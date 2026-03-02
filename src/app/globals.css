@@ -1,26 +1,313 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sora: var(--font-sora);
+  --font-inter: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
+
+  /* Lab Color Palette */
+  --color-lab-dark: #0a0e17;
+  --color-lab-surface: #111827;
+  --color-lab-card: #0d1320;
+  --color-lab-border: #1a2435;
+  --color-green: #00ff88;
+  --color-green-dim: #00cc6a;
+  --color-cyan: #00d4ff;
+  --color-amber: #ffaa00;
+  --color-red: #ff3333;
+  --color-white: #e8eff6;
+  --color-gray-muted: #4a5568;
+
+  /* Legacy compatibility */
+  --color-black: #0a0e17;
+  --color-gold: #00ff88;
+  --color-grey: #1a2435;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(--color-lab-dark);
+  --foreground: var(--color-white);
+  --glow-green: 0 0 20px rgba(0, 255, 136, 0.3), 0 0 60px rgba(0, 255, 136, 0.1);
+  --glow-cyan: 0 0 20px rgba(0, 212, 255, 0.3), 0 0 60px rgba(0, 212, 255, 0.1);
+  --glow-amber: 0 0 20px rgba(255, 170, 0, 0.3), 0 0 60px rgba(255, 170, 0, 0.1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* ====== BASE STYLES ====== */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-sora), sans-serif;
+}
+
+/* ====== SCROLLBAR ====== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-lab-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-green-dim);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-green);
+}
+
+/* ====== SELECTION ====== */
+::selection {
+  background: rgba(0, 255, 136, 0.2);
+  color: #fff;
+}
+
+/* ====== UTILITY CLASSES ====== */
+
+/* Glow text */
+.text-glow-green {
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5), 0 0 30px rgba(0, 255, 136, 0.2);
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 30px rgba(0, 212, 255, 0.2);
+}
+
+/* Lab borders */
+.lab-border {
+  border: 1px solid rgba(0, 255, 136, 0.15);
+}
+
+.lab-border-glow {
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.05), inset 0 0 15px rgba(0, 255, 136, 0.02);
+}
+
+/* Hex grid background */
+.hex-grid-bg {
+  background-image:
+    linear-gradient(30deg, rgba(0, 255, 136, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(0, 255, 136, 0.03) 87.5%),
+    linear-gradient(150deg, rgba(0, 255, 136, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(0, 255, 136, 0.03) 87.5%),
+    linear-gradient(30deg, rgba(0, 255, 136, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(0, 255, 136, 0.03) 87.5%),
+    linear-gradient(150deg, rgba(0, 255, 136, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(0, 255, 136, 0.03) 87.5%),
+    linear-gradient(60deg, rgba(0, 212, 255, 0.02) 25%, transparent 25.5%, transparent 75%, rgba(0, 212, 255, 0.02) 75%),
+    linear-gradient(60deg, rgba(0, 212, 255, 0.02) 25%, transparent 25.5%, transparent 75%, rgba(0, 212, 255, 0.02) 75%);
+  background-size: 80px 140px;
+  background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+}
+
+/* Scanline overlay */
+.scanline-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 136, 0.015) 2px,
+      rgba(0, 255, 136, 0.015) 4px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Monospace data readout */
+.data-readout {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  letter-spacing: 0.1em;
+}
+
+/* No scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ====== ANIMATIONS ====== */
+
+/* Marquee */
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 30s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+/* Pulse glow */
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    opacity: 0.4;
+    filter: brightness(1);
+  }
+
+  50% {
+    opacity: 1;
+    filter: brightness(1.3);
+  }
+}
+
+/* Float */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Scan line sweep */
+.animate-scan {
+  animation: scan-sweep 4s linear infinite;
+}
+
+@keyframes scan-sweep {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+/* Glow border pulse */
+.animate-border-glow {
+  animation: border-glow 3s ease-in-out infinite;
+}
+
+@keyframes border-glow {
+
+  0%,
+  100% {
+    border-color: rgba(0, 255, 136, 0.15);
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.05);
+  }
+
+  50% {
+    border-color: rgba(0, 255, 136, 0.4);
+    box-shadow: 0 0 25px rgba(0, 255, 136, 0.15);
+  }
+}
+
+/* Typing cursor blink */
+.animate-cursor {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+@keyframes cursor-blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Data stream flicker */
+.animate-data-flicker {
+  animation: data-flicker 0.1s infinite alternate;
+}
+
+@keyframes data-flicker {
+  0% {
+    opacity: 0.97;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Molecule rotate */
+.animate-molecule-spin {
+  animation: molecule-spin 20s linear infinite;
+}
+
+@keyframes molecule-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Slow drift */
+.animate-drift {
+  animation: drift 15s ease-in-out infinite;
+}
+
+@keyframes drift {
+
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  25% {
+    transform: translate(10px, -15px) rotate(2deg);
+  }
+
+  50% {
+    transform: translate(-5px, -25px) rotate(-1deg);
+  }
+
+  75% {
+    transform: translate(-15px, -10px) rotate(1deg);
+  }
 }
