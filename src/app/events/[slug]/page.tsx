@@ -1,42 +1,69 @@
-import { notFound } from "next/navigation";
+"use client";
+
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { Event, getEvent } from "@/lib/dataStore";
 import { EventHero } from "@/components/events/EventHero";
 import { EventConcept } from "@/components/events/EventConcept";
 import { EventTimeline } from "@/components/events/EventTimeline";
-import { EventMapSection } from "@/components/events/EventMapSection";
 import { EventBookingSection } from "./EventBookingSection";
+import { EventMapSection } from "@/components/events/EventMapSection";
+import { EventSchema } from "@/components/seo/JsonLd";
 
-// Mock Data Source
-const events = [
-    {
-        id: "1",
-        slug: "notte-medievale",
-        title: "Notte Medievale: Il Banchetto del Toro",
-        subtitle: "Un viaggio nel 1300 tra spezie, giullari e fuoco",
-        date: "15 Giugno 2026",
-        location: "Sala dei Cavalieri",
-        image: "https://images.unsplash.com/photo-1514362545857-3bc16549766b?auto=format&fit=crop&q=80&w=1200",
-        description: `Il Banchetto del Toro Nero non è una cena. È un portale temporale.\n\nImmergiti in un'atmosfera unica, dove la luce delle torce danza sulle pareti di pietra e il profumo di spezie antiche riempie l'aria. I nostri chef hanno ricreato fedelmente le ricette del XIV secolo, rivisitandole per il palato contemporaneo ma mantenendo intatta la loro anima rustica e potente.\n\nTra una portata e l'altra, giullari, mangiafuoco e musicisti vi intratterranno come se foste alla corte di un nobile signore. Non aspettatevi il solito spettacolo: qui voi siete parte della scena.`,
-        timeline: [
-            { time: "20:00", title: "Accoglienza & Idromele", description: "Benvenuto con calice di idromele speziato e assegnazione del casato." },
-            { time: "20:45", title: "Primo Servizio: La Terra", description: "Zuppe di farro e legumi, crostoni al lardo e miele." },
-            { time: "21:30", title: "Spettacolo del Fuoco", description: "Performance di giocoleria infuocata al centro della sala." },
-            { time: "22:00", title: "Secondo Servizio: La Caccia", description: "Stinco di maiale alla brace, verdure di stagione glassate." },
-            { time: "23:00", title: "Gran Finale", description: "Dolci speziati e danza delle spade." },
-        ],
-    },
-    // Add more mock events if needed
-];
+export default function EventPage() {
+    const params = useParams();
+    const slug = params.slug as string;
+    const [event, setEvent] = useState<Event | null>(null);
+    const [notFound, setNotFound] = useState(false);
 
-export default async function EventPage({ params }: { params: Promise<{ slug: string }> }) {
-    const { slug } = await params;
-    const event = events.find((e) => e.slug === slug);
+    useEffect(() => {
+        console.log("Fetching event with slug:", slug);
+        getEvent(slug).then((data) => {
+            console.log("getEvent result:", data);
+            if (data) {
+                setEvent(data);
+            } else {
+                setNotFound(true);
+            }
+        }).catch(err => {
+            console.error("getEvent error caught:", err);
+            setNotFound(true);
+        });
+    }, [slug]);
+
+    if (notFound) {
+        return (
+            <div className="min-h-screen  flex items-center justify-center">
+                <div className="text-center">
+                    <span className="text-[10px] text-bordeaux-light tracking-[0.3em] uppercase font-medium">404</span>
+                    <h1 className="text-3xl font-bold text-rama-text mt-2">Evento Non Trovato</h1>
+                    <p className="text-gray-400 mt-2 text-sm">L&apos;evento che stai cercando non è disponibile.</p>
+                </div>
+            </div>
+        );
+    }
 
     if (!event) {
-        return notFound();
+        return (
+            <div className="min-h-screen  flex items-center justify-center">
+                <div className="text-rama-accent/40 text-sm animate-pulse-glow">Caricamento evento...</div>
+            </div>
+        );
     }
 
     return (
-        <div className="min-h-screen bg-black pb-32">
+        <div className="min-h-screen  pb-32">
+            <title>{`${event.title} — Black Bulls Lab`}</title>
+            <meta name="description" content={event.description || `${event.title} — Un'esperienza immersiva del Black Bulls Lab a Torino.`} />
+            <EventSchema
+                name={event.title}
+                description={event.description}
+                date={event.date}
+                location={event.location}
+                image={event.image}
+                url={`https://blackbullslab.it/events/${event.slug}`}
+                price={event.price}
+            />
             <EventHero
                 title={event.title}
                 subtitle={event.subtitle}
@@ -49,11 +76,16 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
 
             <EventTimeline timeline={event.timeline} />
 
-            {/* Map Section */}
-            <EventMapSection location={event.location} />
+            <EventBookingSection
+                eventId={event.id}
+                slug={event.slug}
+                title={event.title}
+                date={event.date}
+                location={event.location}
+                price={event.price}
+            />
 
-            {/* Seat Selection + Booking Bar */}
-            <EventBookingSection eventId={event.id} />
+            <EventMapSection location={event.location} />
         </div>
     );
 }

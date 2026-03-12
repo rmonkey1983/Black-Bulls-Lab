@@ -1,0 +1,220 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { ImmersiveHeader } from "@/components/layout/ImmersiveHeader";
+import { PremiumButton } from "@/components/ui/PremiumButton";
+import { Building2, Users, Sparkles, BarChart3, ArrowRight } from "lucide-react";
+import { ParallaxImage, StickyTextSection } from "@/components/ui/ParallaxScroll";
+
+const services = [
+    {
+        icon: Building2,
+        title: "Team Building Esperienziale",
+        desc: "Attività di coesione aziendale basate su esperienze immersive, cucina e intrattenimento.",
+    },
+    {
+        icon: Sparkles,
+        title: "Eventi Corporate Esclusivi",
+        desc: "Cene, spettacoli e format su misura per il tuo brand e i tuoi obiettivi.",
+    },
+    {
+        icon: Users,
+        title: "Networking & Relazioni",
+        desc: "Crea connessioni autentiche in ambienti unici e stimolanti.",
+    },
+    {
+        icon: BarChart3,
+        title: "Brand Experience",
+        desc: "Trasforma il tuo messaggio in un'esperienza multisensoriale e memorabile.",
+    },
+];
+
+const stats = [
+    { value: "50+", label: "Eventi Realizzati" },
+    { value: "2000+", label: "Partecipanti" },
+    { value: "98%", label: "Soddisfazione" },
+    { value: "15+", label: "Partner Corporate" },
+];
+
+export default function CorporatePage() {
+    return (
+        <div className="min-h-screen  pb-24 relative">
+            <h1 className="sr-only">Eventi Aziendali e Team Building Esperienziale a Torino</h1>
+            <ImmersiveHeader
+                title="EVENTI"
+                highlight="Aziendali"
+                subtitle="Le solite cene aziendali silenziose? Le slide noiose in sale riunioni asettiche? Fanno parte del passato. Se vuoi che il tuo team faccia davvero rete, hai bisogno di rompere il ghiaccio al Black Bulls Lab."
+                mediaUrl="/images/brand/bg-venue-crowd.png"
+            />
+
+            <div className="max-w-6xl mx-auto px-6 space-y-20 relative z-10">
+                {/* Stats */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="grid grid-cols-2 md:grid-cols-4 gap-4"
+                >
+                    {stats.map((stat) => (
+                        <div
+                            key={stat.label}
+                            className="border border-border bg-bg-card/30 p-5 text-center
+                                hover:border-rama-accent/20 transition-all duration-300"
+                        >
+                            <div className="text-3xl md:text-4xl font-bold text-rama-accent text-glow-gold mb-1">
+                                {stat.value}
+                            </div>
+                            <span className="font-outfit text-xs text-rama-muted tracking-widest uppercase">
+                                {stat.label}
+                            </span>
+                        </div>
+                    ))}
+                </motion.div>
+
+                {/* Services - Parallax Version */}
+                <section className="space-y-32">
+                    <div className="flex items-center gap-3 mb-8">
+                        <div className="w-12 h-[1px] bg-rama-accent/40" />
+                        <span className="font-rock-salt text-rama-accent transform -rotate-2 text-xl block">
+                            I Nostri Servizi
+                        </span>
+                    </div>
+
+                    <StickyTextSection
+                        content={
+                            <div className="space-y-6">
+                                <Building2 size={42} className="text-rama-accent mb-4" />
+                                <h3 className="font-mohave font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-[10vw] md:text-[6vw]">
+                                    <span className="text-white">Team Building</span>
+                                    <span className="text-rama-accent">Naturale.</span>
+                                </h3>
+                                <p className="text-rama-muted font-outfit text-lg leading-relaxed mt-6">
+                                    Niente forza e unisce un gruppo di lavoro più di una risata condivisa durante uno spettacolo di stand-up comedy o un dinner show emozionante.
+                                </p>
+                            </div>
+                        }
+                    >
+                        <ParallaxImage
+                            src="/images/brand/service-plating.png"
+                            alt="Team Building"
+                            aspectRatio="landscape"
+                            speed={0.2}
+                        />
+                    </StickyTextSection>
+
+                    <StickyTextSection
+                        className="md:flex-row-reverse"
+                        content={
+                            <div className="space-y-6">
+                                <Users size={42} className="text-rama-accent mb-4" />
+                                <h3 className="font-mohave font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-[10vw] md:text-[6vw]">
+                                    <span className="text-white">Networking</span>
+                                    <span className="text-rama-accent">Senza Stress.</span>
+                                </h3>
+                                <p className="text-rama-muted font-outfit text-lg leading-relaxed mt-6">
+                                    Un ambiente fluido e informale, perfetto per chiacchierare, rilassarsi e costruire relazioni autentiche tra colleghi o con i clienti più importanti.
+                                </p>
+                            </div>
+                        }
+                    >
+                        <ParallaxImage
+                            src="/images/brand/service-mixology.png"
+                            alt="Corporate Event"
+                            aspectRatio="landscape"
+                            speed={0.3}
+                        />
+                    </StickyTextSection>
+
+                    <StickyTextSection
+                        content={
+                            <div className="space-y-6">
+                                <Sparkles size={42} className="text-rama-accent mb-4" />
+                                <h3 className="font-mohave font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-[10vw] md:text-[6vw]">
+                                    <span className="text-white">Esperienza</span>
+                                    <span className="text-rama-accent">Chiavi in Mano.</span>
+                                </h3>
+                                <p className="text-rama-muted font-outfit text-lg leading-relaxed mt-6">
+                                    Scegli tu il livello di personalizzazione. Dall'affitto esclusivo del locale, al menu dedicato, fino alla scelta dell'artista o del performer perfetto per il tono della tua azienda.
+                                </p>
+                            </div>
+                        }
+                    >
+                        <ParallaxImage
+                            src="/images/brand/bg-stage-lights.png"
+                            alt="Networking"
+                            aspectRatio="landscape"
+                            speed={0.2}
+                        />
+                    </StickyTextSection>
+                </section>
+
+                {/* CTA - Modulo B2B */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="border border-rama-accent/[0.08] bg-bg-card/30 p-8 md:p-16 relative"
+                >
+                    <div className="absolute top-0 left-0 w-6 h-6 border-t border-l border-rama-accent/15" />
+                    <div className="absolute bottom-0 right-0 w-6 h-6 border-b border-r border-rama-accent/15" />
+
+                    <div className="text-center mb-12">
+                        <h3 className="font-mohave font-bold leading-[0.8] tracking-tighter uppercase text-white text-[8vw] md:text-[5vw] mb-4">
+                            Progetta il tuo <br className="md:hidden" /><span className="text-rama-accent">Prossimo Evento</span>
+                        </h3>
+                        <p className="text-rama-muted font-outfit max-w-2xl mx-auto text-lg leading-relaxed">
+                            Raccontaci la tua idea. Il nostro team è pronto a confezionare un'esperienza su misura per le esigenze, il budget e gli obiettivi della tua azienda. Compila il modulo qui sotto, ti ricontatteremo entro 24 ore con una proposta creativa.
+                        </p>
+                    </div>
+
+                    <form className="max-w-3xl mx-auto font-outfit space-y-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="space-y-2">
+                                <label className="text-sm text-rama-muted uppercase tracking-wider">Nome Azienda</label>
+                                <input type="text" className="w-full bg-black/50 border border-white/10 p-4 text-white placeholder-white/30 focus:border-rama-accent/50 focus:outline-none transition-colors" placeholder="Es. Acme Corp" />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-sm text-rama-muted uppercase tracking-wider">Referente</label>
+                                <input type="text" className="w-full bg-black/50 border border-white/10 p-4 text-white placeholder-white/30 focus:border-rama-accent/50 focus:outline-none transition-colors" placeholder="Nome e Cognome" />
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="space-y-2">
+                                <label className="text-sm text-rama-muted uppercase tracking-wider">Email</label>
+                                <input type="email" className="w-full bg-black/50 border border-white/10 p-4 text-white placeholder-white/30 focus:border-rama-accent/50 focus:outline-none transition-colors" placeholder="email@azienda.com" />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-sm text-rama-muted uppercase tracking-wider">Telefono</label>
+                                <input type="tel" className="w-full bg-black/50 border border-white/10 p-4 text-white placeholder-white/30 focus:border-rama-accent/50 focus:outline-none transition-colors" placeholder="+39" />
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="space-y-2">
+                                <label className="text-sm text-rama-muted uppercase tracking-wider">Numero Ospiti Previsti</label>
+                                <select className="w-full bg-black/50 border border-white/10 p-4 text-white focus:border-rama-accent/50 focus:outline-none transition-colors appearance-none cursor-pointer">
+                                    <option value="" disabled selected>Seleziona range</option>
+                                    <option value="10-20">10-20 persone</option>
+                                    <option value="20-50">20-50 persone</option>
+                                    <option value="50-100">50-100 persone</option>
+                                    <option value="100+">100+ persone (Affitto esclusivo)</option>
+                                </select>
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-sm text-rama-muted uppercase tracking-wider">Tipo di Evento</label>
+                                <input type="text" className="w-full bg-black/50 border border-white/10 p-4 text-white placeholder-white/30 focus:border-rama-accent/50 focus:outline-none transition-colors" placeholder="Cena di Natale, Lancio, Team Building..." />
+                            </div>
+                        </div>
+
+                        <div className="pt-6 flex justify-center">
+                            <button type="button" className="inline-flex items-center justify-center bg-roma-gold text-black font-mohave text-xl uppercase tracking-widest font-bold px-12 py-5 hover:bg-white transition-colors">
+                                Richiedi un Preventivo Gratuito
+                            </button>
+                        </div>
+                    </form>
+                </motion.div>
+            </div>
+        </div>
+    );
+}

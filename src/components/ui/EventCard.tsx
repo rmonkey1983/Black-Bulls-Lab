@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Calendar, MapPin, FlaskConical } from "lucide-react";
+import { Calendar, MapPin, ArrowRight } from "lucide-react";
+import { Tilt3DCard } from "./Tilt3DCard";
 
 interface EventCardProps {
     id: string;
@@ -15,63 +16,67 @@ interface EventCardProps {
 
 export function EventCard({ id, slug, title, date, location, image, category }: EventCardProps) {
     return (
-        <Link
-            href={`/events/${slug}`}
-            className="group block relative h-[420px] w-full overflow-hidden bg-lab-card border border-green/10
-                transition-all duration-500 hover:border-green/30 hover:shadow-[0_0_30px_rgba(0,255,136,0.08)]"
-        >
-            {/* Corner accents */}
-            <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-green/30 z-20 transition-all duration-500 group-hover:w-6 group-hover:h-6 group-hover:border-green/60" />
-            <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-green/30 z-20 transition-all duration-500 group-hover:w-6 group-hover:h-6 group-hover:border-green/60" />
-            <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-green/30 z-20 transition-all duration-500 group-hover:w-6 group-hover:h-6 group-hover:border-green/60" />
-            <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-green/30 z-20 transition-all duration-500 group-hover:w-6 group-hover:h-6 group-hover:border-green/60" />
+        <Tilt3DCard tiltMax={8} tiltSpeed={300}>
+            <Link
+                href={`/events/${slug}`}
+                className="group block relative h-[420px] w-full overflow-hidden bg-bg-card
+                    border border-border transition-all duration-500
+                    hover:border-gold/25 hover:shadow-[0_0_40px_rgba(200,164,78,0.15)]"
+                style={{ transformStyle: "preserve-3d" }}
+            >
+                {/* Background Image */}
+                <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                    style={{ backgroundImage: `url(${image})`, transform: "translateZ(-20px)" }}
+                />
 
-            {/* Background Image */}
-            <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                style={{ backgroundImage: `url(${image})` }}
-            />
+                {/* Overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/60 to-transparent opacity-90 group-hover:opacity-80 transition-opacity duration-500" style={{ transform: "translateZ(0px)" }} />
 
-            {/* Overlay with lab tint */}
-            <div className="absolute inset-0 bg-gradient-to-t from-lab-dark via-lab-dark/70 to-transparent opacity-90 group-hover:opacity-80 transition-opacity duration-500" />
+                {/* Gold shine on hover */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-gold/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ transform: "translateZ(10px)" }} />
 
-            {/* Scan line on hover */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
-                style={{
-                    background: `repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0, 255, 136, 0.02) 3px, rgba(0, 255, 136, 0.02) 6px)`
-                }}
-            />
+                {/* Content - popped out */}
+                <div
+                    className="absolute bottom-0 left-0 right-0 p-6 flex flex-col justify-end h-full z-10 duration-300"
+                    style={{ transform: "translateZ(50px)" }}
+                >
+                    {/* Category badge */}
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-bordeaux/20 border border-bordeaux/30 text-bordeaux-light text-[10px] font-bold uppercase tracking-widest w-max mb-4">
+                        {category}
+                    </span>
 
-            {/* Content */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-col justify-end h-full z-10">
-                {/* Classification badge */}
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-green/10 border border-green/30 text-green text-[10px] font-bold uppercase tracking-[0.2em] w-max mb-4 data-readout">
-                    <FlaskConical size={10} />
-                    {category}
-                </span>
+                    <h3 className="text-2xl font-bold text-white mb-3 leading-tight group-hover:text-gold transition-colors duration-300">
+                        {title}
+                    </h3>
 
-                <h3 className="text-2xl font-bold text-white mb-3 leading-tight group-hover:text-green transition-colors duration-300">
-                    {title}
-                </h3>
-
-                <div className="flex items-center gap-5 text-xs data-readout mt-2">
-                    <div className="flex items-center gap-1.5 text-cyan/70">
-                        <Calendar size={12} />
-                        <span>{date}</span>
+                    <div className="flex items-center gap-5 text-xs">
+                        <div className="flex items-center gap-1.5 text-gray-300">
+                            <Calendar size={12} className="text-gold/50" />
+                            <span>{date}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-gray-300">
+                            <MapPin size={12} className="text-gold/50" />
+                            <span>{location}</span>
+                        </div>
                     </div>
-                    <div className="flex items-center gap-1.5 text-cyan/70">
-                        <MapPin size={12} />
-                        <span>{location}</span>
+
+                    {/* View CTA on hover */}
+                    <div className="flex items-center gap-2 text-gold text-sm font-medium mt-4
+                        opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                        Scopri di più <ArrowRight size={14} />
                     </div>
                 </div>
-            </div>
 
-            {/* Experiment ID */}
-            <div className="absolute top-3 right-3 z-20">
-                <span className="data-readout text-[9px] text-green/30 tracking-[0.2em]">
-                    EXP-{id.toString().padStart(3, "0")}
-                </span>
-            </div>
-        </Link>
+                {/* Corner accent - popped out further */}
+                <div
+                    className="absolute top-0 right-0 w-12 h-12 z-20"
+                    style={{ transform: "translateZ(60px)" }}
+                >
+                    <div className="absolute top-0 right-0 w-[1px] h-8 bg-gradient-to-b from-gold/20 to-transparent group-hover:from-gold/50 transition-all duration-500" />
+                    <div className="absolute top-0 right-0 h-[1px] w-8 bg-gradient-to-l from-gold/20 to-transparent group-hover:from-gold/50 transition-all duration-500" />
+                </div>
+            </Link>
+        </Tilt3DCard>
     );
 }

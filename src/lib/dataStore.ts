@@ -1,4 +1,4 @@
-"use client";
+import { supabase } from "./supabase";
 
 // ===== TYPE DEFINITIONS =====
 
@@ -19,6 +19,7 @@ export interface Event {
     image: string;
     description: string;
     timeline: TimelineItem[];
+    price?: number;
 }
 
 export interface GalleryItem {
@@ -26,6 +27,7 @@ export interface GalleryItem {
     src: string;
     alt: string;
     category: string;
+    type: "image" | "video";
 }
 
 export interface Talent {
@@ -46,172 +48,227 @@ export interface SiteSettings {
     adminPassword: string;
 }
 
-// ===== DEFAULT DATA =====
-
-const DEFAULT_EVENTS: Event[] = [
-    {
-        id: "1",
-        slug: "notte-medievale",
-        title: "Notte Medievale: Il Banchetto del Toro",
-        subtitle: "Un viaggio nel 1300 tra spezie, giullari e fuoco",
-        date: "15.06.2026",
-        location: "Sala dei Cavalieri",
-        category: "Dinner Show",
-        image: "https://images.unsplash.com/photo-1514362545857-3bc16549766b?auto=format&fit=crop&q=80&w=800",
-        description: "Il Banchetto del Toro Nero non è una cena. È un portale temporale.\n\nImmergiti in un'atmosfera unica, dove la luce delle torce danza sulle pareti di pietra.",
-        timeline: [
-            { time: "20:00", title: "Accoglienza & Idromele", description: "Benvenuto con calice di idromele speziato." },
-            { time: "20:45", title: "Primo Servizio", description: "Zuppe di farro e legumi, crostoni al lardo e miele." },
-            { time: "21:30", title: "Spettacolo del Fuoco", description: "Performance di giocoleria infuocata." },
-            { time: "22:00", title: "Secondo Servizio", description: "Stinco di maiale alla brace." },
-            { time: "23:00", title: "Gran Finale", description: "Dolci speziati e danza delle spade." },
-        ],
-    },
-    {
-        id: "2",
-        slug: "neon-jazz",
-        title: "Neon Jazz Experience",
-        subtitle: "Jazz, neon e cocktail d'autore",
-        date: "22.06.2026",
-        location: "Rooftop Lounge",
-        category: "Music & Drink",
-        image: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&q=80&w=800",
-        description: "Una serata di musica jazz avvolta da luci neon e cocktail d'autore.",
-        timeline: [
-            { time: "21:00", title: "Apertura", description: "Welcome drink e dj set d'atmosfera." },
-            { time: "22:00", title: "Live Jazz", description: "Performance dal vivo." },
-        ],
-    },
-    {
-        id: "3",
-        slug: "comedy-club",
-        title: "Comedy Club: Risate al Buio",
-        subtitle: "Stand-up comedy al buio completo",
-        date: "29.06.2026",
-        location: "Underground Stage",
-        category: "Comedy",
-        image: "https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&q=80&w=800",
-        description: "Uno show di stand-up comedy completamente al buio.",
-        timeline: [
-            { time: "21:30", title: "Apertura", description: "Benvenuto e introduzione." },
-            { time: "22:00", title: "Show", description: "Le luci si spengono e le risate iniziano." },
-        ],
-    },
-];
-
-const DEFAULT_GALLERY: GalleryItem[] = [
-    { id: "1", src: "https://images.unsplash.com/photo-1514362545857-3bc16549766b?auto=format&fit=crop&q=80&w=800", alt: "Cocktail Art", category: "Bar" },
-    { id: "2", src: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&q=80&w=800", alt: "Live Jazz", category: "Music" },
-    { id: "3", src: "https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&q=80&w=800", alt: "Comedy Night", category: "Stage" },
-    { id: "4", src: "https://images.unsplash.com/photo-1556910103-1c02745a30bf?auto=format&fit=crop&q=80&w=800", alt: "Gourmet Dish", category: "Food" },
-    { id: "5", src: "https://images.unsplash.com/photo-1514525253440-b393452e3383?auto=format&fit=crop&q=80&w=800", alt: "Party Vibes", category: "Atmosphere" },
-    { id: "6", src: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=800", alt: "DJ Set", category: "Music" },
-];
-
-const DEFAULT_TALENTS: Talent[] = [
-    { id: "chef-rubio", name: "Chef Rubio", role: "Direttore Culinario", image: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&q=80&w=800", code: "RES-001", bio: "Maestro della cucina creativa." },
-    { id: "dj-set", name: "Alex V", role: "Architetto Sonoro", image: "https://images.unsplash.com/photo-1571266028243-371695063ad6?auto=format&fit=crop&q=80&w=800", code: "RES-002", bio: "Sound designer e DJ." },
-];
-
-const DEFAULT_SETTINGS: SiteSettings = {
-    siteTitle: "Black Bulls Lab",
-    siteDescription: "Il laboratorio underground dove l'intrattenimento diventa scienza",
-    heroSubtitle: "Il laboratorio underground dove l'intrattenimento diventa scienza.",
-    contactEmail: "info@blackbullslab.it",
-    instagram: "@blackbullslab",
-    adminPassword: "admin123",
-};
-
-// ===== STORAGE HELPERS =====
-
-function getStorage<T>(key: string, defaults: T): T {
-    if (typeof window === "undefined") return defaults;
-    try {
-        const data = localStorage.getItem(key);
-        return data ? JSON.parse(data) : defaults;
-    } catch {
-        return defaults;
-    }
-}
-
-function setStorage<T>(key: string, data: T): void {
-    if (typeof window === "undefined") return;
-    localStorage.setItem(key, JSON.stringify(data));
-}
-
 // ===== EVENTS CRUD =====
 
-export function getEvents(): Event[] {
-    return getStorage<Event[]>("bbl_events", DEFAULT_EVENTS);
-}
+export async function getEvents(): Promise<Event[]> {
+    const { data, error } = await supabase
+        .from("events")
+        .select("*")
+        .order("created_at", { ascending: true });
 
-export function getEvent(slug: string): Event | undefined {
-    return getEvents().find((e) => e.slug === slug);
-}
-
-export function saveEvent(event: Event): void {
-    const events = getEvents();
-    const index = events.findIndex((e) => e.id === event.id);
-    if (index >= 0) {
-        events[index] = event;
-    } else {
-        events.push(event);
+    if (error) {
+        console.error("Error fetching events:", error);
+        return [];
     }
-    setStorage("bbl_events", events);
+    return data.map(mapEvent);
 }
 
-export function deleteEvent(id: string): void {
-    const events = getEvents().filter((e) => e.id !== id);
-    setStorage("bbl_events", events);
+export async function getEvent(slug: string): Promise<Event | undefined> {
+    const { data, error } = await supabase
+        .from("events")
+        .select("*")
+        .eq("slug", slug)
+        .single();
+
+    if (error || !data) return undefined;
+    return mapEvent(data);
+}
+
+export async function saveEvent(event: Event): Promise<void> {
+    const row = {
+        id: event.id,
+        slug: event.slug,
+        title: event.title,
+        subtitle: event.subtitle,
+        date: event.date,
+        location: event.location,
+        category: event.category,
+        image: event.image,
+        description: event.description,
+        timeline: JSON.stringify(event.timeline),
+        price: event.price || null,
+    };
+
+    const { error } = await supabase
+        .from("events")
+        .upsert(row, { onConflict: "id" });
+
+    if (error) {
+        console.error("Error saving event:", error);
+        throw new Error(error.message || "Errore durante il salvataggio in Supabase.");
+    }
+}
+
+export async function deleteEvent(id: string): Promise<void> {
+    const { error } = await supabase.from("events").delete().eq("id", id);
+    if (error) console.error("Error deleting event:", error);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function mapEvent(row: any): Event {
+    return {
+        id: row.id,
+        slug: row.slug,
+        title: row.title,
+        subtitle: row.subtitle || "",
+        date: row.date,
+        location: row.location,
+        category: row.category,
+        image: row.image || "",
+        description: row.description || "",
+        timeline: typeof row.timeline === "string"
+            ? JSON.parse(row.timeline)
+            : (row.timeline || []),
+    };
 }
 
 // ===== GALLERY CRUD =====
 
-export function getGalleryItems(): GalleryItem[] {
-    return getStorage<GalleryItem[]>("bbl_gallery", DEFAULT_GALLERY);
+export async function getGalleryItems(): Promise<GalleryItem[]> {
+    const { data, error } = await supabase
+        .from("gallery")
+        .select("*")
+        .order("created_at", { ascending: true });
+
+    if (error) {
+        console.error("Error fetching gallery:", error);
+        return [];
+    }
+    return data.map((row) => ({
+        ...row,
+        type: row.type || "image",
+    })) as GalleryItem[];
 }
 
-export function addGalleryItem(item: GalleryItem): void {
-    const items = getGalleryItems();
-    items.push(item);
-    setStorage("bbl_gallery", items);
+export async function addGalleryItem(item: GalleryItem): Promise<void> {
+    const { error } = await supabase.from("gallery").insert({
+        id: item.id,
+        src: item.src,
+        alt: item.alt,
+        category: item.category,
+        type: item.type || "image",
+    });
+    if (error) {
+        console.error("Error adding gallery item:", error);
+        throw new Error(error.message || "Impossibile salvare nella tabella gallery.");
+    }
 }
 
-export function deleteGalleryItem(id: string): void {
-    const items = getGalleryItems().filter((i) => i.id !== id);
-    setStorage("bbl_gallery", items);
+export async function uploadMediaFile(file: File, folder: string = "gallery"): Promise<string | null> {
+    const ext = file.name.split(".").pop() || "bin";
+    const fileName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+    const filePath = `${folder}/${fileName}`;
+
+    const { error } = await supabase.storage
+        .from("media")
+        .upload(filePath, file, {
+            cacheControl: "3600",
+            upsert: false,
+        });
+
+    if (error) {
+        console.error("Error uploading file:", error);
+        throw new Error(error.message || "Impossibile caricare il file nel bucket storage.");
+    }
+
+    const { data: urlData } = supabase.storage
+        .from("media")
+        .getPublicUrl(filePath);
+
+    return urlData.publicUrl;
+}
+
+export async function deleteGalleryItem(id: string): Promise<void> {
+    const { error } = await supabase.from("gallery").delete().eq("id", id);
+    if (error) console.error("Error deleting gallery item:", error);
 }
 
 // ===== TALENTS CRUD =====
 
-export function getTalents(): Talent[] {
-    return getStorage<Talent[]>("bbl_talents", DEFAULT_TALENTS);
-}
+export async function getTalents(): Promise<Talent[]> {
+    const { data, error } = await supabase
+        .from("talents")
+        .select("*")
+        .order("created_at", { ascending: true });
 
-export function saveTalent(talent: Talent): void {
-    const talents = getTalents();
-    const index = talents.findIndex((t) => t.id === talent.id);
-    if (index >= 0) {
-        talents[index] = talent;
-    } else {
-        talents.push(talent);
+    if (error) {
+        console.error("Error fetching talents:", error);
+        return [];
     }
-    setStorage("bbl_talents", talents);
+    return data as Talent[];
 }
 
-export function deleteTalent(id: string): void {
-    const talents = getTalents().filter((t) => t.id !== id);
-    setStorage("bbl_talents", talents);
+export async function saveTalent(talent: Talent): Promise<void> {
+    const { error } = await supabase
+        .from("talents")
+        .upsert({
+            id: talent.id,
+            name: talent.name,
+            role: talent.role,
+            image: talent.image,
+            code: talent.code,
+            bio: talent.bio,
+        }, { onConflict: "id" });
+
+    if (error) {
+        console.error("Error saving talent:", error);
+        throw new Error(error.message || "Impossibile salvare nella tabella talents.");
+    }
+}
+
+export async function deleteTalent(id: string): Promise<void> {
+    const { error } = await supabase.from("talents").delete().eq("id", id);
+    if (error) console.error("Error deleting talent:", error);
 }
 
 // ===== SETTINGS =====
 
-export function getSettings(): SiteSettings {
-    return getStorage<SiteSettings>("bbl_settings", DEFAULT_SETTINGS);
+export async function getSettings(): Promise<SiteSettings> {
+    const defaults: SiteSettings = {
+        siteTitle: "Black Bulls Lab",
+        siteDescription: "Il laboratorio underground dove l'intrattenimento diventa scienza",
+        heroSubtitle: "Il laboratorio underground dove l'intrattenimento diventa scienza.",
+        contactEmail: "info@blackbullslab.it",
+        instagram: "@blackbullslab",
+        adminPassword: "admin123",
+    };
+
+    const { data, error } = await supabase
+        .from("settings")
+        .select("*")
+        .eq("id", 1)
+        .single();
+
+    if (error || !data) return defaults;
+
+    return {
+        siteTitle: data.site_title || defaults.siteTitle,
+        siteDescription: data.site_description || defaults.siteDescription,
+        heroSubtitle: data.hero_subtitle || defaults.heroSubtitle,
+        contactEmail: data.contact_email || defaults.contactEmail,
+        instagram: data.instagram || defaults.instagram,
+        adminPassword: data.admin_password || defaults.adminPassword,
+    };
 }
 
-export function saveSettings(settings: SiteSettings): void {
-    setStorage("bbl_settings", settings);
+export async function saveSettings(settings: SiteSettings): Promise<void> {
+    const { error } = await supabase
+        .from("settings")
+        .upsert({
+            id: 1,
+            site_title: settings.siteTitle,
+            site_description: settings.siteDescription,
+            hero_subtitle: settings.heroSubtitle,
+            contact_email: settings.contactEmail,
+            instagram: settings.instagram,
+            admin_password: settings.adminPassword,
+            updated_at: new Date().toISOString(),
+        }, { onConflict: "id" });
+
+    if (error) {
+        console.error("Error saving settings:", error);
+        throw new Error(error.message || "Impossibile salvare le impostazioni.");
+    }
 }
 
 // ===== UTILITY =====

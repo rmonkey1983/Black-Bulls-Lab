@@ -7,16 +7,16 @@ export function HappeningVibes() {
     const [activeStoryIndex, setActiveStoryIndex] = useState<number | null>(null);
 
     const stories: Story[] = [
-        { id: 1, user: "Chef Rubio", image: "https://images.unsplash.com/photo-1556910103-1c02745a30bf?auto=format&fit=crop&q=80&w=600", avatar: "https://images.unsplash.com/photo-1556910103-1c02745a30bf?auto=format&fit=crop&q=80&w=100", timestamp: "5m" },
-        { id: 2, user: "DJ Set", image: "https://images.unsplash.com/photo-1571266028243-371695063ad6?auto=format&fit=crop&q=80&w=600", avatar: "https://images.unsplash.com/photo-1571266028243-371695063ad6?auto=format&fit=crop&q=80&w=100", timestamp: "1h" },
-        { id: 3, user: "Cocktail Art", image: "https://images.unsplash.com/photo-1514362545857-3bc16549766b?auto=format&fit=crop&q=80&w=600", avatar: "https://images.unsplash.com/photo-1514362545857-3bc16549766b?auto=format&fit=crop&q=80&w=100", timestamp: "3h" },
-        { id: 4, user: "Magic Show", image: "https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&q=80&w=600", avatar: "https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&q=80&w=100", timestamp: "4h" },
-        { id: 5, user: "Live Jazz", image: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&q=80&w=600", avatar: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&q=80&w=100", timestamp: "6h" },
+        { id: 1, user: "Chef Show", image: "/images/brand/service-plating.png", avatar: "/images/brand/team-chef.png", timestamp: "5m" },
+        { id: 2, user: "DJ Set", image: "/images/brand/bg-venue-crowd.png", avatar: "/images/brand/team-art-director.png", timestamp: "1h" },
+        { id: 3, user: "Cocktail Art", image: "/images/brand/vibe-cocktail-art.png", avatar: "/images/brand/team-mixologist.png", timestamp: "3h" },
+        { id: 4, user: "Live Show", image: "/images/brand/service-performance.png", avatar: "/images/brand/team-performer.png", timestamp: "4h" },
+        { id: 5, user: "Live Jazz", image: "/images/brand/vibe-live-jazz.png", avatar: "/images/brand/vibe-live-jazz.png", timestamp: "6h" },
     ];
 
     return (
         <>
-            <section className="w-full py-8 overflow-x-auto no-scrollbar pl-6">
+            <section className="w-full py-6 md:py-8 overflow-x-auto no-scrollbar pl-4 md:pl-6">
                 <div className="flex gap-5 min-w-max">
                     {stories.map((story, index) => (
                         <div
@@ -24,33 +24,25 @@ export function HappeningVibes() {
                             className="flex flex-col items-center gap-2 cursor-pointer group"
                             onClick={() => setActiveStoryIndex(index)}
                         >
-                            {/* Hexagonal specimen container */}
-                            <div className="relative w-[76px] h-[76px] flex items-center justify-center">
-                                {/* Hex border */}
-                                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 76 76">
-                                    <polygon
-                                        points="38,2 70,20 70,56 38,74 6,56 6,20"
-                                        fill="none"
-                                        stroke="rgba(0,255,136,0.3)"
-                                        strokeWidth="1.5"
-                                        className="group-hover:stroke-[rgba(0,255,136,0.7)] transition-all duration-300"
-                                    />
-                                </svg>
-                                {/* Image circular inside hex */}
-                                <div className="w-[56px] h-[56px] rounded-full overflow-hidden border-2 border-lab-dark
-                                    group-hover:shadow-[0_0_15px_rgba(0,255,136,0.2)] transition-shadow duration-300">
-                                    <img
-                                        src={story.avatar}
-                                        alt={story.user}
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                    />
+                            {/* Circular avatar with gold ring */}
+                            <div className="relative">
+                                <div className="w-[72px] h-[72px] rounded-full p-[2px]
+                                    bg-gradient-to-br from-gold via-gold-dim to-bordeaux
+                                    group-hover:shadow-[0_0_15px_rgba(200,164,78,0.3)] transition-shadow duration-300">
+                                    <div className="w-full h-full rounded-full overflow-hidden border-2 border-bg-dark">
+                                        <img
+                                            src={story.avatar}
+                                            alt={story.user}
+                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                        />
+                                    </div>
                                 </div>
                                 {/* Live indicator */}
                                 <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2">
-                                    <div className="w-2 h-2 rounded-full bg-green animate-pulse-glow shadow-[0_0_6px_rgba(0,255,136,0.5)]" />
+                                    <div className="w-2 h-2 rounded-full bg-gold animate-pulse-glow shadow-[0_0_6px_rgba(200,164,78,0.5)]" />
                                 </div>
                             </div>
-                            <span className="data-readout text-[9px] uppercase font-bold text-gray-500 tracking-[0.15em] group-hover:text-green transition-colors">
+                            <span className="text-[9px] uppercase font-bold text-gray-400 tracking-[0.15em] group-hover:text-gold transition-colors">
                                 {story.user}
                             </span>
                         </div>
