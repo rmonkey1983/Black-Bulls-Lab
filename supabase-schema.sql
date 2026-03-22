@@ -50,6 +50,13 @@ CREATE TABLE IF NOT EXISTS settings (
     updated_at TIMESTAMPTZ DEFAULT now()
 );
 
+-- ===== NEWSLETTER TABLE =====
+CREATE TABLE IF NOT EXISTS newsletter (
+    id TEXT PRIMARY KEY DEFAULT gen_random_uuid()::text,
+    email TEXT UNIQUE NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT now()
+);
+
 -- ===== ROW LEVEL SECURITY =====
 
 -- Enable RLS on all tables
@@ -57,6 +64,7 @@ ALTER TABLE events ENABLE ROW LEVEL SECURITY;
 ALTER TABLE gallery ENABLE ROW LEVEL SECURITY;
 ALTER TABLE talents ENABLE ROW LEVEL SECURITY;
 ALTER TABLE settings ENABLE ROW LEVEL SECURITY;
+ALTER TABLE newsletter ENABLE ROW LEVEL SECURITY;
 
 -- Allow public read access (anon key)
 CREATE POLICY "Allow public read" ON events FOR SELECT USING (true);
@@ -69,6 +77,8 @@ CREATE POLICY "Allow public write" ON events FOR ALL USING (true) WITH CHECK (tr
 CREATE POLICY "Allow public write" ON gallery FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow public write" ON talents FOR ALL USING (true) WITH CHECK (true);
 CREATE POLICY "Allow public write" ON settings FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow public insert" ON newsletter FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow public read" ON newsletter FOR SELECT USING (true);
 
 
 -- ============================================================
@@ -147,3 +157,23 @@ ON CONFLICT (id) DO NOTHING;
 INSERT INTO settings (id, site_title, site_description, hero_subtitle, contact_email, instagram, admin_password) VALUES
 (1, 'Black Bulls Lab', 'Il laboratorio underground dove l''intrattenimento diventa scienza', 'Il laboratorio underground dove l''intrattenimento diventa scienza.', 'info@blackbullslab.it', '@blackbullslab', 'admin123')
 ON CONFLICT (id) DO NOTHING;
+
+-- ===== GOLDEN VOICE CASTING TABLE =====
+CREATE TABLE IF NOT EXISTS public.golden_voice_casting (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    phone TEXT NOT NULL,
+    age TEXT,
+    signature_song TEXT NOT NULL,
+    media_link TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+ALTER TABLE public.golden_voice_casting ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Enable insert for public golden_voice_casting" ON public.golden_voice_casting
+    FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Enable read access for all users golden_voice_casting" ON public.golden_voice_casting
+    FOR SELECT USING (true);

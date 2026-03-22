@@ -9,7 +9,7 @@ import { RamaTeam } from "@/components/rama/sections/RamaTeam";
 
 export default function RamaHomePage() {
     return (
-        <main className="w-full bg-black min-h-screen text-white relative z-10 selection:bg-rama-accent selection:text-black">
+        <main className="w-full bg-transparent min-h-screen text-white relative z-10 selection:bg-rama-accent selection:text-black">
             <RamaHero />
             <RamaManifesto />
             <RamaWorks />

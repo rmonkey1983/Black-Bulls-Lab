@@ -21,7 +21,8 @@ export function Header() {
             href: "/events",
             subItems: [
                 { name: "Il PalQo", href: "/events/il-palqo" },
-                { name: "The Golden Voice", href: "/events/the-golden-voice" }
+                { name: "The Golden Voice", href: "/events/the-golden-voice" },
+                { name: "A Cena Con Il Bugiardo", href: "/events/a-cena-con-il-bugiardo" }
             ]
         },
         { name: "Ricercatori", href: "/talents" },

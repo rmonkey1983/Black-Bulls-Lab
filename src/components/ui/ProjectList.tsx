@@ -8,34 +8,24 @@ import { Event } from "@/lib/dataStore";
 
 interface ProjectListProps {
     events: Event[];
+    basePath?: string;
 }
 
-export function ProjectList({ events }: ProjectListProps) {
+export function ProjectList({ events, basePath = "/events" }: ProjectListProps) {
     const [hoveredEvent, setHoveredEvent] = useState<Event | null>(null);
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const listRef = useRef<HTMLDivElement>(null);
-
-    const handleMouseMove = (e: React.MouseEvent) => {
-        // Calculate mouse position relative to the viewport or list
-        // Using clientX/Y for fixed positioning of the image
-        setMousePosition({
-            x: e.clientX,
-            y: e.clientY
-        });
-    };
 
     return (
         <div
             className="relative py-10"
             ref={listRef}
-            onMouseMove={handleMouseMove}
         >
             {/* List Items */}
             <div className="space-y-0">
                 {events.map((event) => (
                     <Link
                         key={event.id}
-                        href={`/events/${event.id}`}
+                        href={`${basePath}/${event.slug}`}
                         className="group block"
                         onMouseEnter={() => setHoveredEvent(event)}
                         onMouseLeave={() => setHoveredEvent(null)}
@@ -61,52 +51,6 @@ export function ProjectList({ events }: ProjectListProps) {
                     </Link>
                 ))}
             </div>
-
-            {/* Floating Image Overlay */}
-            <motion.div
-                className="pointer-events-none fixed top-0 left-0 z-50 w-[300px] h-[400px] hidden md:block mix-blend-difference"
-                animate={{
-                    x: mousePosition.x - 150, // Center on cursor
-                    y: mousePosition.y - 200,
-                    opacity: hoveredEvent ? 1 : 0,
-                    scale: hoveredEvent ? 1 : 0.8,
-                    rotate: hoveredEvent ? Math.random() * 10 - 5 : 0 // Slight random rotation
-                }}
-                transition={{
-                    type: "spring",
-                    stiffness: 100,
-                    damping: 20,
-                    mass: 0.5
-                }}
-            >
-                {hoveredEvent && (
-                    <motion.div
-                        initial={{ opacity: 0, scale: 1.1 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                        className="w-full h-full overflow-hidden rounded-lg shadow-2xl relative"
-                    >
-                        <motion.img
-                            key={hoveredEvent.id}
-                            src={hoveredEvent.image}
-                            alt={hoveredEvent.title}
-                            className="w-full h-full object-cover"
-                            animate={{
-                                x: (mousePosition.x - 500) * -0.05,
-                                y: (mousePosition.y - 400) * -0.05,
-                            }}
-                            transition={{ type: "tween", ease: "linear", duration: 0 }}
-                        />
-                        {/* Overlay to ensure text readability if we ever put text here, or just style */}
-                        <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
-                    </motion.div>
-                )}
-            </motion.div>
         </div>
     );
-
-    // Calculate parallax offset based on mouse position relative to screen center
-    // This is a simplified version; for true parallax we'd need window dimensions
-    // But since we center on cursor, we can just use a subtle opposite move
 }

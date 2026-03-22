@@ -31,7 +31,7 @@ export default function CheckoutForm() {
     };
 
     return (
-        <div className="min-h-screen bg-black pt-24 pb-32 px-6">
+        <div className="min-h-screen bg-transparent pt-24 pb-32 px-6">
             <div className="max-w-3xl mx-auto">
                 <Link href={`/events/${eventId || '1'}`} className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition-colors">
                     <ArrowLeft size={16} />
@@ -72,7 +72,7 @@ export default function CheckoutForm() {
                                     <p className="text-white font-medium">Biglietto Standard</p>
                                     <p className="text-gold">€ {event.price},00</p>
                                 </div>
-                                <div className="flex items-center gap-4 bg-black rounded-lg p-2 border border-white/20">
+                                <div className="flex items-center gap-4 bg-transparent rounded-lg p-2 border border-white/20">
                                     <button
                                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
                                         className="w-8 h-8 flex items-center justify-center text-white hover:bg-white/10 rounded"
@@ -94,12 +94,12 @@ export default function CheckoutForm() {
                         <div className="bg-white/5 border border-white/10 rounded-xl p-6 space-y-4">
                             <h3 className="text-xl font-bold text-white mb-4">I tuoi Dati</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <input type="text" placeholder="Nome" className="bg-black border border-white/20 rounded-lg px-4 py-3 text-white focus:border-gold outline-none" />
-                                <input type="text" placeholder="Cognome" className="bg-black border border-white/20 rounded-lg px-4 py-3 text-white focus:border-gold outline-none" />
+                                <input type="text" placeholder="Nome" className="bg-transparent border border-white/20 rounded-lg px-4 py-3 text-white focus:border-gold outline-none" />
+                                <input type="text" placeholder="Cognome" className="bg-transparent border border-white/20 rounded-lg px-4 py-3 text-white focus:border-gold outline-none" />
                             </div>
-                            <input type="email" placeholder="Email" className="w-full bg-black border border-white/20 rounded-lg px-4 py-3 text-white focus:border-gold outline-none" />
-                            <input type="tel" placeholder="Telefono" className="w-full bg-black border border-white/20 rounded-lg px-4 py-3 text-white focus:border-gold outline-none" />
-                            <textarea placeholder="Allergie o Note per lo Chef" className="w-full bg-black border border-white/20 rounded-lg px-4 py-3 text-white focus:border-gold outline-none h-24" />
+                            <input type="email" placeholder="Email" className="w-full bg-transparent border border-white/20 rounded-lg px-4 py-3 text-white focus:border-gold outline-none" />
+                            <input type="tel" placeholder="Telefono" className="w-full bg-transparent border border-white/20 rounded-lg px-4 py-3 text-white focus:border-gold outline-none" />
+                            <textarea placeholder="Allergie o Note per lo Chef" className="w-full bg-transparent border border-white/20 rounded-lg px-4 py-3 text-white focus:border-gold outline-none h-24" />
                         </div>
 
                         {/* Total & Pay */}

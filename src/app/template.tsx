@@ -14,7 +14,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
 
             {/* Optional: Slide-in overlay for more aggressive transition */}
             <motion.div
-                className="fixed inset-0 bg-black z-[60] pointer-events-none"
+                className="fixed inset-0 bg-transparent z-[60] pointer-events-none"
                 initial={{ scaleY: 1 }}
                 animate={{ scaleY: 0 }}
                 exit={{ scaleY: 0 }}
@@ -22,7 +22,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
                 style={{ originY: 0 }}
             />
             <motion.div
-                className="fixed inset-0 bg-black z-[60] pointer-events-none"
+                className="fixed inset-0 bg-transparent z-[60] pointer-events-none"
                 initial={{ scaleY: 0 }}
                 animate={{ scaleY: 0 }}
                 exit={{ scaleY: 1 }}

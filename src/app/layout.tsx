@@ -104,7 +104,7 @@ export default function RootLayout({
       <head>
       </head>
       <body
-        className={`${mohave.variable} ${outfit.variable} ${rockSalt.variable} font-outfit antialiased bg-rama-bg text-rama-text min-h-screen relative selection:bg-rama-accent selection:text-black flex flex-col`}
+        className={`${mohave.variable} ${outfit.variable} ${rockSalt.variable} font-outfit antialiased text-rama-text min-h-screen relative selection:bg-rama-accent selection:text-black flex flex-col`}
       >
         <RamaHeader />
         <Preloader />

@@ -36,14 +36,14 @@ export function RamaFAQ() {
     };
 
     return (
-        <section className="w-full bg-black py-32 px-6 md:px-12 flex flex-col items-center">
+        <section className="w-full bg-transparent py-20 sm:py-32 px-4 sm:px-6 md:px-12 flex flex-col items-center">
 
-            <div className="text-center mb-16 md:mb-24">
+            <div className="text-center mb-12 sm:mb-16 md:mb-24">
                 <RamaAnimatedText
                     text="DOMANDE FREQUENTI"
-                    className="font-rock-salt text-rama-accent text-xl md:text-3xl mb-8 transform -rotate-2"
+                    className="font-rock-salt text-rama-accent text-base sm:text-xl md:text-3xl mb-6 sm:mb-8 transform -rotate-2"
                 />
-                <h2 className="font-mohave font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-[14vw] md:text-[10vw]">
+                <h2 className="font-mohave font-bold leading-[0.85] tracking-tighter uppercase text-white flex flex-col text-[15vw] sm:text-[14vw] md:text-[10vw]">
                     <RamaAnimatedText text="TUTTO QUELLO" />
                     <RamaAnimatedText text="CHE DEVI SAPERE" delay={0.1} />
                 </h2>
@@ -59,8 +59,8 @@ export function RamaFAQ() {
                             className="border-b border-white/10 group cursor-pointer"
                             onClick={() => toggleFaq(index)}
                         >
-                            <div className="py-6 md:py-8 flex items-center justify-between gap-6 transition-colors duration-300 group-hover:bg-white/5 px-4 rounded-lg">
-                                <h3 className={`font-mohave text-2xl md:text-4xl font-bold uppercase tracking-wide transition-colors duration-300 select-none ${isActive ? 'text-rama-accent' : 'text-white'}`}>
+                        <div className="py-5 sm:py-6 md:py-8 flex items-center justify-between gap-4 sm:gap-6 transition-colors duration-300 group-hover:bg-white/5 px-3 sm:px-4 rounded-lg">
+                                <h3 className={`font-mohave text-xl sm:text-2xl md:text-4xl font-bold uppercase tracking-wide transition-colors duration-300 select-none ${isActive ? 'text-rama-accent' : 'text-white'}`}>
                                     {faq.question}
                                 </h3>
                                 <div className="text-white/50 group-hover:text-rama-accent flex-shrink-0 transition-colors duration-300">

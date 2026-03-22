@@ -13,20 +13,20 @@ const teamMembers = [
 
 export function RamaTeam() {
     return (
-        <section className="w-full bg-black py-32 md:py-48 px-6 md:px-12 flex flex-col items-center">
+        <section className="w-full bg-transparent py-20 sm:py-32 md:py-48 px-4 sm:px-6 md:px-12 flex flex-col items-center">
 
-            <div className="text-center mb-24 md:mb-32">
+            <div className="text-center mb-16 sm:mb-24 md:mb-32">
                 <RamaAnimatedText
                     text="IL NOSTRO TEAM"
-                    className="font-rock-salt text-rama-accent text-xl md:text-3xl mb-8 transform -rotate-2"
+                    className="font-rock-salt text-rama-accent text-base sm:text-xl md:text-3xl mb-6 sm:mb-8 transform -rotate-2"
                 />
-                <h2 className="font-mohave font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-[14vw] md:text-[10vw]">
+                <h2 className="font-mohave font-bold leading-[0.85] tracking-tighter uppercase text-white flex flex-col text-[15vw] sm:text-[14vw] md:text-[10vw]">
                     <RamaAnimatedText text="CONOSCI I" />
                     <RamaAnimatedText text="RICERCATORI" delay={0.1} />
                 </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 w-full">
                 {teamMembers.map((member, i) => (
                     <motion.div
                         key={member.name}
@@ -42,7 +42,7 @@ export function RamaTeam() {
                                 alt={member.name}
                                 className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                             />
-                            <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+                            <div className="absolute inset-0 bg-transparent/20 group-hover:bg-transparent transition-colors duration-500" />
                         </div>
 
                         <div className="flex flex-col">

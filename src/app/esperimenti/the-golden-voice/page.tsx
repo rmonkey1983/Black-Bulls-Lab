@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { EventConcept } from "@/components/events/EventConcept";
 import { ArrowLeft, Mic, Trophy, Star, Music2 } from "lucide-react";
 import Link from "next/link";
+import { GoldenVoiceForm } from "@/components/forms/GoldenVoiceForm";
 
 export default function TheGoldenVoicePage() {
     return (
@@ -30,10 +31,10 @@ export default function TheGoldenVoicePage() {
                 {/* Back Button */}
                 <div className="absolute top-24 left-6 z-30">
                     <Link
-                        href="/events"
-                        className="flex items-center gap-2 text-rama-text/70 hover:text-rama-accent transition-colors uppercase text-xs font-bold tracking-widest backdrop-blur-sm bg-black/20 px-4 py-2 rounded-full border border-white/10"
+                        href="/esperimenti"
+                        className="flex items-center gap-2 text-rama-text/70 hover:text-rama-accent transition-colors uppercase text-xs font-bold tracking-widest backdrop-blur-sm bg-transparent/20 px-4 py-2 rounded-full border border-white/10"
                     >
-                        <ArrowLeft size={16} /> Torna agli Eventi
+                        <ArrowLeft size={16} /> Torna agli Esperimenti
                     </Link>
                 </div>
 
@@ -120,13 +121,8 @@ export default function TheGoldenVoicePage() {
                         ))}
                     </div>
 
-                    <div className="mt-20 text-center">
-                        <Link
-                            href="/contact"
-                            className="inline-flex items-center gap-3 px-8 py-4 bg-transparent border border-rama-accent text-rama-accent font-bold uppercase tracking-widest hover:bg-rama-accent hover:text-black transition-all duration-300"
-                        >
-                            Iscriviti al Casting <ArrowLeft className="rotate-180" size={18} />
-                        </Link>
+                    <div className="mt-24 max-w-4xl mx-auto" id="casting-form">
+                        <GoldenVoiceForm />
                     </div>
                 </div>
             </section>

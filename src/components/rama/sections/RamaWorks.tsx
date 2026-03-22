@@ -18,18 +18,18 @@ export function RamaWorks() {
     const displayEvents = events.length > 0 ? events.slice(0, 3) : [];
 
     return (
-        <section ref={containerRef} className="w-full relative px-6 md:px-12 bg-black py-32 flex flex-col lg:flex-row gap-12 lg:gap-0">
+        <section ref={containerRef} className="w-full relative px-4 sm:px-6 md:px-12 bg-transparent py-20 sm:py-32 flex flex-col lg:flex-row gap-8 sm:gap-12 lg:gap-0">
             {/* Left Sticky Sidebar */}
             <div className="lg:w-1/3 relative z-10">
                 <div className="lg:sticky lg:top-40 flex flex-col">
-                    <div className="flex justify-between items-center mb-12">
-                        <div className="font-rock-salt text-rama-accent transform -rotate-2 text-xl">Prossimi Eventi</div>
-                        <a href="/events" className="flex items-center gap-2 text-rama-accent font-outfit uppercase tracking-widest text-sm hover:text-white transition-colors">
+                    <div className="flex justify-between items-center mb-8 sm:mb-12">
+                        <div className="font-rock-salt text-rama-accent transform -rotate-2 text-base sm:text-xl">Prossimi Eventi</div>
+                        <a href="/events" className="flex items-center gap-2 text-rama-accent font-outfit uppercase tracking-widest text-xs sm:text-sm hover:text-white transition-colors">
                             Tutti gli Eventi <ArrowUpRight size={16} />
                         </a>
                     </div>
 
-                    <div className="flex flex-col gap-2 font-mohave text-4xl md:text-6xl uppercase font-bold text-white/50 tracking-tighter">
+                    <div className="flex flex-col gap-2 font-mohave text-3xl sm:text-4xl md:text-6xl uppercase font-bold text-white/50 tracking-tighter">
                         {displayEvents.map((p, i) => (
                             <Link href={`/events/${p.slug}`} key={p.id} className="cursor-pointer hover:text-white transition-colors duration-300">
                                 {i === 0 && <span className="inline-block w-4 h-[6px] bg-rama-accent mr-4 align-middle mb-2"></span>}
@@ -69,7 +69,7 @@ function ProjectCard({ event, index }: { event: Event; index: number }) {
                     alt={event.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-in-out"
                 />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+                <div className="absolute inset-0 bg-transparent/20 group-hover:bg-transparent transition-colors duration-500" />
             </Link>
 
             {/* Project Details */}

@@ -28,10 +28,10 @@ export default function IlPalqoPage() {
                 {/* Back Button */}
                 <div className="absolute top-24 left-6 z-30">
                     <Link
-                        href="/events"
-                        className="flex items-center gap-2 text-rama-text/70 hover:text-rama-accent transition-colors uppercase text-xs font-bold tracking-widest backdrop-blur-sm bg-black/20 px-4 py-2 rounded-full border border-white/10"
+                        href="/esperimenti"
+                        className="flex items-center gap-2 text-rama-text/70 hover:text-rama-accent transition-colors uppercase text-xs font-bold tracking-widest backdrop-blur-sm bg-transparent/20 px-4 py-2 rounded-full border border-white/10"
                     >
-                        <ArrowLeft size={16} /> Torna agli Eventi
+                        <ArrowLeft size={16} /> Torna agli Esperimenti
                     </Link>
                 </div>
 
@@ -66,7 +66,7 @@ export default function IlPalqoPage() {
             />
 
             {/* FORMAT SECTION */}
-            <section className="py-24 bg-black/40 relative overflow-hidden">
+            <section className="py-24 bg-transparent/40 relative overflow-hidden">
                 {/* Background Blobs */}
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rama-accent/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 

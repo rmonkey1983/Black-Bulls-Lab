@@ -64,9 +64,16 @@
   --glow-bordeaux: 0 0 20px rgba(139, 26, 43, 0.3), 0 0 60px rgba(139, 26, 43, 0.1);
 }
 
+/* Prevent horizontal scroll on all viewports */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 /* ====== BASE STYLES ====== */
 body {
-  background: var(--background);
+  background: var(--color-bg-dark) url('/bg-custom.jpg') no-repeat center center fixed;
+  background-size: cover;
   color: var(--foreground);
   font-family: var(--font-inter), sans-serif;
 }
@@ -449,4 +456,17 @@ h6 {
 
 .animate-data-flicker {
   opacity: 1;
+}
+
+/* FadeIn keyframe (used by RamaHero arbitrary animation) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

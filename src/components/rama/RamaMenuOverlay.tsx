@@ -2,23 +2,23 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { X } from "lucide-react";
+import { X, ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 interface RamaMenuOverlayProps {
     isOpen: boolean;
     onClose: () => void;
 }
 
-const menuLinks = [
-    { name: "Home", href: "/" },
-    { name: "Esperimenti", href: "/events" },
-    { name: "Ricercatori", href: "/talents" },
-    { name: "Galleria", href: "/gallery" },
-    { name: "Chi Siamo", href: "/chi-siamo" },
-    { name: "Contatti", href: "/contact" },
+const experiments = [
+    { name: "Il PalQo", href: "/esperimenti/il-palqo", desc: "Community & Show" },
+    { name: "The Golden Voice", href: "/esperimenti/the-golden-voice", desc: "Singing Contest" },
+    { name: "A Cena Con Il Bugiardo", href: "/esperimenti/a-cena-con-il-bugiardo", desc: "Dinner Show & Social Deception" },
 ];
 
 export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
+    const [experimentsOpen, setExperimentsOpen] = useState(false);
+
     return (
         <AnimatePresence>
             {isOpen && (
@@ -55,19 +55,105 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                     </div>
 
                     {/* Right Menu Content */}
-                    <div className="w-full lg:w-1/2 flex flex-col justify-center p-12 md:p-24 overflow-y-auto">
-                        <nav className="flex flex-col gap-4 md:gap-6">
-                            {menuLinks.map((link, i) => (
+                    <div className="w-full lg:w-1/2 flex flex-col justify-center p-8 sm:p-12 md:p-24 overflow-y-auto">
+                        <nav className="flex flex-col gap-3 md:gap-4">
+                            
+                            {/* HOME */}
+                            <motion.div
+                                initial={{ opacity: 0, x: 40 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                            >
+                                <Link
+                                    href="/"
+                                    onClick={onClose}
+                                    className="font-mohave text-4xl sm:text-5xl md:text-7xl uppercase font-bold text-rama-text hover:text-rama-accent transition-colors duration-300 block"
+                                >
+                                    Home
+                                </Link>
+                            </motion.div>
+
+                            {/* ESPERIMENTI — expandable on hover */}
+                            <motion.div
+                                initial={{ opacity: 0, x: 40 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.15, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                                onMouseEnter={() => setExperimentsOpen(true)}
+                                onMouseLeave={() => setExperimentsOpen(false)}
+                            >
+                                {/* Toggle row */}
+                                <div
+                                    className="flex items-center gap-3 font-mohave text-4xl sm:text-5xl md:text-7xl uppercase font-bold text-rama-text hover:text-rama-accent transition-colors duration-300 w-fit group cursor-default"
+                                >
+                                    Esperimenti
+                                    <ChevronDown
+                                        size={28}
+                                        className={`transition-transform duration-300 text-rama-accent mt-2 flex-shrink-0 ${experimentsOpen ? "rotate-180" : ""}`}
+                                    />
+                                </div>
+
+                                {/* Sub-links */}
+                                <AnimatePresence>
+                                    {experimentsOpen && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: "auto", opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.35, ease: "easeInOut" }}
+                                            className="overflow-hidden"
+                                        >
+                                            <div className="flex flex-col gap-1 mt-3 pl-4 border-l-2 border-rama-accent/40">
+                                                {experiments.map((exp, i) => (
+                                                    <motion.div
+                                                        key={exp.href}
+                                                        initial={{ opacity: 0, x: 20 }}
+                                                        animate={{ opacity: 1, x: 0 }}
+                                                        transition={{ delay: i * 0.07, duration: 0.3 }}
+                                                    >
+                                                        <Link
+                                                            href={exp.href}
+                                                            onClick={onClose}
+                                                            className="flex flex-col py-2.5 group/sub"
+                                                        >
+                                                            <span className="font-mohave text-xl sm:text-2xl font-bold uppercase text-white/80 group-hover/sub:text-rama-accent transition-colors tracking-wide">
+                                                                {exp.name}
+                                                            </span>
+                                                            <span className="font-outfit text-xs text-white/30 uppercase tracking-widest">
+                                                                {exp.desc}
+                                                            </span>
+                                                        </Link>
+                                                    </motion.div>
+                                                ))}
+                                                <Link
+                                                    href="/events"
+                                                    onClick={onClose}
+                                                    className="font-outfit text-xs text-rama-accent uppercase tracking-widest hover:text-white transition-colors mt-1 py-1"
+                                                >
+                                                    Tutti gli esperimenti →
+                                                </Link>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </motion.div>
+
+                            {/* OTHER LINKS */}
+                            {[
+                                { name: "Ricercatori", href: "/talents" },
+                                { name: "Galleria", href: "/gallery" },
+                                { name: "Chi Siamo", href: "/chi-siamo" },
+                                { name: "Contatti", href: "/contact" },
+                            ].map((link, i) => (
                                 <motion.div
                                     key={link.name}
                                     initial={{ opacity: 0, x: 40 }}
                                     animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.1 + i * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                                    transition={{ delay: 0.2 + i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                                 >
                                     <Link
                                         href={link.href}
                                         onClick={onClose}
-                                        className="font-mohave text-5xl md:text-7xl uppercase font-bold text-rama-text hover:text-rama-accent transition-colors duration-300 block"
+                                        className="font-mohave text-4xl sm:text-5xl md:text-7xl uppercase font-bold text-rama-text hover:text-rama-accent transition-colors duration-300 block"
                                     >
                                         {link.name}
                                     </Link>
@@ -78,8 +164,8 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            transition={{ delay: 0.6, duration: 0.5 }}
-                            className="mt-16 pt-8 border-t border-white/10 grid grid-cols-2 gap-8 font-outfit text-sm text-rama-muted"
+                            transition={{ delay: 0.7, duration: 0.5 }}
+                            className="mt-12 sm:mt-16 pt-8 border-t border-white/10 grid grid-cols-2 gap-8 font-outfit text-sm text-rama-muted"
                         >
                             <div>
                                 <h4 className="font-rock-salt text-rama-accent mb-4 transform -rotate-2">Seguici</h4>

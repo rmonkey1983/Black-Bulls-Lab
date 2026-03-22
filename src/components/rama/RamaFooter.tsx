@@ -4,31 +4,36 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { subscribeToNewsletter } from "@/app/actions/newsletter";
 
 export function RamaFooter() {
     const pathname = usePathname();
+    const [email, setEmail] = useState("");
+    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+    const [message, setMessage] = useState("");
 
     if (pathname.startsWith("/admin")) return null;
 
     return (
-        <footer className="w-full bg-black border-t border-white/10 pt-16 md:pt-32 pb-8 md:pb-16 flex flex-col px-6 md:px-12">
+        <footer className="w-full bg-transparent border-t border-white/10 pt-12 sm:pt-16 md:pt-32 pb-8 md:pb-16 flex flex-col px-4 sm:px-6 md:px-12 overflow-hidden">
             {/* Massive CTA */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 md:mb-40 group cursor-pointer w-max">
-                <Link href="/events" className="font-mohave text-[18vw] md:text-[140px] leading-[0.8] uppercase font-bold text-rama-text hover:text-rama-accent transition-colors duration-500">
+            <div className="flex flex-row justify-between items-end mb-16 sm:mb-24 md:mb-40 group cursor-pointer">
+                <Link href="/events" className="font-mohave text-[20vw] sm:text-[18vw] md:text-[140px] leading-[0.85] uppercase font-bold text-rama-text hover:text-rama-accent transition-colors duration-500">
                     Prossimi<br />Eventi
                 </Link>
                 <ArrowUpRight
-                    size={120}
+                    size={80}
                     strokeWidth={1}
-                    className="text-rama-text group-hover:text-rama-accent group-hover:-translate-y-4 group-hover:translate-x-4 transition-all duration-500 hidden md:block"
+                    className="text-rama-text group-hover:text-rama-accent group-hover:-translate-y-4 group-hover:translate-x-4 transition-all duration-500 hidden md:block flex-shrink-0"
                 />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 border-t border-white/10 pt-12 text-sm text-rama-muted font-outfit uppercase tracking-widest">
+            <div className="grid grid-cols-2 md:grid-cols-12 gap-8 md:gap-8 border-t border-white/10 pt-10 sm:pt-12 text-sm text-rama-muted font-outfit uppercase tracking-widest">
 
                 {/* Logo and Copyright */}
-                <div className="md:col-span-4 flex flex-col gap-8 text-rama-bg">
-                    <div className="bg-rama-accent p-8 w-full max-w-[300px]">
+                <div className="col-span-2 md:col-span-4 flex flex-col gap-8 text-rama-bg">
+                    <div className="bg-rama-accent p-6 sm:p-8 w-full max-w-[300px]">
                         <h2 className="font-mohave text-6xl font-bold tracking-tighter mix-blend-difference mb-8 leading-none">
                             BLACK<br />BULLS<br />LAB
                         </h2>
@@ -50,7 +55,7 @@ export function RamaFooter() {
                 </div>
 
                 {/* Links Column 1 */}
-                <div className="md:col-span-2 flex flex-col gap-6 font-semibold">
+                <div className="col-span-1 md:col-span-2 flex flex-col gap-6 font-semibold">
                     <Link href="/events" className="hover:text-white transition-colors flex justify-between">Eventi <ArrowUpRight size={14} /></Link>
                     <div className="h-[1px] w-full bg-white/10" />
                     <Link href="/chi-siamo" className="hover:text-white transition-colors flex justify-between">Chi Siamo <ArrowUpRight size={14} /></Link>
@@ -63,7 +68,7 @@ export function RamaFooter() {
                 </div>
 
                 {/* Follow us block */}
-                <div className="md:col-span-3 flex flex-col gap-6 md:pl-8">
+                <div className="col-span-1 md:col-span-3 flex flex-col gap-6 md:pl-8">
                     <h4 className="font-rock-salt text-rama-accent transform -rotate-2 capitalize tracking-normal text-lg mb-2">Seguici</h4>
                     <a href="https://instagram.com/blackbullslab" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
                     <a href="https://facebook.com/blackbullslab" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Facebook</a>
@@ -71,7 +76,7 @@ export function RamaFooter() {
                 </div>
 
                 {/* Newsletter block */}
-                <div className="md:col-span-3 flex flex-col md:border-l md:border-white/10 md:pl-8 justify-between">
+                <div className="col-span-2 md:col-span-3 flex flex-col md:border-l md:border-white/10 md:pl-8 justify-between">
                     <div>
                         <h4 className="font-rock-salt text-rama-accent transform -rotate-2 capitalize tracking-normal text-lg mb-4">Newsletter</h4>
                         <p className="text-xs font-normal capitalize tracking-normal mb-8">Iscriviti per non perdere i prossimi eventi.</p>
@@ -79,30 +84,53 @@ export function RamaFooter() {
 
                     <form
                         className="flex border border-white/20 p-1 focus-within:border-white/50 transition-colors"
-                        onSubmit={(e) => {
+                        onSubmit={async (e) => {
                             e.preventDefault();
-                            alert("Grazie per l'iscrizione!");
-                            (e.target as HTMLFormElement).reset();
+                            if (!email) return;
+
+                            setStatus("loading");
+                            const res = await subscribeToNewsletter(email);
+
+                            if (res?.error) {
+                                setStatus("error");
+                                setMessage(res.error);
+                            } else {
+                                setStatus("success");
+                                setMessage("Iscrizione completata con successo!");
+                                setEmail("");
+                            }
                         }}
                     >
                         <input
                             type="email"
                             required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            disabled={status === "loading"}
                             placeholder="Your Email"
-                            className="bg-transparent outline-none flex-grow px-3 py-2 text-white font-normal capitalize tracking-normal placeholder:text-white/30"
+                            className="bg-transparent outline-none flex-grow px-3 py-2 text-white font-normal capitalize tracking-normal placeholder:text-white/30 disabled:opacity-50"
                         />
-                        <button type="submit" className="bg-white/10 hover:bg-white text-white hover:text-black transition-colors px-6 py-2 font-semibold cursor-pointer">
-                            Iscriviti
+                        <button 
+                            type="submit" 
+                            disabled={status === "loading"}
+                            className="bg-white/10 hover:bg-white text-white hover:text-black transition-colors px-6 py-2 font-semibold cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            {status === "loading" ? "Invio..." : "Iscriviti"}
                         </button>
                     </form>
+                    {message && (
+                        <p className={`text-xs mt-2 ${status === "error" ? "text-red-400" : "text-green-400"}`}>
+                            {message}
+                        </p>
+                    )}
                 </div>
             </div>
 
             {/* Bottom Contact string */}
-            <div className="mt-24 md:mt-32 w-full flex flex-col md:flex-row justify-between items-start md:items-end border-t border-white/10 pt-8 gap-8">
+            <div className="mt-12 sm:mt-24 md:mt-32 w-full flex flex-col md:flex-row justify-between items-start md:items-end border-t border-white/10 pt-8 gap-4 sm:gap-8">
                 <div className="flex flex-col gap-2">
-                    <span className="font-rock-salt text-rama-accent text-xl transform -rotate-2">Contattaci</span>
-                    <a href="mailto:info@blackbullslab.com" className="font-mohave text-4xl md:text-5xl lg:text-7xl lowercase font-bold text-white hover:text-rama-accent transition-colors">
+                    <span className="font-rock-salt text-rama-accent text-lg sm:text-xl transform -rotate-2">Contattaci</span>
+                    <a href="mailto:info@blackbullslab.com" className="font-mohave text-2xl sm:text-4xl md:text-5xl lg:text-7xl lowercase font-bold text-white hover:text-rama-accent transition-colors break-all">
                         info@blackbullslab.com
                     </a>
                 </div>

@@ -53,7 +53,7 @@ export function ParallaxImage({
         <div
             ref={ref}
             className={cn(
-                "relative overflow-hidden w-full bg-rama-bg",
+                "relative overflow-hidden w-full bg-transparent",
                 aspectClasses[aspectRatio],
                 className
             )}

@@ -85,7 +85,7 @@ export default function ParallaxDemoPage() {
             {/* Full Width Break */}
             <section className="py-32">
                 <div className="h-[60vh] relative w-full overflow-hidden">
-                    <div className="absolute inset-0 bg-black/40 z-10 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-transparent/40 z-10 flex items-center justify-center">
                         <h3 className="text-6xl font-mohave uppercase text-rama-text z-20">Taste the Moment</h3>
                     </div>
                     <ParallaxImage

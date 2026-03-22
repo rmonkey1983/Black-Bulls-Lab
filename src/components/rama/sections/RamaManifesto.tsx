@@ -3,7 +3,7 @@ import { RamaAnimatedText } from "../RamaAnimatedText";
 
 export function RamaManifesto() {
     return (
-        <section className="w-full py-32 md:py-48 px-6 md:px-12 bg-black relative flex items-center justify-center overflow-hidden">
+        <section className="w-full py-20 sm:py-32 md:py-48 px-4 sm:px-6 md:px-12 bg-transparent relative flex items-center justify-center overflow-hidden">
             {/* Background Texture/Noise could go here */}
             <div className="absolute inset-0 bg-zinc-900/20 z-0"></div>
 
@@ -12,10 +12,10 @@ export function RamaManifesto() {
 
                 <RamaAnimatedText
                     text="IL CONCETTO"
-                    className="font-rock-salt text-rama-accent text-xl md:text-3xl mb-8 transform -rotate-2"
+                    className="font-rock-salt text-rama-accent text-base sm:text-xl md:text-3xl mb-6 sm:mb-8 transform -rotate-2"
                 />
 
-                <div className="font-mohave font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-[14vw] md:text-[10vw]">
+                <div className="font-mohave font-bold leading-[0.85] tracking-tighter uppercase text-white flex flex-col text-[15vw] sm:text-[14vw] md:text-[10vw]">
                     <RamaAnimatedText text="MOLTO PIÙ" delay={0.1} />
                     <RamaAnimatedText text="DI UNA CENA" delay={0.2} className="text-rama-accent" />
                 </div>

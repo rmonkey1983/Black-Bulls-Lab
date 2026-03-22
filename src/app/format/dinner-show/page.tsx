@@ -5,7 +5,7 @@ import { RamaAnimatedText } from "@/components/rama/RamaAnimatedText";
 
 export default function DinnerShowPage() {
     return (
-        <main className="w-full bg-black min-h-screen text-white relative z-10 pt-32 pb-16">
+        <main className="w-full bg-transparent min-h-screen text-white relative z-10 pt-32 pb-16">
             <section className="relative w-full flex flex-col justify-center px-6 md:px-12 py-16 overflow-hidden">
                 <div className="flex flex-col items-center text-center max-w-5xl mx-auto z-20">
                     <RamaAnimatedText

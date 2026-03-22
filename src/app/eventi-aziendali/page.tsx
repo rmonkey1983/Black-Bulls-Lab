@@ -171,29 +171,29 @@ export default function CorporatePage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <label className="text-sm text-rama-muted uppercase tracking-wider">Nome Azienda</label>
-                                <input type="text" className="w-full bg-black/50 border border-white/10 p-4 text-white placeholder-white/30 focus:border-rama-accent/50 focus:outline-none transition-colors" placeholder="Es. Acme Corp" />
+                                <input type="text" className="w-full bg-transparent/50 border border-white/10 p-4 text-white placeholder-white/30 focus:border-rama-accent/50 focus:outline-none transition-colors" placeholder="Es. Acme Corp" />
                             </div>
                             <div className="space-y-2">
                                 <label className="text-sm text-rama-muted uppercase tracking-wider">Referente</label>
-                                <input type="text" className="w-full bg-black/50 border border-white/10 p-4 text-white placeholder-white/30 focus:border-rama-accent/50 focus:outline-none transition-colors" placeholder="Nome e Cognome" />
+                                <input type="text" className="w-full bg-transparent/50 border border-white/10 p-4 text-white placeholder-white/30 focus:border-rama-accent/50 focus:outline-none transition-colors" placeholder="Nome e Cognome" />
                             </div>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <label className="text-sm text-rama-muted uppercase tracking-wider">Email</label>
-                                <input type="email" className="w-full bg-black/50 border border-white/10 p-4 text-white placeholder-white/30 focus:border-rama-accent/50 focus:outline-none transition-colors" placeholder="email@azienda.com" />
+                                <input type="email" className="w-full bg-transparent/50 border border-white/10 p-4 text-white placeholder-white/30 focus:border-rama-accent/50 focus:outline-none transition-colors" placeholder="email@azienda.com" />
                             </div>
                             <div className="space-y-2">
                                 <label className="text-sm text-rama-muted uppercase tracking-wider">Telefono</label>
-                                <input type="tel" className="w-full bg-black/50 border border-white/10 p-4 text-white placeholder-white/30 focus:border-rama-accent/50 focus:outline-none transition-colors" placeholder="+39" />
+                                <input type="tel" className="w-full bg-transparent/50 border border-white/10 p-4 text-white placeholder-white/30 focus:border-rama-accent/50 focus:outline-none transition-colors" placeholder="+39" />
                             </div>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <label className="text-sm text-rama-muted uppercase tracking-wider">Numero Ospiti Previsti</label>
-                                <select className="w-full bg-black/50 border border-white/10 p-4 text-white focus:border-rama-accent/50 focus:outline-none transition-colors appearance-none cursor-pointer">
+                                <select className="w-full bg-transparent/50 border border-white/10 p-4 text-white focus:border-rama-accent/50 focus:outline-none transition-colors appearance-none cursor-pointer">
                                     <option value="" disabled selected>Seleziona range</option>
                                     <option value="10-20">10-20 persone</option>
                                     <option value="20-50">20-50 persone</option>
@@ -203,7 +203,7 @@ export default function CorporatePage() {
                             </div>
                             <div className="space-y-2">
                                 <label className="text-sm text-rama-muted uppercase tracking-wider">Tipo di Evento</label>
-                                <input type="text" className="w-full bg-black/50 border border-white/10 p-4 text-white placeholder-white/30 focus:border-rama-accent/50 focus:outline-none transition-colors" placeholder="Cena di Natale, Lancio, Team Building..." />
+                                <input type="text" className="w-full bg-transparent/50 border border-white/10 p-4 text-white placeholder-white/30 focus:border-rama-accent/50 focus:outline-none transition-colors" placeholder="Cena di Natale, Lancio, Team Building..." />
                             </div>
                         </div>
 

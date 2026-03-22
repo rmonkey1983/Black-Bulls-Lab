@@ -7,7 +7,7 @@ import { PremiumButton } from "@/components/ui/PremiumButton";
 
 export function RamaTestimonial() {
     return (
-        <section className="relative w-full py-32 px-6 md:px-12 bg-black flex flex-col items-center justify-center overflow-hidden">
+        <section className="relative w-full py-20 sm:py-32 px-4 sm:px-6 md:px-12 bg-transparent flex flex-col items-center justify-center overflow-hidden">
             {/* Subtle Grid Background */}
             <div className="absolute inset-x-0 bottom-0 h-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
 
@@ -42,7 +42,7 @@ export function RamaTestimonial() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="w-full flex flex-col items-center bg-zinc-900/50 border border-rama-accent/10 p-10 md:p-16 rounded-xl relative"
+                    className="w-full flex flex-col items-center bg-zinc-900/50 border border-rama-accent/10 p-6 sm:p-10 md:p-16 rounded-xl relative"
                 >
                     <div className="absolute top-0 right-0 w-32 h-32 bg-rama-accent/5 rounded-full blur-3xl" />
                     <div className="absolute bottom-0 left-0 w-32 h-32 bg-rama-accent/5 rounded-full blur-3xl" />
