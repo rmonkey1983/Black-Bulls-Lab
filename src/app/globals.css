@@ -1,0 +1,468 @@
+@import "tailwindcss";
+
+@theme {
+
+  /* Premium Dark Palette */
+  --color-bg-dark: #0A0A0A;
+  --color-bg-surface: #111111;
+  --color-bg-card: #161616;
+  --color-bg-card-hover: #1C1C1C;
+  --color-border: #252525;
+  --color-border-light: #333333;
+
+  /* Brand Accent Colors */
+  --color-gold: #C8A44E;
+  --color-gold-light: #D4B565;
+  --color-gold-dim: #A08338;
+  --color-bordeaux: #8B1A2B;
+  --color-bordeaux-light: #A82240;
+  --color-bordeaux-dim: #6B1420;
+
+  /* Text Colors */
+  --color-white: #F5F0E8;
+  --color-gray-100: #E8E0D4;
+  --color-gray-200: #C4BAA8;
+  --color-gray-300: #9E9484;
+  --color-gray-400: #706758;
+  --color-gray-500: #4A4238;
+  --color-gray-600: #2A2520;
+
+  /* Legacy compatibility for admin pages */
+  --color-black: #0A0A0A;
+  --color-lab-dark: #0A0A0A;
+  --color-lab-surface: #111111;
+  --color-lab-card: #161616;
+  --color-lab-border: #252525;
+  --color-green: #C8A44E;
+  --color-green-dim: #A08338;
+  --color-cyan: #8B1A2B;
+  --color-amber: #C8A44E;
+  --color-red: #A82240;
+  --color-grey: #252525;
+  --color-gray-muted: #706758;
+
+  /* Rama Clone Colors */
+  --color-rama-bg: #151515;
+  --color-rama-text: #EEEEEE;
+  --color-rama-muted: #A4A4A4;
+  --color-rama-accent: #E5B60C;
+
+  /* Rama Fonts */
+  --font-mohave: var(--font-mohave);
+  --font-outfit: var(--font-outfit);
+  --font-rock-salt: var(--font-rock-salt);
+}
+
+:root {
+  --background: var(--color-bg-dark);
+  --foreground: var(--color-white);
+  --glow-gold: 0 0 20px rgba(200, 164, 78, 0.25), 0 0 60px rgba(200, 164, 78, 0.08);
+  --glow-bordeaux: 0 0 20px rgba(139, 26, 43, 0.3), 0 0 60px rgba(139, 26, 43, 0.1);
+}
+
+/* Prevent horizontal scroll on all viewports */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* ====== BASE STYLES ====== */
+body {
+  background: var(--color-bg-dark) url('/bg-custom.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: var(--foreground);
+  font-family: var(--font-outfit), sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-mohave), sans-serif;
+}
+
+/* Serif headline utility */
+.font-serif-display {
+  font-family: 'Georgia', serif;
+}
+
+/* ====== SCROLLBAR ====== */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold-dim);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold);
+}
+
+/* ====== SELECTION ====== */
+::selection {
+  background: rgba(200, 164, 78, 0.25);
+  color: #fff;
+}
+
+/* ====== UTILITY CLASSES ====== */
+
+/* Gold text glow */
+.text-glow-gold {
+  text-shadow: 0 0 10px rgba(200, 164, 78, 0.4), 0 0 30px rgba(200, 164, 78, 0.15);
+}
+
+/* Bordeaux text glow */
+.text-glow-bordeaux {
+  text-shadow: 0 0 10px rgba(139, 26, 43, 0.4), 0 0 30px rgba(139, 26, 43, 0.15);
+}
+
+/* Legacy compat */
+.text-glow-green {
+  text-shadow: 0 0 10px rgba(200, 164, 78, 0.4), 0 0 30px rgba(200, 164, 78, 0.15);
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 10px rgba(139, 26, 43, 0.4), 0 0 30px rgba(139, 26, 43, 0.15);
+}
+
+/* Gold shimmer animation for text */
+.text-shimmer {
+  background: linear-gradient(110deg,
+      var(--color-gold-dim) 0%,
+      var(--color-gold-light) 45%,
+      var(--color-gold) 55%,
+      var(--color-gold-dim) 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+
+  0%,
+  100% {
+    background-position: 100% 50%;
+  }
+
+  50% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Text Stroke Utilities */
+.text-stroke-white {
+  -webkit-text-stroke: 1px white;
+  color: transparent;
+}
+
+.text-stroke-gold {
+  -webkit-text-stroke: 1px var(--color-gold);
+  color: transparent;
+}
+
+/* Premium glass card */
+.glass-card {
+  background: rgba(22, 22, 22, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(200, 164, 78, 0.08);
+}
+
+.glass-card:hover {
+  border-color: rgba(200, 164, 78, 0.18);
+}
+
+/* Premium borders */
+.premium-border {
+  border: 1px solid rgba(200, 164, 78, 0.12);
+}
+
+.premium-border-hover:hover {
+  border-color: rgba(200, 164, 78, 0.3);
+  box-shadow: 0 0 30px rgba(200, 164, 78, 0.05);
+}
+
+/* Gold gradient line */
+.gold-line {
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+/* Warm gradient overlay */
+.premium-gradient {
+  background: linear-gradient(180deg,
+      rgba(10, 10, 10, 0.95) 0%,
+      rgba(10, 10, 10, 0.7) 40%,
+      rgba(139, 26, 43, 0.08) 100%);
+}
+
+/* Vignette effect */
+.vignette::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at center,
+      transparent 50%,
+      rgba(10, 10, 10, 0.7) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Monospace readout (legacy compat for admin) */
+.data-readout {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  letter-spacing: 0.1em;
+}
+
+/* No scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Legacy compat classes */
+.lab-border {
+  border: 1px solid rgba(200, 164, 78, 0.12);
+}
+
+.lab-border-glow {
+  border: 1px solid rgba(200, 164, 78, 0.2);
+  box-shadow: 0 0 15px rgba(200, 164, 78, 0.04);
+}
+
+.scanline-overlay::after {
+  display: none;
+}
+
+.hex-grid-bg {
+  background: none;
+}
+
+/* ====== ANIMATIONS ====== */
+
+/* Marquee */
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 30s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+/* Pulse glow (gold) */
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    opacity: 0.5;
+    filter: brightness(1);
+  }
+
+  50% {
+    opacity: 1;
+    filter: brightness(1.2);
+  }
+}
+
+/* Float */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Subtle border glow */
+.animate-border-glow {
+  animation: border-glow 3s ease-in-out infinite;
+}
+
+@keyframes border-glow {
+
+  0%,
+  100% {
+    border-color: rgba(200, 164, 78, 0.1);
+    box-shadow: 0 0 10px rgba(200, 164, 78, 0.03);
+  }
+
+  50% {
+    border-color: rgba(200, 164, 78, 0.25);
+    box-shadow: 0 0 20px rgba(200, 164, 78, 0.08);
+  }
+}
+
+/* Cursor blink */
+.animate-cursor {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+@keyframes cursor-blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Slow drift */
+.animate-drift {
+  animation: drift 15s ease-in-out infinite;
+}
+
+@keyframes drift {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  25% {
+    transform: translate(10px, -15px);
+  }
+
+  50% {
+    transform: translate(-5px, -25px);
+  }
+
+  75% {
+    transform: translate(-15px, -10px);
+  }
+}
+
+/* Fade in up */
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scale in */
+.animate-scale-in {
+  animation: scale-in 0.5s ease-out forwards;
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Gold line expand */
+.animate-line-expand {
+  animation: line-expand 1.5s ease-out forwards;
+}
+
+@keyframes line-expand {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+/* Molecule spin (legacy compat for admin) */
+.animate-molecule-spin {
+  animation: molecule-spin 20s linear infinite;
+}
+
+@keyframes molecule-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-scan {
+  display: none;
+}
+
+.animate-data-flicker {
+  opacity: 1;
+}
+
+/* FadeIn keyframe (used by RamaHero arbitrary animation) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
