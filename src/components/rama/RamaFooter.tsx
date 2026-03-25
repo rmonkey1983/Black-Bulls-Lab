@@ -18,7 +18,7 @@ export function RamaFooter() {
     return (
         <footer className="w-full bg-transparent border-t border-white/10 pt-12 sm:pt-16 md:pt-32 pb-8 md:pb-16 flex flex-col px-4 sm:px-6 md:px-12 overflow-hidden">
             {/* Massive CTA */}
-            {pathname !== "/contact" && pathname !== "/events" && (
+            {pathname !== "/" && pathname !== "/contact" && pathname !== "/events" && (
                 <div className="flex flex-row justify-between items-end mb-16 sm:mb-24 md:mb-40 group cursor-pointer">
                     <Link href="/events" className="font-mohave text-[20vw] sm:text-[18vw] md:text-[140px] leading-[0.85] uppercase font-bold text-rama-text hover:text-rama-accent transition-colors duration-500">
                         Prossimi<br />Eventi

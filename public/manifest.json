@@ -1,0 +1,9 @@
+{
+  "name": "Black Bulls Lab",
+  "short_name": "Black Bulls",
+  "description": "Exclusive Event Management Platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F0F0F",
+  "theme_color": "#0F0F0F"
+}
