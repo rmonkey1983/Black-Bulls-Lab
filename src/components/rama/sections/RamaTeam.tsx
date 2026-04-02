@@ -20,7 +20,7 @@ export function RamaTeam() {
                     text="IL NOSTRO TEAM"
                     className="font-rock-salt text-rama-accent text-base sm:text-xl md:text-3xl mb-6 sm:mb-8 transform -rotate-2"
                 />
-                <h2 className="font-mohave font-bold leading-[0.85] tracking-tighter uppercase text-white flex flex-col text-[15vw] sm:text-[14vw] md:text-[10vw]">
+                <h2 className="font-mohave font-bold leading-[0.85] tracking-tighter uppercase text-white flex flex-col text-[15vw] sm:text-[14vw] md:text-[10vw] w-full overflow-hidden">
                     <RamaAnimatedText text="CONOSCI I" />
                     <RamaAnimatedText text="RICERCATORI" delay={0.1} />
                 </h2>
@@ -46,10 +46,10 @@ export function RamaTeam() {
                         </div>
 
                         <div className="flex flex-col">
-                            <h3 className="font-mohave text-3xl md:text-4xl text-white font-bold uppercase tracking-wide group-hover:text-rama-accent transition-colors">
+                            <h3 className="font-mohave text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white font-bold uppercase tracking-wide group-hover:text-rama-accent transition-colors break-words">
                                 {member.name}
                             </h3>
-                            <p className="font-rock-salt text-white/50 transform -rotate-2 mt-2 text-sm">
+                            <p className="font-rock-salt text-white/50 transform -rotate-2 mt-2 text-xs sm:text-sm">
                                 {member.role}
                             </p>
                         </div>

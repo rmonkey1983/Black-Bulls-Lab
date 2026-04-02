@@ -8,7 +8,7 @@ interface PremiumButtonProps {
     variant?: "gold" | "bordeaux" | "outline";
     size?: "sm" | "md" | "lg";
     children: React.ReactNode;
-    onClick?: () => void;
+    onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
     className?: string;
     type?: "button" | "submit";
     "aria-label"?: string;
@@ -52,7 +52,7 @@ export function PremiumButton({
         variantClasses[variant].replace(/\n\s+/g, " "),
         "tracking-wider",
         "uppercase",
-        "transition-all",
+        "transition-[color,background-color,border-color,transform,box-shadow]",
         "duration-500",
         "ease-out",
         className
@@ -60,7 +60,7 @@ export function PremiumButton({
 
     if (href) {
         return (
-            <Link href={href} className={classes} aria-label={ariaLabel}>
+            <Link href={href} className={classes} aria-label={ariaLabel} onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}>
                 {children}
             </Link>
         );

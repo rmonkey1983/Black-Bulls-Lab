@@ -43,7 +43,7 @@ export function RamaFAQ() {
                     text="DOMANDE FREQUENTI"
                     className="font-rock-salt text-rama-accent text-base sm:text-xl md:text-3xl mb-6 sm:mb-8 transform -rotate-2"
                 />
-                <h2 className="font-mohave font-bold leading-[0.85] tracking-tighter uppercase text-white flex flex-col text-[15vw] sm:text-[14vw] md:text-[10vw]">
+                <h2 className="font-mohave font-bold leading-[0.85] tracking-tighter uppercase text-white flex flex-col text-[15vw] sm:text-[14vw] md:text-[10vw] w-full overflow-hidden">
                     <RamaAnimatedText text="TUTTO QUELLO" />
                     <RamaAnimatedText text="CHE DEVI SAPERE" delay={0.1} />
                 </h2>
@@ -59,7 +59,7 @@ export function RamaFAQ() {
                             className="border-b border-white/10 group cursor-pointer"
                             onClick={() => toggleFaq(index)}
                         >
-                        <div className="py-5 sm:py-6 md:py-8 flex items-center justify-between gap-4 sm:gap-6 transition-colors duration-300 group-hover:bg-white/5 px-3 sm:px-4 rounded-lg">
+                        <div className="py-4 sm:py-6 md:py-8 flex items-center justify-between gap-3 sm:gap-6 transition-colors duration-300 group-hover:bg-white/5 px-3 sm:px-4 rounded-lg">
                                 <h3 className={`font-mohave text-xl sm:text-2xl md:text-4xl font-bold uppercase tracking-wide transition-colors duration-300 select-none ${isActive ? 'text-rama-accent' : 'text-white'}`}>
                                     {faq.question}
                                 </h3>

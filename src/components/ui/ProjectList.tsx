@@ -55,12 +55,12 @@ export function ProjectList({ events, basePath = "/events" }: ProjectListProps) 
                                 />
                             )}
                             
-                            <div className="flex items-baseline gap-4 md:gap-8 w-[60%] sm:w-auto">
+                            <div className="flex items-baseline gap-4 md:gap-8 min-w-0 flex-1">
                                 <span className="text-sm font-mohave text-white/40 group-hover:text-rama-accent transition-colors shrink-0 tracking-widest mt-1">
                                     {String(index + 1).padStart(2, '0')}
                                 </span>
-                                <div className="flex flex-col group-hover:translate-x-1 md:group-hover:translate-x-2 transition-transform duration-300">
-                                    <h3 className="text-xl sm:text-3xl md:text-5xl font-mohave font-bold text-white tracking-tight uppercase truncate md:whitespace-nowrap sm:whitespace-normal">
+                                <div className="flex flex-col group-hover:translate-x-1 md:group-hover:translate-x-2 transition-transform duration-300 min-w-0">
+                                    <h3 className="text-xl sm:text-3xl md:text-5xl font-mohave font-bold text-white tracking-tight uppercase break-words">
                                         {event.title}
                                     </h3>
                                     {event.description && (

@@ -26,7 +26,7 @@ export function RamaHero() {
     const carouselItems = [...displayFormats, ...displayFormats, ...displayFormats];
 
     return (
-        <section className="relative w-full min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-12 pt-28 sm:pt-32 pb-12 sm:pb-16 overflow-hidden">
+        <section className="relative w-full min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-12 pt-32 sm:pt-36 md:pt-28 pb-12 sm:pb-16 overflow-hidden">
             <style>{`
                 @keyframes autoScrollVertical {
                     from { transform: translateY(-33.33%); }
@@ -43,19 +43,21 @@ export function RamaHero() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center h-full relative z-10 w-full">
 
                 {/* Left Content */}
-                <div className="flex flex-col items-start justify-center h-full pt-8 lg:pt-0 z-20 mix-blend-difference">
+                <div className="flex flex-col items-start justify-center h-full pt-8 lg:pt-0 z-20 mix-blend-difference overflow-hidden">
                     <RamaAnimatedText
                         text="Oltre il semplice evento."
-                        className="font-rock-salt text-rama-accent text-base sm:text-xl md:text-3xl lg:text-4xl mb-4 sm:mb-6 transform -rotate-3"
+                        className="font-rock-salt text-rama-accent text-sm sm:text-xl md:text-3xl lg:text-4xl mb-4 sm:mb-6 transform -rotate-3"
                     />
 
-                    {/* SEO Optimized H1 - Visually hidden ma readable */}
-                    <h1 className="sr-only">Black Bulls Lab | Creatori di Emozioni e Dinner Show Esclusivi</h1>
+                    {/* SEO Optimized H1 - Visible e indicizzabile da Google e AI */}
+                    <h1 className="font-mohave font-bold uppercase tracking-[0.15em] text-[clamp(0.6rem,1.2vw,0.9rem)] text-white/60 border border-white/20 px-3 py-1 rounded-full mb-4 sm:mb-5 backdrop-blur-sm">
+                        Black Bulls Lab — Dinner Show &amp; Organizzazione Eventi · Torino
+                    </h1>
 
-                    <div className="font-mohave font-bold leading-[0.85] tracking-tighter uppercase text-white flex flex-col text-[14vw] sm:text-[13vw] md:text-[12vw] lg:text-[10vw]">
+                    <div className="font-mohave font-bold leading-[0.85] tracking-tighter uppercase text-white flex flex-col text-[13vw] sm:text-[13vw] md:text-[12vw] lg:text-[10vw] w-full overflow-hidden">
                         <RamaAnimatedText text="CREATORI" delay={0.1} />
                         <RamaAnimatedText text="DI EMOZIONI." delay={0.2} className="text-rama-accent" />
-                        <RamaAnimatedText text="BLACK BULLS LAB" delay={0.3} className="text-[10vw] sm:text-[9vw] md:text-[8.5vw] lg:text-[7.5vw] text-white/50" />
+                        <RamaAnimatedText text="BLACK BULLS LAB" delay={0.3} className="text-[9.5vw] sm:text-[9vw] md:text-[8.5vw] lg:text-[7.5vw] text-white/50" />
                     </div>
 
                     <div className="mt-6 sm:mt-10 md:mt-16 text-rama-muted font-outfit text-base sm:text-lg md:text-xl lg:text-2xl max-w-xl">
@@ -66,21 +68,21 @@ export function RamaHero() {
                     </div>
 
                     <div className="mt-8 sm:mt-10 opacity-0 animate-[fadeIn_1s_ease-out_0.8s_forwards]">
-                        <button 
-                            onClick={() => {
+                        <PremiumButton
+                            href="/events"
+                            variant="gold"
+                            size="lg"
+                            onClick={(e) => {
                                 const target = document.getElementById('esperienze');
                                 if (target) {
-                                    window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - 100, behavior: 'smooth' });
-                                } else {
-                                    window.location.href = "/events";
+                                    e.preventDefault();
+                                    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
                                 }
                             }}
                         >
-                            <PremiumButton href="#" variant="gold" size="lg">
-                                <span className="font-mohave tracking-widest uppercase text-base sm:text-lg">Scopri le Esperienze</span>
-                                <ArrowRight size={20} className="ml-2" />
-                            </PremiumButton>
-                        </button>
+                            <span className="font-mohave tracking-widest uppercase text-base sm:text-lg">Scopri le Esperienze</span>
+                            <ArrowRight size={20} className="ml-2" />
+                        </PremiumButton>
                     </div>
                 </div>
 
@@ -135,6 +137,9 @@ export function RamaHero() {
                                             fill
                                             className="object-cover transition-transform duration-[2s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-110 opacity-70 group-hover:opacity-100"
                                             sizes="(max-width: 1024px) 0vw, 50vw"
+                                            loading="lazy"
+                                            priority={false}
+                                            quality={80}
                                         />
                                         
                                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-700"></div>

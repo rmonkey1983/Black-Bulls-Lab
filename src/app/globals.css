@@ -54,6 +54,7 @@
 }
 
 :root {
+  color-scheme: dark;
   --background: var(--color-bg-dark);
   --foreground: var(--color-white);
   --glow-gold: 0 0 20px rgba(200, 164, 78, 0.25), 0 0 60px rgba(200, 164, 78, 0.08);
@@ -464,5 +465,33 @@ h6 {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ====== REDUCED MOTION ====== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-marquee,
+  .animate-marquee-reverse,
+  .animate-float,
+  .animate-drift,
+  .animate-pulse-glow,
+  .animate-border-glow,
+  .text-shimmer {
+    animation: none !important;
+  }
+
+  .text-shimmer {
+    background: var(--color-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
   }
 }

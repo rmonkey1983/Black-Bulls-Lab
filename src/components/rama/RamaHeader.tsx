@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -31,13 +32,15 @@ export function RamaHeader() {
         <>
             <header className={`fixed top-0 left-0 right-0 z-50 px-6 py-6 md:px-12 md:py-8 flex justify-between items-center text-rama-text transition-all duration-300 ${scrolled ? 'bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/10' : 'mix-blend-difference'}`}>
                 {/* Logo */}
-                <Link href="/" className="relative group flex items-center gap-1 z-50">
-                    <span className="font-mohave text-3xl font-bold tracking-tighter uppercase group-hover:text-rama-accent transition-colors duration-300">
-                        BLACK BULLS LAB
-                    </span>
-                    <span className="font-outfit text-xs font-bold bg-rama-accent text-rama-bg px-1 py-0.5 rounded-sm">
-                        ®
-                    </span>
+                <Link href="/" className="relative z-50 flex items-center shrink-0" aria-label="Black Bulls Lab — Home">
+                    <Image
+                        src="/sito log.png"
+                        alt="Black Bulls Lab"
+                        width={160}
+                        height={48}
+                        className="h-10 md:h-12 w-auto object-contain transition-opacity duration-300 hover:opacity-80"
+                        priority
+                    />
                 </Link>
 
                 {/* Desktop Navigation */}
@@ -54,9 +57,16 @@ export function RamaHeader() {
                         className="relative group py-4"
                         onMouseEnter={() => setExperimentsOpen(true)}
                         onMouseLeave={() => setExperimentsOpen(false)}
+                        onFocus={() => setExperimentsOpen(true)}
+                        onBlur={(e) => {
+                            // Only close if focus leaves the entire dropdown container
+                            if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                                setExperimentsOpen(false);
+                            }
+                        }}
                     >
                         <Link href="/esperimenti" className={`flex items-center gap-1 font-outfit text-sm uppercase tracking-widest transition-colors duration-300 font-medium ${pathname.startsWith("/esperimenti") ? "text-rama-accent" : "text-white/80 hover:text-rama-accent"}`}>
-                            Esperimenti
+                            Le Nostre Serate
                             <ChevronDown size={14} className={`transition-transform duration-300 ${experimentsOpen ? 'rotate-180 text-rama-accent' : ''}`} />
                         </Link>
                         
@@ -68,6 +78,7 @@ export function RamaHeader() {
                                     exit={{ opacity: 0, y: 10 }}
                                     transition={{ duration: 0.2 }}
                                     className="absolute top-12 left-1/2 -translate-x-1/2 w-64 bg-[#0A0A0A] border border-white/10 rounded-sm shadow-xl flex flex-col overflow-hidden"
+                                    role="menu"
                                 >
                                     {experiments.map(exp => (
                                         <Link 
@@ -75,6 +86,7 @@ export function RamaHeader() {
                                             href={exp.href}
                                             className="px-6 py-4 font-outfit text-sm uppercase tracking-wider text-white/80 hover:text-rama-accent hover:bg-white/5 transition-colors border-b border-white/5 last:border-0"
                                             onClick={() => setExperimentsOpen(false)}
+                                            role="menuitem"
                                         >
                                             {exp.name}
                                         </Link>
@@ -87,11 +99,14 @@ export function RamaHeader() {
                     <Link href="/chi-siamo" className={`font-outfit text-sm uppercase tracking-widest transition-colors duration-300 font-medium ${pathname === "/chi-siamo" ? "text-rama-accent" : "text-white/80 hover:text-rama-accent"}`}>
                         Chi Siamo
                     </Link>
+                    <Link href="/eventi-aziendali" className={`font-outfit text-sm uppercase tracking-widest transition-colors duration-300 font-medium ${pathname === "/eventi-aziendali" ? "text-rama-accent" : "text-white/80 hover:text-rama-accent"}`}>
+                        Corporate
+                    </Link>
                     <Link href="/contact" className={`font-outfit text-sm uppercase tracking-widest transition-colors duration-300 font-medium ${pathname === "/contact" ? "text-rama-accent" : "text-white/80 hover:text-rama-accent"}`}>
                         Contact
                     </Link>
-                    <Link href="/events" className="ml-4 font-mohave uppercase font-bold text-black bg-rama-accent px-6 py-2 tracking-widest hover:bg-white transition-colors">
-                        Prenota
+                    <Link href="/contact" className="ml-4 font-mohave uppercase font-bold text-black bg-rama-accent px-6 py-2 tracking-widest hover:bg-white transition-colors">
+                        Richiedi Info
                     </Link>
                 </nav>
 

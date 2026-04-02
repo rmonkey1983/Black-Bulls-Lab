@@ -53,21 +53,21 @@ export function RamaServices() {
                     {services.map((service) => (
                         <div
                             key={service.id}
-                            className={`group border-b border-white/10 py-5 sm:py-6 md:py-10 flex flex-col md:flex-row items-start md:items-center cursor-pointer transition-colors duration-500`}
+                            className={`group border-b border-white/10 py-5 sm:py-6 md:py-10 flex flex-col md:flex-row items-start md:items-center cursor-pointer transition-colors duration-500 gap-2 md:gap-0`}
                             onMouseEnter={() => setHoveredService(service.id)}
                         >
-                            <span className="text-white/30 text-base sm:text-lg md:text-2xl font-mohave group-hover:text-rama-accent transition-colors w-12 sm:w-16 md:w-32">
+                            <span className="text-white/30 text-sm sm:text-lg md:text-2xl font-mohave group-hover:text-rama-accent transition-colors w-10 sm:w-16 md:w-32 flex-shrink-0">
                                 ({service.id})
                             </span>
                             <h2
-                                className={`font-mohave text-[11vw] sm:text-[10vw] md:text-[8vw] uppercase font-bold tracking-tighter leading-[0.85] transition-all duration-500 ${hoveredService === service.id ? 'text-white' : 'text-transparent'}`}
+                                className={`font-mohave text-[11vw] sm:text-[10vw] md:text-[8vw] uppercase font-bold tracking-tighter leading-[0.85] transition-all duration-500 min-w-0 overflow-hidden ${hoveredService === service.id ? 'text-white' : 'text-transparent'}`}
                                 style={{
                                     WebkitTextStroke: hoveredService === service.id ? '0px transparent' : '1px rgba(255,255,255,0.4)'
                                 }}
                             >
                                 {service.title}
                             </h2>
-                            <div className={`ml-auto opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-[-20px] group-hover:translate-x-0 hidden md:flex items-center justify-center bg-white text-black rounded-full p-4`}>
+                            <div className={`ml-auto opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-[-20px] group-hover:translate-x-0 hidden md:flex items-center justify-center bg-white text-black rounded-full p-4 flex-shrink-0`}>
                                 <ArrowUpRight size={24} />
                             </div>
                         </div>

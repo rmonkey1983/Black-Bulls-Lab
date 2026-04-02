@@ -28,7 +28,7 @@ export function RamaWorks() {
                         </a>
                     </div>
 
-                    <div className="flex flex-col gap-2 font-mohave text-3xl sm:text-4xl md:text-6xl uppercase font-bold text-white/50 tracking-tighter">
+                    <div className="flex flex-col gap-2 font-mohave text-2xl sm:text-4xl md:text-6xl uppercase font-bold text-white/50 tracking-tighter overflow-hidden">
                         {displayEvents.map((p, i) => (
                             <Link href={`/events/${p.slug}`} key={p.id} className="cursor-pointer hover:text-white transition-colors duration-300">
                                 {i === 0 && <span className="inline-block w-4 h-[6px] bg-rama-accent mr-4 align-middle mb-2"></span>}

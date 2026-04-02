@@ -36,6 +36,37 @@ export function OrganizationSchema({ url = "https://blackbullslab.it" }: Organiz
     );
 }
 
+// ─── FAQPage Schema ────────────────────────────────────────────────────────────
+
+export interface FAQItem {
+    question: string;
+    answer: string;
+}
+
+export function FAQPageSchema({ faqs }: { faqs: FAQItem[] }) {
+    const schema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.answer,
+            },
+        })),
+    };
+
+    return (
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+    );
+}
+
+// ─── Event Schema ────────────────────────────────────────────────────────────
+
 interface EventSchemaProps {
     name: string;
     description: string;
@@ -44,9 +75,26 @@ interface EventSchemaProps {
     image?: string;
     url: string;
     price?: number;
+    /** Capacità massima del gruppo (default 30 — ideale per format aziendali) */
+    maximumAttendeeCapacity?: number;
+    /** Artisti/performer dell'evento */
+    performers?: string[];
+    /** Range età tipico (default "+18") */
+    typicalAgeRange?: string;
 }
 
-export function EventSchema({ name, description, date, location, image, url, price }: EventSchemaProps) {
+export function EventSchema({
+    name,
+    description,
+    date,
+    location,
+    image,
+    url,
+    price,
+    maximumAttendeeCapacity = 30,
+    performers = [],
+    typicalAgeRange = "18+",
+}: EventSchemaProps) {
     const schema: Record<string, unknown> = {
         "@context": "https://schema.org",
         "@type": "Event",
@@ -55,6 +103,12 @@ export function EventSchema({ name, description, date, location, image, url, pri
         startDate: date,
         eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
         eventStatus: "https://schema.org/EventScheduled",
+        typicalAgeRange,
+        maximumAttendeeCapacity,
+        audience: {
+            "@type": "Audience",
+            audienceType: "Adulti, Team Aziendale, Gruppi Privati",
+        },
         location: {
             "@type": "Place",
             name: location,
@@ -71,6 +125,12 @@ export function EventSchema({ name, description, date, location, image, url, pri
             name: "Black Bulls Lab",
             url: "https://blackbullslab.it",
         },
+        ...(performers.length > 0 && {
+            performer: performers.map((p) => ({
+                "@type": "PerformingGroup",
+                name: p,
+            })),
+        }),
     };
 
     if (price && price > 0) {
@@ -89,7 +149,7 @@ export function EventSchema({ name, description, date, location, image, url, pri
             priceCurrency: "EUR",
             availability: "https://schema.org/InStock",
             url,
-            description: "A partire da"
+            description: "A partire da",
         };
     }
 

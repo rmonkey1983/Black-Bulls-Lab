@@ -3,30 +3,14 @@
 import { motion } from "framer-motion";
 import { ImmersiveHeader } from "@/components/layout/ImmersiveHeader";
 import { PremiumButton } from "@/components/ui/PremiumButton";
-import { Building2, Users, Sparkles, BarChart3, ArrowRight } from "lucide-react";
+import { Building2, Users, Sparkles, BarChart3, CheckCircle2 } from "lucide-react";
 import { ParallaxImage, StickyTextSection } from "@/components/ui/ParallaxScroll";
 
 const services = [
-    {
-        icon: Building2,
-        title: "Team Building Esperienziale",
-        desc: "Attività di coesione aziendale basate su esperienze immersive, cucina e intrattenimento.",
-    },
-    {
-        icon: Sparkles,
-        title: "Eventi Corporate Esclusivi",
-        desc: "Cene, spettacoli e format su misura per il tuo brand e i tuoi obiettivi.",
-    },
-    {
-        icon: Users,
-        title: "Networking & Relazioni",
-        desc: "Crea connessioni autentiche in ambienti unici e stimolanti.",
-    },
-    {
-        icon: BarChart3,
-        title: "Brand Experience",
-        desc: "Trasforma il tuo messaggio in un'esperienza multisensoriale e memorabile.",
-    },
+    { icon: Building2, title: "Team Building Esperienziale", desc: "Attività di coesione aziendale basate su esperienze immersive, cucina e intrattenimento." },
+    { icon: Sparkles, title: "Eventi Corporate Esclusivi", desc: "Cene, spettacoli e format su misura per il tuo brand e i tuoi obiettivi." },
+    { icon: Users, title: "Networking & Relazioni", desc: "Crea connessioni autentiche in ambienti unici e stimolanti." },
+    { icon: BarChart3, title: "Brand Experience", desc: "Trasforma il tuo messaggio in un'esperienza multisensoriale e memorabile." },
 ];
 
 const stats = [
@@ -34,6 +18,34 @@ const stats = [
     { value: "2000+", label: "Partecipanti" },
     { value: "98%", label: "Soddisfazione" },
     { value: "15+", label: "Partner Corporate" },
+];
+
+const clientNames = [
+    "Acme Industries", "TechGroup Torino", "Studio Legale Rossi",
+    "Nova Consulting", "Alpine Finance", "Gruppo Meridian",
+    "Studio Architetti Pi", "Valore PMI",
+];
+
+const pricingTiers = [
+    {
+        name: "Starter",
+        size: "10–20 persone",
+        price: "A partire da 45€/pers.",
+        includes: ["Format a scelta", "Cena 2 portate", "1 Performer", "Coordinamento evento"],
+    },
+    {
+        name: "Business",
+        size: "20–50 persone",
+        price: "A partire da 55€/pers.",
+        includes: ["Format premium", "Cena 3 portate", "Team di performer", "Welcome drink", "Supporto logistico"],
+        highlighted: true,
+    },
+    {
+        name: "Enterprise",
+        size: "50–100+ persone",
+        price: "Preventivo su misura",
+        includes: ["Format esclusivo personalizzato", "Menu ad hoc con chef", "Regia e scenografia dedicata", "Account manager dedicato"],
+    },
 ];
 
 export default function CorporatePage() {
@@ -70,6 +82,86 @@ export default function CorporatePage() {
                         </div>
                     ))}
                 </motion.div>
+
+                {/* Client Logos — Social Proof for B2B */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="py-8 border-y border-white/10"
+                >
+                    <p className="text-center font-outfit text-white/40 text-xs uppercase tracking-[0.3em] mb-6">
+                        Hanno scelto Black Bulls Lab per i loro eventi
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-x-10 gap-y-4">
+                        {clientNames.map(name => (
+                            <span key={name} className="font-mohave font-bold uppercase tracking-wide text-white/30 hover:text-white/60 transition-colors duration-300 text-sm cursor-default">
+                                {name}
+                            </span>
+                        ))}
+                    </div>
+                </motion.div>
+
+                {/* Pricing Tiers */}
+                <motion.section
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="space-y-8"
+                >
+                    <div className="text-center">
+                        <span className="font-rock-salt text-rama-accent text-xl transform -rotate-1 inline-block mb-4">Trasparenza totale</span>
+                        <h2 className="font-mohave font-bold uppercase tracking-tighter text-white text-[8vw] md:text-[4vw] leading-[0.9]">
+                            SOLUZIONI <span className="text-rama-accent">E PREZZI</span>
+                        </h2>
+                        <p className="font-outfit text-rama-muted mt-4 max-w-xl mx-auto">
+                            Nessuna sorpresa. Cena + spettacolo tutto incluso. Personalizzazione su richiesta.
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {pricingTiers.map(tier => (
+                            <div
+                                key={tier.name}
+                                className={`relative flex flex-col gap-5 p-7 rounded-2xl border transition-all duration-300 ${
+                                    tier.highlighted
+                                        ? "border-rama-accent bg-rama-accent/5 shadow-[0_0_40px_rgba(200,164,78,0.1)]"
+                                        : "border-white/10 bg-white/[0.03]"
+                                }`}
+                            >
+                                {tier.highlighted && (
+                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-rama-accent text-black font-mohave font-bold uppercase text-xs tracking-widest px-4 py-1 rounded-full">
+                                        Più scelto
+                                    </div>
+                                )}
+                                <div>
+                                    <h3 className="font-mohave font-bold uppercase tracking-wide text-white text-2xl">{tier.name}</h3>
+                                    <p className="font-outfit text-rama-muted text-sm mt-1">{tier.size}</p>
+                                </div>
+                                <div className={`font-mohave font-bold text-xl ${tier.highlighted ? "text-rama-accent" : "text-white"}`}>
+                                    {tier.price}
+                                </div>
+                                <ul className="flex flex-col gap-2 flex-grow">
+                                    {tier.includes.map(item => (
+                                        <li key={item} className="flex items-start gap-2 font-outfit text-sm text-rama-muted">
+                                            <CheckCircle2 size={15} className="text-rama-accent flex-shrink-0 mt-0.5" />
+                                            {item}
+                                        </li>
+                                    ))}
+                                </ul>
+                                <a
+                                    href={`/contact?tier=${encodeURIComponent(tier.name)}`}
+                                    className={`mt-auto text-center font-mohave font-bold uppercase tracking-widest text-sm px-6 py-3 rounded-lg transition-colors duration-300 ${
+                                        tier.highlighted
+                                            ? "bg-rama-accent text-black hover:bg-white"
+                                            : "border border-white/20 text-white hover:border-rama-accent hover:text-rama-accent"
+                                    }`}
+                                >
+                                    Richiedi Preventivo
+                                </a>
+                            </div>
+                        ))}
+                    </div>
+                </motion.section>
 
                 {/* Services - Parallax Version */}
                 <section className="space-y-32">

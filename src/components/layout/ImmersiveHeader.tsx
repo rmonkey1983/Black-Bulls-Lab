@@ -28,16 +28,16 @@ export function ImmersiveHeader({
                 {highlight || title.split(" ")[0]}
             </div>
 
-            <div className={`relative z-10 w-full ${align === "center" ? "flex flex-col items-center text-center" : ""}`}>
+            <div className={`relative z-10 w-full overflow-hidden ${align === "center" ? "flex flex-col items-center text-center" : ""}`}>
                 <RamaAnimatedText
                     text={title}
-                    className="font-mohave text-[18vw] leading-[0.8] tracking-tighter uppercase font-bold text-white flex flex-col"
+                    className="font-mohave text-[18vw] leading-[0.8] tracking-tighter uppercase font-bold text-white flex flex-col max-w-full"
                 />
 
                 {highlight && (
                     <RamaAnimatedText
                         text={highlight}
-                        className={`font-mohave text-[18vw] leading-[0.8] tracking-tighter uppercase font-bold text-rama-accent flex flex-col ${align === "center" ? "" : "ml-0 md:ml-[10vw]"}`}
+                        className={`font-mohave text-[18vw] leading-[0.8] tracking-tighter uppercase font-bold text-rama-accent flex flex-col max-w-full ${align === "center" ? "" : "ml-0 md:ml-[10vw]"}`}
                         delay={0.1}
                     />
                 )}

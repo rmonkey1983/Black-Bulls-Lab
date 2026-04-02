@@ -14,12 +14,18 @@ export function Preloader() {
 
     // Swap icons every 400ms
     useEffect(() => {
+        // FCP optimization: skip preloader on subsequent same-session visits
+        if (typeof window !== "undefined" && sessionStorage.getItem("bbl_preloader_shown")) {
+            setIsLoading(false);
+            return;
+        }
+
         const iconInterval = setInterval(() => {
             setIconIndex((prev) => (prev + 1) % ICONS.length);
         }, 400);
 
-        // Generate lab particles on mount
-        const generated = Array.from({ length: 35 }).map((_, i) => ({
+        // Generate lab particles on mount — reduced to 18 for lower main-thread cost
+        const generated = Array.from({ length: 18 }).map((_, i) => ({
             id: i,
             left: Math.random() * 100,
             size: Math.random() * 6 + 2,
@@ -43,7 +49,13 @@ export function Preloader() {
                 if (next >= 100) {
                     clearInterval(interval);
                     if (mounted) {
-                        setTimeout(() => setIsLoading(false), 500);
+                        setTimeout(() => {
+                            setIsLoading(false);
+                            // Mark as shown so subsequent in-session visits skip the preloader
+                            if (typeof window !== "undefined") {
+                                sessionStorage.setItem("bbl_preloader_shown", "1");
+                            }
+                        }, 300);
                     }
                     return 100;
                 }
@@ -51,21 +63,28 @@ export function Preloader() {
             });
         }, 100);
 
-        // Fallback: forcefully finish after 3 seconds max
+        // Fallback: forcefully finish after 1.2s max (target FCP < 1.5s)
         const fallback = setTimeout(() => {
             if (mounted && count < 100) {
                 setCount(100);
                 clearInterval(interval);
-                setTimeout(() => setIsLoading(false), 300);
+                setTimeout(() => {
+                    setIsLoading(false);
+                    if (typeof window !== "undefined") {
+                        sessionStorage.setItem("bbl_preloader_shown", "1");
+                    }
+                }, 200);
             }
-        }, 3000);
+        }, 1200);
 
         return () => {
             mounted = false;
             clearInterval(interval);
             clearTimeout(fallback);
         };
-    }, [count]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
 
     const CurrentIcon = ICONS[iconIndex];
 
@@ -91,7 +110,8 @@ export function Preloader() {
                     {/* Lab Scanner Line effect */}
                     <motion.div
                         className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold/40 to-transparent shadow-[0_0_15px_rgba(255,215,0,0.5)] z-0"
-                        animate={{ top: ["0%", "100%", "0%"] }}
+                        style={{ top: 0 }}
+                        animate={{ y: ["0vh", "100vh", "0vh"] }}
                         transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
                     />
 

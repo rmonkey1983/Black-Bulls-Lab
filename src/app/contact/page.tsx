@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { ImmersiveHeader } from "@/components/layout/ImmersiveHeader";
 import { PremiumButton } from "@/components/ui/PremiumButton";
 import { Send, Mail, MapPin, Instagram, Sparkles, ChevronDown } from "lucide-react";
@@ -69,10 +70,12 @@ export default function ContactPage() {
                     </div>
 
                     <div className="w-full aspect-[16/9] md:aspect-[4/3] rounded-lg overflow-hidden relative group">
-                        <img 
-                            src="/images/brand/bg-venue-crowd.png" 
-                            alt="Location Interior" 
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                        <Image
+                            src="/images/brand/bg-venue-crowd.png"
+                            alt="Interno del locale Black Bulls Lab — atmosfera elegante e immersiva"
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-1000"
+                            sizes="(max-width: 1024px) 100vw, 50vw"
                         />
                         <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
                     </div>
@@ -149,7 +152,7 @@ export default function ContactPage() {
                                     required
                                     placeholder="Es. Mario Rossi"
                                     className="w-full bg-transparent border-none px-0 py-2 text-white text-base md:text-lg font-outfit
-                                        placeholder:text-white/40 focus:outline-none focus:ring-0"
+                                        placeholder:text-white/40 focus:outline-none focus-visible:ring-1 focus-visible:ring-rama-accent/50 focus-visible:rounded"
                                 />
                             </div>
 
@@ -169,7 +172,7 @@ export default function ContactPage() {
                                     required
                                     placeholder="la.tua@email.com"
                                     className="w-full bg-transparent border-none px-0 py-2 text-white text-base md:text-lg font-outfit
-                                        placeholder:text-white/40 focus:outline-none focus:ring-0"
+                                        placeholder:text-white/40 focus:outline-none focus-visible:ring-1 focus-visible:ring-rama-accent/50 focus-visible:rounded"
                                 />
                             </div>
 
@@ -232,9 +235,15 @@ export default function ContactPage() {
                             )}
 
                             <div className="pt-6">
-                                <PremiumButton type="submit" variant="gold" size="lg" className={`w-full ${status === 'loading' ? 'opacity-50 pointer-events-none' : ''}`}>
+                                <PremiumButton
+                                    type="submit"
+                                    variant="gold"
+                                    size="lg"
+                                    className={`w-full ${status === 'loading' ? 'opacity-50 pointer-events-none' : ''}`}
+                                    onClick={status === 'loading' ? (e) => e.preventDefault() : undefined}
+                                >
                                     <span className="font-mohave tracking-widest uppercase text-lg">
-                                        {status === "loading" ? "Invio in corso..." : "Parla con il Nostro Team"}
+                                        {status === "loading" ? "Invio in corso…" : "Parla con il Nostro Team"}
                                     </span>
                                 </PremiumButton>
                                 <p className="text-xs text-center text-white/40 font-outfit mt-4 flex items-center justify-center gap-2">

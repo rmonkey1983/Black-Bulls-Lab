@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { X, ChevronDown } from "lucide-react";
 import { useState } from "react";
 
@@ -28,6 +29,10 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.4 }}
                     className="fixed inset-0 z-[60] bg-rama-bg flex text-white"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label="Menu principale"
+                    style={{ overscrollBehavior: "contain" }}
                 >
                     {/* Close Button */}
                     <button
@@ -46,10 +51,12 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                             transition={{ duration: 0.8 }}
                             className="absolute inset-0 bg-yellow-600/20"
                         >
-                            <img
+                            <Image
                                 src="/lab_menu.png"
                                 alt="Laboratory Aesthetic Menu Background"
-                                className="object-cover w-full h-full mix-blend-lighten"
+                                fill
+                                className="object-cover mix-blend-lighten"
+                                sizes="50vw"
                             />
                         </motion.div>
                     </div>
@@ -81,21 +88,26 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                                 onMouseEnter={() => setExperimentsOpen(true)}
                                 onMouseLeave={() => setExperimentsOpen(false)}
                             >
-                                {/* Toggle row */}
-                                <div
-                                    className="flex items-center gap-3 font-mohave text-4xl sm:text-5xl md:text-7xl uppercase font-bold text-rama-text hover:text-rama-accent transition-colors duration-300 w-fit group cursor-default"
+                                {/* Toggle row — also tappable on touch devices */}
+                                <button
+                                    type="button"
+                                    className="flex items-center gap-3 font-mohave text-4xl sm:text-5xl md:text-7xl uppercase font-bold text-rama-text hover:text-rama-accent transition-colors duration-300 w-fit group cursor-pointer select-none bg-transparent border-none p-0"
+                                    onClick={() => setExperimentsOpen(prev => !prev)}
+                                    aria-expanded={experimentsOpen}
+                                    aria-controls="esperimenti-submenu"
                                 >
-                                    Esperimenti
+                                    Le Nostre Serate
                                     <ChevronDown
                                         size={28}
                                         className={`transition-transform duration-300 text-rama-accent mt-2 flex-shrink-0 ${experimentsOpen ? "rotate-180" : ""}`}
                                     />
-                                </div>
+                                </button>
 
                                 {/* Sub-links */}
                                 <AnimatePresence>
                                     {experimentsOpen && (
                                         <motion.div
+                                            id="esperimenti-submenu"
                                             initial={{ height: 0, opacity: 0 }}
                                             animate={{ height: "auto", opacity: 1 }}
                                             exit={{ height: 0, opacity: 0 }}
@@ -134,6 +146,7 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                             {/* OTHER LINKS */}
                             {[
                                 { name: "Ricercatori", href: "/talents" },
+                                { name: "Corporate", href: "/eventi-aziendali" },
                                 { name: "Galleria", href: "/gallery" },
                                 { name: "Chi Siamo", href: "/chi-siamo" },
                                 { name: "Contatti", href: "/contact" },
