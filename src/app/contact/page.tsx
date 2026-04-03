@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { ImmersiveHeader } from "@/components/layout/ImmersiveHeader";
 import { PremiumButton } from "@/components/ui/PremiumButton";
-import { Send, Mail, MapPin, Instagram, Sparkles, ChevronDown } from "lucide-react";
+import { Send, Mail, MapPin, Instagram, Sparkles, ChevronDown, Phone } from "lucide-react";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { submitContact } from "@/app/actions/contact";
 
@@ -84,6 +84,7 @@ export default function ContactPage() {
                         {[
                             { label: "Indirizzo", value: "Torino, Italia", icon: MapPin },
                             { label: "Email", value: "info@blackbullslab.it", icon: Mail },
+                            { label: "Telefono / WhatsApp", value: "+39 3342010067", icon: Phone },
                             { label: "Social", value: "@blackbullslab", icon: Instagram },
                         ].map((info) => (
                             <div key={info.label} className="flex items-center gap-4 p-4 border border-white/5 bg-white/5 rounded-md hover:border-rama-accent/40 transition-colors">

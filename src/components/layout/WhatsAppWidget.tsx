@@ -1,8 +1,7 @@
 "use client";
 
 import { MessageCircle } from "lucide-react";
-
-const WHATSAPP_NUMBER = "393XXXXXXXXX"; // Sostituire con numero reale
+const WHATSAPP_NUMBER = "393342010067";
 const WHATSAPP_TEXT = encodeURIComponent("Ciao! Vorrei informazioni su un evento con Black Bulls Lab 🎭");
 
 export function WhatsAppWidget() {

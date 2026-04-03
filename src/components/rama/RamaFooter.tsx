@@ -38,10 +38,12 @@ export function RamaFooter() {
                 <div className="col-span-2 md:col-span-4 flex flex-col gap-8">
                     <Link href="/" aria-label="Black Bulls Lab — Home">
                         <Image
-                            src="/sito log.png"
+                            src="/blackbullslab.png"
                             alt="Black Bulls Lab"
-                            width={180}
-                            height={60}
+                            width={300}
+                            height={90}
+                            quality={90}
+                            sizes="(max-width: 768px) 150px, 300px"
                             className="w-auto h-14 object-contain"
                         />
                     </Link>

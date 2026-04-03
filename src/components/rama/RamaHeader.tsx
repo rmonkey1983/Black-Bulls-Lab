@@ -34,10 +34,12 @@ export function RamaHeader() {
                 {/* Logo */}
                 <Link href="/" className="relative z-50 flex items-center shrink-0" aria-label="Black Bulls Lab — Home">
                     <Image
-                        src="/sito log.png"
+                        src="/blackbullslab.png"
                         alt="Black Bulls Lab"
-                        width={160}
-                        height={48}
+                        width={300}
+                        height={90}
+                        sizes="(max-width: 768px) 150px, 300px"
+                        quality={90}
                         className="h-10 md:h-12 w-auto object-contain transition-opacity duration-300 hover:opacity-80"
                         priority
                     />

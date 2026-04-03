@@ -6,16 +6,16 @@ import { Users, ChevronRight, Sparkles, Star, PartyPopper, Briefcase, Heart } fr
 import Link from "next/link";
 
 const occasions = [
-    { id: "team", label: "Team Building Aziendale", icon: Briefcase, formats: ["Cena con Delitto", "Il Palqo"], tagline: "Rompete il ghiaccio. Costruite qualcosa di vero." },
-    { id: "corporate", label: "Cena di Natale / Gala", icon: Sparkles, formats: ["Notte Medievale", "Cena con Delitto"], tagline: "Un finale d'anno che resterà nei ricordi." },
-    { id: "birthday", label: "Compleanno di Gruppo", icon: PartyPopper, formats: ["Il Palqo", "Cena con Delitto"], tagline: "Festeggia come non hai mai festeggiato." },
-    { id: "private", label: "Evento Privato", icon: Heart, formats: ["Cena con Delitto", "Notte Medievale"], tagline: "La tua idea. Il nostro palcoscenico." },
+    { id: "team", label: "Team Building Aziendale", icon: Briefcase, formats: ["A Cena Con Il Bugiardo", "Il Palqo"], tagline: "Rompete il ghiaccio. Costruite qualcosa di vero." },
+    { id: "corporate", label: "Cena di Natale / Gala", icon: Sparkles, formats: ["Notte Medievale", "A Cena Con Il Bugiardo"], tagline: "Un finale d'anno che resterà nei ricordi." },
+    { id: "birthday", label: "Compleanno di Gruppo", icon: PartyPopper, formats: ["Il Palqo", "A Cena Con Il Bugiardo"], tagline: "Festeggia come non hai mai festeggiato." },
+    { id: "private", label: "Evento Privato", icon: Heart, formats: ["A Cena Con Il Bugiardo", "Notte Medievale"], tagline: "La tua idea. Il nostro palcoscenico." },
 ];
 
 const groupSizes = ["10-20", "20-30", "30-50", "50+"];
 
 const formatDetails: Record<string, { price: string; capacity: string; duration: string; highlight: string }> = {
-    "Cena con Delitto": {
+    "A Cena Con Il Bugiardo": {
         price: "A partire da 55€/persona",
         capacity: "20–50 persone",
         duration: "~3 ore",
@@ -36,7 +36,7 @@ const formatDetails: Record<string, { price: string; capacity: string; duration:
 };
 
 const slugs: Record<string, string> = {
-    "Cena con Delitto": "/esperimenti/a-cena-con-il-bugiardo",
+    "A Cena Con Il Bugiardo": "/esperimenti/a-cena-con-il-bugiardo",
     "Il Palqo": "/esperimenti/il-palqo",
     "Notte Medievale": "/eventi",
 };
