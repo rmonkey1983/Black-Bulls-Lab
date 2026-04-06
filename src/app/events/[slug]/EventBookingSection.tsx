@@ -22,12 +22,41 @@ export function EventBookingSection({ eventId, slug, title, date, location, pric
     const ticketPrice = price || 0;
     const total = ticketPrice * quantity;
 
-    const handlePayment = () => {
+    const handlePayment = async () => {
         setLoading(true);
-        setTimeout(() => {
+        try {
+            const response = await fetch("/api/checkout", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    eventId,
+                    eventTitle: title,
+                    quantity,
+                    selectedDate: date,
+                    guest: {
+                        name: form.nome,
+                        surname: form.cognome,
+                        email: form.email,
+                        phone: form.telefono
+                    },
+                    premium: {
+                        allergies: form.note,
+                        occasion: "Nessuna specifica"
+                    },
+                    unitAmount: ticketPrice * 100 // Convert to cents
+                })
+            });
+            const data = await response.json();
+            if (data.url) {
+                window.location.href = data.url;
+            } else {
+                throw new Error(data.error || "Errore sconosciuto");
+            }
+        } catch (error) {
+            console.error("Errore di pagamento:", error);
+            alert("Si è verificato un errore durante la connessione al sistema di pagamento.");
             setLoading(false);
-            setBooked(true);
-        }, 2000);
+        }
     };
 
     if (ticketPrice === 0) return null;

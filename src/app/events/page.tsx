@@ -6,7 +6,7 @@ import { ImmersiveHeader } from "@/components/layout/ImmersiveHeader";
 import { Calendar } from "lucide-react";
 import { getEvents, Event } from "@/lib/dataStore";
 
-import { ParallaxImage, StickyTextSection } from "@/components/ui/ParallaxScroll";
+import { StickyTextSection } from "@/components/ui/ParallaxScroll";
 import { Sparkles } from "lucide-react";
 import { ProjectList } from "@/components/ui/ProjectList";
 
@@ -58,20 +58,23 @@ export default function EventsPage() {
                                     <span className="text-rama-accent">Pronto.</span>
                                 </h2>
                                 <p className="text-rama-muted font-outfit text-lg leading-relaxed mt-6">
-                                    Non semplici date sul calendario, ma appuntamenti con l'arte,
-                                    la musica e la cucina d'autore. Prenota il tuo posto in prima fila.
+                                    Non semplici date sul calendario, ma appuntamenti con l&apos;arte,
+                                    la musica e la cucina d&apos;autore. Prenota il tuo posto in prima fila.
                                 </p>
                             </div>
                         }
                     >
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 mt-8">
                             <div className="aspect-[4/5] rounded-lg overflow-hidden relative group">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src="/images/brand/bg-venue-crowd.png" alt="Crowd" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                             </div>
                             <div className="aspect-[4/5] rounded-lg overflow-hidden relative group translate-y-4 md:translate-y-8">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src="/images/brand/service-performance.png" alt="Performance" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                             </div>
                             <div className="aspect-[4/5] rounded-lg overflow-hidden relative group hidden md:block">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img src="/images/brand/bg-stage-lights.png" alt="Stage Lights" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                             </div>
                         </div>
@@ -101,7 +104,7 @@ export default function EventsPage() {
                 <div className="border border-white/10 bg-[#0c0c0c] p-8 md:p-16 text-center mt-32 rounded-lg flex flex-col items-center justify-center space-y-6">
                     <h3 className="font-mohave text-3xl md:text-5xl font-bold uppercase text-white">Eventi Corporate & <span className="text-rama-accent">B2B</span></h3>
                     <p className="text-rama-muted font-outfit max-w-xl text-base md:text-lg">
-                        Vuoi organizzare un format esclusivo per la tua azienda? Dalla creatività all'esecuzione, progettiamo esperienze uniche e indimenticabili.
+                        Vuoi organizzare un format esclusivo per la tua azienda? Dalla creatività all&apos;esecuzione, progettiamo esperienze uniche e indimenticabili.
                     </p>
                     <a href="/contact" className="inline-block border border-rama-accent bg-rama-accent/10 hover:bg-rama-accent text-rama-accent hover:text-black transition-colors px-8 py-3 uppercase tracking-widest text-sm font-semibold rounded-sm mt-4">
                         Contattaci Ora

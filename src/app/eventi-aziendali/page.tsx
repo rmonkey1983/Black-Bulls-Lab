@@ -2,16 +2,8 @@
 
 import { motion } from "framer-motion";
 import { ImmersiveHeader } from "@/components/layout/ImmersiveHeader";
-import { PremiumButton } from "@/components/ui/PremiumButton";
-import { Building2, Users, Sparkles, BarChart3, CheckCircle2 } from "lucide-react";
+import { Building2, Users, Sparkles, CheckCircle2 } from "lucide-react";
 import { ParallaxImage, StickyTextSection } from "@/components/ui/ParallaxScroll";
-
-const services = [
-    { icon: Building2, title: "Team Building Esperienziale", desc: "Attività di coesione aziendale basate su esperienze immersive, cucina e intrattenimento." },
-    { icon: Sparkles, title: "Eventi Corporate Esclusivi", desc: "Cene, spettacoli e format su misura per il tuo brand e i tuoi obiettivi." },
-    { icon: Users, title: "Networking & Relazioni", desc: "Crea connessioni autentiche in ambienti unici e stimolanti." },
-    { icon: BarChart3, title: "Brand Experience", desc: "Trasforma il tuo messaggio in un'esperienza multisensoriale e memorabile." },
-];
 
 const stats = [
     { value: "50+", label: "Eventi Realizzati" },
@@ -226,7 +218,7 @@ export default function CorporatePage() {
                                     <span className="text-rama-accent">Chiavi in Mano.</span>
                                 </h3>
                                 <p className="text-rama-muted font-outfit text-lg leading-relaxed mt-6">
-                                    Scegli tu il livello di personalizzazione. Dalla creazione di format ad alto impatto, al menu dedicato, fino alla meticolosa scelta dell'artista o del performer perfetto per il tono e la visione della tua azienda.
+                                    Scegli tu il livello di personalizzazione. Dalla creazione di format ad alto impatto, al menu dedicato, fino alla meticolosa scelta dell&apos;artista o del performer perfetto per il tono e la visione della tua azienda.
                                 </p>
                             </div>
                         }
@@ -255,7 +247,7 @@ export default function CorporatePage() {
                             Progetta il tuo <br className="md:hidden" /><span className="text-rama-accent">Prossimo Evento</span>
                         </h3>
                         <p className="text-rama-muted font-outfit max-w-2xl mx-auto text-lg leading-relaxed">
-                            Raccontaci la tua idea. Il nostro team è pronto a confezionare un'esperienza su misura per le esigenze, il budget e gli obiettivi della tua azienda. Compila il modulo qui sotto, ti ricontatteremo entro 24 ore con una proposta creativa.
+                            Raccontaci la tua idea. Il nostro team è pronto a confezionare un&apos;esperienza su misura per le esigenze, il budget e gli obiettivi della tua azienda. Compila il modulo qui sotto, ti ricontatteremo entro 24 ore con una proposta creativa.
                         </p>
                     </div>
 

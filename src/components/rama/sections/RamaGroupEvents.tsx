@@ -6,9 +6,9 @@ import Link from "next/link";
 const valueProps = [
     {
         icon: Users,
-        label: "Gruppi da 20 a 30 persone",
+        label: "Per Piccoli e Grandi Gruppi",
         description:
-            "Format progettati su misura per team aziendali, compleanni di gruppo, addii al celibato e cene tra amici. Nessun minimo di lusso: parliamo la lingua delle persone reali.",
+            "Format progettati su misura per team aziendali, compleanni, addii al celibato e cene esclusive. Che siate in pochi o un grande gruppo, adattiamo l'esperienza: parliamo la lingua delle persone reali.",
     },
     {
         icon: Zap,

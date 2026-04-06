@@ -35,7 +35,7 @@ export default function ContactPage() {
                 setStatus("success");
                 setSent(true);
             }
-        } catch (error) {
+        } catch {
             setStatus("error");
             setMsg("Errore di rete improvviso. Ritenta più tardi.");
         }
@@ -56,15 +56,15 @@ export default function ContactPage() {
                 <div className="space-y-12">
                     <div>
                         <span className="font-rock-salt text-rama-accent transform -rotate-2 text-xl block mb-4">
-                            <Sparkles size={14} className="inline mr-2" /> L'Agenzia
+                            <Sparkles size={14} className="inline mr-2" /> L&apos;Agenzia
                         </span>
                         <h2 className="font-mohave font-bold leading-[0.85] tracking-tighter uppercase text-white flex flex-col text-5xl md:text-7xl">
                             <span className="text-white">Dove Nascono</span>
                             <span className="text-rama-accent">le Emozioni.</span>
                         </h2>
                         <p className="text-rama-muted font-outfit text-base md:text-lg leading-relaxed mt-6">
-                            Hai un'idea per un evento unico? Cerchi un dinner show esclusivo o una consulenza creativa? 
-                            Il nostro quartier generale creativo è un hub dove l'immaginazione prende forma 
+                            Hai un&apos;idea per un evento unico? Cerchi un dinner show esclusivo o una consulenza creativa? 
+                            Il nostro quartier generale creativo è un hub dove l&apos;immaginazione prende forma 
                             e diventa spettacolo. Contattaci, il nostro team troverà la soluzione perfetta per te.
                         </p>
                     </div>

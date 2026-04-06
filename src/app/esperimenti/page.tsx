@@ -70,7 +70,7 @@ export default function EsperimentiPage() {
                         transition={{ delay: 0.1 }}
                         className="text-xl text-gray-400 mt-4 max-w-2xl font-light"
                     >
-                        Format unici, nati nel laboratorio sotterraneo. Esplora le nostre esperienze esclusive, dove l'intrattenimento si fonde con l'interazione.
+                        Format unici, nati nel laboratorio sotterraneo. Esplora le nostre esperienze esclusive, dove l&apos;intrattenimento si fonde con l&apos;interazione.
                     </motion.p>
                 </div>
 

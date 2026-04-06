@@ -34,15 +34,15 @@ export default function AboutPage() {
                                     <span className="font-rock-salt text-rama-accent transform -rotate-2 text-xl block">La Visione</span>
                                 </div>
                                 <h2 className="font-mohave font-bold leading-[0.85] tracking-tighter uppercase text-white flex flex-col text-5xl md:text-7xl mt-2">
-                                    <span className="text-white">Oltre l'</span>
+                                    <span className="text-white">Oltre l&apos;</span>
                                     <span className="text-rama-accent">evento.</span>
-                                    <span className="text-white">Oltre l'</span>
+                                    <span className="text-white">Oltre l&apos;</span>
                                     <span className="text-rama-accent">immaginazione.</span>
                                 </h2>
                                 <p className="text-base md:text-lg text-rama-muted font-outfit font-light leading-relaxed mt-4">
-                                    Black Bulls Lab è molto più di un'agenzia. Siamo architetti dell'intrattenimento. 
-                                    Progettiamo dinner show e spettacoli dove l'ospite è al centro della scena, 
-                                    curando maniacalmente sia la direzione creativa che l'eccellenza esecutiva.
+                                    Black Bulls Lab è molto più di un&apos;agenzia. Siamo architetti dell&apos;intrattenimento. 
+                                    Progettiamo dinner show e spettacoli dove l&apos;ospite è al centro della scena, 
+                                    curando maniacalmente sia la direzione creativa che l&apos;eccellenza esecutiva.
                                 </p>
                                 <div className="pt-4">
                                     <PremiumButton href="/events" variant="gold" size="lg">

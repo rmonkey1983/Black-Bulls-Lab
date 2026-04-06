@@ -22,7 +22,7 @@ export function RamaTestimonial() {
                     className="text-center"
                 >
                     <p className="font-mohave text-2xl md:text-4xl lg:text-5xl font-medium tracking-wide uppercase leading-[1.1] mb-8 text-white">
-                        "Cercavo un posto per spezzare la routine del venerdì sera dopo il lavoro. Al <span className="text-rama-accent">Black Bulls Lab</span> ho trovato piatti eccezionali, risate vere e un'energia pazzesca. Sicuramente uno dei locali più originali della città."
+                        &quot;Cercavo un posto per spezzare la routine del venerdì sera dopo il lavoro. Al <span className="text-rama-accent">Black Bulls Lab</span> ho trovato piatti eccezionali, risate vere e un&apos;energia pazzesca. Sicuramente uno dei locali più originali della città.&quot;
                     </p>
 
                     <div className="flex flex-col items-center justify-center gap-2 mt-12 mb-24">
@@ -51,7 +51,7 @@ export function RamaTestimonial() {
                         Il tuo tavolo ti aspetta. Lo spettacolo sta per iniziare.
                     </h3>
                     <p className="text-rama-muted font-outfit text-center max-w-2xl mb-10 text-base md:text-lg relative z-10">
-                        I nostri eventi sono a numero chiuso per garantire un'esperienza intima e curata nei minimi dettagli. I posti si esauriscono in fretta.
+                        I nostri eventi sono a numero chiuso per garantire un&apos;esperienza intima e curata nei minimi dettagli. I posti si esauriscono in fretta.
                     </p>
                     <div className="relative z-10">
                         <PremiumButton href="/events" variant="gold" size="lg">

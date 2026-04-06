@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { EventConcept } from "@/components/events/EventConcept";
-import { ArrowLeft, Music, Mic2, Users } from "lucide-react";
+import { ArrowLeft, Mic2, Users } from "lucide-react";
 import Link from "next/link";
 
 export default function IlPalqoPage() {
@@ -54,7 +54,7 @@ export default function IlPalqoPage() {
                         </h1>
 
                         <p className="text-xl md:text-3xl text-gray-300 font-light max-w-2xl border-l-4 border-rama-accent pl-6">
-                            Il palcoscenico dove il talento incontra l'opportunità.
+                            Il palcoscenico dove il talento incontra l&apos;opportunità.
                         </p>
                     </motion.div>
                 </div>
@@ -88,7 +88,7 @@ export default function IlPalqoPage() {
                                 viewport={{ once: true }}
                                 className="text-lg text-gray-300 leading-relaxed mb-8"
                             >
-                                Ogni serata de "Il PalQo" è un viaggio in tre atti, disegnato per massimizzare l'esperienza sia per gli artisti che per il pubblico.
+                                Ogni serata de &quot;Il PalQo&quot; è un viaggio in tre atti, disegnato per massimizzare l&apos;esperienza sia per gli artisti che per il pubblico.
                             </motion.p>
 
                             <ul className="space-y-6">

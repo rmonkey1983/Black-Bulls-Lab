@@ -33,8 +33,8 @@ export function RamaAnimatedText({
     once = true,
     delay = 0,
 }: RamaAnimatedTextProps) {
-    // Use Wrapper correctly avoiding type error
-    const MotionWrapper = motion(Wrapper as any);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const MotionWrapper = (motion as Record<string, any>)[Wrapper as string] || motion.div;
 
     return (
         <MotionWrapper

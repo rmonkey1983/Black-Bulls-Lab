@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { getFutureEvents, Event } from "@/lib/dataStore";
 import Link from "next/link";
@@ -23,9 +23,9 @@ export function RamaWorks() {
                 <div className="flex flex-col">
                     <div className="flex justify-between items-center mb-8 sm:mb-12">
                         <div className="font-rock-salt text-rama-accent transform -rotate-2 text-base sm:text-xl">Prossimi Eventi</div>
-                        <a href="/events" className="flex items-center gap-2 text-rama-accent font-outfit uppercase tracking-widest text-xs sm:text-sm hover:text-white transition-colors">
+                        <Link href="/events" className="flex items-center gap-2 text-rama-accent font-outfit uppercase tracking-widest text-xs sm:text-sm hover:text-white transition-colors">
                             Tutti gli Eventi <ArrowUpRight size={16} />
-                        </a>
+                        </Link>
                     </div>
 
                     <div className="flex flex-col gap-2 font-mohave text-2xl sm:text-4xl md:text-6xl uppercase font-bold text-white/50 tracking-tighter overflow-hidden">
@@ -47,8 +47,8 @@ export function RamaWorks() {
 
             {/* Right Scrollable Content */}
             <div className="lg:w-2/3 flex flex-col gap-32">
-                {displayEvents.map((event, index) => (
-                    <ProjectCard key={event.id} event={event} index={index} />
+                {displayEvents.map((event) => (
+                    <ProjectCard key={event.id} event={event} />
                 ))}
             </div>
         </section>
@@ -71,7 +71,7 @@ const formatDate = (dateStr: string) => {
     }
 };
 
-function ProjectCard({ event, index }: { event: Event; index: number }) {
+function ProjectCard({ event }: { event: Event }) {
     return (
         <motion.div
             initial={{ opacity: 0, y: 100 }}
@@ -82,6 +82,7 @@ function ProjectCard({ event, index }: { event: Event; index: number }) {
         >
             {/* Card Graphic */}
             <Link href={`/events/${event.slug}`} className="w-full aspect-[4/3] rounded-2xl overflow-hidden relative group block cursor-pointer">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     src={(event.slug === 'il-palqo' && event.image?.includes('bull')) ? '/images/brand/bg-venue-crowd.png' : (event.image || "/images/brand/bg-hero-wide.png")}
                     alt={event.title}

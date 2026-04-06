@@ -1,0 +1,59 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { XCircle, ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+
+function CancelContent() {
+    const searchParams = useSearchParams();
+    const eventId = searchParams.get("eventId") || "";
+
+    return (
+        <div className="min-h-screen bg-transparent pt-32 pb-24 px-4 sm:px-6 flex items-center justify-center">
+            <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="max-w-2xl w-full bg-white/[0.02] border border-white/10 rounded-2xl p-8 md:p-16 shadow-2xl relative overflow-hidden backdrop-blur-sm text-center"
+            >
+                {/* Visual Cancelled */}
+                <div className="w-24 h-24 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-8 border border-red-500/20">
+                    <XCircle className="text-red-500 w-12 h-12" />
+                </div>
+
+                <h1 className="text-4xl md:text-5xl font-bold font-mohave uppercase tracking-tighter text-white mb-4">
+                    Pagamento <span className="text-red-500">Annullato</span>
+                </h1>
+                
+                <p className="text-gray-400 font-outfit text-lg max-w-md mx-auto mb-10">
+                    Il processo di pagamento è stato interrotto. Nessun addebito è stato effettuato e la tua prenotazione non è stata completata.
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <Link
+                        href={`/checkout?eventId=${eventId}`}
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gold text-black font-bold uppercase tracking-widest px-8 py-4 rounded-xl hover:bg-white transition-all shadow-lg"
+                    >
+                        Riprova Pagamento
+                    </Link>
+                    
+                    <Link
+                        href="/events"
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest px-8 py-4 rounded-xl hover:bg-white/10 transition-all"
+                    >
+                        <ArrowLeft size={18} /> Altri Eventi
+                    </Link>
+                </div>
+            </motion.div>
+        </div>
+    );
+}
+
+export default function CheckoutCancelPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-transparent pt-32 text-center text-white font-mohave text-2xl">Caricamento...</div>}>
+            <CancelContent />
+        </Suspense>
+    );
+}

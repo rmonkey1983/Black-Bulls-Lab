@@ -66,12 +66,32 @@ export default function CheckoutForm() {
     const handleNextMonth = () => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1));
     const handlePrevMonth = () => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1));
 
-    const handlePayment = () => {
+    const handlePayment = async () => {
         setLoading(true);
-        setTimeout(() => {
-            alert("Prenotazione registrata nel CRM. Invio email/SMS in corso... Reindirizzamento a Stripe per la transazione sicura.");
+        try {
+            const response = await fetch("/api/checkout", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    eventId: event.id,
+                    eventTitle: event.title,
+                    quantity,
+                    selectedDate,
+                    guest,
+                    premium
+                })
+            });
+            const data = await response.json();
+            if (data.url) {
+                window.location.href = data.url;
+            } else {
+                throw new Error(data.error || "Errore durante la creazione della sessione");
+            }
+        } catch (error) {
+            console.error("Payment error:", error);
+            alert("Si è verificato un errore di connessione con il sistema di pagamento. Riprova.");
             setLoading(false);
-        }, 2000);
+        }
     };
 
     return (

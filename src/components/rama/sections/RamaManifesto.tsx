@@ -28,7 +28,7 @@ export function RamaManifesto() {
                     />
                     {/* AI-ready paragraph 2: Per chi + Replicabilità */}
                     <RamaAnimatedText
-                        text="I nostri format — dalla Cena con Delitto a Il Palqo — sono progettati per funzionare ogni volta: per cene aziendali, team building, compleanni e gruppi privati da 20 a 30 persone. Format collaudati, replicabili, e sempre originali."
+                        text="I nostri format — dalla Cena con Delitto a Il Palqo — sono progettati per funzionare ogni volta: per cene aziendali, team building, compleanni e gruppi privati di qualsiasi dimensione. Format collaudati, replicabili, e sempre originali."
                         delay={0.4}
                     />
                     {/* AI-ready paragraph 3: Costi + Value prop */}
