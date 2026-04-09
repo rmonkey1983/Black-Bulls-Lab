@@ -105,11 +105,11 @@ function EventForm({ event, onSave, onCancel }: { event?: Event; onSave: () => v
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="md:col-span-2">
                     <label className={labelClass}>Titolo</label>
-                    <input value={form.title} onChange={(e) => handleChange("title", e.target.value)} required placeholder="Notte Medievale..." className={inputClass} />
+                    <input value={form.title} onChange={(e) => handleChange("title", e.target.value)} required placeholder="Il PalQo, A Cena Con Il Bugiardo..." className={inputClass} />
                 </div>
                 <div>
                     <label className={labelClass}>Slug (URL)</label>
-                    <input value={form.slug} onChange={(e) => handleChange("slug", e.target.value)} required placeholder="notte-medievale" className={inputClass} />
+                    <input value={form.slug} onChange={(e) => handleChange("slug", e.target.value)} required placeholder="il-palqo" className={inputClass} />
                 </div>
                 <div>
                     <label className={labelClass}>Sottotitolo</label>
@@ -176,8 +176,8 @@ function EventForm({ event, onSave, onCancel }: { event?: Event; onSave: () => v
                     </div>
                 </div>
                 <div className="md:col-span-2">
-                    <label className={labelClass}>Descrizione</label>
-                    <textarea value={form.description} onChange={(e) => handleChange("description", e.target.value)} rows={4} placeholder="Descrizione dell'evento..." className={`${inputClass} resize-none`} />
+                    <label className={labelClass}>Descrizione Breve (Necessari almeno 20 caratteri per la lista eventi)</label>
+                    <textarea value={form.description} minLength={20} required onChange={(e) => handleChange("description", e.target.value)} rows={4} placeholder="Descrizione dell'evento..." className={`${inputClass} resize-none`} />
                 </div>
             </div>
 

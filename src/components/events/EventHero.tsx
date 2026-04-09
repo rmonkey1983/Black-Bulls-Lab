@@ -2,7 +2,8 @@
 
 import { Calendar, MapPin, Share2, ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { useGSAP } from "@/hooks/useGSAP";
+import { animateFade } from "@/lib/gsapAnimations";
 
 interface EventHeroProps {
     title: string;
@@ -13,6 +14,10 @@ interface EventHeroProps {
 }
 
 export function EventHero({ title, subtitle, image, date, location }: EventHeroProps) {
+    useGSAP(() => {
+        animateFade("#event-hero-content", "up", 0.1);
+    });
+
     return (
         <div className="relative h-[85vh] w-full overflow-hidden flex items-end">
             {/* Background */}
@@ -33,10 +38,8 @@ export function EventHero({ title, subtitle, image, date, location }: EventHeroP
 
             {/* Content */}
             <div className="relative z-20 w-full max-w-7xl mx-auto p-6 md:p-12 mb-12">
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
+                <div
+                    id="event-hero-content"
                     className="flex flex-col md:flex-row md:items-end justify-between gap-8"
                 >
                     <div className="space-y-6 max-w-4xl">
@@ -76,7 +79,7 @@ export function EventHero({ title, subtitle, image, date, location }: EventHeroP
                         <Share2 size={20} className="group-hover:text-gold transition-colors" />
                         <span className="text-xs font-bold uppercase tracking-widest">Condividi</span>
                     </button>
-                </motion.div>
+                </div>
             </div>
         </div>
     );

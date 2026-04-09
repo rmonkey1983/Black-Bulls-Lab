@@ -63,6 +63,21 @@ export async function getEvents(): Promise<Event[]> {
     return data.map(mapEvent);
 }
 
+export async function getFutureEvents(): Promise<Event[]> {
+    const today = new Date().toISOString().split('T')[0];
+    const { data, error } = await supabase
+        .from("events")
+        .select("*")
+        .gte("date", today)
+        .order("date", { ascending: true });
+
+    if (error) {
+        console.error("Error fetching future events:", error);
+        return [];
+    }
+    return data.map(mapEvent);
+}
+
 export async function getEvent(slug: string): Promise<Event | undefined> {
     const { data, error } = await supabase
         .from("events")
@@ -119,6 +134,7 @@ function mapEvent(row: any): Event {
         timeline: typeof row.timeline === "string"
             ? JSON.parse(row.timeline)
             : (row.timeline || []),
+        price: row.price ?? undefined,
     };
 }
 
@@ -228,7 +244,7 @@ export async function getSettings(): Promise<SiteSettings> {
         siteTitle: "Black Bulls Lab",
         siteDescription: "Il laboratorio underground dove l'intrattenimento diventa scienza",
         heroSubtitle: "Il laboratorio underground dove l'intrattenimento diventa scienza.",
-        contactEmail: "info@blackbullslab.it",
+        contactEmail: CONTACT_EMAIL,
         instagram: "@blackbullslab",
         adminPassword: "admin123",
     };

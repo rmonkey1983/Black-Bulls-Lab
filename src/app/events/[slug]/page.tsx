@@ -17,16 +17,13 @@ export default function EventPage() {
     const [notFound, setNotFound] = useState(false);
 
     useEffect(() => {
-        console.log("Fetching event with slug:", slug);
         getEvent(slug).then((data) => {
-            console.log("getEvent result:", data);
             if (data) {
                 setEvent(data);
             } else {
                 setNotFound(true);
             }
-        }).catch(err => {
-            console.error("getEvent error caught:", err);
+        }).catch(() => {
             setNotFound(true);
         });
     }, [slug]);

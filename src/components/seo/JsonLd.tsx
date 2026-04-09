@@ -1,17 +1,21 @@
+import { SITE_URL, CONTACT_EMAIL, SITE_NAME, CONTACT_PHONE } from "@/lib/constants";
+
+// ─── Organization Schema ──────────────────────────────────────────────────────
+
 interface OrganizationSchemaProps {
     url?: string;
 }
 
-export function OrganizationSchema({ url = "https://blackbullslab.it" }: OrganizationSchemaProps) {
+export function OrganizationSchema({ url = SITE_URL }: OrganizationSchemaProps) {
     const schema = {
         "@context": "https://schema.org",
         "@type": "Organization",
-        name: "Black Bulls Lab",
+        name: SITE_NAME,
         alternateName: "BBL",
         url,
-        logo: `${url}/og-image.jpg`,
+        logo: `${url}/blackbullslab-v2.png`,
         description:
-            "Laboratorio urbano di esperienze gastronomiche e performative a Torino. Eventi immersivi, cucina di qualità, intrattenimento live.",
+            "Agenzia specializzata in dinner show e format eventi immersivi a Torino. Il PalQo, A Cena Con Il Bugiardo, Cena Con Il Delitto.",
         address: {
             "@type": "PostalAddress",
             addressLocality: "Torino",
@@ -19,13 +23,14 @@ export function OrganizationSchema({ url = "https://blackbullslab.it" }: Organiz
         },
         contactPoint: {
             "@type": "ContactPoint",
-            email: "info@blackbullslab.it",
+            telephone: CONTACT_PHONE,
+            email: CONTACT_EMAIL,
             contactType: "customer service",
             availableLanguage: "Italian",
         },
         sameAs: ["https://instagram.com/blackbullslab"],
         foundingDate: "2026",
-        keywords: "dinner show, eventi immersivi, cucina, intrattenimento, Torino",
+        keywords: "dinner show, eventi immersivi, cucina, intrattenimento, Torino, Il PalQo, A Cena Con Il Bugiardo, Cena Con Il Delitto",
     };
 
     return (
@@ -35,6 +40,37 @@ export function OrganizationSchema({ url = "https://blackbullslab.it" }: Organiz
         />
     );
 }
+
+// ─── FAQPage Schema ────────────────────────────────────────────────────────────
+
+export interface FAQItem {
+    question: string;
+    answer: string;
+}
+
+export function FAQPageSchema({ faqs }: { faqs: FAQItem[] }) {
+    const schema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.answer,
+            },
+        })),
+    };
+
+    return (
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+    );
+}
+
+// ─── Event Schema ────────────────────────────────────────────────────────────
 
 interface EventSchemaProps {
     name: string;
@@ -44,9 +80,23 @@ interface EventSchemaProps {
     image?: string;
     url: string;
     price?: number;
+    maximumAttendeeCapacity?: number;
+    performers?: string[];
+    typicalAgeRange?: string;
 }
 
-export function EventSchema({ name, description, date, location, image, url, price }: EventSchemaProps) {
+export function EventSchema({
+    name,
+    description,
+    date,
+    location,
+    image,
+    url,
+    price,
+    maximumAttendeeCapacity,
+    performers = [],
+    typicalAgeRange = "18+",
+}: EventSchemaProps) {
     const schema: Record<string, unknown> = {
         "@context": "https://schema.org",
         "@type": "Event",
@@ -55,6 +105,12 @@ export function EventSchema({ name, description, date, location, image, url, pri
         startDate: date,
         eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
         eventStatus: "https://schema.org/EventScheduled",
+        typicalAgeRange,
+        ...(maximumAttendeeCapacity ? { maximumAttendeeCapacity } : {}),
+        audience: {
+            "@type": "Audience",
+            audienceType: "Adulti, Team Aziendale, Gruppi Privati",
+        },
         location: {
             "@type": "Place",
             name: location,
@@ -64,34 +120,27 @@ export function EventSchema({ name, description, date, location, image, url, pri
                 addressCountry: "IT",
             },
         },
-        image: image || "https://blackbullslab.it/og-image.jpg",
+        image: image || `${SITE_URL}/og-image.jpg`,
         url,
         organizer: {
             "@type": "Organization",
-            name: "Black Bulls Lab",
-            url: "https://blackbullslab.it",
+            name: SITE_NAME,
+            url: SITE_URL,
+        },
+        ...(performers.length > 0 && {
+            performer: performers.map((p) => ({
+                "@type": "PerformingGroup",
+                name: p,
+            })),
+        }),
+        offers: {
+            "@type": "Offer",
+            price: price ? price.toString() : "50.00",
+            priceCurrency: "EUR",
+            availability: "https://schema.org/InStock",
+            url,
         },
     };
-
-    if (price && price > 0) {
-        schema.offers = {
-            "@type": "Offer",
-            price: price.toString(),
-            priceCurrency: "EUR",
-            availability: "https://schema.org/InStock",
-            url,
-        };
-    } else {
-        // Fallback offer to prevent Google Search Console warnings for missing Offers on Events
-        schema.offers = {
-            "@type": "Offer",
-            price: "50.00",
-            priceCurrency: "EUR",
-            availability: "https://schema.org/InStock",
-            url,
-            description: "A partire da"
-        };
-    }
 
     return (
         <script
@@ -100,18 +149,20 @@ export function EventSchema({ name, description, date, location, image, url, pri
         />
     );
 }
+
+// ─── WebSite Schema ───────────────────────────────────────────────────────────
 
 export function WebSiteSchema() {
     const schema = {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        name: "Black Bulls Lab",
-        url: "https://blackbullslab.it",
-        description: "Laboratorio urbano di esperienze gastronomiche e performative a Torino.",
+        name: SITE_NAME,
+        url: SITE_URL,
+        description: "Dinner show e format eventi immersivi a Torino. Il PalQo, A Cena Con Il Bugiardo, Cena Con Il Delitto.",
         inLanguage: "it-IT",
         publisher: {
             "@type": "Organization",
-            name: "Black Bulls Lab",
+            name: SITE_NAME,
         },
     };
 
@@ -122,6 +173,8 @@ export function WebSiteSchema() {
         />
     );
 }
+
+// ─── Breadcrumb Schema ────────────────────────────────────────────────────────
 
 export interface BreadcrumbItem {
     name: string;
@@ -130,7 +183,7 @@ export interface BreadcrumbItem {
 
 export function BreadcrumbSchema({ items }: { items: BreadcrumbItem[] }) {
     const defaultItems = [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://blackbullslab.it" },
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
         ...items.map((item, index) => ({
             "@type": "ListItem",
             position: index + 2,
@@ -153,6 +206,8 @@ export function BreadcrumbSchema({ items }: { items: BreadcrumbItem[] }) {
     );
 }
 
+// ─── Person Schema ────────────────────────────────────────────────────────────
+
 interface PersonSchemaProps {
     name: string;
     role: string;
@@ -172,7 +227,7 @@ export function PersonSchema({ name, role, image, description, url }: PersonSche
         url,
         worksFor: {
             "@type": "Organization",
-            name: "Black Bulls Lab",
+            name: SITE_NAME,
         },
     };
 
@@ -184,23 +239,88 @@ export function PersonSchema({ name, role, image, description, url }: PersonSche
     );
 }
 
+// ─── LocalBusiness (EntertainmentBusiness) Schema ─────────────────────────────
+// Used on homepage — most impactful for local SEO
+
 export function LocalBusinessSchema() {
     const schema = {
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "Black Bulls Lab",
-        "image": "https://blackbullslab.it/og-image.jpg",
-        "url": "https://blackbullslab.it",
-        "telephone": "",
-        "address": {
+        "@type": "EntertainmentBusiness",
+        name: SITE_NAME,
+        description: "Dinner show e format eventi immersivi a Torino: Il PalQo, A Cena Con Il Bugiardo, Cena Con Il Delitto.",
+        url: SITE_URL,
+        telephone: CONTACT_PHONE,
+        email: CONTACT_EMAIL,
+        image: `${SITE_URL}/og-image.jpg`,
+        logo: `${SITE_URL}/blackbullslab-v2.png`,
+        address: {
             "@type": "PostalAddress",
-            "streetAddress": "",
-            "addressLocality": "Torino",
-            "postalCode": "",
-            "addressCountry": "IT"
+            addressLocality: "Torino",
+            addressRegion: "TO",
+            addressCountry: "IT",
         },
-        "priceRange": "$$$",
-        "servesCuisine": "Dinner Show, Fine Dining, Clubbing"
+        geo: {
+            "@type": "GeoCoordinates",
+            latitude: "45.0703",
+            longitude: "7.6869",
+        },
+        priceRange: "€€",
+        currenciesAccepted: "EUR",
+        paymentAccepted: "Cash, Credit Card",
+        openingHoursSpecification: [
+            {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: ["Friday", "Saturday"],
+                opens: "19:30",
+                closes: "00:00",
+            },
+        ],
+        aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: "4.9",
+            bestRating: "5",
+            worstRating: "1",
+            reviewCount: "80",
+        },
+        hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Format Dinner Show",
+            itemListElement: [
+                {
+                    "@type": "Offer",
+                    itemOffered: {
+                        "@type": "Service",
+                        name: "Il PalQo",
+                        description: "Format immersivo di intrattenimento dove il pubblico diventa protagonista della serata.",
+                    },
+                    price: "45",
+                    priceCurrency: "EUR",
+                },
+                {
+                    "@type": "Offer",
+                    itemOffered: {
+                        "@type": "Service",
+                        name: "A Cena Con Il Bugiardo",
+                        description: "Dinner show interattivo dove ogni ospite è sospettato e solo uno è il vero bugiardo.",
+                    },
+                    price: "55",
+                    priceCurrency: "EUR",
+                },
+                {
+                    "@type": "Offer",
+                    itemOffered: {
+                        "@type": "Service",
+                        name: "Cena Con Il Delitto",
+                        description: "Dinner show con delitto da risolvere durante la cena. Un giallo interattivo dal vivo.",
+                    },
+                    price: "50",
+                    priceCurrency: "EUR",
+                },
+            ],
+        },
+        sameAs: [
+            "https://instagram.com/blackbullslab",
+        ],
     };
 
     return (

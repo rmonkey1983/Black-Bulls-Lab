@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { useGSAP } from "@/hooks/useGSAP";
+import { gsap } from "gsap";
 
 interface RamaAnimatedTextProps {
     text: string;
@@ -11,21 +12,6 @@ interface RamaAnimatedTextProps {
     delay?: number;
 }
 
-const defaultAnimations = {
-    hidden: {
-        opacity: 0,
-        y: 40,
-    },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            duration: 0.8,
-            ease: [0.16, 1, 0.3, 1], // Custom slow ease-out
-        },
-    },
-};
-
 export function RamaAnimatedText({
     text,
     className = "",
@@ -33,27 +19,38 @@ export function RamaAnimatedText({
     once = true,
     delay = 0,
 }: RamaAnimatedTextProps) {
-    // Use Wrapper correctly avoiding type error
-    const MotionWrapper = motion(Wrapper as any);
+    const textRef = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        if (!textRef.current) return;
+
+        gsap.fromTo(textRef.current, 
+            { opacity: 0, y: 40 },
+            { 
+                opacity: 1, 
+                y: 0, 
+                duration: 0.8, 
+                delay: delay,
+                ease: "expo.out",
+                scrollTrigger: {
+                    trigger: textRef.current,
+                    start: "top 90%",
+                    once: once
+                }
+            }
+        );
+    }, { dependencies: [text, delay], scope: textRef });
+
+    // We cast Wrapper to any to use it as a component
+    const Tag = Wrapper as any;
 
     return (
-        <MotionWrapper
+        <Tag
+            ref={textRef}
             className={className}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once, margin: "-10%" }}
-            variants={{
-                hidden: defaultAnimations.hidden,
-                visible: {
-                    ...defaultAnimations.visible,
-                    transition: {
-                        ...defaultAnimations.visible.transition,
-                        delay,
-                    },
-                },
-            }}
+            style={{ opacity: 0 }}
         >
             {text}
-        </MotionWrapper>
+        </Tag>
     );
 }

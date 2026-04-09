@@ -1,62 +1,162 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import Image from "next/image";
 import { ImmersiveHeader } from "@/components/layout/ImmersiveHeader";
 import { PremiumButton } from "@/components/ui/PremiumButton";
-import { Send, Mail, MapPin, Instagram } from "lucide-react";
-import { ParallaxImage, StickyTextSection } from "@/components/ui/ParallaxScroll";
+import { Send, Mail, MapPin, Instagram, Sparkles, ChevronDown, Phone } from "lucide-react";
+import { Turnstile } from "@marsidev/react-turnstile";
+import { submitContact } from "@/app/actions/contact";
+import { useGSAP } from "@/hooks/useGSAP";
+import { animateFade } from "@/lib/gsapAnimations";
+import { CONTACT_EMAIL, CONTACT_PHONE, SOCIAL_LINKS } from "@/lib/constants";
 
 export default function ContactPage() {
     const [sent, setSent] = useState(false);
+    const [status, setStatus] = useState<"idle" | "loading" | "error" | "success">("idle");
+    const [msg, setMsg] = useState("");
+    const [turnstileToken, setTurnstileToken] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    useGSAP(() => {
+        animateFade("#contact-info", "up", 0.1);
+        animateFade("#contact-form-container", "up", 0.05);
+    });
+    
+    // Fallback environment var check, will only render Turnstile if public key is available
+    const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setSent(true);
+        setStatus("loading");
+        setMsg("");
+        
+        const formData = new FormData(e.currentTarget);
+        if (turnstileToken) formData.append("cf-turnstile-response", turnstileToken);
+
+        try {
+            const res = await submitContact(formData);
+            if (res?.error) {
+                setStatus("error");
+                setMsg(res.error);
+            } else {
+                setStatus("success");
+                setSent(true);
+            }
+        } catch {
+            setStatus("error");
+            setMsg("Errore di rete improvviso. Ritenta più tardi.");
+        }
     };
 
     return (
-        <div className="min-h-screen  pb-24">
+        <div className="min-h-screen pb-24">
             <ImmersiveHeader
+                id="contact-hero"
                 title="CONTATTACI"
                 highlight=""
-                subtitle="Hai una domanda? Vuoi prenotare un'esperienza? Scrivici, ci pensiamo noi."
-                mediaUrl="/images/brand/bg-hero-wide.png"
+                subtitle=""
+                mediaUrl=""
             />
 
-            <div className="max-w-3xl mx-auto px-6">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="border border-border bg-bg-card/50 relative"
+            <div className="max-w-7xl mx-auto px-6 py-12 lg:-mt-24 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+                
+                {/* Left Column: Text & Image */}
+                <div id="contact-info" className="space-y-12">
+                    <div className="gsap-fade">
+                        <span className="font-rock-salt text-rama-accent transform -rotate-2 text-xl block mb-4">
+                            <Sparkles size={14} className="inline mr-2" /> L&apos;Agenzia
+                        </span>
+                        <h2 className="font-mohave font-bold leading-[0.85] tracking-tighter uppercase text-white flex flex-col text-5xl md:text-7xl">
+                            <span className="text-white">Dove Nascono</span>
+                            <span className="text-rama-accent">le Emozioni.</span>
+                        </h2>
+                        <p className="text-rama-muted font-outfit text-base md:text-lg leading-relaxed mt-6">
+                            Hai un&apos;idea per un evento unico? Cerchi un dinner show esclusivo o una consulenza creativa? 
+                            Il nostro quartier generale creativo è un hub dove l&apos;immaginazione prende forma 
+                            e diventa spettacolo. Contattaci, il nostro team troverà la soluzione perfetta per te.
+                        </p>
+                    </div>
+
+                    <div className="gsap-fade w-full aspect-[16/9] md:aspect-[4/3] rounded-lg overflow-hidden relative group">
+                        <Image
+                            src="/images/brand/bg-venue-crowd.png"
+                            alt="Interno del locale Black Bulls Lab — atmosfera elegante e immersiva"
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-1000"
+                            sizes="(max-width: 1024px) 100vw, 50vw"
+                        />
+                        <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+                    </div>
+
+                    <div className="grid sm:grid-cols-1 gap-4">
+                        {[
+                            { label: "Indirizzo", value: "Torino, Italia", icon: MapPin },
+                            { label: "Email", value: CONTACT_EMAIL, icon: Mail },
+                            { label: "Telefono / WhatsApp", value: CONTACT_PHONE, icon: Phone },
+                            { label: "Social", value: "@blackbullslab", icon: Instagram },
+                        ].map((info) => (
+                            <div key={info.label} className="gsap-fade flex items-center gap-4 p-4 border border-white/5 bg-white/5 rounded-md hover:border-rama-accent/40 transition-colors">
+                                <info.icon className="text-rama-accent" size={20} />
+                                <div>
+                                    <span className="block font-outfit text-xs text-rama-muted tracking-widest uppercase mb-1">{info.label}</span>
+                                    {info.label === "Email" ? (
+                                        <a href={`mailto:${CONTACT_EMAIL}`} className="text-white font-medium hover:text-rama-accent transition-colors">
+                                            {CONTACT_EMAIL}
+                                        </a>
+                                    ) : info.label === "Social" ? (
+                                        <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-white font-medium hover:text-rama-accent transition-colors">
+                                            {info.value}
+                                        </a>
+                                    ) : (
+                                        <span className="text-white font-medium">{info.value}</span>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Right Column: Form */}
+                <div
+                    id="contact-form-container"
+                    className="border border-white/10 bg-[#0c0c0c]/80 backdrop-blur-xl relative rounded-xl shadow-2xl"
                 >
                     {/* Corner accents */}
-                    <div className="absolute top-0 left-0 w-5 h-5 border-t border-l border-rama-accent/15" />
-                    <div className="absolute top-0 right-0 w-5 h-5 border-t border-r border-rama-accent/15" />
-                    <div className="absolute bottom-0 left-0 w-5 h-5 border-b border-l border-rama-accent/15" />
-                    <div className="absolute bottom-0 right-0 w-5 h-5 border-b border-r border-rama-accent/15" />
+                    <div className="absolute top-0 left-0 w-5 h-5 border-t border-l border-rama-accent" />
+                    <div className="absolute top-0 right-0 w-5 h-5 border-t border-r border-rama-accent" />
+                    <div className="absolute bottom-0 left-0 w-5 h-5 border-b border-l border-rama-accent" />
+                    <div className="absolute bottom-0 right-0 w-5 h-5 border-b border-r border-rama-accent" />
 
                     {sent ? (
-                        <div className="p-12 text-center py-24">
-                            <motion.div
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                className="w-16 h-16 border border-rama-accent/30 mx-auto flex items-center justify-center mb-6"
+                        <div className="p-12 text-center py-32">
+                            <div
+                                className="w-16 h-16 rounded-full bg-rama-accent/10 border border-rama-accent/30 mx-auto flex items-center justify-center mb-6"
                             >
                                 <Send size={24} className="text-rama-accent" />
-                            </motion.div>
-                            <h3 className="font-mohave text-3xl md:text-5xl font-bold text-white uppercase mb-4">Messaggio<br /><span className="text-rama-accent">Inviato</span></h3>
-                            <p className="text-rama-muted font-outfit text-lg">
-                                Ti risponderemo al più presto. Grazie per averci contattato!
+                            </div>
+                            <h3 className="font-mohave text-3xl md:text-4xl font-bold text-white uppercase mb-4">Richiesta<br /><span className="text-rama-accent">Inviata</span></h3>
+                            <p className="text-rama-muted font-outfit text-base">
+                                Il nostro team analizzerà la tua richiesta e ti risponderà entro 24/48 ore. Grazie!
                             </p>
                         </div>
                     ) : (
-                        <form onSubmit={handleSubmit} className="p-8 md:p-12 space-y-8">
+                        <form onSubmit={handleSubmit} className="p-8 md:p-10 space-y-6">
+                            
+                            {/* Form Messages */}
+                            {msg && status === "error" && (
+                                <div className="bg-red-500/10 border border-red-500/30 p-4 rounded-md text-red-400 text-sm font-outfit mb-4">
+                                    {msg}
+                                </div>
+                            )}
+
+                            {/* Honeypot for Anti-Spam */}
+                            <input type="text" name="honeypot" className="hidden" tabIndex={-1} autoComplete="off" />
+
                             {/* Name */}
-                            <div className="relative border-b border-white/20 focus-within:border-rama-accent transition-colors duration-500">
+                            <div className="gsap-fade relative border-b-2 border-white/15 focus-within:border-rama-accent focus-within:bg-white/5 transition-all duration-300 p-2 rounded-t-md">
                                 <label
                                     htmlFor="name"
-                                    className="font-outfit text-xs text-rama-accent/60 tracking-widest uppercase block mb-1"
+                                    className="font-outfit text-[10px] md:text-xs text-rama-accent/80 tracking-widest uppercase block mb-1 font-medium"
                                 >
                                     Nome e Cognome
                                 </label>
@@ -66,17 +166,17 @@ export default function ContactPage() {
                                     name="name"
                                     autoComplete="name"
                                     required
-                                    placeholder="Il tuo nome..."
-                                    className="w-full bg-transparent border-none px-0 py-3 text-white text-lg font-outfit
-                                        placeholder:text-gray-600 focus:outline-none focus:ring-0"
+                                    placeholder="Es. Mario Rossi"
+                                    className="w-full bg-transparent border-none px-0 py-2 text-white text-base md:text-lg font-outfit
+                                        placeholder:text-white/40 focus:outline-none focus-visible:ring-1 focus-visible:ring-rama-accent/50 focus-visible:rounded"
                                 />
                             </div>
 
                             {/* Email */}
-                            <div className="relative border-b border-white/20 focus-within:border-rama-accent transition-colors duration-500">
+                            <div className="gsap-fade relative border-b-2 border-white/15 focus-within:border-rama-accent focus-within:bg-white/5 transition-all duration-300 p-2 rounded-t-md">
                                 <label
                                     htmlFor="email"
-                                    className="font-outfit text-xs text-rama-accent/60 tracking-widest uppercase block mb-1"
+                                    className="font-outfit text-[10px] md:text-xs text-rama-accent/80 tracking-widest uppercase block mb-1 font-medium"
                                 >
                                     Email
                                 </label>
@@ -86,40 +186,44 @@ export default function ContactPage() {
                                     name="email"
                                     autoComplete="email"
                                     required
-                                    placeholder="la-tua@email.com"
-                                    className="w-full bg-transparent border-none px-0 py-3 text-white text-lg font-outfit
-                                        placeholder:text-gray-600 focus:outline-none focus:ring-0"
+                                    placeholder="la.tua@email.com"
+                                    className="w-full bg-transparent border-none px-0 py-2 text-white text-base md:text-lg font-outfit
+                                        placeholder:text-white/40 focus:outline-none focus-visible:ring-1 focus-visible:ring-rama-accent/50 focus-visible:rounded"
                                 />
                             </div>
 
                             {/* Subject */}
-                            <div className="relative border-b border-white/20 focus-within:border-rama-accent transition-colors duration-500">
+                            <div className="gsap-fade relative border-b-2 border-white/15 focus-within:border-rama-accent focus-within:bg-white/5 transition-all duration-300 p-2 rounded-t-md">
                                 <label
                                     htmlFor="subject"
-                                    className="font-outfit text-xs text-rama-accent/60 tracking-widest uppercase block mb-1"
+                                    className="font-outfit text-[10px] md:text-xs text-rama-accent/80 tracking-widest uppercase block mb-1 font-medium"
                                 >
-                                    Motivo
+                                    Motivo della Richiesta
                                 </label>
-                                <select
-                                    id="subject"
-                                    name="subject"
-                                    className="w-full bg-transparent border-none px-0 py-3 text-white text-lg font-outfit
-                                        focus:outline-none focus:ring-0 appearance-none rounded-none"
-                                >
-                                    <option value="" className="bg-bg-dark">Seleziona un motivo...</option>
-                                    <option value="event" className="bg-bg-dark">Informazioni Eventi</option>
-                                    <option value="booking" className="bg-bg-dark">Prenotazione</option>
-                                    <option value="corporate" className="bg-bg-dark">Collaborazione Corporate</option>
-                                    <option value="talent" className="bg-bg-dark">Candidatura Artista</option>
-                                    <option value="other" className="bg-bg-dark">Altro</option>
-                                </select>
+                                <div className="relative">
+                                    <select
+                                        id="subject"
+                                        name="subject"
+                                        required
+                                        className="w-full bg-transparent border-none px-0 py-2 text-white text-base md:text-lg font-outfit
+                                            focus:outline-none focus:ring-0 appearance-none cursor-pointer"
+                                    >
+                                        <option value="" className="bg-[#0c0c0c] text-white/50">Seleziona un motivo...</option>
+                                        <option value="event" className="bg-[#0c0c0c]">Informazioni Eventi</option>
+                                        <option value="booking" className="bg-[#0c0c0c]">Prenotazione Dinner Show</option>
+                                        <option value="corporate" className="bg-[#0c0c0c]">Collaborazione Corporate / B2B</option>
+                                        <option value="talent" className="bg-[#0c0c0c]">Candidatura Artista / Performer</option>
+                                        <option value="other" className="bg-[#0c0c0c]">Altro</option>
+                                    </select>
+                                    <ChevronDown size={18} className="absolute right-2 top-1/2 -translate-y-1/2 text-white/50 pointer-events-none" />
+                                </div>
                             </div>
 
                             {/* Message */}
-                            <div className="relative border-b border-white/20 focus-within:border-rama-accent transition-colors duration-500">
+                            <div className="gsap-fade relative border-b-2 border-white/15 focus-within:border-rama-accent focus-within:bg-white/5 transition-all duration-300 p-2 rounded-t-md">
                                 <label
                                     htmlFor="message"
-                                    className="font-outfit text-xs text-rama-accent/60 tracking-widest uppercase block mb-1"
+                                    className="font-outfit text-[10px] md:text-xs text-rama-accent/80 tracking-widest uppercase block mb-1 font-medium"
                                 >
                                     Il Tuo Messaggio
                                 </label>
@@ -127,64 +231,43 @@ export default function ContactPage() {
                                     id="message"
                                     name="message"
                                     required
-                                    rows={4}
-                                    placeholder="Raccontaci come possiamo aiutarti..."
-                                    className="w-full bg-transparent border-none px-0 py-3 text-white text-lg font-outfit
-                                        placeholder:text-gray-600 resize-none focus:outline-none focus:ring-0"
+                                    minLength={10}
+                                    rows={5}
+                                    placeholder="Raccontaci dettagliatamente la tua idea o come possiamo aiutarti..."
+                                    className="w-full bg-transparent border-none px-0 py-2 text-white text-base md:text-lg font-outfit
+                                        placeholder:text-white/40 resize-none focus:outline-none focus:ring-0"
                                 />
                             </div>
 
-                            <div className="pt-4">
-                                <PremiumButton type="submit" variant="gold" size="lg" className="w-full">
-                                    <Send size={14} /> Invia Messaggio
+                            {/* Turnstile optional rendering */}
+                            {siteKey && (
+                                <div className="pt-2 flex justify-center">
+                                    <Turnstile 
+                                        siteKey={siteKey} 
+                                        onSuccess={(token) => setTurnstileToken(token)}
+                                        options={{ theme: 'dark' }}
+                                    />
+                                </div>
+                            )}
+
+                            <div className="gsap-fade pt-6">
+                                <PremiumButton
+                                    type="submit"
+                                    variant="gold"
+                                    size="lg"
+                                    className={`w-full ${status === 'loading' ? 'opacity-50 pointer-events-none' : ''}`}
+                                    onClick={status === 'loading' ? (e) => e.preventDefault() : undefined}
+                                >
+                                    <span className="font-mohave tracking-widest uppercase text-lg">
+                                        {status === "loading" ? "Invio in corso…" : "Parla con il Nostro Team"}
+                                    </span>
                                 </PremiumButton>
+                                <p className="text-xs text-center text-white/40 font-outfit mt-4 flex items-center justify-center gap-2">
+                                    <Sparkles size={12} className="text-rama-accent" /> Ti risponderemo entro 24/48 ore.
+                                </p>
                             </div>
                         </form>
                     )}
-                </motion.div>
-
-                <div className="pt-24">
-                    <StickyTextSection
-                        content={
-                            <div className="space-y-6">
-                                <span className="font-rock-salt text-rama-accent transform -rotate-2 text-xl block">
-                                    <MapPin size={14} className="inline mr-2" /> La Location
-                                </span>
-                                <h2 className="font-mohave font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-[10vw] md:text-[6vw]">
-                                    <span className="text-white">Dove Scocca</span>
-                                    <span className="text-rama-accent">la Scintilla.</span>
-                                </h2>
-                                <p className="text-rama-muted font-outfit text-lg leading-relaxed mb-8 mt-6">
-                                    Nel cuore post-industriale di Torino. Uno spazio dove l'architettura
-                                    urbana incontra l'eleganza del design contemporaneo.
-                                </p>
-
-                                <div className="space-y-4">
-                                    {[
-                                        { label: "Indirizzo", value: "Torino, Italia", icon: MapPin },
-                                        { label: "Email", value: "info@blackbullslab.it", icon: Mail },
-                                        { label: "Social", value: "@blackbullslab", icon: Instagram },
-                                    ].map((info) => (
-                                        <div key={info.label} className="flex items-center gap-4 p-4 border border-white/5 bg-white/5 rounded-sm hover:border-rama-accent/40 transition-colors">
-                                            <info.icon className="text-rama-accent" size={20} />
-                                            <div>
-                                                <span className="block font-outfit text-xs text-rama-muted tracking-widest uppercase mb-1">{info.label}</span>
-                                                <span className="text-white font-medium">{info.value}</span>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        }
-                    >
-                        <ParallaxImage
-                            src="/images/brand/bg-venue-crowd.png"
-                            alt="Location Interior"
-                            aspectRatio="portrait"
-                            speed={0.2}
-                            priority
-                        />
-                    </StickyTextSection>
                 </div>
             </div>
         </div>

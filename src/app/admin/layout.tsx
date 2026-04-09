@@ -33,7 +33,7 @@ function LoginGate({ onLogin }: { onLogin: () => void }) {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const settings = await getSettings();
-        if (password === settings.adminPassword || password === "admin123") {
+        if (password === settings.adminPassword) {
             sessionStorage.setItem("bbl_admin_auth", "true");
             onLogin();
         } else {

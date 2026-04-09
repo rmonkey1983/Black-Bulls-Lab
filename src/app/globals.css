@@ -1,10 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sora: var(--font-sora);
-  --font-inter: var(--font-inter);
-  --font-playfair: var(--font-playfair);
-  --font-mono: var(--font-jetbrains);
 
   /* Premium Dark Palette */
   --color-bg-dark: #0A0A0A;
@@ -58,6 +54,7 @@
 }
 
 :root {
+  color-scheme: dark;
   --background: var(--color-bg-dark);
   --foreground: var(--color-white);
   --glow-gold: 0 0 20px rgba(200, 164, 78, 0.25), 0 0 60px rgba(200, 164, 78, 0.08);
@@ -70,12 +67,48 @@ html, body {
   overflow-x: hidden;
 }
 
+/* ====== RESPONSIVE: Mobile-first improvements ====== */
+
+/* Ensure images never overflow their containers */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Smooth font scaling on mobile */
+@media (max-width: 640px) {
+  /* Ensure tap targets are at least 44px */
+  button, a, [role="button"] {
+    min-height: 44px;
+  }
+
+  /* Better paragraph readability on small screens */
+  p, li {
+    line-height: 1.7;
+  }
+
+  /* Prevent text from being too small */
+  input, select, textarea {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+}
+
+/* Tablet breakpoint improvements */
+@media (max-width: 768px) {
+  /* Section padding normalization */
+  section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+
 /* ====== BASE STYLES ====== */
 body {
   background: var(--color-bg-dark) url('/bg-custom.jpg') no-repeat center center fixed;
   background-size: cover;
   color: var(--foreground);
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-outfit), sans-serif;
 }
 
 h1,
@@ -84,12 +117,12 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-sora), sans-serif;
+  font-family: var(--font-mohave), sans-serif;
 }
 
 /* Serif headline utility */
 .font-serif-display {
-  font-family: var(--font-playfair), 'Georgia', serif;
+  font-family: 'Georgia', serif;
 }
 
 /* ====== SCROLLBAR ====== */
@@ -468,5 +501,69 @@ h6 {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ====== REDUCED MOTION ====== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-marquee,
+  .animate-marquee-reverse,
+  .animate-float,
+  .animate-drift,
+  .animate-pulse-glow,
+  .animate-border-glow,
+  .text-shimmer {
+    animation: none !important;
+  }
+
+  .text-shimmer {
+    background: var(--color-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+}
+/* ── GSAP: maschere per text reveal ── */
+.line {
+  display: block;
+  overflow: hidden;
+}
+
+.reveal-block {
+  overflow: hidden;
+}
+
+.reveal-block .inner {
+  display: block;
+}
+
+/* ── GSAP: stato iniziale nascosto per elementi animati ──
+   Previene il flash di contenuto non animato (FOUC)
+   prima che GSAP abbia il tempo di impostare gli stati iniziali */
+.gsap-card,
+.gsap-step,
+.gsap-fade {
+  opacity: 0;
+}
+
+/* ── GSAP: accessibilità — rispetta preferenze sistema ── */
+@media (prefers-reduced-motion: reduce) {
+  .gsap-card,
+  .gsap-step,
+  .gsap-fade,
+  .line span,
+  .reveal-block .inner {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
   }
 }

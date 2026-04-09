@@ -117,7 +117,7 @@ export function GoldenVoiceForm() {
                 </div>
 
                 <div>
-                    <label htmlFor="media_link" className="block text-xs font-outfit uppercase tracking-widest text-gray-500 mb-2">Link a un'esibizione (YouTube, Drive, Instagram) - Consigliato</label>
+                    <label htmlFor="media_link" className="block text-xs font-outfit uppercase tracking-widest text-gray-500 mb-2">Link a un&apos;esibizione (YouTube, Drive, Instagram) - Consigliato</label>
                     <input
                         type="url"
                         id="media_link"

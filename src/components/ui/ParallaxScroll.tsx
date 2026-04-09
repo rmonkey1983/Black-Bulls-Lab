@@ -1,19 +1,21 @@
 "use client";
 
-import { useScroll, useTransform, motion, MotionValue } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { useGSAP } from "@/hooks/useGSAP";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 /**
  * ParallaxImage Component
- * Renders an image that moves at a different speed than the scroll.
+ * Renders an image that moves at a different speed than the scroll using GSAP ScrollTrigger.
  */
 interface ParallaxImageProps {
     src: string;
     alt: string;
     className?: string;
-    speed?: number; // Speed factor (e.g., 0.5 for half speed, -0.5 for reverse)
+    speed?: number; // Speed factor (e.g., 0.5 for half speed)
     aspectRatio?: "video" | "square" | "portrait" | "landscape";
     priority?: boolean;
 }
@@ -26,22 +28,32 @@ export function ParallaxImage({
     aspectRatio = "landscape",
     priority = false,
 }: ParallaxImageProps) {
-    const ref = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: ref,
-        offset: ["start end", "end start"],
-    });
+    const containerRef = useRef<HTMLDivElement>(null);
+    const imageRef = useRef<HTMLDivElement>(null);
 
-    // Calculate the vertical movement based on scroll progress and speed
-    // A positive y value moves the image down (slower than scroll if simple parallax)
-    // We want the image to move slightly within its container.
-    // The logic: 
-    // start: y = -50 * speed
-    // end: y = 50 * speed
-    // This creates a shift of 100 * speed pixels over the viewport duration.
-    const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+    useGSAP(() => {
+        if (!containerRef.current || !imageRef.current) return;
 
-    // Map aspect ratio to Tailwind classes
+        // Register ScrollTrigger if not already
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Calculate the shift based on speed - simplified for GSAP
+        // We move the image from -10% to 10% relative to its container
+        gsap.fromTo(imageRef.current, 
+            { y: "-10%" },
+            {
+                y: "10%",
+                ease: "none",
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true,
+                }
+            }
+        );
+    }, { scope: containerRef });
+
     const aspectClasses = {
         video: "aspect-video",
         square: "aspect-square",
@@ -51,14 +63,14 @@ export function ParallaxImage({
 
     return (
         <div
-            ref={ref}
+            ref={containerRef}
             className={cn(
                 "relative overflow-hidden w-full bg-transparent",
                 aspectClasses[aspectRatio],
                 className
             )}
         >
-            <motion.div style={{ y }} className="absolute inset-[-10%] w-[120%] h-[120%]">
+            <div ref={imageRef} className="absolute inset-[-15%] w-[130%] h-[130%]">
                 <Image
                     src={src}
                     alt={alt}
@@ -67,7 +79,7 @@ export function ParallaxImage({
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 50vw"
                 />
-            </motion.div>
+            </div>
         </div>
     );
 }
