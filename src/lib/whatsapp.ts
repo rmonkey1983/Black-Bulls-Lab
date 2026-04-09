@@ -10,3 +10,5 @@ export const WA_MESSAGES = {
 
 export const buildWAUrl = (msg: string) =>
     `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`;
+
+
