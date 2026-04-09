@@ -244,7 +244,7 @@ export async function getSettings(): Promise<SiteSettings> {
         siteTitle: "Black Bulls Lab",
         siteDescription: "Il laboratorio underground dove l'intrattenimento diventa scienza",
         heroSubtitle: "Il laboratorio underground dove l'intrattenimento diventa scienza.",
-        contactEmail: CONTACT_EMAIL,
+        contactEmail: "info@blackbullslab.com",
         instagram: "@blackbullslab",
         adminPassword: "admin123",
     };
