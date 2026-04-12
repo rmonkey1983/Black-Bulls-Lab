@@ -6,10 +6,10 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { useGSAP } from "@/hooks/useGSAP";
 import { animateFade } from "@/lib/gsapAnimations";
-import { Event } from "@/lib/dataStore";
+import { Event as BullsEvent } from "@/lib/dataStore";
 
 interface ProjectListProps {
-    events: Event[];
+    events: BullsEvent[];
     basePath?: string;
 }
 
@@ -30,7 +30,7 @@ const formatDate = (dateStr: string) => {
 };
 
 export function ProjectList({ events, basePath = "/events" }: ProjectListProps) {
-    const [ setHoveredEvent] = useState<Event | null>(null);
+    const [hoveredEvent, setHoveredEvent] = useState<BullsEvent | null>(null);
     const listRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
