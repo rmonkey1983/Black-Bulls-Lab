@@ -44,15 +44,15 @@ export default function FormatPage() {
                         <div key={format.id} className="gsap-card flex flex-col group">
                             {/* Image Container */}
                             <Link href={`/format/${format.slug}`} className="relative aspect-video overflow-hidden rounded-2xl mb-6 block border border-white/10">
-                                <Image 
-                                    src={format.image || FALLBACK_IMAGE} 
-                                    alt={format.name} 
-                                    fill 
+                                <Image
+                                    src={format.image || "/images/brand/bg-venue-crowd.png"}
+                                    alt={format.name}
+                                    fill
                                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                
+
                                 {format.badge && (
                                     <div className="absolute top-4 right-4 bg-rama-accent text-black text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg z-10">
                                         {format.badge}
@@ -70,7 +70,7 @@ export default function FormatPage() {
                                         {String(index + 1).padStart(2, '0')}
                                     </span>
                                 </div>
-                                
+
                                 <Link href={`/format/${format.slug}`} className="group/title">
                                     <h2 className="text-3xl md:text-4xl font-mohave font-bold text-white uppercase tracking-tight mb-2 group-hover/title:text-rama-accent transition-colors">
                                         {format.name}
@@ -92,7 +92,7 @@ export default function FormatPage() {
                                 {/* CTA Buttons */}
                                 <div className="mt-auto flex flex-col sm:flex-row gap-3">
                                     {format.ctaHref && format.ctaText && (
-                                        <a 
+                                        <a
                                             href={format.ctaHref}
                                             target={format.ctaHref.startsWith('http') ? "_blank" : undefined}
                                             rel={format.ctaHref.startsWith('http') ? "noopener noreferrer" : undefined}
@@ -101,7 +101,7 @@ export default function FormatPage() {
                                             {format.ctaText}
                                         </a>
                                     )}
-                                    <Link 
+                                    <Link
                                         href={`/format/${format.slug}`}
                                         className="w-full sm:w-auto border border-white/20 text-white text-center text-xs font-bold uppercase tracking-widest px-6 py-4 rounded-full hover:border-rama-accent hover:text-rama-accent transition-all flex items-center justify-center gap-2"
                                     >
