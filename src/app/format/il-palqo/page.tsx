@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { IlPalqoClient } from "./IlPalqoClient";
 import { EventSchema } from "@/components/seo/JsonLd";
 import { SITE_URL } from "@/lib/constants";

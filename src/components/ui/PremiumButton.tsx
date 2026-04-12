@@ -15,7 +15,7 @@ interface PremiumButtonProps {
 
 export function PremiumButton({
     href,
-    variant = "gold",
+    variant = "primary",
     size = "md",
     children,
     onClick,
@@ -109,7 +109,7 @@ export function PremiumButton({
 // Also export as GlowButton for backward compatibility
 export function GlowButton({
     href,
-    variant = "gold",
+    variant = "primary",
     size = "md",
     children,
     ...rest

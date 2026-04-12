@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { CenaConDelittoClient } from "./CenaConDelittoClient";
 import { EventSchema } from "@/components/seo/JsonLd";
 import { SITE_URL } from "@/lib/constants";
