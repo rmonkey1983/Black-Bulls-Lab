@@ -38,6 +38,7 @@ export default function CheckoutForm() {
     const isStep1Valid = selectedDate !== null && quantity > 0;
     const isStep2Valid = guest.name.length > 1 && guest.surname.length > 1 && isEmailValid && isPhoneValid;
 
+
     // Calendar Logic
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -77,6 +78,7 @@ export default function CheckoutForm() {
     }, { dependencies: [step], scope: formAreaRef });
 
     const handlePayment = async () => {
+        const isFormValid = isStep1Valid && isStep2Valid && !loading;
         if (!isFormValid) {
             alert("Per favore, completa tutti i campi obbligatori con dati validi.");
             return;
