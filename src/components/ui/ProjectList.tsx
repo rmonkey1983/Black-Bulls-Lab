@@ -30,7 +30,7 @@ const formatDate = (dateStr: string) => {
 };
 
 export function ProjectList({ events, basePath = "/events" }: ProjectListProps) {
-    const [hoveredEvent, setHoveredEvent] = useState<Event | null>(null);
+    const [ setHoveredEvent] = useState<Event | null>(null);
     const listRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {

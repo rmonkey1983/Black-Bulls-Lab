@@ -31,23 +31,23 @@ export function Preloader() {
         // Only start initialization logic if not seen
         const iconInterval = setInterval(() => {
             setIconIndex((prev) => (prev + 1) % ICONS.length);
-        }, 400);
+        }, 200);
 
-        const generated = Array.from({ length: 18 }).map((_, i) => ({
+        const generated = Array.from({ length: 12 }).map((_, i) => ({
             id: i,
             left: Math.random() * 100,
-            size: Math.random() * 6 + 2,
-            delay: Math.random() * 5,
-            dur: Math.random() * 6 + 4,
-            x1: Math.random() * 100 - 50,
-            x2: Math.random() * 100 - 50,
+            size: Math.random() * 4 + 2,
+            delay: Math.random() * 2,
+            dur: Math.random() * 3 + 2,
+            x1: Math.random() * 60 - 30,
+            x2: Math.random() * 60 - 30,
         }));
         setParticles(generated);
 
         let mounted = true;
         const countInterval = setInterval(() => {
             setCount((prev) => {
-                const next = prev + Math.floor(Math.random() * 8) + 5;
+                const next = prev + Math.floor(Math.random() * 15) + 10;
                 if (next >= 100) {
                     clearInterval(countInterval);
                     if (mounted) {
@@ -55,7 +55,7 @@ export function Preloader() {
                             if (containerRef.current) {
                                 gsap.to(containerRef.current, {
                                     y: "-100%",
-                                    duration: 0.8,
+                                    duration: 0.6,
                                     ease: "expo.inOut",
                                     onComplete: () => {
                                         setIsLoading(false);
@@ -66,13 +66,13 @@ export function Preloader() {
                                 setIsLoading(false);
                                 sessionStorage.setItem("splash-seen", "true");
                             }
-                        }, 300);
+                        }, 150);
                     }
                     return 100;
                 }
                 return next;
             });
-        }, 100);
+        }, 60);
 
         const fallback = setTimeout(() => {
             if (mounted && count < 100) {
@@ -82,7 +82,7 @@ export function Preloader() {
                     if (containerRef.current) {
                         gsap.to(containerRef.current, {
                             y: "-100%",
-                            duration: 0.8,
+                            duration: 0.6,
                             ease: "expo.inOut",
                             onComplete: () => {
                                 setIsLoading(false);
@@ -93,9 +93,9 @@ export function Preloader() {
                         setIsLoading(false);
                         sessionStorage.setItem("splash-seen", "true");
                     }
-                }, 200);
+                }, 100);
             }
-        }, 3000); // Increased fallback for safety
+        }, 1500); // Reduced fallback for performance
 
         return () => {
             mounted = false;

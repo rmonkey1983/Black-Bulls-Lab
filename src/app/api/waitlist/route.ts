@@ -30,6 +30,11 @@ export async function POST(req: NextRequest) {
     try {
         const body = await req.json().catch(() => null);
         const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
+        const honeypot = body?.b_contact_name;
+
+        if (honeypot) {
+            return NextResponse.json({ error: "Spam detected" }, { status: 400 });
+        }
 
         if (!email || !EMAIL_RE.test(email)) {
             return NextResponse.json({ error: "Indirizzo email non valido." }, { status: 400 });

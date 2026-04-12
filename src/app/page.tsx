@@ -23,16 +23,19 @@ export const metadata: Metadata = {
         images: ["/og-image.jpg"],
     },
 };
+import dynamic from "next/dynamic";
 import { RamaHero } from "@/components/rama/sections/RamaHero";
 import { RamaNextEvents } from "@/components/rama/sections/RamaNextEvents";
 import { RamaManifesto } from "@/components/rama/sections/RamaManifesto";
-import { RamaHowItWorks } from "@/components/rama/sections/RamaHowItWorks";
-import { RamaGroupEvents } from "@/components/rama/sections/RamaGroupEvents";
-import { RamaGroupConfigurator } from "@/components/rama/sections/RamaGroupConfigurator";
-import { RamaServices } from "@/components/rama/sections/RamaServices";
-import { RamaTestimonials } from "@/components/rama/sections/RamaTestimonials";
-import { RamaCTA } from "@/components/rama/sections/RamaCTA";
-import { RamaFAQ } from "@/components/rama/sections/RamaFAQ";
+
+// Dynamic imports for below-the-fold components to optimize TTI and initial bundle size
+const RamaHowItWorks = dynamic(() => import("@/components/rama/sections/RamaHowItWorks").then(mod => mod.RamaHowItWorks));
+const RamaGroupEvents = dynamic(() => import("@/components/rama/sections/RamaGroupEvents").then(mod => mod.RamaGroupEvents));
+const RamaGroupConfigurator = dynamic(() => import("@/components/rama/sections/RamaGroupConfigurator").then(mod => mod.RamaGroupConfigurator));
+const RamaServices = dynamic(() => import("@/components/rama/sections/RamaServices").then(mod => mod.RamaServices));
+const RamaTestimonials = dynamic(() => import("@/components/rama/sections/RamaTestimonials").then(mod => mod.RamaTestimonials));
+const RamaCTA = dynamic(() => import("@/components/rama/sections/RamaCTA").then(mod => mod.RamaCTA));
+const RamaFAQ = dynamic(() => import("@/components/rama/sections/RamaFAQ").then(mod => mod.RamaFAQ));
 
 /** Contextual divider CTA between sections */
 function SectionCTA({ href, label }: { href: string; label: string }) {

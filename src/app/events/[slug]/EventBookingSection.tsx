@@ -14,10 +14,10 @@ interface EventBookingSectionProps {
     price?: number;
 }
 
-export function EventBookingSection({ eventId, slug, title, date, location, price }: EventBookingSectionProps) {
+export function EventBookingSection({ eventId, title, date, location, price }: EventBookingSectionProps) {
     const [quantity, setQuantity] = useState(2);
     const [loading, setLoading] = useState(false);
-    const [booked, setBooked] = useState(false);
+    const [booked] = useState(false);
     const [form, setForm] = useState({ nome: "", cognome: "", email: "", telefono: "", note: "" });
     const containerRef = useRef<HTMLDivElement>(null);
 

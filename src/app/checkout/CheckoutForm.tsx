@@ -13,7 +13,7 @@ export default function CheckoutForm() {
 
     const event = {
         id: "1",
-        title: eventId === "il-palqo" ? "Il PalQo" : eventId === "a-cena-con-il-bugiardo" ? "A Cena Con Il Bugiardo" : eventId === "the-golden-voice" ? "The Golden Voice" : "Cena Con Delitto",
+        title: eventId === "il-palqo" ? "Il PalQo" : eventId === "a-cena-con-il-bugiardo" ? "A Cena Con Il Bugiardo" : eventId === "the-golden-voice" ? "THE GOLDEN VOICE" : "Cena Con Delitto",
         price: 85,
         location: "Sala dei Cavalieri",
     };
@@ -77,6 +77,16 @@ export default function CheckoutForm() {
     }, { dependencies: [step], scope: formAreaRef });
 
     const handlePayment = async () => {
+        if (!isFormValid) {
+            alert("Per favore, completa tutti i campi obbligatori con dati validi.");
+            return;
+        }
+
+        if (quantity < 1 || quantity > 10) {
+            alert("La quantità deve essere compresa tra 1 e 10 ospiti.");
+            return;
+        }
+
         setLoading(true);
         try {
             const response = await fetch("/api/checkout", {
@@ -270,6 +280,22 @@ export default function CheckoutForm() {
                                             value={premium.allergies} onChange={e => setPremium({...premium, allergies: e.target.value})}
                                             placeholder="Non esitare ad avvisarci di celiachia, intolleranze al lattosio o altro. Il nostro Chef creerà un'esperienza perfetta per te." 
                                             className="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-gold outline-none h-24 transition-all resize-none text-sm"
+                                        />
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label className="text-xs font-bold uppercase tracking-widest text-gray-400 uppercase">Numero di Ospiti</label>
+                                        <input 
+                                            type="number" 
+                                            min="1" 
+                                            max="10"
+                                            value={quantity} 
+                                            onChange={e => {
+                                                const val = parseInt(e.target.value);
+                                                if (isNaN(val)) setQuantity(1);
+                                                else setQuantity(Math.min(10, Math.max(1, val)));
+                                            }}
+                                            className="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3.5 text-white focus:border-gold outline-none" 
                                         />
                                     </div>
 

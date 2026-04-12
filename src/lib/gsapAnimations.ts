@@ -5,9 +5,18 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Config di default per tutti i ScrollTrigger del sito
 const DEFAULT_TRIGGER = {
-  start: 'top 88%',
+  start: 'top 92%', // Leggermente ritardato per performance
   toggleActions: 'play none none none',
 };
+
+// Optimization for mobile devices
+const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+const animationDistance = isMobile ? 15 : 30; // Minore spostamento su mobile
+
+// Check for reduced motion preference
+const prefersReducedMotion = typeof window !== 'undefined' 
+  ? window.matchMedia('(prefers-reduced-motion: reduce)').matches 
+  : false;
 
 // ─────────────────────────────────────────────────────────
 // ANIMAZIONE 1 — TEXT REVEAL (righe che salgono da sotto)
@@ -20,10 +29,11 @@ export function animateHeroText(selector: string, delay = 0) {
   gsap.set(lines, { translateY: '110%' });
 
   gsap.to(lines, {
-    translateY: '0%',
-    duration: 1,
+    translateY: prefersReducedMotion ? '0%' : '0%',
+    opacity: prefersReducedMotion ? 1 : 1,
+    duration: prefersReducedMotion ? 0.3 : 1,
     ease: 'power4.out',
-    stagger: 0.12,
+    stagger: prefersReducedMotion ? 0 : 0.12,
     delay,
   });
 }
@@ -67,15 +77,15 @@ export function animateCards(containerSelector: string, staggerDelay = 0.15) {
   const cards = gsap.utils.toArray(`${containerSelector} .gsap-card`) as HTMLElement[];
   if (!cards.length) return;
 
-  gsap.set(cards, { opacity: 0, translateY: 50 });
+  gsap.set(cards, { opacity: 0, translateY: animationDistance + 20 });
 
   cards.forEach((card, i) => {
     gsap.to(card, {
       opacity: 1,
       translateY: 0,
-      duration: 0.7,
+      duration: prefersReducedMotion ? 0.3 : 0.7,
       ease: 'power3.out',
-      delay: i * staggerDelay,
+      delay: prefersReducedMotion ? 0 : i * staggerDelay,
       scrollTrigger: {
         trigger: card as Element,
         ...DEFAULT_TRIGGER,
@@ -144,8 +154,8 @@ export function animateFade(containerSelector: string, direction: 'up' | 'down' 
 
   const from = {
     opacity: 0,
-    translateY: direction === 'up' ? 30 : direction === 'down' ? -30 : 0,
-    translateX: direction === 'left' ? -30 : direction === 'right' ? 30 : 0,
+    translateY: direction === 'up' ? animationDistance : direction === 'down' ? -animationDistance : 0,
+    translateX: direction === 'left' ? -animationDistance : direction === 'right' ? animationDistance : 0,
   };
 
   gsap.set(els, from);

@@ -19,7 +19,7 @@ export function RamaNextEvents() {
                 { id: '1', title: 'Il PalQo', image: '/images/brand/bg-venue-crowd.png', slug: 'il-palqo' },
                 { id: '2', title: 'A Cena Con Il Bugiardo', image: '/images/brand/bg-hero-wide.png', slug: 'a-cena-con-il-bugiardo' },
                 { id: '3', title: 'Cena Con Delitto', image: '/images/brand/bg-venue-crowd.png', slug: 'cena-con-delitto' },
-                { id: '4', title: 'The Golden Voice', image: '/images/brand/service-performance.png', slug: 'the-golden-voice' }
+                { id: '4', title: 'THE GOLDEN VOICE', image: '/images/brand/service-performance.png', slug: 'the-golden-voice' }
             ];
             setEvents(data.length > 0 ? data : (fallbackFormats as Event[]));
         });

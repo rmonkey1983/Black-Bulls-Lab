@@ -16,6 +16,15 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Dati incompleti' }, { status: 400 });
     }
 
+    if (quantity < 1 || quantity > 10) {
+      return NextResponse.json({ error: 'Quantità non valida (1-10)' }, { status: 400 });
+    }
+
+    const bookingDate = new Date(selectedDate);
+    if (bookingDate < new Date()) {
+      return NextResponse.json({ error: 'Data non valida' }, { status: 400 });
+    }
+
     // Determine the base URL for redirects
     const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
     const host = req.headers.get('host') || 'localhost:3000';

@@ -11,6 +11,11 @@ export async function submitCasting(formData: FormData) {
     const signature_song = formData.get("signature_song") as string;
     const media_link = formData.get("media_link") as string;
 
+    const honeypot = formData.get("b_contact_name") as string;
+
+    // 1. Check honeypot
+    if (honeypot) return { success: false, error: "Spam detected." };
+
     // Basic validation
     if (!name || !email || !phone || !signature_song) {
         return { success: false, error: "Tutti i campi obbligatori devono essere compilati." };

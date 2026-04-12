@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 
 interface PremiumButtonProps {
     href?: string;
@@ -52,16 +51,30 @@ export function PremiumButton({
         variantClasses[variant].replace(/\n\s+/g, " "),
         "tracking-wider",
         "uppercase",
-        "transition-[color,background-color,border-color,transform,box-shadow]",
+        "transition-all",
         "duration-500",
         "ease-out",
+        "relative",
+        "overflow-hidden",
+        "group/btn",
         className
     ].filter(Boolean).join(" ");
+
+    const shineEffect = (
+        <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] skew-x-[-20deg] group-hover/btn:animate-[premium-shine_0.7s_ease-in-out_forwards] pointer-events-none" />
+    );
 
     if (href) {
         return (
             <Link href={href} className={classes} aria-label={ariaLabel} onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}>
-                {children}
+                <style>{`
+                    @keyframes premium-shine {
+                        0% { transform: translateX(-150%) skewX(-20deg); }
+                        100% { transform: translateX(150%) skewX(-20deg); }
+                    }
+                `}</style>
+                {shineEffect}
+                <span className="relative z-10 flex items-center gap-2.5">{children}</span>
             </Link>
         );
     }
@@ -73,7 +86,14 @@ export function PremiumButton({
             className={classes}
             aria-label={ariaLabel}
         >
-            {children}
+            <style>{`
+                @keyframes premium-shine {
+                    0% { transform: translateX(-150%) skewX(-20deg); }
+                    100% { transform: translateX(150%) skewX(-20deg); }
+                }
+            `}</style>
+            {shineEffect}
+            <span className="relative z-10 flex items-center gap-2.5">{children}</span>
         </button>
     );
 }
@@ -81,14 +101,15 @@ export function PremiumButton({
 // Also export as GlowButton for backward compatibility
 export function GlowButton({
     href,
-    variant: rawVariant = "gold",
+    variant = "gold",
     size = "md",
     children,
     ...rest
-}: Omit<PremiumButtonProps, "variant"> & { variant?: string }) {
-    const v = rawVariant as string;
+}: PremiumButtonProps) {
+    // Map legacy variants
     const mappedVariant: "gold" | "bordeaux" | "outline" =
-        v === "cyan" ? "bordeaux" : v === "green" ? "gold" : (v as "gold" | "bordeaux" | "outline");
+        variant === ("cyan" as any) ? "bordeaux" : variant === ("green" as any) ? "gold" : variant;
+
     return (
         <PremiumButton href={href} variant={mappedVariant} size={size} {...rest}>
             {children}

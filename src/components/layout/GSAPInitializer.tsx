@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { gsap } from "gsap";
 
 /**
  * GSAPInitializer — Handles ScrollTrigger lifecycle in the Next.js App Router.

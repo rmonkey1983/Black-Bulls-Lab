@@ -1,7 +1,21 @@
 import Image from "next/image";
+import { Metadata } from "next";
 import { ImmersiveHeader } from "@/components/layout/ImmersiveHeader";
 import { Instagram, ArrowRight, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { SITE_URL } from "@/lib/constants";
+
+export const metadata: Metadata = {
+    title: "Galleria Eventi e Dinner Show | Black Bulls Lab - Torino",
+    description: "Rivivi i momenti più belli dei dinner show a Torino: scatti dai nostri format, performance dal vivo e l'atmosfera esclusiva del Black Bulls Lab.",
+    alternates: { canonical: `${SITE_URL}/gallery` },
+    openGraph: {
+        title: "Galleria Eventi e Dinner Show | Black Bulls Lab - Torino",
+        description: "Rivivi i momenti più belli dei dinner show a Torino: scatti dai nostri format, performance dal vivo e l'atmosfera esclusiva del Black Bulls Lab.",
+        url: `${SITE_URL}/gallery`,
+        images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Galleria Black Bulls Lab" }],
+    },
+};
 
 // Placeholder data for the gallery grid
 const GALLERY_IMAGES = [
@@ -80,7 +94,7 @@ export default function GalleryPage() {
                     </div>
                     <div className="flex flex-col sm:flex-row gap-4 pt-4 w-full sm:w-auto">
                         <a 
-                            href="https://instagram.com/blackbullslab" 
+                            href={SOCIAL_LINKS.instagram} 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="group inline-flex items-center justify-center gap-3 bg-rama-accent text-black font-mohave font-bold uppercase tracking-widest text-base px-10 py-5 rounded-full hover:bg-white transition-all transform active:scale-95 shadow-xl shadow-rama-accent/10"
@@ -111,6 +125,7 @@ export default function GalleryPage() {
                         <Link
                             href="/format"
                             className="inline-flex items-center justify-center border border-white/20 text-white font-mohave font-bold uppercase tracking-widest text-base px-10 py-5 rounded-full hover:border-rama-accent/60 hover:text-rama-accent transition-all transform active:scale-95"
+                            aria-label="Scopri i format esclusivi di Black Bulls Lab"
                         >
                             Scopri i Format
                         </Link>

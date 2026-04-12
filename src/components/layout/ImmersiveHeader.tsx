@@ -2,7 +2,7 @@
 
 import { useGSAP } from "@/hooks/useGSAP";
 import { animateHeroText, animateFade } from "@/lib/gsapAnimations";
-import { useRef } from "react";
+
 import Image from "next/image";
 
 interface ImmersiveHeaderProps {
@@ -24,7 +24,6 @@ export function ImmersiveHeader({
     align = "left",
     id
 }: ImmersiveHeaderProps) {
-    const headerRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
         if (id) {
@@ -45,7 +44,7 @@ export function ImmersiveHeader({
                         fill
                         priority
                         sizes="100vw"
-                        className="object-cover opacity-30 brightness-[0.7] contrast-125"
+                        className="object-cover object-center md:object-top opacity-30 brightness-[0.7] contrast-125"
                     />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/40 to-transparent" />

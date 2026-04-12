@@ -41,8 +41,8 @@ export function RamaAnimatedText({
         );
     }, { dependencies: [text, delay], scope: textRef });
 
-    // We cast Wrapper to any to use it as a component
-    const Tag = Wrapper as any;
+    // Use React.ElementType for dynamically choosing the wrapper tag
+    const Tag = Wrapper as React.ElementType;
 
     return (
         <Tag

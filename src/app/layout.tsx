@@ -109,34 +109,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it" suppressHydrationWarning>
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              "name": "Black Bulls Lab",
-              "description": "Dinner show e organizzazione eventi immersivi a Torino",
-              "url": "https://blackbullslab.com",
-              "telephone": "+393342010067",
-              "email": "info@blackbullslab.com",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Torino",
-                "addressRegion": "TO",
-                "addressCountry": "IT"
-              },
-              "priceRange": "€€",
-              "sameAs": [
-                "https://instagram.com/blackbullslab",
-                "https://facebook.com/blackbullslab",
-                "https://tiktok.com/@blackbullslab"
-              ]
-            })
-          }}
-        />
-      </head>
+      <head />
       <body
         className={`${mohave.variable} ${outfit.variable} ${rockSalt.variable} font-outfit antialiased text-rama-text min-h-screen relative selection:bg-rama-accent selection:text-black flex flex-col`}
       >
@@ -147,7 +120,7 @@ export default function RootLayout({
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-6 focus:py-3 focus:bg-rama-accent focus:text-black focus:font-mohave focus:font-bold focus:uppercase focus:tracking-widest focus:rounded-sm focus:shadow-lg"
         >
-          Salta al contenuto
+          Salta al contenuto principale
         </a>
         <Preloader />
         <main id="main-content" className="flex-grow relative z-10 w-full">
@@ -165,7 +138,7 @@ export default function RootLayout({
         <FAQPageSchema faqs={[
           { question: "Qual è il dress code per le serate?", answer: "Richiediamo un abbigliamento elegante e curato (Smart Casual / Elegant). Ci riserviamo il diritto di selezione all'ingresso per mantenere l'atmosfera esclusiva del nostro club." },
           { question: "Come funzionano le prenotazioni per la cena spettacolo?", answer: "La prenotazione è fortemente consigliata ed è garantita solo a seguito della nostra conferma. Offriamo sia menu degustazione fissi che soluzioni à-la-carte, a seconda del format della serata." },
-          { question: "Posso organizzare un evento privato o aziendale a Torino?", answer: `Certamente. ${SITE_NAME} organizza cene aziendali, team building, dinner show e eventi immersivi a Torino per gruppi di qualsiasi dimensione. I nostri format ufficiali sono A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e The Golden Voice. Contattaci a ${CONTACT_EMAIL} per un preventivo personalizzato.` },
+          { question: "Posso organizzare un evento privato o aziendale a Torino?", answer: `Certamente. ${SITE_NAME} organizza cene aziendali, team building, dinner show e eventi immersivi a Torino per gruppi di qualsiasi dimensione. I nostri format ufficiali sono A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e THE GOLDEN VOICE. Contattaci a ${CONTACT_EMAIL} per un preventivo personalizzato.` },
           { question: "Gestite intolleranze o allergie alimentari?", answer: "Assolutamente sì. Vi chiediamo di comunicare eventuali allergie, intolleranze o scelte dietetiche (vegan/vegetariane) al momento della prenotazione, per permettere al nostro Executive Chef di prepararvi una variante ad hoc." },
           { question: `Quanto costa partecipare a un dinner show di ${SITE_NAME}?`, answer: `I nostri format partono da 50€ a persona, con soluzioni flessibili per gruppi aziendali e privati. Il prezzo include la cena e lo spettacolo immersivo. Contattaci a ${CONTACT_EMAIL} per un preventivo su misura per il tuo gruppo.` },
         ]} />

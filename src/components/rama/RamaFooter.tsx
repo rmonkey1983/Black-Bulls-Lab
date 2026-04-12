@@ -7,7 +7,7 @@ import { ArrowUpRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { subscribeToNewsletter } from "@/app/actions/newsletter";
-import { CONTACT_EMAIL, SITE_NAME } from "@/lib/constants";
+import { CONTACT_EMAIL, SITE_NAME, SOCIAL_LINKS } from "@/lib/constants";
 
 export function RamaFooter() {
     const pathname = usePathname();
@@ -18,7 +18,7 @@ export function RamaFooter() {
     if (pathname.startsWith("/admin")) return null;
 
     return (
-        <footer className="w-full bg-transparent border-t border-white/10 pt-12 sm:pt-16 md:pt-32 pb-8 md:pb-16 flex flex-col px-4 sm:px-6 md:px-12 overflow-hidden">
+        <footer className="w-full bg-transparent border-t border-white/10 pt-12 sm:pt-16 md:pt-32 pb-8 md:pb-16 pb-safe flex flex-col px-4 sm:px-6 md:px-12 overflow-hidden">
             {/* Massive CTA */}
             {pathname !== "/" && pathname !== "/contact" && (
                 <div className="flex flex-row justify-between items-end mb-16 sm:mb-24 md:mb-40 group cursor-pointer overflow-hidden">
@@ -73,9 +73,9 @@ export function RamaFooter() {
                 {/* Follow us block */}
                 <div className="col-span-1 md:col-span-3 flex flex-col gap-5 md:gap-6 md:pl-8 px-4 md:px-0">
                     <h4 className="font-rock-salt text-rama-accent transform -rotate-2 capitalize tracking-normal text-lg mb-2">Seguici</h4>
-                    <a href="https://instagram.com/blackbullslab" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex justify-between border-b border-white/5 pb-2">Instagram <ArrowUpRight size={12} className="opacity-40" /></a>
-                    <a href="https://facebook.com/blackbullslab" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex justify-between border-b border-white/5 pb-2">Facebook <ArrowUpRight size={12} className="opacity-40" /></a>
-                    <a href="https://tiktok.com/@blackbullslab" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex justify-between border-b border-white/5 pb-2">TikTok <ArrowUpRight size={12} className="opacity-40" /></a>
+                    <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex justify-between border-b border-white/5 pb-2" aria-label="Seguici su Instagram">Instagram <ArrowUpRight size={12} className="opacity-40" /></a>
+                    <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex justify-between border-b border-white/5 pb-2" aria-label="Seguici su Facebook">Facebook <ArrowUpRight size={12} className="opacity-40" /></a>
+                    <a href={SOCIAL_LINKS.tiktok} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex justify-between border-b border-white/5 pb-2" aria-label="Seguici su TikTok">TikTok <ArrowUpRight size={12} className="opacity-40" /></a>
                 </div>
 
                 {/* Newsletter block */}

@@ -10,19 +10,19 @@ const steps = [
         icon: ClipboardList,
         number: "01",
         title: "Scegli il format",
-        description: "Sfoglia i nostri show: A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e The Golden Voice. Ogni format è progettato per stupire.",
+        description: "Sfoglia i nostri show: A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e THE GOLDEN VOICE. Tutti supportati dalla nostra Web App proprietaria.",
     },
     {
         icon: CalendarCheck,
         number: "02",
-        title: "Prenota o richiedi info",
-        description: "Scrivici la data, il numero di persone e l'occasione. Ti rispondiamo entro 24 ore con un preventivo su misura.",
+        title: "Ricevi il link di gara",
+        description: "Una volta prenotato, ogni partecipante riceve un accesso esclusivo alla Web App. Lo smartphone sarà la vostra chiave per interagire con l'evento.",
     },
     {
         icon: Star,
         number: "03",
-        title: "Vivi la serata",
-        description: "Arrivi, ti siedi e sparisci dalla realtà per 3 ore. Cena, spettacolo, sorprese — tutto già organizzato da noi.",
+        title: "Vivi il gioco",
+        description: "Arrivi al tavolo e la magia inizia. La Web App gestisce ruoli, indizi e votazioni, lasciandoti libero di goderti la cena e la sfida.",
     },
 ];
 

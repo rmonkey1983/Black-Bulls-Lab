@@ -4,6 +4,7 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { CONTACT_WHATSAPP } from "@/lib/constants";
 
 export function PreFooterCTA() {
     const pathname = usePathname();
@@ -17,7 +18,7 @@ export function PreFooterCTA() {
     let title = "Il tuo tavolo ti sta aspettando.";
     let subtitle = "Ogni serata ha un numero limitato di posti. Non aspettare.";
     let ctaText = "Scrivici su WhatsApp";
-    let ctaHref = "https://wa.me/393342010067?text=Ciao!%20Voglio%20prenotare%20una%20serata%20con%20Black%20Bulls%20Lab";
+    let ctaHref = `https://wa.me/${CONTACT_WHATSAPP}?text=Ciao!%20Voglio%20prenotare%20una%20serata%20con%20Black%20Bulls%20Lab`;
 
     if (pathname === "/eventi-aziendali") {
         title = "Il tuo team merita una serata indimenticabile.";
@@ -28,7 +29,7 @@ export function PreFooterCTA() {
         title = "Il tuo tavolo ti sta aspettando.";
         subtitle = "Posti limitati ogni sera. Prenota prima che si esaurisca.";
         ctaText = "Voglio esserci quella sera";
-        ctaHref = "https://wa.me/393342010067?text=Ciao!%20Sono%20interessato%2Fa%20a%20%22A%20Cena%20Con%20Il%20Bugiardo%22.%20Quando%20posso%20venire%3F";
+        ctaHref = `https://wa.me/${CONTACT_WHATSAPP}?text=Ciao!%20Sono%20interessato%2Fa%20a%20%22A%20Cena%20Con%20Il%20Bugiardo%22.%20Quando%20posso%20venire%3F`;
     } else if (pathname === "/format/il-palqo") {
         title = "Il palco è pronto. Sei tu?";
         subtitle = "Artisti, performer, creativi — candidati per la prossima serata.";

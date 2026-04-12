@@ -123,8 +123,21 @@ export async function deleteEvent(id: string): Promise<void> {
     if (error) console.error("Error deleting event:", error);
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function mapEvent(row: any): Event {
+interface SupabaseEventRow {
+    id: string;
+    slug: string;
+    title: string;
+    subtitle?: string;
+    date: string;
+    location: string;
+    category: string;
+    image?: string;
+    description?: string;
+    timeline?: string | TimelineItem[];
+    price?: number | null;
+}
+
+function mapEvent(row: SupabaseEventRow): Event {
     return {
         id: row.id,
         slug: row.slug,

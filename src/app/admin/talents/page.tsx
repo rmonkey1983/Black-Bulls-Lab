@@ -79,8 +79,9 @@ function TalentForm({ talent, onSave, onCancel }: { talent?: Talent; onSave: () 
                 code: form.code || `RES-${generateId().slice(0, 3).toUpperCase()}`,
             });
             onSave();
-        } catch (err: any) {
-            setErrorMsg(err.message || "Impossibile salvare il ricercatore.");
+        } catch (err: unknown) {
+            const message = err instanceof Error ? err.message : "Impossibile salvare il ricercatore.";
+            setErrorMsg(message);
         }
     };
 

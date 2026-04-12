@@ -45,11 +45,16 @@ export function GoldenVoiceForm() {
 
             <div className="text-center mb-10 relative z-10">
                 <Mic2 className="mx-auto text-gold mb-4" size={40} />
-                <h3 className="text-3xl lg:text-4xl font-bold text-white mb-2 uppercase tracking-wide">Voglio esibirmi con voi</h3>
-                <p className="text-gray-400">Compila il form per partecipare alle audizioni di The Golden Voice.</p>
+                <h3 className="text-3xl lg:text-4xl font-bold text-white mb-2 uppercase tracking-wide">Voglio esibirmi con te</h3>
+                <p className="text-gray-400">Compila il form per partecipare alle audizioni di THE GOLDEN VOICE.</p>
             </div>
 
             <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
+                {/* Honeypot */}
+                <div style={{ display: 'none' }} aria-hidden="true">
+                    <input type="text" name="b_contact_name" tabIndex={-1} autoComplete="off" />
+                </div>
+                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label htmlFor="name" className="block text-xs font-outfit uppercase tracking-widest text-gray-500 mb-2">Nome e Cognome *</label>

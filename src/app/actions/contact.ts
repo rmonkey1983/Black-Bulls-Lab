@@ -7,7 +7,7 @@ export async function submitContact(data: FormData) {
     const email = data.get("email") as string;
     const subject = data.get("subject") as string;
     const message = data.get("message") as string;
-    const honeypot = data.get("honeypot") as string;
+    const honeypot = data.get("b_contact_name") as string;
     const turnstile = data.get("cf-turnstile-response") as string;
 
     // 1. Check honeypot
@@ -47,7 +47,7 @@ export async function submitContact(data: FormData) {
         
         // Database insert logic...
         return { success: true };
-    } catch (e: any) {
+    } catch (e: unknown) {
         console.error("submitContact error:", e);
         return { error: "Errore di connessione al database. Riprova più tardi." };
     }

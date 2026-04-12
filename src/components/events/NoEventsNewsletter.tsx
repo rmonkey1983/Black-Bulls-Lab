@@ -40,17 +40,20 @@ export function NoEventsNewsletter() {
         }
     }, { dependencies: [status] });
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!email) return;
         setStatus("loading");
         setErrorMsg("");
 
         try {
+            const formPayload = new FormData(e.currentTarget);
+            const honeypot = formPayload.get("b_contact_name") as string;
+            
             const res = await fetch("/api/waitlist", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email: email.trim().toLowerCase() }),
+                body: JSON.stringify({ email: email.trim().toLowerCase(), b_contact_name: honeypot }),
             });
 
             if (res.ok) {
@@ -134,6 +137,10 @@ export function NoEventsNewsletter() {
                     ) : (
                         <>
                             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+                                {/* Honeypot */}
+                                <div style={{ display: 'none' }} aria-hidden="true">
+                                    <input type="text" name="b_contact_name" tabIndex={-1} autoComplete="off" />
+                                </div>
                                 <input
                                     type="email"
                                     required

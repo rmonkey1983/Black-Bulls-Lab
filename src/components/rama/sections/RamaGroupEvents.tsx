@@ -17,7 +17,7 @@ const valueProps = [
         icon: Zap,
         label: "Alto coinvolgimento garantito",
         description:
-            "Non siete spettatori: siete i protagonisti. I nostri format — da A Cena Con Il Bugiardo a The Golden Voice, passando per Il PalQo e Cena Con Delitto — trasformano ogni tavolo in un palcoscenico. Il coinvolgimento non è un'opzione, è il prodotto.",
+            "Non siete spettatori: siete i protagonisti. I nostri format — da A Cena Con Il Bugiardo a THE GOLDEN VOICE, passando per Il PalQo e Cena Con Delitto — trasformano ogni tavolo in un palcoscenico. Il coinvolgimento non è un'opzione, è il prodotto.",
     },
     {
         icon: BadgeEuro,

@@ -15,7 +15,7 @@ export function OrganizationSchema({ url = SITE_URL }: OrganizationSchemaProps) 
         url,
         logo: `${url}/blackbullslab-v2.png`,
         description:
-            "Agenzia specializzata in dinner show e format eventi immersivi a Torino. A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e The Golden Voice.",
+            "Agenzia specializzata in dinner show e format eventi immersivi a Torino. A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e THE GOLDEN VOICE.",
         address: {
             "@type": "PostalAddress",
             addressLocality: "Torino",
@@ -30,7 +30,7 @@ export function OrganizationSchema({ url = SITE_URL }: OrganizationSchemaProps) 
         },
         sameAs: ["https://instagram.com/blackbullslab"],
         foundingDate: "2026",
-        keywords: "dinner show, eventi immersivi, cucina, intrattenimento, Torino, A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto, The Golden Voice",
+        keywords: "dinner show, eventi immersivi, cucina, intrattenimento, Torino, A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto, THE GOLDEN VOICE",
     };
 
     return (
@@ -158,7 +158,7 @@ export function WebSiteSchema() {
         "@type": "WebSite",
         name: SITE_NAME,
         url: SITE_URL,
-        description: "Dinner show e format eventi immersivi a Torino. A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e The Golden Voice.",
+        description: "Dinner show e format eventi immersivi a Torino. A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e THE GOLDEN VOICE.",
         inLanguage: "it-IT",
         publisher: {
             "@type": "Organization",
@@ -247,7 +247,7 @@ export function LocalBusinessSchema() {
         "@context": "https://schema.org",
         "@type": "EntertainmentBusiness",
         name: SITE_NAME,
-        description: "Dinner show e format eventi immersivi a Torino: A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e The Golden Voice.",
+        description: "Dinner show e format eventi immersivi a Torino: A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e THE GOLDEN VOICE.",
         url: SITE_URL,
         telephone: CONTACT_PHONE,
         email: CONTACT_EMAIL,

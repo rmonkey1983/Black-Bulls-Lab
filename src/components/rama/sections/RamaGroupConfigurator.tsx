@@ -1,52 +1,39 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { Users, ChevronRight, Sparkles, Star, PartyPopper, Briefcase, Heart, Gift, GraduationCap } from "lucide-react";
-import Link from "next/link";
+import { ChevronRight, Sparkles, Star, PartyPopper, Briefcase, Heart, Gift, GraduationCap } from "lucide-react";
 import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";
 
 const occasions = [
     { id: "team", label: "Team Building Aziendale", icon: Briefcase, formats: ["A Cena Con Il Bugiardo", "Il PalQo", "Cena Con Delitto"], tagline: "Rompete il ghiaccio. Costruite qualcosa di vero." },
-    { id: "corporate", label: "Cena di Natale / Gala", icon: Sparkles, formats: ["Cena Con Delitto", "A Cena Con Il Bugiardo", "The Golden Voice"], tagline: "Un finale d'anno che resterà nei ricordi." },
+    { id: "corporate", label: "Cena di Natale / Gala", icon: Sparkles, formats: ["Cena Con Delitto", "A Cena Con Il Bugiardo", "THE GOLDEN VOICE"], tagline: "Un finale d'anno che resterà nei ricordi." },
     { id: "birthday", label: "Festa di Compleanno", icon: Gift, formats: ["Il PalQo", "A Cena Con Il Bugiardo", "Cena Con Delitto"], tagline: "Un compleanno fuori dagli schemi." },
-    { id: "graduation", label: "Festa di Laurea", icon: GraduationCap, formats: ["Il PalQo", "The Golden Voice"], tagline: "Festeggiate il traguardo con noi." },
+    { id: "graduation", label: "Festa di Laurea", icon: GraduationCap, formats: ["Il PalQo", "THE GOLDEN VOICE"], tagline: "Festeggiate il traguardo con noi." },
     { id: "private", label: "Evento Privato", icon: Heart, formats: ["A Cena Con Il Bugiardo", "Cena Con Delitto"], tagline: "La tua idea. Il nostro palcoscenico." },
 ];
 
-const groupSizes = ["10-20", "20-30", "30-50", "50+"];
 
-const formatDetails: Record<string, { price: string; capacity: string; duration: string; highlight: string }> = {
-    "A Cena Con Il Bugiardo": {
-        price: "A partire da 55€/persona",
+const formatDetails: Record<string, { price: string; capacity: string; duration: string; highlight: string }> = { "A Cena Con Il Bugiardo": { price: "A partire da 55€/persona",
         capacity: "Qualsiasi dimensione",
         duration: "~3 ore",
-        highlight: "Siete tutti sospettati. Solo uno è il colpevole.",
-    },
-    "Il PalQo": {
-        price: "A partire da 45€/persona",
+        highlight: "Siete tutti sospettati. Solo uno è il colpevole." },
+    "Il PalQo": { price: "A partire da 45€/persona",
         capacity: "Qualsiasi dimensione",
         duration: "~2.5 ore",
-        highlight: "I tuoi colleghi diventano le star della serata.",
-    },
-    "Cena Con Delitto": {
-        price: "A partire da 50€/persona",
+        highlight: "I tuoi colleghi diventano le star della serata." },
+    "Cena Con Delitto": { price: "A partire da 50€/persona",
         capacity: "Qualsiasi dimensione",
         duration: "~3 ore",
-        highlight: "Chi è l'assassino? Vivi un'indagine immersiva tra una portata e l'altra.",
-    },
-    "The Golden Voice": {
-        price: "A partire da 45€/persona",
+        highlight: "Chi è l'assassino? Vivi un'indagine immersiva tra una portata e l'altra." },
+    "THE GOLDEN VOICE": { price: "A partire da 45€/persona",
         capacity: "Qualsiasi dimensione",
         duration: "~3 ore",
-        highlight: "Il format dove il talento vocale incontra lo show immersivo.",
-    },
-};
+        highlight: "Il format dove il talento vocale incontra lo show immersivo." } };
 
 import { buildWAUrl } from "@/lib/whatsapp";
 
-export function RamaGroupConfigurator() {
-    const [step, setStep] = useState<1 | 2 | 3>(1);
+export function RamaGroupConfigurator() { const [step, setStep] = useState<1 | 2 | 3>(1);
     const [selectedOccasion, setSelectedOccasion] = useState<string | null>(null);
     const [numPeople, setNumPeople] = useState<number>(25);
     const [preferredDate, setPreferredDate] = useState<string>("");
@@ -55,18 +42,14 @@ export function RamaGroupConfigurator() {
     const occasionObj = occasions.find(o => o.id === selectedOccasion);
     const suggestedFormats = occasionObj?.formats ?? [];
 
-    useGSAP(() => {
-        if (stepContainerRef.current) {
-            gsap.fromTo(stepContainerRef.current,
+    useGSAP(() => { if (stepContainerRef.current) { gsap.fromTo(stepContainerRef.current,
                 { opacity: 0, x: 30 },
                 { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" }
             );
         }
     }, { dependencies: [step], scope: stepContainerRef });
 
-    const handleWhatsAppRedirect = (formatName: string) => {
-        const buildMsg = (tipo: string, persone: number, data: string) => {
-            return `Ciao! Vorrei organizzare un ${tipo} (${formatName}) per ${persone} persone` +
+    const handleWhatsAppRedirect = (formatName: string) => { const buildMsg = (tipo: string, persone: number, data: string) => { return `Ciao! Vorrei organizzare un ${tipo} (${formatName}) per ${persone} persone` +
                 (data ? ` il ${data}` : '') +
                 `. Potete inviarmi un preventivo?`;
         };
@@ -111,8 +94,7 @@ export function RamaGroupConfigurator() {
                         <div key="step1">
                             <p className="font-mohave uppercase tracking-widest text-white/60 text-sm text-center mb-6">Passo 1 — Che tipo di evento stai organizzando?</p>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 px-2 sm:px-0">
-                                {occasions.map(occ => {
-                                    const Icon = occ.icon;
+                                {occasions.map(occ => { const Icon = occ.icon;
                                     return (
                                         <button
                                             key={occ.id}
@@ -194,8 +176,7 @@ export function RamaGroupConfigurator() {
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 mb-8 px-2 sm:px-0">
-                                {suggestedFormats.map(fmt => {
-                                    const d = formatDetails[fmt];
+                                {suggestedFormats.map(fmt => { const d = formatDetails[fmt];
                                     return (
                                         <div key={fmt} className="flex flex-col gap-4 p-5 sm:p-6 rounded-xl border border-white/10 bg-white/[0.03] hover:border-rama-accent/30 transition-all duration-300">
                                             <h3 className="font-mohave font-bold uppercase tracking-tight text-white text-xl sm:text-2xl">{fmt}</h3>

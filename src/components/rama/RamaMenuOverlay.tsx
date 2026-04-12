@@ -3,10 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { X, ChevronDown } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";
-import { CONTACT_EMAIL } from "@/lib/constants";
+import { CONTACT_EMAIL, SOCIAL_LINKS } from "@/lib/constants";
 
 interface RamaMenuOverlayProps {
     isOpen: boolean;
@@ -17,7 +17,7 @@ const experiments = [
     { name: "A Cena Con Il Bugiardo", href: "/format/a-cena-con-il-bugiardo", desc: "Dinner Show & Social Deception" },
     { name: "Il PalQo", href: "/format/il-palqo", desc: "Community & Show" },
     { name: "Cena Con Delitto", href: "/format/cena-con-delitto", desc: "Dinner Show & Investigation" },
-    { name: "The Golden Voice", href: "/format/the-golden-voice", desc: "Singing Contest" },
+    { name: "THE GOLDEN VOICE", href: "/format/the-golden-voice", desc: "Singing Contest" },
 ];
 
 export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
@@ -27,6 +27,18 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
     const linksRef = useRef<HTMLDivElement>(null);
     const bgImageRef = useRef<HTMLDivElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
+
+    // Lock body scroll when menu is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "unset";
+        }
+        return () => {
+            document.body.style.overflow = "unset";
+        };
+    }, [isOpen]);
 
     useGSAP(() => {
         if (isOpen) {
@@ -93,7 +105,7 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
     return (
         <div
             ref={containerRef}
-            className="fixed inset-0 z-[60] bg-rama-bg hidden opacity-0 text-white flex overflow-hidden"
+            className="fixed top-0 left-0 w-full h-[100dvh] z-[200] bg-rama-bg hidden opacity-0 text-white flex overflow-hidden lg:pb-0 pb-[env(safe-area-inset-bottom)]"
             role="dialog"
             aria-modal="true"
             aria-label="Menu principale"
@@ -103,7 +115,7 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
             <button
                 onClick={onClose}
                 className="absolute top-6 right-6 md:top-8 md:right-12 z-[70] p-4 text-rama-accent hover:rotate-90 transition-transform duration-300"
-                aria-label="Close menu"
+                aria-label="Chiudi menu"
             >
                 <X size={32} strokeWidth={2.5} />
             </button>
@@ -230,9 +242,9 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                     <div>
                         <h4 className="font-rock-salt text-rama-accent mb-4 transform -rotate-2">Seguici</h4>
                         <div className="flex flex-col gap-2">
-                            <a href="https://instagram.com/blackbullslab" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
-                            <a href="https://facebook.com/blackbullslab" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Facebook</a>
-                            <a href="https://tiktok.com/@blackbullslab" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">TikTok</a>
+                            <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Seguici su Instagram">Instagram</a>
+                            <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Seguici su Facebook">Facebook</a>
+                            <a href={SOCIAL_LINKS.tiktok} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Seguici su TikTok">TikTok</a>
                         </div>
                     </div>
                     <div>

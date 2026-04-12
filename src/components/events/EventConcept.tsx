@@ -8,8 +8,11 @@ interface EventConceptProps {
     description: string;
 }
 
-export function EventConcept({ description }: EventConceptProps) {
+export function EventConcept({ description = "" }: EventConceptProps) {
     const containerRef = useRef<HTMLDivElement>(null);
+
+    // Safeguard for empty description
+    const paragraphs = description ? description.split('\n').filter(p => p.trim() !== '') : [];
 
     useGSAP(() => {
         animateFade("#concept-title", "left", 0.1);
@@ -30,14 +33,18 @@ export function EventConcept({ description }: EventConceptProps) {
                 </div>
 
                 <div className="md:col-span-8 space-y-6 md:space-y-8">
-                    {description.split('\n').map((paragraph, index) => (
+                    {paragraphs.length > 0 ? paragraphs.map((paragraph, index) => (
                         <p
                             key={index}
                             className="concept-paragraph gsap-fade text-base md:text-lg text-gray-300 leading-relaxed font-light max-w-prose first-letter:text-4xl first-letter:md:text-5xl first-letter:font-bold first-letter:text-white first-letter:mr-3 first-letter:float-left"
                         >
                             {paragraph}
                         </p>
-                    ))}
+                    )) : (
+                        <p className="concept-paragraph gsap-fade text-base md:text-lg text-gray-500 italic">
+                            Dettagli dell&apos;esperimento in fase di caricamento...
+                        </p>
+                    )}
                 </div>
             </div>
         </section>

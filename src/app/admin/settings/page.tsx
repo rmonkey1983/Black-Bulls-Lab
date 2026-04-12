@@ -22,8 +22,9 @@ export default function AdminSettingsPage() {
                 await saveSettings(form);
                 setSaved(true);
                 setTimeout(() => setSaved(false), 2000);
-            } catch (err: any) {
-                setErrorMsg(err.message || "Errore di connessione a Supabase.");
+            } catch (err: unknown) {
+                const message = err instanceof Error ? err.message : "Errore di connessione a Supabase.";
+                setErrorMsg(message);
             }
         }
     };

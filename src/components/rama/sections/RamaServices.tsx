@@ -59,7 +59,7 @@ export function RamaServices() {
                     <Image
                         key={hoveredService}
                         src={services.find(s => s.id === hoveredService)?.image || ""}
-                        alt="Service Background"
+                        alt={`Black Bulls Lab - ${services.find(s => s.id === hoveredService)?.title || "Servizio"}`}
                         fill
                         className="object-cover"
                         sizes="100vw"

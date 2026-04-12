@@ -116,8 +116,9 @@ export default function AdminGalleryPage() {
                         type: mediaType as "image" | "video",
                     });
                 }
-            } catch (err: any) {
-                setErrorMsg(err.message || "Errore durante il caricamento del file.");
+            } catch (err: unknown) {
+                const message = err instanceof Error ? err.message : "Errore durante il caricamento del file.";
+                setErrorMsg(message);
             }
         }
 
@@ -146,8 +147,9 @@ export default function AdminGalleryPage() {
             setForm({ src: "", alt: "", category: "" });
             setShowForm(false);
             load();
-        } catch (err: any) {
-            setErrorMsg(err.message || "Impossibile salvare l'elemento nella galleria.");
+        } catch (err: unknown) {
+            const message = err instanceof Error ? err.message : "Impossibile salvare l'elemento nella galleria.";
+            setErrorMsg(message);
         }
     };
 

@@ -14,7 +14,7 @@ const experiments = [
     { name: "A Cena Con Il Bugiardo", href: "/format/a-cena-con-il-bugiardo" },
     { name: "Il PalQo", href: "/format/il-palqo" },
     { name: "Cena Con Delitto", href: "/format/cena-con-delitto" },
-    { name: "The Golden Voice", href: "/format/the-golden-voice" },
+    { name: "THE GOLDEN VOICE", href: "/format/the-golden-voice" },
 ];
 
 export function RamaHeader() {
@@ -131,7 +131,7 @@ export function RamaHeader() {
                 <button
                     onClick={() => setIsMenuOpen(true)}
                     className="relative z-50 flex lg:hidden border-none bg-transparent flex-col gap-1.5 p-2 group"
-                    aria-label="Open menu"
+                    aria-label="Apri menu"
                 >
                     <div className="w-8 h-1 bg-rama-accent group-hover:scale-105 transition-transform origin-right" />
                     <div className="w-8 h-1 bg-rama-accent group-hover:scale-105 transition-transform origin-right" />

@@ -42,7 +42,7 @@ export function RamaManifesto() {
                         Black Bulls Lab è un&apos;agenzia di Torino specializzata in dinner show e format immersivi: serate in cui la cena e lo spettacolo diventano un&apos;unica esperienza interattiva, dove il pubblico non guarda — partecipa.
                     </p>
                     <p>
-                        I nostri format — A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e The Golden Voice — sono progettati per funzionare ogni volta: per cene aziendali, team building, compleanni e gruppi privati di qualsiasi dimensione. Format collaudati, replicabili, e sempre originali.
+                        I nostri format — A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e THE GOLDEN VOICE — sono progettati per funzionare ogni volta: per cene aziendali, team building, compleanni e gruppi privati di qualsiasi dimensione. Format collaudati, replicabili, e sempre originali.
                     </p>
                     <p className="text-white/90">
                         Non organizziamo eventi di lusso inaccessibili. Progettiamo esperienze autentiche a prezzi sostenibili, con cura ossessiva per ogni dettaglio. Per noi, un budget reale non è un limite: è una sfida creativa.
