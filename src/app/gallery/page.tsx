@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { ImmersiveHeader } from "@/components/layout/ImmersiveHeader";
 import { Instagram, ArrowRight, Sparkles } from "lucide-react";
 import Link from "next/link";
-import { SITE_URL } from "@/lib/constants";
+import { SITE_URL, SOCIAL_LINKS } from "@/lib/constants";
 
 export const metadata: Metadata = {
     title: "Galleria Eventi e Dinner Show | Black Bulls Lab - Torino",
