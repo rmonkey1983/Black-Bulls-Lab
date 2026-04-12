@@ -82,7 +82,7 @@ export default function ACenaConIlBugiardoPage() {
             {/* QUICK INFO SECTION */}
             <FormatQuickInfo
                 duration="3 ore circa"
-                capacity="10 - 200 persone"
+                capacity="10 - 30 persone"
                 price="da 50€ / pers"
                 highlight="Su prenotazione"
                 highlightLabel="Disponibilità"
@@ -112,17 +112,17 @@ export default function ACenaConIlBugiardoPage() {
                             {
                                 icon: <MessageCircleQuestion size={24} />,
                                 title: "L'Inizio",
-                                desc: "Arrivate, vi siedete, ordinate. Qualcuno al tavolo però non è chi dice di essere. Le portate iniziano ad arrivare, insieme ai primi indizi."
+                                desc: "Arrivi, ti siedi, ordini. Qualcuno al tavolo però non è chi dice di essere. Le portate iniziano ad arrivare, insieme ai primi indizi."
                             },
                             {
                                 icon: <Eye size={24} />,
                                 title: "L'Indagine",
-                                desc: "Durante la cena potete fare domande, studiare le reazioni, confrontarvi con i commensali. Ogni risposta è preziosa — o forse no."
+                                desc: "Durante la cena puoi fare domande, studiare le reazioni, confrontarti con i commensali. Ogni risposta è preziosa — o forse no."
                             },
                             {
                                 icon: <Smile size={24} />,
                                 title: "La Rivelazione",
-                                desc: "Prima del dessert la verità viene a galla. Chi ha smascherato il Bugiardo vince un premio speciale. Chi è stato ingannato... ci riderà su."
+                                desc: "Prima del dessert la verità viene a galla. Se hai smascherato il Bugiardo vinci un premio speciale. Se sei stato ingannato... ci riderai su."
                             }
                         ].map((step, i) => (
                             <div
@@ -150,7 +150,7 @@ export default function ACenaConIlBugiardoPage() {
                             Voglio esserci quella sera <ArrowLeft className="rotate-180" size={18} />
                         </Link>
                         <a
-                            href={buildWAUrl(WA_MESSAGES.cenaConDelitto)}
+                            href={buildWAUrl(WA_MESSAGES.bugiardo)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="w-full md:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-rama-accent text-black font-bold uppercase tracking-widest hover:bg-white transition-all duration-300"

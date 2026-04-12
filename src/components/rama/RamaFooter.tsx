@@ -48,8 +48,7 @@ export function RamaFooter() {
                         />
                     </Link>
                     <div className="text-rama-muted font-normal capitalize tracking-normal text-xs flex flex-col items-center md:items-start gap-1">
-                        <span>Dinner Show &amp; Club</span>
-                        <span>based in Torino</span>
+                        <span>Dinner Show &amp; Club · Torino</span>
                         <br />
                         <span className="flex items-center gap-4">
                             © 2026 {SITE_NAME}. All Rights Reserved.

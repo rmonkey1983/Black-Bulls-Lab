@@ -24,6 +24,21 @@ export function PreFooterCTA() {
         subtitle = "Parliamo del tuo evento. Preventivo gratuito in 24 ore.";
         ctaText = "Costruiamo insieme la serata";
         ctaHref = "/contact";
+    } else if (pathname === "/format/a-cena-con-il-bugiardo") {
+        title = "Il tuo tavolo ti sta aspettando.";
+        subtitle = "Posti limitati ogni sera. Prenota prima che si esaurisca.";
+        ctaText = "Voglio esserci quella sera";
+        ctaHref = "https://wa.me/393342010067?text=Ciao!%20Sono%20interessato%2Fa%20a%20%22A%20Cena%20Con%20Il%20Bugiardo%22.%20Quando%20posso%20venire%3F";
+    } else if (pathname === "/format/il-palqo") {
+        title = "Il palco è pronto. Sei tu?";
+        subtitle = "Artisti, performer, creativi — candidati per la prossima serata.";
+        ctaText = "Voglio salire sul palco";
+        ctaHref = "/contact";
+    } else if (pathname === "/format/the-golden-voice") {
+        title = "La tua voce merita di essere ascoltata.";
+        subtitle = "Le audizioni apriranno presto. Candidati ora per essere tra i primi.";
+        ctaText = "Voglio esibirmi";
+        ctaHref = "#casting-form-container";
     } else if (pathname === "/chi-siamo") {
         title = "Vieni a scoprirci dal vivo.";
         subtitle = "Le parole fanno poco. Vivi un'esperienza Black Bulls Lab.";

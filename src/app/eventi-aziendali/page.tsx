@@ -206,7 +206,7 @@ export default function CorporatePage() {
                                     <span className="text-rama-accent">Naturale.</span>
                                 </h3>
                                 <p className="text-rama-muted font-outfit text-lg leading-relaxed mt-6">
-                                    Niente forza e unisce un gruppo di lavoro più di una risata condivisa durante uno spettacolo di stand-up comedy o un dinner show emozionante.
+                                    Niente unisce un gruppo di lavoro più di una risata condivisa durante uno spettacolo di stand-up comedy o un dinner show emozionante.
                                 </p>
                             </div>
                         }

@@ -55,7 +55,7 @@ export default function AboutPage() {
                                     curando maniacalmente sia la direzione creativa che l&apos;eccellenza esecutiva.
                                 </p>
                                 <div className="pt-4">
-                                    <PremiumButton href="/events" variant="gold" size="lg">
+                                    <PremiumButton href="/format" variant="gold" size="lg">
                                         <span className="font-mohave tracking-widest uppercase text-base">Vedi cosa abbiamo creato</span>
                                         <ArrowRight size={18} className="ml-2" />
                                     </PremiumButton>
@@ -134,7 +134,7 @@ export default function AboutPage() {
                                     <span className="font-rock-salt text-rama-accent transform -rotate-2 text-xl block">I Nostri Valori</span>
                                 </div>
                                 <h2 className="font-mohave font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-5xl md:text-7xl mt-6">
-                                    <span className="text-white">Dettagli che fanno</span>
+                                    <span className="text-white">Dettagli che fanno </span>
                                     <span className="text-rama-accent">la differenza.</span>
                                 </h2>
                                 
@@ -162,7 +162,7 @@ export default function AboutPage() {
                                 </div>
 
                                 <div className="pt-6">
-                                    <PremiumButton href="/events" variant="outline" size="lg">
+                                    <PremiumButton href="/format" variant="outline" size="lg">
                                         <span className="font-mohave tracking-widest uppercase text-base text-white">Prenota la tua serata</span>
                                         <ArrowRight size={18} className="ml-2 text-white" />
                                     </PremiumButton>

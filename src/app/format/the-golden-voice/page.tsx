@@ -79,9 +79,9 @@ export default function TheGoldenVoicePage() {
 
             {/* QUICK INFO SECTION */}
             <FormatQuickInfo 
-                duration="3 ore circa"
-                capacity="Aperto a tutti"
-                price="Iscrizione gratuita"
+                duration="Contest Canoro"
+                capacity="In definizione"
+                price="Stay Tuned"
                 highlight="La Tua Voce, La Tua Occasione"
             />
 

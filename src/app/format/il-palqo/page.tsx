@@ -102,7 +102,7 @@ export default function IlPalqoPage() {
 
                             <ul id="format-steps" className="space-y-6">
                                 {[
-                                    { icon: <Music size={20} />, title: "L'Aperitivo Artistico", desc: "Networking e warm-up con dj set lounge, dove artisti e pubblico si incontrano." },
+                                    { icon: <Music size={20} />, title: "L'Aperitivo Artistico", desc: "Networking e warm-up con DJ set lounge, dove artisti e pubblico si incontrano." },
                                     { icon: <Mic2 size={20} />, title: "Le Performance", desc: "Il cuore della serata. Esibizioni live curate e selezionate, con focus sulla qualità e l'originalità." },
                                     { icon: <div className="text-xl font-rock-salt">!</div>, title: "Jam Session & Aftershow", desc: "Il palco si apre. Improvvisazione e festa fino a tarda notte." }
                                 ].map((item, i) => (
