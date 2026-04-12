@@ -49,11 +49,11 @@ export function RamaGroupEvents() {
                     <span className="gsap-fade font-rock-salt text-rama-accent text-base sm:text-xl md:text-2xl mb-6 transform -rotate-1 block">
                         PER GRUPPI & AZIENDE
                     </span>
-                    <h2 className="font-mohave font-bold leading-[0.85] tracking-tighter uppercase text-white text-[12vw] sm:text-[10vw] md:text-[7vw] lg:text-[6vw] overflow-hidden mb-6">
+                    <h2 className="font-heading font-bold leading-[0.85] tracking-tighter uppercase text-white text-[12vw] sm:text-[10vw] md:text-[7vw] lg:text-[6vw] overflow-hidden mb-6">
                         <span className="gsap-fade block">FORMAT COLLAUDATI</span>
                         <span className="gsap-fade block text-rama-accent">E REPLICABILI</span>
                     </h2>
-                    <p className="gsap-fade font-outfit text-rama-muted text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+                    <p className="gsap-fade font-sans text-rama-muted text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
                         Cerchi qualcosa di originale per la tua cena aziendale a Torino?
                         I nostri format funzionano già — e funzionano per gruppi come il tuo.
                     </p>
@@ -81,10 +81,10 @@ export function RamaGroupEvents() {
                                     </div>
 
                                     {/* Text */}
-                                    <h3 className="font-mohave font-bold uppercase tracking-wide text-xl lg:text-2xl text-white leading-tight">
+                                    <h3 className="font-heading font-bold uppercase tracking-wide text-xl lg:text-2xl text-white leading-tight">
                                         {prop.label}
                                     </h3>
-                                    <p className="font-outfit text-rama-muted text-base leading-relaxed flex-grow">
+                                    <p className="font-sans text-rama-muted text-base leading-relaxed flex-grow">
                                         {prop.description}
                                     </p>
                                 </article>
@@ -104,14 +104,14 @@ export function RamaGroupEvents() {
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                     <Link
                         href="/eventi-aziendali"
-                        className="group inline-flex items-center gap-3 bg-rama-accent text-black font-mohave font-bold uppercase tracking-widest text-base px-8 py-4 rounded-full hover:bg-white transition-colors duration-300"
+                        className="group inline-flex items-center gap-3 bg-rama-accent text-black font-heading font-bold uppercase tracking-widest text-base px-8 py-4 rounded-full hover:bg-white transition-colors duration-300"
                     >
                         Trasforma la tua prossima cena aziendale
                         <ArrowRight size={18} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform duration-300" />
                     </Link>
                     <Link
                         href="/contact"
-                        className="inline-flex items-center gap-2 border border-white/20 text-white font-mohave font-bold uppercase tracking-widest text-base px-8 py-4 rounded-full hover:border-rama-accent/60 hover:text-rama-accent transition-colors duration-300"
+                        className="inline-flex items-center gap-2 border border-white/20 text-white font-heading font-bold uppercase tracking-widest text-base px-8 py-4 rounded-full hover:border-rama-accent/60 hover:text-rama-accent transition-colors duration-300"
                     >
                         Parla con noi — è gratuito
                     </Link>

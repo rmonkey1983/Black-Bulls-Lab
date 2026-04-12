@@ -70,7 +70,7 @@ export function ProjectList({ events, basePath = "/events" }: ProjectListProps) 
                             <div className="relative z-10 py-8 md:py-10 px-4 flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-8 transition-all duration-300 md:group-hover:px-8 cursor-default overflow-hidden md:overflow-visible">
                                 
                                 <div className="flex items-start gap-4 md:gap-8 min-w-0 flex-1">
-                                    <span className="text-xs sm:text-sm font-mohave text-white/40 group-hover:text-rama-accent transition-colors shrink-0 tracking-widest mt-1.5 pt-1">
+                                    <span className="text-xs sm:text-sm font-heading text-white/40 group-hover:text-rama-accent transition-colors shrink-0 tracking-widest mt-1.5 pt-1">
                                         {String(index + 1).padStart(2, '0')}
                                     </span>
                                     
@@ -79,19 +79,19 @@ export function ProjectList({ events, basePath = "/events" }: ProjectListProps) 
                                             href={`${basePath}/${event.slug}`}
                                             className="group/title block w-full"
                                         >
-                                            <h3 className="text-2xl sm:text-4xl md:text-5xl font-mohave font-bold text-white tracking-tight uppercase leading-[0.9] sm:leading-none group-hover/title:text-rama-accent transition-colors break-words overflow-visible">
+                                            <h3 className="text-2xl sm:text-4xl md:text-5xl font-heading font-bold text-white tracking-tight uppercase leading-[0.9] sm:leading-none group-hover/title:text-rama-accent transition-colors break-words overflow-visible">
                                                 {event.title}
                                             </h3>
                                         </Link>
 
                                         {event.description && (
-                                            <p className="text-sm text-rama-muted font-outfit line-clamp-3 md:line-clamp-2 max-w-2xl mt-2 md:mt-1">
+                                            <p className="text-sm text-rama-muted font-sans line-clamp-3 md:line-clamp-2 max-w-2xl mt-2 md:mt-1">
                                                 {event.description}
                                             </p>
                                         )}
 
                                         {event.details && (
-                                            <p className="text-[10px] sm:text-xs text-rama-accent/60 font-outfit uppercase tracking-widest mt-3 md:mt-1 font-semibold">
+                                            <p className="text-[10px] sm:text-xs text-rama-accent/60 font-sans uppercase tracking-widest mt-3 md:mt-1 font-semibold">
                                                 {event.details}
                                             </p>
                                         )}
@@ -109,7 +109,7 @@ export function ProjectList({ events, basePath = "/events" }: ProjectListProps) 
                                             <span className="text-[10px] uppercase tracking-widest text-white/40 md:group-hover:text-white transition-colors duration-300">
                                                 {formatDate(event.date)}
                                             </span>
-                                            <span className="text-[10px] uppercase font-outfit tracking-widest text-rama-muted/60">
+                                            <span className="text-[10px] uppercase font-sans tracking-widest text-rama-muted/60">
                                                 {event.category}
                                             </span>
                                         </div>

@@ -19,13 +19,13 @@ export default function ProfilePage() {
                     <div className="w-16 h-16 border border-rama-accent/30 mx-auto flex items-center justify-center mb-6">
                         <User size={28} className="text-rama-accent/50" />
                     </div>
-                    <h1 className="font-mohave text-4xl md:text-5xl font-bold text-white uppercase tracking-tighter mb-4">
+                    <h1 className="font-heading text-4xl md:text-5xl font-bold text-white uppercase tracking-tighter mb-4">
                         Area <span className="text-rama-accent">Personale</span>
                     </h1>
-                    <p className="text-rama-muted font-outfit text-lg">
+                    <p className="text-rama-muted font-sans text-lg">
                         Questa sezione sarà disponibile a breve.
                     </p>
-                    <p className="text-rama-muted/60 font-outfit text-sm mt-2">
+                    <p className="text-rama-muted/60 font-sans text-sm mt-2">
                         Potrai gestire le tue prenotazioni, i biglietti e le preferenze.
                     </p>
                 </div>

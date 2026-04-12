@@ -55,10 +55,10 @@ export function PreFooterCTA() {
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(200,164,78,0.04)_0%,transparent_100%)] pointer-events-none" />
             
             <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
-                <h2 className="font-mohave font-bold uppercase tracking-tighter text-[9vw] sm:text-[7vw] md:text-6xl text-white mb-6 leading-[0.9]">
+                <h2 className="font-heading font-bold uppercase tracking-tighter text-[9vw] sm:text-[7vw] md:text-6xl text-white mb-6 leading-[0.9]">
                     {title}
                 </h2>
-                <p className="font-outfit text-rama-muted text-lg sm:text-xl font-light max-w-xl mb-12">
+                <p className="font-sans text-rama-muted text-lg sm:text-xl font-light max-w-xl mb-12">
                     {subtitle}
                 </p>
                 
@@ -67,7 +67,8 @@ export function PreFooterCTA() {
                         href={ctaHref} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="group inline-flex items-center gap-3 bg-rama-accent text-black font-mohave font-bold uppercase tracking-widest text-sm sm:text-base px-8 py-4 sm:px-12 sm:py-5 rounded-full hover:bg-white transition-all transform active:scale-95 shadow-[0_0_20px_rgba(200,164,78,0.2)]"
+                        suppressHydrationWarning
+                        className="group inline-flex items-center gap-3 bg-rama-accent text-black font-heading font-bold uppercase tracking-widest text-sm sm:text-base px-8 py-4 sm:px-12 sm:py-5 rounded-full hover:bg-white transition-all transform active:scale-95 shadow-[0_0_20px_rgba(200,164,78,0.2)]"
                     >
                         {ctaText}
                         <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -75,7 +76,8 @@ export function PreFooterCTA() {
                 ) : (
                     <Link 
                         href={ctaHref}
-                        className="group inline-flex items-center gap-3 bg-rama-accent text-black font-mohave font-bold uppercase tracking-widest text-sm sm:text-base px-8 py-4 sm:px-12 sm:py-5 rounded-full hover:bg-white transition-all transform active:scale-95 shadow-[0_0_20px_rgba(200,164,78,0.2)]"
+                        suppressHydrationWarning
+                        className="group inline-flex items-center gap-3 bg-rama-accent text-black font-heading font-bold uppercase tracking-widest text-sm sm:text-base px-8 py-4 sm:px-12 sm:py-5 rounded-full hover:bg-white transition-all transform active:scale-95 shadow-[0_0_20px_rgba(200,164,78,0.2)]"
                     >
                         {ctaText}
                         <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />

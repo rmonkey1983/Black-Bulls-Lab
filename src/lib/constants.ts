@@ -46,7 +46,7 @@ export const EXPERIMENTS = [
         subtitle: "L'inganno è a portata di smartphone.",
         desc: "Web App Interactive Game",
         longDesc: "Il primo dinner show dove la regia del gioco è nel tuo smartphone. Smaschererai l'unico vero bugiardo?",
-        image: "/images/brand/service-plating.png",
+        image: "/images/brand/service-plating.webp",
         badge: "Digital Experience",
         details: "3 ore · 10-100+ persone · Da 50€/persona",
         price: 50,
@@ -61,7 +61,7 @@ export const EXPERIMENTS = [
         subtitle: "Social Talent & Digital Voting",
         desc: "Interactive Live Show",
         longDesc: "Il palco dove decidi tu chi merita il plauso, votando in tempo reale tramite la nostra web app.",
-        image: "/images/brand/bg-venue-crowd.png",
+        image: "/images/brand/bg-venue-crowd.webp",
         badge: "Social & Live",
         details: "Showcase Aperto · Votazione Live · Ingresso Libero",
         price: 0,
@@ -76,7 +76,7 @@ export const EXPERIMENTS = [
         subtitle: "L'indagine noir diventa digitale.",
         desc: "Investigation Web App",
         longDesc: "Risolvi il mistero analizzando indizi e testimonianze digitali inviate direttamente al tuo smartphone.",
-        image: "/images/brand/bg-stage-lights.png",
+        image: "/images/brand/bg-stage-lights.webp",
         badge: "Tech Noir",
         details: "3 ore · Indagine Digitale · Da 50€/persona",
         price: 50,
@@ -91,7 +91,7 @@ export const EXPERIMENTS = [
         subtitle: "Il contest che voti tu dal tavolo.",
         desc: "Live Singing Contest",
         longDesc: "Il grande show canoro dove il pubblico è il quinto giudice grazie all'integrazione digitale.",
-        image: "/images/brand/service-performance.png",
+        image: "/images/brand/service-performance.webp",
         badge: "Coming Soon",
         details: "Singing contest · Voto del Pubblico · Stay tuned",
         price: 0,
@@ -103,5 +103,5 @@ export const EXPERIMENTS = [
 /**
  * ASSETS
  */
-export const LOGO_PATH = "/blackbullslab-v2.png";
-export const FALLBACK_IMAGE = "/lab_menu.png";
+export const LOGO_PATH = "/brand/logo-white.svg";
+export const FALLBACK_IMAGE = "/lab_menu.webp";

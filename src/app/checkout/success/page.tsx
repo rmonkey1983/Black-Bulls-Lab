@@ -31,11 +31,11 @@ function SuccessContent() {
                     <CheckCircle className="text-green-500 w-12 h-12" />
                 </div>
 
-                <h1 className="text-4xl md:text-5xl font-bold font-mohave uppercase tracking-tighter text-white mb-4">
+                <h1 className="text-4xl md:text-5xl font-bold font-heading uppercase tracking-tighter text-white mb-4">
                     Prenotazione <span className="text-gold">Confermata</span>
                 </h1>
                 
-                <p className="text-gray-400 font-outfit text-lg max-w-md mx-auto mb-10">
+                <p className="text-gray-400 font-sans text-lg max-w-md mx-auto mb-10">
                     La tua transazione è andata a buon fine. Abbiamo ricevuto la caparra e riservato il tuo tavolo in esclusiva.
                     Riceverai a breve un&apos;email con il riepilogo.
                 </p>
@@ -69,7 +69,7 @@ function SuccessContent() {
 
 export default function CheckoutSuccessPage() {
     return (
-        <Suspense fallback={<div className="min-h-screen bg-transparent pt-32 text-center text-white font-mohave text-2xl">Caricamento...</div>}>
+        <Suspense fallback={<div className="min-h-screen bg-transparent pt-32 text-center text-white font-heading text-2xl">Caricamento...</div>}>
             <SuccessContent />
         </Suspense>
     );

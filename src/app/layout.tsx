@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Mohave, Outfit, Rock_Salt } from "next/font/google";
+import { Mohave, Outfit, Rock_Salt, Inter } from "next/font/google";
 import { RamaHeader } from "@/components/rama/RamaHeader";
 import { RamaFooter } from "@/components/rama/RamaFooter";
 import { OrganizationSchema, WebSiteSchema, LocalBusinessSchema, FAQPageSchema } from "@/components/seo/JsonLd";
@@ -9,7 +9,7 @@ import { MobileStickyBookButton } from "@/components/layout/MobileStickyBookButt
 import { WhatsAppWidget } from "@/components/layout/WhatsAppWidget";
 import { BackToTop } from "@/components/layout/BackToTop";
 import { GSAPInitializer } from "@/components/layout/GSAPInitializer";
-import { PreFooterCTA } from "@/components/layout/PreFooterCTA";
+import { PageTransition } from "@/components/layout/PageTransition";
 import { CONTACT_EMAIL, SITE_URL, SITE_NAME } from "@/lib/constants";
 import "./globals.css";
 
@@ -22,6 +22,11 @@ const mohave = Mohave({
 
 const outfit = Outfit({
   variable: "--font-outfit",
+  subsets: ["latin"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -102,6 +107,8 @@ export function generateViewport(): Viewport {
   };
 }
 
+import { BackgroundWrapper } from "@/components/layout/BackgroundWrapper";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -111,27 +118,36 @@ export default function RootLayout({
     <html lang="it" suppressHydrationWarning>
       <head />
       <body
-        className={`${mohave.variable} ${outfit.variable} ${rockSalt.variable} font-outfit antialiased text-rama-text min-h-screen relative selection:bg-rama-accent selection:text-black flex flex-col`}
+        className={`${outfit.variable} ${inter.variable} ${mohave.variable} ${rockSalt.variable} font-sans antialiased text-white min-h-screen relative selection:bg-yellow-500 selection:text-black flex flex-col bg-zinc-950`}
       >
         <GSAPInitializer />
+        <BackgroundWrapper />
         <RamaHeader />
-        {/* Skip to main content — visible on focus for keyboard/screen reader users */}
+        
+        {/* Skip to main content */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-6 focus:py-3 focus:bg-rama-accent focus:text-black focus:font-mohave focus:font-bold focus:uppercase focus:tracking-widest focus:rounded-sm focus:shadow-lg"
+          suppressHydrationWarning
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-6 focus:py-3 focus:bg-yellow-500 focus:text-black focus:font-heading focus:font-bold focus:uppercase focus:tracking-widest focus:rounded-sm focus:shadow-lg"
         >
           Salta al contenuto principale
         </a>
+        
         <Preloader />
+        
         <main id="main-content" className="flex-grow relative z-10 w-full">
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
         </main>
-        <PreFooterCTA />
+
         <RamaFooter />
+        
         <MobileStickyBookButton />
         <WhatsAppWidget />
         <BackToTop />
         <SmoothScroll />
+        
         <OrganizationSchema />
         <WebSiteSchema />
         <LocalBusinessSchema />

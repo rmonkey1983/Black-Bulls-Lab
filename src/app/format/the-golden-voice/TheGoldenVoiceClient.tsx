@@ -28,7 +28,7 @@ export function TheGoldenVoiceClient() {
             <section className="relative aspect-video md:h-[85vh] w-full overflow-hidden flex items-end">
                 <div className="absolute inset-0 z-0">
                     <Image 
-                        src="/images/brand/service-performance.png" 
+                        src="/images/brand/service-performance.webp" 
                         alt="THE GOLDEN VOICE" 
                         width={1920}
                         height={1080}
@@ -38,7 +38,7 @@ export function TheGoldenVoiceClient() {
                     />
                     <div className="absolute inset-0 bg-rama-accent/10 mix-blend-overlay" />
                     <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/40 to-transparent" />
-                    <div className="absolute inset-0 bg-[url('/noise.png')] opacity-20 mix-blend-overlay pointer-events-none" />
+                    <div className="absolute inset-0 bg-[url('/noise.webp')] opacity-20 mix-blend-overlay pointer-events-none" />
                 </div>
 
                 <div className="absolute top-24 left-6 z-30">
@@ -132,7 +132,7 @@ export function TheGoldenVoiceClient() {
                         <GoldenVoiceForm />
                         
                         <div className="flex flex-col items-center gap-4 mt-8">
-                            <p className="text-gray-400 text-sm font-outfit uppercase tracking-widest">Oppure chiedi info date</p>
+                            <p className="text-gray-400 text-sm font-sans uppercase tracking-widest">Oppure chiedi info date</p>
                             <a
                                 href={buildWAUrl(WA_MESSAGES.default)}
                                 target="_blank"

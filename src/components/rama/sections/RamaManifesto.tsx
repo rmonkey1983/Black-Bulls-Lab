@@ -27,7 +27,7 @@ export function RamaManifesto() {
                 </div>
 
                 <div className={clsx(
-                    "font-mohave font-bold leading-[0.85] tracking-tighter uppercase text-white flex flex-col text-[15vw] sm:text-[14vw] md:text-[10vw] w-full transition-all duration-1000 delay-200 transform",
+                    "font-heading font-bold leading-[0.85] tracking-tighter uppercase text-white flex flex-col text-[15vw] sm:text-[14vw] md:text-[10vw] w-full transition-all duration-1000 delay-200 transform",
                     inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 )}>
                     <div><span>L&apos;ARTE DI</span></div>
@@ -35,7 +35,7 @@ export function RamaManifesto() {
                 </div>
 
                 <div className={clsx(
-                    "mt-16 w-full max-w-3xl text-center mx-auto text-rama-muted font-outfit text-lg md:text-2xl leading-relaxed space-y-6 transition-all duration-1000 delay-500 transform",
+                    "mt-16 w-full max-w-3xl text-center mx-auto text-rama-muted font-sans text-lg md:text-2xl leading-relaxed space-y-6 transition-all duration-1000 delay-500 transform",
                     inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 )}>
                     <p>

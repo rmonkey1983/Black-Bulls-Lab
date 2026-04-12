@@ -146,7 +146,7 @@ export default function CheckoutForm() {
                         {step === 1 && (
                             <div key="step1" className="space-y-8">
                                 <div className="space-y-2">
-                                    <h2 className="text-3xl font-bold font-mohave uppercase tracking-tighter text-white">L&apos;Esperienza</h2>
+                                    <h2 className="text-3xl font-bold font-heading uppercase tracking-tighter text-white">L&apos;Esperienza</h2>
                                     <p className="text-gray-400 text-sm">Seleziona la data e il numero di partecipanti per {event.title}.</p>
                                 </div>
 
@@ -222,7 +222,7 @@ export default function CheckoutForm() {
                             <div key="step2" className="space-y-8">
                                 <div className="space-y-2">
                                     <div onClick={() => setStep(1)} className="text-xs text-gold uppercase tracking-widest cursor-pointer hover:text-white flex items-center gap-1 mb-2"><ChevronLeft size={12}/> Torna a Data e Posti</div>
-                                    <h2 className="text-3xl font-bold font-mohave uppercase tracking-tighter text-white">L&apos;Ospite</h2>
+                                    <h2 className="text-3xl font-bold font-heading uppercase tracking-tighter text-white">L&apos;Ospite</h2>
                                     <p className="text-gray-400 text-sm">I tuoi dettagli per confermare la prenotazione.</p>
                                 </div>
 
@@ -269,7 +269,7 @@ export default function CheckoutForm() {
                             <div key="step3" className="space-y-8">
                                 <div className="space-y-2">
                                     <div onClick={() => setStep(2)} className="text-xs text-gold uppercase tracking-widest cursor-pointer hover:text-white flex items-center gap-1 mb-2"><ChevronLeft size={12}/> Torna ai Dati Ospite</div>
-                                    <h2 className="text-3xl font-bold font-mohave uppercase tracking-tighter text-white flex items-center gap-3">
+                                    <h2 className="text-3xl font-bold font-heading uppercase tracking-tighter text-white flex items-center gap-3">
                                         Il Tocco Premium <span className="px-2 py-0.5 bg-gold/20 text-gold text-xs rounded-full border border-gold/30">VIP</span>
                                     </h2>
                                     <p className="text-gray-400 text-sm">Aiutaci a farti vivere una serata magica, curando ogni tuo dettaglio.</p>
@@ -363,7 +363,7 @@ export default function CheckoutForm() {
                     {/* Right: Order Summary Sidebar */}
                     <div className="lg:col-span-4 space-y-6">
                         <div className="bg-bg-dark/50 border border-white/10 rounded-2xl p-6 sticky top-32">
-                            <h2 className="text-lg font-bold text-white mb-6 font-mohave tracking-wide uppercase border-b border-white/10 pb-4">Riepilogo Ordine</h2>
+                            <h2 className="text-lg font-bold text-white mb-6 font-heading tracking-wide uppercase border-b border-white/10 pb-4">Riepilogo Ordine</h2>
                             
                             <div className="space-y-5 text-sm">
                                 <div className="space-y-1">

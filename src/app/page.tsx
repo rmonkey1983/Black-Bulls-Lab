@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import React from "react";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
     title: "Dinner Show a Torino | Black Bulls Lab — Cena Con Delitto e Format Immersivi",
@@ -23,52 +21,15 @@ export const metadata: Metadata = {
         images: ["/og-image.jpg"],
     },
 };
+
 import dynamic from "next/dynamic";
-import { RamaHero } from "@/components/rama/sections/RamaHero";
-import { RamaNextEvents } from "@/components/rama/sections/RamaNextEvents";
-import { RamaManifesto } from "@/components/rama/sections/RamaManifesto";
 
-// Dynamic imports for below-the-fold components to optimize TTI and initial bundle size
-const RamaHowItWorks = dynamic(() => import("@/components/rama/sections/RamaHowItWorks").then(mod => mod.RamaHowItWorks));
-const RamaGroupEvents = dynamic(() => import("@/components/rama/sections/RamaGroupEvents").then(mod => mod.RamaGroupEvents));
-const RamaGroupConfigurator = dynamic(() => import("@/components/rama/sections/RamaGroupConfigurator").then(mod => mod.RamaGroupConfigurator));
-const RamaServices = dynamic(() => import("@/components/rama/sections/RamaServices").then(mod => mod.RamaServices));
-const RamaTestimonials = dynamic(() => import("@/components/rama/sections/RamaTestimonials").then(mod => mod.RamaTestimonials));
-const RamaCTA = dynamic(() => import("@/components/rama/sections/RamaCTA").then(mod => mod.RamaCTA));
-const RamaFAQ = dynamic(() => import("@/components/rama/sections/RamaFAQ").then(mod => mod.RamaFAQ));
+const HomeClient = dynamic(() => import("./HomeClient").then(mod => mod.HomeClient));
 
-/** Contextual divider CTA between sections */
-function SectionCTA({ href, label }: { href: string; label: string }) {
+export default function HomePage() {
     return (
-        <div className="flex justify-center py-4 px-4">
-            <Link
-                href={href}
-                className="group inline-flex items-center gap-2 text-white/40 hover:text-rama-accent font-outfit text-sm uppercase tracking-widest transition-colors duration-300"
-            >
-                {label}
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
-            </Link>
-        </div>
-    );
-}
-
-export default function RamaHomePage() {
-    return (
-        <main className="w-full bg-transparent min-h-screen text-white relative z-10 selection:bg-rama-accent selection:text-black">
-            <RamaHero />
-            <RamaNextEvents />
-            <RamaManifesto />
-            <SectionCTA href="/chi-siamo" label="Scopri chi si nasconde dietro la magia →" />
-            <RamaHowItWorks />
-            <SectionCTA href="/format" label="Scegli la tua serata →" />
-            <RamaGroupEvents />
-            <RamaGroupConfigurator />
-            <SectionCTA href="/eventi-aziendali" label="Il tuo team merita di meglio →" />
-            <RamaServices />
-            <SectionCTA href="/gallery" label="Guarda cosa ti aspetta →" />
-            <RamaTestimonials />
-            <RamaCTA />
-            <RamaFAQ />
+        <main className="w-full bg-zinc-950 min-h-screen">
+            <HomeClient />
         </main>
     );
 }

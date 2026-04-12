@@ -7,6 +7,8 @@ import { useState, useRef, useEffect } from "react";
 import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";
 import { CONTACT_EMAIL, SOCIAL_LINKS } from "@/lib/constants";
+import { PrimaryButton } from "@/components/ui/PrimaryButton";
+import { usePathname } from "next/navigation";
 
 interface RamaMenuOverlayProps {
     isOpen: boolean;
@@ -21,6 +23,7 @@ const experiments = [
 ];
 
 export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
+    const pathname = usePathname();
     const [experimentsOpen, setExperimentsOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
@@ -105,7 +108,7 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
     return (
         <div
             ref={containerRef}
-            className="fixed top-0 left-0 w-full h-[100dvh] z-[200] bg-rama-bg hidden opacity-0 text-white flex overflow-hidden lg:pb-0 pb-[env(safe-area-inset-bottom)]"
+            className="fixed top-0 left-0 w-full h-[100dvh] z-[200] bg-black hidden opacity-0 text-white flex overflow-hidden lg:pb-0 pb-[env(safe-area-inset-bottom)]"
             role="dialog"
             aria-modal="true"
             aria-label="Menu principale"
@@ -114,7 +117,7 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
             {/* Close Button */}
             <button
                 onClick={onClose}
-                className="absolute top-6 right-6 md:top-8 md:right-12 z-[70] p-4 text-rama-accent hover:rotate-90 transition-transform duration-300"
+                className="absolute top-6 right-6 md:top-8 md:right-12 z-[70] p-4 text-yellow-500 hover:rotate-90 transition-transform duration-300"
                 aria-label="Chiudi menu"
             >
                 <X size={32} strokeWidth={2.5} />
@@ -128,7 +131,7 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
             >
                 <div className="absolute inset-0 bg-yellow-600/20">
                     <Image
-                        src="/lab_menu.png"
+                        src="/lab_menu.webp"
                         alt="Laboratory Aesthetic Menu Background"
                         fill
                         className="object-cover mix-blend-lighten"
@@ -137,7 +140,7 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                 </div>
                 {/* Overlay click area indicator for desktop */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity bg-black/20">
-                    <span className="font-mohave uppercase tracking-widest text-xs text-white/40">Clicca per chiudere</span>
+                    <span className="font-heading uppercase tracking-widest text-xs text-white/40">Clicca per chiudere</span>
                 </div>
             </div>
 
@@ -158,7 +161,8 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                         <Link
                             href="/"
                             onClick={onClose}
-                            className="font-mohave text-4xl sm:text-5xl md:text-7xl uppercase font-bold text-rama-text hover:text-rama-accent transition-colors duration-300 block"
+                            suppressHydrationWarning
+                            className={`font-heading text-4xl sm:text-5xl md:text-7xl uppercase font-bold transition-colors duration-300 block ${pathname === "/" ? "text-yellow-500" : "text-white hover:text-yellow-500"}`}
                         >
                             Home
                         </Link>
@@ -171,7 +175,7 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                     >
                         <button
                             type="button"
-                            className="flex items-center gap-3 font-mohave text-4xl sm:text-5xl md:text-7xl uppercase font-bold text-rama-text hover:text-rama-accent transition-colors duration-300 w-fit group cursor-pointer select-none bg-transparent border-none p-0"
+                            className="flex items-center gap-3 font-heading text-4xl sm:text-5xl md:text-7xl uppercase font-bold text-white hover:text-yellow-500 transition-colors duration-300 w-fit group cursor-pointer select-none bg-transparent border-none p-0"
                             onClick={() => setExperimentsOpen(prev => !prev)}
                             aria-expanded={experimentsOpen}
                             aria-controls="esperimenti-submenu"
@@ -179,23 +183,24 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                             Le Nostre Serate
                             <ChevronDown
                                 size={28}
-                                className={`transition-transform duration-300 text-rama-accent mt-2 flex-shrink-0 ${experimentsOpen ? "rotate-180" : ""}`}
+                                className={`transition-transform duration-300 text-yellow-500 mt-2 flex-shrink-0 ${experimentsOpen ? "rotate-180" : ""}`}
                             />
                         </button>
 
                         <div id="esperimenti-submenu" ref={dropdownRef} className="overflow-hidden h-0 opacity-0">
-                            <div className="flex flex-col gap-1 mt-3 pl-4 border-l-2 border-rama-accent/40">
+                            <div className="flex flex-col gap-1 mt-3 pl-4 border-l-2 border-yellow-500/40">
                                 {experiments.map((exp) => (
                                     <div key={exp.href} className="sub-link">
                                         <Link
                                             href={exp.href}
                                             onClick={onClose}
+                                            suppressHydrationWarning
                                             className="flex flex-col py-2.5 group/sub"
                                         >
-                                            <span className="font-mohave text-xl sm:text-2xl font-bold uppercase text-white/80 group-hover/sub:text-rama-accent transition-colors tracking-wide">
+                                            <span className="font-heading text-xl sm:text-2xl font-bold uppercase text-white/80 group-hover/sub:text-yellow-500 transition-colors tracking-wide">
                                                 {exp.name}
                                             </span>
-                                            <span className="font-outfit text-xs text-white/30 uppercase tracking-widest">
+                                            <span className="font-sans text-xs text-white/30 uppercase tracking-widest">
                                                 {exp.desc}
                                             </span>
                                         </Link>
@@ -216,7 +221,8 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                             <Link
                                 href={link.href}
                                 onClick={onClose}
-                                className="font-mohave text-4xl sm:text-5xl md:text-7xl uppercase font-bold text-rama-text hover:text-rama-accent transition-colors duration-300 block"
+                                suppressHydrationWarning
+                                className={`font-heading text-4xl sm:text-5xl md:text-7xl uppercase font-bold transition-colors duration-300 block ${pathname === link.href ? "text-yellow-500" : "text-white hover:text-yellow-500"}`}
                             >
                                 {link.name}
                             </Link>
@@ -224,32 +230,33 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                     ))}
 
                     {/* MOBILE CTA */}
-                    <div className="nav-link mt-4 md:hidden">
-                        <Link
+                    <div className="nav-link mt-8 md:hidden">
+                        <PrimaryButton
                             href="/contact"
                             onClick={onClose}
-                            className="inline-flex items-center justify-center w-full bg-rama-accent text-black font-mohave font-bold uppercase tracking-widest text-xl px-10 py-5 hover:bg-white transition-colors duration-300"
+                            size="lg"
+                            className="w-full text-xl py-6"
                         >
                             Richiedi Info
-                        </Link>
+                        </PrimaryButton>
                     </div>
                 </nav>
 
                 <div 
-                    className="mt-12 sm:mt-16 pt-8 border-t border-white/10 grid grid-cols-2 gap-8 font-outfit text-sm text-rama-muted"
+                    className="mt-12 sm:mt-16 pt-8 border-t border-white/10 grid grid-cols-2 gap-8 font-sans text-sm text-rama-muted"
                     onClick={(e) => e.stopPropagation()}
                 >
                     <div>
-                        <h4 className="font-rock-salt text-rama-accent mb-4 transform -rotate-2">Seguici</h4>
+                        <h4 className="font-rock-salt text-yellow-500 mb-4 transform -rotate-2">Seguici</h4>
                         <div className="flex flex-col gap-2">
-                            <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Seguici su Instagram">Instagram</a>
-                            <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Seguici su Facebook">Facebook</a>
-                            <a href={SOCIAL_LINKS.tiktok} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Seguici su TikTok">TikTok</a>
+                            <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" suppressHydrationWarning className="hover:text-white transition-colors" aria-label="Seguici su Instagram">Instagram</a>
+                            <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" suppressHydrationWarning className="hover:text-white transition-colors" aria-label="Seguici su Facebook">Facebook</a>
+                            <a href={SOCIAL_LINKS.tiktok} target="_blank" rel="noopener noreferrer" suppressHydrationWarning className="hover:text-white transition-colors" aria-label="Seguici su TikTok">TikTok</a>
                         </div>
                     </div>
                     <div>
-                        <h4 className="font-rock-salt text-rama-accent mb-4 transform -rotate-2">Contattaci</h4>
-                        <a href={`mailto:${CONTACT_EMAIL}`} className="text-white hover:text-rama-accent transition-colors text-lg tracking-wider">
+                        <h4 className="font-rock-salt text-yellow-500 mb-4 transform -rotate-2">Contattaci</h4>
+                        <a href={`mailto:${CONTACT_EMAIL}`} suppressHydrationWarning className="text-white hover:text-yellow-500 transition-colors text-lg tracking-wider">
                             {CONTACT_EMAIL}
                         </a>
                     </div>

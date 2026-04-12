@@ -48,7 +48,7 @@ export function RamaHowItWorks() {
                     <span className="font-rock-salt text-rama-accent text-base sm:text-xl transform -rotate-1 inline-block mb-6">
                         Semplice. Immediato. Indimenticabile.
                     </span>
-                    <h2 className="font-mohave font-bold uppercase tracking-tighter text-white text-[12vw] sm:text-[9vw] md:text-[6vw] leading-[0.88]">
+                    <h2 className="font-heading font-bold uppercase tracking-tighter text-white text-[12vw] sm:text-[9vw] md:text-[6vw] leading-[0.88]">
                         COME <span className="text-rama-accent">FUNZIONA</span>
                     </h2>
                 </div>
@@ -73,7 +73,7 @@ export function RamaHowItWorks() {
                                 style={{ transitionDelay: `${index * 150}ms` }}
                             >
                                 {/* Step number badge */}
-                                <div className="absolute -top-4 -left-2 font-mohave font-bold text-[6rem] md:text-[5rem] leading-none text-white/[0.04] select-none pointer-events-none">
+                                <div className="absolute -top-4 -left-2 font-heading font-bold text-[6rem] md:text-[5rem] leading-none text-white/[0.04] select-none pointer-events-none">
                                     {step.number}
                                 </div>
 
@@ -84,13 +84,13 @@ export function RamaHowItWorks() {
 
                                 {/* Content */}
                                 <div className="flex flex-col gap-2">
-                                    <span className="font-mohave font-bold uppercase tracking-widest text-rama-accent text-xs">
+                                    <span className="font-heading font-bold uppercase tracking-widest text-rama-accent text-xs">
                                         Step {step.number}
                                     </span>
-                                    <h3 className="font-mohave font-bold uppercase tracking-wide text-white text-xl lg:text-2xl leading-tight">
+                                    <h3 className="font-heading font-bold uppercase tracking-wide text-white text-xl lg:text-2xl leading-tight">
                                         {step.title}
                                     </h3>
-                                    <p className="font-outfit text-rama-muted text-base leading-relaxed">
+                                    <p className="font-sans text-rama-muted text-base leading-relaxed">
                                         {step.description}
                                     </p>
                                 </div>

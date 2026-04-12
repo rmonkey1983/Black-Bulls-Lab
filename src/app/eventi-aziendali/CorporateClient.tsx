@@ -47,22 +47,22 @@ export function CorporateClient() {
                     title="EVENTI"
                     highlight="Aziendali"
                     subtitle="Dimentica le solite cene. Progettiamo esperienze smart, digitali e altamente coinvolgenti per il tuo team."
-                    mediaUrl="/images/brand/bg-venue-crowd.png"
+                    mediaUrl="/images/brand/bg-venue-crowd.webp"
                 />
 
                 <div id="hero-stats" className="relative z-20 max-w-6xl mx-auto px-6 -mt-16 md:-mt-20 mb-20">
                     <div className="flex flex-wrap items-center gap-8 md:gap-16">
                         <div className="flex flex-col">
-                            <span className="gsap-counter font-mohave font-bold text-4xl md:text-6xl text-white" data-target="150">0</span>
-                            <span className="text-rama-accent font-outfit text-xs md:text-sm uppercase tracking-widest font-bold">Eventi Realizzati</span>
+                            <span className="gsap-counter font-heading font-bold text-4xl md:text-6xl text-white" data-target="150">0</span>
+                            <span className="text-rama-accent font-sans text-xs md:text-sm uppercase tracking-widest font-bold">Eventi Realizzati</span>
                         </div>
                         <div className="flex flex-col">
-                            <span className="font-mohave font-bold text-4xl md:text-6xl text-white"><span className="gsap-counter" data-target="100">0</span>%</span>
-                            <span className="text-rama-accent font-outfit text-xs md:text-sm uppercase tracking-widest font-bold">Coinvolgimento</span>
+                            <span className="font-heading font-bold text-4xl md:text-6xl text-white"><span className="gsap-counter" data-target="100">0</span>%</span>
+                            <span className="text-rama-accent font-sans text-xs md:text-sm uppercase tracking-widest font-bold">Coinvolgimento</span>
                         </div>
                         <div className="hidden md:flex flex-col border-l border-white/10 pl-16">
-                            <span className="gsap-counter font-mohave font-bold text-4xl md:text-5xl text-white/40" data-target="24">0</span>
-                            <span className="text-white/20 font-outfit text-xs uppercase tracking-widest font-bold">Ore per il Briefing</span>
+                            <span className="gsap-counter font-heading font-bold text-4xl md:text-5xl text-white/40" data-target="24">0</span>
+                            <span className="text-white/20 font-sans text-xs uppercase tracking-widest font-bold">Ore per il Briefing</span>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@ export function CorporateClient() {
             <div className="max-w-6xl mx-auto px-6 space-y-24 relative z-10">
                 <section id="team-merit" className="space-y-16">
                     <div className="text-center">
-                        <h2 className="font-mohave font-bold uppercase tracking-tighter text-white text-4xl md:text-7xl mb-4 leading-none">
+                        <h2 className="font-heading font-bold uppercase tracking-tighter text-white text-4xl md:text-7xl mb-4 leading-none">
                             IL TUO TEAM MERITA <br className="md:hidden" />
                             <span className="text-rama-accent">UN&apos;ESPERIENZA SMART</span>
                         </h2>
@@ -82,10 +82,10 @@ export function CorporateClient() {
                             <div className="w-12 h-12 rounded-full bg-rama-accent/10 flex items-center justify-center text-rama-accent">
                                 <Users size={24} />
                             </div>
-                            <h3 className="font-mohave uppercase font-bold text-white text-xl leading-tight">
+                            <h3 className="font-heading uppercase font-bold text-white text-xl leading-tight">
                                 Partecipazione 100% Digitale
                             </h3>
-                            <p className="font-outfit text-rama-muted text-sm leading-relaxed">
+                            <p className="font-sans text-rama-muted text-sm leading-relaxed">
                                 Ogni dipendente interagisce con il proprio smartphone. Nessuno resta a guardare, tutti sono protagonisti del gioco.
                             </p>
                         </div>
@@ -94,10 +94,10 @@ export function CorporateClient() {
                             <div className="w-12 h-12 rounded-full bg-rama-accent/10 flex items-center justify-center text-rama-accent">
                                 <Users size={24} />
                             </div>
-                            <h3 className="font-mohave uppercase font-bold text-white text-xl leading-tight">
+                            <h3 className="font-heading uppercase font-bold text-white text-xl leading-tight">
                                 Scalabilità Illimitata
                             </h3>
-                            <p className="font-outfit text-rama-muted text-sm leading-relaxed">
+                            <p className="font-sans text-rama-muted text-sm leading-relaxed">
                                 Gestiamo piccoli gruppi o intere divisioni aziendali con la stessa qualità, grazie alla nostra regia Web App proprietaria.
                             </p>
                         </div>
@@ -106,10 +106,10 @@ export function CorporateClient() {
                             <div className="w-12 h-12 rounded-full bg-rama-accent/10 flex items-center justify-center text-rama-accent">
                                 <Sparkles size={24} />
                             </div>
-                            <h3 className="font-mohave uppercase font-bold text-white text-xl leading-tight">
+                            <h3 className="font-heading uppercase font-bold text-white text-xl leading-tight">
                                 Dashboard & Feedback
                             </h3>
-                            <p className="font-outfit text-rama-muted text-sm leading-relaxed">
+                            <p className="font-sans text-rama-muted text-sm leading-relaxed">
                                 Monitora il coinvolgimento e ricevi i feedback della serata. Unire il team non è mai stato così tecnologico e divertente.
                             </p>
                         </div>
@@ -117,7 +117,7 @@ export function CorporateClient() {
                 </section>
 
                 <div id="services-intro" className="text-center">
-                    <h2 className="font-mohave font-bold uppercase tracking-tighter text-white text-4xl md:text-7xl mb-4 leading-none">
+                    <h2 className="font-heading font-bold uppercase tracking-tighter text-white text-4xl md:text-7xl mb-4 leading-none">
                         PROGETTIAMO <span className="text-rama-accent">IL VOSTRO SHOW</span>
                     </h2>
                 </div>
@@ -125,10 +125,10 @@ export function CorporateClient() {
                 <section id="pricing-grid" className="space-y-12">
                     <div className="text-center">
                         <span className="font-rock-salt text-rama-accent text-xl transform -rotate-1 inline-block mb-4">Soluzioni chiavi in mano</span>
-                        <h2 className="font-mohave font-bold uppercase tracking-tighter text-white text-4xl md:text-[4vw] leading-[0.9]">
+                        <h2 className="font-heading font-bold uppercase tracking-tighter text-white text-4xl md:text-[4vw] leading-[0.9]">
                             FORMAT <span className="text-rama-accent">AZIENDALI</span>
                         </h2>
-                        <p className="font-outfit text-rama-muted mt-4 max-w-xl mx-auto">
+                        <p className="font-sans text-rama-muted mt-4 max-w-xl mx-auto">
                             Scegliete il livello di interazione. Dalla web app standard alla personalizzazione totale del mistero aziendale.
                         </p>
                     </div>
@@ -142,25 +142,25 @@ export function CorporateClient() {
                                 }`}
                             >
                                 {tier.highlighted && (
-                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-rama-accent text-black font-mohave font-bold uppercase text-xs tracking-widest px-4 py-1 rounded-full whitespace-nowrap z-10">
+                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-rama-accent text-black font-heading font-bold uppercase text-xs tracking-widest px-4 py-1 rounded-full whitespace-nowrap z-10">
                                         Più scelto
                                     </div>
                                 )}
                                 <div>
-                                    <h3 className="font-mohave font-bold uppercase tracking-wide text-white text-2xl">{tier.name}</h3>
-                                    <p className="font-outfit text-rama-muted text-sm mt-1">{tier.size}</p>
+                                    <h3 className="font-heading font-bold uppercase tracking-wide text-white text-2xl">{tier.name}</h3>
+                                    <p className="font-sans text-rama-muted text-sm mt-1">{tier.size}</p>
                                 </div>
-                                <div className={`font-mohave font-bold text-2xl ${tier.highlighted ? "text-rama-accent" : "text-white"}`}>
+                                <div className={`font-heading font-bold text-2xl ${tier.highlighted ? "text-rama-accent" : "text-white"}`}>
                                     {tier.price}
                                 </div>
                                 <ul className="flex flex-col gap-3 flex-grow py-4">
                                     {tier.includes.map(item => (
-                                        <li key={item} className="flex items-start gap-2 font-outfit text-sm text-rama-muted">
+                                        <li key={item} className="flex items-start gap-2 font-sans text-sm text-rama-muted">
                                             <CheckCircle2 size={16} className="text-rama-accent flex-shrink-0 mt-0.5" />
                                             {item}
                                         </li>
                                     ))}
-                                    <li className="flex items-start gap-2 font-outfit text-sm text-rama-accent font-bold">
+                                    <li className="flex items-start gap-2 font-sans text-sm text-rama-accent font-bold">
                                         <Sparkles size={16} className="flex-shrink-0 mt-0.5" />
                                         Web App Interattiva Inclusa
                                     </li>
@@ -168,7 +168,7 @@ export function CorporateClient() {
                                 <div className="mt-auto flex flex-col gap-4">
                                     <a
                                         href={`/contact?tier=${encodeURIComponent(tier.name)}`}
-                                        className={`w-full text-center font-mohave font-bold uppercase tracking-widest text-sm px-6 py-4 rounded-lg transition-colors duration-300 ${ tier.highlighted
+                                        className={`w-full text-center font-heading font-bold uppercase tracking-widest text-sm px-6 py-4 rounded-lg transition-colors duration-300 ${ tier.highlighted
                                                 ? "bg-rama-accent text-black hover:bg-white"
                                                 : "border border-white/20 text-white hover:border-rama-accent hover:text-rama-accent"
                                         }`}
@@ -193,18 +193,18 @@ export function CorporateClient() {
                         className="flex-col-reverse md:flex-row"
                         content={ <div className="space-y-6 mt-8 md:mt-0">
                                 <Building2 size={42} className="text-rama-accent mb-4" />
-                                <h3 className="font-mohave font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-5xl md:text-[6vw]">
+                                <h3 className="font-heading font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-5xl md:text-[6vw]">
                                     <span className="text-white">Team Building</span>
                                     <span className="text-rama-accent">Interattivo.</span>
                                 </h3>
-                                <p className="text-rama-muted font-outfit text-lg leading-relaxed mt-6">
+                                <p className="text-rama-muted font-sans text-lg leading-relaxed mt-6">
                                     Niente unisce un gruppo di lavoro più di una sfida digitale condivisa. I nostri format permettono di collaborare in tempo reale per risolvere misteri o vincere contest, alimentando lo spirito di squadra in modo moderno.
                                 </p>
                             </div>
                         }
                     >
                         <ParallaxImage
-                            src="/images/brand/service-plating.png"
+                            src="/images/brand/service-plating.webp"
                             alt="Team Building"
                             aspectRatio="landscape"
                             speed={0.2}
@@ -215,18 +215,18 @@ export function CorporateClient() {
                         className="flex-col-reverse md:flex-row-reverse"
                         content={ <div className="space-y-6 mt-8 md:mt-0">
                                 <Users size={42} className="text-rama-accent mb-4" />
-                                <h3 className="font-mohave font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-5xl md:text-[6vw]">
+                                <h3 className="font-heading font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-5xl md:text-[6vw]">
                                     <span className="text-white">Networking</span>
                                     <span className="text-rama-accent">Tecnologico.</span>
                                 </h3>
-                                <p className="text-rama-muted font-outfit text-lg leading-relaxed mt-6">
+                                <p className="text-rama-muted font-sans text-lg leading-relaxed mt-6">
                                     Eliminiamo l&apos;imbarazzo dei classici eventi. La nostra Web App agisce come un facilitatore sociale, guidando gli ospiti in interazioni naturali attraverso missioni e mini-giochi digitali al tavolo.
                                 </p>
                             </div>
                         }
                     >
                         <ParallaxImage
-                            src="/images/brand/service-plating.png"
+                            src="/images/brand/service-plating.webp"
                             alt="Team Building"
                             aspectRatio="landscape"
                             speed={0.2}
@@ -237,18 +237,18 @@ export function CorporateClient() {
                         className="flex-col-reverse md:flex-row"
                         content={ <div className="space-y-6 mt-8 md:mt-0">
                                 <Sparkles size={42} className="text-rama-accent mb-4" />
-                                <h3 className="font-mohave font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-5xl md:text-[6vw]">
+                                <h3 className="font-heading font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-5xl md:text-[6vw]">
                                     <span className="text-white">Esperienza</span>
                                     <span className="text-rama-accent">Chiavi in Mano.</span>
                                 </h3>
-                                <p className="text-rama-muted font-outfit text-lg leading-relaxed mt-6">
+                                <p className="text-rama-muted font-sans text-lg leading-relaxed mt-6">
                                     Scegli tu il livello di personalizzazione. Dalla creazione di format ad alto impatto, al menu dedicato, fino alla meticolosa scelta dell&apos;artista o del performer perfetto per il tono e la visione della tua azienda.
                                 </p>
                             </div>
                         }
                     >
                         <ParallaxImage
-                            src="/images/brand/bg-stage-lights.png"
+                            src="/images/brand/bg-stage-lights.webp"
                             alt="Networking"
                             aspectRatio="landscape"
                             speed={0.2}
@@ -264,15 +264,15 @@ export function CorporateClient() {
                     <div className="absolute bottom-0 right-0 w-6 h-6 border-b border-r border-rama-accent/15" />
 
                     <div className="text-center mb-12">
-                        <h3 className="font-mohave font-bold leading-[0.8] tracking-tighter uppercase text-white text-4xl md:text-[5vw] mb-4">
+                        <h3 className="font-heading font-bold leading-[0.8] tracking-tighter uppercase text-white text-4xl md:text-[5vw] mb-4">
                             Progetta il tuo <br className="md:hidden" /><span className="text-rama-accent">Prossimo Evento</span>
                         </h3>
-                        <p className="text-rama-muted font-outfit max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+                        <p className="text-rama-muted font-sans max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
                             Raccontaci la tua idea. Il nostro team è pronto a confezionare un&apos;esperienza su misura per le esigenze, il budget e gli obiettivi della tua azienda.
                         </p>
                     </div>
 
-                    <form className="max-w-3xl mx-auto font-outfit space-y-6">
+                    <form className="max-w-3xl mx-auto font-sans space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="gsap-fade space-y-2">
                                 <label className="block text-xs md:text-sm text-rama-muted uppercase tracking-wider font-bold">Nome Azienda</label>
@@ -313,7 +313,7 @@ export function CorporateClient() {
                         </div>
 
                         <div className="gsap-fade pt-8">
-                            <button type="button" className="w-full md:w-auto inline-flex items-center justify-center bg-rama-accent text-black font-mohave text-lg md:text-xl uppercase tracking-widest font-bold px-12 py-5 hover:bg-white transition-colors rounded-sm shadow-xl shadow-rama-accent/10">
+                            <button type="button" className="w-full md:w-auto inline-flex items-center justify-center bg-rama-accent text-black font-heading text-lg md:text-xl uppercase tracking-widest font-bold px-12 py-5 hover:bg-white transition-colors rounded-sm shadow-xl shadow-rama-accent/10">
                                 Costruiamo insieme la serata
                             </button>
                         </div>

@@ -11,7 +11,7 @@ export function TalentsClient() {
                 title="I NOSTRI"
                 highlight="Artisti"
                 subtitle="Le menti creative e i talenti che danno vita ad ogni esperienza del Black Bulls Lab."
-                mediaUrl="/images/brand/service-performance.png"
+                mediaUrl="/images/brand/service-performance.webp"
             />
             <div className="max-w-7xl mx-auto px-6 space-y-20">
                 <section className="py-20 flex flex-col md:flex-row items-center gap-12 border-y border-white/5 bg-white/[0.02] rounded-3xl p-8 md:p-16">
@@ -20,7 +20,7 @@ export function TalentsClient() {
                             <span className="flex items-center gap-2 text-rama-accent text-xs font-bold tracking-[0.2em] uppercase">
                                 <Users size={14} /> Join the Lab
                             </span>
-                            <h2 className="text-4xl md:text-6xl font-bold text-white font-mohave uppercase tracking-tighter leading-none">
+                            <h2 className="text-4xl md:text-6xl font-bold text-white font-heading uppercase tracking-tighter leading-none">
                                 Sei un artista, <br />
                                 <span className="text-rama-accent">performer o chef?</span>
                             </h2>
@@ -31,7 +31,7 @@ export function TalentsClient() {
                         
                         <Link
                             href="/contact?motivo=candidatura-artista"
-                            className="group inline-flex items-center gap-3 bg-rama-accent text-black font-mohave font-bold uppercase tracking-widest text-base px-10 py-5 rounded-full hover:bg-white transition-colors duration-300"
+                            className="group inline-flex items-center gap-3 bg-rama-accent text-black font-heading font-bold uppercase tracking-widest text-base px-10 py-5 rounded-full hover:bg-white transition-colors duration-300"
                         >
                             Voglio esibirmi con voi
                             <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -48,7 +48,7 @@ export function TalentsClient() {
                             <div key={item.role} className="p-6 border border-white/10 bg-black/40 rounded-2xl hover:border-rama-accent/40 transition-colors group flex items-center gap-4 sm:flex-col sm:items-start">
                                 <item.icon size={28} className="text-rama-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
                                 <div>
-                                    <h3 className="font-mohave font-bold text-white uppercase tracking-wider text-xl">{item.role}</h3>
+                                    <h3 className="font-heading font-bold text-white uppercase tracking-wider text-xl">{item.role}</h3>
                                     <p className="text-[10px] text-gray-500 uppercase tracking-widest mt-1">{item.desc}</p>
                                 </div>
                             </div>
@@ -57,7 +57,7 @@ export function TalentsClient() {
                 </section>
 
                 <section className="text-center max-w-3xl mx-auto py-12">
-                    <p className="font-outfit text-rama-muted italic text-lg opacity-60">
+                    <p className="font-sans text-rama-muted italic text-lg opacity-60">
                         "Non cerchiamo semplici esecutori, ma menti creative che vogliano sfidare i limiti dell&apos;intrattenimento tradizionale."
                     </p>
                 </section>

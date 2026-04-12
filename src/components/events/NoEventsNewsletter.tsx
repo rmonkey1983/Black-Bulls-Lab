@@ -92,13 +92,13 @@ export function NoEventsNewsletter() {
                 </span>
 
                 {/* Headline */}
-                <div className="newsletter-headline font-mohave font-bold uppercase tracking-tighter text-white leading-[0.85] text-[12vw] sm:text-[9vw] md:text-[6vw] overflow-hidden">
+                <div className="newsletter-headline font-heading font-bold uppercase tracking-tighter text-white leading-[0.85] text-[12vw] sm:text-[9vw] md:text-[6vw] overflow-hidden">
                     <div className="will-change-transform">Stiamo preparando</div>
                     <div className="text-rama-accent will-change-transform">le prossime date.</div>
                 </div>
 
                 {/* Body text */}
-                <p className="newsletter-body font-outfit text-rama-muted text-lg md:text-xl max-w-lg leading-relaxed">
+                <p className="newsletter-body font-sans text-rama-muted text-lg md:text-xl max-w-lg leading-relaxed">
                     Lascia la tua email — sarai il primo a sapere quando escono i biglietti.{" "}
                     <span className="text-white font-medium">Spesso sold out in 48 ore.</span>
                 </p>
@@ -112,7 +112,7 @@ export function NoEventsNewsletter() {
                     ].map(({ icon: Icon, text }) => (
                         <div
                             key={text}
-                            className="newsletter-feature flex items-center gap-2 bg-white/[0.04] border border-white/10 rounded-full px-4 py-2 text-sm text-white/70 font-outfit"
+                            className="newsletter-feature flex items-center gap-2 bg-white/[0.04] border border-white/10 rounded-full px-4 py-2 text-sm text-white/70 font-sans"
                         >
                             <Icon size={13} className="text-rama-accent" />
                             {text}
@@ -127,10 +127,10 @@ export function NoEventsNewsletter() {
                             <div className="w-14 h-14 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center">
                                 <CheckCircle className="text-green-500" size={28} />
                             </div>
-                            <p className="font-mohave font-bold uppercase text-white text-xl tracking-wide">
+                            <p className="font-heading font-bold uppercase text-white text-xl tracking-wide">
                                 Sei dentro!
                             </p>
-                            <p className="font-outfit text-rama-muted text-sm">
+                            <p className="font-sans text-rama-muted text-sm">
                                 Ti avviseremo non appena la prossima data sarà disponibile.
                             </p>
                         </div>
@@ -150,7 +150,7 @@ export function NoEventsNewsletter() {
                                         if (status === "error") setStatus("idle");
                                     }}
                                     placeholder="La tua email..."
-                                    className={`flex-1 bg-white/[0.05] border rounded-xl px-5 py-4 text-white font-outfit text-sm placeholder:text-white/30 focus:outline-none transition-colors ${
+                                    className={`flex-1 bg-white/[0.05] border rounded-xl px-5 py-4 text-white font-sans text-sm placeholder:text-white/30 focus:outline-none transition-colors ${
                                         status === "error"
                                             ? "border-red-500/50 focus:border-red-500/70"
                                             : "border-white/15 focus:border-rama-accent/50"
@@ -159,7 +159,7 @@ export function NoEventsNewsletter() {
                                 <button
                                     type="submit"
                                     disabled={status === "loading"}
-                                    className="flex items-center justify-center gap-2 bg-rama-accent text-black font-mohave font-bold uppercase tracking-widest text-sm px-6 py-4 rounded-xl hover:bg-white transition-colors duration-300 disabled:opacity-50 disabled:cursor-wait whitespace-nowrap"
+                                    className="flex items-center justify-center gap-2 bg-rama-accent text-black font-heading font-bold uppercase tracking-widest text-sm px-6 py-4 rounded-xl hover:bg-white transition-colors duration-300 disabled:opacity-50 disabled:cursor-wait whitespace-nowrap"
                                 >
                                     {status === "loading" ? (
                                         <span className="inline-block w-4 h-4 border-2 border-black/40 border-t-black rounded-full animate-spin" />
@@ -169,13 +169,13 @@ export function NoEventsNewsletter() {
                                 </button>
                             </form>
                             {status === "error" && errorMsg && (
-                                <p className="font-outfit text-red-400 text-xs mt-2 text-left">
+                                <p className="font-sans text-red-400 text-xs mt-2 text-left">
                                     ⚠ {errorMsg}
                                 </p>
                             )}
                         </>
                     )}
-                    <p className="font-outfit text-xs text-white/20 mt-3">
+                    <p className="font-sans text-xs text-white/20 mt-3">
                         Nessuno spam. Disiscrizione in un click. Privacy garantita.
                     </p>
                 </div>
@@ -183,7 +183,7 @@ export function NoEventsNewsletter() {
                 {/* Secondary link — /format */}
                 <Link
                     href="/format"
-                    className="group inline-flex items-center gap-2 font-outfit text-sm text-white/40 hover:text-rama-accent transition-colors duration-300 uppercase tracking-widest mt-2"
+                    className="group inline-flex items-center gap-2 font-sans text-sm text-white/40 hover:text-rama-accent transition-colors duration-300 uppercase tracking-widest mt-2"
                 >
                     Nel frattempo, scopri i nostri format
                     <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-300" />

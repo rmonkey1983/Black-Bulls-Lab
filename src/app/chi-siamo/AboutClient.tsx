@@ -1,11 +1,15 @@
 "use client";
 
 import { ImmersiveHeader } from "@/components/layout/ImmersiveHeader";
-import { ParallaxImage, StickyTextSection } from "@/components/ui/ParallaxScroll";
-import { PremiumButton } from "@/components/ui/PremiumButton";
-import { Sparkles, Target, Heart, Star, ArrowRight } from "lucide-react";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PrimaryButton } from "@/components/ui/PrimaryButton";
+import { SecondaryButton } from "@/components/ui/SecondaryButton";
+import { PremiumCard } from "@/components/ui/PremiumCard";
+import { Sparkles, Target, Heart, ArrowRight } from "lucide-react";
 import { useGSAP } from "@/hooks/useGSAP";
 import { animateQuote, animateSteps, animateFade } from "@/lib/gsapAnimations";
+import { TeamGrid } from "@/components/ui/TeamGrid";
+import { gsap } from "gsap";
 
 const timeline = [
     { year: "2024", title: "L'Ideazione", desc: "Nasce l'idea di Black Bulls Lab. Volevamo garantire al nostro pubblico torinese serate uniche dove l'alta cucina incontra lo spettacolo dal vivo, offrendoti un'esperienza mai vista prima." },
@@ -13,197 +17,185 @@ const timeline = [
     { year: "Oggi", title: "Oltre l'Evento", desc: "Progettiamo produzioni originali e soluzioni su misura sempre più ambiziose. Il nostro focus rimane uno solo: farti vivere ricordi indimenticabili." },
 ];
 
+import { usePathname } from "next/navigation";
+
 export function AboutClient() {
+    const pathname = usePathname();
     useGSAP(() => {
-        animateQuote("#vision-section");
-        animateSteps("#timeline-steps");
-        animateFade("#values-grid", "up", 0.1);
-    });
+        // Hero title reveal
+        animateQuote("#hero-title-reveal");
+
+        // Icons stagger in Values section
+        gsap.from(".value-card", {
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+                trigger: "#values-grid",
+                start: "top 80%"
+            }
+        });
+    }, { dependencies: [pathname] });
+
+    const scrollToVision = (e: React.MouseEvent) => {
+        e.preventDefault();
+        const visionSection = document.getElementById('vision-section');
+        if (visionSection) {
+            visionSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
 
     return (
-        <div className="min-h-screen pb-24 relative">
+        <div className="min-h-screen relative bg-transparent overflow-hidden">
+            {/* 1. HERO SECTION */}
             <ImmersiveHeader
                 id="about-hero"
-                title="CHI"
-                highlight="Siamo"
-                subtitle="Siamo i Black Bulls. Dietro ogni serata, c'è una squadra ossessionata dai dettagli."
-                mediaUrl="/images/brand/bg-venue-crowd.png"
+                title="OLTRE L'EVENTO."
+                highlight="OLTRE L'IMMAGINAZIONE."
+                subtitle="LA VISIONE. Benvenuto nel laboratorio dove la precisione incontra la magia."
+                mediaUrl="/images/brand/bg-venue-crowd.webp"
             />
-
-            <div className="relative z-10 space-y-16 md:space-y-24 mt-[-4vh]">
-                <section className="px-6 max-w-7xl mx-auto">
-                    <StickyTextSection
-                        content={
-                            <div className="space-y-4">
-                                <div className="flex items-center gap-3">
-                                    <div className="h-[1px] w-12 bg-rama-accent/40" />
-                                    <span className="font-rock-salt text-rama-accent transform -rotate-2 text-xl block">La Visione</span>
-                                </div>
-                                <div id="vision-section" className="gsap-quote">
-                                    <h2 className="font-mohave font-bold leading-[0.85] tracking-tighter uppercase text-white flex flex-col text-4xl md:text-7xl mt-2">
-                                        <div className="reveal-block"><span className="inner text-white">Oltre l&apos;</span></div>
-                                        <div className="reveal-block"><span className="inner text-rama-accent">evento.</span></div>
-                                        <div className="reveal-block"><span className="inner text-white">Oltre l&apos;</span></div>
-                                        <div className="reveal-block"><span className="inner text-rama-accent">immaginazione.</span></div>
-                                    </h2>
-                                </div>
-                                <p className="gsap-fade text-base md:text-lg text-rama-muted font-outfit font-light leading-relaxed mt-4">
-                                    Black Bulls Lab è molto più di un&apos;agenzia. Siamo architetti dell&apos;intrattenimento. 
-                                    Progettiamo dinner show e spettacoli dove l&apos;ospite è al centro della scena, 
-                                    curando maniacalmente sia la direzione creativa che l&apos;eccellenza esecutiva.
-                                </p>
-                                <div className="pt-4">
-                                    <PremiumButton href="/format" variant="gold" size="lg">
-                                        <span className="font-mohave tracking-widest uppercase text-base">Vedi cosa abbiamo creato</span>
-                                        <ArrowRight size={18} className="ml-2" />
-                                    </PremiumButton>
-                                </div>
-                            </div>
-                        }
-                    >
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4 h-full">
-                            <ParallaxImage
-                                src="/images/brand/team-art-director.png"
-                                alt="Il Nostro Art Director"
-                                aspectRatio="portrait"
-                                speed={0.2}
-                                priority
-                            />
-                            <div className="md:pt-12">
-                                <ParallaxImage
-                                    src="/images/brand/team-chef.png"
-                                    alt="Il Nostro Chef"
-                                    aspectRatio="portrait"
-                                    speed={0.4}
-                                />
-                            </div>
-                        </div>
-                    </StickyTextSection>
-                </section>
-
-                <section className="relative py-32 overflow-hidden">
-                    <div className="absolute inset-0 z-0">
-                        <ParallaxImage
-                            src="/images/brand/bg-venue-crowd.png"
-                            alt="Crowd & Lights"
-                            className="!w-full !h-full !rounded-none !aspect-auto"
-                            speed={0.5}
-                        />
-                        <div className="absolute inset-0 bg-rama-bg/80 backdrop-blur-sm" />
+            
+            <div className="flex justify-center mt-[-10vh] mb-20 relative z-20">
+                <button 
+                    onClick={scrollToVision}
+                    className="group flex flex-col items-center gap-4 transition-transform duration-500 hover:scale-105"
+                >
+                    <span className="font-heading tracking-[0.3em] uppercase text-xs text-rama-muted group-hover:text-yellow-500 transition-colors">
+                        Vedi cosa abbiamo creato
+                    </span>
+                    <div className="w-12 h-12 rounded-full border border-yellow-500/20 flex items-center justify-center bg-black/40 backdrop-blur-sm group-hover:border-yellow-500 transition-all duration-300">
+                        <ArrowRight size={20} className="text-yellow-500 rotate-90" />
                     </div>
-
-                    <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-                        <h3 className="font-mohave font-bold leading-[0.8] tracking-tighter uppercase text-white text-[12vw] md:text-[10vw] mb-12">
-                            La <span className="text-rama-accent">Differenza</span>
-                        </h3>
-                        <div className="grid md:grid-cols-3 gap-8">
-                            <div className="space-y-4">
-                                <div className="w-12 h-12 mx-auto rounded-full border border-rama-accent/30 flex items-center justify-center text-rama-accent">
-                                    <Target size={20} />
-                                </div>
-                                <p className="text-rama-muted font-outfit">Non offriamo un servizio ordinario <br /> <span className="text-rama-accent font-semibold">progettiamo emozioni indimenticabili</span></p>
-                            </div>
-                            <div className="space-y-4">
-                                <div className="w-12 h-12 mx-auto rounded-full border border-rama-accent/30 flex items-center justify-center text-rama-accent">
-                                    <Sparkles size={20} />
-                                </div>
-                                <p className="text-rama-muted font-outfit">Non proponiamo format pre-confezionati <br /> <span className="text-rama-accent font-semibold">creiamo soluzioni su misura</span></p>
-                            </div>
-                            <div className="space-y-4">
-                                <div className="w-12 h-12 mx-auto rounded-full border border-rama-accent/30 flex items-center justify-center text-rama-accent">
-                                    <Heart size={20} />
-                                </div>
-                                <p className="text-rama-muted font-outfit">Non organizziamo semplici date <br /> <span className="text-rama-accent font-semibold">costruiamo ricordi preziosi</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="px-6 max-w-7xl mx-auto">
-                    <StickyTextSection
-                        className="md:flex-row-reverse"
-                        content={
-                            <div className="space-y-6">
-                                <div className="flex items-center gap-3">
-                                    <div className="h-[1px] w-12 bg-rama-accent/40" />
-                                    <span className="font-rock-salt text-rama-accent transform -rotate-2 text-xl block">I Nostri Valori</span>
-                                </div>
-                                <h2 className="font-mohave font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-5xl md:text-7xl mt-6">
-                                    <span className="text-white">Dettagli che fanno </span>
-                                    <span className="text-rama-accent">la differenza.</span>
-                                </h2>
-                                
-                                <div id="values-grid" className="bg-black/50 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-white/5 shadow-2xl mt-8 mx-[-2vw] sm:mx-0">
-                                    <p className="gsap-fade text-base md:text-lg text-white/90 font-outfit font-light leading-relaxed">
-                                        Esperienza, passione e dedizione assoluta. Questi sono i pilastri con cui affrontiamo 
-                                        ogni singola produzione. Il nostro team è programmato per trovare sempre la soluzione ideale 
-                                        e superare le aspettative del tuo pubblico, in ogni situazione.
-                                    </p>
-                                    <ul className="space-y-4 pt-6 font-outfit">
-                                        <li className="gsap-fade flex items-center gap-4">
-                                            <Star className="text-rama-accent" size={20} />
-                                            <span className="text-white font-medium tracking-wide">Creatività senza limiti</span>
-                                        </li>
-                                        <li className="gsap-fade flex items-center gap-4">
-                                            <Target className="text-rama-accent" size={20} />
-                                            <span className="text-white font-medium tracking-wide">Precisione maniacale</span>
-                                        </li>
-                                        <li className="gsap-fade flex items-center gap-4">
-                                            <Heart className="text-rama-accent" size={20} />
-                                            <span className="text-white font-medium tracking-wide">Emozione al centro</span>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div className="pt-6">
-                                    <PremiumButton href="/format" variant="outline" size="lg">
-                                        <span className="font-mohave tracking-widest uppercase text-base text-white">Prenota la tua serata</span>
-                                        <ArrowRight size={18} className="ml-2 text-white" />
-                                    </PremiumButton>
-                                </div>
-                            </div>
-                        }
-                    >
-                        <ParallaxImage
-                            src="/images/brand/service-plating.png"
-                            alt="Alta Gastronomia"
-                            aspectRatio="portrait"
-                            speed={0.3}
-                        />
-                    </StickyTextSection>
-                </section>
-
-                <section className="max-w-5xl mx-auto px-6 pt-16 pb-32">
-                    <div className="gsap-fade text-center mb-20 flex flex-col items-center">
-                        <span className="font-rock-salt text-rama-accent transform -rotate-2 text-2xl md:text-3xl block">La Nostra Visione</span>
-                        <h2 className="font-mohave text-4xl md:text-6xl font-bold text-white uppercase mt-4">La Timeline</h2>
-                        <div className="h-[2px] w-24 bg-rama-accent/40 mt-6" />
-                    </div>
-
-                    <div className="relative">
-                        <div className="absolute top-0 bottom-0 left-4 md:left-1/2 w-[1px] bg-rama-accent/15 md:-translate-x-1/2" />
-                        
-                        <div id="timeline-steps" className="space-y-16 md:space-y-24">
-                            {timeline.map((item, i) => (
-                                <div
-                                    key={i}
-                                    className={`gsap-step relative flex flex-col md:flex-row items-start md:items-center w-full ${
-                                        i % 2 === 0 ? 'md:flex-row-reverse' : ''
-                                    }`}
-                                >
-                                    <div className="absolute left-[11px] md:left-1/2 top-2 md:top-1/2 w-4 h-4 border border-rama-accent/60 rotate-45 bg-bg-dark md:-translate-y-1/2 z-10 transition-colors duration-500 group-hover:bg-rama-accent" style={{ transform: "translateX(-50%) rotate(45deg)" }} />
-
-                                    <div className={`w-full md:w-1/2 pl-12 md:pl-0 ${i % 2 === 0 ? 'md:pr-16 md:text-right' : 'md:pl-16 md:text-left'}`}>
-                                        <span className="text-sm md:text-base text-rama-accent tracking-widest uppercase font-mohave">{item.year}</span>
-                                        <h3 className="font-mohave text-3xl md:text-4xl lg:text-5xl font-bold text-white uppercase mt-2">{item.title}</h3>
-                                        <p className={`text-rama-muted font-outfit text-base md:text-lg mt-4 leading-relaxed max-w-md ${i % 2 === 0 ? 'md:ml-auto' : 'md:mr-auto'}`}>{item.desc}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
+                </button>
             </div>
+
+            {/* 2. SEZIONE VISIONE (Il Laboratorio) */}
+            <section id="vision-section" className="reveal-section py-24 px-6 max-w-7xl mx-auto border-t border-white/5">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div className="space-y-8">
+                        <SectionHeading 
+                            title="IL LABORATORIO DI"
+                            highlight="EMOZIONI"
+                            subtitle="Il Laboratorio"
+                            align="left"
+                        />
+                        <p className="font-sans text-lg md:text-xl text-zinc-300 font-light leading-relaxed max-w-xl">
+                            In Black Bulls Lab, ogni evento è un esperimento di precisione. Julian Halili ha fondato questo progetto con una visione chiara: unire l&apos;organizzazione millimetrica di un laboratorio tecnico alla scintilla creativa dell&apos;intrattenimento dal vivo. Non siamo solo organizzatori, siamo architetti di esperienze che sfidano l&apos;ordinario.
+                        </p>
+                    </div>
+                    <div className="flex justify-center lg:justify-end">
+                        <div className="relative w-64 h-64 md:w-96 md:h-96">
+                            <div className="absolute inset-0 border-[1px] border-yellow-500/20 rounded-full animate-[spin_20s_linear_infinite]" />
+                            <div className="absolute inset-4 border-[1px] border-white/5 rounded-full" />
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <Sparkles size={80} className="text-yellow-500 opacity-40" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* 3. SEZIONE VALORI (Perché noi) */}
+            <section id="values-grid" className="reveal-section bg-zinc-950/50 py-32 border-y border-white/5">
+                <div className="max-w-7xl mx-auto px-6">
+                    <SectionHeading 
+                        title="PERCHÉ SCEGLIERE"
+                        highlight="IL LAB"
+                        align="center"
+                        accentPos="bottom"
+                        className="mb-20"
+                    />
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {/* Valore 1 */}
+                        <PremiumCard className="value-card p-10 group">
+                            <div className="w-16 h-16 rounded-xl border border-yellow-500/20 flex items-center justify-center text-yellow-500 mb-8 group-hover:border-yellow-500 transition-colors">
+                                <Target size={32} />
+                            </div>
+                            <h4 className="font-heading text-2xl font-bold text-white uppercase mb-4 tracking-wide group-hover:text-yellow-500 transition-colors">
+                                FORMAT REPLICABILI
+                            </h4>
+                            <p className="font-sans text-zinc-400 font-light leading-relaxed">
+                                Soluzioni concrete e scalabili per ogni tipologia di spazio, garantendo sempre la massima qualità esecutiva.
+                            </p>
+                        </PremiumCard>
+
+                        {/* Valore 2 */}
+                        <PremiumCard className="value-card p-10 group">
+                            <div className="w-16 h-16 rounded-xl border border-yellow-500/20 flex items-center justify-center text-yellow-500 mb-8 group-hover:border-yellow-500 transition-colors">
+                                <Heart size={32} />
+                            </div>
+                            <h4 className="font-heading text-2xl font-bold text-white uppercase mb-4 tracking-wide group-hover:text-yellow-500 transition-colors">
+                                COINVOLGIMENTO
+                            </h4>
+                            <p className="font-sans text-zinc-400 font-light leading-relaxed">
+                                L&apos;ospite non è un semplice spettatore, ma il vero protagonista al centro di una narrazione immersiva.
+                            </p>
+                        </PremiumCard>
+
+                        {/* Valore 3 */}
+                        <PremiumCard className="value-card p-10 group">
+                            <div className="w-16 h-16 rounded-xl border border-yellow-500/20 flex items-center justify-center text-yellow-500 mb-8 group-hover:border-yellow-500 transition-colors">
+                                <Sparkles size={32} />
+                            </div>
+                            <h4 className="font-heading text-2xl font-bold text-white uppercase mb-4 tracking-wide group-hover:text-yellow-500 transition-colors">
+                                ECCELLENZA TECNICA
+                            </h4>
+                            <p className="font-sans text-zinc-400 font-light leading-relaxed">
+                                Nulla è lasciato al caso. Ogni dettaglio audio, video e logistico è orchestrato con perfezione millimetrica.
+                            </p>
+                        </PremiumCard>
+                    </div>
+                </div>
+            </section>
+
+            {/* 4. SEZIONE TEAM (L'anima del progetto) */}
+            <section className="reveal-section py-32 bg-transparent">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16 px-6">
+                        <SectionHeading 
+                            title="LE MENTI"
+                            highlight="DIETRO AL LAB"
+                            subtitle="Creators"
+                            align="center"
+                        />
+                    </div>
+                    <TeamGrid />
+                </div>
+            </section>
+
+            {/* 5. CALL TO ACTION (Chiusura) */}
+            <section className="reveal-section px-6 pb-24">
+                <div className="max-w-7xl mx-auto">
+                    <div className="relative bg-zinc-950 border-t-2 border-yellow-500 rounded-3xl overflow-hidden p-12 md:p-20 text-center shadow-[0_-20px_50px_rgba(234,179,8,0.05)]">
+                        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-yellow-500/[0.03] to-transparent pointer-events-none" />
+                        
+                        <div className="relative z-10 max-w-3xl mx-auto space-y-10">
+                            <SectionHeading 
+                                title="PRONTO A TRASFORMARE IL TUO PROSSIMO"
+                                highlight="EVENTO?"
+                                align="center"
+                                level="h2"
+                            />
+                            <p className="font-sans text-lg text-zinc-400 max-w-xl mx-auto leading-relaxed">
+                                Entra nel laboratorio. Raccontaci la tua idea e lasciati guidare dalla visione di Black Bulls Lab per creare qualcosa di irripetibile.
+                            </p>
+                            <div className="pt-6">
+                                <PrimaryButton href="/contact" size="lg">
+                                    CONTATTACI ORA
+                                </PrimaryButton>
+                            </div>
+                        </div>
+
+                        {/* Decorative Background Elements */}
+                        <div className="absolute -bottom-1/2 -right-1/4 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px] pointer-events-none" />
+                        <div className="absolute -top-1/2 -left-1/4 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px] pointer-events-none" />
+                    </div>
+                </div>
+            </section>
         </div>
     );
 }

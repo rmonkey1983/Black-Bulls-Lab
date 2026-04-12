@@ -10,17 +10,17 @@ const services = [
     {
         id: "01",
         title: "CREAZIONE DINNER SHOW",
-        image: "/images/brand/service-plating.png",
+        image: "/images/brand/service-plating.webp",
     },
     {
         id: "02",
         title: "FORMAT EVENTI SU MISURA",
-        image: "/images/brand/bg-venue-crowd.png",
+        image: "/images/brand/bg-venue-crowd.webp",
     },
     {
         id: "03",
         title: "DIREZIONE ARTISTICA",
-        image: "/images/brand/service-performance.png",
+        image: "/images/brand/service-performance.webp",
     }
 ];
 
@@ -80,11 +80,11 @@ export function RamaServices() {
                             className={`group border-b border-white/10 py-5 sm:py-6 md:py-10 flex flex-col md:flex-row items-start md:items-center cursor-pointer transition-colors duration-500 gap-2 md:gap-0`}
                             onMouseEnter={() => setHoveredService(service.id)}
                         >
-                            <span className="text-white/30 text-sm sm:text-lg md:text-2xl font-mohave group-hover:text-rama-accent transition-colors w-10 sm:w-16 md:w-32 flex-shrink-0">
+                            <span className="text-white/30 text-sm sm:text-lg md:text-2xl font-heading group-hover:text-rama-accent transition-colors w-10 sm:w-16 md:w-32 flex-shrink-0">
                                 ({service.id})
                             </span>
                             <h2
-                                className={`font-mohave text-[11vw] sm:text-[10vw] md:text-[8vw] uppercase font-bold tracking-tighter leading-[0.85] transition-all duration-500 min-w-0 overflow-hidden ${hoveredService === service.id ? 'text-white' : 'text-transparent'}`}
+                                className={`font-heading text-[11vw] sm:text-[10vw] md:text-[8vw] uppercase font-bold tracking-tighter leading-[0.85] transition-all duration-500 min-w-0 overflow-hidden ${hoveredService === service.id ? 'text-white' : 'text-transparent'}`}
                                 style={{
                                     WebkitTextStroke: hoveredService === service.id ? '0px transparent' : '1px rgba(255,255,255,0.4)'
                                 }}

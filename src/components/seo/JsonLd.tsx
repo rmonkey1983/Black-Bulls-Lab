@@ -13,7 +13,7 @@ export function OrganizationSchema({ url = SITE_URL }: OrganizationSchemaProps) 
         name: SITE_NAME,
         alternateName: "BBL",
         url,
-        logo: `${url}/blackbullslab-v2.png`,
+        logo: `${url}/blackbullslab-v2.webp`,
         description:
             "Agenzia specializzata in dinner show e format eventi immersivi a Torino. A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e THE GOLDEN VOICE.",
         address: {
@@ -252,7 +252,7 @@ export function LocalBusinessSchema() {
         telephone: CONTACT_PHONE,
         email: CONTACT_EMAIL,
         image: `${SITE_URL}/og-image.jpg`,
-        logo: `${SITE_URL}/blackbullslab-v2.png`,
+        logo: `${SITE_URL}/blackbullslab-v2.webp`,
         address: {
             "@type": "PostalAddress",
             addressLocality: "Torino",

@@ -27,7 +27,7 @@ export function ACenaConIlBugiardoClient() {
             <section className="relative aspect-video md:h-[85vh] w-full overflow-hidden flex items-end">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/images/brand/bg-hero-wide.png"
+                        src="/images/brand/bg-hero-wide.webp"
                         alt="A Cena Con Il Bugiardo"
                         width={1920}
                         height={1080}
@@ -37,7 +37,7 @@ export function ACenaConIlBugiardoClient() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-br from-red-900/30 via-transparent to-amber-900/20 mix-blend-overlay" />
                     <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/50 to-transparent" />
-                    <div className="absolute inset-0 bg-[url('/noise.png')] opacity-20 mix-blend-overlay pointer-events-none" />
+                    <div className="absolute inset-0 bg-[url('/noise.webp')] opacity-20 mix-blend-overlay pointer-events-none" />
                 </div>
 
                 <div className="absolute top-24 left-6 z-30">
@@ -100,22 +100,22 @@ export function ACenaConIlBugiardoClient() {
                     <div id="how-it-works-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                         {[
                             {
-                                icon: <div className="font-mohave text-2xl font-bold">01</div>,
+                                icon: <div className="font-heading text-2xl font-bold">01</div>,
                                 title: "Il Login",
                                 desc: "Appena seduto al tavolo, inquadra il QR code per accedere alla Web App della serata. Da questo momento, lo smartphone diventa la tua vera plancia di gioco."
                             },
                             {
-                                icon: <div className="font-mohave text-2xl font-bold">02</div>,
+                                icon: <div className="font-heading text-2xl font-bold">02</div>,
                                 title: "La Scelta Segreta",
                                 desc: "Uno alla volta, in totale privacy, verrai guidato dal sistema per decidere il tuo ruolo: avrai il coraggio di proporti come Bugiardo? Attenzione, il sistema accetterà un solo Bugiardo. L'app distribuirà poi identità e obiettivi a tutti."
                             },
                             {
-                                icon: <div className="font-mohave text-2xl font-bold">03</div>,
+                                icon: <div className="font-heading text-2xl font-bold">03</div>,
                                 title: "Indagini e Missioni",
                                 desc: "Durante la cena, il gioco non si ferma mai. La Web App invierà notifiche personali, indizi preziosi e missioni segrete da portare a termine direttamente al tavolo, mettendo alla prova la furbizia e l'intuito di ognuno."
                             },
                             {
-                                icon: <div className="font-mohave text-2xl font-bold">04</div>,
+                                icon: <div className="font-heading text-2xl font-bold">04</div>,
                                 title: "Il Verdetto",
                                 desc: "Arrivati al dessert, le indagini si chiudono. Mettendo insieme i pezzi del puzzle forniti dall'app e analizzando i sospetti, dovrai votare per smascherare l'unico, vero Bugiardo della serata."
                             }

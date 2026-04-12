@@ -1,7 +1,8 @@
-import { Metadata } from "next";
 import { ACenaConIlBugiardoClient } from "./ACenaConIlBugiardoClient";
 import { EventSchema } from "@/components/seo/JsonLd";
 import { SITE_URL } from "@/lib/constants";
+import { BookingForm } from "@/components/ui/BookingForm";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export const metadata: Metadata = {
     title: "A Cena con il Bugiardo Torino | Black Bulls Lab - Social Deception",
@@ -25,9 +26,23 @@ export default function ACenaConIlBugiardoPage() {
                 location="Black Bulls Lab, Torino"
                 url={`${SITE_URL}/format/a-cena-con-il-bugiardo`}
                 price={50}
-                image={`${SITE_URL}/images/brand/bg-hero-wide.png`}
+                image={`${SITE_URL}/images/brand/bg-hero-wide.webp`}
             />
             <ACenaConIlBugiardoClient />
+
+            <section className="py-24 px-6 bg-zinc-950/50">
+                <div className="max-w-7xl mx-auto">
+                    <div className="mb-16">
+                        <SectionHeading
+                            title="SCOPRI IL"
+                            highlight="BUGIARDO"
+                            subtitle="Prenota il tuo tavolo per la sfida dell'inganno"
+                            align="center"
+                        />
+                    </div>
+                    <BookingForm />
+                </div>
+            </section>
         </>
     );
 }

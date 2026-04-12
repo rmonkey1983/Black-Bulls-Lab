@@ -10,6 +10,8 @@ import { NoEventsNewsletter } from "@/components/events/NoEventsNewsletter";
 import { useGSAP } from "@/hooks/useGSAP";
 import { animateCards, animateFade } from "@/lib/gsapAnimations";
 import Image from "next/image";
+import { BookingForm } from "@/components/ui/BookingForm";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function EventsClient() {
     const [events, setEvents] = useState<Event[]>([]);
@@ -31,7 +33,7 @@ export function EventsClient() {
                 title="I NOSTRI"
                 highlight="Eventi"
                 subtitle="Ogni serata è un'esperienza unica. Scopri il prossimo evento e vivi qualcosa di straordinario."
-                mediaUrl="/images/brand/bg-venue-crowd.png"
+                mediaUrl="/images/brand/bg-venue-crowd.webp"
             />
 
             <div className="flex justify-center -mt-12 md:-mt-24 mb-16 md:mb-24 relative z-20">
@@ -59,11 +61,11 @@ export function EventsClient() {
                                 <span className="font-rock-salt text-rama-accent transform -rotate-2 text-xl block">
                                     <Sparkles size={14} className="inline mr-2" /> Prossimamente
                                 </span>
-                                <h2 className="font-mohave font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-5xl sm:text-7xl md:text-[6vw]">
+                                <h2 className="font-heading font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-5xl sm:text-7xl md:text-[6vw]">
                                     <span className="text-white">Il Palco è</span>
                                     <span className="text-rama-accent">Pronto.</span>
                                 </h2>
-                                <p className="text-rama-muted font-outfit text-lg leading-relaxed mt-6">
+                                <p className="text-rama-muted font-sans text-lg leading-relaxed mt-6">
                                     Non semplici date sul calendario, ma appuntamenti con l&apos;arte,
                                     la musica e la cucina d&apos;autore. Prenota il tuo posto in prima fila.
                                 </p>
@@ -73,7 +75,7 @@ export function EventsClient() {
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 mt-8">
                             <div className="aspect-[4/5] rounded-lg overflow-hidden relative group">
                                 <Image 
-                                    src="/images/brand/bg-venue-crowd.png" 
+                                    src="/images/brand/bg-venue-crowd.webp" 
                                     alt="Crowd" 
                                     fill
                                     className="object-cover group-hover:scale-105 transition-transform duration-700" 
@@ -82,7 +84,7 @@ export function EventsClient() {
                             </div>
                             <div className="aspect-[4/5] rounded-lg overflow-hidden relative group translate-y-4 md:translate-y-8">
                                 <Image 
-                                    src="/images/brand/service-performance.png" 
+                                    src="/images/brand/service-performance.webp" 
                                     alt="Performance" 
                                     fill
                                     className="object-cover group-hover:scale-105 transition-transform duration-700" 
@@ -91,7 +93,7 @@ export function EventsClient() {
                             </div>
                             <div className="aspect-[4/5] rounded-lg overflow-hidden relative group hidden md:block">
                                 <Image 
-                                    src="/images/brand/bg-stage-lights.png" 
+                                    src="/images/brand/bg-stage-lights.webp" 
                                     alt="Stage Lights" 
                                     fill
                                     className="object-cover group-hover:scale-105 transition-transform duration-700" 
@@ -110,7 +112,7 @@ export function EventsClient() {
                         >
                             <div className="flex items-center gap-3">
                                 <Calendar size={14} className="text-rama-accent/50" />
-                                <span className="font-outfit text-[11px] text-rama-accent/50 tracking-widest uppercase">
+                                <span className="font-sans text-[11px] text-rama-accent/50 tracking-widest uppercase">
                                     {events.length} {events.length === 1 ? "Evento Disponibile" : "Eventi Disponibili"}
                                 </span>
                             </div>
@@ -122,14 +124,16 @@ export function EventsClient() {
                 )}
                 </div>
                 
-                <div id="events-cta" className="border border-white/10 bg-[#0c0c0c] p-8 md:p-16 text-center mt-32 rounded-lg flex flex-col items-center justify-center space-y-6">
-                    <h3 className="font-mohave text-3xl md:text-5xl font-bold uppercase text-white">Eventi Corporate & <span className="text-rama-accent">B2B</span></h3>
-                    <p className="text-rama-muted font-outfit max-w-xl text-base md:text-lg">
-                        Vuoi organizzare un format esclusivo per la tua azienda? Dalla creatività all&apos;esecuzione, progettiamo esperienze uniche e indimenticabili.
-                    </p>
-                    <a href="/contact" className="inline-block border border-rama-accent bg-rama-accent/10 hover:bg-rama-accent text-rama-accent hover:text-black transition-colors px-8 py-3 uppercase tracking-widest text-sm font-semibold rounded-sm mt-4">
-                        Contattaci Ora
-                    </a>
+                <div id="events-cta" className="mt-32">
+                    <div className="mb-16">
+                        <SectionHeading
+                            title="ORGANIZZA IL TUO"
+                            highlight="EVENTO"
+                            subtitle="Vuoi un format esclusivo per la tua azienda o un tavolo per il prossimo show?"
+                            align="center"
+                        />
+                    </div>
+                    <BookingForm />
                 </div>
             </div>
         </main>

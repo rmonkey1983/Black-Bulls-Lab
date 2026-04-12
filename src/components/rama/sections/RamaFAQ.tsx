@@ -51,7 +51,7 @@ export function RamaFAQ() {
                 <span className="font-rock-salt text-rama-accent text-base sm:text-xl md:text-3xl mb-6 sm:mb-8 transform -rotate-2 block">
                     DOMANDE FREQUENTI
                 </span>
-                <div className="font-mohave font-bold leading-[0.85] tracking-tighter uppercase text-white flex flex-col text-[15vw] sm:text-[14vw] md:text-[10vw] w-full overflow-hidden">
+                <div className="font-heading font-bold leading-[0.85] tracking-tighter uppercase text-white flex flex-col text-[15vw] sm:text-[14vw] md:text-[10vw] w-full overflow-hidden">
                     <span className="gsap-fade block">TUTTO QUELLO</span>
                     <span className="gsap-fade block">CHE DEVI SAPERE</span>
                 </div>
@@ -68,7 +68,7 @@ export function RamaFAQ() {
                             onClick={() => toggleFaq(index)}
                         >
                             <div className="py-4 sm:py-6 md:py-8 flex items-center justify-between gap-3 sm:gap-6 transition-colors duration-300 group-hover:bg-white/5 px-3 sm:px-4 rounded-lg">
-                                <h3 className={`font-mohave text-xl sm:text-2xl md:text-4xl font-bold uppercase tracking-wide transition-colors duration-300 select-none ${isActive ? 'text-rama-accent' : 'text-white'}`}>
+                                <h3 className={`font-heading text-xl sm:text-2xl md:text-4xl font-bold uppercase tracking-wide transition-colors duration-300 select-none ${isActive ? 'text-rama-accent' : 'text-white'}`}>
                                     {faq.question}
                                 </h3>
                                 <div className="text-white/50 group-hover:text-rama-accent flex-shrink-0 transition-colors duration-300">
@@ -77,7 +77,7 @@ export function RamaFAQ() {
                             </div>
 
                             <FaqContent isOpen={isActive}>
-                                <div className="pb-8 px-4 text-rama-muted font-outfit text-lg md:text-xl leading-relaxed">
+                                <div className="pb-8 px-4 text-rama-muted font-sans text-lg md:text-xl leading-relaxed">
                                     {faq.answer}
                                 </div>
                             </FaqContent>

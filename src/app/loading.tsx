@@ -10,14 +10,14 @@ export default function Loading() {
         
         {/* Core circle */}
         <div className="w-24 h-24 rounded-full bg-black border border-rama-accent/50 flex items-center justify-center relative z-10">
-          <div className="font-mohave font-bold text-rama-accent tracking-tighter text-2xl animate-pulse">
+          <div className="font-heading font-bold text-rama-accent tracking-tighter text-2xl animate-pulse">
             BBL
           </div>
         </div>
       </div>
       
       <div className="mt-8 space-y-2 text-center">
-        <p className="font-mohave uppercase font-bold tracking-[0.3em] text-white/40 text-xs animate-pulse">
+        <p className="font-heading uppercase font-bold tracking-[0.3em] text-white/40 text-xs animate-pulse">
           Inizializzazione Protocollo
         </p>
         <div className="flex justify-center gap-1">

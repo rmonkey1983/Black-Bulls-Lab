@@ -4,7 +4,7 @@ import Link from "next/link";
 
 interface PremiumButtonProps {
     href?: string;
-    variant?: "gold" | "bordeaux" | "outline";
+    variant?: "primary" | "secondary" | "outline";
     size?: "sm" | "md" | "lg";
     children: React.ReactNode;
     onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
@@ -30,16 +30,15 @@ export function PremiumButton({
     };
 
     const variantClasses = {
-        gold: `bg-rama-accent text-black font-bold uppercase
+        primary: `bg-yellow-500 text-black font-bold uppercase
       hover:bg-white hover:text-black
       border border-transparent
+      shadow-[0_0_20px_rgba(234,179,8,0.2)]`,
+        secondary: `bg-transparent border border-yellow-500 text-yellow-500 font-bold uppercase
+      hover:bg-yellow-500 hover:text-black
       shadow-none`,
-        bordeaux: `bg-zinc-800 text-white font-bold uppercase
-      hover:bg-zinc-700
-      border border-transparent
-      shadow-none`,
-        outline: `bg-transparent border border-rama-accent text-rama-accent font-bold uppercase
-      hover:bg-rama-accent hover:text-black`,
+        outline: `bg-transparent border border-white/20 text-white font-bold uppercase
+      hover:bg-white hover:text-black`,
     };
 
     const classes = [
@@ -48,8 +47,10 @@ export function PremiumButton({
         "justify-center",
         "gap-2.5",
         sizeClasses[size],
-        variantClasses[variant].replace(/\n\s+/g, " "),
-        "tracking-wider",
+        variantClasses[variant as keyof typeof variantClasses].replace(/\n\s+/g, " "),
+        "tracking-[0.2em]",
+        "text-[10px] md:text-xs",
+        "font-heading",
         "uppercase",
         "transition-all",
         "duration-500",
@@ -66,7 +67,13 @@ export function PremiumButton({
 
     if (href) {
         return (
-            <Link href={href} className={classes} aria-label={ariaLabel} onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}>
+            <Link 
+                href={href} 
+                className={classes} 
+                aria-label={ariaLabel} 
+                onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}
+                suppressHydrationWarning
+            >
                 <style>{`
                     @keyframes premium-shine {
                         0% { transform: translateX(-150%) skewX(-20deg); }
@@ -85,6 +92,7 @@ export function PremiumButton({
             onClick={onClick}
             className={classes}
             aria-label={ariaLabel}
+            suppressHydrationWarning
         >
             <style>{`
                 @keyframes premium-shine {
@@ -107,8 +115,8 @@ export function GlowButton({
     ...rest
 }: PremiumButtonProps) {
     // Map legacy variants
-    const mappedVariant: "gold" | "bordeaux" | "outline" =
-        variant === ("cyan" as any) ? "bordeaux" : variant === ("green" as any) ? "gold" : variant;
+    const mappedVariant: "primary" | "secondary" | "outline" =
+        variant === ("gold" as any) ? "primary" : variant === ("outline" as any) ? "secondary" : "primary";
 
     return (
         <PremiumButton href={href} variant={mappedVariant} size={size} {...rest}>

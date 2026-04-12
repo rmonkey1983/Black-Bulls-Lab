@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import { IlPalqoClient } from "./IlPalqoClient";
 import { EventSchema } from "@/components/seo/JsonLd";
 import { SITE_URL } from "@/lib/constants";
+import { BookingForm } from "@/components/ui/BookingForm";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export const metadata: Metadata = {
     title: "Il PalQo Torino | Black Bulls Lab - Open Stage & Community",
@@ -25,9 +27,23 @@ export default function IlPalqoPage() {
                 location="Black Bulls Lab, Torino"
                 url={`${SITE_URL}/format/il-palqo`}
                 price={0}
-                image={`${SITE_URL}/images/brand/bg-stage-lights.png`}
+                image={`${SITE_URL}/images/brand/bg-stage-lights.webp`}
             />
             <IlPalqoClient />
+            
+            <section className="py-24 px-6 bg-zinc-950/50">
+                <div className="max-w-7xl mx-auto">
+                    <div className="mb-16">
+                        <SectionHeading
+                            title="PRENOTA IL TUO"
+                            highlight="PALQO"
+                            subtitle="Sali sul palco o prenota un tavolo esclusivo"
+                            align="center"
+                        />
+                    </div>
+                    <BookingForm />
+                </div>
+            </section>
         </>
     );
 }

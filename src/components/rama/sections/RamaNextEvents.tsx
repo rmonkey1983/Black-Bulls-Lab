@@ -16,10 +16,10 @@ export function RamaNextEvents() {
     useEffect(() => {
         getFutureEvents().then((data) => {
             const fallbackFormats = [
-                { id: '1', title: 'Il PalQo', image: '/images/brand/bg-venue-crowd.png', slug: 'il-palqo' },
-                { id: '2', title: 'A Cena Con Il Bugiardo', image: '/images/brand/bg-hero-wide.png', slug: 'a-cena-con-il-bugiardo' },
-                { id: '3', title: 'Cena Con Delitto', image: '/images/brand/bg-venue-crowd.png', slug: 'cena-con-delitto' },
-                { id: '4', title: 'THE GOLDEN VOICE', image: '/images/brand/service-performance.png', slug: 'the-golden-voice' }
+                { id: '1', title: 'Il PalQo', image: '/images/brand/bg-venue-crowd.webp', slug: 'il-palqo' },
+                { id: '2', title: 'A Cena Con Il Bugiardo', image: '/images/brand/bg-hero-wide.webp', slug: 'a-cena-con-il-bugiardo' },
+                { id: '3', title: 'Cena Con Delitto', image: '/images/brand/bg-venue-crowd.webp', slug: 'cena-con-delitto' },
+                { id: '4', title: 'THE GOLDEN VOICE', image: '/images/brand/service-performance.webp', slug: 'the-golden-voice' }
             ];
             setEvents(data.length > 0 ? data : (fallbackFormats as Event[]));
         });
@@ -49,10 +49,10 @@ export function RamaNextEvents() {
             )}>
                 <div className="max-w-7xl mx-auto flex items-end justify-between mb-10">
                     <div>
-                        <h2 className="font-mohave font-bold leading-[0.85] tracking-tighter uppercase text-white mb-2 text-5xl md:text-6xl">
+                        <h2 className="font-heading font-bold leading-[0.85] tracking-tighter uppercase text-white mb-2 text-5xl md:text-6xl">
                             Prossimi <span className="text-rama-accent">Eventi</span>
                         </h2>
-                        <p className="font-outfit text-rama-muted">Scegli la tua serata magica.</p>
+                        <p className="font-sans text-rama-muted">Scegli la tua serata magica.</p>
                     </div>
                     {/* Navigation Arrows for Desktop */}
                     <div className="hidden md:flex items-center gap-4">
@@ -86,7 +86,7 @@ export function RamaNextEvents() {
                             className="relative w-[300px] sm:w-[350px] aspect-[4/5] flex-shrink-0 snap-start bg-bg-dark rounded-2xl overflow-hidden group transition-transform duration-500 hover:-translate-y-2"
                         >
                             <Image
-                                src={(format.slug === 'il-palqo' && format.image?.includes('bull')) ? '/images/brand/bg-venue-crowd.png' : (format.image || "/images/brand/bg-hero-wide.png")}
+                                src={(format.slug === 'il-palqo' && format.image?.includes('bull')) ? '/images/brand/bg-venue-crowd.webp' : (format.image || "/images/brand/bg-hero-wide.webp")}
                                 alt={format.title}
                                 fill
                                 className="object-cover transition-transform duration-[1.5s] group-hover:scale-105 opacity-80 group-hover:opacity-100"
@@ -99,7 +99,7 @@ export function RamaNextEvents() {
                                 <div className="text-rama-accent font-rock-salt text-sm mb-2 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
                                     Il tuo posto sta aspettando
                                 </div>
-                                <h3 className="font-mohave text-3xl font-bold uppercase tracking-wide text-white group-hover:text-rama-accent transition-colors">
+                                <h3 className="font-heading text-3xl font-bold uppercase tracking-wide text-white group-hover:text-rama-accent transition-colors">
                                     {format.title}
                                 </h3>
                             </div>

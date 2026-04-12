@@ -33,9 +33,9 @@ export function FormatQuickInfo({ duration, capacity, price, highlight, highligh
                         <div key={i} className="flex flex-col gap-2 p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-rama-accent/30 transition-colors">
                             <div className="flex items-center gap-2 text-rama-accent mb-1">
                                 <info.icon size={16} />
-                                <span className="font-mohave text-[10px] uppercase tracking-[0.2em] font-bold">{info.label}</span>
+                                <span className="font-heading text-[10px] uppercase tracking-[0.2em] font-bold">{info.label}</span>
                             </div>
-                            <span className="font-outfit text-white text-sm md:text-base font-medium">{info.value}</span>
+                            <span className="font-sans text-white text-sm md:text-base font-medium">{info.value}</span>
                         </div>
                     ))}
                 </div>

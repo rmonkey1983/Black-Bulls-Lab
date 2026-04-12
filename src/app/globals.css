@@ -18,6 +18,14 @@
   --color-bordeaux-light: #A82240;
   --color-bordeaux-dim: #6B1420;
 
+  /* Standard Brand Palette */
+  --color-brand-black: #09090b;
+  --color-brand-gold: #eab308;
+  --color-brand-gray: #71717a;
+
+  /* Backgrounds */
+  --background-image-circuit-pattern: url('/bg-custom.webp');
+
   /* Text Colors */
   --color-white: #F5F0E8;
   --color-gray-100: #E8E0D4;
@@ -47,13 +55,16 @@
   --color-rama-muted: #A4A4A4;
   --color-rama-accent: #E5B60C;
 
-  /* Rama Fonts */
-  --font-mohave: var(--font-mohave);
-  --font-outfit: var(--font-outfit);
+  /* Rama Fonts are mapped in layout.tsx via next/font/google */
   --font-rock-salt: var(--font-rock-salt);
 }
 
 :root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 9, 9, 11; /* Zinc 950 */
+  --background-end-rgb: 0, 0, 0;
+  --brand-yellow: #eab308; /* Il tuo giallo/oro */
+  
   color-scheme: dark;
   --background: var(--color-bg-dark);
   --foreground: var(--color-white);
@@ -125,24 +136,32 @@ img, video, iframe {
 
 /* ====== BASE STYLES ====== */
 body {
-  background: var(--color-bg-dark);
-  background-image: url('/bg-custom.jpg');
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  overflow-x: hidden;
+  background-image: url('/bg-custom.webp');
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
   background-size: cover;
-  color: var(--foreground);
-  font-family: var(--font-outfit), sans-serif;
-  font-display: swap;
 }
 
 h1,
 h2,
-h3,
+h3 {
+  font-family: var(--font-outfit), sans-serif;
+  letter-spacing: -0.025em; /* tracking-tight */
+}
+
 h4,
 h5,
 h6 {
-  font-family: var(--font-mohave), sans-serif;
+  font-family: var(--font-outfit), sans-serif;
+}
+
+p, a {
+  font-family: var(--font-inter), sans-serif;
 }
 
 /* Serif headline utility */
@@ -150,22 +169,20 @@ h6 {
   font-family: 'Georgia', serif;
 }
 
-/* ====== SCROLLBAR & FOCUS ====== */
+/* Stile globale per le scrollbar premium */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 8px;
 }
-
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-dark);
+  background: #09090b;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: var(--color-gold-dim);
-  border-radius: 3px;
+  background: #eab308;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-gold);
+  background: #d4a007;
 }
 
 /* Accessible focus ring for keyboard navigation */

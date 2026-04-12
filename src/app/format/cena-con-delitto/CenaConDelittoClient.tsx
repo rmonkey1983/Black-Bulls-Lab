@@ -28,7 +28,7 @@ export function CenaConDelittoClient() {
             <section className="relative aspect-video md:h-[85vh] w-full overflow-hidden flex items-end">
                 <div className="absolute inset-0 z-0">
                     <Image 
-                        src="/images/brand/bg-venue-crowd.png" 
+                        src="/images/brand/bg-venue-crowd.webp" 
                         alt="Cena Con Delitto" 
                         width={1920}
                         height={1080}
@@ -38,7 +38,7 @@ export function CenaConDelittoClient() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-black/60 mix-blend-multiply" />
                     <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/50 to-transparent" />
-                    <div className="absolute inset-0 bg-[url('/noise.png')] opacity-20 mix-blend-overlay pointer-events-none" />
+                    <div className="absolute inset-0 bg-[url('/noise.webp')] opacity-20 mix-blend-overlay pointer-events-none" />
                 </div>
 
                 <div className="absolute top-24 left-6 z-30">
@@ -95,17 +95,17 @@ export function CenaConDelittoClient() {
                     <div id="how-it-works-grid" className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                         {[
                             {
-                                icon: <div className="font-mohave text-2xl font-bold">01</div>,
+                                icon: <div className="font-heading text-2xl font-bold">01</div>,
                                 title: "Briefing Digitale",
                                 desc: "Ogni squadra accede alla Web App dedicata. Riceverai il fascicolo del caso, la lista dei sospettati e il primo set di prove direttamente sul tuo smartphone."
                             },
                             {
-                                icon: <div className="font-mohave text-2xl font-bold">02</div>,
+                                icon: <div className="font-heading text-2xl font-bold">02</div>,
                                 title: "Setaccia il Campo",
                                 desc: "Tra una portata e l'altra, il sistema invierà notifiche in tempo reale: nuovi indizi, testimonianze video e sospetti che cambiano versione. Nulla è come sembra."
                             },
                             {
-                                icon: <div className="font-mohave text-2xl font-bold">03</div>,
+                                icon: <div className="font-heading text-2xl font-bold">03</div>,
                                 title: "Il Verdetto Online",
                                 desc: "Arrivati al caffè, dovrai formulare l'accusa. Invia il tuo verdetto tramite l'App identificando colpevole, movente e arma del delitto per vincere."
                             }
@@ -119,7 +119,7 @@ export function CenaConDelittoClient() {
                                 </div>
                                 <div className="flex flex-col md:items-center">
                                     <h3 className="text-xl md:text-2xl font-bold text-rama-text mb-2 md:mb-4">{step.title}</h3>
-                                    <p className="text-gray-400 text-sm md:text-base leading-relaxed font-outfit">
+                                    <p className="text-gray-400 text-sm md:text-base leading-relaxed font-sans">
                                         {step.desc}
                                     </p>
                                 </div>

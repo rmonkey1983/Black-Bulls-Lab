@@ -75,7 +75,7 @@ export function RamaTestimonials() {
                         text="COSA DICONO DI NOI"
                         className="font-rock-salt text-rama-accent text-base sm:text-xl md:text-2xl mb-6 transform -rotate-1"
                     />
-                    <div className="font-mohave font-bold uppercase tracking-tighter text-white text-[12vw] sm:text-[9vw] md:text-[6vw] leading-[0.88] overflow-hidden">
+                    <div className="font-heading font-bold uppercase tracking-tighter text-white text-[12vw] sm:text-[9vw] md:text-[6vw] leading-[0.88] overflow-hidden">
                         <RamaAnimatedText text="ESPERIENZE" delay={0.1} />
                         <RamaAnimatedText text="REALI" delay={0.2} className="text-rama-accent" />
                     </div>
@@ -92,7 +92,7 @@ export function RamaTestimonials() {
 
                         {/* Format tag */}
                         <div className="inline-flex items-center gap-2 bg-rama-accent/10 border border-rama-accent/30 rounded-full px-4 py-1.5 mb-6">
-                            <span className="font-mohave uppercase tracking-widest text-rama-accent text-xs font-bold">
+                            <span className="font-heading uppercase tracking-widest text-rama-accent text-xs font-bold">
                                 {t.format}
                             </span>
                         </div>
@@ -105,18 +105,18 @@ export function RamaTestimonials() {
                         </div>
 
                         {/* Text */}
-                        <blockquote className="font-outfit text-white/90 text-base md:text-xl leading-relaxed mb-8 italic">
+                        <blockquote className="font-sans text-white/90 text-base md:text-xl leading-relaxed mb-8 italic">
                             &ldquo;{t.text}&rdquo;
                         </blockquote>
 
                         {/* Author */}
                         <div className="flex items-center gap-4">
-                            <div className="w-11 h-11 rounded-full bg-rama-accent/20 border border-rama-accent/30 flex items-center justify-center font-mohave font-bold text-rama-accent text-lg">
+                            <div className="w-11 h-11 rounded-full bg-rama-accent/20 border border-rama-accent/30 flex items-center justify-center font-heading font-bold text-rama-accent text-lg">
                                 {t.name.charAt(0)}
                             </div>
                             <div>
-                                <div className="font-mohave font-bold uppercase text-white tracking-wide">{t.name}</div>
-                                <div className="font-outfit text-rama-muted text-sm">{t.role} · {t.company}</div>
+                                <div className="font-heading font-bold uppercase text-white tracking-wide">{t.name}</div>
+                                <div className="font-sans text-rama-muted text-sm">{t.role} · {t.company}</div>
                             </div>
                         </div>
                     </div>
@@ -163,8 +163,8 @@ export function RamaTestimonials() {
                         ))}
                     </div>
                     <div className="flex items-center gap-2 justify-center">
-                        <span className="font-mohave font-bold text-white text-xl">4.9/5</span>
-                        <span className="font-outfit text-rama-muted text-sm px-4 sm:px-0">· Basato su oltre 80 recensioni verificate</span>
+                        <span className="font-heading font-bold text-white text-xl">4.9/5</span>
+                        <span className="font-sans text-rama-muted text-sm px-4 sm:px-0">· Basato su oltre 80 recensioni verificate</span>
                     </div>
                 </div>
             </div>

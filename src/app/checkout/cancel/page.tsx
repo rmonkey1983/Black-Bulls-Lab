@@ -31,11 +31,11 @@ function CancelContent() {
                     <XCircle className="text-red-500 w-12 h-12" />
                 </div>
 
-                <h1 className="text-4xl md:text-5xl font-bold font-mohave uppercase tracking-tighter text-white mb-4">
+                <h1 className="text-4xl md:text-5xl font-bold font-heading uppercase tracking-tighter text-white mb-4">
                     Pagamento <span className="text-red-500">Annullato</span>
                 </h1>
                 
-                <p className="text-gray-400 font-outfit text-lg max-w-md mx-auto mb-10">
+                <p className="text-gray-400 font-sans text-lg max-w-md mx-auto mb-10">
                     Il processo di pagamento è stato interrotto. Nessun addebito è stato effettuato e la tua prenotazione non è stata completata.
                 </p>
 
@@ -61,7 +61,7 @@ function CancelContent() {
 
 export default function CheckoutCancelPage() {
     return (
-        <Suspense fallback={<div className="min-h-screen bg-transparent pt-32 text-center text-white font-mohave text-2xl">Caricamento...</div>}>
+        <Suspense fallback={<div className="min-h-screen bg-transparent pt-32 text-center text-white font-heading text-2xl">Caricamento...</div>}>
             <CancelContent />
         </Suspense>
     );
