@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
 
         // Deduplicate — silently succeed if already present
         if (entries.some((e) => e.email === email)) {
-            console.log(`[waitlist] already registered: ${email}`);
+            // Already registered
             return NextResponse.json({ ok: true, duplicate: true });
         }
 
@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
         entries.push(newEntry);
         await writeWaitlist(entries);
 
-        console.log(`[waitlist] new signup: ${email} (total: ${entries.length})`);
+        // New registration successful
         return NextResponse.json({ ok: true }, { status: 201 });
     } catch (err) {
         console.error("[waitlist] error:", err);

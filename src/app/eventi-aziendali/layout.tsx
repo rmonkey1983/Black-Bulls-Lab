@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Team Building a Torino | Cene Aziendali Originali — Black Bulls Lab",
+    title: "Eventi Aziendali e Team Building a Torino | Black Bulls Lab",
     description:
-        "Formato dinner show per cene aziendali, team building e gala a Torino. Pacchetti da 45€/persona tutto incluso. Preventivo gratuito in 24 ore.",
+        "Organizza il tuo evento aziendale a Torino con Black Bulls Lab. Dinner show immersivi, team building originali e gala dinner personalizzati. Soluzioni da 50€/persona.",
     keywords: ["team building Torino", "cena aziendale Torino", "dinner show aziendale", "eventi corporate Torino", "gala dinner Torino"],
     alternates: { canonical: "/eventi-aziendali" },
     openGraph: {
-        title: "Team Building a Torino | Cene Aziendali Originali — Black Bulls Lab",
+        title: "Eventi Aziendali e Team Building a Torino | Black Bulls Lab",
         description:
-            "Formato dinner show per cene aziendali, team building e gala a Torino. Pacchetti da 45€/persona tutto incluso. Preventivo gratuito in 24 ore.",
+            "Format immersivi per cene aziendali, team building e gala a Torino. Trasforma il tuo evento in un'esperienza indimenticabile.",
         url: "https://blackbullslab.com/eventi-aziendali",
         images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Team Building e Cene Aziendali — Black Bulls Lab" }],
     },
     twitter: {
         card: "summary_large_image",
-        title: "Team Building a Torino | Cene Aziendali Originali — Black Bulls Lab",
+        title: "Eventi Aziendali e Team Building a Torino | Black Bulls Lab",
         description:
-            "Formato dinner show per cene aziendali, team building e gala a Torino. Pacchetti da 45€/persona tutto incluso.",
+            "Format immersivi per cene aziendali, team building e gala a Torino. Soluzioni personalizzate da 50€/persona.",
         images: ["/og-image.jpg"],
     },
 };

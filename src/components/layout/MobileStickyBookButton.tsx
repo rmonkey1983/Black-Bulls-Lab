@@ -8,11 +8,11 @@ export function MobileStickyBookButton() {
             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-rama-accent to-transparent animate-pulse" />
             <Link
                 href="/contact"
-                className="flex items-center justify-center gap-3 p-4 bg-rama-accent text-black font-mohave uppercase font-bold text-xl tracking-widest shadow-[0_-10px_30px_rgba(255,215,0,0.2)] transition-[transform] active:scale-95"
-                style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))' }}
+                className="flex items-center justify-center gap-3 p-3 bg-rama-accent/95 backdrop-blur-md text-black font-mohave uppercase font-bold text-lg tracking-widest shadow-[0_-5px_20px_rgba(255,215,0,0.15)] transition-[transform] active:scale-95"
+                style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom))' }}
             >
-                <Phone size={20} strokeWidth={2.5} />
-                Richiedi Info
+                <Phone size={18} strokeWidth={2.5} />
+                Prenota una serata
             </Link>
         </div>
     );

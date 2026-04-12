@@ -14,9 +14,10 @@ interface RamaMenuOverlayProps {
 }
 
 const experiments = [
-    { name: "Il PalQo", href: "/format/il-palqo", desc: "Community & Show" },
-    { name: "The Golden Voice", href: "/format/the-golden-voice", desc: "Singing Contest" },
     { name: "A Cena Con Il Bugiardo", href: "/format/a-cena-con-il-bugiardo", desc: "Dinner Show & Social Deception" },
+    { name: "Il PalQo", href: "/format/il-palqo", desc: "Community & Show" },
+    { name: "Cena Con Delitto", href: "/format/cena-con-delitto", desc: "Dinner Show & Investigation" },
+    { name: "The Golden Voice", href: "/format/the-golden-voice", desc: "Singing Contest" },
 ];
 
 export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
@@ -108,7 +109,11 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
             </button>
 
             {/* Left Decorative Image (Hidden on very small screens) */}
-            <div ref={bgImageRef} className="hidden lg:block w-1/2 relative overflow-hidden">
+            <div 
+                ref={bgImageRef} 
+                className="hidden lg:block w-1/2 relative overflow-hidden cursor-pointer"
+                onClick={onClose}
+            >
                 <div className="absolute inset-0 bg-yellow-600/20">
                     <Image
                         src="/lab_menu.png"
@@ -118,11 +123,23 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                         sizes="50vw"
                     />
                 </div>
+                {/* Overlay click area indicator for desktop */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity bg-black/20">
+                    <span className="font-mohave uppercase tracking-widest text-xs text-white/40">Clicca per chiudere</span>
+                </div>
             </div>
 
             {/* Right Menu Content */}
-            <div ref={contentRef} className="w-full lg:w-1/2 flex flex-col justify-center p-8 sm:p-12 md:p-24 overflow-y-auto">
-                <nav ref={linksRef} className="flex flex-col gap-3 md:gap-4">
+            <div 
+                ref={contentRef} 
+                className="w-full lg:w-1/2 flex flex-col justify-center p-8 sm:p-12 md:p-24 overflow-y-auto"
+                onClick={onClose}
+            >
+                <nav 
+                    ref={linksRef} 
+                    className="flex flex-col gap-3 md:gap-4"
+                    onClick={(e) => e.stopPropagation()}
+                >
                     
                     {/* HOME */}
                     <div className="nav-link">
@@ -177,7 +194,7 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                     </div>
 
                     {[
-                        { name: "Ricercatori", href: "/talents" },
+                        { name: "Artisti", href: "/talents" },
                         { name: "Corporate", href: "/eventi-aziendali" },
                         { name: "Galleria", href: "/gallery" },
                         { name: "Chi Siamo", href: "/chi-siamo" },
@@ -193,9 +210,23 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                             </Link>
                         </div>
                     ))}
+
+                    {/* MOBILE CTA */}
+                    <div className="nav-link mt-4 md:hidden">
+                        <Link
+                            href="/contact"
+                            onClick={onClose}
+                            className="inline-flex items-center justify-center w-full bg-rama-accent text-black font-mohave font-bold uppercase tracking-widest text-xl px-10 py-5 hover:bg-white transition-colors duration-300"
+                        >
+                            Richiedi Info
+                        </Link>
+                    </div>
                 </nav>
 
-                <div className="mt-12 sm:mt-16 pt-8 border-t border-white/10 grid grid-cols-2 gap-8 font-outfit text-sm text-rama-muted">
+                <div 
+                    className="mt-12 sm:mt-16 pt-8 border-t border-white/10 grid grid-cols-2 gap-8 font-outfit text-sm text-rama-muted"
+                    onClick={(e) => e.stopPropagation()}
+                >
                     <div>
                         <h4 className="font-rock-salt text-rama-accent mb-4 transform -rotate-2">Seguici</h4>
                         <div className="flex flex-col gap-2">

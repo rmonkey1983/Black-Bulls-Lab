@@ -17,7 +17,7 @@ const valueProps = [
         icon: Zap,
         label: "Alto coinvolgimento garantito",
         description:
-            "Non siete spettatori: siete i protagonisti. I nostri format — da A Cena Con Il Bugiardo a Il PalQo — trasformano ogni tavolo in un palcoscenico. Il coinvolgimento non è un'opzione, è il prodotto.",
+            "Non siete spettatori: siete i protagonisti. I nostri format — da A Cena Con Il Bugiardo a The Golden Voice, passando per Il PalQo e Cena Con Delitto — trasformano ogni tavolo in un palcoscenico. Il coinvolgimento non è un'opzione, è il prodotto.",
     },
     {
         icon: BadgeEuro,
@@ -59,33 +59,45 @@ export function RamaGroupEvents() {
                     </p>
                 </div>
 
-                {/* Value Props Grid */}
-                <div id="group-events-grid" className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-14">
-                    {valueProps.map((prop, i) => {
-                        const Icon = prop.icon;
-                        return (
-                            <article
-                                key={i}
-                                className="gsap-card group relative flex flex-col gap-4 p-7 lg:p-8 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm hover:border-rama-accent/40 hover:bg-white/[0.06] transition-all duration-500 cursor-default"
-                            >
-                                {/* Corner glow on hover */}
-                                <div className="absolute top-0 left-0 w-16 h-16 bg-rama-accent/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                {/* Value Props Grid / Slider on Mobile */}
+                <div className="relative group/slider mb-14">
+                    <div 
+                        id="group-events-grid" 
+                        className="flex md:grid md:grid-cols-3 gap-6 lg:gap-8 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory scrollbar-hide pb-8 md:pb-0 px-2 md:px-0"
+                    >
+                        {valueProps.map((prop, i) => {
+                            const Icon = prop.icon;
+                            return (
+                                <article
+                                    key={i}
+                                    className="gsap-card group relative flex flex-col gap-4 p-7 lg:p-8 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm hover:border-rama-accent/40 hover:bg-white/[0.06] transition-all duration-500 cursor-default min-w-[85vw] md:min-w-0 snap-center"
+                                >
+                                    {/* Corner glow on hover */}
+                                    <div className="absolute top-0 left-0 w-16 h-16 bg-rama-accent/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                                {/* Icon */}
-                                <div className="w-12 h-12 rounded-xl border border-rama-accent/30 bg-rama-accent/10 flex items-center justify-center flex-shrink-0 group-hover:border-rama-accent/60 transition-colors duration-300">
-                                    <Icon size={22} className="text-rama-accent" strokeWidth={1.5} />
-                                </div>
+                                    {/* Icon */}
+                                    <div className="w-12 h-12 rounded-xl border border-rama-accent/30 bg-rama-accent/10 flex items-center justify-center flex-shrink-0 group-hover:border-rama-accent/60 transition-colors duration-300">
+                                        <Icon size={22} className="text-rama-accent" strokeWidth={1.5} />
+                                    </div>
 
-                                {/* Text */}
-                                <h3 className="font-mohave font-bold uppercase tracking-wide text-xl lg:text-2xl text-white leading-tight">
-                                    {prop.label}
-                                </h3>
-                                <p className="font-outfit text-rama-muted text-base leading-relaxed flex-grow">
-                                    {prop.description}
-                                </p>
-                            </article>
-                        );
-                    })}
+                                    {/* Text */}
+                                    <h3 className="font-mohave font-bold uppercase tracking-wide text-xl lg:text-2xl text-white leading-tight">
+                                        {prop.label}
+                                    </h3>
+                                    <p className="font-outfit text-rama-muted text-base leading-relaxed flex-grow">
+                                        {prop.description}
+                                    </p>
+                                </article>
+                            );
+                        })}
+                    </div>
+
+                    {/* Mobile Scroll Indicator (Dots) */}
+                    <div className="flex md:hidden justify-center gap-2 mt-2">
+                        {valueProps.map((_, i) => (
+                            <div key={i} className="w-1.5 h-1.5 rounded-full bg-white/20 first:bg-rama-accent" />
+                        ))}
+                    </div>
                 </div>
 
                 {/* CTA Bar */}
@@ -94,14 +106,14 @@ export function RamaGroupEvents() {
                         href="/eventi-aziendali"
                         className="group inline-flex items-center gap-3 bg-rama-accent text-black font-mohave font-bold uppercase tracking-widest text-base px-8 py-4 rounded-full hover:bg-white transition-colors duration-300"
                     >
-                        Scopri i Format Aziendali
+                        Trasforma la tua prossima cena aziendale
                         <ArrowRight size={18} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform duration-300" />
                     </Link>
                     <Link
                         href="/contact"
                         className="inline-flex items-center gap-2 border border-white/20 text-white font-mohave font-bold uppercase tracking-widest text-base px-8 py-4 rounded-full hover:border-rama-accent/60 hover:text-rama-accent transition-colors duration-300"
                     >
-                        Richiedi un Preventivo
+                        Parla con noi — è gratuito
                     </Link>
                 </div>
             </div>

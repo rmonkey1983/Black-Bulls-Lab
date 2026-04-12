@@ -4,12 +4,12 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-    title: "Dinner Show a Torino | Black Bulls Lab — Cena con Delitto e Format Immersivi",
+    title: "Dinner Show a Torino | Black Bulls Lab — Cena Con Delitto e Format Immersivi",
     description:
         "Organizza una serata indimenticabile a Torino con Black Bulls Lab. Dinner show, cena con delitto e team building da 50€/persona. Gruppi da 20 a 100 persone. Risposta in 24 ore.",
     alternates: { canonical: "/" },
     openGraph: {
-        title: "Dinner Show a Torino | Black Bulls Lab — Cena con Delitto e Format Immersivi",
+        title: "Dinner Show a Torino | Black Bulls Lab — Cena Con Delitto e Format Immersivi",
         description:
             "Organizza una serata indimenticabile a Torino con Black Bulls Lab. Dinner show, cena con delitto e team building da 50€/persona. Gruppi da 20 a 100 persone. Risposta in 24 ore.",
         url: "https://blackbullslab.com",
@@ -24,12 +24,14 @@ export const metadata: Metadata = {
     },
 };
 import { RamaHero } from "@/components/rama/sections/RamaHero";
+import { RamaNextEvents } from "@/components/rama/sections/RamaNextEvents";
 import { RamaManifesto } from "@/components/rama/sections/RamaManifesto";
 import { RamaHowItWorks } from "@/components/rama/sections/RamaHowItWorks";
 import { RamaGroupEvents } from "@/components/rama/sections/RamaGroupEvents";
 import { RamaGroupConfigurator } from "@/components/rama/sections/RamaGroupConfigurator";
 import { RamaServices } from "@/components/rama/sections/RamaServices";
 import { RamaTestimonials } from "@/components/rama/sections/RamaTestimonials";
+import { RamaCTA } from "@/components/rama/sections/RamaCTA";
 import { RamaFAQ } from "@/components/rama/sections/RamaFAQ";
 
 /** Contextual divider CTA between sections */
@@ -51,17 +53,18 @@ export default function RamaHomePage() {
     return (
         <main className="w-full bg-transparent min-h-screen text-white relative z-10 selection:bg-rama-accent selection:text-black">
             <RamaHero />
+            <RamaNextEvents />
             <RamaManifesto />
-            <SectionCTA href="/chi-siamo" label="Scopri chi siamo →" />
+            <SectionCTA href="/chi-siamo" label="Scopri chi si nasconde dietro la magia →" />
             <RamaHowItWorks />
-            <SectionCTA href="/format" label="Guarda tutti i format →" />
+            <SectionCTA href="/format" label="Scegli la tua serata →" />
             <RamaGroupEvents />
             <RamaGroupConfigurator />
-            <SectionCTA href="/eventi-aziendali" label="Tutte le soluzioni aziendali →" />
+            <SectionCTA href="/eventi-aziendali" label="Il tuo team merita di meglio →" />
             <RamaServices />
-            <SectionCTA href="/gallery" label="Guarda la gallery →" />
+            <SectionCTA href="/gallery" label="Guarda cosa ti aspetta →" />
             <RamaTestimonials />
-            <SectionCTA href="/contact" label="Hai ancora dubbi? Scrivici →" />
+            <RamaCTA />
             <RamaFAQ />
         </main>
     );

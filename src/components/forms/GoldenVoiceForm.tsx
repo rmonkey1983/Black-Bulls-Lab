@@ -45,7 +45,7 @@ export function GoldenVoiceForm() {
 
             <div className="text-center mb-10 relative z-10">
                 <Mic2 className="mx-auto text-gold mb-4" size={40} />
-                <h3 className="text-3xl lg:text-4xl font-bold text-white mb-2 uppercase tracking-wide">Candidati Ora</h3>
+                <h3 className="text-3xl lg:text-4xl font-bold text-white mb-2 uppercase tracking-wide">Voglio esibirmi con voi</h3>
                 <p className="text-gray-400">Compila il form per partecipare alle audizioni di The Golden Voice.</p>
             </div>
 

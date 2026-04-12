@@ -105,7 +105,7 @@ function EventForm({ event, onSave, onCancel }: { event?: Event; onSave: () => v
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="md:col-span-2">
                     <label className={labelClass}>Titolo</label>
-                    <input value={form.title} onChange={(e) => handleChange("title", e.target.value)} required placeholder="Il PalQo, A Cena Con Il Bugiardo..." className={inputClass} />
+                    <input value={form.title} onChange={(e) => handleChange("title", e.target.value)} required placeholder="A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto, The Golden Voice..." className={inputClass} />
                 </div>
                 <div>
                     <label className={labelClass}>Slug (URL)</label>

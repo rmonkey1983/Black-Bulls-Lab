@@ -2,11 +2,13 @@
 
 import { useRef } from "react";
 import { EventConcept } from "@/components/events/EventConcept";
-import { ArrowLeft, Eye, Smile, MessageCircleQuestion } from "lucide-react";
+import { ArrowLeft, Eye, Smile, MessageCircleQuestion, Image as ImageIcon } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useGSAP } from "@/hooks/useGSAP";
 import { animateHeroText, animateFade, animateCards } from "@/lib/gsapAnimations";
 import { buildWAUrl, WA_MESSAGES } from "@/lib/whatsapp";
+import { FormatQuickInfo } from "@/components/events/FormatQuickInfo";
 
 export default function ACenaConIlBugiardoPage() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -23,18 +25,18 @@ export default function ACenaConIlBugiardoPage() {
     return (
         <main ref={containerRef} className="min-h-screen">
             {/* HERO SECTION */}
-            <section className="relative h-[85vh] w-full overflow-hidden flex items-end">
-                {/* Video Background */}
+            <section className="relative aspect-video md:h-[85vh] w-full overflow-hidden flex items-end">
+                {/* Background (Video on Desktop, Image on Mobile) */}
                 <div className="absolute inset-0 z-0">
-                    <video
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
+                    <Image
+                        src="/images/brand/bg-hero-wide.png"
+                        alt="A Cena Con Il Bugiardo"
+                        width={1920}
+                        height={1080}
                         className="w-full h-full object-cover opacity-40 contrast-125"
-                    >
-                        <source src="/Untitled Project.mp4" type="video/mp4" />
-                    </video>
+                        style={{ aspectRatio: '16/9', objectFit: 'cover' }}
+                        priority
+                    />
                     {/* Warm amber-red tint overlay */}
                     <div className="absolute inset-0 bg-gradient-to-br from-red-900/30 via-transparent to-amber-900/20 mix-blend-overlay" />
                     <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/50 to-transparent" />
@@ -47,16 +49,19 @@ export default function ACenaConIlBugiardoPage() {
                         href="/format"
                         className="flex items-center gap-2 text-rama-text/70 hover:text-rama-accent transition-colors uppercase text-xs font-bold tracking-widest backdrop-blur-sm bg-transparent/20 px-4 py-2 rounded-full border border-white/10"
                     >
-                        <ArrowLeft size={16} /> Torna agli Esperimenti
+                        <ArrowLeft size={16} /> ← Esplora gli altri format
                     </Link>
                 </div>
 
                 {/* Content */}
                 <div className="relative z-20 w-full max-w-7xl mx-auto p-6 md:p-12 mb-12">
                     <div id="bugiardo-hero" className="flex flex-col space-y-6">
-                        <div className="bugiardo-tag flex items-center gap-3 text-rama-accent text-sm font-bold uppercase tracking-[0.2em]">
+                        <div className="bugiardo-tag flex flex-wrap items-center gap-3 text-rama-accent text-sm font-bold uppercase tracking-[0.2em]">
                             <span className="flex items-center gap-2 bg-rama-accent/10 backdrop-blur-sm px-3 py-1 rounded-full border border-rama-accent/20">
                                 <Smile size={14} /> Dinner Show & Social Deception
+                            </span>
+                            <span className="flex items-center gap-2 bg-white/10 text-white backdrop-blur-sm px-3 py-1 rounded-full border border-white/20">
+                                Posti limitati — Max 30 persone
                             </span>
                         </div>
 
@@ -73,6 +78,15 @@ export default function ACenaConIlBugiardoPage() {
                     </div>
                 </div>
             </section>
+
+            {/* QUICK INFO SECTION */}
+            <FormatQuickInfo
+                duration="3 ore circa"
+                capacity="10 - 200 persone"
+                price="da 50€ / pers"
+                highlight="Su prenotazione"
+                highlightLabel="Disponibilità"
+            />
 
             {/* DESCRIPTION SECTION */}
             <EventConcept
@@ -93,53 +107,55 @@ export default function ACenaConIlBugiardoPage() {
                         <div className="w-24 h-1 bg-rama-accent mx-auto" />
                     </div>
 
-                    <div id="how-it-works-grid" className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div id="how-it-works-grid" className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                         {[
                             {
-                                icon: <MessageCircleQuestion size={32} />,
+                                icon: <MessageCircleQuestion size={24} />,
                                 title: "L'Inizio",
                                 desc: "Arrivate, vi siedete, ordinate. Qualcuno al tavolo però non è chi dice di essere. Le portate iniziano ad arrivare, insieme ai primi indizi."
                             },
                             {
-                                icon: <Eye size={32} />,
+                                icon: <Eye size={24} />,
                                 title: "L'Indagine",
                                 desc: "Durante la cena potete fare domande, studiare le reazioni, confrontarvi con i commensali. Ogni risposta è preziosa — o forse no."
                             },
                             {
-                                icon: <Smile size={32} />,
+                                icon: <Smile size={24} />,
                                 title: "La Rivelazione",
                                 desc: "Prima del dessert la verità viene a galla. Chi ha smascherato il Bugiardo vince un premio speciale. Chi è stato ingannato... ci riderà su."
                             }
                         ].map((step, i) => (
                             <div
                                 key={i}
-                                className="gsap-card bg-white/5 border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition-colors group text-center"
+                                className="gsap-card bg-white/5 border border-white/10 p-6 md:p-8 rounded-2xl hover:bg-white/10 transition-colors group flex md:flex-col items-center md:text-center gap-6"
                             >
-                                <div className="w-16 h-16 bg-rama-accent/10 rounded-full flex items-center justify-center text-rama-accent mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 border border-rama-accent/20">
+                                <div className="w-12 h-12 md:w-16 md:h-16 bg-rama-accent/10 rounded-full flex items-center justify-center text-rama-accent shrink-0 group-hover:scale-110 transition-transform duration-300 border border-rama-accent/20">
                                     {step.icon}
                                 </div>
-                                <h3 className="text-2xl font-bold text-rama-text mb-4">{step.title}</h3>
-                                <p className="text-gray-400 leading-relaxed">
-                                    {step.desc}
-                                </p>
+                                <div className="flex flex-col md:items-center">
+                                    <h3 className="text-xl md:text-2xl font-bold text-rama-text mb-2 md:mb-4">{step.title}</h3>
+                                    <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+                                        {step.desc}
+                                    </p>
+                                </div>
                             </div>
                         ))}
                     </div>
 
-                    <div id="bugiardo-cta" className="gsap-fade mt-20 flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <div id="bugiardo-cta" className="gsap-fade mt-16 md:mt-20 flex flex-col md:flex-row gap-4 md:gap-6 justify-center items-center">
                         <Link
                             href="/events"
-                            className="inline-flex items-center gap-3 px-8 py-4 bg-transparent border border-rama-accent text-rama-accent font-bold uppercase tracking-widest hover:bg-rama-accent hover:text-black transition-all duration-300"
+                            className="w-full md:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent border border-rama-accent text-rama-accent font-bold uppercase tracking-widest hover:bg-rama-accent hover:text-black transition-all duration-300"
                         >
-                            Prenota il tuo Posto <ArrowLeft className="rotate-180" size={18} />
+                            Voglio esserci quella sera <ArrowLeft className="rotate-180" size={18} />
                         </Link>
                         <a
                             href={buildWAUrl(WA_MESSAGES.cenaConDelitto)}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-3 px-8 py-4 bg-rama-accent text-black font-bold uppercase tracking-widest hover:bg-white transition-all duration-300"
+                            className="w-full md:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-rama-accent text-black font-bold uppercase tracking-widest hover:bg-white transition-all duration-300"
                         >
-                            Chiedi info su WhatsApp
+                            Dimmi quando è la prossima data
                         </a>
                     </div>
                 </div>

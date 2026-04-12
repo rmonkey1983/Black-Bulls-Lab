@@ -12,7 +12,7 @@ const testimonials = [
         role: "HR Manager",
         company: "Azienda Tech, Torino",
         stars: 5,
-        format: "Cena con Delitto",
+        format: "Cena Con Delitto",
         text: "Avevamo bisogno di qualcosa di diverso per la cena aziendale di fine anno. Black Bulls Lab ha superato ogni aspettativa: organizzazione perfetta, cena ottima e un'atmosfera che ha fatto ridere e interagire anche i colleghi più timidi. Lo faremmo ogni anno.",
     },
     {
@@ -20,8 +20,8 @@ const testimonials = [
         role: "Festeggiato",
         company: "Compleanno 40 anni",
         stars: 5,
-        format: "Il Palqo",
-        text: "Per i miei 40 anni volevo qualcosa di memorabile, non l'ennesima cena al ristorante. Il Palqo è stato assolutamente incredibile: siamo diventati noi i protagonisti della serata. I miei amici me ne parlano ancora.",
+        format: "Il PalQo",
+        text: "Per i miei 40 anni volevo qualcosa di memorabile, non l'ennesima cena al ristorante. Il PalQo è stato assolutamente incredibile: siamo diventati noi i protagonisti della serata. I miei amici me ne parlano ancora.",
     },
     {
         name: "Laura B.",
@@ -36,7 +36,7 @@ const testimonials = [
         role: "Team Leader, Gruppo di 25",
         company: "Multinazionale, Sede Torino",
         stars: 5,
-        format: "Cena con Delitto",
+        format: "Cena Con Delitto",
         text: "Il budget era limitato ma le aspettative alte. Ci hanno trovato la soluzione perfetta senza farci sentire a disagio per il prezzo. Risultato: 25 persone che non vedono l'ora di tornare. Valore enorme.",
     },
 ];
@@ -105,7 +105,7 @@ export function RamaTestimonials() {
                         </div>
 
                         {/* Text */}
-                        <blockquote className="font-outfit text-white/90 text-lg md:text-xl leading-relaxed mb-8 italic">
+                        <blockquote className="font-outfit text-white/90 text-base md:text-xl leading-relaxed mb-8 italic">
                             &ldquo;{t.text}&rdquo;
                         </blockquote>
 
@@ -156,14 +156,16 @@ export function RamaTestimonials() {
                 </div>
 
                 {/* Rating summary */}
-                <div className="mt-10 flex items-center justify-center gap-4 text-center">
-                    <div className="flex gap-1">
+                <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-center">
+                    <div className="flex gap-1 justify-center">
                         {Array.from({ length: 5 }).map((_, i) => (
                             <Star key={i} size={16} className="text-rama-accent fill-rama-accent" />
                         ))}
                     </div>
-                    <span className="font-mohave font-bold text-white text-xl">4.9/5</span>
-                    <span className="font-outfit text-rama-muted text-sm">· Basato su oltre 80 recensioni verificate</span>
+                    <div className="flex items-center gap-2 justify-center">
+                        <span className="font-mohave font-bold text-white text-xl">4.9/5</span>
+                        <span className="font-outfit text-rama-muted text-sm px-4 sm:px-0">· Basato su oltre 80 recensioni verificate</span>
+                    </div>
                 </div>
             </div>
         </section>

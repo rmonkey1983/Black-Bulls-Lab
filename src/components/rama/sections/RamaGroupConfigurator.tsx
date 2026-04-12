@@ -1,16 +1,17 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { Users, ChevronRight, Sparkles, Star, PartyPopper, Briefcase, Heart } from "lucide-react";
+import { Users, ChevronRight, Sparkles, Star, PartyPopper, Briefcase, Heart, Gift, GraduationCap } from "lucide-react";
 import Link from "next/link";
 import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";
 
 const occasions = [
-    { id: "team", label: "Team Building Aziendale", icon: Briefcase, formats: ["A Cena Con Il Bugiardo", "Il PalQo"], tagline: "Rompete il ghiaccio. Costruite qualcosa di vero." },
-    { id: "corporate", label: "Cena di Natale / Gala", icon: Sparkles, formats: ["Cena Con Il Delitto", "A Cena Con Il Bugiardo"], tagline: "Un finale d'anno che resterà nei ricordi." },
-    { id: "birthday", label: "Compleanno di Gruppo", icon: PartyPopper, formats: ["Il PalQo", "A Cena Con Il Bugiardo"], tagline: "Festeggia come non hai mai festeggiato." },
-    { id: "private", label: "Evento Privato", icon: Heart, formats: ["A Cena Con Il Bugiardo", "Cena Con Il Delitto"], tagline: "La tua idea. Il nostro palcoscenico." },
+    { id: "team", label: "Team Building Aziendale", icon: Briefcase, formats: ["A Cena Con Il Bugiardo", "Il PalQo", "Cena Con Delitto"], tagline: "Rompete il ghiaccio. Costruite qualcosa di vero." },
+    { id: "corporate", label: "Cena di Natale / Gala", icon: Sparkles, formats: ["Cena Con Delitto", "A Cena Con Il Bugiardo", "The Golden Voice"], tagline: "Un finale d'anno che resterà nei ricordi." },
+    { id: "birthday", label: "Festa di Compleanno", icon: Gift, formats: ["Il PalQo", "A Cena Con Il Bugiardo", "Cena Con Delitto"], tagline: "Un compleanno fuori dagli schemi." },
+    { id: "graduation", label: "Festa di Laurea", icon: GraduationCap, formats: ["Il PalQo", "The Golden Voice"], tagline: "Festeggiate il traguardo con noi." },
+    { id: "private", label: "Evento Privato", icon: Heart, formats: ["A Cena Con Il Bugiardo", "Cena Con Delitto"], tagline: "La tua idea. Il nostro palcoscenico." },
 ];
 
 const groupSizes = ["10-20", "20-30", "30-50", "50+"];
@@ -28,11 +29,17 @@ const formatDetails: Record<string, { price: string; capacity: string; duration:
         duration: "~2.5 ore",
         highlight: "I tuoi colleghi diventano le star della serata.",
     },
-    "Cena Con Il Delitto": {
+    "Cena Con Delitto": {
         price: "A partire da 50€/persona",
         capacity: "Qualsiasi dimensione",
         duration: "~3 ore",
-        highlight: "Chi ha ucciso il maggiordomo? Tocca a te scoprirlo.",
+        highlight: "Chi è l'assassino? Vivi un'indagine immersiva tra una portata e l'altra.",
+    },
+    "The Golden Voice": {
+        price: "A partire da 45€/persona",
+        capacity: "Qualsiasi dimensione",
+        duration: "~3 ore",
+        highlight: "Il format dove il talento vocale incontra lo show immersivo.",
     },
 };
 
@@ -81,7 +88,7 @@ export function RamaGroupConfigurator() {
                     <h2 className="font-mohave font-bold uppercase tracking-tighter text-white text-[10vw] sm:text-[8vw] md:text-[5vw] leading-[0.9] text-center">
                         CONFIGURA <span className="text-rama-accent text-center">IL TUO EVENTO</span>
                     </h2>
-                    <p className="text-rama-muted font-outfit text-lg mt-4 max-w-xl mx-auto text-center">
+                    <p className="text-rama-muted font-outfit text-base md:text-lg mt-4 max-w-xl mx-auto text-center px-4">
                         In 3 passi ti diciamo quale format fa per te — e ricevi il preventivo su WhatsApp.
                     </p>
                 </div>
@@ -103,20 +110,20 @@ export function RamaGroupConfigurator() {
                     {step === 1 && (
                         <div key="step1">
                             <p className="font-mohave uppercase tracking-widest text-white/60 text-sm text-center mb-6">Passo 1 — Che tipo di evento stai organizzando?</p>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 px-2 sm:px-0">
                                 {occasions.map(occ => {
                                     const Icon = occ.icon;
                                     return (
                                         <button
                                             key={occ.id}
                                             onClick={() => { setSelectedOccasion(occ.id); setStep(2); }}
-                                            className={`group flex items-center gap-4 p-5 rounded-xl border text-left transition-all duration-300 cursor-pointer ${selectedOccasion === occ.id ? "border-rama-accent bg-rama-accent/10" : "border-white/10 bg-white/[0.03] hover:border-rama-accent/40 hover:bg-white/[0.06]"}`}
+                                            className={`group flex items-center gap-4 p-4 sm:p-5 rounded-xl border text-left transition-all duration-300 cursor-pointer ${selectedOccasion === occ.id ? "border-rama-accent bg-rama-accent/10" : "border-white/10 bg-white/[0.03] hover:border-rama-accent/40 hover:bg-white/[0.06]"}`}
                                         >
-                                            <div className="w-11 h-11 rounded-lg border border-rama-accent/30 bg-rama-accent/10 flex items-center justify-center flex-shrink-0">
-                                                <Icon size={20} className="text-rama-accent" />
+                                            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg border border-rama-accent/30 bg-rama-accent/10 flex items-center justify-center flex-shrink-0">
+                                                <Icon size={18} className="text-rama-accent" />
                                             </div>
-                                            <span className="font-mohave font-bold uppercase tracking-wide text-white text-lg">{occ.label}</span>
-                                            <ChevronRight size={18} className="ml-auto text-white/30 group-hover:text-rama-accent transition-colors" />
+                                            <span className="font-mohave font-bold uppercase tracking-wide text-white text-base sm:text-lg">{occ.label}</span>
+                                            <ChevronRight size={16} className="ml-auto text-white/30 group-hover:text-rama-accent transition-colors" />
                                         </button>
                                     );
                                 })}
@@ -186,21 +193,21 @@ export function RamaGroupConfigurator() {
                                 <p className="text-rama-muted font-outfit text-center max-w-lg mx-auto">{occasionObj?.tagline}</p>
                             </div>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 mb-8 px-2 sm:px-0">
                                 {suggestedFormats.map(fmt => {
                                     const d = formatDetails[fmt];
                                     return (
-                                        <div key={fmt} className="flex flex-col gap-4 p-6 rounded-xl border border-white/10 bg-white/[0.03] hover:border-rama-accent/30 transition-all duration-300">
-                                            <h3 className="font-mohave font-bold uppercase tracking-tight text-white text-2xl">{fmt}</h3>
-                                            <p className="font-outfit text-rama-muted text-sm italic">&ldquo;{d.highlight}&rdquo;</p>
+                                        <div key={fmt} className="flex flex-col gap-4 p-5 sm:p-6 rounded-xl border border-white/10 bg-white/[0.03] hover:border-rama-accent/30 transition-all duration-300">
+                                            <h3 className="font-mohave font-bold uppercase tracking-tight text-white text-xl sm:text-2xl">{fmt}</h3>
+                                            <p className="font-outfit text-rama-muted text-xs sm:text-sm italic">&ldquo;{d.highlight}&rdquo;</p>
                                             <div className="flex flex-wrap gap-2 mt-auto mb-4">
-                                                <span className="text-xs font-outfit bg-white/5 border border-white/10 rounded-full px-3 py-1 text-white/70">👥 {d.capacity}</span>
-                                                <span className="text-xs font-outfit bg-white/5 border border-white/10 rounded-full px-3 py-1 text-white/70">⏱ {d.duration}</span>
-                                                <span className="text-xs font-outfit bg-rama-accent/10 border border-rama-accent/30 rounded-full px-3 py-1 text-rama-accent font-bold">💰 {d.price}</span>
+                                                <span className="text-[10px] sm:text-xs font-outfit bg-white/5 border border-white/10 rounded-full px-2.5 py-1 text-white/70">👥 {d.capacity}</span>
+                                                <span className="text-[10px] sm:text-xs font-outfit bg-white/5 border border-white/10 rounded-full px-2.5 py-1 text-white/70">⏱ {d.duration}</span>
+                                                <span className="text-[10px] sm:text-xs font-outfit bg-rama-accent/10 border border-rama-accent/30 rounded-full px-2.5 py-1 text-rama-accent font-bold">💰 {d.price}</span>
                                             </div>
                                             <button 
                                                 onClick={() => handleWhatsAppRedirect(fmt)}
-                                                className="w-full text-center bg-rama-accent text-black font-mohave font-bold uppercase tracking-widest text-sm px-6 py-4 rounded-xl hover:bg-white transition-all duration-300 shadow-[0_4px_15px_rgba(200,164,78,0.15)] flex items-center justify-center gap-2">
+                                                className="w-full text-center bg-rama-accent text-black font-mohave font-bold uppercase tracking-widest text-xs sm:text-sm px-6 py-4 rounded-xl hover:bg-white transition-all duration-300 shadow-[0_4px_15px_rgba(200,164,78,0.15)] flex items-center justify-center gap-2">
                                                 <PartyPopper size={16} />
                                                 Preventivo su WhatsApp
                                             </button>

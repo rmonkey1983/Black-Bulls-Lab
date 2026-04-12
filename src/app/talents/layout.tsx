@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Artisti — I Nostri Talenti",
+    title: "Artisti e Performer | Black Bulls Lab — I Nostri Talenti a Torino",
     description:
-        "Scopri gli artisti del Black Bulls Lab: chef, DJ, performer e creativi che danno vita ad ogni esperienza unica.",
+        "Scopri gli artisti, i performer e i talenti creativi del Black Bulls Lab. Entra nel nostro laboratorio urbano o candidati per far parte dei nostri dinner show a Torino.",
     alternates: { canonical: "/talents" },
     openGraph: {
-        title: "Artisti — Black Bulls Lab",
-        description: "Le menti creative che danno vita alle esperienze immersive del Black Bulls Lab.",
+        title: "Artisti e Performer | Black Bulls Lab — Talenti Creativi",
+        description: "Incontra i protagonisti delle serate Black Bulls Lab. Cantanti, attori e performer che rendono unici i nostri show.",
         url: "/talents",
     },
 };

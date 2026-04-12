@@ -17,23 +17,23 @@ export function EventConcept({ description }: EventConceptProps) {
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} className="py-24 px-6 max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
+        <section ref={containerRef} className="py-20 md:py-32 px-4 md:px-6 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
                 <div className="md:col-span-4">
                     <h2
                         id="concept-title"
-                        className="gsap-fade text-4xl md:text-5xl font-bold text-white tracking-tighter sticky top-32"
+                        className="gsap-fade text-4xl md:text-5xl font-bold text-white tracking-tighter md:sticky md:top-32"
                     >
                         THE <br />
                         <span className="text-gold italic">CONCEPT</span>
                     </h2>
                 </div>
 
-                <div className="md:col-span-8 space-y-8">
+                <div className="md:col-span-8 space-y-6 md:space-y-8">
                     {description.split('\n').map((paragraph, index) => (
                         <p
                             key={index}
-                            className="concept-paragraph gsap-fade text-lg md:text-xl text-gray-300 leading-relaxed font-light first-letter:text-5xl first-letter:font-bold first-letter:text-white first-letter:mr-3 first-letter:float-left"
+                            className="concept-paragraph gsap-fade text-base md:text-lg text-gray-300 leading-relaxed font-light max-w-prose first-letter:text-4xl first-letter:md:text-5xl first-letter:font-bold first-letter:text-white first-letter:mr-3 first-letter:float-left"
                         >
                             {paragraph}
                         </p>

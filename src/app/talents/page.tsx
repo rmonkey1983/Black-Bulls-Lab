@@ -2,17 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Users } from "lucide-react";
+import { ArrowRight, Users, Mic, Utensils, GlassWater, Zap } from "lucide-react";
 import { ImmersiveHeader } from "@/components/layout/ImmersiveHeader";
-import { getTalents, Talent } from "@/lib/dataStore";
-import { ParallaxImage, StickyTextSection } from "@/components/ui/ParallaxScroll";
 
 export default function TalentsPage() {
-    const [talents, setTalents] = useState<Talent[]>([]);
-
-    useEffect(() => {
-        getTalents().then(setTalents);
-    }, []);
 
     return (
         <div className="min-h-screen  pb-24">
@@ -24,70 +17,55 @@ export default function TalentsPage() {
             />
             <div className="max-w-7xl mx-auto px-6 space-y-20">
 
-                {/* Intro Section */}
-                <section>
-                    <StickyTextSection
-                        className="md:flex-row-reverse"
-                        content={
-                            <div className="space-y-6">
-                                <span className="flex items-center gap-2 text-rama-accent text-xs font-bold tracking-[0.2em] uppercase">
-                                    <Users size={14} /> Il Nostro Cast
-                                </span>
-                                <h2 className="text-4xl md:text-5xl font-bold text-rama-text">
-                                    I Volti del <br /><span className="text-rama-accent font-mohave uppercase">Toro.</span>
-                                </h2>
-                                <p className="text-gray-300 text-lg leading-relaxed">
-                                    Chef visionari, bartender alchimisti, artisti e performer.
-                                    Scopri i talenti che ogni sera trasformano il Black Bulls Lab in magia.
-                                </p>
-                            </div>
-                        }
-                    >
-                        <ParallaxImage
-                            src="/images/brand/bg-stage-lights.png"
-                            alt="Talent Group"
-                            aspectRatio="landscape"
-                            speed={0.2}
-                            priority
-                        />
-                    </StickyTextSection>
-                </section>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {talents.map((talent) => (
+                {/* Recruiting Section */}
+                <section className="py-20 flex flex-col md:flex-row items-center gap-12 border-y border-white/5 bg-white/[0.02] rounded-3xl p-8 md:p-16">
+                    <div className="flex-1 space-y-8">
+                        <div className="space-y-4">
+                            <span className="flex items-center gap-2 text-rama-accent text-xs font-bold tracking-[0.2em] uppercase">
+                                <Users size={14} /> Join the Lab
+                            </span>
+                            <h2 className="text-4xl md:text-6xl font-bold text-white font-mohave uppercase tracking-tighter leading-none">
+                                Sei un artista, <br />
+                                <span className="text-rama-accent">performer o chef?</span>
+                            </h2>
+                            <p className="text-gray-400 text-xl leading-relaxed max-w-xl">
+                                Black Bulls Lab cerca talenti per le sue serate a Torino. Cantanti, attori, bartender, chef — se hai qualcosa di unico da mostrare, vogliamo conoscerti.
+                            </p>
+                        </div>
+                        
                         <Link
-                            key={talent.id}
-                            href={`/talents/${talent.id}`}
-                            className="group relative block aspect-[3/4] overflow-hidden bg-bg-card border border-border
-                                hover:border-rama-accent/25 hover:shadow-[0_0_30px_rgba(200,164,78,0.05)]
-                                transition-all duration-500"
+                            href="/contact?motivo=candidatura-artista"
+                            className="group inline-flex items-center gap-3 bg-rama-accent text-black font-mohave font-bold uppercase tracking-widest text-base px-10 py-5 rounded-full hover:bg-white transition-colors duration-300"
                         >
-                            {/* Corner accents */}
-                            <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-rama-accent/15 z-20
-                                group-hover:w-6 group-hover:h-6 group-hover:border-rama-accent/40 transition-all duration-500" />
-                            <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-rama-accent/15 z-20
-                                group-hover:w-6 group-hover:h-6 group-hover:border-rama-accent/40 transition-all duration-500" />
+                            Voglio esibirmi con voi
+                            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                    </div>
 
-                            <img
-                                src={talent.image}
-                                alt={talent.name}
-                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-
-                            <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-                                <span className="text-rama-accent/60 text-[10px] font-bold uppercase tracking-widest mb-2 block">
-                                    {talent.role}
-                                </span>
-                                <h3 className="text-3xl font-bold text-rama-text mb-2">{talent.name}</h3>
-                                <div className="flex items-center gap-2 text-rama-accent text-sm font-medium opacity-0 transform translate-y-4
-                                    group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                                    Scopri di più <ArrowRight size={14} />
+                    <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+                        {[
+                            { role: "Performer", icon: Mic, desc: "Cantanti, attori, performer" },
+                            { role: "Chef", icon: Utensils, desc: "Cucina sperimentale" },
+                            { role: "Bartender", icon: GlassWater, desc: "Mixology & Alchimia" },
+                            { role: "Tecnico", icon: Zap, desc: "Luci, Audio & Show" },
+                        ].map((item) => (
+                            <div key={item.role} className="p-6 border border-white/10 bg-black/40 rounded-2xl hover:border-rama-accent/40 transition-colors group flex items-center gap-4 sm:flex-col sm:items-start">
+                                <item.icon size={28} className="text-rama-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
+                                <div>
+                                    <h3 className="font-mohave font-bold text-white uppercase tracking-wider text-xl">{item.role}</h3>
+                                    <p className="text-[10px] text-gray-500 uppercase tracking-widest mt-1">{item.desc}</p>
                                 </div>
                             </div>
-                        </Link>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* Secondary Info */}
+                <section className="text-center max-w-3xl mx-auto py-12">
+                    <p className="font-outfit text-rama-muted italic text-lg opacity-60">
+                        "Non cerchiamo semplici esecutori, ma menti creative che vogliano sfidare i limiti dell&apos;intrattenimento tradizionale."
+                    </p>
+                </section>
             </div>
         </div>
     );

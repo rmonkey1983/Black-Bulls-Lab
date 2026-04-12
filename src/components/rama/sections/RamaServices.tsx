@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";
@@ -55,11 +56,14 @@ export function RamaServices() {
             {/* Background Image Viewer */}
             <div ref={bgRef} className="absolute inset-0 z-0 opacity-20 md:opacity-40 transition-opacity duration-1000">
                 {hoveredService && (
-                    <img
+                    <Image
                         key={hoveredService}
-                        src={services.find(s => s.id === hoveredService)?.image}
-                        className="absolute inset-0 w-full h-full object-cover"
+                        src={services.find(s => s.id === hoveredService)?.image || ""}
                         alt="Service Background"
+                        fill
+                        className="object-cover"
+                        sizes="100vw"
+                        priority={hoveredService === services[0].id}
                     />
                 )}
                 <div className="absolute inset-0 bg-transparent/20" />

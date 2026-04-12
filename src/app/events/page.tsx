@@ -9,6 +9,7 @@ import { ProjectList } from "@/components/ui/ProjectList";
 import { NoEventsNewsletter } from "@/components/events/NoEventsNewsletter";
 import { useGSAP } from "@/hooks/useGSAP";
 import { animateCards, animateFade } from "@/lib/gsapAnimations";
+import Image from "next/image";
 
 export default function EventsPage() {
     const [events, setEvents] = useState<Event[]>([]);
@@ -24,16 +25,17 @@ export default function EventsPage() {
     }, []);
 
     return (
-        <div className="min-h-screen  pb-24">
+        <main className="min-h-screen pb-24 bg-black relative">
             <ImmersiveHeader
                 id="events-hero"
                 title="I NOSTRI"
                 highlight="Eventi"
                 subtitle="Ogni serata è un'esperienza unica. Scopri il prossimo evento e vivi qualcosa di straordinario."
+                mediaUrl="/images/brand/bg-venue-crowd.png"
             />
 
             {/* Anchor Button */}
-            <div className="flex justify-center -mt-16 md:-mt-24 mb-24 relative z-20">
+            <div className="flex justify-center -mt-12 md:-mt-24 mb-16 md:mb-24 relative z-20">
                 <button 
                     onClick={() => {
                         const target = document.getElementById('events-list');
@@ -60,7 +62,7 @@ export default function EventsPage() {
                                 <span className="font-rock-salt text-rama-accent transform -rotate-2 text-xl block">
                                     <Sparkles size={14} className="inline mr-2" /> Prossimamente
                                 </span>
-                                <h2 className="font-mohave font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-[10vw] md:text-[6vw]">
+                                <h2 className="font-mohave font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-5xl sm:text-7xl md:text-[6vw]">
                                     <span className="text-white">Il Palco è</span>
                                     <span className="text-rama-accent">Pronto.</span>
                                 </h2>
@@ -73,16 +75,31 @@ export default function EventsPage() {
                     >
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 mt-8">
                             <div className="aspect-[4/5] rounded-lg overflow-hidden relative group">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src="/images/brand/bg-venue-crowd.png" alt="Crowd" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                                <Image 
+                                    src="/images/brand/bg-venue-crowd.png" 
+                                    alt="Crowd" 
+                                    fill
+                                    className="object-cover group-hover:scale-105 transition-transform duration-700" 
+                                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                                />
                             </div>
                             <div className="aspect-[4/5] rounded-lg overflow-hidden relative group translate-y-4 md:translate-y-8">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src="/images/brand/service-performance.png" alt="Performance" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                                <Image 
+                                    src="/images/brand/service-performance.png" 
+                                    alt="Performance" 
+                                    fill
+                                    className="object-cover group-hover:scale-105 transition-transform duration-700" 
+                                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                                />
                             </div>
                             <div className="aspect-[4/5] rounded-lg overflow-hidden relative group hidden md:block">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src="/images/brand/bg-stage-lights.png" alt="Stage Lights" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                                <Image 
+                                    src="/images/brand/bg-stage-lights.png" 
+                                    alt="Stage Lights" 
+                                    fill
+                                    className="object-cover group-hover:scale-105 transition-transform duration-700" 
+                                    sizes="(max-width: 1024px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                                />
                             </div>
                         </div>
                     </StickyTextSection>
@@ -122,6 +139,6 @@ export default function EventsPage() {
                 </div>
 
             </div>
-        </div>
+        </main>
     );
 }

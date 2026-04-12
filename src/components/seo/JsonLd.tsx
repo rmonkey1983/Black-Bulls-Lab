@@ -15,7 +15,7 @@ export function OrganizationSchema({ url = SITE_URL }: OrganizationSchemaProps) 
         url,
         logo: `${url}/blackbullslab-v2.png`,
         description:
-            "Agenzia specializzata in dinner show e format eventi immersivi a Torino. Il PalQo, A Cena Con Il Bugiardo, Cena Con Il Delitto.",
+            "Agenzia specializzata in dinner show e format eventi immersivi a Torino. A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e The Golden Voice.",
         address: {
             "@type": "PostalAddress",
             addressLocality: "Torino",
@@ -30,7 +30,7 @@ export function OrganizationSchema({ url = SITE_URL }: OrganizationSchemaProps) 
         },
         sameAs: ["https://instagram.com/blackbullslab"],
         foundingDate: "2026",
-        keywords: "dinner show, eventi immersivi, cucina, intrattenimento, Torino, Il PalQo, A Cena Con Il Bugiardo, Cena Con Il Delitto",
+        keywords: "dinner show, eventi immersivi, cucina, intrattenimento, Torino, A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto, The Golden Voice",
     };
 
     return (
@@ -158,7 +158,7 @@ export function WebSiteSchema() {
         "@type": "WebSite",
         name: SITE_NAME,
         url: SITE_URL,
-        description: "Dinner show e format eventi immersivi a Torino. Il PalQo, A Cena Con Il Bugiardo, Cena Con Il Delitto.",
+        description: "Dinner show e format eventi immersivi a Torino. A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e The Golden Voice.",
         inLanguage: "it-IT",
         publisher: {
             "@type": "Organization",
@@ -247,7 +247,7 @@ export function LocalBusinessSchema() {
         "@context": "https://schema.org",
         "@type": "EntertainmentBusiness",
         name: SITE_NAME,
-        description: "Dinner show e format eventi immersivi a Torino: Il PalQo, A Cena Con Il Bugiardo, Cena Con Il Delitto.",
+        description: "Dinner show e format eventi immersivi a Torino: A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e The Golden Voice.",
         url: SITE_URL,
         telephone: CONTACT_PHONE,
         email: CONTACT_EMAIL,
@@ -310,7 +310,7 @@ export function LocalBusinessSchema() {
                     "@type": "Offer",
                     itemOffered: {
                         "@type": "Service",
-                        name: "Cena Con Il Delitto",
+                        name: "Cena Con Delitto",
                         description: "Dinner show con delitto da risolvere durante la cena. Un giallo interattivo dal vivo.",
                     },
                     price: "50",

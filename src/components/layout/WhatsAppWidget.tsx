@@ -16,7 +16,7 @@ export function WhatsAppWidget() {
         >
             {/* Tooltip label */}
             <span className="hidden md:flex items-center opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0 bg-[#0a0a0a] border border-white/10 text-white font-outfit text-sm px-4 py-2 rounded-full whitespace-nowrap shadow-xl">
-                Scrivici su WhatsApp
+                Scrivici — il tuo tavolo è quasi pronto
             </span>
 
             {/* Button */}

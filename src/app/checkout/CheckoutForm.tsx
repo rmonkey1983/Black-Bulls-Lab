@@ -13,7 +13,7 @@ export default function CheckoutForm() {
 
     const event = {
         id: "1",
-        title: eventId === "il-palqo" ? "Il PalQo" : eventId === "a-cena-con-il-bugiardo" ? "A Cena Con Il Bugiardo" : "Cena Con Il Delitto",
+        title: eventId === "il-palqo" ? "Il PalQo" : eventId === "a-cena-con-il-bugiardo" ? "A Cena Con Il Bugiardo" : eventId === "the-golden-voice" ? "The Golden Voice" : "Cena Con Delitto",
         price: 85,
         location: "Sala dei Cavalieri",
     };

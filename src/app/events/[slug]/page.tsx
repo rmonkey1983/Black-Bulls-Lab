@@ -58,7 +58,7 @@ export default function EventPage() {
                 date={event.date}
                 location={event.location}
                 image={event.image}
-                url={`https://blackbullslab.it/events/${event.slug}`}
+                url={`https://blackbullslab.com/events/${event.slug}`}
                 price={event.price}
             />
             <EventHero

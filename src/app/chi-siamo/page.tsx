@@ -26,8 +26,8 @@ export default function AboutPage() {
                 id="about-hero"
                 title="CHI"
                 highlight="Siamo"
-                subtitle="Un team di professionisti dove energia, cultura teatrale e competenza si fondono per dare vita a format straordinari."
-                mediaUrl=""
+                subtitle="Siamo i Black Bulls. Dietro ogni serata, c'è una squadra ossessionata dai dettagli."
+                mediaUrl="/images/brand/bg-venue-crowd.png"
             />
 
             <div className="relative z-10 space-y-16 md:space-y-24 mt-[-4vh]">
@@ -56,14 +56,14 @@ export default function AboutPage() {
                                 </p>
                                 <div className="pt-4">
                                     <PremiumButton href="/events" variant="gold" size="lg">
-                                        <span className="font-mohave tracking-widest uppercase text-base">Scopri i format</span>
+                                        <span className="font-mohave tracking-widest uppercase text-base">Vedi cosa abbiamo creato</span>
                                         <ArrowRight size={18} className="ml-2" />
                                     </PremiumButton>
                                 </div>
                             </div>
                         }
                     >
-                        <div className="grid grid-cols-2 gap-4 h-full">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4 h-full">
                             <ParallaxImage
                                 src="/images/brand/team-art-director.png"
                                 alt="Il Nostro Art Director"
@@ -71,7 +71,7 @@ export default function AboutPage() {
                                 speed={0.2}
                                 priority
                             />
-                            <div className="pt-12">
+                            <div className="md:pt-12">
                                 <ParallaxImage
                                     src="/images/brand/team-chef.png"
                                     alt="Il Nostro Chef"
@@ -139,7 +139,7 @@ export default function AboutPage() {
                                 </h2>
                                 
                                 {/* Contrast wrapper for readability */}
-                                <div id="values-grid" className="bg-black/50 backdrop-blur-md p-6 md:p-8 rounded-2xl border border-white/5 shadow-2xl mt-8">
+                                <div id="values-grid" className="bg-black/50 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-white/5 shadow-2xl mt-8 mx-[-2vw] sm:mx-0">
                                     <p className="gsap-fade text-base md:text-lg text-white/90 font-outfit font-light leading-relaxed">
                                         Esperienza, passione e dedizione assoluta. Questi sono i pilastri con cui affrontiamo 
                                         ogni singola produzione. Il nostro team è programmato per trovare sempre la soluzione ideale 
@@ -163,7 +163,7 @@ export default function AboutPage() {
 
                                 <div className="pt-6">
                                     <PremiumButton href="/events" variant="outline" size="lg">
-                                        <span className="font-mohave tracking-widest uppercase text-base text-white">Esplora gli Eventi</span>
+                                        <span className="font-mohave tracking-widest uppercase text-base text-white">Prenota la tua serata</span>
                                         <ArrowRight size={18} className="ml-2 text-white" />
                                     </PremiumButton>
                                 </div>

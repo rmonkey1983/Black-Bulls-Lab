@@ -8,11 +8,13 @@ import { ChevronDown } from "lucide-react";
 import { RamaMenuOverlay } from "./RamaMenuOverlay";
 import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";
+import { LOGO_PATH } from "@/lib/constants";
 
 const experiments = [
-    { name: "Il PalQo", href: "/format/il-palqo" },
-    { name: "The Golden Voice", href: "/format/the-golden-voice" },
     { name: "A Cena Con Il Bugiardo", href: "/format/a-cena-con-il-bugiardo" },
+    { name: "Il PalQo", href: "/format/il-palqo" },
+    { name: "Cena Con Delitto", href: "/format/cena-con-delitto" },
+    { name: "The Golden Voice", href: "/format/the-golden-voice" },
 ];
 
 export function RamaHeader() {
@@ -51,16 +53,16 @@ export function RamaHeader() {
 
     return (
         <>
-            <header className={`fixed top-0 left-0 right-0 z-50 px-6 py-3 md:px-12 md:py-4 flex justify-between items-center text-rama-text transition-all duration-300 ${scrolled ? 'bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/10' : 'mix-blend-difference'}`}>
+            <header className={`fixed top-0 left-0 right-0 z-50 px-6 py-2 md:px-12 md:py-4 flex justify-between items-center text-rama-text transition-all duration-300 h-14 md:h-20 ${scrolled ? 'bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/10' : 'mix-blend-difference'}`}>
                 {/* Logo */}
                 <Link href="/" className="relative z-50 flex items-center shrink-0" aria-label="Black Bulls Lab — Home">
-                    <div className="h-16 md:h-24 w-32 md:w-48 relative overflow-hidden flex items-center justify-center">
+                    <div className="h-10 md:h-20 w-[110px] md:w-[160px] relative overflow-hidden flex items-center justify-center">
                         <Image
-                            src="/blackbullslab-v2.png"
+                            src={LOGO_PATH}
                             alt="Black Bulls Lab"
                             fill
-                            quality={90}
                             className="object-contain scale-[1.65] transition-opacity duration-300 hover:opacity-80"
+                            sizes="(max-width: 640px) 80px, 120px"
                             priority
                         />
                     </div>

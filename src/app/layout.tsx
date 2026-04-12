@@ -9,6 +9,7 @@ import { MobileStickyBookButton } from "@/components/layout/MobileStickyBookButt
 import { WhatsAppWidget } from "@/components/layout/WhatsAppWidget";
 import { BackToTop } from "@/components/layout/BackToTop";
 import { GSAPInitializer } from "@/components/layout/GSAPInitializer";
+import { PreFooterCTA } from "@/components/layout/PreFooterCTA";
 import { CONTACT_EMAIL, SITE_URL, SITE_NAME } from "@/lib/constants";
 import "./globals.css";
 
@@ -45,9 +46,9 @@ export const metadata: Metadata = {
     "eventi aziendali creativi", "organizzazione spettacoli", "intrattenimento su misura",
     "agenzia spettacolo", "dinner show aziendale", "team building esperienziale",
     // Keyword geo-locali Torino
-    "dinner show Torino", "eventi aziendali Torino", "cena con il delitto Torino",
+    "dinner show Torino", "eventi aziendali Torino", "cena con delitto Torino",
     "organizzazione eventi Torino", "team building Torino", "cena spettacolo Torino",
-    "a cena con il bugiardo Torino", "il palqo Torino", "format cena teatro Torino"
+    "a cena con il bugiardo Torino", "il palqo Torino", "cena con delitto Torino", "the golden voice Torino", "format cena teatro Torino"
   ],
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
@@ -152,6 +153,7 @@ export default function RootLayout({
         <main id="main-content" className="flex-grow relative z-10 w-full">
           {children}
         </main>
+        <PreFooterCTA />
         <RamaFooter />
         <MobileStickyBookButton />
         <WhatsAppWidget />
@@ -163,7 +165,7 @@ export default function RootLayout({
         <FAQPageSchema faqs={[
           { question: "Qual è il dress code per le serate?", answer: "Richiediamo un abbigliamento elegante e curato (Smart Casual / Elegant). Ci riserviamo il diritto di selezione all'ingresso per mantenere l'atmosfera esclusiva del nostro club." },
           { question: "Come funzionano le prenotazioni per la cena spettacolo?", answer: "La prenotazione è fortemente consigliata ed è garantita solo a seguito della nostra conferma. Offriamo sia menu degustazione fissi che soluzioni à-la-carte, a seconda del format della serata." },
-          { question: "Posso organizzare un evento privato o aziendale a Torino?", answer: `Certamente. ${SITE_NAME} organizza cene aziendali, team building, dinner show e eventi immersivi a Torino per gruppi di qualsiasi dimensione. I nostri format sono Il PalQo, A Cena Con Il Bugiardo e Cena Con Il Delitto. Contattaci a ${CONTACT_EMAIL} per un preventivo personalizzato.` },
+          { question: "Posso organizzare un evento privato o aziendale a Torino?", answer: `Certamente. ${SITE_NAME} organizza cene aziendali, team building, dinner show e eventi immersivi a Torino per gruppi di qualsiasi dimensione. I nostri format ufficiali sono A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e The Golden Voice. Contattaci a ${CONTACT_EMAIL} per un preventivo personalizzato.` },
           { question: "Gestite intolleranze o allergie alimentari?", answer: "Assolutamente sì. Vi chiediamo di comunicare eventuali allergie, intolleranze o scelte dietetiche (vegan/vegetariane) al momento della prenotazione, per permettere al nostro Executive Chef di prepararvi una variante ad hoc." },
           { question: `Quanto costa partecipare a un dinner show di ${SITE_NAME}?`, answer: `I nostri format partono da 50€ a persona, con soluzioni flessibili per gruppi aziendali e privati. Il prezzo include la cena e lo spettacolo immersivo. Contattaci a ${CONTACT_EMAIL} per un preventivo su misura per il tuo gruppo.` },
         ]} />

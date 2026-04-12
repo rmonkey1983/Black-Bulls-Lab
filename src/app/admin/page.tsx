@@ -27,7 +27,7 @@ export default function AdminDashboard() {
     const statCards = [
         { label: "Esperimenti", value: stats.events, icon: FlaskConical, color: "green", href: "/admin/events" },
         { label: "Campioni Foto", value: stats.photos, icon: ImageIcon, color: "cyan", href: "/admin/gallery" },
-        { label: "Ricercatori", value: stats.talents, icon: Users, color: "amber", href: "/admin/talents" },
+        { label: "Artisti", value: stats.talents, icon: Users, color: "amber", href: "/admin/talents" },
     ];
 
     const quickActions = [

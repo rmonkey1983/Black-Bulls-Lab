@@ -20,7 +20,7 @@ export function RamaFooter() {
     return (
         <footer className="w-full bg-transparent border-t border-white/10 pt-12 sm:pt-16 md:pt-32 pb-8 md:pb-16 flex flex-col px-4 sm:px-6 md:px-12 overflow-hidden">
             {/* Massive CTA */}
-            {pathname !== "/" && pathname !== "/contact" && pathname !== "/events" && (
+            {pathname !== "/" && pathname !== "/contact" && (
                 <div className="flex flex-row justify-between items-end mb-16 sm:mb-24 md:mb-40 group cursor-pointer overflow-hidden">
                     <Link href="/events" className="font-mohave text-[18vw] sm:text-[16vw] md:text-[140px] leading-[0.85] uppercase font-bold text-rama-text hover:text-rama-accent transition-colors duration-500">
                         Prossimi<br />Eventi
@@ -33,22 +33,21 @@ export function RamaFooter() {
                 </div>
             )}
 
-            <div className="grid grid-cols-2 md:grid-cols-12 gap-8 md:gap-8 border-t border-white/10 pt-10 sm:pt-12 text-sm text-rama-muted font-outfit uppercase tracking-widest">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-10 md:gap-8 border-t border-white/10 pt-10 sm:pt-12 text-sm text-rama-muted font-outfit uppercase tracking-widest">
 
                 {/* Logo and Copyright */}
-                <div className="col-span-2 md:col-span-4 flex flex-col gap-8">
+                <div className="col-span-1 sm:col-span-2 md:col-span-4 flex flex-col gap-6 md:gap-8 items-center md:items-start text-center md:text-left">
                     <Link href="/" aria-label="Black Bulls Lab — Home">
                         <Image
                             src="/blackbullslab-v2.png"
                             alt="Black Bulls Lab"
-                            width={200}
-                            height={200}
-                            quality={90}
-                            sizes="(max-width: 768px) 150px, 200px"
-                            className="w-auto h-24 md:h-32 object-contain"
+                            width={160}
+                            height={160}
+                            className="w-auto h-20 md:h-32 object-contain"
+                            sizes="(max-width: 640px) 80px, 120px"
                         />
                     </Link>
-                    <div className="text-rama-muted font-normal capitalize tracking-normal text-xs flex flex-col items-start gap-1">
+                    <div className="text-rama-muted font-normal capitalize tracking-normal text-xs flex flex-col items-center md:items-start gap-1">
                         <span>Dinner Show &amp; Club</span>
                         <span>based in Torino</span>
                         <br />
@@ -60,12 +59,12 @@ export function RamaFooter() {
 
 
                 {/* Links Column 1 */}
-                <div className="col-span-1 md:col-span-2 flex flex-col gap-6 font-semibold">
+                <div className="col-span-1 md:col-span-2 flex flex-col gap-5 md:gap-6 font-semibold md:pl-0 px-4 md:px-0">
                     <Link href="/events" className="hover:text-white transition-colors flex justify-between">Eventi <ArrowUpRight size={14} /></Link>
                     <div className="h-[1px] w-full bg-white/10" />
                     <Link href="/chi-siamo" className="hover:text-white transition-colors flex justify-between">Chi Siamo <ArrowUpRight size={14} /></Link>
                     <div className="h-[1px] w-full bg-white/10" />
-                    <Link href="/talents" className="hover:text-white transition-colors flex justify-between">Ricercatori <ArrowUpRight size={14} /></Link>
+                    <Link href="/talents" className="hover:text-white transition-colors flex justify-between">Artisti <ArrowUpRight size={14} /></Link>
                     <div className="h-[1px] w-full bg-white/10" />
                     <Link href="/gallery" className="hover:text-white transition-colors flex justify-between">Galleria <ArrowUpRight size={14} /></Link>
                     <div className="h-[1px] w-full bg-white/10" />
@@ -73,15 +72,15 @@ export function RamaFooter() {
                 </div>
 
                 {/* Follow us block */}
-                <div className="col-span-1 md:col-span-3 flex flex-col gap-6 md:pl-8">
+                <div className="col-span-1 md:col-span-3 flex flex-col gap-5 md:gap-6 md:pl-8 px-4 md:px-0">
                     <h4 className="font-rock-salt text-rama-accent transform -rotate-2 capitalize tracking-normal text-lg mb-2">Seguici</h4>
-                    <a href="https://instagram.com/blackbullslab" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
-                    <a href="https://facebook.com/blackbullslab" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Facebook</a>
-                    <a href="https://tiktok.com/@blackbullslab" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">TikTok</a>
+                    <a href="https://instagram.com/blackbullslab" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex justify-between border-b border-white/5 pb-2">Instagram <ArrowUpRight size={12} className="opacity-40" /></a>
+                    <a href="https://facebook.com/blackbullslab" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex justify-between border-b border-white/5 pb-2">Facebook <ArrowUpRight size={12} className="opacity-40" /></a>
+                    <a href="https://tiktok.com/@blackbullslab" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex justify-between border-b border-white/5 pb-2">TikTok <ArrowUpRight size={12} className="opacity-40" /></a>
                 </div>
 
                 {/* Newsletter block */}
-                <div className="col-span-2 md:col-span-3 flex flex-col md:border-l md:border-white/10 md:pl-8 justify-between">
+                <div className="col-span-1 sm:col-span-2 md:col-span-3 flex flex-col md:border-l md:border-white/10 md:pl-8 justify-between mt-8 md:mt-0 px-4 md:px-0">
                     <div>
                         <h4 className="font-rock-salt text-rama-accent transform -rotate-2 capitalize tracking-normal text-lg mb-4">Newsletter</h4>
                         <p className="text-xs font-normal capitalize tracking-normal mb-8">Iscriviti per non perdere i prossimi eventi.</p>
@@ -124,7 +123,7 @@ export function RamaFooter() {
                             disabled={status === "loading"}
                             className="bg-white/10 hover:bg-white text-white hover:text-black transition-colors px-6 py-2 font-semibold cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            {status === "loading" ? "Invio..." : "Iscriviti"}
+                            {status === "loading" ? "Invio..." : "Avvisami"}
                         </button>
                     </form>
                     {message && (
@@ -136,10 +135,10 @@ export function RamaFooter() {
             </div>
 
             {/* Bottom Contact string */}
-            <div className="mt-12 sm:mt-24 md:mt-32 w-full flex flex-col md:flex-row justify-between items-start md:items-end border-t border-white/10 pt-8 gap-4 sm:gap-8">
-                <div className="flex flex-col gap-2">
+            <div className="mt-16 sm:mt-24 md:mt-32 w-full flex flex-col md:flex-row justify-between items-start md:items-end border-t border-white/10 pt-10 gap-6 sm:gap-8">
+                <div className="flex flex-col gap-4 w-full">
                     <span className="font-rock-salt text-rama-accent text-lg sm:text-xl transform -rotate-2">Contattaci</span>
-                    <a href={`mailto:${CONTACT_EMAIL}`} className="font-mohave text-2xl sm:text-4xl md:text-5xl lg:text-7xl lowercase font-bold text-white hover:text-rama-accent transition-colors break-all">
+                    <a href={`mailto:${CONTACT_EMAIL}`} className="font-mohave text-[10vw] sm:text-[8vw] md:text-[6vw] lg:text-[7vw] lowercase font-bold text-white hover:text-rama-accent transition-colors break-all leading-none">
                         {CONTACT_EMAIL}
                     </a>
                 </div>

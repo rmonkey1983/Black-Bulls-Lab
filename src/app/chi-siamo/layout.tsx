@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Chi Siamo — Il Laboratorio Urbano",
+    title: "Chi Siamo | Black Bulls Lab — Il Laboratorio di Eventi Immersivi a Torino",
     description:
-        "Scopri la storia e i valori di Black Bulls Lab, il laboratorio urbano di esperienze gastronomiche e performative nato a Torino nel 2026.",
+        "Scopri l'anima di Black Bulls Lab: il laboratorio creativo di Torino specializzato in dinner show, format immersivi e intrattenimento d'avanguardia.",
     alternates: { canonical: "/chi-siamo" },
     openGraph: {
-        title: "Chi Siamo — Black Bulls Lab",
-        description: "Dove cucina di qualità, intrattenimento live e socialità si fondono in esperienze memorabili.",
+        title: "Chi Siamo | Black Bulls Lab — Eventi e Dinner Show",
+        description: "L'agenzia creativa di Torino che trasforma le serate in esperienze memorabili attraverso cucina, arte e mistero.",
         url: "/chi-siamo",
     },
 };

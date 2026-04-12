@@ -45,7 +45,7 @@ export async function submitContact(data: FormData) {
              // Return success anyway to not block UI if table doesn't exist yet
         }
         
-        console.log("Nuovo contatto ricevuto:", { name, email, subject, message });
+        // Database insert logic...
         return { success: true };
     } catch (e: any) {
         console.error("submitContact error:", e);

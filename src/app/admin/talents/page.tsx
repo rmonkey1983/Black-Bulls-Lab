@@ -90,7 +90,7 @@ function TalentForm({ talent, onSave, onCancel }: { talent?: Talent; onSave: () 
     return (
         <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl">
             <div className="flex items-center justify-between border-b border-green/10 pb-3 mb-4">
-                <h3 className="text-lg font-bold text-rama-text">{talent ? "Modifica Ricercatore" : "Nuovo Ricercatore"}</h3>
+                <h3 className="text-lg font-bold text-rama-text">{talent ? "Modifica Artista" : "Nuovo Artista"}</h3>
                 <button type="button" onClick={onCancel} className="text-gray-500 hover:text-rama-text cursor-pointer"><X size={20} /></button>
             </div>
 
@@ -112,7 +112,7 @@ function TalentForm({ talent, onSave, onCancel }: { talent?: Talent; onSave: () 
             {/* Image section */}
             <div>
                 <div className="flex items-center gap-3 mb-2">
-                    <label className={`${labelClass} mb-0`}>Foto Ricercatore</label>
+                    <label className={`${labelClass} mb-0`}>Foto Artista</label>
                     <div className="flex gap-1 ml-auto">
                         <button
                             type="button"
@@ -227,7 +227,7 @@ function TalentForm({ talent, onSave, onCancel }: { talent?: Talent; onSave: () 
 
             <div className="flex gap-3 pt-2">
                 <button type="submit" disabled={uploading} className="flex-1 py-3 border border-amber/40 bg-amber/10 text-amber text-sm font-bold uppercase tracking-wider data-readout hover:bg-amber/20 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
-                    <Save size={14} /> Salva Ricercatore
+                    <Save size={14} /> Salva Artista
                 </button>
                 <button type="button" onClick={onCancel} className="px-6 py-3 border border-gray-700 text-gray-400 text-sm data-readout uppercase tracking-wider hover:text-rama-text transition-colors cursor-pointer">
                     Annulla
@@ -251,7 +251,7 @@ export default function AdminTalentsPage() {
     }, [searchParams]);
 
     const handleDelete = async (id: string) => {
-        if (confirm("Eliminare questo ricercatore?")) {
+        if (confirm("Eliminare questo artista?")) {
             await deleteTalent(id);
             load();
         }
@@ -271,11 +271,11 @@ export default function AdminTalentsPage() {
         <div className="space-y-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <span className="data-readout text-[10px] text-green/40 tracking-[0.3em] uppercase">TAL // Team Ricerca</span>
-                    <h1 className="text-3xl font-bold text-rama-text mt-1">Ricercatori</h1>
+                    <span className="data-readout text-[10px] text-green/40 tracking-[0.3em] uppercase">TAL // Team Artisti</span>
+                    <h1 className="text-3xl font-bold text-rama-text mt-1">Artisti</h1>
                 </div>
                 <button onClick={() => setCreating(true)} className="flex items-center gap-2 px-5 py-2.5 border border-amber/40 bg-amber/10 text-amber text-xs font-bold uppercase tracking-wider data-readout hover:bg-amber/20 transition-all cursor-pointer">
-                    <Plus size={14} /> Nuovo Ricercatore
+                    <Plus size={14} /> Nuovo Artista
                 </button>
             </div>
 
@@ -310,7 +310,7 @@ export default function AdminTalentsPage() {
 
             {talents.length === 0 && (
                 <div className="text-center py-12 text-gray-500 data-readout text-sm">
-                    Nessun ricercatore. Aggiungi il primo!
+                    Nessun artista. Aggiungi il primo!
                 </div>
             )}
         </div>

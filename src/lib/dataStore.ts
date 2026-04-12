@@ -20,6 +20,10 @@ export interface Event {
     description: string;
     timeline: TimelineItem[];
     price?: number;
+    badge?: string;
+    details?: string;
+    ctaText?: string;
+    ctaHref?: string;
 }
 
 export interface GalleryItem {
