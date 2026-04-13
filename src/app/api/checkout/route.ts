@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
+export const dynamic = 'force-dynamic';
+
 // Initialize Stripe with the secret key from environment variable
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
