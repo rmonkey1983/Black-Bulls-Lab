@@ -154,7 +154,7 @@ export function AboutClient() {
             </section>
 
             {/* 4. SEZIONE TEAM (L'anima del progetto) */}
-            <section className="reveal-section py-32 bg-transparent">
+            <section className="reveal-section py-32 mt-24 bg-transparent">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16 px-6">
                         <SectionHeading 

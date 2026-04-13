@@ -34,13 +34,7 @@ export function TeamGrid() {
 
   return (
     <section id="team-grid-container" ref={containerRef} className="py-24 px-6 max-w-7xl mx-auto">
-      <SectionHeading 
-        title="DIETRO LA"
-        highlight="MAGIA"
-        subtitle="Il Lab"
-        align="center"
-        className="mb-16"
-      />
+
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
         {teamMembers.map((member) => {
@@ -75,17 +69,13 @@ export function TeamGrid() {
                 ) : isJulianPlaceholder ? (
                   /* Julian Specific Placeholder with Logo */
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-12 bg-zinc-950 overflow-hidden group-hover:bg-zinc-900 transition-colors duration-500">
-                    <div className="relative w-32 h-32 mb-4 opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 julian-placeholder-logo">
-                        <Image 
-                            src={LOGO_PATH}
-                            alt="Black Bulls Lab Logo"
-                            fill
-                            className="object-contain grayscale brightness-200"
-                        />
-                    </div>
-                    <span className="font-heading text-[10px] text-yellow-500/60 uppercase tracking-[0.4em] font-bold group-hover:text-yellow-500 transition-colors duration-500">
-                      FONDATORE
-                    </span>
+                    <Image 
+                        src="/brand/logo-white.svg" 
+                        alt="Black Bulls Logo" 
+                        width={120} 
+                        height={120} 
+                        className="opacity-50 mx-auto transition-all duration-500 group-hover:scale-110 group-hover:opacity-80" 
+                    />
                     <div className="absolute inset-x-0 bottom-0 h-[20%] bg-gradient-to-t from-yellow-500/5 to-transparent" />
                   </div>
                 ) : (

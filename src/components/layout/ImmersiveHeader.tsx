@@ -53,7 +53,7 @@ export function ImmersiveHeader({
             </div>
 
             {/* Massive Background Text */}
-            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] md:text-[25vw] font-heading font-black text-white/5 whitespace-nowrap z-[1] tracking-tighter pointer-events-none uppercase mix-blend-difference">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] md:text-[25vw] font-heading font-black text-white/5 whitespace-nowrap z-[1] tracking-tighter pointer-events-none uppercase mix-blend-difference">
                 {highlight || title.split(" ")[0]}
             </div>
 
