@@ -4,14 +4,21 @@ import { Resend } from 'resend';
 import { BookingConfirmationEmail } from '@/components/emails/BookingConfirmationEmail';
 import * as React from 'react';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: '2023-10-16' as any,
-});
-
-const resend = new Resend(process.env.RESEND_API_KEY || 're_placeholder');
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
+  // Initialize SDKs inside the handler to prevent build-time crashes due to missing env vars
+  if (!process.env.STRIPE_SECRET_KEY) {
+    return NextResponse.json({ error: 'Stripe API key is not configured.' }, { status: 500 });
+  }
+
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+    apiVersion: '2023-10-16' as any,
+  });
+
+  const resend = new Resend(process.env.RESEND_API_KEY || 're_placeholder');
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
   const body = await req.text();
   const signature = req.headers.get('stripe-signature') as string;
 
