@@ -3,14 +3,18 @@ import Stripe from 'stripe';
 
 export const dynamic = 'force-dynamic';
 
-// Initialize Stripe with the secret key from environment variable
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  apiVersion: '2023-10-16' as any, // Using stable casting for compatibility
-});
-
 export async function POST(req: Request) {
   try {
+    // Initialize Stripe inside the handler to prevent build-time crashes due to missing env vars
+    if (!process.env.STRIPE_SECRET_KEY) {
+        return NextResponse.json({ error: 'Stripe API key is not configured.' }, { status: 500 });
+    }
+
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      apiVersion: '2023-10-16' as any,
+    });
+
     const body = await req.json();
     const { eventId, eventTitle, quantity, selectedDate, guest, premium, unitAmount } = body;
 
