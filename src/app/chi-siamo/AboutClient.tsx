@@ -10,6 +10,7 @@ import { useGSAP } from "@/hooks/useGSAP";
 import { animateQuote, animateSteps, animateFade } from "@/lib/gsapAnimations";
 import { TeamGrid } from "@/components/ui/TeamGrid";
 import { gsap } from "gsap";
+import { PreFooterCTA } from "@/components/layout/PreFooterCTA";
 
 const timeline = [
     { year: "2024", title: "L'Ideazione", desc: "Nasce l'idea di Black Bulls Lab. Volevamo garantire al nostro pubblico torinese serate uniche dove l'alta cucina incontra lo spettacolo dal vivo, offrendoti un'esperienza mai vista prima." },
@@ -196,6 +197,8 @@ export function AboutClient() {
                     </div>
                 </div>
             </section>
+
+            <PreFooterCTA />
         </div>
     );
 }

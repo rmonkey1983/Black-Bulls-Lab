@@ -30,7 +30,7 @@ export function EventHero({ title, subtitle, image, date, location }: EventHeroP
 
             {/* Back Button */}
             <Link
-                href="/events"
+                href="/format"
                 className="absolute top-24 left-6 z-30 flex items-center gap-2 text-white/70 hover:text-gold transition-colors uppercase text-xs font-bold tracking-widest"
             >
                 <ArrowLeft size={16} /> Torna agli Eventi

@@ -155,7 +155,7 @@ ON CONFLICT (id) DO NOTHING;
 
 -- Seed Settings
 INSERT INTO settings (id, site_title, site_description, hero_subtitle, contact_email, instagram, admin_password) VALUES
-(1, 'Black Bulls Lab', 'Il laboratorio underground dove l''intrattenimento diventa scienza', 'Il laboratorio underground dove l''intrattenimento diventa scienza.', 'info@blackbullslab.it', '@blackbullslab', 'admin123')
+(1, 'Black Bulls Lab', 'Il laboratorio underground dove l''intrattenimento diventa scienza', 'Il laboratorio underground dove l''intrattenimento diventa scienza.', 'info@blackbullslab.com', '@blackbullslab', 'admin123')
 ON CONFLICT (id) DO NOTHING;
 
 -- ===== GOLDEN VOICE CASTING TABLE =====

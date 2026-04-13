@@ -20,6 +20,8 @@ import {
   Heart
 } from "lucide-react";
 
+import FaqSection from "@/components/ui/FaqSection";
+
 export function HomeClient() {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -49,7 +51,7 @@ export function HomeClient() {
     // 4. FORMAT CARDS STAGGER
     gsap.from(".format-card", {
       opacity: 0,
-      scale: 0.95,
+       scale: 0.95,
       y: 40,
       duration: 0.8,
       stagger: 0.15,
@@ -139,7 +141,7 @@ export function HomeClient() {
                         Julian Halili ha fondato Black Bulls Lab per rispondere a una domanda semplice: come si crea un evento che rimanga nel cuore degli ospiti senza i costi proibitivi dei grandi stage?
                     </p>
                     <p>
-                        La risposta è il nostro **Metodo Lab**: soluzioni replicabili, costi sostenibili e un coinvolgimento psicologico studiato per mettere l&apos;ospite al centro di ogni scena. Non siamo semplici organizzatori, siamo ingegneri dell&apos;emozione.
+                        La risposta è il nostro <strong>Metodo Lab</strong>: soluzioni replicabili, costi sostenibili e un coinvolgimento psicologico studiato per mettere l&apos;ospite al centro di ogni scena. Non siamo semplici organizzatori, siamo ingegneri dell&apos;emozione.
                     </p>
                 </div>
                 <div className="grid grid-cols-2 gap-8 pt-6">
@@ -259,6 +261,7 @@ export function HomeClient() {
         </div>
       </section>
 
+      <FaqSection />
     </div>
   );
 }

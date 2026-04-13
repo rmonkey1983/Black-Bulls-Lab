@@ -3,6 +3,7 @@ import { CenaConDelittoClient } from "./CenaConDelittoClient";
 import { EventSchema } from "@/components/seo/JsonLd";
 import { SITE_URL } from "@/lib/constants";
 import { BookingForm } from "@/components/ui/BookingForm";
+import { FormatFAQ } from "@/components/sections/FormatFAQ";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export const metadata: Metadata = {
@@ -30,6 +31,8 @@ export default function CenaConDelittoPage() {
                 image={`${SITE_URL}/images/brand/bg-venue-crowd.webp`}
             />
             <CenaConDelittoClient />
+            
+            <FormatFAQ />
 
             <section className="py-24 px-6 bg-zinc-950/50">
                 <div className="max-w-7xl mx-auto">

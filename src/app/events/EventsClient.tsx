@@ -13,6 +13,8 @@ import Image from "next/image";
 import { BookingForm } from "@/components/ui/BookingForm";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
+import FaqSection from "@/components/ui/FaqSection";
+
 export function EventsClient() {
     const [events, setEvents] = useState<Event[]>([]);
 
@@ -27,7 +29,7 @@ export function EventsClient() {
     }, []);
 
     return (
-        <main className="min-h-screen pb-24 bg-black relative">
+        <main className="min-h-screen pb-24 bg-black relative uppercase">
             <ImmersiveHeader
                 id="events-hero"
                 title="I NOSTRI"
@@ -135,6 +137,8 @@ export function EventsClient() {
                     </div>
                     <BookingForm />
                 </div>
+
+                <FaqSection />
             </div>
         </main>
     );

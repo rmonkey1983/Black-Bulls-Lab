@@ -44,7 +44,7 @@ export function RamaCTA() {
                 </p>
                 
                 <div className="flex flex-col sm:flex-row items-center gap-6">
-                    <PremiumButton href="/events" variant="primary" size="lg" className="w-full sm:w-auto px-12 py-5 rounded-sm">
+                    <PremiumButton href="/format" variant="primary" size="lg" className="w-full sm:w-auto px-12 py-5 rounded-sm">
                         <span className="font-heading tracking-[0.2em] uppercase text-lg">Entra nel Laboratorio</span>
                     </PremiumButton>
                 </div>

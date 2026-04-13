@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS public.settings (
 
 -- Inserimento impostazioni di default (se non esistono)
 INSERT INTO public.settings (id, site_title, site_description, hero_subtitle, contact_email, instagram, admin_password)
-VALUES (1, 'Black Bulls Lab', 'Il laboratorio underground dove l''intrattenimento diventa scienza', 'Il laboratorio underground dove l''intrattenimento diventa scienza.', 'info@blackbullslab.it', '@blackbullslab', 'admin123')
+VALUES (1, 'Black Bulls Lab', 'Il laboratorio underground dove l''intrattenimento diventa scienza', 'Il laboratorio underground dove l''intrattenimento diventa scienza.', 'info@blackbullslab.com', '@blackbullslab', 'admin123')
 ON CONFLICT (id) DO NOTHING;
 
 -- PERMESSI TEMPORANEI: Abilitazione Row Level Security e Policy Anonime

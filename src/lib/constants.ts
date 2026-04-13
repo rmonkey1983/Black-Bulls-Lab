@@ -26,7 +26,7 @@ export const SOCIAL_LINKS = {
  */
 export const NAV_LINKS = [
     { name: "Home", href: "/" },
-    { name: "Eventi", href: "/events" },
+    { name: "Eventi", href: "/format" },
     { name: "I Nostri Format", href: "/format" },
     { name: "Artisti", href: "/talents" },
     { name: "Chi Siamo", href: "/chi-siamo" },

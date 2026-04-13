@@ -139,7 +139,7 @@ export function ACenaConIlBugiardoClient() {
 
                     <div id="bugiardo-cta" className="gsap-fade mt-16 md:mt-20 flex flex-col md:flex-row gap-4 md:gap-6 justify-center items-center">
                         <Link
-                            href="/events"
+                            href="/format"
                             className="w-full md:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent border border-rama-accent text-rama-accent font-bold uppercase tracking-widest hover:bg-rama-accent hover:text-black transition-all duration-300"
                         >
                             Voglio esserci quella sera <ArrowLeft className="rotate-180" size={18} />

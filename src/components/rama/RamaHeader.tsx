@@ -103,7 +103,7 @@ export function RamaHeader() {
                             onMouseLeave={() => setExperimentsOpen(false)}
                         >
                             <Link href="/format" suppressHydrationWarning className={`flex items-center gap-2 font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname.startsWith("/format") ? "text-yellow-500" : "text-zinc-400 hover:text-yellow-500"}`}>
-                                Format <ChevronDown size={10} className={`transition-transform duration-300 ${experimentsOpen ? 'rotate-180' : ''}`} />
+                                Le Nostre Serate <ChevronDown size={10} className={`transition-transform duration-300 ${experimentsOpen ? 'rotate-180' : ''}`} />
                             </Link>
                             
                             <div

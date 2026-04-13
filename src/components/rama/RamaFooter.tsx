@@ -52,7 +52,8 @@ export function RamaFooter() {
                     </div>
                     <div className="flex flex-col md:flex-row gap-6 md:gap-10 font-heading text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-bold">
                         <Link href="/chi-siamo" className="hover:text-white transition-colors">Chi Siamo</Link>
-                        <Link href="/format" className="hover:text-white transition-colors">Inostri Format</Link>
+                        <Link href="/talents" className="hover:text-white transition-colors">Artisti</Link>
+                        <Link href="/format" className="hover:text-white transition-colors">I nostri Format</Link>
                         <Link href="/contact" className="hover:text-white transition-colors">Collabora con noi</Link>
                     </div>
                 </div>

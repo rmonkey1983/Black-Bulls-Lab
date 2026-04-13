@@ -137,7 +137,7 @@ export function CenaConDelittoClient() {
                             Dimmi quando è la prossima data
                         </a>
                         <Link
-                            href="/events"
+                            href="/format"
                             className="w-full md:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent border border-white/20 text-white font-bold uppercase tracking-widest hover:border-rama-accent hover:text-rama-accent transition-all duration-300 rounded-sm"
                         >
                             Dal Vivo a Torino
