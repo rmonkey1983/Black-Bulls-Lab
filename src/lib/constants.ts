@@ -49,8 +49,10 @@ export const EXPERIMENTS = [
         image: "/images/brand/service-plating.webp",
         badge: "Digital Experience",
         details: "3 ore · 10-100+ persone · Da 50€/persona",
+        quickInfo: "da 50€ · Max 30 pers.",
         price: 50,
         ctaText: "Accedi alla prova",
+        actionLabel: "Voglio smascherarlo →",
         ctaHref: `https://wa.me/39${CONTACT_WHATSAPP}?text=Ciao!%20Sono%20interessato%2Fa%20a%20%22A%20Cena%20Con%20Il%20Bugiardo%22.%20Voglio%20saperne%20di%20pi%C3%B9%20sull%27App%21`
     },
     { 
@@ -64,8 +66,10 @@ export const EXPERIMENTS = [
         image: "/images/brand/bg-venue-crowd.webp",
         badge: "Social & Live",
         details: "Showcase Aperto · Votazione Live · Ingresso Libero",
+        quickInfo: "Ogni mese · Ingresso libero",
         price: 0,
         ctaText: "Voglio partecipare",
+        actionLabel: "Voglio salire sul palco →",
         ctaHref: "/events"
     },
     { 
@@ -74,13 +78,15 @@ export const EXPERIMENTS = [
         slug: "cena-con-delitto",
         href: "/format/cena-con-delitto", 
         subtitle: "L'indagine noir diventa digitale.",
-        desc: "Investigation Web App",
+        desc: "Dinner Show & Investigation",
         longDesc: "Risolvi il mistero analizzando indizi e testimonianze digitali inviate direttamente al tuo smartphone.",
         image: "/images/brand/bg-stage-lights.webp",
-        badge: "Tech Noir",
+        badge: "Su prenotazione",
         details: "3 ore · Indagine Digitale · Da 50€/persona",
+        quickInfo: "da 50€ · 15-40 pers.",
         price: 50,
         ctaText: "Inizia l'indagine",
+        actionLabel: "Voglio risolvere il caso →",
         ctaHref: `https://wa.me/39${CONTACT_WHATSAPP}?text=Ciao!%20Vorrei%20organizzare%20una%20Cena%20con%20Delitto%20Digitale.%20Info%3F`
     },
     { 
@@ -94,8 +100,10 @@ export const EXPERIMENTS = [
         image: "/images/brand/service-performance.webp",
         badge: "Coming Soon",
         details: "Singing contest · Voto del Pubblico · Stay tuned",
+        quickInfo: "In arrivo",
         price: 0,
         ctaText: "Candidati ora",
+        actionLabel: "Voglio esibirmi →",
         ctaHref: "/contact"
     }
 ];

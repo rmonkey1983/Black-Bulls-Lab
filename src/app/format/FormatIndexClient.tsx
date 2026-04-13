@@ -34,14 +34,14 @@ export function FormatIndexClient() {
 
                     <div id="format-hero" className="flex flex-col">
                         <h1 className="line font-bold text-rama-text font-heading uppercase tracking-tighter text-6xl md:text-8xl leading-[0.85]">
-                            <span>SCEGLI IL TUO <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-rama-accent via-white to-rama-accent">PROGRAMMA.</span></span>
+                            <span>SCEGLI LA TUA <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-rama-accent via-white to-rama-accent">SERATA.</span></span>
                         </h1>
                     </div>
                     <p
                         id="format-desc"
                         className="gsap-fade text-xl text-gray-500 mt-6 max-w-2xl font-light leading-relaxed"
                     >
-                        Dall&apos;indagine noir al social deception. Ogni format è un&apos;esperienza digitale unica progettata nel nostro laboratorio di Torino.
+                        Quattro format. Posti limitati ogni sera. Quale fa per te?
                     </p>
                 </div>
 
@@ -98,10 +98,22 @@ export function FormatIndexClient() {
                                 </div>
 
                                 {/* CTA Buttons */}
-                                <div className="mt-auto flex flex-col sm:flex-row gap-4">
+                                <div className="mt-auto flex flex-col gap-6">
+                                    <div className="flex items-center justify-between pb-4 border-b border-white/5">
+                                        <span className="text-xs font-sans text-rama-muted">
+                                            {format.quickInfo}
+                                        </span>
+                                        <Link 
+                                            href={format.href}
+                                            className="text-rama-accent hover:text-white transition-colors text-sm font-bold uppercase tracking-widest flex items-center gap-2 group/cta"
+                                        >
+                                            {format.actionLabel}
+                                        </Link>
+                                    </div>
+                                    
                                     <Link
                                         href={format.href}
-                                        className="w-full sm:flex-1 bg-white text-black text-center text-[10px] font-bold uppercase tracking-[0.2em] px-8 py-5 rounded-sm hover:bg-rama-accent transition-all transform active:scale-95 flex items-center justify-center gap-2"
+                                        className="w-full bg-white text-black text-center text-[10px] font-bold uppercase tracking-[0.2em] px-8 py-5 rounded-sm hover:bg-rama-accent transition-all transform active:scale-95 flex items-center justify-center gap-2"
                                         aria-label={`Accedi al programma ${format.name}`}
                                     >
                                         ACCEDI AL PROGRAMMA <ArrowUpRight size={14} />
