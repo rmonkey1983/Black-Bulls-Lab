@@ -38,7 +38,7 @@ export default function TheGoldenVoicePage() {
                 <div className="max-w-7xl mx-auto">
                     <div className="mb-16">
                         <SectionHeading
-                            title="ISCRIVITI O"
+                            title="AVVISAMI O"
                             highlight="PRENOTA"
                             subtitle="Sali sul palco o goditi lo spettacolo dal tuo tavolo"
                             align="center"

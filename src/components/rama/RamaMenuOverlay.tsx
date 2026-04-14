@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { X, ChevronDown } from "lucide-react";
+import { X, ChevronDown, ChevronRight } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";
@@ -169,25 +169,25 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                     </div>
 
                     {/* ESPERIMENTI */}
-                    <div className="nav-link"
+                    {/* FORMAT */}
+                    <div className="nav-link space-y-4"
                          onMouseEnter={() => setExperimentsOpen(true)}
                          onMouseLeave={() => setExperimentsOpen(false)}
                     >
                         <button
                             type="button"
-                            className="flex items-center gap-3 font-heading text-4xl sm:text-5xl md:text-7xl uppercase font-bold text-white hover:text-yellow-500 transition-colors duration-300 w-fit group cursor-pointer select-none bg-transparent border-none p-0"
-                            onClick={() => setExperimentsOpen(prev => !prev)}
+                            onClick={() => setExperimentsOpen(!experimentsOpen)}
+                            className="w-full flex justify-between items-center text-left"
                             aria-expanded={experimentsOpen}
-                            aria-controls="esperimenti-submenu"
+                            aria-controls="format-submenu"
                         >
-                            Le Nostre Serate
-                            <ChevronDown
-                                size={28}
-                                className={`transition-transform duration-300 text-yellow-500 mt-2 flex-shrink-0 ${experimentsOpen ? "rotate-180" : ""}`}
-                            />
+                            <span className="font-heading font-bold text-4xl sm:text-5xl md:text-7xl uppercase tracking-tighter text-white hover:text-yellow-500 transition-colors">
+                                I Format
+                            </span>
+                            <ChevronRight className={`transition-transform duration-500 text-yellow-500 ${experimentsOpen ? 'rotate-90' : ''}`} size={32} />
                         </button>
-
-                        <div id="esperimenti-submenu" ref={dropdownRef} className="overflow-hidden h-0 opacity-0">
+                        
+                        <div id="format-submenu" ref={dropdownRef} className="overflow-hidden h-0 opacity-0">
                             <div className="flex flex-col gap-1 mt-3 pl-4 border-l-2 border-yellow-500/40">
                                 {experiments.map((exp) => (
                                     <div key={exp.href} className="sub-link">

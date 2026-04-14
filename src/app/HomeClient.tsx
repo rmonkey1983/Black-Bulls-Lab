@@ -175,7 +175,7 @@ export function HomeClient() {
             <div className="flex flex-col md:flex-row items-end justify-between mb-20 gap-8">
                 <SectionHeading 
                   title="GLI"
-                  highlight="ESPERIMENTI."
+                  highlight="I FORMAT."
                   align="left"
                   accentPos="top"
                 />

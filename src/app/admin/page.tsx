@@ -33,7 +33,7 @@ export default function AdminDashboard() {
     const quickActions = [
         { label: "Nuovo Esperimento", href: "/admin/events?action=new", icon: Plus, color: "green" },
         { label: "Aggiungi Foto", href: "/admin/gallery?action=new", icon: Plus, color: "cyan" },
-        { label: "Nuovo Ricercatore", href: "/admin/talents?action=new", icon: Plus, color: "amber" },
+        { label: "Nuovo Artista", href: "/admin/talents?action=new", icon: Plus, color: "amber" },
     ];
 
     const colorClasses: Record<string, { text: string; border: string; bg: string; glow: string }> = {

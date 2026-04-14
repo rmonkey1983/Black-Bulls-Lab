@@ -252,7 +252,7 @@ export function LocalBusinessSchema() {
         telephone: CONTACT_PHONE,
         email: CONTACT_EMAIL,
         image: `${SITE_URL}/og-image.jpg`,
-        logo: `${SITE_URL}/blackbullslab-v2.webp`,
+        logo: `${SITE_URL}/brand/logo-white.svg`,
         address: {
             "@type": "PostalAddress",
             addressLocality: "Torino",
