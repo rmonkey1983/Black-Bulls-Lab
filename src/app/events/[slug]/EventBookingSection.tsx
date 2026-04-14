@@ -115,19 +115,21 @@ export function EventBookingSection({ eventId, title, date, location, price }: E
                             <div className="flex items-center justify-between">
                                 <div>
                                     <p className="text-white font-medium">Esperienza Completa</p>
-                                    <p className="text-gold text-lg font-bold">€ {ticketPrice},00 <span className="text-gray-500 text-xs font-normal">/ persona</span></p>
+                                    <p className="text-gold text-lg font-bold">€ {ticketPrice},00 <span className="text-zinc-400 text-xs font-normal">/ persona</span></p>
                                 </div>
                                 <div className="flex items-center gap-3 border border-border bg-bg-dark p-1.5">
                                     <button
                                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                                        className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gold hover:bg-gold/5 transition-all"
+                                        className="w-8 h-8 flex items-center justify-center text-zinc-400 hover:text-gold hover:bg-gold/5 transition-all"
+                                        aria-label="Diminuisci quantità"
                                     >
                                         <Minus size={14} />
                                     </button>
                                     <span className="text-white font-bold w-6 text-center">{quantity}</span>
                                     <button
                                         onClick={() => setQuantity(Math.min(10, quantity + 1))}
-                                        className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gold hover:bg-gold/5 transition-all"
+                                        className="w-8 h-8 flex items-center justify-center text-zinc-400 hover:text-gold hover:bg-gold/5 transition-all"
+                                        aria-label="Aumenta quantità"
                                     >
                                         <Plus size={14} />
                                     </button>
@@ -148,28 +150,32 @@ export function EventBookingSection({ eventId, title, date, location, price }: E
                                     placeholder="Nome"
                                     value={form.nome}
                                     onChange={(e) => setForm({ ...form, nome: e.target.value })}
-                                    className="bg-bg-dark border border-border px-4 py-3 text-white text-sm placeholder:text-gray-600 focus:outline-none focus:border-gold/30 transition-colors"
+                                    className="bg-bg-dark border border-border px-4 py-3 text-white text-sm placeholder:text-zinc-400 focus:outline-none focus:border-gold/30 transition-colors"
+                                    aria-label="Nome"
                                 />
                                 <input
                                     type="text"
                                     placeholder="Cognome"
                                     value={form.cognome}
                                     onChange={(e) => setForm({ ...form, cognome: e.target.value })}
-                                    className="bg-bg-dark border border-border px-4 py-3 text-white text-sm placeholder:text-gray-600 focus:outline-none focus:border-gold/30 transition-colors"
+                                    className="bg-bg-dark border border-border px-4 py-3 text-white text-sm placeholder:text-zinc-400 focus:outline-none focus:border-gold/30 transition-colors"
+                                    aria-label="Cognome"
                                 />
                                 <input
                                     type="email"
                                     placeholder="Email"
                                     value={form.email}
                                     onChange={(e) => setForm({ ...form, email: e.target.value })}
-                                    className="bg-bg-dark border border-border px-4 py-3 text-white text-sm placeholder:text-gray-600 focus:outline-none focus:border-gold/30 transition-colors"
+                                    className="bg-bg-dark border border-border px-4 py-3 text-white text-sm placeholder:text-zinc-400 focus:outline-none focus:border-gold/30 transition-colors"
+                                    aria-label="Email"
                                 />
                                 <input
                                     type="tel"
                                     placeholder="Telefono"
                                     value={form.telefono}
                                     onChange={(e) => setForm({ ...form, telefono: e.target.value })}
-                                    className="bg-bg-dark border border-border px-4 py-3 text-white text-sm placeholder:text-gray-600 focus:outline-none focus:border-gold/30 transition-colors"
+                                    className="bg-bg-dark border border-border px-4 py-3 text-white text-sm placeholder:text-zinc-400 focus:outline-none focus:border-gold/30 transition-colors"
+                                    aria-label="Telefono"
                                 />
                             </div>
                             <textarea

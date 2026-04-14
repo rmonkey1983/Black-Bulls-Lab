@@ -35,7 +35,7 @@ function SuccessContent() {
                     Prenotazione <span className="text-gold">Confermata</span>
                 </h1>
                 
-                <p className="text-gray-400 font-sans text-lg max-w-md mx-auto mb-10">
+                <p className="text-zinc-300 font-sans text-lg max-w-md mx-auto mb-10">
                     La tua transazione è andata a buon fine. Abbiamo ricevuto la caparra e riservato il tuo tavolo in esclusiva.
                     Riceverai a breve un&apos;email con il riepilogo.
                 </p>
@@ -44,14 +44,14 @@ function SuccessContent() {
                     <div className="flex items-center gap-3 text-white">
                         <Calendar className="text-gold" size={24} />
                         <div className="text-left leading-tight">
-                            <span className="block text-xs uppercase tracking-widest text-gray-500 mb-1">Status</span>
+                            <span className="block text-xs uppercase tracking-widest text-zinc-400 mb-1">Status</span>
                             <span className="font-bold">Lista Vip Registrata</span>
                         </div>
                     </div>
                 </div>
 
                 {sessionId && (
-                    <p className="text-xs text-gray-600 font-mono mb-10">
+                    <p className="text-xs text-zinc-500 font-mono mb-10">
                         ID: {sessionId.split('_').pop()}
                     </p>
                 )}

@@ -39,7 +39,7 @@ export function FormatIndexClient() {
                     </div>
                     <p
                         id="format-desc"
-                        className="gsap-fade text-xl text-gray-500 mt-6 max-w-2xl font-light leading-relaxed"
+                        className="gsap-fade text-xl text-zinc-300 mt-6 max-w-2xl font-light leading-relaxed"
                     >
                         Quattro format. Posti limitati ogni sera. Quale fa per te?
                     </p>
@@ -85,13 +85,13 @@ export function FormatIndexClient() {
                                     </h2>
                                 </Link>
 
-                                <p className="text-base text-gray-500 font-sans mb-6 line-clamp-2 leading-relaxed">
+                                <p className="text-base text-zinc-300 font-sans mb-6 line-clamp-2 leading-relaxed">
                                     {format.subtitle}
                                 </p>
 
                                 <div className="flex flex-wrap gap-2 mb-10">
                                     {format.details?.split(' · ').map((detail, idx) => (
-                                        <span key={idx} className="text-[9px] uppercase font-heading tracking-widest bg-white/[0.03] border border-white/10 px-3 py-1.5 rounded-sm text-white/40">
+                                        <span key={idx} className="text-[9px] uppercase font-heading tracking-widest bg-white/[0.03] border border-white/10 px-3 py-1.5 rounded-sm text-zinc-300">
                                             {detail}
                                         </span>
                                     ))}

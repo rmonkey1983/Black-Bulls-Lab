@@ -24,7 +24,7 @@ export function TalentsClient() {
                                 Sei un artista, <br />
                                 <span className="text-rama-accent">performer o chef?</span>
                             </h2>
-                            <p className="text-gray-400 text-xl leading-relaxed max-w-xl">
+                            <p className="text-zinc-300 text-xl leading-relaxed max-w-xl">
                                 Black Bulls Lab cerca talenti per le sue serate a Torino. Cantanti, attori, bartender, chef — se hai qualcosa di unico da mostrare, vogliamo conoscerti.
                             </p>
                         </div>
@@ -49,7 +49,7 @@ export function TalentsClient() {
                                 <item.icon size={28} className="text-rama-accent flex-shrink-0 group-hover:scale-110 transition-transform" />
                                 <div>
                                     <h3 className="font-heading font-bold text-white uppercase tracking-wider text-xl">{item.role}</h3>
-                                    <p className="text-[10px] text-gray-500 uppercase tracking-widest mt-1">{item.desc}</p>
+                                    <p className="text-[10px] text-zinc-400 uppercase tracking-widest mt-1">{item.desc}</p>
                                 </div>
                             </div>
                         ))}

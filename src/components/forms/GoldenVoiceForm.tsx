@@ -46,7 +46,7 @@ export function GoldenVoiceForm() {
             <div className="text-center mb-10 relative z-10">
                 <Mic2 className="mx-auto text-gold mb-4" size={40} />
                 <h3 className="text-3xl lg:text-4xl font-bold text-white mb-2 uppercase tracking-wide">Voglio esibirmi con te</h3>
-                <p className="text-gray-400">Compila il form per partecipare alle audizioni di THE GOLDEN VOICE.</p>
+                <p className="text-zinc-300">Compila il form per partecipare alle audizioni di THE GOLDEN VOICE.</p>
             </div>
 
             <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
@@ -57,7 +57,7 @@ export function GoldenVoiceForm() {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label htmlFor="name" className="block text-xs font-sans uppercase tracking-widest text-gray-500 mb-2">Nome e Cognome *</label>
+                        <label htmlFor="name" className="block text-xs font-sans uppercase tracking-widest text-zinc-400 mb-2">Nome e Cognome *</label>
                         <input
                             type="text"
                             id="name"
@@ -69,7 +69,7 @@ export function GoldenVoiceForm() {
                         />
                     </div>
                     <div>
-                        <label htmlFor="email" className="block text-xs font-sans uppercase tracking-widest text-gray-500 mb-2">Email *</label>
+                        <label htmlFor="email" className="block text-xs font-sans uppercase tracking-widest text-zinc-400 mb-2">Email *</label>
                         <input
                             type="email"
                             id="email"
@@ -84,7 +84,7 @@ export function GoldenVoiceForm() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label htmlFor="phone" className="block text-xs font-sans uppercase tracking-widest text-gray-500 mb-2">Telefono *</label>
+                        <label htmlFor="phone" className="block text-xs font-sans uppercase tracking-widest text-zinc-400 mb-2">Telefono *</label>
                         <input
                             type="tel"
                             id="phone"
@@ -96,7 +96,7 @@ export function GoldenVoiceForm() {
                         />
                     </div>
                     <div>
-                        <label htmlFor="age" className="block text-xs font-sans uppercase tracking-widest text-gray-500 mb-2">Età</label>
+                        <label htmlFor="age" className="block text-xs font-sans uppercase tracking-widest text-zinc-400 mb-2">Età</label>
                         <input
                             type="number"
                             id="age"
@@ -109,7 +109,7 @@ export function GoldenVoiceForm() {
                 </div>
 
                 <div>
-                    <label htmlFor="signature_song" className="block text-xs font-sans uppercase tracking-widest text-gray-500 mb-2">Brano Cavallo di Battaglia *</label>
+                    <label htmlFor="signature_song" className="block text-xs font-sans uppercase tracking-widest text-zinc-400 mb-2">Brano Cavallo di Battaglia *</label>
                     <input
                         type="text"
                         id="signature_song"
@@ -122,7 +122,7 @@ export function GoldenVoiceForm() {
                 </div>
 
                 <div>
-                    <label htmlFor="media_link" className="block text-xs font-sans uppercase tracking-widest text-gray-500 mb-2">Link a un&apos;esibizione (YouTube, Drive, Instagram) - Consigliato</label>
+                    <label htmlFor="media_link" className="block text-xs font-sans uppercase tracking-widest text-zinc-400 mb-2">Link a un&apos;esibizione (YouTube, Drive, Instagram) - Consigliato</label>
                     <input
                         type="url"
                         id="media_link"

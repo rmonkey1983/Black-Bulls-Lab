@@ -105,7 +105,7 @@ export function HomeClient() {
              <h2 className="font-heading text-xl md:text-3xl text-zinc-400 uppercase tracking-widest font-light">
                 L&apos;intrattenimento diventa <span className="text-white font-medium">scienza.</span>
              </h2>
-             <p className="font-sans text-zinc-500 text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-light">
+             <p className="font-sans text-zinc-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-light">
                 Benvenuto nel Laboratorio delle Emozioni. Creiamo esperienze originali, <br className="hidden md:block" /> scalabili e indimenticabili per chi non si accontenta dell&apos;ordinario.
              </p>
           </div>
@@ -115,8 +115,8 @@ export function HomeClient() {
                 SCOPRI I FORMAT
             </PrimaryButton>
             
-            <button onClick={scrollToNext} className="animate-bounce p-3 border border-white/5 rounded-full bg-white/5 hover:border-yellow-500/30 transition-colors">
-                <ChevronDown size={24} className="text-zinc-500" />
+            <button onClick={scrollToNext} className="animate-bounce p-3 border border-white/5 rounded-full bg-white/5 hover:border-yellow-500/30 transition-colors" aria-label="Vai alla prossima sezione">
+                <ChevronDown size={24} className="text-zinc-400" />
             </button>
           </div>
         </div>
@@ -147,11 +147,11 @@ export function HomeClient() {
                 <div className="grid grid-cols-2 gap-8 pt-6">
                     <div className="space-y-2">
                         <span className="text-yellow-500 font-heading text-2xl font-bold">100%</span>
-                        <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">Engagement Rate</p>
+                        <p className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold">Engagement Rate</p>
                     </div>
                     <div className="space-y-2">
                         <span className="text-yellow-500 font-heading text-2xl font-bold">24H</span>
-                        <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">Response Time</p>
+                        <p className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold">Response Time</p>
                     </div>
                 </div>
             </div>
@@ -200,9 +200,9 @@ export function HomeClient() {
                                 <span className="font-heading text-[10px] text-yellow-500 tracking-[0.3em] font-bold uppercase">
                                     {exp.badge}
                                 </span>
-                                <h4 className="font-heading text-3xl font-bold uppercase text-white tracking-widest leading-none">
+                                <h3 className="font-heading text-3xl font-bold uppercase text-white tracking-widest leading-none">
                                     {exp.name}
-                                </h4>
+                                </h3>
                             </div>
                         </div>
                     </PremiumCard>
@@ -246,9 +246,9 @@ export function HomeClient() {
                                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
                                 </div>
                                 <div className="space-y-1">
-                                    <h4 className="font-heading text-2xl font-bold uppercase text-white group-hover:text-yellow-500 transition-colors">
+                                    <h3 className="font-heading text-2xl font-bold uppercase text-white group-hover:text-yellow-500 transition-colors">
                                         {member.name}
-                                    </h4>
+                                    </h3>
                                     <p className="font-heading text-xs text-yellow-500 uppercase tracking-widest font-bold">
                                         {member.role}
                                     </p>

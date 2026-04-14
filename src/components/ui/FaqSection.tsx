@@ -54,6 +54,7 @@ export default function FaqSection() {
                                 <button
                                     onClick={() => toggleFaq(index)}
                                     className="w-full flex items-center justify-between p-6 md:p-8 text-left focus:outline-none"
+                                    aria-label={isActive ? "Chiudi risposta" : "Apri risposta"}
                                 >
                                     <h3 className={`font-heading text-lg md:text-2xl font-bold uppercase tracking-widest transition-colors duration-300 ${isActive ? 'text-yellow-500' : 'text-zinc-300 group-hover:text-white'}`}>
                                         {faq.question}
@@ -66,7 +67,7 @@ export default function FaqSection() {
                                 <FaqWrapper isOpen={isActive}>
                                     <div className="px-6 md:px-8 pb-8">
                                         <div className="pt-2 border-t border-white/5 mt-2 opacity-80">
-                                            <p className="font-sans text-zinc-400 text-base md:text-lg leading-relaxed font-light">
+                                            <p className="font-sans text-zinc-300 text-base md:text-lg leading-relaxed font-light">
                                                 {faq.answer}
                                             </p>
                                         </div>

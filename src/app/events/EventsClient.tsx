@@ -68,15 +68,16 @@ export function EventsClient() {
 
                     <form id="waitlist-form" onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4">
                         <div className="relative">
-                            <input
-                                type="email"
-                                placeholder="La tua migliore email"
-                                required
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="w-full bg-black/40 border border-white/10 rounded-full px-8 py-5 font-sans text-white focus:outline-none focus:border-rama-accent/50 transition-colors"
-                                disabled={status === "loading" || status === "success"}
-                            />
+                                <input
+                                    type="email"
+                                    placeholder="La tua migliore email"
+                                    required
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className="w-full bg-black/40 border border-white/10 rounded-full px-8 py-5 font-sans text-white focus:outline-none focus:border-rama-accent/50 transition-colors"
+                                    disabled={status === "loading" || status === "success"}
+                                    aria-label="La tua email per la waitlist"
+                                />
                             <button
                                 type="submit"
                                 disabled={status === "loading" || status === "success"}

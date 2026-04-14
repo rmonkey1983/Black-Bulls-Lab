@@ -116,10 +116,10 @@ export function AboutClient() {
                             <div className="w-16 h-16 rounded-xl border border-yellow-500/20 flex items-center justify-center text-yellow-500 mb-8 group-hover:border-yellow-500 transition-colors">
                                 <Target size={32} />
                             </div>
-                            <h4 className="font-heading text-2xl font-bold text-white uppercase mb-4 tracking-wide group-hover:text-yellow-500 transition-colors">
+                            <h3 className="font-heading text-2xl font-bold text-white uppercase mb-4 tracking-wide group-hover:text-yellow-500 transition-colors">
                                 FORMAT REPLICABILI
-                            </h4>
-                            <p className="font-sans text-zinc-400 font-light leading-relaxed">
+                            </h3>
+                            <p className="font-sans text-zinc-300 font-light leading-relaxed">
                                 Soluzioni concrete e scalabili per ogni tipologia di spazio, garantendo sempre la massima qualità esecutiva.
                             </p>
                         </PremiumCard>
@@ -129,10 +129,10 @@ export function AboutClient() {
                             <div className="w-16 h-16 rounded-xl border border-yellow-500/20 flex items-center justify-center text-yellow-500 mb-8 group-hover:border-yellow-500 transition-colors">
                                 <Heart size={32} />
                             </div>
-                            <h4 className="font-heading text-2xl font-bold text-white uppercase mb-4 tracking-wide group-hover:text-yellow-500 transition-colors">
+                            <h3 className="font-heading text-2xl font-bold text-white uppercase mb-4 tracking-wide group-hover:text-yellow-500 transition-colors">
                                 COINVOLGIMENTO
-                            </h4>
-                            <p className="font-sans text-zinc-400 font-light leading-relaxed">
+                            </h3>
+                            <p className="font-sans text-zinc-300 font-light leading-relaxed">
                                 L&apos;ospite non è un semplice spettatore, ma il vero protagonista al centro di una narrazione immersiva.
                             </p>
                         </PremiumCard>
@@ -142,10 +142,10 @@ export function AboutClient() {
                             <div className="w-16 h-16 rounded-xl border border-yellow-500/20 flex items-center justify-center text-yellow-500 mb-8 group-hover:border-yellow-500 transition-colors">
                                 <Sparkles size={32} />
                             </div>
-                            <h4 className="font-heading text-2xl font-bold text-white uppercase mb-4 tracking-wide group-hover:text-yellow-500 transition-colors">
+                            <h3 className="font-heading text-2xl font-bold text-white uppercase mb-4 tracking-wide group-hover:text-yellow-500 transition-colors">
                                 ECCELLENZA TECNICA
-                            </h4>
-                            <p className="font-sans text-zinc-400 font-light leading-relaxed">
+                            </h3>
+                            <p className="font-sans text-zinc-300 font-light leading-relaxed">
                                 Nulla è lasciato al caso. Ogni dettaglio audio, video e logistico è orchestrato con perfezione millimetrica.
                             </p>
                         </PremiumCard>
@@ -181,7 +181,7 @@ export function AboutClient() {
                                 align="center"
                                 level="h2"
                             />
-                            <p className="font-sans text-lg text-zinc-400 max-w-xl mx-auto leading-relaxed">
+                            <p className="font-sans text-lg text-zinc-300 max-w-xl mx-auto leading-relaxed">
                                 Entra nel laboratorio. Raccontaci la tua idea e lasciati guidare dalla visione di Black Bulls Lab per creare qualcosa di irripetibile.
                             </p>
                             <div className="pt-6">

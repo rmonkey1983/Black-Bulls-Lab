@@ -93,7 +93,7 @@ export function RamaHeader() {
 
                     {/* 2. NAVIGATION (Center) */}
                     <nav className="hidden lg:flex items-center gap-10 relative z-50">
-                        <Link href="/" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname === "/" ? "text-yellow-500" : "text-zinc-400 hover:text-yellow-500"}`}>
+                        <Link href="/" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname === "/" ? "text-yellow-500" : "text-zinc-300 hover:text-yellow-500"}`}>
                             Home
                         </Link>
                         
@@ -102,7 +102,7 @@ export function RamaHeader() {
                             onMouseEnter={() => setExperimentsOpen(true)}
                             onMouseLeave={() => setExperimentsOpen(false)}
                         >
-                            <Link href="/format" suppressHydrationWarning className={`flex items-center gap-2 font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname.startsWith("/format") ? "text-yellow-500" : "text-zinc-400 hover:text-yellow-500"}`}>
+                            <Link href="/format" suppressHydrationWarning className={`flex items-center gap-2 font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname.startsWith("/format") ? "text-yellow-500" : "text-zinc-300 hover:text-yellow-500"}`}>
                                 Le Nostre Serate <ChevronDown size={10} className={`transition-transform duration-300 ${experimentsOpen ? 'rotate-180' : ''}`} />
                             </Link>
                             
@@ -115,7 +115,7 @@ export function RamaHeader() {
                                         key={exp.name} 
                                         href={exp.href}
                                         suppressHydrationWarning
-                                        className="px-6 py-4 font-heading text-[10px] uppercase tracking-[0.2em] text-zinc-400 hover:text-yellow-500 hover:bg-white/5 transition-all border-b border-white/5 last:border-0 font-bold"
+                                        className="px-6 py-4 font-heading text-[10px] uppercase tracking-[0.2em] text-zinc-300 hover:text-yellow-500 hover:bg-white/5 transition-all border-b border-white/5 last:border-0 font-bold"
                                     >
                                         {exp.name}
                                     </Link>
@@ -123,10 +123,10 @@ export function RamaHeader() {
                             </div>
                         </div>
 
-                        <Link href="/chi-siamo" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname === "/chi-siamo" ? "text-yellow-500" : "text-zinc-400 hover:text-yellow-500"}`}>
+                        <Link href="/chi-siamo" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname === "/chi-siamo" ? "text-yellow-500" : "text-zinc-300 hover:text-yellow-500"}`}>
                             Chi Siamo
                         </Link>
-                        <Link href="/contact" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname === "/contact" ? "text-yellow-500" : "text-zinc-400 hover:text-yellow-500"}`}>
+                        <Link href="/contact" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname === "/contact" ? "text-yellow-500" : "text-zinc-300 hover:text-yellow-500"}`}>
                             Contatti
                         </Link>
                     </nav>
@@ -143,6 +143,7 @@ export function RamaHeader() {
                         <button
                             onClick={() => setIsMenuOpen(true)}
                             className="flex lg:hidden flex-col gap-1.5 p-2 group"
+                            aria-label="Apri menu di navigazione"
                         >
                             <div className="w-8 h-[2px] bg-yellow-500 group-hover:scale-x-110 transition-transform origin-right" />
                             <div className="w-6 h-[2px] bg-yellow-500 group-hover:scale-x-125 transition-transform origin-right" />

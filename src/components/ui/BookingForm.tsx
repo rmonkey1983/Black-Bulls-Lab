@@ -68,8 +68,8 @@ export function BookingForm() {
     );
   }
 
-  const inputClasses = "w-full bg-zinc-900/40 border border-zinc-800 rounded-xl px-5 py-4 text-white font-sans focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500/20 outline-none transition-all duration-300 placeholder:text-zinc-600";
-  const labelClasses = "block font-heading text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-bold mb-2 ml-1";
+  const inputClasses = "w-full bg-zinc-900/40 border border-zinc-800 rounded-xl px-5 py-4 text-white font-sans focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500/20 outline-none transition-all duration-300 placeholder:text-zinc-400";
+  const labelClasses = "block font-heading text-[10px] uppercase tracking-[0.2em] text-zinc-400 font-bold mb-2 ml-1";
 
   return (
     <div ref={formRef} className="max-w-4xl mx-auto">

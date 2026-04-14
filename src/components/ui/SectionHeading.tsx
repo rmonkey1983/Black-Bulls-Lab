@@ -56,7 +56,7 @@ export function SectionHeading({
           align === "center" ? "justify-center" : "justify-start"
         )}>
           {align === "left" && <div className="h-[1px] w-8 bg-yellow-500/40" />}
-          <span className="font-rock-salt text-yellow-500 transform -rotate-2 text-lg md:text-xl block">
+          <span className="font-rock-salt text-yellow-500/90 transform -rotate-2 text-lg md:text-xl block">
             {subtitle}
           </span>
           {align === "center" && <div className="h-[1px] w-8 bg-yellow-500/40" />}

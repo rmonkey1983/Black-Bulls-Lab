@@ -157,15 +157,15 @@ export default function CheckoutForm() {
                                             <Calendar size={18} className="text-gold text-center" /> Data dell&apos;Evento
                                         </h3>
                                         <div className="flex items-center gap-4 text-white">
-                                            <button onClick={handlePrevMonth} className="hover:text-gold transition-colors"><ChevronLeft size={20} /></button>
+                                            <button onClick={handlePrevMonth} className="hover:text-gold transition-colors" aria-label="Mese precedente"><ChevronLeft size={20} /></button>
                                             <span className="font-bold uppercase tracking-widest text-sm text-gold text-center">
                                                 {currentMonth.toLocaleString('it-IT', { month: 'long', year: 'numeric' })}
                                             </span>
-                                            <button onClick={handleNextMonth} className="hover:text-gold transition-colors"><ChevronRight size={20} /></button>
+                                            <button onClick={handleNextMonth} className="hover:text-gold transition-colors" aria-label="Mese successivo"><ChevronRight size={20} /></button>
                                         </div>
                                     </div>
                                     
-                                    <div className="grid grid-cols-7 gap-1 sm:gap-2 text-center text-xs mb-2 text-gray-500 font-medium">
+                                    <div className="grid grid-cols-7 gap-1 sm:gap-2 text-center text-xs mb-2 text-zinc-300 font-medium">
                                         {['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'].map(d => <div key={d} className="text-center">{d}</div>)}
                                     </div>
                                     
@@ -183,7 +183,7 @@ export default function CheckoutForm() {
                                                     className={`aspect-square rounded-lg flex flex-col items-center justify-center transition-all disabled:cursor-not-allowed ${
                                                         isSelected ? 'bg-gold text-black border-gold shadow-[0_0_15px_rgba(200,164,78,0.3)]' :
                                                         isSoldOut ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
-                                                        isPast ? 'text-gray-600 opacity-50' : 'bg-white/5 text-white hover:bg-white/15 border border-white/10'
+                                                        isPast ? 'text-zinc-600' : 'bg-white/5 text-white hover:bg-white/15 border border-white/10'
                                                     }`}
                                                 >
                                                     <span className="text-lg font-bold block text-center">{date.getDate()}</span>
@@ -201,9 +201,9 @@ export default function CheckoutForm() {
                                         <p className="text-gray-400 text-sm">Numero di persone al tavolo</p>
                                     </div>
                                     <div className="flex items-center gap-4 bg-black/50 rounded-lg p-2 border border-white/20">
-                                        <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="w-10 h-10 flex items-center justify-center text-white hover:bg-white/10 rounded-md transition-colors text-xl font-bold bg-white/5">-</button>
+                                        <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="w-10 h-10 flex items-center justify-center text-white hover:bg-white/10 rounded-md transition-colors text-xl font-bold bg-white/5" aria-label="Diminuisci numero ospiti">-</button>
                                         <span className="text-white font-bold w-6 text-center text-xl">{quantity}</span>
-                                        <button onClick={() => setQuantity(quantity + 1)} className="w-10 h-10 flex items-center justify-center text-white hover:bg-white/10 rounded-md transition-colors text-xl font-bold bg-white/5">+</button>
+                                        <button onClick={() => setQuantity(quantity + 1)} className="w-10 h-10 flex items-center justify-center text-white hover:bg-white/10 rounded-md transition-colors text-xl font-bold bg-white/5" aria-label="Aumenta numero ospiti">+</button>
                                     </div>
                                 </div>
 
@@ -228,16 +228,16 @@ export default function CheckoutForm() {
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-2 relative">
-                                        <label className="text-xs font-bold uppercase tracking-widest text-gray-400 flex items-center gap-2"><User size={14}/> Nome</label>
+                                        <label className="text-xs font-bold uppercase tracking-widest text-zinc-350 flex items-center gap-2"><User size={14}/> Nome</label>
                                         <input type="text" value={guest.name} onChange={e => setGuest({...guest, name: e.target.value})} placeholder="Mario" className="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3.5 text-white focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-all" />
                                     </div>
                                     <div className="space-y-2 relative">
-                                        <label className="text-xs font-bold uppercase tracking-widest text-gray-400">Cognome</label>
+                                        <label className="text-xs font-bold uppercase tracking-widest text-zinc-350">Cognome</label>
                                         <input type="text" value={guest.surname} onChange={e => setGuest({...guest, surname: e.target.value})} placeholder="Rossi" className="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3.5 text-white focus:border-gold focus:ring-1 focus:ring-gold outline-none transition-all" />
                                     </div>
 
                                     <div className="space-y-2 relative">
-                                        <label className="text-xs font-bold uppercase tracking-widest text-gray-400 flex items-center gap-2"><Mail size={14}/> Indirizzo Email</label>
+                                        <label className="text-xs font-bold uppercase tracking-widest text-zinc-350 flex items-center gap-2"><Mail size={14}/> Indirizzo Email</label>
                                         <div className="relative">
                                             <input type="email" value={guest.email} onChange={e => setGuest({...guest, email: e.target.value})} placeholder="mario.rossi@email.com" className={`w-full bg-black/30 border ${guest.email.length>0 && isEmailValid ? 'border-green-500/50' : 'border-white/10'} rounded-xl px-4 py-3.5 text-white focus:border-gold outline-none transition-all pr-12`} />
                                             {isEmailValid && <CheckCircle className="absolute right-4 top-1/2 -translate-y-1/2 text-green-500 w-5 h-5 flex items-center justify-center" />}
@@ -245,7 +245,7 @@ export default function CheckoutForm() {
                                     </div>
 
                                     <div className="space-y-2 relative">
-                                        <label className="text-xs font-bold uppercase tracking-widest text-gray-400 flex items-center gap-2"><Phone size={14}/> Cellulare</label>
+                                        <label className="text-xs font-bold uppercase tracking-widest text-zinc-350 flex items-center gap-2"><Phone size={14}/> Cellulare</label>
                                         <div className="relative">
                                             <input type="tel" value={guest.phone} onChange={e => setGuest({...guest, phone: e.target.value})} placeholder="+39 333 1234567" className={`w-full bg-black/30 border ${guest.phone.length>0 && isPhoneValid ? 'border-green-500/50' : 'border-white/10'} rounded-xl px-4 py-3.5 text-white focus:border-gold outline-none transition-all pr-12`} />
                                             {isPhoneValid && <CheckCircle className="absolute right-4 top-1/2 -translate-y-1/2 text-green-500 w-5 h-5 flex items-center justify-center" />}
@@ -277,7 +277,7 @@ export default function CheckoutForm() {
 
                                 <div className="space-y-6 bg-white/5 border border-white/10 rounded-xl p-6">
                                     <div className="space-y-2">
-                                        <label className="text-xs font-bold uppercase tracking-widest text-gray-400 uppercase">Allergie o Intolleranze</label>
+                                        <label className="text-xs font-bold uppercase tracking-widest text-zinc-350 uppercase">Allergie o Intolleranze</label>
                                         <textarea 
                                             value={premium.allergies} onChange={e => setPremium({...premium, allergies: e.target.value})}
                                             placeholder="Non esitare ad avvisarci di celiachia, intolleranze al lattosio o altro. Il nostro Chef creerà un'esperienza perfetta per te." 
@@ -367,7 +367,7 @@ export default function CheckoutForm() {
                             
                             <div className="space-y-5 text-sm">
                                 <div className="space-y-1">
-                                    <p className="text-xs uppercase tracking-widest text-gray-500 font-bold uppercase">L&apos;Esperienza</p>
+                                    <p className="text-xs uppercase tracking-widest text-zinc-400 font-bold uppercase">L&apos;Esperienza</p>
                                     <p className="text-white text-base font-medium">{event.title}</p>
                                     {selectedDate && <p className="text-gold">{selectedDate.toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>}
                                 </div>
