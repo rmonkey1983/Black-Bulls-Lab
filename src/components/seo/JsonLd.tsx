@@ -245,9 +245,9 @@ export function PersonSchema({ name, role, image, description, url }: PersonSche
 export function LocalBusinessSchema() {
     const schema = {
         "@context": "https://schema.org",
-        "@type": "EntertainmentBusiness",
+        "@type": "LocalBusiness",
         name: SITE_NAME,
-        description: "Dinner show e format eventi immersivi a Torino: A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e THE GOLDEN VOICE.",
+        description: "Dinner show e format immersivi a Torino",
         url: SITE_URL,
         telephone: CONTACT_PHONE,
         email: CONTACT_EMAIL,
