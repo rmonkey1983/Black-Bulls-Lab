@@ -29,11 +29,10 @@ export function CenaConDelittoClient() {
                 <div className="absolute inset-0 z-0">
                     <Image 
                         src="/images/brand/bg-venue-crowd.webp" 
-                        alt="Cena Con Delitto" 
-                        width={1920}
-                        height={1080}
-                        className="w-full h-full object-cover opacity-40 contrast-125 grayscale"
-                        style={{ aspectRatio: '16/9', objectFit: 'cover' }}
+                        alt="Cena con Delitto" 
+                        fill 
+                        style={{ objectFit: 'cover' }}
+                        className="opacity-40 contrast-125 grayscale"
                         priority
                     />
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-black/60 mix-blend-multiply" />
@@ -102,7 +101,7 @@ export function CenaConDelittoClient() {
                             {
                                 icon: <div className="font-heading text-2xl font-bold">02</div>,
                                 title: "Setaccia il Campo",
-                                desc: "Tra una portata e l'altra, il sistema invierà notifiche in tempo reale: nuovi indizi, testimonianze video e sospetti che cambiano versione. Nulla è come sembra."
+                                desc: "Durante la cena raccogli indizi, ascolta le testimonianze e metti alla prova i sospetti. Ogni portata svela qualcosa di nuovo."
                             },
                             {
                                 icon: <div className="font-heading text-2xl font-bold">03</div>,

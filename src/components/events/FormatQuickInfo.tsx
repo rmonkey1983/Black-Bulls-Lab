@@ -10,7 +10,7 @@ interface QuickInfoItem {
 }
 
 interface FormatQuickInfoProps {
-    duration: string;
+    duration?: string;
     capacity: string;
     price: string;
     highlight?: string;
@@ -19,11 +19,11 @@ interface FormatQuickInfoProps {
 
 export function FormatQuickInfo({ duration, capacity, price, highlight, highlightLabel }: FormatQuickInfoProps) {
     const infos: QuickInfoItem[] = [
-        { icon: Clock, label: "Durata", value: duration },
+        { icon: Clock, label: "Durata", value: duration || "" },
         { icon: Users, label: "Capienza", value: capacity },
         { icon: BadgeEuro, label: "Prezzo", value: price },
         { icon: Sparkles, label: highlightLabel || "Highlight", value: highlight || "Show Immersivo" },
-    ];
+    ].filter(item => item.value !== "");
 
     return (
         <section className="w-full py-12 px-4 md:px-6 bg-white/[0.02] border-y border-white/5">

@@ -73,7 +73,6 @@ export function TheGoldenVoiceClient() {
             </section>
 
             <FormatQuickInfo 
-                duration="Contest Canoro"
                 capacity="In definizione"
                 price="Stay Tuned"
                 highlight="Digital Voting System"
@@ -81,7 +80,7 @@ export function TheGoldenVoiceClient() {
             />
 
             <EventConcept
-                description={`THE GOLDEN VOICE non è il solito talent show. È una competizione seria, intensa e prestigiosa, dove la tecnologia accorcia le distanze tra palco e platea. Grazie alla nostra Web App dedicata, ogni spettatore diventa parte attiva della giuria, influenzando il destino dei talenti in gara in tempo reale.\n\nCerchiamo interpreti capaci di emozionare, cantautori originali e performer che sanno dominare il palco. Qui non si cerca solo la tecnica, ma l'anima e la capacità di connettersi con il pubblico digitale.`}
+                description={`THE GOLDEN VOICE non è il solito talent show. È una competizione seria, intensa e prestigiosa, pensata per chi crede nella potenza della propria voce.\n\nCerchiamo interpreti capaci di emozionare, cantautori originali e performer che sanno dominare il palco. Qui non si cerca solo la tecnica, ma l'anima e la capacità di connettersi con il pubblico digitale.`}
             />
 
             <section className="py-24 bg-gradient-to-b from-black to-bg-dark relative overflow-hidden">

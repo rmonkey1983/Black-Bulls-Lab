@@ -29,10 +29,9 @@ export function IlPalqoClient() {
                     <Image 
                         src="/images/brand/bg-stage-lights.webp" 
                         alt="Il PalQo" 
-                        width={1920}
-                        height={1080}
-                        className="w-full h-full object-cover opacity-50"
-                        style={{ aspectRatio: '16/9', objectFit: 'cover' }}
+                        fill 
+                        style={{ objectFit: 'cover' }}
+                        className="opacity-50"
                         priority
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/40 to-transparent" />
