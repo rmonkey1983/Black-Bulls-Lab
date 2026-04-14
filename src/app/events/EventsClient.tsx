@@ -1,145 +1,120 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ImmersiveHeader } from "@/components/layout/ImmersiveHeader";
-import { Calendar, Sparkles } from "lucide-react";
-import { getEvents, Event } from "@/lib/dataStore";
-import { StickyTextSection } from "@/components/ui/ParallaxScroll";
-import { ProjectList } from "@/components/ui/ProjectList";
-import { NoEventsNewsletter } from "@/components/events/NoEventsNewsletter";
+import { Sparkles, ArrowRight, Loader2, CheckCircle2 } from "lucide-react";
 import { useGSAP } from "@/hooks/useGSAP";
-import { animateCards, animateFade } from "@/lib/gsapAnimations";
-import Image from "next/image";
-import { BookingForm } from "@/components/ui/BookingForm";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-
-import FaqSection from "@/components/ui/FaqSection";
+import { animateFade } from "@/lib/gsapAnimations";
+import Link from "next/link";
 
 export function EventsClient() {
-    const [events, setEvents] = useState<Event[]>([]);
+    const [email, setEmail] = useState("");
+    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
     useGSAP(() => {
-        animateCards("#events-list-container");
-        animateFade("#events-intro", "up", 0.1);
-        animateFade("#events-cta", "up", 0.1);
+        animateFade("#waitlist-content", "up", 0.1);
+        animateFade("#waitlist-form", "up", 0.3);
     });
 
-    useEffect(() => {
-        getEvents().then(setEvents);
-    }, []);
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!email) return;
+
+        setStatus("loading");
+        try {
+            const res = await fetch("/api/waitlist", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email }),
+            });
+
+            if (res.ok) {
+                setStatus("success");
+                setEmail("");
+            } else {
+                setStatus("error");
+            }
+        } catch (err) {
+            setStatus("error");
+        }
+    };
 
     return (
-        <main className="min-h-screen pb-24 bg-black relative uppercase">
+        <main className="min-h-screen pb-24 bg-black relative">
             <ImmersiveHeader
                 id="events-hero"
-                title="I NOSTRI"
-                highlight="Eventi"
-                subtitle="Ogni serata è un'esperienza unica. Scopri il prossimo evento e vivi qualcosa di straordinario."
+                title="IL NOSTRO"
+                highlight="Calendario"
+                subtitle="Stiamo preparando le prossime date."
                 mediaUrl="/images/brand/bg-venue-crowd.webp"
             />
 
-            <div className="flex justify-center -mt-12 md:-mt-24 mb-16 md:mb-24 relative z-20">
-                <button 
-                    onClick={() => {
-                        const target = document.getElementById('events-list');
-                        if (target) {
-                            const offset = 100;
-                            const elementPosition = target.getBoundingClientRect().top;
-                            const offsetPosition = elementPosition + window.pageYOffset - offset;
-                            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-                        }
-                    }} 
-                    className="border border-rama-accent/50 text-rama-accent px-8 py-4 uppercase tracking-widest text-sm hover:bg-rama-accent hover:text-black transition-colors rounded-full font-semibold backdrop-blur-sm bg-black/20"
-                >
-                    Vedi le Date Disponibili
-                </button>
-            </div>
-
-            <div className="max-w-7xl mx-auto px-6 space-y-20">
-                <section id="events-intro">
-                    <StickyTextSection
-                        content={
-                            <div className="space-y-6">
-                                <span className="font-rock-salt text-rama-accent transform -rotate-2 text-xl block">
-                                    <Sparkles size={14} className="inline mr-2" /> Prossimamente
-                                </span>
-                                <h2 className="font-heading font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-5xl sm:text-7xl md:text-[6vw]">
-                                    <span className="text-white">Il Palco è</span>
-                                    <span className="text-rama-accent">Pronto.</span>
-                                </h2>
-                                <p className="text-rama-muted font-sans text-lg leading-relaxed mt-6">
-                                    Non semplici date sul calendario, ma appuntamenti con l&apos;arte,
-                                    la musica e la cucina d&apos;autore. Prenota il tuo posto in prima fila.
-                                </p>
-                            </div>
-                        }
-                    >
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 mt-8">
-                            <div className="aspect-[4/5] rounded-lg overflow-hidden relative group">
-                                <Image 
-                                    src="/images/brand/bg-venue-crowd.webp" 
-                                    alt="Crowd" 
-                                    fill
-                                    className="object-cover group-hover:scale-105 transition-transform duration-700" 
-                                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                                />
-                            </div>
-                            <div className="aspect-[4/5] rounded-lg overflow-hidden relative group translate-y-4 md:translate-y-8">
-                                <Image 
-                                    src="/images/brand/service-performance.webp" 
-                                    alt="Performance" 
-                                    fill
-                                    className="object-cover group-hover:scale-105 transition-transform duration-700" 
-                                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                                />
-                            </div>
-                            <div className="aspect-[4/5] rounded-lg overflow-hidden relative group hidden md:block">
-                                <Image 
-                                    src="/images/brand/bg-stage-lights.webp" 
-                                    alt="Stage Lights" 
-                                    fill
-                                    className="object-cover group-hover:scale-105 transition-transform duration-700" 
-                                    sizes="(max-width: 1024px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                                />
-                            </div>
+            <div className="max-w-4xl mx-auto px-6 -mt-12 md:-mt-24 relative z-20">
+                <div id="waitlist-content" className="bg-zinc-900/50 backdrop-blur-xl border border-white/5 p-8 md:p-16 rounded-3xl text-center space-y-8">
+                    <div className="flex justify-center">
+                        <div className="w-16 h-16 bg-rama-accent/10 rounded-full flex items-center justify-center text-rama-accent border border-rama-accent/20">
+                            <Sparkles size={24} />
                         </div>
-                    </StickyTextSection>
-                </section>
-
-                <div id="events-list-container" className="pt-12 scroll-m-24">
-                {events.length > 0 ? (
-                    <>
-                        <div
-                            className="flex items-center justify-between border border-border bg-bg-card/30 px-5 py-3"
-                        >
-                            <div className="flex items-center gap-3">
-                                <Calendar size={14} className="text-rama-accent/50" />
-                                <span className="font-sans text-[11px] text-rama-accent/50 tracking-widest uppercase">
-                                    {events.length} {events.length === 1 ? "Evento Disponibile" : "Eventi Disponibili"}
-                                </span>
-                            </div>
-                        </div>
-                        <ProjectList events={events} />
-                    </>
-                ) : (
-                    <NoEventsNewsletter />
-                )}
-                </div>
-                
-                <div id="events-cta" className="mt-32">
-                    <div className="mb-16">
-                        <SectionHeading
-                            title="ORGANIZZA IL TUO"
-                            highlight="EVENTO"
-                            subtitle="Vuoi un format esclusivo per la tua azienda o un tavolo per il prossimo show?"
-                            align="center"
-                        />
                     </div>
-                    <BookingForm />
-                </div>
 
-                <FaqSection />
+                    <div className="space-y-4">
+                        <h2 className="text-3xl md:text-5xl font-heading font-bold uppercase tracking-tighter text-white">
+                            Sii il primo <span className="text-rama-accent">a sapere.</span>
+                        </h2>
+                        <p className="text-rama-muted font-sans text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
+                            Le prenotazioni per i nostri format aprono periodicamente e i posti vanno esauriti in fretta. Lascia la tua email per ricevere l&apos;accesso prioritario alle prossime date.
+                        </p>
+                    </div>
+
+                    <form id="waitlist-form" onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4">
+                        <div className="relative">
+                            <input
+                                type="email"
+                                placeholder="La tua migliore email"
+                                required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="w-full bg-black/40 border border-white/10 rounded-full px-8 py-5 font-sans text-white focus:outline-none focus:border-rama-accent/50 transition-colors"
+                                disabled={status === "loading" || status === "success"}
+                            />
+                            <button
+                                type="submit"
+                                disabled={status === "loading" || status === "success"}
+                                className="w-full md:absolute md:right-2 md:top-2 md:w-auto mt-4 md:mt-0 bg-rama-accent text-black font-heading font-bold uppercase tracking-widest px-8 py-3 rounded-full hover:bg-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {status === "loading" ? (
+                                    <Loader2 className="animate-spin" size={20} />
+                                ) : status === "success" ? (
+                                    <CheckCircle2 size={20} />
+                                ) : (
+                                    "Avvisami subito"
+                                )}
+                            </button>
+                        </div>
+                        {status === "success" && (
+                            <p className="text-green-500 font-sans text-sm animate-pulse">
+                                Confermiamo! Ti avviseremo appena le date saranno online.
+                            </p>
+                        )}
+                        {status === "error" && (
+                            <p className="text-red-500 font-sans text-sm">
+                                Qualcosa è andato storto. Riprova più tardi.
+                            </p>
+                        )}
+                    </form>
+
+                    <div className="pt-8 border-t border-white/5">
+                        <Link
+                            href="/format"
+                            className="group inline-flex items-center gap-2 text-rama-accent font-heading text-xs uppercase tracking-[0.2em] font-bold hover:text-white transition-colors"
+                        >
+                            Nel frattempo → Scopri i 4 format
+                            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                    </div>
+                </div>
             </div>
         </main>
     );
 }
+

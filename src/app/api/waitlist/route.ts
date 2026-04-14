@@ -1,71 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
-
-const WAITLIST_PATH = path.join(process.cwd(), "data", "waitlist.json");
-
-// Simple email regex
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-interface WaitlistEntry {
-    email: string;
-    createdAt: string;
-}
-
-async function readWaitlist(): Promise<WaitlistEntry[]> {
-    try {
-        const raw = await fs.readFile(WAITLIST_PATH, "utf-8");
-        return JSON.parse(raw) as WaitlistEntry[];
-    } catch {
-        return [];
-    }
-}
-
-async function writeWaitlist(entries: WaitlistEntry[]): Promise<void> {
-    await fs.mkdir(path.dirname(WAITLIST_PATH), { recursive: true });
-    await fs.writeFile(WAITLIST_PATH, JSON.stringify(entries, null, 2), "utf-8");
-}
 
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json().catch(() => null);
         const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
-        const honeypot = body?.b_contact_name;
 
-        if (honeypot) {
-            return NextResponse.json({ error: "Spam detected" }, { status: 400 });
+        if (!email) {
+            return NextResponse.json({ error: "Email missing" }, { status: 400 });
         }
 
-        if (!email || !EMAIL_RE.test(email)) {
-            return NextResponse.json({ error: "Indirizzo email non valido." }, { status: 400 });
-        }
-
-        const entries = await readWaitlist();
-
-        // Deduplicate — silently succeed if already present
-        if (entries.some((e) => e.email === email)) {
-            // Already registered
-            return NextResponse.json({ ok: true, duplicate: true });
-        }
-
-        const newEntry: WaitlistEntry = { email, createdAt: new Date().toISOString() };
-        entries.push(newEntry);
-        await writeWaitlist(entries);
-
-        // New registration successful
-        return NextResponse.json({ ok: true }, { status: 201 });
+        console.log(`[WAITLIST LEAD]: ${email}`);
+        
+        // TODO: Integrare Resend o Supabase per salvare i lead (Non usare file JSON locali)
+        
+        return NextResponse.json({ success: true });
     } catch (err) {
         console.error("[waitlist] error:", err);
-        return NextResponse.json({ error: "Errore del server. Riprova più tardi." }, { status: 500 });
+        return NextResponse.json({ error: "Server error" }, { status: 500 });
     }
 }
 
-// GET — read the list (useful for admin inspection in dev)
-export async function GET() {
-    try {
-        const entries = await readWaitlist();
-        return NextResponse.json({ count: entries.length, entries });
-    } catch {
-        return NextResponse.json({ error: "Unable to read waitlist." }, { status: 500 });
-    }
-}
