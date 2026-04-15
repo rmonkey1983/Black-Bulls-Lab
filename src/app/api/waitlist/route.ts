@@ -1,22 +1,23 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
+import { supabase } from '@/lib/supabase';
 
-export async function POST(req: NextRequest) {
-    try {
-        const body = await req.json().catch(() => null);
-        const email = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
+export async function POST(request: Request) {
+  try {
+    const { email } = await request.json();
+    if (!email) return NextResponse.json({ error: 'Email mancante' }, { status: 400 });
 
-        if (!email) {
-            return NextResponse.json({ error: "Email missing" }, { status: 400 });
-        }
+    const { data, error } = await supabase
+      .from('waitlist')
+      .insert([{ email }]);
 
-        console.log(`[WAITLIST LEAD]: ${email}`);
-        
-        // TODO: Integrare Resend o Supabase per salvare i lead (Non usare file JSON locali)
-        
-        return NextResponse.json({ success: true });
-    } catch (err) {
-        console.error("[waitlist] error:", err);
-        return NextResponse.json({ error: "Server error" }, { status: 500 });
+    if (error) {
+      if (error.code === '23505') return NextResponse.json({ error: 'Email già registrata' }, { status: 400 });
+      throw error;
     }
-}
 
+    return NextResponse.json({ success: true, message: 'Email salvata con successo' }, { status: 200 });
+  } catch (error) {
+    console.error('Errore Waitlist:', error);
+    return NextResponse.json({ error: 'Errore interno del server' }, { status: 500 });
+  }
+}
