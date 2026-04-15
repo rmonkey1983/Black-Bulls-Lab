@@ -228,6 +228,7 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
                         highlight="CREATIVE."
                         subtitle="The Faces"
                         align="left"
+                        titleClassName="md:text-5xl lg:text-6xl break-words"
                     />
                     <p className="font-sans text-zinc-400 font-light leading-relaxed">
                         Dietro ogni esperimento riuscito c&apos;è una squadra di esperti ossessionata dai dettagli. Incontra le persone che trasformano il Lab in realtà ogni sera.
