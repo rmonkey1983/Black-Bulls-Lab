@@ -126,6 +126,9 @@ export function RamaHeader() {
                         <Link href="/chi-siamo" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname === "/chi-siamo" ? "text-yellow-500" : "text-zinc-300 hover:text-yellow-500"}`}>
                             Chi Siamo
                         </Link>
+                        <Link href="/blog" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname.startsWith("/blog") ? "text-yellow-500" : "text-zinc-300 hover:text-yellow-500"}`}>
+                            Blog
+                        </Link>
                         <Link href="/contact" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname === "/contact" ? "text-yellow-500" : "text-zinc-300 hover:text-yellow-500"}`}>
                             Contatti
                         </Link>

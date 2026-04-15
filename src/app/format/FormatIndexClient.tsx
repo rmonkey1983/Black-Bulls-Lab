@@ -33,7 +33,7 @@ export function FormatIndexClient() {
                     </Link>
 
                     <div id="format-hero" className="flex flex-col">
-                        <h1 className="line font-bold text-rama-text font-heading uppercase tracking-tighter text-6xl md:text-8xl leading-[0.85]">
+                        <h1 className="line font-bold text-rama-text font-heading uppercase tracking-tighter text-4xl sm:text-6xl md:text-8xl leading-[0.85]">
                             <span>SCEGLI LA TUA <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-rama-accent via-white to-rama-accent">SERATA.</span></span>
                         </h1>
                     </div>

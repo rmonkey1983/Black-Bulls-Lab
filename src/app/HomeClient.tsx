@@ -21,8 +21,15 @@ import {
 } from "lucide-react";
 
 import FaqSection from "@/components/ui/FaqSection";
+import { RamaTestimonials } from "@/components/rama/sections/RamaTestimonials";
+import { RamaBlogPreview } from "@/components/rama/sections/RamaBlogPreview";
+import { BlogPost } from "@/lib/blog";
 
-export function HomeClient() {
+interface HomeClientProps {
+  latestPosts: BlogPost[];
+}
+
+export function HomeClient({ latestPosts }: HomeClientProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
@@ -97,12 +104,12 @@ export function HomeClient() {
             </span>
           </div>
           
-          <h1 className="font-heading font-bold text-5xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tighter uppercase max-w-5xl mx-auto italic transform -skew-x-2">
+          <h1 className="font-heading font-bold text-4xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tighter uppercase max-w-5xl mx-auto italic transform -skew-x-2">
             DINNER SHOW <span className="text-yellow-500">A TORINO.</span>
           </h1>
           
           <div className="space-y-4">
-             <h2 className="font-heading text-xl md:text-3xl text-zinc-400 uppercase tracking-widest font-light">
+             <h2 className="font-heading text-base sm:text-xl md:text-3xl text-zinc-400 uppercase tracking-widest font-light">
                 L&apos;intrattenimento diventa <span className="text-white font-medium">scienza.</span>
              </h2>
              <p className="font-sans text-zinc-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-light">
@@ -127,7 +134,7 @@ export function HomeClient() {
       </section>
 
       {/* 2. SEZIONE 'IL METODO' (La Visione) */}
-      <section id="metodo" className="metodo-section py-32 md:py-48 px-6 bg-transparent">
+      <section id="metodo" className="metodo-section py-20 md:py-32 lg:py-48 px-6 bg-transparent">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div className="space-y-10">
                 <SectionHeading 
@@ -261,6 +268,8 @@ export function HomeClient() {
         </div>
       </section>
 
+      <RamaTestimonials />
+      <RamaBlogPreview posts={latestPosts} />
       <FaqSection />
     </div>
   );

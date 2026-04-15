@@ -210,11 +210,10 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                         </div>
                     </div>
 
+                    {/* VOCI PRIMARIE — stesso ordine del desktop nav */}
                     {[
-                        { name: "Artisti", href: "/talents" },
-                        { name: "Corporate", href: "/eventi-aziendali" },
-                        { name: "Galleria", href: "/gallery" },
                         { name: "Chi Siamo", href: "/chi-siamo" },
+                        { name: "Blog", href: "/blog" },
                         { name: "Contatti", href: "/contact" },
                     ].map((link) => (
                         <div key={link.name} className="nav-link">
@@ -228,6 +227,27 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                             </Link>
                         </div>
                     ))}
+
+                    {/* VOCI SECONDARIE — pagine extra rispetto al desktop */}
+                    <div className="nav-link border-t border-white/5 pt-4 mt-2">
+                        <div className="flex flex-col gap-3">
+                            {[
+                                { name: "Artisti", href: "/talents" },
+                                { name: "Corporate", href: "/eventi-aziendali" },
+                                { name: "Galleria", href: "/gallery" },
+                            ].map((link) => (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    onClick={onClose}
+                                    suppressHydrationWarning
+                                    className={`font-heading text-2xl sm:text-3xl uppercase font-bold transition-colors duration-300 block ${pathname === link.href ? "text-yellow-500" : "text-zinc-500 hover:text-white"}`}
+                                >
+                                    {link.name}
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
 
                     {/* MOBILE CTA */}
                     <div className="nav-link mt-8 md:hidden">

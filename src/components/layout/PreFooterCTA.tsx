@@ -45,6 +45,16 @@ export function PreFooterCTA() {
         subtitle = "Le parole fanno poco. Vivi un'esperienza Black Bulls Lab.";
         ctaText = "Scegli la tua serata";
         ctaHref = "/format";
+    } else if (pathname === "/blog") {
+        title = "Hai vissuto una nostra serata?";
+        subtitle = "Raccontacela. Le migliori storie finiscono su questo blog.";
+        ctaText = "Scrivici";
+        ctaHref = "/contact";
+    } else if (pathname.startsWith("/blog/")) {
+        title = "Vuoi vivere di persona quello di cui hai letto?";
+        subtitle = "Le migliori serate iniziano con una decisione. Scegli la tua.";
+        ctaText = "Prenota la tua serata";
+        ctaHref = "/format";
     }
 
     const isExternal = ctaHref.startsWith("http");

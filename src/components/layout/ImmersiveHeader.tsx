@@ -33,7 +33,7 @@ export function ImmersiveHeader({
     }, [id]);
 
     return (
-        <section id={id} className="pt-40 md:pt-60 px-6 md:px-12 mb-24 md:mb-32 relative overflow-hidden min-h-[60vh] md:min-h-[80vh] flex flex-col justify-end pb-12 md:pb-24">
+        <section id={id} className="pt-28 md:pt-40 lg:pt-60 px-4 sm:px-6 md:px-12 mb-16 md:mb-32 relative overflow-hidden min-h-[55vh] md:min-h-[80vh] flex flex-col justify-end pb-8 md:pb-24">
             
             {/* Background Media */}
             <div className="absolute inset-0 z-0">
@@ -58,12 +58,12 @@ export function ImmersiveHeader({
             </div>
 
             <div className={`relative z-10 w-full overflow-hidden ${align === "center" ? "flex flex-col items-center text-center" : ""}`}>
-                <h1 className="line font-heading text-[clamp(3.5rem,15vw,10rem)] leading-[0.8] tracking-tighter uppercase font-bold text-white flex flex-col max-w-full">
+                <h1 className="line font-heading text-[clamp(2.2rem,12vw,10rem)] leading-[0.85] tracking-tighter uppercase font-bold text-white flex flex-col max-w-full">
                     <span>{title}</span>
                 </h1>
 
                 {highlight && (
-                    <h2 className={`line font-heading text-[clamp(3.5rem,15vw,10rem)] leading-[0.8] tracking-tighter uppercase font-bold text-rama-accent flex flex-col max-w-full ${align === "center" ? "" : "ml-0 md:ml-[10vw]"}`}>
+                    <h2 className={`line font-heading text-[clamp(2.2rem,12vw,10rem)] leading-[0.85] tracking-tighter uppercase font-bold text-rama-accent flex flex-col max-w-full ${align === "center" ? "" : "ml-0 md:ml-[10vw]"}`}>
                         <span>{highlight}</span>
                     </h2>
                 )}

@@ -54,7 +54,9 @@ export function RamaFooter() {
                         <Link href="/chi-siamo" className="hover:text-white transition-colors">Chi Siamo</Link>
                         <Link href="/talents" className="hover:text-white transition-colors">Artisti</Link>
                         <Link href="/format" className="hover:text-white transition-colors">I nostri Format</Link>
-                        <Link href="/contact" className="hover:text-white transition-colors">Collabora con noi</Link>
+                        <Link href="/gallery" className="hover:text-white transition-colors">Galleria</Link>
+                        <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
+                        <Link href="/contact" className="hover:text-white transition-colors">Contatti</Link>
                     </div>
                 </div>
             </div>

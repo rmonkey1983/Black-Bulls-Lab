@@ -23,13 +23,16 @@ export const metadata: Metadata = {
 };
 
 import dynamic from "next/dynamic";
+import { getAllPosts } from "@/lib/blog";
 
 const HomeClient = dynamic(() => import("./HomeClient").then(mod => mod.HomeClient));
 
 export default function HomePage() {
+    const latestPosts = getAllPosts().slice(0, 3);
+
     return (
         <main className="w-full bg-zinc-950 min-h-screen">
-            <HomeClient />
+            <HomeClient latestPosts={latestPosts} />
         </main>
     );
 }

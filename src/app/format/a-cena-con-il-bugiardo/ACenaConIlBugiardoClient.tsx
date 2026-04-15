@@ -24,7 +24,7 @@ export function ACenaConIlBugiardoClient() {
 
     return (
         <main ref={containerRef} className="min-h-screen">
-            <section className="relative aspect-video md:h-[85vh] w-full overflow-hidden flex items-end">
+            <section className="relative min-h-[60vw] md:min-h-0 md:h-[85vh] w-full overflow-hidden flex items-end">
                 <div className="absolute inset-0 z-0">
                     <Image
                         src="/images/brand/bg-hero-wide.webp"
@@ -40,12 +40,12 @@ export function ACenaConIlBugiardoClient() {
                     <div className="absolute inset-0 bg-[url('/noise.webp')] opacity-20 mix-blend-overlay pointer-events-none" />
                 </div>
 
-                <div className="absolute top-24 left-6 z-30">
+                <div className="absolute top-20 sm:top-24 left-4 sm:left-6 z-30">
                     <Link
                         href="/format"
-                        className="flex items-center gap-2 text-rama-text/70 hover:text-rama-accent transition-colors uppercase text-xs font-bold tracking-widest backdrop-blur-sm bg-transparent/20 px-4 py-2 rounded-full border border-white/10"
+                        className="flex items-center gap-2 text-rama-text/70 hover:text-rama-accent transition-colors uppercase text-xs font-bold tracking-widest backdrop-blur-sm bg-black/30 px-3 py-2 sm:px-4 rounded-full border border-white/10"
                     >
-                        <ArrowLeft size={16} /> ← Esplora gli altri format
+                        <ArrowLeft size={14} /> Tutti i format
                     </Link>
                 </div>
 
@@ -59,14 +59,14 @@ export function ACenaConIlBugiardoClient() {
                                 Posti limitati — Max 30 persone
                             </span>
                         </div>
-                        <h1 className="line text-5xl md:text-8xl font-bold text-rama-text tracking-tighter leading-[0.9] drop-shadow-2xl">
+                        <h1 className="line text-4xl sm:text-5xl md:text-8xl font-bold text-rama-text tracking-tighter leading-[0.9] drop-shadow-2xl">
                             <span>A CENA CON</span><br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-rama-accent via-white to-rama-accent">
                                 <span>IL BUGIARDO</span>
                             </span>
                         </h1>
 
-                        <p className="bugiardo-desc text-xl md:text-3xl text-gray-300 font-light max-w-2xl border-l-4 border-rama-accent pl-6">
+                        <p className="bugiardo-desc text-base sm:text-xl md:text-3xl text-gray-300 font-light max-w-2xl border-l-4 border-rama-accent pl-4 sm:pl-6">
                             Dimentica le cene spettacolo passive. L&apos;inganno ora è a portata di smartphone.
                         </p>
                     </div>

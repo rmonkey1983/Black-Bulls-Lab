@@ -133,6 +133,21 @@ img, video, iframe {
   }
 }
 
+/* ====== XS Mobile (< 390px) — extra safety checks ====== */
+@media (max-width: 390px) {
+  /* Titoli giganti non devono mai sforare */
+  h1, h2 {
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  /* Previeni overflow su heading con font clamp */
+  .font-heading {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+}
+
 
 /* ====== BASE STYLES ====== */
 body {
