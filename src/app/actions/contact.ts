@@ -1,6 +1,9 @@
 "use server";
 
 import { supabase } from "@/lib/supabase";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function submitContact(data: FormData) {
     const name = data.get("name") as string;
@@ -37,18 +40,33 @@ export async function submitContact(data: FormData) {
         }
     }
 
-    // 4. Save to DB (optional/graceful fallback)
+    // 4. Save to DB
     try {
         const { error } = await supabase.from('contacts').insert([{ name, email, subject, message }]);
         if (error) {
              console.error("Supabase insert error (contacts):", error.message);
-             // Return success anyway to not block UI if table doesn't exist yet
         }
         
-        // Database insert logic...
+        // 5. Send Notification Email via Resend
+        await resend.emails.send({
+            from: "Black Bulls Lab <onboarding@resend.dev>",
+            to: ["info@blackbullslab.com"],
+            subject: `Nuovo contatto: ${name} - ${subject || "Nessun Oggetto"}`,
+            html: `
+                <h2>Nuova richiesta dal sito Black Bulls Lab</h2>
+                <p><strong>Nome:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Oggetto:</strong> ${subject || "Nessuno"}</p>
+                <p><strong>Messaggio:</strong></p>
+                <p>${message.replace(/\n/g, '<br>')}</p>
+                <hr />
+                <p><em>Rispondi entro 24 ore per mantenere gli standard del Lab.</em></p>
+            `,
+        });
+
         return { success: true };
     } catch (e: unknown) {
         console.error("submitContact error:", e);
-        return { error: "Errore di connessione al database. Riprova più tardi." };
+        return { error: "Errore di connessione. Riprova più tardi." };
     }
 }
