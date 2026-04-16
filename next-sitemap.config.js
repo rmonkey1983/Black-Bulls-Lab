@@ -2,8 +2,9 @@
 module.exports = {
   siteUrl: 'https://blackbullslab.com',
   generateRobotsTxt: true,
-  exclude: ['/admin/*', '/api/*'],
-  // Incrementing priority for core marketing pages
+  sitemapSize: 99999,
+  generateIndexSitemap: false,
+  exclude: ['/admin', '/admin/*', '/api/*'],
   priority: 0.7,
   changefreq: 'weekly',
   robotsTxtOptions: {
@@ -11,13 +12,8 @@ module.exports = {
       { userAgent: '*', allow: '/' },
       { userAgent: '*', disallow: ['/admin', '/api'] },
     ],
-    additionalSitemaps: [
-      'https://blackbullslab.com/sitemap.xml',
-    ],
   },
-  // Ensure dynamic routes are included (crawled during build)
   transform: async (config, path) => {
-    // Custom logic for priority
     let priority = config.priority;
     if (path === '/') priority = 1.0;
     if (path.startsWith('/format')) priority = 0.9;
