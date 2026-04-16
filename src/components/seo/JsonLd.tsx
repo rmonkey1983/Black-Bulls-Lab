@@ -330,3 +330,55 @@ export function LocalBusinessSchema() {
         />
     );
 }
+
+// ─── EntertainmentBusiness + Event Graph Schema ────────────────────────────────
+
+export function EntertainmentBusinessSchema() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "EntertainmentBusiness",
+        "@id": `${SITE_URL}/#organization`,
+        name: SITE_NAME,
+        url: SITE_URL,
+        telephone: CONTACT_PHONE,
+        email: CONTACT_EMAIL,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Torino",
+          addressCountry: "IT"
+        },
+        sameAs: [
+          SOCIAL_LINKS.instagram,
+          SOCIAL_LINKS.facebook,
+          SOCIAL_LINKS.tiktok
+        ]
+      },
+      {
+        "@type": "Event",
+        "name": `${SITE_NAME} - Dinner Show Immersivo`,
+        "location": {
+          "@type": "Place",
+          "name": `${SITE_NAME} Torino`,
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Torino",
+            "addressCountry": "IT"
+          }
+        },
+        "organizer": {
+          "@id": `${SITE_URL}/#organization`
+        },
+        "description": "Il laboratorio underground dove l'intrattenimento diventa scienza. Dinner show e format originali a Torino."
+      }
+    ]
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}

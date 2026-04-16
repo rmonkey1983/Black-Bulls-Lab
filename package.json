@@ -6,7 +6,8 @@
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "echo 'Skipping lint' || eslint"
+    "lint": "echo 'Skipping lint' || eslint",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@marsidev/react-turnstile": "^1.4.2",
@@ -37,6 +38,7 @@
     "dotenv": "^17.3.1",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "next-sitemap": "^4.2.3",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "typescript": "^5"

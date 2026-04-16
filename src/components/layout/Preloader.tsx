@@ -2,12 +2,14 @@
 
 import { useEffect, useState, useRef } from "react";
 import { FlaskConical, Atom, Dna, Microscope, TestTube } from "lucide-react";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";
 
 const ICONS = [FlaskConical, Dna, Atom, Microscope, TestTube];
 
 export function Preloader() {
+    const isMobile = useMediaQuery("(max-width: 768px)");
     const [count, setCount] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [iconIndex, setIconIndex] = useState(0);
@@ -17,23 +19,22 @@ export function Preloader() {
     const iconRef = useRef<HTMLDivElement>(null);
     const [particles, setParticles] = useState<Array<{id: number, left: number, size: number, delay: number, dur: number, x1: number, x2: number}>>([]);
 
-    // Swap icons every 400ms
+    // Swap icons every 200ms
     useEffect(() => {
         if (typeof window === "undefined") return;
 
-        // Requirement: Skip if already seen in same session
+        // Skip condition: Mobile or Session storage
         const hasSeenSplash = sessionStorage.getItem("splash-seen");
-        if (hasSeenSplash) {
+        if (isMobile || hasSeenSplash) {
             setIsLoading(false);
             return;
         }
 
-        // Only start initialization logic if not seen
         const iconInterval = setInterval(() => {
             setIconIndex((prev) => (prev + 1) % ICONS.length);
         }, 200);
 
-        const generated = Array.from({ length: 12 }).map((_, i) => ({
+        setParticles(Array.from({ length: 12 }).map((_, i) => ({
             id: i,
             left: Math.random() * 100,
             size: Math.random() * 4 + 2,
@@ -41,8 +42,7 @@ export function Preloader() {
             dur: Math.random() * 3 + 2,
             x1: Math.random() * 60 - 30,
             x2: Math.random() * 60 - 30,
-        }));
-        setParticles(generated);
+        })));
 
         let mounted = true;
         const countInterval = setInterval(() => {
@@ -50,52 +50,37 @@ export function Preloader() {
                 const next = prev + Math.floor(Math.random() * 15) + 10;
                 if (next >= 100) {
                     clearInterval(countInterval);
-                    if (mounted) {
-                        setTimeout(() => {
-                            if (containerRef.current) {
-                                gsap.to(containerRef.current, {
-                                    y: "-100%",
-                                    duration: 0.6,
-                                    ease: "expo.inOut",
-                                    onComplete: () => {
-                                        setIsLoading(false);
-                                        sessionStorage.setItem("splash-seen", "true");
-                                    }
-                                });
-                            } else {
-                                setIsLoading(false);
-                                sessionStorage.setItem("splash-seen", "true");
-                            }
-                        }, 150);
-                    }
+                    if (mounted) finishPreloader();
                     return 100;
                 }
                 return next;
             });
         }, 60);
 
+        const finishPreloader = () => {
+            if (containerRef.current) {
+                gsap.to(containerRef.current, {
+                    y: "-100%",
+                    duration: 0.6,
+                    ease: "expo.inOut",
+                    onComplete: () => {
+                        setIsLoading(false);
+                        sessionStorage.setItem("splash-seen", "true");
+                    }
+                });
+            } else {
+                setIsLoading(false);
+                sessionStorage.setItem("splash-seen", "true");
+            }
+        };
+
         const fallback = setTimeout(() => {
             if (mounted && count < 100) {
                 setCount(100);
                 clearInterval(countInterval);
-                setTimeout(() => {
-                    if (containerRef.current) {
-                        gsap.to(containerRef.current, {
-                            y: "-100%",
-                            duration: 0.6,
-                            ease: "expo.inOut",
-                            onComplete: () => {
-                                setIsLoading(false);
-                                sessionStorage.setItem("splash-seen", "true");
-                            }
-                        });
-                    } else {
-                        setIsLoading(false);
-                        sessionStorage.setItem("splash-seen", "true");
-                    }
-                }, 100);
+                finishPreloader();
             }
-        }, 1500); // Reduced fallback for performance
+        }, 1500); // 1500ms hard cap for desktop
 
         return () => {
             mounted = false;
@@ -103,7 +88,7 @@ export function Preloader() {
             clearInterval(countInterval);
             clearTimeout(fallback);
         };
-    }, []);
+    }, [isMobile]);
 
     useGSAP(() => {
         if (!isLoading) return;

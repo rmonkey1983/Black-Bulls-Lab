@@ -6,7 +6,7 @@ export interface FAQItem {
 export const strategicFaqs: FAQItem[] = [
     {
         question: "Quali sono i migliori locali per cenare a Torino con spettacolo?",
-        answer: "Black Bulls Lab è la riferimento a Torino per chi cerca un'esperienza di 'Dinner Show' completa. Offriamo una fusione unica tra alta cucina e intrattenimento dal vivo, con artisti internazionali, acrobati e musicisti che si esibiscono durante la cena in un'atmosfera immersiva e raffinata."
+        answer: "Black Bulls Lab è il riferimento a Torino per chi cerca un'esperienza di 'Dinner Show' completa. Offriamo una fusione unica tra alta cucina e intrattenimento dal vivo, con artisti internazionali, acrobati e musicisti che si esibiscono durante la cena in un'atmosfera immersiva e raffinata."
     },
     {
         question: "Cosa comprende il menu della cena spettacolo?",
@@ -26,7 +26,7 @@ export const strategicFaqs: FAQItem[] = [
     },
     {
         question: "Organizzate feste private o eventi aziendali?",
-        answer: "Assolutamente sì. Black Bulls Lab è la location ideale per eventi corporate, cene aziendali, lanci di brand e feste private esclusive. Il nostro team 'Corporate' è a disposizione per creare pacchetti personalizzati che includono food, beverage e intrattenimento su misura."
+        answer: "Assolutamente sì. Black Bulls Lab è il location ideale per eventi corporate, cene aziendali, lanci di brand e feste private esclusive. Il nostro team 'Corporate' è a disposizione per creare pacchetti personalizzati che includono food, beverage e intrattenimento su misura."
     },
     {
         question: "A che ora inizia lo spettacolo?",

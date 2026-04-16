@@ -64,7 +64,7 @@ export function RamaFooter() {
             {/* Bottom Tech Detail */}
             <div className="mt-20 pt-8 border-t border-white/5 w-full text-center">
                 <p className="font-heading text-[8px] text-zinc-500 uppercase tracking-[1em]">
-                    Sytem Status: Online // Entertainment Laboratory
+                    System Status: Online // Entertainment Laboratory
                 </p>
             </div>
         </footer>

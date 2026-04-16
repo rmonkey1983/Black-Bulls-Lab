@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Mohave, Outfit, Rock_Salt, Inter } from "next/font/google";
 import { RamaHeader } from "@/components/rama/RamaHeader";
 import { RamaFooter } from "@/components/rama/RamaFooter";
-import { OrganizationSchema, WebSiteSchema, LocalBusinessSchema, FAQPageSchema } from "@/components/seo/JsonLd";
+import { EntertainmentBusinessSchema, WebSiteSchema, FAQPageSchema } from "@/components/seo/JsonLd";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { Preloader } from "@/components/layout/Preloader";
 import { MobileStickyBookButton } from "@/components/layout/MobileStickyBookButton";
@@ -148,9 +148,8 @@ export default function RootLayout({
         <BackToTop />
         <SmoothScroll />
         
-        <OrganizationSchema />
+        <EntertainmentBusinessSchema />
         <WebSiteSchema />
-        <LocalBusinessSchema />
         <FAQPageSchema faqs={[
           { question: "Qual è il dress code per le serate?", answer: "Richiediamo un abbigliamento elegante e curato (Smart Casual / Elegant). Ci riserviamo il diritto di selezione all'ingresso per mantenere l'atmosfera esclusiva del nostro club." },
           { question: "Come funzionano le prenotazioni per la cena spettacolo?", answer: "La prenotazione è fortemente consigliata ed è garantita solo a seguito della nostra conferma. Offriamo sia menu degustazione fissi che soluzioni à-la-carte, a seconda del format della serata." },
