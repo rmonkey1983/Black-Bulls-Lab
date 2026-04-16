@@ -1,4 +1,4 @@
-import { SITE_URL, CONTACT_EMAIL, SITE_NAME, CONTACT_PHONE } from "@/lib/constants";
+import { SITE_URL, CONTACT_EMAIL, SITE_NAME, CONTACT_PHONE, SOCIAL_LINKS } from "@/lib/constants";
 
 // ─── Organization Schema ──────────────────────────────────────────────────────
 
