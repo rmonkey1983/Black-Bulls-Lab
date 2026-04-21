@@ -1,6 +1,6 @@
 "use client";
 
-import { Instagram, Globe, ArrowLeft } from "lucide-react";
+import { Instagram, Globe, ArrowLeft, Search } from "lucide-react";
 import Link from "next/link";
 import { Talent } from "@/lib/dataStore";
 
