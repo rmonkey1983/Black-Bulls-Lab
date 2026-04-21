@@ -41,6 +41,7 @@ export interface Talent {
     image: string;
     code: string;
     bio: string;
+    category: string;
 }
 
 export interface SiteSettings {
@@ -241,6 +242,7 @@ export async function saveTalent(talent: Talent): Promise<void> {
             image: talent.image,
             code: talent.code,
             bio: talent.bio,
+            category: talent.category,
         }, { onConflict: "id" });
 
     if (error) {

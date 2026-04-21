@@ -12,6 +12,7 @@ function TalentForm({ talent, onSave, onCancel }: { talent?: Talent; onSave: () 
         image: talent?.image || "",
         code: talent?.code || "",
         bio: talent?.bio || "",
+        category: talent?.category || "",
     });
     const [imageMode, setImageMode] = useState<"upload" | "url">(talent?.image ? "url" : "upload");
     const [uploading, setUploading] = useState(false);
@@ -107,6 +108,10 @@ function TalentForm({ talent, onSave, onCancel }: { talent?: Talent; onSave: () 
                 <div>
                     <label className={labelClass}>Codice</label>
                     <input value={form.code} onChange={(e) => setForm({ ...form, code: e.target.value })} placeholder="RES-001" className={inputClass} />
+                </div>
+                <div>
+                    <label className={labelClass}>Categoria</label>
+                    <input value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} required placeholder="Guest, Format..." className={inputClass} />
                 </div>
             </div>
 
