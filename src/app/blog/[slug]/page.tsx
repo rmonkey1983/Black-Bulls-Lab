@@ -9,6 +9,7 @@ import { Calendar, Clock, User, ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { PreFooterCTA } from "@/components/layout/PreFooterCTA";
 import { SITE_URL } from "@/lib/constants";
+import { MDXComponentsProps } from "@/types/mdx";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -42,52 +43,52 @@ export async function generateMetadata({
 }
 
 const components = {
-  h2: (props: any) => (
+  h2: (props: MDXComponentsProps['heading']) => (
     <h2
       className="font-heading text-3xl md:text-4xl font-bold uppercase text-white mt-16 mb-8 border-b border-white/5 pb-4"
       {...props}
     />
   ),
-  h3: (props: any) => (
+  h3: (props: MDXComponentsProps['heading']) => (
     <h3
       className="font-heading text-xl md:text-2xl font-bold uppercase text-rama-accent mt-12 mb-6"
       {...props}
     />
   ),
-  p: (props: any) => (
+  p: (props: MDXComponentsProps['paragraph']) => (
     <p
       className="font-sans text-[17px] text-zinc-300 font-light leading-[1.8] max-w-[680px] mx-auto mb-8"
       {...props}
     />
   ),
-  a: (props: any) => (
+  a: (props: MDXComponentsProps['anchor']) => (
     <a
       className="text-rama-accent hover:text-white underline underline-offset-4 transition-colors font-medium"
       {...props}
     />
   ),
-  blockquote: (props: any) => (
+  blockquote: (props: MDXComponentsProps['blockquote']) => (
     <blockquote
       className="max-w-[680px] mx-auto border-l-4 border-rama-accent bg-zinc-900/50 p-8 my-12 italic text-xl text-zinc-200 font-serif"
       {...props}
     />
   ),
-  strong: (props: any) => (
+  strong: (props: MDXComponentsProps['strong']) => (
     <strong className="font-semibold text-white" {...props} />
   ),
-  ul: (props: any) => (
+  ul: (props: MDXComponentsProps['list']) => (
     <ul
       className="max-w-[680px] mx-auto list-disc list-outside pl-5 mb-8 space-y-4 text-zinc-300 font-light"
       {...props}
     />
   ),
-  ol: (props: any) => (
+  ol: (props: MDXComponentsProps['list']) => (
     <ol
       className="max-w-[680px] mx-auto list-decimal list-outside pl-5 mb-8 space-y-4 text-zinc-300 font-light"
       {...props}
     />
   ),
-  li: (props: any) => (
+  li: (props: MDXComponentsProps['listItem']) => (
     <li className="leading-relaxed" {...props} />
   ),
 };
@@ -194,11 +195,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <span>{formatDate(post.date)}</span>
             </div>
             <div className="flex items-center gap-2">
-              <User size={14} className="text-rama-accent/50 opacity-0 w-0 h-0" /> {/* Spacer or hidden element if needed */}
-              <div className="flex items-center gap-2">
-                 <Clock size={14} className="text-rama-accent/50" />
-                 <span>{post.readingTime}</span>
-              </div>
+              <Clock size={14} className="text-rama-accent/50" />
+              <span>{post.readingTime}</span>
             </div>
           </div>
         </header>

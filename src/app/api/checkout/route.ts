@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { checkCapacity } from '@/lib/dataStore';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,9 +17,9 @@ export async function POST(req: Request) {
     });
 
     const body = await req.json();
-    const { eventId, eventTitle, quantity, selectedDate, guest, premium, unitAmount } = body;
+    const { eventId, eventTitle, eventDateId, quantity, selectedDate, guest, premium, unitAmount } = body;
 
-    if (!quantity || !guest.email || !guest.name) {
+    if (!quantity || !guest.email || !guest.name || !eventDateId) {
       return NextResponse.json({ error: 'Dati incompleti' }, { status: 400 });
     }
 
@@ -29,6 +30,12 @@ export async function POST(req: Request) {
     const bookingDate = new Date(selectedDate);
     if (bookingDate < new Date()) {
       return NextResponse.json({ error: 'Data non valida' }, { status: 400 });
+    }
+
+    // Capacity Check
+    const hasCapacity = await checkCapacity(eventDateId, quantity);
+    if (!hasCapacity) {
+      return NextResponse.json({ error: 'Posti esauriti o non sufficienti per questa data.' }, { status: 400 });
     }
 
     // Determine the base URL for redirects
@@ -59,6 +66,7 @@ export async function POST(req: Request) {
       metadata: {
         eventId: eventId,
         eventTitle: eventTitle,
+        eventDateId: eventDateId,
         quantity: quantity.toString(),
         selectedDate: selectedDate,
         guestName: guest.name,

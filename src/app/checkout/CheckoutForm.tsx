@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { ArrowLeft, CreditCard, Lock, CheckCircle, ChevronRight, ChevronLeft, ShieldCheck, Mail, Phone, User, Calendar, Info } from "lucide-react";
 import Link from "next/link";
@@ -39,11 +39,29 @@ export default function CheckoutForm() {
     const isStep2Valid = guest.name.length > 1 && guest.surname.length > 1 && isEmailValid && isPhoneValid;
 
 
-    // Calendar Logic
+    // Calendar & Booking Logic
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
     const [currentMonth, setCurrentMonth] = useState(new Date(today.getFullYear(), today.getMonth(), 1));
+    const [availableDates, setAvailableDates] = useState<any[]>([]);
+    const [fetchingDates, setFetchingDates] = useState(true);
+
+    useEffect(() => {
+        setFetchingDates(true);
+        fetch(`/api/dates?eventId=${eventId || '1'}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.dates) {
+                    setAvailableDates(data.dates);
+                }
+                setFetchingDates(false);
+            })
+            .catch(err => {
+                console.error("Error fetching dates", err);
+                setFetchingDates(false);
+            });
+    }, [eventId]);
 
     const calendarDates = useMemo(() => {
         const year = currentMonth.getFullYear();
@@ -59,11 +77,25 @@ export default function CheckoutForm() {
         for (let i = 1; i <= daysInMonth; i++) {
             const d = new Date(year, month, i);
             const isPast = d < today;
-            const isSoldOut = !isPast && (d.getDate() % 5 === 0 || d.getDate() % 8 === 0);
-            dates.push({ date: d, isPast, isSoldOut });
+            
+            // Find if this date exists in availableDates
+            const dateStr = [d.getFullYear(), String(d.getMonth() + 1).padStart(2, '0'), String(d.getDate()).padStart(2, '0')].join('-');
+            const dbDate = availableDates.find(x => x.date === dateStr);
+            
+            let isSoldOut = !isPast;
+            let availableSeats = 0;
+            let eventDateId = null;
+
+            if (dbDate) {
+                availableSeats = dbDate.capacity - dbDate.booked_seats;
+                isSoldOut = availableSeats < quantity || dbDate.status === 'sold_out';
+                eventDateId = dbDate.id;
+            }
+
+            dates.push({ date: d, isPast, isSoldOut, eventDateId, availableSeats });
         }
         return dates;
-    }, [currentMonth, today]);
+    }, [currentMonth, today, availableDates, quantity]);
 
     const handleNextMonth = () => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1));
     const handlePrevMonth = () => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1));
@@ -89,6 +121,19 @@ export default function CheckoutForm() {
             return;
         }
 
+        // Find the eventDateId for the selected date
+        const dateStr = [selectedDate.getFullYear(), String(selectedDate.getMonth() + 1).padStart(2, '0'), String(selectedDate.getDate()).padStart(2, '0')].join('-');
+        const dbDate = availableDates.find(x => x.date === dateStr);
+        if (!dbDate) {
+             alert("Siamo spiacenti, la data selezionata non è più disponibile nel sistema.");
+             return;
+        }
+
+        if (dbDate.capacity - dbDate.booked_seats < quantity) {
+             alert("I posti residui non sono sufficienti per il tuo gruppo per questa data.");
+             return;
+        }
+
         setLoading(true);
         try {
             const response = await fetch("/api/checkout", {
@@ -97,6 +142,7 @@ export default function CheckoutForm() {
                 body: JSON.stringify({
                     eventId: event.id,
                     eventTitle: event.title,
+                    eventDateId: dbDate.id, // Passing DB id!
                     quantity,
                     selectedDate,
                     guest,

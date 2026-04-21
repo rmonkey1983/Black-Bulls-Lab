@@ -15,10 +15,12 @@ import {
     Shield,
     Eye,
     EyeOff,
+    MessageSquare,
 } from "lucide-react";
 
 const navItems = [
     { name: "Dashboard", href: "/admin", icon: LayoutDashboard, code: "DSH" },
+    { name: "Richieste", href: "/admin/richieste", icon: MessageSquare, code: "REQ" },
     { name: "Eventi", href: "/admin/events", icon: FlaskConical, code: "EVT" },
     { name: "Gallery", href: "/admin/gallery", icon: ImageIcon, code: "GAL" },
     { name: "Artisti", href: "/admin/talents", icon: Users, code: "TAL" },

@@ -72,13 +72,16 @@ CREATE POLICY "Allow public read" ON gallery FOR SELECT USING (true);
 CREATE POLICY "Allow public read" ON talents FOR SELECT USING (true);
 CREATE POLICY "Allow public read" ON settings FOR SELECT USING (true);
 
--- Allow public write access (managed by app-level auth via admin password)
-CREATE POLICY "Allow public write" ON events FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow public write" ON gallery FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow public write" ON talents FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow public write" ON settings FOR ALL USING (true) WITH CHECK (true);
+-- Restricted write access to authenticated users only!
+CREATE POLICY "Allow authenticated write" ON events FOR ALL TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "Allow authenticated write" ON gallery FOR ALL TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "Allow authenticated write" ON talents FOR ALL TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "Allow authenticated write" ON settings FOR ALL TO authenticated USING (true) WITH CHECK (true);
+
+-- Newsletter: ONLY allow anonymous inserts. NO SELECT!
 CREATE POLICY "Allow public insert" ON newsletter FOR INSERT WITH CHECK (true);
-CREATE POLICY "Allow public read" ON newsletter FOR SELECT USING (true);
+-- To read newsletter, must be authenticated
+CREATE POLICY "Allow authenticated read" ON newsletter FOR SELECT TO authenticated USING (true);
 
 
 -- ============================================================
@@ -176,4 +179,4 @@ CREATE POLICY "Enable insert for public golden_voice_casting" ON public.golden_v
     FOR INSERT WITH CHECK (true);
 
 CREATE POLICY "Enable read access for all users golden_voice_casting" ON public.golden_voice_casting
-    FOR SELECT USING (true);
+    FOR SELECT TO authenticated USING (true);

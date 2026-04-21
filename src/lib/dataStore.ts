@@ -53,6 +53,31 @@ export interface SiteSettings {
     adminPassword: string;
 }
 
+export interface EventDate {
+    id: string;
+    event_slug: string;
+    date: string; // ISO String or YYYY-MM-DD
+    capacity: number;
+    booked_seats: number;
+    status: 'available' | 'sold_out' | 'cancelled';
+}
+
+export interface Booking {
+    id: string;
+    event_date_id: string;
+    guest_name: string;
+    guest_surname: string;
+    guest_email: string;
+    guest_phone: string;
+    quantity: number;
+    allergies?: string;
+    occasion?: string;
+    stripe_session_id: string;
+    payment_status: 'pending' | 'paid' | 'refunded' | 'cancelled';
+    amount_paid: number;
+    created_at?: string;
+}
+
 // ===== EVENTS CRUD =====
 
 export async function getEvents(): Promise<Event[]> {
@@ -304,6 +329,46 @@ export async function saveSettings(settings: SiteSettings): Promise<void> {
         console.error("Error saving settings:", error);
         throw new Error(error.message || "Impossibile salvare le impostazioni.");
     }
+}
+
+// ===== BOOKINGS & CALENDAR =====
+
+export async function getAvailableDates(eventSlug: string): Promise<EventDate[]> {
+    const today = new Date().toISOString().split('T')[0];
+    const { data, error } = await supabase
+        .from("event_dates")
+        .select("*")
+        .eq("event_slug", eventSlug)
+        .gte("date", today)
+        .order("date", { ascending: true });
+
+    if (error) {
+        console.error("Error fetching dates:", error);
+        return [];
+    }
+    return data as EventDate[];
+}
+
+export async function checkCapacity(dateId: string, requestedSeats: number): Promise<boolean> {
+    const { data, error } = await supabase
+        .from("event_dates")
+        .select("capacity, booked_seats")
+        .eq("id", dateId)
+        .single();
+    
+    if (error || !data) return false;
+    return (data.capacity - data.booked_seats) >= requestedSeats;
+}
+
+export async function insertBooking(booking: Partial<Booking>, client = supabase): Promise<string> {
+    const { data, error } = await client
+        .from("bookings")
+        .insert([booking])
+        .select("id")
+        .single();
+
+    if (error) throw error;
+    return data.id;
 }
 
 // ===== UTILITY =====

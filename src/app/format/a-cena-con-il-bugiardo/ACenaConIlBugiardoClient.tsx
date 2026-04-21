@@ -59,12 +59,13 @@ export function ACenaConIlBugiardoClient() {
                                 Posti limitati — Max 30 persone
                             </span>
                         </div>
-                        <h1 className="line text-4xl sm:text-5xl md:text-8xl font-bold text-rama-text tracking-tighter leading-[0.9] drop-shadow-2xl">
+                        <h1 className="sr-only">A Cena con il Bugiardo | Dinner Show a Torino</h1>
+                        <div aria-hidden="true" className="line text-4xl sm:text-5xl md:text-8xl font-bold text-rama-text tracking-tighter leading-[0.9] drop-shadow-2xl">
                             <span>A CENA CON</span><br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-rama-accent via-white to-rama-accent">
                                 <span>IL BUGIARDO</span>
                             </span>
-                        </h1>
+                        </div>
 
                         <p className="bugiardo-desc text-base sm:text-xl md:text-3xl text-gray-300 font-light max-w-2xl border-l-4 border-rama-accent pl-4 sm:pl-6">
                             Dimentica le cene spettacolo passive. L&apos;inganno ora è a portata di smartphone.

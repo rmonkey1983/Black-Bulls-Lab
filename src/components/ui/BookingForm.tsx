@@ -5,10 +5,13 @@ import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
 import { CheckCircle, Calendar, Users, Star, MessageSquare, User, AtSign, Phone } from "lucide-react";
+import { submitContact } from "@/app/actions/contact";
 
 export function BookingForm() {
   const formRef = useRef<HTMLDivElement>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -38,10 +41,37 @@ export function BookingForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Booking Data Submitted:", formData);
-    setIsSubmitted(true);
+    setIsLoading(true);
+    setErrorMsg("");
+
+    const formattedMessage = `Telefono: ${formData.phone}
+Data Richiesta: ${formData.date}
+Ospiti: ${formData.guests}
+Format: ${formData.format}
+
+Note aggiuntive:
+${formData.message}`;
+
+    const data = new FormData();
+    data.append("name", formData.name);
+    data.append("email", formData.email);
+    data.append("subject", `[PRENOTAZIONE] ${formData.format} in data ${formData.date}`);
+    data.append("message", formattedMessage);
+
+    try {
+      const res = await submitContact(data);
+      if (res?.error) {
+        setErrorMsg(res.error);
+      } else {
+        setIsSubmitted(true);
+      }
+    } catch (err) {
+      setErrorMsg("Errore di rete. Impossibile inoltrare la richiesta.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (isSubmitted) {
@@ -200,9 +230,15 @@ export function BookingForm() {
           />
         </div>
 
+        {errorMsg && (
+          <div className="text-red-500 font-bold text-center text-sm my-4">
+            {errorMsg}
+          </div>
+        )}
+
         <div className="pt-4">
-          <PrimaryButton type="submit" size="lg" className="w-full py-6 text-base tracking-[0.3em]">
-            INVIA RICHIESTA AL LABORATORIO
+          <PrimaryButton type="submit" size="lg" className="w-full py-6 text-base tracking-[0.3em]" disabled={isLoading}>
+            {isLoading ? "INVIO IN CORSO..." : "INVIA RICHIESTA AL LABORATORIO"}
           </PrimaryButton>
         </div>
       </form>

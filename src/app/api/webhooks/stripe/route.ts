@@ -3,6 +3,8 @@ import Stripe from 'stripe';
 import { Resend } from 'resend';
 import { BookingConfirmationEmail } from '@/components/emails/BookingConfirmationEmail';
 import * as React from 'react';
+import { supabaseAdmin } from '@/lib/supabase';
+import { insertBooking } from '@/lib/dataStore';
 
 export const dynamic = 'force-dynamic';
 
@@ -49,6 +51,38 @@ export async function POST(req: Request) {
     }
 
     try {
+      const quantity = parseInt(metadata.quantity || '1', 10);
+      
+      // 1. Insert Booking via DataStore function
+      try {
+          await insertBooking({
+              event_date_id: metadata.eventDateId,
+              guest_name: metadata.guestName || '',
+              guest_surname: metadata.guestSurname || '',
+              guest_email: metadata.guestEmail || '',
+              guest_phone: metadata.guestPhone || '',
+              quantity: quantity,
+              allergies: metadata.allergies || '',
+              occasion: metadata.occasion || '',
+              stripe_session_id: session.id,
+              payment_status: 'paid',
+              amount_paid: (session.amount_total || 0) / 100
+          }, supabaseAdmin);
+          console.log(`✅ Booking saved to Database for ${metadata.guestEmail}`);
+      } catch (err) {
+          console.error("Failed to insert booking, might already exist via duplicate webhook:", err);
+      }
+
+      // 2. Atomically increment capacity
+      const { error: rpcError } = await supabaseAdmin.rpc('increment_booked_seats', {
+          target_date_id: metadata.eventDateId,
+          seats_to_add: quantity
+      });
+
+      if (rpcError) {
+          console.error("❌ RPC increment_booked_seats failed:", rpcError);
+      }
+
       // Send Confirmation Email
       await resend.emails.send({
         from: 'Black Bulls Lab <info@blackbullslab.com>',

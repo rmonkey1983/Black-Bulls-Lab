@@ -17,7 +17,9 @@ import {
   Instagram, 
   ChevronDown,
   Target,
-  Heart
+  Heart,
+  Star,
+  Users
 } from "lucide-react";
 
 import FaqSection from "@/components/ui/FaqSection";
@@ -105,11 +107,12 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
             </span>
           </div>
           
-          <h1 className="font-heading font-black text-6xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tighter uppercase max-w-5xl mx-auto italic transform -skew-x-2">
+          <h1 className="sr-only">Dinner Show Torino e Eventi Immersivi | Black Bulls Lab</h1>
+          <div aria-hidden="true" className="font-heading font-black text-6xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tighter uppercase max-w-5xl mx-auto italic transform -skew-x-2">
             <span className="text-white">DINNER SHOW </span>
             <span className="text-yellow-500">A</span><br className="hidden md:block" />
             <span className="text-yellow-500">TORINO.</span>
-          </h1>
+          </div>
           
           <div className="space-y-4 max-w-3xl mx-auto">
              <h2 className="font-heading text-lg md:text-2xl text-zinc-400 uppercase tracking-widest font-light">
@@ -215,23 +218,53 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
 
             <div className="format-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {EXPERIMENTS.map((exp) => (
-                    <PremiumCard key={exp.id} href={exp.href} className="group">
-                        <div className="relative aspect-[4/5] overflow-hidden">
+                    <PremiumCard key={exp.id} href={exp.href} className="group rounded-[24px]">
+                        <div className="relative aspect-[4/5] overflow-hidden bg-zinc-950 rounded-2xl">
+                            {/* Immagine di sfondo */}
                             <Image 
                                 src={exp.image}
                                 alt={exp.name}
                                 fill
-                                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                                className="object-cover transition-all duration-1000 group-hover:scale-110 group-hover:opacity-75 opacity-90 grayscale group-hover:grayscale-0"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
                             
-                            <div className="absolute bottom-0 left-0 w-full p-8 space-y-2">
-                                <span className="font-heading text-[10px] text-yellow-500 tracking-[0.3em] font-bold uppercase">
+                            {/* Overlay Sfumato Assoluto */}
+                            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-zinc-950/40 to-zinc-950 hover:via-zinc-950/60 transition-colors duration-700 pointer-events-none" />
+                            
+                            {/* Badge in alto (fluttuante) */}
+                            <div className="absolute top-6 right-6">
+                                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/10 font-heading text-[10px] text-yellow-500 tracking-[0.2em] font-bold uppercase transition-all duration-300 group-hover:border-yellow-500/50">
+                                    <Star size={12} className="fill-yellow-500/20 text-yellow-500" />
                                     {exp.badge}
                                 </span>
-                                <h3 className="font-heading text-3xl font-bold uppercase text-white tracking-widest leading-none">
-                                    {exp.name}
-                                </h3>
+                            </div>
+
+                            {/* Contenuto in basso */}
+                            <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col justify-end">
+                                
+                                <div className="transform translate-y-4 group-hover:-translate-y-2 transition-transform duration-500 ease-out">
+                                    <h3 className="font-heading text-3xl font-bold uppercase text-white tracking-widest leading-none mb-3 drop-shadow-md">
+                                        {exp.name}
+                                    </h3>
+                                    
+                                    <p className="font-sans text-sm text-zinc-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 line-clamp-2">
+                                        {exp.desc}
+                                    </p>
+                                </div>
+
+                                {/* Divider dinamico */}
+                                <div className="w-full h-px bg-yellow-500/30 my-6 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 delay-200" />
+
+                                {/* Footer Card Action */}
+                                <div className="flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-300">
+                                    <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-zinc-400">
+                                        <Users size={14} className="text-zinc-500" />
+                                        <span>Show Interattivo</span>
+                                    </div>
+                                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-yellow-500">
+                                        Scopri <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </PremiumCard>

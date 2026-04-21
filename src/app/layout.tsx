@@ -37,12 +37,12 @@ const rockSalt = Rock_Salt({
 });
 
 const DEFAULT_DESCRIPTION =
-  "Siamo un'agenzia specializzata nella creazione di format, dinner show e spettacoli immersivi. Passione e professionalità per trasformare ogni evento in un'esperienza indimenticabile.";
+  "Siamo l'agenzia Black Bulls Lab: format immersivi, cena spettacolo e team building aziendale. Eventi indimenticabili dove il vero protagonista sei tu.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Creatori di Emozioni e Dinner Show Esclusivi | Black Bulls Lab",
+    default: "Creatori di Emozioni e Dinner Show Esclusivi | Black Bulls",
     template: "%s | Black Bulls Lab",
   },
   description: DEFAULT_DESCRIPTION,
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     // Keyword geo-locali Torino
     "dinner show Torino", "eventi aziendali Torino", "cena con delitto Torino",
     "organizzazione eventi Torino", "team building Torino", "cena spettacolo Torino",
-    "a cena con il bugiardo Torino", "il palqo Torino", "cena con delitto Torino", "the golden voice Torino", "format cena teatro Torino"
+    "a cena con il bugiardo Torino", "il palqo Torino", "the golden voice Torino", "format cena teatro Torino", "esperienze interattive"
   ],
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
@@ -65,20 +65,20 @@ export const metadata: Metadata = {
     locale: "it_IT",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: "Black Bulls Lab | Creatori di Emozioni e Dinner Show Esclusivi",
+    title: "Creatori di Emozioni e Dinner Show Esclusivi | Black Bulls",
     description: DEFAULT_DESCRIPTION,
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Black Bulls Lab | L'Agenzia che Crea Emozioni",
+        alt: "Black Bulls Lab | Creatori di Emozioni",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Black Bulls Lab | Creatori di Emozioni e Dinner Show Esclusivi",
+    title: "Creatori di Emozioni e Dinner Show Esclusivi | Black Bulls",
     description: DEFAULT_DESCRIPTION,
     images: ["/og-image.jpg"],
   },

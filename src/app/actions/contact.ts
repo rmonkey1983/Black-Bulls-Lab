@@ -1,6 +1,6 @@
 "use server";
 
-import { supabase } from "@/lib/supabase";
+import { supabase, supabaseAdmin } from "@/lib/supabase";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -68,5 +68,36 @@ export async function submitContact(data: FormData) {
     } catch (e: unknown) {
         console.error("submitContact error:", e);
         return { error: "Errore di connessione. Riprova più tardi." };
+    }
+}
+
+export async function getContacts() {
+    try {
+        // Here we MUST use supabaseAdmin to bypass RLS since contacts is restricted.
+        const { data, error } = await supabaseAdmin
+            .from('contacts')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        return { data };
+    } catch (error) {
+        console.error("Failed to fetch contacts:", error);
+        return { error: "Impossibile recuperare i contatti." };
+    }
+}
+
+export async function archiveContact(id: string) {
+    try {
+        const { error } = await supabaseAdmin
+            .from('contacts')
+            .update({ status: 'archiviato' })
+            .eq('id', id);
+
+        if (error) throw error;
+        return { success: true };
+    } catch (error) {
+        console.error("Failed to archive contact:", error);
+        return { error: "Impossibile archiviare la richiesta." };
     }
 }

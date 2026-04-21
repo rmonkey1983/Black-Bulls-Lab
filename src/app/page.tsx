@@ -3,23 +3,23 @@ import React from "react";
 
 export const metadata: Metadata = {
     title: {
-        absolute: "Dinner Show Torino | Black Bulls Lab: Esperienze Immersive",
+        absolute: "Dinner Show Torino e Eventi Immersivi | Black Bulls Lab",
     },
     description:
-        "Dinner Show Torino: vivi serate immersive e format originali con Black Bulls Lab. Cena con Delitto e show interattivi per eventi aziendali e privati. Prenota ora!",
+        "Vivi esperienze interattive uniche a Torino. Scopri i mockumentary, i nostri dinner show e lasciati stupire da una cena spettacolo curata nei minimi dettagli.",
     alternates: { canonical: "/" },
     openGraph: {
-        title: "Dinner Show Torino | Black Bulls Lab: Esperienze Immersive",
+        title: "Dinner Show Torino e Eventi Immersivi | Black Bulls Lab",
         description:
-            "Dinner Show Torino: vivi serate immersive e format originali con Black Bulls Lab. Cena con Delitto e show interattivi per eventi aziendali e privati. Prenota ora!",
+            "Vivi esperienze interattive uniche a Torino. Scopri i mockumentary, i nostri dinner show e lasciati stupire da una cena spettacolo curata nei minimi dettagli.",
         url: "https://blackbullslab.com",
         images: [{ url: "/images/brand/bg-hero-wide.webp", width: 1200, height: 630, alt: "Black Bulls Lab | Dinner Show Torino" }],
     },
     twitter: {
         card: "summary_large_image",
-        title: "Dinner Show Torino | Black Bulls Lab: Esperienze Immersive",
+        title: "Dinner Show Torino e Eventi Immersivi | Black Bulls Lab",
         description:
-            "Dinner Show Torino: vivi serate immersive e format originali con Black Bulls Lab. Cena con Delitto e show interattivi per eventi aziendali e privati. Prenota ora!",
+            "Vivi esperienze interattive uniche a Torino. Scopri i mockumentary, i nostri dinner show e lasciati stupire da una cena spettacolo curata nei minimi dettagli.",
         images: ["/og-image.jpg"],
     },
 };
