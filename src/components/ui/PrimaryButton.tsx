@@ -11,6 +11,7 @@ interface PrimaryButtonProps {
   className?: string;
   size?: "sm" | "md" | "lg";
   type?: "button" | "submit";
+  disabled?: boolean;
 }
 
 export function PrimaryButton({
@@ -20,6 +21,7 @@ export function PrimaryButton({
   className,
   size = "md",
   type = "button",
+  disabled = false,
 }: PrimaryButtonProps) {
   const sizeClasses = {
     sm: "px-5 py-2 text-[10px]",
@@ -32,6 +34,7 @@ export function PrimaryButton({
     "bg-yellow-500 text-black border border-transparent",
     "hover:bg-white hover:text-black hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]",
     "active:scale-95",
+    "disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none",
     sizeClasses[size],
     className
   );
@@ -62,7 +65,7 @@ export function PrimaryButton({
   }
 
   return (
-    <button type={type} onClick={onClick as any} className={classes}>
+    <button type={type} onClick={onClick as any} className={classes} disabled={disabled}>
       {content}
     </button>
   );
