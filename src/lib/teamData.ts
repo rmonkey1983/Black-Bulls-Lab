@@ -21,7 +21,7 @@ export const teamMembers: TeamMember[] = [
         role: "CEO & Founder",
         bio: "L'architetto del Black Bulls Lab. Unisce l'organizzazione logistica alla cura ossessiva per l'esperienza immersiva, creando format scalabili e indimenticabili.",
         fullBio: "Julian è il motore pulsante dietro il successo di Black Bulls Lab. Con un background solido nell'organizzazione di grandi eventi, ha fondato il Lab con l'unico obiettivo di ridefinire lo standard dei dinner show. La sua filosofia si basa sulla precisione micrometrica e sull'ossessione per il dettaglio, elementi che permettono di trasformare ogni semplice serata in un viaggio sensoriale indimenticabile per i gruppi e le aziende più esigenti.",
-        imageUrl: "", // LASCIAMO VUOTO PER ORA
+        imageUrl: "/images/team/julian-halili.png",
         socialUrl: "",
         qualifiche: ["Event Management", "Business Design", "Luxury Hospitality", "Project Leadership"]
     },

@@ -7,14 +7,14 @@ import { FormatFAQ } from "@/components/sections/FormatFAQ";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export const metadata: Metadata = {
-    title: "Il PalQo Torino | Black Bulls Lab - Open Stage & Community",
-    description: "Il format del Black Bulls Lab dove il talento incontra la tecnologia. Esibisciti o vota le performance live a Torino tramite la nostra Web App. Ingresso libero.",
+    title: "Il PalQo | Serate Live e Talenti a Torino",
+    description: "Vivi Il PalQo: tre atti di musica e stand-up. Le migliori serate live Torino con artisti emergenti tra i più originali eventi culturali Torino del momento",
     alternates: { canonical: `${SITE_URL}/format/il-palqo` },
     openGraph: {
-        title: "Il PalQo Torino | Black Bulls Lab",
-        description: "Il format del Black Bulls Lab dove il talento incontra la tecnologia. Esibisciti o vota le performance live a Torino tramite la nostra Web App.",
+        title: "Il Palqo | Dinner Show & Performance | Black Bulls Lab",
+        description: "Un'esperienza gastronomica che incontra la performance dal vivo. Scopri Il Palqo, il format dove il cibo e l'arte si fondono in un dinner show unico a Torino",
         url: `${SITE_URL}/format/il-palqo`,
-        images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Il PalQo Black Bulls Lab" }],
+        images: [{ url: "/images/brand/vibe-live-jazz.webp", width: 1200, height: 630, alt: "Il Palqo | Black Bulls Lab" }],
     },
 };
 

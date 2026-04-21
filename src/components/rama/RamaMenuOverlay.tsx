@@ -148,135 +148,86 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
             <div 
                 ref={contentRef} 
                 className="w-full lg:w-1/2 flex flex-col justify-center p-8 sm:p-12 md:p-24 overflow-y-auto"
-                onClick={onClose}
+                onClick={(e) => e.stopPropagation()}
             >
-                <nav 
-                    ref={linksRef} 
-                    className="flex flex-col gap-3 md:gap-4"
-                    onClick={(e) => e.stopPropagation()}
-                >
-                    
-                    {/* HOME */}
-                    <div className="nav-link">
-                        <Link
-                            href="/"
-                            onClick={onClose}
-                            suppressHydrationWarning
-                            className={`font-heading text-4xl sm:text-5xl md:text-7xl uppercase font-bold transition-colors duration-300 block ${pathname === "/" ? "text-yellow-500" : "text-white hover:text-yellow-500"}`}
-                        >
-                            Home
-                        </Link>
-                    </div>
-
-                    {/* ESPERIMENTI */}
-                    {/* FORMAT */}
-                    <div className="nav-link space-y-4"
-                         onMouseEnter={() => setExperimentsOpen(true)}
-                         onMouseLeave={() => setExperimentsOpen(false)}
+                <nav ref={linksRef} className="flex flex-col gap-6 md:gap-8">
+                    <Link
+                        href="/"
+                        onClick={onClose}
+                        className={`nav-link font-heading text-4xl sm:text-5xl md:text-7xl uppercase font-bold transition-colors duration-300 block ${pathname === "/" ? "text-rama-accent" : "text-white hover:text-rama-accent"}`}
                     >
+                        Home
+                    </Link>
+
+                    {/* Format with Sub-menu */}
+                    <div className="nav-link flex flex-col">
                         <button
-                            type="button"
                             onClick={() => setExperimentsOpen(!experimentsOpen)}
-                            className="w-full flex justify-between items-center text-left"
-                            aria-expanded={experimentsOpen}
-                            aria-controls="format-submenu"
+                            className="flex items-center gap-4 text-left group focus:outline-none"
                         >
-                            <span className="font-heading font-bold text-4xl sm:text-5xl md:text-7xl uppercase tracking-tighter text-white hover:text-yellow-500 transition-colors">
-                                I Format
+                            <span className="font-heading font-bold text-4xl sm:text-5xl md:text-7xl uppercase tracking-tighter text-white hover:text-rama-accent transition-colors">
+                                Le Nostre Serate
                             </span>
-                            <ChevronRight className={`transition-transform duration-500 text-yellow-500 ${experimentsOpen ? 'rotate-90' : ''}`} size={32} />
+                            <ChevronRight className={`transition-transform duration-500 text-rama-accent ${experimentsOpen ? 'rotate-90' : ''}`} size={32} />
                         </button>
                         
-                        <div id="format-submenu" ref={dropdownRef} className="overflow-hidden h-0 opacity-0">
-                            <div className="flex flex-col gap-1 mt-3 pl-4 border-l-2 border-yellow-500/40">
+                        <div 
+                            ref={dropdownRef}
+                            className="overflow-hidden"
+                            style={{ height: 0, opacity: 0 }}
+                        >
+                            <div className="py-6 flex flex-col gap-4 pl-4 border-l border-rama-accent/20">
                                 {experiments.map((exp) => (
-                                    <div key={exp.href} className="sub-link">
-                                        <Link
-                                            href={exp.href}
-                                            onClick={onClose}
-                                            suppressHydrationWarning
-                                            className="flex flex-col py-2.5 group/sub"
-                                        >
-                                            <span className="font-heading text-xl sm:text-2xl font-bold uppercase text-white/80 group-hover/sub:text-yellow-500 transition-colors tracking-wide">
-                                                {exp.name}
-                                            </span>
-                                            <span className="font-sans text-xs text-white/30 uppercase tracking-widest">
-                                                {exp.desc}
-                                            </span>
-                                        </Link>
-                                    </div>
+                                    <Link
+                                        key={exp.href}
+                                        href={exp.href}
+                                        onClick={onClose}
+                                        className="sub-link group flex flex-col"
+                                    >
+                                        <span className="font-heading text-2xl uppercase font-bold text-white/70 group-hover:text-rama-accent transition-colors">
+                                            {exp.name}
+                                        </span>
+                                        <span className="font-sans text-xs text-rama-muted uppercase tracking-widest">
+                                            {exp.desc}
+                                        </span>
+                                    </Link>
                                 ))}
                             </div>
                         </div>
                     </div>
 
-                    {/* VOCI PRIMARIE — stesso ordine del desktop nav */}
                     {[
+                        { name: "Artisti", href: "/talents" },
+                        { name: "Corporate", href: "/eventi-aziendali" },
+                        { name: "Gallery", href: "/gallery" },
                         { name: "Chi Siamo", href: "/chi-siamo" },
                         { name: "Blog", href: "/blog" },
                         { name: "Contatti", href: "/contact" },
                     ].map((link) => (
-                        <div key={link.name} className="nav-link">
-                            <Link
-                                href={link.href}
-                                onClick={onClose}
-                                suppressHydrationWarning
-                                className={`font-heading text-4xl sm:text-5xl md:text-7xl uppercase font-bold transition-colors duration-300 block ${pathname === link.href ? "text-yellow-500" : "text-white hover:text-yellow-500"}`}
-                            >
-                                {link.name}
-                            </Link>
-                        </div>
-                    ))}
-
-                    {/* VOCI SECONDARIE — pagine extra rispetto al desktop */}
-                    <div className="nav-link border-t border-white/5 pt-4 mt-2">
-                        <div className="flex flex-col gap-3">
-                            {[
-                                { name: "Artisti", href: "/talents" },
-                                { name: "Corporate", href: "/eventi-aziendali" },
-                                { name: "Galleria", href: "/gallery" },
-                            ].map((link) => (
-                                <Link
-                                    key={link.href}
-                                    href={link.href}
-                                    onClick={onClose}
-                                    suppressHydrationWarning
-                                    className={`font-heading text-2xl sm:text-3xl uppercase font-bold transition-colors duration-300 block ${pathname === link.href ? "text-yellow-500" : "text-zinc-500 hover:text-white"}`}
-                                >
-                                    {link.name}
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* MOBILE CTA */}
-                    <div className="nav-link mt-8 md:hidden">
-                        <PrimaryButton
-                            href="/contact"
+                        <Link
+                            key={link.href}
+                            href={link.href}
                             onClick={onClose}
-                            size="lg"
-                            className="w-full text-xl py-6"
+                            className={`nav-link font-heading text-4xl sm:text-5xl md:text-7xl uppercase font-bold transition-colors duration-300 block ${pathname === link.href ? "text-rama-accent" : "text-white hover:text-rama-accent"}`}
                         >
-                            Richiedi Info
-                        </PrimaryButton>
-                    </div>
+                            {link.name}
+                        </Link>
+                    ))}
                 </nav>
 
-                <div 
-                    className="mt-12 sm:mt-16 pt-8 border-t border-white/10 grid grid-cols-2 gap-8 font-sans text-sm text-rama-muted"
-                    onClick={(e) => e.stopPropagation()}
-                >
+                {/* Footer Info */}
+                <div className="mt-12 pt-8 border-t border-white/10 grid grid-cols-2 gap-8 font-sans text-sm text-rama-muted">
                     <div>
-                        <h4 className="font-rock-salt text-yellow-500 mb-4 transform -rotate-2">Seguici</h4>
+                        <h4 className="text-rama-accent mb-4 uppercase tracking-[0.2em] text-[10px] font-bold">Social</h4>
                         <div className="flex flex-col gap-2">
-                            <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" suppressHydrationWarning className="hover:text-white transition-colors" aria-label="Seguici su Instagram">Instagram</a>
-                            <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" suppressHydrationWarning className="hover:text-white transition-colors" aria-label="Seguici su Facebook">Facebook</a>
-                            <a href={SOCIAL_LINKS.tiktok} target="_blank" rel="noopener noreferrer" suppressHydrationWarning className="hover:text-white transition-colors" aria-label="Seguici su TikTok">TikTok</a>
+                            <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
+                            <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Facebook</a>
+                            <a href={SOCIAL_LINKS.tiktok} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">TikTok</a>
                         </div>
                     </div>
                     <div>
-                        <h4 className="font-rock-salt text-yellow-500 mb-4 transform -rotate-2">Contattaci</h4>
-                        <a href={`mailto:${CONTACT_EMAIL}`} suppressHydrationWarning className="text-white hover:text-yellow-500 transition-colors text-lg tracking-wider">
+                        <h4 className="text-rama-accent mb-4 uppercase tracking-[0.2em] text-[10px] font-bold">Contattaci</h4>
+                        <a href={`mailto:${CONTACT_EMAIL}`} className="text-white hover:text-rama-accent transition-colors text-lg">
                             {CONTACT_EMAIL}
                         </a>
                     </div>

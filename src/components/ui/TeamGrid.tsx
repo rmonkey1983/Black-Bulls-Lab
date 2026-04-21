@@ -17,11 +17,11 @@ export function TeamGrid() {
   useGSAP(() => {
     animateCards("#team-grid-container", 0.2);
 
-    // Julian's logo pulse animation
-    const julianPulse = gsap.to(".julian-placeholder-logo", {
-      scale: 1.05,
-      opacity: 0.8,
-      duration: 2,
+    // Julian's silhouette pulse animation
+    const julianPulse = gsap.to(".julian-silhouette", {
+      scale: 1.02,
+      opacity: 0.9,
+      duration: 3,
       repeat: -1,
       yoyo: true,
       ease: "sine.inOut"
@@ -38,8 +38,8 @@ export function TeamGrid() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
         {teamMembers.map((member) => {
-          // Check for Julian's specific placeholder logic
-          const isJulianPlaceholder = member.id === 'julian' && member.imageUrl === '';
+          // Check for Julian's specific profile
+          const isJulian = member.id === 'julian';
           
           // Get initials for standard placeholder
           const initials = member.name
@@ -56,7 +56,18 @@ export function TeamGrid() {
             >
               {/* Image Container */}
               <div className="relative aspect-[4/5] overflow-hidden rounded-xl border border-white/10 bg-zinc-900 transition-all duration-500">
-                {member.imageUrl ? (
+                {isJulian ? (
+                  /* Julian Silhouette */
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-zinc-950 overflow-hidden group-hover:bg-zinc-900 transition-colors duration-500">
+                    <Image 
+                        src={member.imageUrl} 
+                        alt={member.name} 
+                        fill
+                        className="julian_silhouette julian-silhouette object-cover opacity-70 transition-all duration-500 group-hover:scale-105 group-hover:opacity-100" 
+                    />
+                    <div className="absolute inset-x-0 bottom-0 h-[30%] bg-gradient-to-t from-black via-black/40 to-transparent" />
+                  </div>
+                ) : member.imageUrl ? (
                   <Image
                     src={member.imageUrl}
                     alt={member.name}
@@ -66,18 +77,6 @@ export function TeamGrid() {
                       group-hover:grayscale-0 group-hover:scale-105 group-hover:contrast-100`}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
-                ) : isJulianPlaceholder ? (
-                  /* Julian Specific Placeholder with Logo */
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-12 bg-zinc-950 overflow-hidden group-hover:bg-zinc-900 transition-colors duration-500">
-                    <Image 
-                        src="/brand/logo-white.svg" 
-                        alt="Black Bulls Logo" 
-                        width={120} 
-                        height={120} 
-                        className="opacity-50 mx-auto transition-all duration-500 group-hover:scale-110 group-hover:opacity-80" 
-                    />
-                    <div className="absolute inset-x-0 bottom-0 h-[20%] bg-gradient-to-t from-yellow-500/5 to-transparent" />
-                  </div>
                 ) : (
                   /* Generic Initial Placeholder */
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-zinc-900 overflow-hidden group-hover:bg-zinc-800 transition-colors duration-500">

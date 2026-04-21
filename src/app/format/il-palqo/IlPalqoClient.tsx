@@ -75,7 +75,7 @@ export function IlPalqoClient() {
             />
 
             <EventConcept
-                description={`Il PalQo non è solo un evento, è un movimento potenziato dalla tecnologia. È lo spazio dove artisti emergenti, performer e creativi possono esprimere la loro arte ricevendo feedback immediato dal pubblico tramite la nostra Web App dedicata.\n\nNato dall'esigenza di dare voce a chi ha qualcosa da dire, Il PalQo trasforma il Black Bulls Lab in un'arena interattiva. Dalla musica alla danza, dal teatro alla stand-up comedy, ogni forma d'arte trova qui un palco dove il pubblico è il giudice supremo attraverso il proprio smartphone.`}
+                description={`Il PalQo è dove le serate live Torino tornano a essere scoperte reali. Una volta al mese, apriamo le porte ad artisti emergenti Torino che hanno scommesso tutto su un’unica esibizione.\n\nCosa succede? Arrivi, ti godi lo show e decidi chi merita di andare avanti votando in tempo reale. È il cuore pulsante dei nostri eventi culturali Torino: uno spazio senza filtri, dove il talento incontra finalmente il suo pubblico.`}
             />
 
             <section className="py-24 bg-transparent/40 relative overflow-hidden">

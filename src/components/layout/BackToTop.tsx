@@ -52,7 +52,7 @@ export function BackToTop() {
         <button
             ref={buttonRef}
             onClick={scrollToTop}
-            className="fixed bottom-24 right-5 md:bottom-8 md:right-8 z-50 hidden flex-col items-center gap-2 group transition-transform active:scale-95 sm:hover:scale-110"
+            className="fixed bottom-44 right-5 md:bottom-8 md:right-8 z-50 hidden flex-col items-center gap-2 group transition-transform active:scale-95 sm:hover:scale-110"
             aria-label="Torna in cima"
         >
             <span className="font-sans text-[11px] uppercase tracking-widest text-rama-accent/70 group-hover:text-rama-accent transition-colors">

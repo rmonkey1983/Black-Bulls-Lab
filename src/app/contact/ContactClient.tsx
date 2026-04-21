@@ -18,10 +18,10 @@ export function ContactClient() {
         <div className="min-h-screen pb-24">
             <ImmersiveHeader
                 id="contact-hero"
-                title="CONTATTACI"
-                highlight=""
-                subtitle=""
-                mediaUrl=""
+                title="IL LABORATORIO"
+                highlight="TI ASPETTA."
+                subtitle="Il tuo esperimento inizia qui. Raccontaci la tua visione e lasciati guidare dall'eccellenza."
+                mediaUrl="/images/brand/bg-venue-crowd.webp"
             />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:-mt-24 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-start">

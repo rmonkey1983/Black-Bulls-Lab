@@ -112,5 +112,5 @@ export const EXPERIMENTS = [
 /**
  * ASSETS
  */
-export const LOGO_PATH = "/brand/logo-white.svg";
+export const LOGO_PATH = "/brand/logo-full.jpg";
 export const FALLBACK_IMAGE = "/lab_menu.webp";

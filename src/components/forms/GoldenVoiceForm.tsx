@@ -45,8 +45,8 @@ export function GoldenVoiceForm() {
 
             <div className="text-center mb-10 relative z-10">
                 <Mic2 className="mx-auto text-gold mb-4" size={40} />
-                <h3 className="text-3xl lg:text-4xl font-bold text-white mb-2 uppercase tracking-wide">Voglio esibirmi con te</h3>
-                <p className="text-zinc-300">Compila il form per partecipare alle audizioni di THE GOLDEN VOICE.</p>
+                <h3 className="text-3xl lg:text-4xl font-bold text-white mb-2 uppercase tracking-wide">Sali sul palco del Lab</h3>
+                <p className="text-zinc-300">Il tuo posto sul palco ti aspetta. Candidati ora: selezioniamo solo le voci più autentiche per l&apos;evento dell&apos;anno.</p>
             </div>
 
             <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
@@ -109,7 +109,7 @@ export function GoldenVoiceForm() {
                 </div>
 
                 <div>
-                    <label htmlFor="signature_song" className="block text-xs font-sans uppercase tracking-widest text-zinc-400 mb-2">Brano Cavallo di Battaglia *</label>
+                    <label htmlFor="signature_song" className="block text-xs font-sans uppercase tracking-widest text-zinc-400 mb-2">Brano di presentazione *</label>
                     <input
                         type="text"
                         id="signature_song"
@@ -122,7 +122,7 @@ export function GoldenVoiceForm() {
                 </div>
 
                 <div>
-                    <label htmlFor="media_link" className="block text-xs font-sans uppercase tracking-widest text-zinc-400 mb-2">Link a un&apos;esibizione (YouTube, Drive, Instagram) - Consigliato</label>
+                    <label htmlFor="media_link" className="block text-xs font-sans uppercase tracking-widest text-zinc-400 mb-2">Link esibizione (YouTube, Drive, Social)</label>
                     <input
                         type="url"
                         id="media_link"

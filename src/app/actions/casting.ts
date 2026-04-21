@@ -47,6 +47,30 @@ export async function submitCasting(formData: FormData) {
             };
         }
 
+        // Send Notification Email to Admin
+        try {
+            const { Resend } = await import("resend");
+            const resend = new Resend(process.env.RESEND_API_KEY);
+            await resend.emails.send({
+                from: "Black Bulls Lab <info@blackbullslab.com>",
+                to: ["info@blackbullslab.com"],
+                subject: `Nuova Candidatura Casting: ${name}`,
+                html: `
+                    <h2>Nuova candidatura per The Golden Voice</h2>
+                    <p><strong>Nome:</strong> ${name}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Telefono:</strong> ${phone}</p>
+                    <p><strong>Età:</strong> ${age}</p>
+                    <p><strong>Brano:</strong> ${signature_song}</p>
+                    <p><strong>Media Link:</strong> ${media_link || "Nessuno"}</p>
+                    <hr />
+                    <p><em>Gestisci la candidatura dalla dashboard Supabase.</em></p>
+                `,
+            });
+        } catch (emailErr) {
+            console.error("Non-critical error: failed to send casting notification email", emailErr);
+        }
+
         return { success: true, message: "CANDIDATURA INVIATA CON SUCCESSO!" };
     } catch (err) {
         console.error("Unexpected error submitting casting:", err);

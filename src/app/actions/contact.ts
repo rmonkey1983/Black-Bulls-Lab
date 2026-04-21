@@ -49,7 +49,7 @@ export async function submitContact(data: FormData) {
         
         // 5. Send Notification Email via Resend
         await resend.emails.send({
-            from: "Black Bulls Lab <onboarding@resend.dev>",
+            from: "Black Bulls Lab <info@blackbullslab.com>",
             to: ["info@blackbullslab.com"],
             subject: `Nuovo contatto: ${name} - ${subject || "Nessun Oggetto"}`,
             html: `

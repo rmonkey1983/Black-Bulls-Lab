@@ -8,9 +8,9 @@ export function TalentsClient() {
     return (
         <div className="min-h-screen pb-24">
             <ImmersiveHeader
-                title="I NOSTRI"
-                highlight="Artisti"
-                subtitle="Le menti creative e i talenti che danno vita ad ogni esperienza del Black Bulls Lab."
+                title="IL NOSTRO CAST È IN"
+                highlight="Evoluzione"
+                subtitle="Stiamo selezionando i migliori artisti Torino e performer eventi Torino per i nostri nuovi format."
                 mediaUrl="/images/brand/service-performance.webp"
             />
             <div className="max-w-7xl mx-auto px-6 space-y-20">
@@ -18,14 +18,14 @@ export function TalentsClient() {
                     <div className="flex-1 space-y-8">
                         <div className="space-y-4">
                             <span className="flex items-center gap-2 text-rama-accent text-xs font-bold tracking-[0.2em] uppercase">
-                                <Users size={14} /> Join the Lab
+                                <Zap size={14} /> Join the Lab
                             </span>
                             <h2 className="text-4xl md:text-6xl font-bold text-white font-heading uppercase tracking-tighter leading-none">
-                                Sei un artista, <br />
-                                <span className="text-rama-accent">performer o chef?</span>
+                                Vuoi essere <br />
+                                <span className="text-rama-accent">il prossimo?</span>
                             </h2>
                             <p className="text-zinc-300 text-xl leading-relaxed max-w-xl">
-                                Black Bulls Lab cerca talenti per le sue serate a Torino. Cantanti, attori, bartender, chef — se hai qualcosa di unico da mostrare, vogliamo conoscerti.
+                                Cerchiamo chi non ha paura di rompere gli schemi. Sei pronto a salire sul palco? Inviaci la tua candidatura.
                             </p>
                         </div>
                         
@@ -33,7 +33,7 @@ export function TalentsClient() {
                             href="/contact?motivo=candidatura-artista"
                             className="group inline-flex items-center gap-3 bg-rama-accent text-black font-heading font-bold uppercase tracking-widest text-base px-10 py-5 rounded-full hover:bg-white transition-colors duration-300"
                         >
-                            Voglio esibirmi con voi
+                            Invia la tua candidatura
                             <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </div>

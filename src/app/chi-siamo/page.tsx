@@ -3,14 +3,14 @@ import { AboutClient } from "./AboutClient";
 import { SITE_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-    title: "Chi Siamo | Black Bulls Lab - Team di Produzione Eventi",
-    description: "Siamo i Black Bulls Lab. Scopri il team dietro i dinner show più esclusivi di Torino. Dagli architetti dell'intrattenimento all'eccellenza culinaria.",
+    title: "Chi Siamo | I Registi dell'Intrattenimento",
+    description: "Incontra Julian Halili, Manuel Epifani e il team di Black Bulls Lab. Progettiamo dinner show e eventi immersivi a Torino con un approccio creativo unico",
     alternates: { canonical: `${SITE_URL}/chi-siamo` },
     openGraph: {
-        title: "Chi Siamo | Black Bulls Lab - Team di Produzione Eventi",
-        description: "Siamo i Black Bulls Lab. Scopri il team dietro i dinner show più esclusivi di Torino. Dagli architetti dell'intrattenimento all'eccellenza culinaria.",
+        title: "Chi Siamo | I Registi dell'Intrattenimento | Black Bulls Lab",
+        description: "Incontra Julian Halili, Manuel Epifani e il team di Black Bulls Lab. Progettiamo dinner show e eventi immersivi a Torino con un approccio creativo unico",
         url: `${SITE_URL}/chi-siamo`,
-        images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Chi Siamo - Black Bulls Lab" }],
+        images: [{ url: "/images/brand/bg-stage-lights.webp", width: 1200, height: 630, alt: "Chi Siamo | Black Bulls Lab" }],
     },
 };
 

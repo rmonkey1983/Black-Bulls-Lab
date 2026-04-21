@@ -79,21 +79,22 @@ export function RamaHeader() {
                                 ref={logoRef}
                                 className="h-8 md:h-10 w-[90px] md:w-[110px] relative transition-all duration-300 group-hover/logo:brightness-125 group-hover/logo:drop-shadow-[0_0_8px_rgba(234,179,8,0.4)]"
                             >
-                                <Image
-                                    src={LOGO_PATH}
-                                    alt="Black Bulls Lab"
-                                    fill
-                                    className="object-contain"
-                                    sizes="(max-width: 640px) 90px, 110px"
-                                    priority
-                                />
+                                    <Image
+                                        src={LOGO_PATH}
+                                        alt="Black Bulls Lab"
+                                        fill
+                                        className="object-contain"
+                                        sizes="(max-width: 640px) 90px, 110px"
+                                        priority
+                                        fetchPriority="high"
+                                    />
                             </div>
                         </Link>
                     </div>
 
                     {/* 2. NAVIGATION (Center) */}
-                    <nav className="hidden lg:flex items-center gap-10 relative z-50">
-                        <Link href="/" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname === "/" ? "text-yellow-500" : "text-zinc-300 hover:text-yellow-500"}`}>
+                    <nav className="hidden xl:flex items-center gap-6 relative z-50">
+                        <Link href="/" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname === "/" ? "text-rama-accent" : "text-zinc-300 hover:text-rama-accent"}`}>
                             Home
                         </Link>
                         
@@ -102,7 +103,7 @@ export function RamaHeader() {
                             onMouseEnter={() => setExperimentsOpen(true)}
                             onMouseLeave={() => setExperimentsOpen(false)}
                         >
-                            <Link href="/format" suppressHydrationWarning className={`flex items-center gap-2 font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname.startsWith("/format") ? "text-yellow-500" : "text-zinc-300 hover:text-yellow-500"}`}>
+                            <Link href="/format" suppressHydrationWarning className={`flex items-center gap-2 font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname.startsWith("/format") ? "text-rama-accent" : "text-zinc-300 hover:text-rama-accent"}`}>
                                 Le Nostre Serate <ChevronDown size={10} className={`transition-transform duration-300 ${experimentsOpen ? 'rotate-180' : ''}`} />
                             </Link>
                             
@@ -115,7 +116,7 @@ export function RamaHeader() {
                                         key={exp.name} 
                                         href={exp.href}
                                         suppressHydrationWarning
-                                        className="px-6 py-4 font-heading text-[10px] uppercase tracking-[0.2em] text-zinc-300 hover:text-yellow-500 hover:bg-white/5 transition-all border-b border-white/5 last:border-0 font-bold"
+                                        className="px-6 py-4 font-heading text-[10px] uppercase tracking-[0.2em] text-zinc-300 hover:text-rama-accent hover:bg-white/5 transition-all border-b border-white/5 last:border-0 font-bold"
                                     >
                                         {exp.name}
                                     </Link>
@@ -123,13 +124,22 @@ export function RamaHeader() {
                             </div>
                         </div>
 
-                        <Link href="/chi-siamo" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname === "/chi-siamo" ? "text-yellow-500" : "text-zinc-300 hover:text-yellow-500"}`}>
+                        <Link href="/talents" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname.startsWith("/talents") ? "text-rama-accent" : "text-zinc-300 hover:text-rama-accent"}`}>
+                            Artisti
+                        </Link>
+                        <Link href="/eventi-aziendali" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname === "/eventi-aziendali" ? "text-rama-accent" : "text-zinc-300 hover:text-rama-accent"}`}>
+                            Corporate
+                        </Link>
+                        <Link href="/gallery" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname === "/gallery" ? "text-rama-accent" : "text-zinc-300 hover:text-rama-accent"}`}>
+                            Gallery
+                        </Link>
+                        <Link href="/chi-siamo" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname === "/chi-siamo" ? "text-rama-accent" : "text-zinc-300 hover:text-rama-accent"}`}>
                             Chi Siamo
                         </Link>
-                        <Link href="/blog" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname.startsWith("/blog") ? "text-yellow-500" : "text-zinc-300 hover:text-yellow-500"}`}>
+                        <Link href="/blog" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname.startsWith("/blog") ? "text-rama-accent" : "text-zinc-300 hover:text-rama-accent"}`}>
                             Blog
                         </Link>
-                        <Link href="/contact" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname === "/contact" ? "text-yellow-500" : "text-zinc-300 hover:text-yellow-500"}`}>
+                        <Link href="/contact" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname === "/contact" ? "text-rama-accent" : "text-zinc-300 hover:text-rama-accent"}`}>
                             Contatti
                         </Link>
                     </nav>
@@ -138,18 +148,18 @@ export function RamaHeader() {
                     <div className="flex-1 flex justify-end items-center gap-6">
                         <div className="hidden lg:block">
                             <PrimaryButton href="/contact" size="sm">
-                                RICHIEDI INFO
+                                PRENOTA ORA
                             </PrimaryButton>
                         </div>
 
-                        {/* Hamburger Icon */}
+                        {/* Hamburger Icon (Visible on lg and below) */}
                         <button
                             onClick={() => setIsMenuOpen(true)}
-                            className="flex lg:hidden flex-col gap-1.5 p-2 group"
+                            className="flex xl:hidden flex-col gap-1.5 p-2 group"
                             aria-label="Apri menu di navigazione"
                         >
-                            <div className="w-8 h-[2px] bg-yellow-500 group-hover:scale-x-110 transition-transform origin-right" />
-                            <div className="w-6 h-[2px] bg-yellow-500 group-hover:scale-x-125 transition-transform origin-right" />
+                            <div className="w-8 h-[2px] bg-rama-accent group-hover:scale-x-110 transition-transform origin-right" />
+                            <div className="w-6 h-[2px] bg-rama-accent group-hover:scale-x-125 transition-transform origin-right" />
                         </button>
                     </div>
                 </div>

@@ -2,23 +2,16 @@
 
 import { ImmersiveHeader } from "@/components/layout/ImmersiveHeader";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { PrimaryButton } from "@/components/ui/PrimaryButton";
-import { SecondaryButton } from "@/components/ui/SecondaryButton";
 import { PremiumCard } from "@/components/ui/PremiumCard";
-import { Sparkles, Target, Heart, ArrowRight } from "lucide-react";
+import { Sparkles, Target, Heart, ArrowRight, Zap, Cpu } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useGSAP } from "@/hooks/useGSAP";
-import { animateQuote, animateSteps, animateFade } from "@/lib/gsapAnimations";
-import { TeamGrid } from "@/components/ui/TeamGrid";
+import { animateQuote } from "@/lib/gsapAnimations";
 import { gsap } from "gsap";
 import { PreFooterCTA } from "@/components/layout/PreFooterCTA";
 
-const timeline = [
-    { year: "2024", title: "L'Ideazione", desc: "Nasce l'idea di Black Bulls Lab. Volevamo garantire al nostro pubblico torinese serate uniche dove l'alta cucina incontra lo spettacolo dal vivo, offrendoti un'esperienza mai vista prima." },
-    { year: "2025", title: "Il Primo Format", desc: "Dal concept alla realtà. I nostri primi dinner show immersivi diventano il nuovo punto di riferimento per chi cerca emozioni vibranti e intrattenimento di livello." },
-    { year: "Oggi", title: "Oltre l'Evento", desc: "Progettiamo produzioni originali e soluzioni su misura sempre più ambiziose. Il nostro focus rimane uno solo: farti vivere ricordi indimenticabili." },
-];
 
-import { usePathname } from "next/navigation";
 
 export function AboutClient() {
     const pathname = usePathname();
@@ -164,41 +157,70 @@ export function AboutClient() {
                             align="center"
                         />
                     </div>
-                    <TeamGrid />
-                </div>
-            </section>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
+                        {[
+                            { 
+                                title: "DESIGN", 
+                                desc: "Progettiamo ogni interazione per essere unica e irripetibile.",
+                                icon: <Zap size={32} />
+                            },
+                            { 
+                                title: "TECHNOLOGY", 
+                                desc: "Utilizziamo web app proprietarie per guidare lo show senza intoppi.",
+                                icon: <Cpu size={32} />
+                            },
+                            { 
+                                title: "EMOTION", 
+                                desc: "Mettiamo l'uomo al centro, creando legami reali in un mondo digitale.",
+                                icon: <Heart size={32} />
+                            }
+                        ].map((item, idx) => (
+                            <div key={idx} className="group p-10 rounded-3xl border border-white/5 bg-white/[0.02] hover:bg-rama-accent/[0.03] hover:border-rama-accent/30 transition-all duration-500">
+                                <div className="w-16 h-16 rounded-xl border border-rama-accent/20 flex items-center justify-center text-rama-accent mb-8 group-hover:border-rama-accent transition-colors">
+                                    {item.icon}
+                                </div>
+                                <h3 className="font-heading text-2xl font-bold text-white uppercase mb-4 tracking-wide group-hover:text-rama-accent transition-colors">
+                                    {item.title}
+                                </h3>
+                                <p className="font-sans text-rama-muted leading-relaxed">
+                                    {item.desc}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                    </div>
+                </section>
 
-            {/* 5. CALL TO ACTION (Chiusura) */}
-            <section className="reveal-section px-6 pb-24">
-                <div className="max-w-7xl mx-auto">
-                    <div className="relative bg-zinc-950 border-t-2 border-yellow-500 rounded-3xl overflow-hidden p-12 md:p-20 text-center shadow-[0_-20px_50px_rgba(234,179,8,0.05)]">
-                        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-yellow-500/[0.03] to-transparent pointer-events-none" />
+                {/* 3. Call to Action */}
+                <section className="py-24">
+                    <div className="relative bg-zinc-950 border-t-2 border-rama-accent rounded-3xl overflow-hidden p-12 md:p-20 text-center shadow-[0_-20px_50px_rgba(229,182,12,0.05)]">
+                        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-rama-accent/[0.03] to-transparent pointer-events-none" />
                         
-                        <div className="relative z-10 max-w-3xl mx-auto space-y-10">
-                            <SectionHeading 
-                                title="PRONTO A TRASFORMARE IL TUO PROSSIMO"
-                                highlight="EVENTO?"
-                                align="center"
-                                level="h2"
-                            />
-                            <p className="font-sans text-lg text-zinc-300 max-w-xl mx-auto leading-relaxed">
-                                Entra nel laboratorio. Raccontaci la tua idea e lasciati guidare dalla visione di Black Bulls Lab per creare qualcosa di irripetibile.
+                        <div className="relative z-10 space-y-8">
+                            <h2 className="font-heading font-bold text-4xl md:text-7xl uppercase tracking-tighter text-white">
+                                VUOI COLLABORARE <br />
+                                <span className="text-rama-accent">AL PROSSIMO ESPERIMENTO?</span>
+                            </h2>
+                            <p className="font-sans text-rama-muted text-lg md:text-xl max-w-2xl mx-auto">
+                                Siamo sempre alla ricerca di nuovi talenti, partner e location per elevare il livello dei nostri format.
                             </p>
-                            <div className="pt-6">
-                                <PrimaryButton href="/contact" size="lg">
-                                    CONTATTACI ORA
-                                </PrimaryButton>
+                            <div className="flex justify-center pt-4">
+                                <Link 
+                                    href="/contact"
+                                    className="bg-rama-accent text-black font-heading font-bold uppercase tracking-[0.2em] text-xs px-12 py-5 rounded-full hover:bg-white transition-all transform hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(229,182,12,0.2)]"
+                                >
+                                    Contattaci ora
+                                </Link>
                             </div>
                         </div>
 
-                        {/* Decorative Background Elements */}
-                        <div className="absolute -bottom-1/2 -right-1/4 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px] pointer-events-none" />
-                        <div className="absolute -top-1/2 -left-1/4 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px] pointer-events-none" />
+                        {/* Decorazioni */}
+                        <div className="absolute -bottom-1/2 -right-1/4 w-[500px] h-[500px] bg-rama-accent/5 rounded-full blur-[100px] pointer-events-none" />
+                        <div className="absolute -top-1/2 -left-1/4 w-[500px] h-[500px] bg-rama-accent/5 rounded-full blur-[100px] pointer-events-none" />
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <PreFooterCTA />
-        </div>
-    );
-}
+                <PreFooterCTA />
+            </div>
+        );
+    }

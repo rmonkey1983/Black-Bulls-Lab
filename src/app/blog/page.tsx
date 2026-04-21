@@ -6,12 +6,12 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PreFooterCTA } from "@/components/layout/PreFooterCTA";
 
 export const metadata: Metadata = {
-  title: "Blog | Black Bulls Lab — Dinner Show, Torino, Ispirazione",
+  title: "Blog | Idee e Storie dal Laboratorio",
   description:
-    "Idee per serate originali a Torino, dietro le quinte dei nostri format e storie del team. Il blog di Black Bulls Lab.",
+    "Idee per serate originali a Torino, dietro le quinte dei nostri format e storie del team. Entra nel laboratorio delle emozioni di Black Bulls Lab",
   openGraph: {
-    title: "Blog | Black Bulls Lab",
-    description: "Idee, storie e ispirazione dal laboratorio delle emozioni.",
+    title: "Blog | Idee e Storie dal Laboratorio | Black Bulls Lab",
+    description: "Idee, storie e ispirazione dal laboratorio delle emozioni di Black Bulls Lab a Torino",
     url: "https://blackbullslab.com/blog",
   },
 };

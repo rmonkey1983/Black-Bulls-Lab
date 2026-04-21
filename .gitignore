@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# junk files
+*.txt
+audit.json
+eslint_report*.json
+convert_to_webp.js

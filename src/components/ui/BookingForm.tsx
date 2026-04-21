@@ -48,13 +48,13 @@ export function BookingForm() {
     return (
       <div 
         ref={formRef}
-        className="max-w-4xl mx-auto p-12 md:p-20 bg-zinc-950 border border-yellow-500/30 rounded-3xl text-center space-y-6 shadow-[0_0_50px_rgba(234,179,8,0.05)]"
+        className="max-w-4xl mx-auto p-12 md:p-20 bg-zinc-950 border border-rama-accent/30 rounded-3xl text-center space-y-6 shadow-[0_0_50px_rgba(229,182,12,0.05)]"
       >
-        <div className="w-20 h-20 bg-yellow-500/10 border border-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-8">
-          <CheckCircle size={40} className="text-yellow-500" />
+        <div className="w-20 h-20 bg-rama-accent/10 border border-rama-accent/20 rounded-full flex items-center justify-center mx-auto mb-8">
+          <CheckCircle size={40} className="text-rama-accent" />
         </div>
         <h3 className="font-heading text-3xl md:text-5xl font-bold text-white uppercase tracking-tighter">
-          Richiesta <span className="text-yellow-500">Inviata!</span>
+          Richiesta <span className="text-rama-accent">Inviata!</span>
         </h3>
         <p className="font-sans text-zinc-400 text-lg md:text-xl max-w-md mx-auto leading-relaxed">
           Il tuo esperimento sta iniziando. Julian ti contatterà nelle prossime 24 ore per definire ogni dettaglio.
@@ -68,7 +68,7 @@ export function BookingForm() {
     );
   }
 
-  const inputClasses = "w-full bg-zinc-900/40 border border-zinc-800 rounded-xl px-5 py-4 text-white font-sans focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500/20 outline-none transition-all duration-300 placeholder:text-zinc-400";
+  const inputClasses = "w-full bg-zinc-900/40 border border-zinc-800 rounded-xl px-5 py-4 text-white font-sans focus:border-rama-accent focus:ring-1 focus:ring-rama-accent/20 outline-none transition-all duration-300 placeholder:text-zinc-400";
   const labelClasses = "block font-heading text-[10px] uppercase tracking-[0.2em] text-zinc-400 font-bold mb-2 ml-1";
 
   return (
@@ -81,7 +81,7 @@ export function BookingForm() {
           {/* Nome e Cognome */}
           <div className="space-y-2">
             <label className={labelClasses} htmlFor="name">
-              <User size={12} className="inline mr-2 text-yellow-500/50" /> Nome e Cognome
+              <User size={12} className="inline mr-2 text-rama-accent/50" /> Nome e Cognome
             </label>
             <input
               type="text"
@@ -98,7 +98,7 @@ export function BookingForm() {
           {/* Email */}
           <div className="space-y-2">
             <label className={labelClasses} htmlFor="email">
-              <AtSign size={12} className="inline mr-2 text-yellow-500/50" /> Email
+              <AtSign size={12} className="inline mr-2 text-rama-accent/50" /> Email
             </label>
             <input
               type="email"
@@ -115,7 +115,7 @@ export function BookingForm() {
           {/* Telefono */}
           <div className="space-y-2">
             <label className={labelClasses} htmlFor="phone">
-              <Phone size={12} className="inline mr-2 text-yellow-500/50" /> Telefono
+              <Phone size={12} className="inline mr-2 text-rama-accent/50" /> Telefono
             </label>
             <input
               type="tel"
@@ -132,7 +132,7 @@ export function BookingForm() {
           {/* Data */}
           <div className="space-y-2">
             <label className={labelClasses} htmlFor="date">
-              <Calendar size={12} className="inline mr-2 text-yellow-500/50" /> Data dell'evento
+              <Calendar size={12} className="inline mr-2 text-rama-accent/50" /> Data dell'evento
             </label>
             <input
               type="date"
@@ -149,7 +149,7 @@ export function BookingForm() {
           {/* Numero di persone */}
           <div className="space-y-2">
             <label className={labelClasses} htmlFor="guests">
-              <Users size={12} className="inline mr-2 text-yellow-500/50" /> Numero di persone
+              <Users size={12} className="inline mr-2 text-rama-accent/50" /> Numero di persone
             </label>
             <select
               id="guests"
@@ -168,7 +168,7 @@ export function BookingForm() {
           {/* Tipo di Format */}
           <div className="space-y-2">
             <label className={labelClasses} htmlFor="format">
-              <Star size={12} className="inline mr-2 text-yellow-500/50" /> Tipo di Format
+              <Star size={12} className="inline mr-2 text-rama-accent/50" /> Tipo di Format
             </label>
             <select
               id="format"
@@ -187,7 +187,7 @@ export function BookingForm() {
         {/* Messaggio */}
         <div className="space-y-2">
           <label className={labelClasses} htmlFor="message">
-            <MessageSquare size={12} className="inline mr-2 text-yellow-500/50" /> Messaggio / Note aggiuntive
+            <MessageSquare size={12} className="inline mr-2 text-rama-accent/50" /> Messaggio / Note aggiuntive
           </label>
           <textarea
             id="message"

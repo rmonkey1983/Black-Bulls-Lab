@@ -3,14 +3,14 @@ import { FormatIndexClient } from "./FormatIndexClient";
 import { SITE_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-    title: "Format Dinner Show e Team Building | Black Bulls Lab - Torino",
-    description: "Scopri i format esclusivi del Black Bulls Lab di Torino. Dalla Cena con Delitto digitale al social deception di A Cena con il Bugiardo. Esperienze uniche per gruppi.",
+    title: "I Nostri Format | Le Serate Immersive",
+    description: "Dalla Cena con Delitto al social game interattivo. Esplora i format di intrattenimento a Torino che mettono il tuo gruppo al centro della narrazione",
     alternates: { canonical: `${SITE_URL}/format` },
     openGraph: {
-        title: "Format Dinner Show e Team Building | Black Bulls Lab - Torino",
-        description: "Scopri i format esclusivi del Black Bulls Lab di Torino. Dalla Cena con Delitto digitale al social deception di A Cena con il Bugiardo. Esperienze uniche per gruppi.",
+        title: "I Nostri Format | Le Serate Immersive | Black Bulls Lab",
+        description: "Dalla Cena con Delitto al social game interattivo. Esplora i format di intrattenimento a Torino che mettono il tuo gruppo al centro della narrazione",
         url: `${SITE_URL}/format`,
-        images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Format Black Bulls Lab" }],
+        images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Format | Black Bulls Lab" }],
     },
 };
 

@@ -7,14 +7,14 @@ import { FormatFAQ } from "@/components/sections/FormatFAQ";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export const metadata: Metadata = {
-    title: "Cena con Delitto Torino | Black Bulls Lab - Noir Experience",
-    description: "Risolvi il mistero con la Cena con Delitto del Black Bulls Lab a Torino. Un'esperienza noir interattiva con Web App dedicata, indizi digitali e colpi di scena. Da 50€.",
+    title: "Cena con Delitto Torino | Noir Experience",
+    description: "Risolvi il mistero con la Cena con Delitto di Black Bulls Lab a Torino. Un'esperienza noir interattiva con Web App dedicata e indizi digitali",
     alternates: { canonical: `${SITE_URL}/format/cena-con-delitto` },
     openGraph: {
-        title: "Cena con Delitto Torino | Black Bulls Lab",
-        description: "Risolvi il mistero con la Cena con Delitto del Black Bulls Lab a Torino. Un'esperienza noir interattiva con Web App dedicata e indizi digitali. Da 50€.",
+        title: "Cena con Delitto Torino | Noir Experience | Black Bulls Lab",
+        description: "Risolvi il mistero con la Cena con Delitto di Black Bulls Lab a Torino. Un'esperienza noir interattiva con Web App dedicata e indizi digitali",
         url: `${SITE_URL}/format/cena-con-delitto`,
-        images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Cena con Delitto Black Bulls Lab" }],
+        images: [{ url: "/images/brand/bg-venue-crowd.webp", width: 1200, height: 630, alt: "Cena con Delitto | Black Bulls Lab" }],
     },
 };
 

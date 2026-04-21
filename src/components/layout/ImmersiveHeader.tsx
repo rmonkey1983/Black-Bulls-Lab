@@ -53,17 +53,17 @@ export function ImmersiveHeader({
             </div>
 
             {/* Massive Background Text */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] md:text-[25vw] font-heading font-black text-white/5 whitespace-nowrap z-[1] tracking-tighter pointer-events-none uppercase mix-blend-difference">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[10vw] md:text-[25vw] font-heading font-black text-white/5 whitespace-nowrap z-[1] tracking-tighter pointer-events-none uppercase mix-blend-difference">
                 {highlight || title.split(" ")[0]}
             </div>
 
             <div className={`relative z-10 w-full overflow-hidden ${align === "center" ? "flex flex-col items-center text-center" : ""}`}>
-                <h1 className="line font-heading text-[clamp(2.2rem,12vw,10rem)] leading-[0.85] tracking-tighter uppercase font-bold text-white flex flex-col max-w-full">
+                <h1 className="line font-heading text-[clamp(2rem,10vw,10rem)] leading-[0.85] tracking-tighter uppercase font-bold text-white flex flex-col max-w-full">
                     <span>{title}</span>
                 </h1>
 
                 {highlight && (
-                    <h2 className={`line font-heading text-[clamp(2.2rem,12vw,10rem)] leading-[0.85] tracking-tighter uppercase font-bold text-rama-accent flex flex-col max-w-full ${align === "center" ? "" : "ml-0 md:ml-[10vw]"}`}>
+                    <h2 className={`line font-heading text-[clamp(2rem,10vw,10rem)] leading-[0.85] tracking-tighter uppercase font-bold text-rama-accent flex flex-col max-w-full ${align === "center" ? "" : "ml-0 md:ml-[10vw]"}`}>
                         <span>{highlight}</span>
                     </h2>
                 )}

@@ -3,14 +3,14 @@ import { TalentsClient } from "./TalentsClient";
 import { SITE_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-    title: "Artisti e Performer | Black Bulls Lab - Torino",
-    description: "Incontra i talenti del Black Bulls Lab di Torino. Sei un artista, performer o chef? Unisciti al nostro laboratorio e crea con noi eventi indimenticabili.",
+    title: "Artisti e Performer | Unisciti al Lab",
+    description: "Incontra i talenti di Black Bulls Lab a Torino. Sei un artista o un performer? Unisciti al nostro laboratorio e crea con noi eventi indimenticabili",
     alternates: { canonical: `${SITE_URL}/talents` },
     openGraph: {
-        title: "Artisti e Performer | Black Bulls Lab - Torino",
-        description: "Incontra i talenti del Black Bulls Lab di Torino. Sei un artista, performer o chef? Unisciti al nostro laboratorio e crea con noi eventi indimenticabili.",
+        title: "Artisti e Performer | Unisciti al Lab | Black Bulls Lab",
+        description: "Incontra i talenti di Black Bulls Lab a Torino. Sei un artista o un performer? Unisciti al nostro laboratorio e crea con noi eventi indimenticabili",
         url: `${SITE_URL}/talents`,
-        images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Artisti Black Bulls Lab" }],
+        images: [{ url: "/images/brand/bg-stage-lights.webp", width: 1200, height: 630, alt: "Artisti | Black Bulls Lab" }],
     },
 };
 

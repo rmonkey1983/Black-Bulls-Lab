@@ -7,21 +7,21 @@ import { FormatFAQ } from "@/components/sections/FormatFAQ";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export const metadata: Metadata = {
-    title: "THE GOLDEN VOICE Torino | Black Bulls Lab - Singing Contest",
-    description: "La competizione canora più prestigiosa di Torino. Vota il tuo talento preferito tramite Web App o candidati per esibirti sul palco del Black Bulls Lab.",
+    title: "The Golden Voice | Concorso Canoro Torino",
+    description: "Sali sul palco di The Golden Voice. Partecipa al concorso canoro Torino più ambizioso. Un talent show Torino epico e un singing contest per il tuo talento",
     alternates: { canonical: `${SITE_URL}/format/the-golden-voice` },
     openGraph: {
-        title: "THE GOLDEN VOICE Torino | Black Bulls Lab",
-        description: "La competizione canora più prestigiosa di Torino. Vota il tuo talento preferito tramite Web App o candidati per esibirti sul palco del Black Bulls Lab.",
+        title: "The Golden Voice | Dinner Show Torino | Black Bulls Lab",
+        description: "Il dinner show a Torino dove la musica è protagonista. Prenota il tuo tavolo per una serata di grande intrattenimento sonoro e cucina d'eccellenza",
         url: `${SITE_URL}/format/the-golden-voice`,
-        images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "THE GOLDEN VOICE Black Bulls Lab" }],
+        images: [{ url: "/images/brand/service-performance.webp", width: 1200, height: 630, alt: "The Golden Voice | Black Bulls Lab" }],
     },
 };
 
 export default function TheGoldenVoicePage() {
     return (
         <>
-            <EventSchema 
+            <EventSchema
                 name="THE GOLDEN VOICE — Digital Singing Contest"
                 description="Un contest canoro dove ogni spettatore è un giudice. Vota le performance in tempo reale tramite la nostra Web App dedicata."
                 date="2026-12-31T21:00:00Z"
@@ -31,7 +31,7 @@ export default function TheGoldenVoicePage() {
                 image={`${SITE_URL}/images/brand/service-performance.webp`}
             />
             <TheGoldenVoiceClient />
-            
+
             <FormatFAQ />
 
             <section className="py-24 px-6 bg-zinc-950/50">

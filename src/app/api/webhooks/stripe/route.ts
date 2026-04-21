@@ -25,13 +25,17 @@ export async function POST(req: Request) {
   let event: Stripe.Event;
 
   try {
-    if (!signature || !webhookSecret) {
-        throw new Error('Mancano signature o webhook secret');
+    if (!signature || !webhookSecret || webhookSecret.includes('placeholder')) {
+        const missing = !signature ? 'signature' : !webhookSecret ? 'secret' : 'correct secret (placeholder detected)';
+        throw new Error(`Mancano configurazioni critiche: ${missing}`);
     }
     event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
   } catch (err: any) {
     console.error(`❌ Webhook signature verification failed: ${err.message}`);
-    return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 });
+    return NextResponse.json({ 
+        error: "Signature verification failed", 
+        detail: "Verifica STRIPE_WEBHOOK_SECRET nel file .env" 
+    }, { status: 400 });
   }
 
   // Handle the event

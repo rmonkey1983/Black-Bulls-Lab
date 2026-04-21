@@ -23,6 +23,7 @@ import {
 import FaqSection from "@/components/ui/FaqSection";
 import { RamaTestimonials } from "@/components/rama/sections/RamaTestimonials";
 import { RamaBlogPreview } from "@/components/rama/sections/RamaBlogPreview";
+import { ProssimeDate } from "@/components/rama/sections/ProssimeDate";
 import { BlogPost } from "@/lib/blog";
 
 interface HomeClientProps {
@@ -96,34 +97,36 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
         </div>
 
         {/* Content */}
-        <div className="hero-content relative z-10 max-w-6xl mx-auto px-6 text-center space-y-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-yellow-500/20 bg-yellow-500/5 backdrop-blur-sm">
+        <div className="hero-content relative z-10 max-w-5xl mx-auto px-6 text-center space-y-10">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-yellow-500/20 bg-yellow-500/5 backdrop-blur-sm">
             <Sparkles size={14} className="text-yellow-500" />
-            <span className="font-heading text-[10px] sm:text-xs tracking-[0.3em] text-yellow-500 uppercase font-bold">
-                Advanced Entertainment Lab
+            <span className="font-heading text-[10px] tracking-[0.2em] text-yellow-500 uppercase font-bold">
+                ADVANCED ENTERTAINMENT LAB
             </span>
           </div>
           
-          <h1 className="font-heading font-bold text-4xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tighter uppercase max-w-5xl mx-auto italic transform -skew-x-2">
-            DINNER SHOW <span className="text-yellow-500">A TORINO.</span>
+          <h1 className="font-heading font-black text-6xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tighter uppercase max-w-5xl mx-auto italic transform -skew-x-2">
+            <span className="text-white">DINNER SHOW </span>
+            <span className="text-yellow-500">A</span><br className="hidden md:block" />
+            <span className="text-yellow-500">TORINO.</span>
           </h1>
           
-          <div className="space-y-4">
-             <h2 className="font-heading text-base sm:text-xl md:text-3xl text-zinc-400 uppercase tracking-widest font-light">
-                L&apos;intrattenimento diventa <span className="text-white font-medium">scienza.</span>
+          <div className="space-y-4 max-w-3xl mx-auto">
+             <h2 className="font-heading text-lg md:text-2xl text-zinc-400 uppercase tracking-widest font-light">
+                L&apos;INTRATTENIMENTO DIVENTA <span className="text-white font-bold">SCIENZA.</span>
              </h2>
-             <p className="font-sans text-zinc-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-light">
-                Benvenuto nel Laboratorio delle Emozioni. Creiamo esperienze originali, <br className="hidden md:block" /> scalabili e indimenticabili per chi non si accontenta dell&apos;ordinario.
+             <p className="font-sans text-zinc-400 text-sm md:text-base leading-relaxed font-light">
+                Benvenuto nel Laboratorio delle Emozioni. Creiamo esperienze originali, scalabili e indimenticabili per chi non si accontenta dell&apos;ordinario.
              </p>
           </div>
 
-          <div className="pt-8 flex flex-col items-center gap-12">
-            <PrimaryButton href="#format" size="lg" className="px-12 py-6">
+          <div className="pt-8 flex flex-col items-center gap-8">
+            <PrimaryButton href="/format" size="lg" className="px-12 py-5 text-sm font-bold tracking-widest bg-yellow-500 text-black hover:bg-white hover:text-black border-yellow-500">
                 SCOPRI I FORMAT
             </PrimaryButton>
             
-            <button onClick={scrollToNext} className="animate-bounce p-3 border border-white/5 rounded-full bg-white/5 hover:border-yellow-500/30 transition-colors" aria-label="Vai alla prossima sezione">
-                <ChevronDown size={24} className="text-zinc-400" />
+            <button onClick={scrollToNext} className="mt-8 w-12 h-12 flex items-center justify-center rounded-full border border-white/10 bg-white/5 hover:border-white/30 hover:bg-white/10 transition-all text-zinc-500 hover:text-white backdrop-blur-sm shadow-xl" aria-label="Vai alla prossima sezione">
+                <ChevronDown size={20} className="animate-bounce" />
             </button>
           </div>
         </div>
@@ -133,33 +136,52 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
         <div className="absolute top-1/2 right-0 -translate-y-1/2 w-px h-1/2 bg-gradient-to-b from-transparent via-yellow-500/20 to-transparent" />
       </section>
 
+      {/* 1B. PROSSIME DATE */}
+      <ProssimeDate />
+
       {/* 2. SEZIONE 'IL METODO' (La Visione) */}
       <section id="metodo" className="metodo-section py-20 md:py-32 lg:py-48 px-6 bg-transparent">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div className="space-y-10">
                 <SectionHeading 
-                  title="L'APPROCCIO"
-                  highlight="PRACTICAL."
-                  subtitle="La Nostra Visione"
+                  title="LAB INGEGNERISTICO PER"
+                  highlight="EVENTI TORINO"
+                  subtitle="L'Approccio Practical"
                   align="left"
                 />
                 <div className="space-y-6 font-sans text-lg text-zinc-400 font-light leading-relaxed max-w-xl">
                     <p>
-                        Julian Halili ha fondato Black Bulls Lab per rispondere a una domanda semplice: come si crea un evento che rimanga nel cuore degli ospiti senza i costi proibitivi dei grandi stage?
+                        Le solite proposte per eventi mancano spesso di anima e precisione, risultando costose e poco coinvolgenti. Black Bulls Lab nasce da un’intuizione di Julian Halili per eliminare la casualità dall’intrattenimento.
                     </p>
                     <p>
-                        La risposta è il nostro <strong>Metodo Lab</strong>: soluzioni replicabili, costi sostenibili e un coinvolgimento psicologico studiato per mettere l&apos;ospite al centro di ogni scena. Non siamo semplici organizzatori, siamo ingegneri dell&apos;emozione.
+                        Applichiamo un approccio scientifico a format immersivi replicabili e sostenibili. Siamo gli ingegneri dell’emozione al servizio di HR manager, titolari di locali e gruppi privati in cerca di un impatto reale.
+                    </p>
+                    <p>
+                        Dimentica le cene silenziose e gli show distaccati: ogni nostro esperimento è testato per massimizzare il coinvolgimento, trasformando gli ospiti da semplici spettatori in protagonisti attivi della narrazione.
                     </p>
                 </div>
-                <div className="grid grid-cols-2 gap-8 pt-6">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-6">
                     <div className="space-y-2">
                         <span className="text-yellow-500 font-heading text-2xl font-bold">100%</span>
-                        <p className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold">Engagement Rate</p>
+                        <p className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold">Engagement</p>
                     </div>
                     <div className="space-y-2">
-                        <span className="text-yellow-500 font-heading text-2xl font-bold">24H</span>
-                        <p className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold">Response Time</p>
+                        <span className="text-yellow-500 font-heading text-2xl font-bold">FORMAT</span>
+                        <p className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold">Testati</p>
                     </div>
+                    <div className="space-y-2">
+                        <span className="text-yellow-500 font-heading text-2xl font-bold">80+</span>
+                        <p className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold">Recensioni</p>
+                    </div>
+                </div>
+                <div className="pt-6">
+                    <Link 
+                        href="/format"
+                        className="group inline-flex items-center gap-2 font-heading text-xs uppercase tracking-[0.2em] text-white hover:text-yellow-500 transition-colors"
+                    >
+                        Trova l'esperimento perfetto per il tuo prossimo evento
+                        <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </Link>
                 </div>
             </div>
 

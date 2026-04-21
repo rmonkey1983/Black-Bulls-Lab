@@ -80,7 +80,7 @@ export function TheGoldenVoiceClient() {
             />
 
             <EventConcept
-                description={`THE GOLDEN VOICE non è il solito talent show. È una competizione seria, intensa e prestigiosa, pensata per chi crede nella potenza della propria voce.\n\nCerchiamo interpreti capaci di emozionare, cantautori originali e performer che sanno dominare il palco. Qui non si cerca solo la tecnica, ma l'anima e la capacità di connettersi con il pubblico digitale.`}
+                description={`Sei uno di quelli che sente la musica come una necessità e ne sprigiona tutta la potenza? The Golden Voice non è il solito talent show Torino, ma il concorso canoro dove conta solo la verità della tua voce.\n\nI posti sul palco sono pochissimi, la selezione è millimetrica e il tempo per candidarti sta per scadere. Cerchiamo chi vive per esibirsi e non teme il giudizio. Dimostra il tuo valore nel singing contest Torino più atteso dell’anno.`}
             />
 
             <section className="py-24 bg-gradient-to-b from-black to-bg-dark relative overflow-hidden">

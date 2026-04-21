@@ -9,8 +9,8 @@ export function MobileStickyBookButton() {
             <Link
                 href="/contact"
                 suppressHydrationWarning
-                className="flex items-center justify-center gap-3 p-3 bg-rama-accent/95 backdrop-blur-md text-black font-heading uppercase font-bold text-lg tracking-widest shadow-[0_-5px_20px_rgba(255,215,0,0.15)] transition-[transform] active:scale-95"
-                style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom))' }}
+                className="flex items-center justify-center gap-3 p-2.5 bg-rama-accent/95 backdrop-blur-md text-black font-heading uppercase font-bold text-base tracking-widest shadow-[0_-5px_20px_rgba(255,215,0,0.15)] transition-[transform] active:scale-95"
+                style={{ paddingBottom: 'calc(0.5rem + env(safe-area-inset-bottom))' }}
             >
                 <Phone size={18} strokeWidth={2.5} />
                 Prenota una serata

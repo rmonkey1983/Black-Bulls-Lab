@@ -30,10 +30,10 @@ export async function generateMetadata({
   if (!post) return {};
 
   return {
-    title: `${post.title} | Blog | Black Bulls Lab`,
+    title: post.title,
     description: post.description,
     openGraph: {
-      title: post.title,
+      title: `${post.title} | Black Bulls Lab`,
       description: post.description,
       url: `https://blackbullslab.com/blog/${slug}`,
       images: [{ url: post.coverImage }],
@@ -50,7 +50,7 @@ const components = {
   ),
   h3: (props: any) => (
     <h3
-      className="font-heading text-xl md:text-2xl font-bold uppercase text-yellow-500 mt-12 mb-6"
+      className="font-heading text-xl md:text-2xl font-bold uppercase text-rama-accent mt-12 mb-6"
       {...props}
     />
   ),
@@ -62,13 +62,13 @@ const components = {
   ),
   a: (props: any) => (
     <a
-      className="text-yellow-500 hover:text-white underline underline-offset-4 transition-colors font-medium"
+      className="text-rama-accent hover:text-white underline underline-offset-4 transition-colors font-medium"
       {...props}
     />
   ),
   blockquote: (props: any) => (
     <blockquote
-      className="max-w-[680px] mx-auto border-l-4 border-yellow-500 bg-zinc-900/50 p-8 my-12 italic text-xl text-zinc-200 font-serif"
+      className="max-w-[680px] mx-auto border-l-4 border-rama-accent bg-zinc-900/50 p-8 my-12 italic text-xl text-zinc-200 font-serif"
       {...props}
     />
   ),
@@ -107,9 +107,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     .slice(0, 2);
 
   const categoryStyles = {
-    seo: "bg-amber-500/10 text-amber-500 border-amber-500/20",
-    eventi: "bg-teal-500/10 text-teal-500 border-teal-500/20",
-    team: "bg-purple-500/10 text-purple-500 border-purple-500/20",
+    seo: "bg-rama-accent/10 text-rama-accent border-rama-accent/20",
+    eventi: "bg-zinc-800/10 text-zinc-400 border-zinc-800/20",
+    team: "bg-white/5 text-white/70 border-white/10",
   };
 
   const categoryLabels = {
@@ -154,11 +154,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <div className="max-w-7xl mx-auto px-6">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-[10px] text-zinc-500 uppercase tracking-widest font-bold mb-12">
-          <Link href="/" className="hover:text-yellow-500 transition-colors">
+          <Link href="/" className="hover:text-rama-accent transition-colors">
             Home
           </Link>
           <span>/</span>
-          <Link href="/blog" className="hover:text-yellow-500 transition-colors">
+          <Link href="/blog" className="hover:text-rama-accent transition-colors">
             Blog
           </Link>
           <span>/</span>
@@ -186,17 +186,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           <div className="flex flex-wrap items-center justify-center gap-6 text-[11px] text-zinc-400 uppercase tracking-widest font-bold">
             <div className="flex items-center gap-2">
-              <User size={14} className="text-yellow-500/50" />
+              <User size={14} className="text-rama-accent/50" />
               <span>{post.author}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Calendar size={14} className="text-yellow-500/50" />
+              <Calendar size={14} className="text-rama-accent/50" />
               <span>{formatDate(post.date)}</span>
             </div>
             <div className="flex items-center gap-2">
-              <User size={14} className="text-yellow-500/50 opacity-0 w-0 h-0" /> {/* Spacer or hidden element if needed */}
+              <User size={14} className="text-rama-accent/50 opacity-0 w-0 h-0" /> {/* Spacer or hidden element if needed */}
               <div className="flex items-center gap-2">
-                 <Clock size={14} className="text-yellow-500/50" />
+                 <Clock size={14} className="text-rama-accent/50" />
                  <span>{post.readingTime}</span>
               </div>
             </div>
@@ -235,7 +235,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </h2>
               <Link
                 href="/blog"
-                className="group flex items-center gap-2 text-xs text-zinc-400 uppercase tracking-widest font-bold hover:text-yellow-500 transition-colors"
+                className="group flex items-center gap-2 text-xs text-zinc-400 uppercase tracking-widest font-bold hover:text-rama-accent transition-colors"
               >
                 Vedi tutti <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </Link>
@@ -248,7 +248,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   href={`/blog/${rp.slug}`}
                   className="group block space-y-6"
                 >
-                  <div className="relative aspect-[16/9] overflow-hidden rounded-xl border border-white/5 transition-all duration-500 group-hover:border-yellow-500/30">
+                  <div className="relative aspect-[16/9] overflow-hidden rounded-xl border border-white/5 transition-all duration-500 group-hover:border-rama-accent/30">
                     <Image
                       src={rp.coverImage}
                       alt={rp.title}
@@ -257,7 +257,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     />
                   </div>
                   <div className="space-y-2">
-                    <h3 className="font-heading text-xl font-bold uppercase text-white group-hover:text-yellow-500 transition-colors">
+                    <h3 className="font-heading text-xl font-bold uppercase text-white group-hover:text-rama-accent transition-colors">
                       {rp.title}
                     </h3>
                     <p className="font-sans text-sm text-zinc-400 line-clamp-2">

@@ -7,14 +7,14 @@ import { FormatFAQ } from "@/components/sections/FormatFAQ";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export const metadata: Metadata = {
-    title: "A Cena con il Bugiardo Torino | Black Bulls Lab - Social Deception",
-    description: "Il dinner show dell'inganno a Torino. Chi è il bugiardo al tavolo? Scoprilo con la nostra Web App interattiva e indizi segreti. Posti limitati, prenota ora.",
+    title: "A Cena Con Il Bugiardo Torino | Dinner Show",
+    description: "Vivi una serata immersiva e un dinner show Torino fuori dagli schemi. Una cena con delitto alternativa dove qualcuno sta mentendo e tu devi scoprire chi",
     alternates: { canonical: `${SITE_URL}/format/a-cena-con-il-bugiardo` },
     openGraph: {
-        title: "A Cena con il Bugiardo Torino | Black Bulls Lab",
-        description: "Il dinner show dell'inganno a Torino. Chi è il bugiardo al tavolo? Scoprilo con la nostra Web App interattiva e indizi segreti.",
+        title: "A Cena Con Il Bugiardo Torino | Dinner Show | Black Bulls Lab",
+        description: "Vivi una serata immersiva e un dinner show Torino fuori dagli schemi. Una cena con delitto alternativa dove qualcuno sta mentendo e tu devi scoprire chi",
         url: `${SITE_URL}/format/a-cena-con-il-bugiardo`,
-        images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "A Cena con il Bugiardo Black Bulls Lab" }],
+        images: [{ url: "/images/brand/vibe-cocktail-art.webp", width: 1200, height: 630, alt: "A Cena Con Il Bugiardo | Black Bulls Lab" }],
     },
 };
 

@@ -19,17 +19,21 @@ export function Preloader() {
     const iconRef = useRef<HTMLDivElement>(null);
     const [particles, setParticles] = useState<Array<{id: number, left: number, size: number, delay: number, dur: number, x1: number, x2: number}>>([]);
 
-    // Swap icons every 200ms
+    // Optimized Loading Logic
     useEffect(() => {
         if (typeof window === "undefined") return;
 
-        // Skip condition: Mobile or Session storage
         const hasSeenSplash = sessionStorage.getItem("splash-seen");
+        
+        // 1. MOBILE SKIP: Render content immediately to avoid CLS and lag
         if (isMobile || hasSeenSplash) {
             setIsLoading(false);
             return;
         }
 
+        let mounted = true;
+
+        // 2. ICON & PARTICLE SETUP
         const iconInterval = setInterval(() => {
             setIconIndex((prev) => (prev + 1) % ICONS.length);
         }, 200);
@@ -44,18 +48,35 @@ export function Preloader() {
             x2: Math.random() * 60 - 30,
         })));
 
-        let mounted = true;
-        const countInterval = setInterval(() => {
-            setCount((prev) => {
-                const next = prev + Math.floor(Math.random() * 15) + 10;
-                if (next >= 100) {
-                    clearInterval(countInterval);
-                    if (mounted) finishPreloader();
-                    return 100;
-                }
-                return next;
+        // 3. DESKTOP CAP (1500ms max)
+        const startLoading = async () => {
+            // Progress promise: smoother 1s climb
+            const progressTask = new Promise<void>((resolve) => {
+                const interval = setInterval(() => {
+                    setCount((prev) => {
+                        const next = prev + 4;
+                        if (next >= 100) {
+                            clearInterval(interval);
+                            resolve();
+                            return 100;
+                        }
+                        return next;
+                    });
+                }, 40); // ~1s total
             });
-        }, 60);
+
+            // Max Timeout Cap: 1500ms
+            const timeoutCap = new Promise<void>((resolve) => setTimeout(resolve, 1500));
+
+            // Race: Finish whenever progress is 100% OR we hit the 1.5s cap
+            await Promise.race([progressTask, timeoutCap]);
+
+            if (mounted) {
+                setCount(100);
+                clearInterval(iconInterval);
+                finishPreloader();
+            }
+        };
 
         const finishPreloader = () => {
             if (containerRef.current) {
@@ -74,19 +95,11 @@ export function Preloader() {
             }
         };
 
-        const fallback = setTimeout(() => {
-            if (mounted && count < 100) {
-                setCount(100);
-                clearInterval(countInterval);
-                finishPreloader();
-            }
-        }, 1500); // 1500ms hard cap for desktop
+        startLoading();
 
         return () => {
             mounted = false;
             clearInterval(iconInterval);
-            clearInterval(countInterval);
-            clearTimeout(fallback);
         };
     }, [isMobile]);
 

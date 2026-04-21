@@ -1,5 +1,11 @@
 import { Suspense } from "react";
 import CheckoutForm from "./CheckoutForm";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Checkout",
+    robots: { index: false, follow: false },
+};
 
 export default function CheckoutPage() {
     return (

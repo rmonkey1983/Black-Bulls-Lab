@@ -65,20 +65,20 @@ export const metadata: Metadata = {
     locale: "it_IT",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: "Black Bulls Lab — Creatori di Emozioni e Dinner Show Esclusivi",
+    title: "Black Bulls Lab | Creatori di Emozioni e Dinner Show Esclusivi",
     description: DEFAULT_DESCRIPTION,
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Black Bulls Lab — L'Agenzia che Crea Emozioni",
+        alt: "Black Bulls Lab | L'Agenzia che Crea Emozioni",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Black Bulls Lab — Creatori di Emozioni e Dinner Show Esclusivi",
+    title: "Black Bulls Lab | Creatori di Emozioni e Dinner Show Esclusivi",
     description: DEFAULT_DESCRIPTION,
     images: ["/og-image.jpg"],
   },
@@ -94,8 +94,8 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    icon: "/brand/logo-white.svg",
+    apple: "/brand/logo-full.jpg",
   },
   category: "entertainment",
 };
@@ -109,6 +109,9 @@ export function generateViewport(): Viewport {
 
 import { BackgroundWrapper } from "@/components/layout/BackgroundWrapper";
 
+import { CustomCursor } from "@/components/layout/CustomCursor";
+import { ScrollProgress } from "@/components/layout/ScrollProgress";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -118,8 +121,10 @@ export default function RootLayout({
     <html lang="it" suppressHydrationWarning>
       <head />
       <body
-        className={`${outfit.variable} ${inter.variable} ${mohave.variable} ${rockSalt.variable} font-sans antialiased text-white min-h-screen relative selection:bg-yellow-500 selection:text-black flex flex-col bg-zinc-950`}
+        className={`${outfit.variable} ${inter.variable} ${mohave.variable} ${rockSalt.variable} font-sans antialiased text-white min-h-screen relative selection:bg-rama-accent selection:text-black flex flex-col bg-zinc-950`}
       >
+        <CustomCursor />
+        <ScrollProgress />
         <GSAPInitializer />
         <BackgroundWrapper />
         <RamaHeader />
@@ -128,7 +133,7 @@ export default function RootLayout({
         <a
           href="#main-content"
           suppressHydrationWarning
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-6 focus:py-3 focus:bg-yellow-500 focus:text-black focus:font-heading focus:font-bold focus:uppercase focus:tracking-widest focus:rounded-sm focus:shadow-lg"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-6 focus:py-3 focus:bg-rama-accent focus:text-black focus:font-heading focus:font-bold focus:uppercase focus:tracking-widest focus:rounded-sm focus:shadow-lg"
         >
           Salta al contenuto principale
         </a>
@@ -151,11 +156,13 @@ export default function RootLayout({
         <EntertainmentBusinessSchema />
         <WebSiteSchema />
         <FAQPageSchema faqs={[
-          { question: "Qual è il dress code per le serate?", answer: "Richiediamo un abbigliamento elegante e curato (Smart Casual / Elegant). Ci riserviamo il diritto di selezione all'ingresso per mantenere l'atmosfera esclusiva del nostro club." },
-          { question: "Come funzionano le prenotazioni per la cena spettacolo?", answer: "La prenotazione è fortemente consigliata ed è garantita solo a seguito della nostra conferma. Offriamo sia menu degustazione fissi che soluzioni à-la-carte, a seconda del format della serata." },
-          { question: "Posso organizzare un evento privato o aziendale a Torino?", answer: `Certamente. ${SITE_NAME} organizza cene aziendali, team building, dinner show e eventi immersivi a Torino per gruppi di qualsiasi dimensione. I nostri format ufficiali sono A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e THE GOLDEN VOICE. Contattaci a ${CONTACT_EMAIL} per un preventivo personalizzato.` },
-          { question: "Gestite intolleranze o allergie alimentari?", answer: "Assolutamente sì. Vi chiediamo di comunicare eventuali allergie, intolleranze o scelte dietetiche (vegan/vegetariane) al momento della prenotazione, per permettere al nostro Executive Chef di prepararvi una variante ad hoc." },
-          { question: `Quanto costa partecipare a un dinner show di ${SITE_NAME}?`, answer: `I nostri format partono da 50€ a persona, con soluzioni flessibili per gruppi aziendali e privati. Il prezzo include la cena e lo spettacolo immersivo. Contattaci a ${CONTACT_EMAIL} per un preventivo su misura per il tuo gruppo.` },
+          { question: "Come funziona una serata Black Bulls Lab?", answer: "Arrivi, ti siedi, e diventi parte dello show. I nostri format immersivi coinvolgono ogni ospite direttamente — non sei spettatore, sei protagonista. Ogni serata dura circa 3 ore tra cena e spettacolo." },
+          { question: "Quante persone partecipano a ogni serata?", answer: "Max 20-30 persone per serata. La dimensione ridotta è parte del format: garantisce coinvolgimento totale e un'atmosfera unica che i grandi eventi non possono replicare." },
+          { question: "Dove si svolgono le serate?", answer: "A Torino, in location selezionate in base al format. La sede viene comunicata al momento della prenotazione." },
+          { question: "Come prenoto una serata?", answer: "Compila il form su /contact oppure scrivici su WhatsApp. Risposta garantita entro 24h. I posti sono limitati: prima prenoti, meglio è." },
+          { question: "Organizzate eventi aziendali o privati?", answer: "Sì. Tutti i format sono replicabili per eventi corporate, team building, feste private. Contattaci per un preventivo personalizzato." },
+          { question: "Qual è il prezzo a persona?", answer: "Dipende dal format e dalla location. Contattaci per il dettaglio — lavoriamo sempre su preventivo trasparente senza sorprese." },
+          { question: "Devo avere esperienze teatrali o particolari abilità?", answer: "Zero. I nostri format sono progettati per funzionare con chiunque — timidi inclusi. Ci pensiamo noi a tirarti in ballo." },
         ]} />
       </body>
     </html>
