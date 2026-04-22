@@ -4,9 +4,9 @@ Allow: /
 
 # *
 User-agent: *
-Disallow: /admin
-Disallow: /api
-Disallow: /checkout
+Disallow: /admin/
+Disallow: /api/
+Disallow: /checkout/
 
 # Host
 Host: https://blackbullslab.com
