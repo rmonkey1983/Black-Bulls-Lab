@@ -99,7 +99,7 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
         </div>
 
         {/* Content */}
-        <div className="hero-content relative z-10 max-w-5xl mx-auto px-6 text-center space-y-10">
+        <div className="hero-content relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center space-y-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-yellow-500/20 bg-yellow-500/5 backdrop-blur-sm">
             <Sparkles size={14} className="text-yellow-500" />
             <span className="font-heading text-[10px] tracking-[0.2em] text-yellow-500 uppercase font-bold">
@@ -108,9 +108,11 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
           </div>
           
           <h1 className="sr-only">Dinner Show Torino e Eventi Immersivi | Black Bulls Lab</h1>
-          <div aria-hidden="true" className="font-heading font-black text-6xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tighter uppercase max-w-5xl mx-auto italic transform -skew-x-2">
+          <div aria-hidden="true" className="font-heading font-black text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl leading-[0.85] tracking-tighter uppercase max-w-5xl mx-auto italic transform -skew-x-2">
             <span className="text-white">DINNER SHOW </span>
-            <span className="text-yellow-500">A</span><br className="hidden md:block" />
+            <span className="text-yellow-500">A</span>
+            <span className="inline md:hidden">&nbsp;</span>
+            <br className="hidden md:block" />
             <span className="text-yellow-500">TORINO.</span>
           </div>
           
@@ -143,8 +145,8 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
       <ProssimeDate />
 
       {/* 2. SEZIONE 'IL METODO' (La Visione) */}
-      <section id="metodo" className="metodo-section py-20 md:py-32 lg:py-48 px-6 bg-transparent">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+      <section id="metodo" className="metodo-section py-16 md:py-32 lg:py-48 px-4 sm:px-6 bg-transparent">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="space-y-10">
                 <SectionHeading 
                   title="LAB INGEGNERISTICO PER"
@@ -202,21 +204,21 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
       </section>
 
       {/* 3. PREVIEW FORMAT (Dinner & Show) */}
-      <section id="format" className="reveal-section py-32 bg-zinc-950 border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6">
-            <div className="flex flex-col md:flex-row items-end justify-between mb-20 gap-8">
+      <section id="format" className="reveal-section py-16 md:py-32 bg-zinc-950 border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-12 md:mb-20 gap-6 md:gap-8">
                 <SectionHeading 
                   title=""
                   highlight="I FORMAT."
                   align="left"
                   accentPos="top"
                 />
-                <p className="font-sans text-zinc-400 max-w-sm text-right font-light italic">
+                <p className="font-sans text-zinc-400 max-w-sm text-left md:text-right font-light italic">
                     Format testati e pronti per essere installati nel tuo locale o per il tuo evento privato.
                 </p>
             </div>
 
-            <div className="format-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="format-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {EXPERIMENTS.map((exp) => (
                     <PremiumCard key={exp.id} href={exp.href} className="group rounded-[24px]">
                         <div className="relative aspect-[4/5] overflow-hidden bg-zinc-950 rounded-2xl">
@@ -274,9 +276,9 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
       </section>
 
       {/* 4. SOCIAL PROOF / TEAM (Le Facce) */}
-      <section className="reveal-section py-32 bg-transparent">
-        <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+      <section className="reveal-section py-16 md:py-32 bg-transparent">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
                 <div className="lg:col-span-4 space-y-8">
                     <SectionHeading 
                         title="LE MENTI"
@@ -295,7 +297,7 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
                     </div>
                 </div>
 
-                <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
                     {teamMembers.filter(m => ['manuel', 'maurizio'].includes(m.id)).map((member) => (
                         <PremiumCard key={member.id} href={`/team/${member.id}`} className="group p-6">
                             <div className="space-y-6">
