@@ -31,7 +31,7 @@ export default function AdminSettingsPage() {
 
     if (!form) return null;
 
-    const inputClass = "w-full bg-lab-dark/80 border border-green/15 px-4 py-2.5 text-rama-text text-sm data-readout placeholder:text-gray-600 focus:outline-none focus:border-green/40 transition-all duration-300";
+    const inputClass = "w-full bg-lab-dark/80 border border-green/15 px-4 py-2.5 text-rama-text text-sm data-readout placeholder:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 focus:border-green/40 transition duration-300";
     const labelClass = "data-readout text-[10px] text-green/40 tracking-[0.2em] uppercase block mb-1.5";
 
     return (
@@ -117,7 +117,7 @@ export default function AdminSettingsPage() {
                 <button
                     type="submit"
                     className={`w-full py-3 border text-sm font-bold uppercase tracking-wider data-readout
-                        flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer
+                        flex items-center justify-center gap-2 transition duration-300 cursor-pointer
                         ${saved
                             ? "border-green bg-green/20 text-green"
                             : "border-green/40 bg-green/10 text-green hover:bg-green/20 hover:border-green/60"

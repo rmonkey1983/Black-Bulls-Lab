@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { CenaConDelittoClient } from "./CenaConDelittoClient";
 import { EventSchema } from "@/components/seo/JsonLd";
 import { SITE_URL } from "@/lib/constants";
-import { BookingForm } from "@/components/ui/BookingForm";
+import { FormatBookingCTA } from "@/components/events/FormatBookingCTA";
 import { FormatFAQ } from "@/components/sections/FormatFAQ";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export const metadata: Metadata = {
     title: "Cena Con Delitto Torino | Noir Experience e Cena Spettacolo",
@@ -34,19 +33,7 @@ export default function CenaConDelittoPage() {
             
             <FormatFAQ />
 
-            <section className="py-24 px-6 bg-zinc-950/50">
-                <div className="max-w-7xl mx-auto">
-                    <div className="mb-16">
-                        <SectionHeading
-                            title="RISOLVI IL"
-                            highlight="MISTERO"
-                            subtitle="Assicura il tuo posto nel nostro prossimo noir"
-                            align="center"
-                        />
-                    </div>
-                    <BookingForm />
-                </div>
-            </section>
+            <FormatBookingCTA formatName="Cena con Delitto" />
         </>
     );
 }

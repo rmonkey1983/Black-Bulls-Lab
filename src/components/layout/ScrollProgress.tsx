@@ -37,7 +37,7 @@ export function ScrollProgress() {
     }, [pathname]);
 
     return (
-        <div className="fixed top-0 left-0 w-full h-[2px] z-[100] pointer-events-none">
+        <div className="fixed top-0 left-0 w-full h-0.5 z-100 pointer-events-none">
             <div 
                 ref={progressRef}
                 className="w-full h-full bg-rama-accent shadow-[0_0_10px_rgba(200,164,78,0.5)]"

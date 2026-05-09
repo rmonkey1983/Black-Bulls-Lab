@@ -18,15 +18,15 @@ export const strategicFaqs: FAQItem[] = [
     },
     {
         question: "Come prenoto una serata?",
-        answer: "Compila il form su /contact oppure scrivici su WhatsApp. Risposta garantita entro 24h. I posti sono limitati: prima prenoti, meglio è."
+        answer: "Controlla le prossime date nel nostro calendario e prenota direttamente online. Risposta e conferma immediata via email. I posti sono limitati: prima prenoti, meglio è."
     },
     {
         question: "Organizzate eventi aziendali o privati?",
-        answer: "Sì. Tutti i format sono replicabili per eventi corporate, team building, feste private. Contattaci per un preventivo personalizzato."
+        answer: "Sì. Tutti i format sono replicabili per eventi corporate, team building, feste private. Scegli la tua serata dal calendario o scrivici su WhatsApp per un preventivo personalizzato."
     },
     {
         question: "Qual è il prezzo a persona?",
-        answer: "Dipende dal format e dalla location. Contattaci per il dettaglio — lavoriamo sempre su preventivo trasparente senza sorprese."
+        answer: "Il prezzo varia in base al format ed è indicato chiaramente nel calendario per ogni singola data. Lavoriamo con prezzi trasparenti tutto incluso."
     },
     {
         question: "Devo avere esperienze teatrali o particolari abilità?",

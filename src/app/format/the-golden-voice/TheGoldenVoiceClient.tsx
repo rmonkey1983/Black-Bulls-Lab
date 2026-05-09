@@ -37,7 +37,7 @@ export function TheGoldenVoiceClient() {
                         priority
                     />
                     <div className="absolute inset-0 bg-rama-accent/10 mix-blend-overlay" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/40 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-bg-dark via-bg-dark/40 to-transparent" />
                     <div className="absolute inset-0 bg-[url('/noise.webp')] opacity-20 mix-blend-overlay pointer-events-none" />
                 </div>
 
@@ -60,7 +60,7 @@ export function TheGoldenVoiceClient() {
 
                         <h1 className="line text-4xl sm:text-6xl md:text-8xl font-bold text-rama-text tracking-tighter leading-[0.9] drop-shadow-2xl">
                             <span>THE GOLDEN</span> <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold via-white to-gold animate-gradient-x bg-[length:200%_auto]">
+                            <span className="text-transparent bg-clip-text bg-linear-to-r from-gold via-white to-gold animate-gradient-x bg-size-[200%_auto]">
                                 <span>VOICE</span>
                             </span>
                         </h1>
@@ -83,7 +83,7 @@ export function TheGoldenVoiceClient() {
                 description={`Sei uno di quelli che sente la musica come una necessità e ne sprigiona tutta la potenza? The Golden Voice non è il solito talent show Torino, ma il concorso canoro dove conta solo la verità della tua voce.\n\nI posti sul palco sono pochissimi, la selezione è millimetrica e il tempo per candidarti sta per scadere. Cerchiamo chi vive per esibirsi e non teme il giudizio. Dimostra il tuo valore nel singing contest Torino più atteso dell’anno.`}
             />
 
-            <section className="py-24 bg-gradient-to-b from-black to-bg-dark relative overflow-hidden">
+            <section className="py-24 bg-linear-to-b from-black to-bg-dark relative overflow-hidden">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center mb-16">
                         <h2 id="percorso-title" className="gsap-fade text-4xl md:text-5xl font-bold text-rama-text mb-4">
@@ -136,7 +136,7 @@ export function TheGoldenVoiceClient() {
                                 href={buildWAUrl(WA_MESSAGES.default)}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-3 px-8 py-4 border border-rama-accent text-rama-accent font-bold uppercase tracking-widest hover:bg-rama-accent hover:text-black transition-all duration-300 rounded-sm"
+                                className="inline-flex items-center gap-3 px-8 py-4 border border-rama-accent text-rama-accent font-bold uppercase tracking-widest hover:bg-rama-accent hover:text-black transition duration-300 rounded-sm"
                             >
                                 <Mic size={18} /> Dimmi quando è la prossima data
                             </a>

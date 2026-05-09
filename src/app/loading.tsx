@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Loading() {
   return (
-    <div className="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center">
+    <div className="fixed inset-0 z-100 bg-black flex flex-col items-center justify-center">
       <div className="relative">
         {/* Pulsing ring */}
         <div className="absolute inset-0 w-24 h-24 rounded-full border-2 border-rama-accent/20 animate-ping" />

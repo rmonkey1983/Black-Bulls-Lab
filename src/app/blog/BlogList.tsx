@@ -45,7 +45,7 @@ export function BlogList({ posts }: BlogListProps) {
             key={cat.id}
             onClick={() => setSelectedCategory(cat.id)}
             className={cn(
-              "px-6 py-2 rounded-full font-heading text-xs uppercase tracking-widest font-bold transition-all duration-300 border",
+              "px-6 py-2 rounded-full font-heading text-xs uppercase tracking-widest font-bold transition duration-300 border",
               selectedCategory === cat.id
                 ? "bg-yellow-500 border-yellow-500 text-black shadow-[0_0_20px_rgba(234,179,8,0.3)]"
                 : "bg-white/5 border-white/10 text-zinc-400 hover:border-white/30 hover:text-white"
@@ -66,7 +66,7 @@ export function BlogList({ posts }: BlogListProps) {
               className="flex flex-col h-full group"
             >
               {/* Image Container */}
-              <div className="relative aspect-[16/10] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
+              <div className="relative aspect-[16/10] overflow-hidden grayscale group-hover:grayscale-0 transition duration-700">
                 <Image
                   src={post.coverImage}
                   alt={post.title}

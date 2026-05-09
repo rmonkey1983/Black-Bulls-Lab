@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { getEvents, getGalleryItems, getTalents } from "@/lib/dataStore";
-import { FlaskConical, Image as ImageIcon, Users, Plus, ArrowRight } from "lucide-react";
+import { FlaskConical, Image as ImageIcon, Users, Plus, ArrowRight, QrCode, Ticket } from "lucide-react";
 
 export default function AdminDashboard() {
     const [stats, setStats] = useState({ events: 0, photos: 0, talents: 0 });
@@ -26,20 +26,21 @@ export default function AdminDashboard() {
 
     const statCards = [
         { label: "Esperimenti", value: stats.events, icon: FlaskConical, color: "green", href: "/admin/events" },
-        { label: "Campioni Foto", value: stats.photos, icon: ImageIcon, color: "cyan", href: "/admin/gallery" },
+        { label: "Prenotazioni", value: "VIEW", icon: Ticket, color: "gold", href: "/admin/bookings" },
         { label: "Artisti", value: stats.talents, icon: Users, color: "amber", href: "/admin/talents" },
     ];
 
     const quickActions = [
+        { label: "Scanner QR Ingresso", href: "/admin/scanner", icon: QrCode, color: "gold" },
         { label: "Nuovo Esperimento", href: "/admin/events?action=new", icon: Plus, color: "green" },
         { label: "Aggiungi Foto", href: "/admin/gallery?action=new", icon: Plus, color: "cyan" },
-        { label: "Nuovo Artista", href: "/admin/talents?action=new", icon: Plus, color: "amber" },
     ];
 
     const colorClasses: Record<string, { text: string; border: string; bg: string; glow: string }> = {
         green: { text: "text-green", border: "border-green/20", bg: "bg-green/5", glow: "text-glow-green" },
         cyan: { text: "text-cyan", border: "border-cyan/20", bg: "bg-cyan/5", glow: "text-glow-cyan" },
         amber: { text: "text-amber", border: "border-amber/20", bg: "bg-amber/5", glow: "" },
+        gold: { text: "text-[#FFD700]", border: "border-[#FFD700]/20", bg: "bg-[#FFD700]/5", glow: "text-glow-gold" },
     };
 
     return (
@@ -62,7 +63,7 @@ export default function AdminDashboard() {
                             key={card.label}
                             href={card.href}
                             className={`border ${c.border} ${c.bg} p-6 hover:border-opacity-50
-                                transition-all duration-300 group relative`}
+                                transition duration-300 group relative`}
                         >
                             <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-green/20" />
                             <div className="flex items-start justify-between">
@@ -99,7 +100,7 @@ export default function AdminDashboard() {
                                 key={action.label}
                                 href={action.href}
                                 className={`flex items-center gap-3 px-4 py-3 border ${c.border} ${c.bg}
-                                    hover:border-opacity-50 transition-all duration-300 ${c.text} data-readout text-xs
+                                    hover:border-opacity-50 transition duration-300 ${c.text} data-readout text-xs
                                     uppercase tracking-wider`}
                             >
                                 <Icon size={14} />

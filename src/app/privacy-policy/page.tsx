@@ -22,7 +22,7 @@ export default function PrivacyPolicyPage() {
                     <section className="space-y-6">
                         <h2 className="font-heading text-2xl font-bold uppercase tracking-wider text-white">1. Titolarità del Trattamento</h2>
                         <p className="leading-relaxed">
-                            Il titolare del trattamento è **Black Bulls Lab**, con sede a Torino. Per qualsiasi richiesta relativa alla protezione dei dati, puoi contattarci all'indirizzo email dedicato.
+                            Il titolare del trattamento è **Black Bulls Lab**, con sede a Torino. Per qualsiasi richiesta relativa alla protezione dei dati, puoi contattarci all&apos;indirizzo email dedicato.
                         </p>
                     </section>
 
@@ -30,7 +30,7 @@ export default function PrivacyPolicyPage() {
                         <h2 className="font-heading text-2xl font-bold uppercase tracking-wider text-white">2. Tipologia di dati raccolti</h2>
                         <ul className="list-disc pl-6 space-y-3">
                             <li>Dati di contatto forniti tramite i form di prenotazione (Nome, Email, Telefono).</li>
-                            <li>Dati tecnici di navigazione raccolti per ottimizzare l'esperienza utente.</li>
+                            <li>Dati tecnici di navigazione raccolti per ottimizzare l&apos;esperienza utente.</li>
                             <li>Preferenze di partecipazione agli eventi per personalizzare i nostri format.</li>
                         </ul>
                     </section>

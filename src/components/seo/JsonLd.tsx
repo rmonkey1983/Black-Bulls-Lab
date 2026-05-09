@@ -1,4 +1,4 @@
-import { SITE_URL, CONTACT_EMAIL, SITE_NAME, CONTACT_PHONE, SOCIAL_LINKS } from "@/lib/constants";
+import { SITE_URL, CONTACT_EMAIL, SITE_NAME, CONTACT_PHONE, SOCIAL_LINKS, SITE_KEYWORDS } from "@/lib/constants";
 
 // ─── Organization Schema ──────────────────────────────────────────────────────
 
@@ -13,9 +13,9 @@ export function OrganizationSchema({ url = SITE_URL }: OrganizationSchemaProps) 
         name: SITE_NAME,
         alternateName: "BBL",
         url,
-        logo: `${url}/blackbullslab-v2.webp`,
+        logo: `${url}/brand/logo-white.svg`,
         description:
-            "Agenzia specializzata in dinner show e format eventi immersivi a Torino. A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e THE GOLDEN VOICE.",
+            "Leader a Torino nella creazione di Dinner Show interattivi e format eventi immersivi. Black Bulls Lab fonde tecnologia e intrattenimento per team building aziendali e serate private uniche.",
         address: {
             "@type": "PostalAddress",
             addressLocality: "Torino",
@@ -28,9 +28,13 @@ export function OrganizationSchema({ url = SITE_URL }: OrganizationSchemaProps) 
             contactType: "customer service",
             availableLanguage: "Italian",
         },
-        sameAs: ["https://instagram.com/blackbullslab"],
+        sameAs: [
+            SOCIAL_LINKS.instagram,
+            SOCIAL_LINKS.facebook,
+            SOCIAL_LINKS.tiktok
+        ],
         foundingDate: "2026",
-        keywords: "dinner show, eventi immersivi, cucina, intrattenimento, Torino, A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto, THE GOLDEN VOICE",
+        keywords: SITE_KEYWORDS.join(", "),
     };
 
     return (
@@ -277,10 +281,10 @@ export function LocalBusinessSchema() {
         ],
         aggregateRating: {
             "@type": "AggregateRating",
-            ratingValue: "4.9",
+            ratingValue: "5.0",
             bestRating: "5",
             worstRating: "1",
-            reviewCount: "80",
+            reviewCount: "82",
         },
         hasOfferCatalog: {
             "@type": "OfferCatalog",

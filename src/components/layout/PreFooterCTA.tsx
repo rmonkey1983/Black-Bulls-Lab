@@ -9,52 +9,52 @@ import { CONTACT_WHATSAPP } from "@/lib/constants";
 export function PreFooterCTA() {
     const pathname = usePathname();
 
-    // Nascondiamo il pre-footer su pannello admin e pagina di checkout per non disturbare l'utente
-    if (pathname.startsWith("/admin") || pathname.startsWith("/checkout")) {
+    // Nascondiamo il pre-footer su pannello admin per non disturbare l'utente
+    if (pathname.startsWith("/admin")) {
         return null;
     }
 
     // Default: Homepage e pagine format
     let title = "Il tuo tavolo ti sta aspettando.";
     let subtitle = "Ogni serata ha un numero limitato di posti. Non aspettare.";
-    let ctaText = "Scrivici su WhatsApp";
-    let ctaHref = `https://wa.me/${CONTACT_WHATSAPP}?text=Ciao!%20Voglio%20prenotare%20una%20serata%20con%20Black%20Bulls%20Lab`;
+    let ctaText = "Vedi il Calendario";
+    let ctaHref = "/calendario";
 
     if (pathname === "/eventi-aziendali") {
         title = "Il tuo team merita una serata indimenticabile.";
         subtitle = "Parliamo del tuo evento. Preventivo gratuito in 24 ore.";
         ctaText = "Costruiamo insieme la serata";
-        ctaHref = "/contact";
+        ctaHref = `https://wa.me/${CONTACT_WHATSAPP}?text=Ciao!%20Voglio%20organizzare%20un%20evento%20aziendale`;
     } else if (pathname === "/format/a-cena-con-il-bugiardo") {
-        title = "Il tuo tavolo ti sta aspettando.";
-        subtitle = "Posti limitati ogni sera. Prenota prima che si esaurisca.";
-        ctaText = "Voglio esserci quella sera";
-        ctaHref = `https://wa.me/${CONTACT_WHATSAPP}?text=Ciao!%20Sono%20interessato%2Fa%20a%20%22A%20Cena%20Con%20Il%20Bugiardo%22.%20Quando%20posso%20venire%3F`;
+        title = "Smaschera il Bugiardo.";
+        subtitle = "Solo 30 posti segreti disponibili per ogni esperimento.";
+        ctaText = "Prenota ora";
+        ctaHref = "/calendario";
     } else if (pathname === "/format/il-palqo") {
         title = "Il palco è pronto. Sei tu?";
-        subtitle = "Artisti, performer, creativi — candidati per la prossima serata.";
-        ctaText = "Voglio salire sul palco";
-        ctaHref = "/contact";
+        subtitle = "Artisti, performer, creativi — consulta le prossime date.";
+        ctaText = "Apri il Calendario";
+        ctaHref = "/calendario";
     } else if (pathname === "/format/the-golden-voice") {
         title = "La tua voce merita di essere ascoltata.";
-        subtitle = "Le audizioni apriranno presto. Candidati ora per essere tra i primi.";
-        ctaText = "Voglio esibirmi";
-        ctaHref = "#casting-form-container";
+        subtitle = "Guarda le prossime audizioni e dinner show nel calendario.";
+        ctaText = "Vedi Date";
+        ctaHref = "/calendario";
     } else if (pathname === "/chi-siamo") {
         title = "Vieni a scoprirci dal vivo.";
         subtitle = "Le parole fanno poco. Vivi un'esperienza Black Bulls Lab.";
         ctaText = "Scegli la tua serata";
-        ctaHref = "/format";
+        ctaHref = "/calendario";
     } else if (pathname === "/blog") {
-        title = "Hai vissuto una nostra serata?";
-        subtitle = "Raccontacela. Le migliori storie finiscono su questo blog.";
-        ctaText = "Scrivici";
-        ctaHref = "/contact";
-    } else if (pathname.startsWith("/blog/")) {
-        title = "Vuoi vivere di persona quello di cui hai letto?";
-        subtitle = "Le migliori serate iniziano con una decisione. Scegli la tua.";
+        title = "Pronto a vivere la tua storia?";
+        subtitle = "Non limitarti a leggere. Entra nel Lab.";
         ctaText = "Prenota la tua serata";
-        ctaHref = "/format";
+        ctaHref = "/calendario";
+    } else if (pathname.startsWith("/blog/")) {
+        title = "Vuoi vivere quello di cui hai letto?";
+        subtitle = "Le migliori serate iniziano con una decisione. Scegli la tua.";
+        ctaText = "Vedi il Calendario";
+        ctaHref = "/calendario";
     }
 
     const isExternal = ctaHref.startsWith("http");
@@ -78,7 +78,7 @@ export function PreFooterCTA() {
                         target="_blank" 
                         rel="noopener noreferrer"
                         suppressHydrationWarning
-                        className="group inline-flex items-center gap-3 bg-rama-accent text-black font-heading font-bold uppercase tracking-widest text-sm sm:text-base px-8 py-4 sm:px-12 sm:py-5 rounded-full hover:bg-white transition-all transform active:scale-95 shadow-[0_0_20px_rgba(200,164,78,0.2)]"
+                        className="group inline-flex items-center gap-3 bg-rama-accent text-black font-heading font-bold uppercase tracking-widest text-sm sm:text-base px-8 py-4 sm:px-12 sm:py-5 rounded-full hover:bg-white transition transform active:scale-95 shadow-[0_0_20px_rgba(200,164,78,0.2)]"
                     >
                         {ctaText}
                         <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -87,7 +87,7 @@ export function PreFooterCTA() {
                     <Link 
                         href={ctaHref}
                         suppressHydrationWarning
-                        className="group inline-flex items-center gap-3 bg-rama-accent text-black font-heading font-bold uppercase tracking-widest text-sm sm:text-base px-8 py-4 sm:px-12 sm:py-5 rounded-full hover:bg-white transition-all transform active:scale-95 shadow-[0_0_20px_rgba(200,164,78,0.2)]"
+                        className="group inline-flex items-center gap-3 bg-rama-accent text-black font-heading font-bold uppercase tracking-widest text-sm sm:text-base px-8 py-4 sm:px-12 sm:py-5 rounded-full hover:bg-white transition transform active:scale-95 shadow-[0_0_20px_rgba(200,164,78,0.2)]"
                     >
                         {ctaText}
                         <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />

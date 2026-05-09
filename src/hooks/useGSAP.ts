@@ -7,7 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 interface GSAPConfig {
-  scope?: React.RefObject<any> | string | Element;
+  scope?: React.RefObject<Element | null> | string | Element;
   dependencies?: React.DependencyList;
 }
 
@@ -31,9 +31,13 @@ export function useGSAP(
     if (typeof window === "undefined") return;
 
     // Use scope if provided (can be a ref or a selector/element)
-    const contextScope = scope && typeof scope !== "string" && "current" in scope ? scope.current : scope;
+    const isRef = scope && typeof scope !== "string" && "current" in scope;
+    const contextScope = isRef ? (scope as React.RefObject<Element | null>).current : scope;
 
-    ctx.current = gsap.context(callback, contextScope);
+    // If a ref scope is provided but it's null, skip this effect cycle
+    if (isRef && !contextScope) return;
+
+    ctx.current = gsap.context(callback, contextScope ?? undefined);
     
     return () => {
       ctx.current?.revert();

@@ -2,12 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { X, ChevronDown, ChevronRight } from "lucide-react";
+import { X, ChevronRight } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";
 import { CONTACT_EMAIL, SOCIAL_LINKS } from "@/lib/constants";
-import { PrimaryButton } from "@/components/ui/PrimaryButton";
 import { usePathname } from "next/navigation";
 
 interface RamaMenuOverlayProps {
@@ -16,7 +15,7 @@ interface RamaMenuOverlayProps {
 }
 
 const experiments = [
-    { name: "A Cena Con Il Bugiardo", href: "/format/a-cena-con-il-bugiardo", desc: "Dinner Show & Social Deception" },
+    { name: "Liar System", href: "/format/a-cena-con-il-bugiardo", desc: "Dinner Show & Social Deception" },
     { name: "Il PalQo", href: "/format/il-palqo", desc: "Community & Show" },
     { name: "Cena Con Delitto", href: "/format/cena-con-delitto", desc: "Dinner Show & Investigation" },
     { name: "THE GOLDEN VOICE", href: "/format/the-golden-voice", desc: "Singing Contest" },
@@ -108,7 +107,7 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
     return (
         <div
             ref={containerRef}
-            className="fixed top-0 left-0 w-full h-[100dvh] z-[200] bg-black hidden opacity-0 text-white flex overflow-hidden lg:pb-0 pb-[env(safe-area-inset-bottom)]"
+            className="fixed top-0 left-0 w-full h-dvh z-200 bg-black hidden opacity-0 text-white overflow-hidden lg:pb-0 pb-[env(safe-area-inset-bottom)]"
             role="dialog"
             aria-modal="true"
             aria-label="Menu principale"
@@ -117,7 +116,7 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
             {/* Close Button */}
             <button
                 onClick={onClose}
-                className="absolute top-6 right-6 md:top-8 md:right-12 z-[70] p-4 text-yellow-500 hover:rotate-90 transition-transform duration-300"
+                className="absolute top-6 right-6 md:top-8 md:right-12 z-70 p-4 text-yellow-500 hover:rotate-90 transition-transform duration-300"
                 aria-label="Chiudi menu"
             >
                 <X size={32} strokeWidth={2.5} />
@@ -154,7 +153,8 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                     <Link
                         href="/"
                         onClick={onClose}
-                        className={`nav-link font-heading text-4xl sm:text-5xl md:text-7xl uppercase font-bold transition-colors duration-300 block ${pathname === "/" ? "text-rama-accent" : "text-white hover:text-rama-accent"}`}
+                        suppressHydrationWarning
+                        className={`nav-link font-heading text-3xl sm:text-5xl md:text-7xl uppercase font-bold transition-colors duration-300 block ${pathname === "/" ? "text-rama-accent" : "text-white hover:text-rama-accent"}`}
                     >
                         Home
                     </Link>
@@ -163,12 +163,12 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                     <div className="nav-link flex flex-col">
                         <button
                             onClick={() => setExperimentsOpen(!experimentsOpen)}
-                            className="flex items-center gap-4 text-left group focus:outline-none"
+                            className="flex items-center gap-4 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50"
                         >
-                            <span className="font-heading font-bold text-4xl sm:text-5xl md:text-7xl uppercase tracking-tighter text-white hover:text-rama-accent transition-colors">
+                            <span className="font-heading font-bold text-3xl sm:text-5xl md:text-7xl uppercase tracking-tighter text-white hover:text-rama-accent transition-colors">
                                 Le Nostre Serate
                             </span>
-                            <ChevronRight className={`transition-transform duration-500 text-rama-accent ${experimentsOpen ? 'rotate-90' : ''}`} size={32} />
+                            <ChevronRight className={`transition-transform duration-500 text-rama-accent ${experimentsOpen ? 'rotate-90' : ''}`} size={24} />
                         </button>
                         
                         <div 
@@ -176,18 +176,19 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                             className="overflow-hidden"
                             style={{ height: 0, opacity: 0 }}
                         >
-                            <div className="py-6 flex flex-col gap-4 pl-4 border-l border-rama-accent/20">
+                            <div className="py-4 flex flex-col gap-3 pl-4 border-l border-rama-accent/20">
                                 {experiments.map((exp) => (
                                     <Link
                                         key={exp.href}
                                         href={exp.href}
                                         onClick={onClose}
+                                        suppressHydrationWarning
                                         className="sub-link group flex flex-col"
                                     >
-                                        <span className="font-heading text-2xl uppercase font-bold text-white/70 group-hover:text-rama-accent transition-colors">
+                                        <span className="font-heading text-xl uppercase font-bold text-white/70 group-hover:text-rama-accent transition-colors">
                                             {exp.name}
                                         </span>
-                                        <span className="font-sans text-xs text-rama-muted uppercase tracking-widest">
+                                        <span className="font-sans text-[10px] text-rama-muted uppercase tracking-widest">
                                             {exp.desc}
                                         </span>
                                     </Link>
@@ -202,13 +203,14 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                         { name: "Gallery", href: "/gallery" },
                         { name: "Chi Siamo", href: "/chi-siamo" },
                         { name: "Blog", href: "/blog" },
-                        { name: "Contatti", href: "/contact" },
+                        { name: "Calendario", href: "/calendario" },
                     ].map((link) => (
                         <Link
                             key={link.href}
                             href={link.href}
                             onClick={onClose}
-                            className={`nav-link font-heading text-4xl sm:text-5xl md:text-7xl uppercase font-bold transition-colors duration-300 block ${pathname === link.href ? "text-rama-accent" : "text-white hover:text-rama-accent"}`}
+                            suppressHydrationWarning
+                            className={`nav-link font-heading text-3xl sm:text-5xl md:text-7xl uppercase font-bold transition-colors duration-300 block ${pathname === link.href ? "text-rama-accent" : "text-white hover:text-rama-accent"}`}
                         >
                             {link.name}
                         </Link>
@@ -220,14 +222,14 @@ export function RamaMenuOverlay({ isOpen, onClose }: RamaMenuOverlayProps) {
                     <div>
                         <h4 className="text-rama-accent mb-4 uppercase tracking-[0.2em] text-[10px] font-bold">Social</h4>
                         <div className="flex flex-col gap-2">
-                            <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
-                            <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Facebook</a>
-                            <a href={SOCIAL_LINKS.tiktok} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">TikTok</a>
+                            <a href={SOCIAL_LINKS.instagram} suppressHydrationWarning target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
+                            <a href={SOCIAL_LINKS.facebook} suppressHydrationWarning target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Facebook</a>
+                            <a href={SOCIAL_LINKS.tiktok} suppressHydrationWarning target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">TikTok</a>
                         </div>
                     </div>
                     <div>
                         <h4 className="text-rama-accent mb-4 uppercase tracking-[0.2em] text-[10px] font-bold">Contattaci</h4>
-                        <a href={`mailto:${CONTACT_EMAIL}`} className="text-white hover:text-rama-accent transition-colors text-lg">
+                        <a href={`mailto:${CONTACT_EMAIL}`} suppressHydrationWarning className="text-white hover:text-rama-accent transition-colors text-lg">
                             {CONTACT_EMAIL}
                         </a>
                     </div>

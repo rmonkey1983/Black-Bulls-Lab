@@ -85,10 +85,10 @@ export function RamaTestimonials() {
                 <div className="relative">
                     <div
                         ref={cardRef}
-                        className="relative p-8 md:p-12 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden"
+                        className="relative group p-8 rounded-3xl bg-white/3 border border-white/5 transition duration-500 hover:border-rama-accent/30 hover:-translate-y-2"
                     >
                         {/* Background quote mark */}
-                        <Quote className="absolute top-6 right-6 md:top-10 md:right-10 text-white/[0.04]" size={80} />
+                        <Quote className="absolute top-6 right-6 text-white/4 group-hover:text-rama-accent/10 transition-colors duration-500" size={48} />
 
                         {/* Format tag */}
                         <div className="inline-flex items-center gap-2 bg-rama-accent/10 border border-rama-accent/30 rounded-full px-4 py-1.5 mb-6">
@@ -130,7 +130,7 @@ export function RamaTestimonials() {
                                     key={i}
                                     onClick={() => setCurrent(i)}
                                     aria-label={`Vai alla recensione ${i + 1}`}
-                                    className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? "w-8 bg-rama-accent" : "w-2 bg-white/20 hover:bg-white/40"}`}
+                                    className={`h-1.5 rounded-full transition duration-300 ${i === current ? "w-8 bg-rama-accent" : "w-2 bg-white/20 hover:bg-white/40"}`}
                                 />
                             ))}
                         </div>
@@ -140,14 +140,14 @@ export function RamaTestimonials() {
                             <button
                                 onClick={prev}
                                 aria-label="Recensione precedente"
-                                className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-rama-accent hover:text-rama-accent transition-all duration-300"
+                                className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-rama-accent hover:text-rama-accent transition duration-300"
                             >
                                 <ChevronLeft size={18} />
                             </button>
                             <button
                                 onClick={next}
                                 aria-label="Recensione successiva"
-                                className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-rama-accent hover:text-rama-accent transition-all duration-300"
+                                className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:border-rama-accent hover:text-rama-accent transition duration-300"
                             >
                                 <ChevronRight size={18} />
                             </button>

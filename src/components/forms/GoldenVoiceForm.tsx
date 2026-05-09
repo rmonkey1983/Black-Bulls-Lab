@@ -64,7 +64,7 @@ export function GoldenVoiceForm() {
                             name="name"
                             required
                             disabled={loading}
-                            className="w-full bg-black/50 border border-white/10 rounded-none px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors disabled:opacity-50"
+                            className="w-full bg-black/50 border border-white/10 rounded-none px-4 py-3 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 focus:border-gold transition-colors disabled:opacity-50"
                             placeholder="Mario Rossi"
                         />
                     </div>
@@ -76,7 +76,7 @@ export function GoldenVoiceForm() {
                             name="email"
                             required
                             disabled={loading}
-                            className="w-full bg-black/50 border border-white/10 rounded-none px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors disabled:opacity-50"
+                            className="w-full bg-black/50 border border-white/10 rounded-none px-4 py-3 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 focus:border-gold transition-colors disabled:opacity-50"
                             placeholder="mario@example.com"
                         />
                     </div>
@@ -91,7 +91,7 @@ export function GoldenVoiceForm() {
                             name="phone"
                             required
                             disabled={loading}
-                            className="w-full bg-black/50 border border-white/10 rounded-none px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors disabled:opacity-50"
+                            className="w-full bg-black/50 border border-white/10 rounded-none px-4 py-3 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 focus:border-gold transition-colors disabled:opacity-50"
                             placeholder="+39 333 1234567"
                         />
                     </div>
@@ -102,7 +102,7 @@ export function GoldenVoiceForm() {
                             id="age"
                             name="age"
                             disabled={loading}
-                            className="w-full bg-black/50 border border-white/10 rounded-none px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors disabled:opacity-50"
+                            className="w-full bg-black/50 border border-white/10 rounded-none px-4 py-3 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 focus:border-gold transition-colors disabled:opacity-50"
                             placeholder="25"
                         />
                     </div>
@@ -116,7 +116,7 @@ export function GoldenVoiceForm() {
                         name="signature_song"
                         required
                         disabled={loading}
-                        className="w-full bg-black/50 border border-white/10 rounded-none px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors disabled:opacity-50"
+                        className="w-full bg-black/50 border border-white/10 rounded-none px-4 py-3 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 focus:border-gold transition-colors disabled:opacity-50"
                         placeholder="Es. Sognami - Biagio Antonacci"
                     />
                 </div>
@@ -128,7 +128,7 @@ export function GoldenVoiceForm() {
                         id="media_link"
                         name="media_link"
                         disabled={loading}
-                        className="w-full bg-black/50 border border-white/10 rounded-none px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors disabled:opacity-50"
+                        className="w-full bg-black/50 border border-white/10 rounded-none px-4 py-3 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 focus:border-gold transition-colors disabled:opacity-50"
                         placeholder="https://youtu.be/..."
                     />
                 </div>
@@ -143,7 +143,7 @@ export function GoldenVoiceForm() {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="flex items-center gap-3 px-12 py-4 bg-gold text-black font-bold uppercase tracking-widest hover:bg-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex items-center gap-3 px-12 py-4 bg-gold text-black font-bold uppercase tracking-widest hover:bg-white transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {loading ? "IN INVIO..." : "INVIA CANDIDATURA"} <ArrowLeft className="rotate-180" size={18} />
                     </button>

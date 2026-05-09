@@ -49,8 +49,10 @@ export default function AdminGalleryPage() {
     };
 
     useEffect(() => {
-        load();
-        if (searchParams.get("action") === "new") setShowForm(true);
+        requestAnimationFrame(() => load());
+        if (searchParams.get("action") === "new") {
+            requestAnimationFrame(() => setShowForm(true));
+        }
     }, [searchParams]);
 
     // ===== FILE HANDLING =====
@@ -178,7 +180,7 @@ export default function AdminGalleryPage() {
         });
     };
 
-    const inputClass = "w-full bg-lab-dark/80 border border-green/15 px-4 py-2.5 text-rama-text text-sm data-readout placeholder:text-gray-600 focus:outline-none focus:border-green/40 transition-all duration-300";
+    const inputClass = "w-full bg-lab-dark/80 border border-green/15 px-4 py-2.5 text-rama-text text-sm data-readout placeholder:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 focus:border-green/40 transition duration-300";
 
     return (
         <div
@@ -210,11 +212,11 @@ export default function AdminGalleryPage() {
                 </div>
                 <div className="flex items-center gap-3">
                     {selected.size > 0 && (
-                        <button onClick={handleBulkDelete} className="flex items-center gap-2 px-4 py-2 border border-red/30 bg-red/10 text-red text-xs font-bold uppercase tracking-wider data-readout hover:bg-red/20 transition-all cursor-pointer">
+                        <button onClick={handleBulkDelete} className="flex items-center gap-2 px-4 py-2 border border-red/30 bg-red/10 text-red text-xs font-bold uppercase tracking-wider data-readout hover:bg-red/20 transition cursor-pointer">
                             <Trash2 size={12} /> Elimina ({selected.size})
                         </button>
                     )}
-                    <button onClick={() => setShowForm(!showForm)} className="flex items-center gap-2 px-5 py-2.5 border border-cyan/40 bg-cyan/10 text-cyan text-xs font-bold uppercase tracking-wider data-readout hover:bg-cyan/20 transition-all cursor-pointer">
+                    <button onClick={() => setShowForm(!showForm)} className="flex items-center gap-2 px-5 py-2.5 border border-cyan/40 bg-cyan/10 text-cyan text-xs font-bold uppercase tracking-wider data-readout hover:bg-cyan/20 transition cursor-pointer">
                         <Plus size={14} /> Carica Media
                     </button>
                 </div>
@@ -228,7 +230,7 @@ export default function AdminGalleryPage() {
                             <button
                                 type="button"
                                 onClick={() => setFormMode("upload")}
-                                className={`data-readout text-[10px] tracking-[0.2em] uppercase flex items-center gap-1.5 px-3 py-1.5 border transition-all cursor-pointer
+                                className={`data-readout text-[10px] tracking-[0.2em] uppercase flex items-center gap-1.5 px-3 py-1.5 border transition cursor-pointer
                                     ${formMode === "upload"
                                         ? "text-cyan border-cyan/40 bg-cyan/10"
                                         : "text-gray-500 border-gray-700 hover:text-cyan hover:border-cyan/20"
@@ -239,7 +241,7 @@ export default function AdminGalleryPage() {
                             <button
                                 type="button"
                                 onClick={() => setFormMode("url")}
-                                className={`data-readout text-[10px] tracking-[0.2em] uppercase flex items-center gap-1.5 px-3 py-1.5 border transition-all cursor-pointer
+                                className={`data-readout text-[10px] tracking-[0.2em] uppercase flex items-center gap-1.5 px-3 py-1.5 border transition cursor-pointer
                                     ${formMode === "url"
                                         ? "text-cyan border-cyan/40 bg-cyan/10"
                                         : "text-gray-500 border-gray-700 hover:text-cyan hover:border-cyan/20"
@@ -259,15 +261,15 @@ export default function AdminGalleryPage() {
                             <div
                                 onClick={() => fileInputRef.current?.click()}
                                 className="border-2 border-dashed border-cyan/20 hover:border-cyan/40 bg-lab-dark/40 p-8
-                                    flex flex-col items-center justify-center cursor-pointer transition-all duration-300
-                                    hover:bg-cyan/[0.03]"
+                                    flex flex-col items-center justify-center cursor-pointer transition duration-300
+                                    hover:bg-cyan/3]"
                             >
                                 <Upload size={32} className="text-cyan/30 mb-3" />
                                 <p className="text-rama-text text-sm font-medium mb-1">
                                     Clicca per selezionare o trascina qui
                                 </p>
                                 <p className="text-gray-500 text-xs data-readout">
-                                    JPG, PNG, GIF, WebP, MP4, WebM, MOV
+                                    JPG, PNG, GIF, WebP, MP4, WebM, MOV (Max 10MB per file)
                                 </p>
                                 <input
                                     ref={fileInputRef}
@@ -314,7 +316,7 @@ export default function AdminGalleryPage() {
                                                     type="button"
                                                     onClick={() => removePendingFile(i)}
                                                     className="absolute top-1 right-1 w-5 h-5 bg-lab-dark/80 border border-red/30 flex items-center justify-center
-                                                        text-red/50 hover:text-red hover:border-red transition-all cursor-pointer opacity-0 group-hover:opacity-100"
+                                                        text-red/50 hover:text-red hover:border-red transition cursor-pointer opacity-0 group-hover:opacity-100"
                                                 >
                                                     <X size={10} />
                                                 </button>
@@ -345,7 +347,7 @@ export default function AdminGalleryPage() {
                                     type="submit"
                                     disabled={uploading}
                                     className={`w-full py-3 border text-sm font-bold uppercase tracking-wider data-readout
-                                        flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer
+                                        flex items-center justify-center gap-2 transition duration-300 cursor-pointer
                                         ${uploading
                                             ? "border-cyan/20 bg-cyan/5 text-cyan/50"
                                             : "border-cyan/40 bg-cyan/10 text-cyan hover:bg-cyan/20 hover:border-cyan/60"
@@ -392,7 +394,7 @@ export default function AdminGalleryPage() {
                                     )}
                                 </div>
                             )}
-                            <button type="submit" className="w-full py-2.5 border border-cyan/40 bg-cyan/10 text-cyan text-sm font-bold uppercase tracking-wider data-readout hover:bg-cyan/20 transition-all flex items-center justify-center gap-2 cursor-pointer">
+                            <button type="submit" className="w-full py-2.5 border border-cyan/40 bg-cyan/10 text-cyan text-sm font-bold uppercase tracking-wider data-readout hover:bg-cyan/20 transition flex items-center justify-center gap-2 cursor-pointer">
                                 <Check size={14} /> Salva
                             </button>
                         </form>
@@ -409,7 +411,7 @@ export default function AdminGalleryPage() {
             {/* Gallery Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                 {items.map((item) => (
-                    <div key={item.id} className={`relative group border transition-all duration-300 overflow-hidden
+                    <div key={item.id} className={`relative group border transition duration-300 overflow-hidden
                         ${selected.has(item.id) ? "border-cyan/50 shadow-[0_0_15px_rgba(0,212,255,0.1)]" : "border-green/10 hover:border-green/25"}`}
                     >
                         {item.type === "video" || isVideo(item.src) ? (
@@ -430,7 +432,7 @@ export default function AdminGalleryPage() {
                         <div className="absolute inset-0 bg-lab-dark/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
                             <button
                                 onClick={() => toggleSelect(item.id)}
-                                className={`w-8 h-8 border flex items-center justify-center transition-all cursor-pointer
+                                className={`w-8 h-8 border flex items-center justify-center transition cursor-pointer
                                     ${selected.has(item.id)
                                         ? "border-cyan bg-cyan/20 text-cyan"
                                         : "border-white/30 text-rama-text hover:border-cyan"
@@ -438,7 +440,7 @@ export default function AdminGalleryPage() {
                             >
                                 ✓
                             </button>
-                            <button onClick={() => handleDelete(item.id)} className="w-8 h-8 border border-red/30 flex items-center justify-center text-red/50 hover:text-red hover:border-red transition-all cursor-pointer">
+                            <button onClick={() => handleDelete(item.id)} className="w-8 h-8 border border-red/30 flex items-center justify-center text-red/50 hover:text-red hover:border-red transition cursor-pointer">
                                 <Trash2 size={14} />
                             </button>
                         </div>

@@ -1,161 +1,269 @@
 "use client";
 
-import { useRef } from "react";
-import { EventConcept } from "@/components/events/EventConcept";
-import { ArrowLeft, Smile } from "lucide-react";
-import Link from "next/link";
+import React, { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { Search, Smartphone, CheckCircle2, AlertTriangle, Building2, PartyPopper, Zap, ArrowLeft } from "lucide-react";
+import { gsap } from "gsap";
 import { useGSAP } from "@/hooks/useGSAP";
 import { animateHeroText, animateFade, animateCards } from "@/lib/gsapAnimations";
-import { buildWAUrl, WA_MESSAGES } from "@/lib/whatsapp";
 import { FormatQuickInfo } from "@/components/events/FormatQuickInfo";
+import { Anton } from "next/font/google";
 
-export function ACenaConIlBugiardoClient() { 
-    const containerRef = useRef<HTMLDivElement>(null);
+const anton = Anton({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-anton",
+});
 
-    useGSAP(() => { 
-        animateHeroText("#bugiardo-hero", 0.1);
-        animateFade(".bugiardo-tag", "up", 0.3);
-        animateFade(".bugiardo-desc", "up", 0.4);
-        animateFade("#how-it-works-title", "up", 0.1);
-        animateCards("#how-it-works-grid");
-        animateFade("#bugiardo-cta", "up", 0.1);
-    }, { scope: containerRef });
+export function ACenaConIlBugiardoClient() {
+  const containerRef = useRef<HTMLDivElement>(null);
 
-    return (
-        <main ref={containerRef} className="min-h-screen">
-            <section className="relative min-h-[60vw] md:min-h-0 md:h-[85vh] w-full overflow-hidden flex items-end">
-                <div className="absolute inset-0 z-0">
-                    <Image
-                        src="/images/brand/bg-hero-wide.webp"
-                        alt="A Cena Con Il Bugiardo"
-                        width={1920}
-                        height={1080}
-                        className="w-full h-full object-cover opacity-40 contrast-125"
-                        style={{ aspectRatio: '16/9', objectFit: 'cover' }}
-                        priority
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-br from-red-900/30 via-transparent to-amber-900/20 mix-blend-overlay" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/50 to-transparent" />
-                    <div className="absolute inset-0 bg-[url('/noise.webp')] opacity-20 mix-blend-overlay pointer-events-none" />
+  useGSAP(() => {
+    animateHeroText("#liar-hero", 0.1);
+    animateFade(".liar-tag", "up", 0.3);
+    animateFade(".liar-desc", "up", 0.4);
+    const items = gsap.utils.toArray(".reveal-liar");
+    items.forEach((item: any) => {
+      gsap.from(item, {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: item,
+          start: "top 90%",
+          toggleActions: "play none none none"
+        }
+      });
+    });
+  }, { scope: containerRef });
+
+  return (
+    <main ref={containerRef} className={`${anton.variable} min-h-screen bg-zinc-950 text-white font-sans selection:bg-red-600 selection:text-white`}>
+      
+      {/* 1. HERO SECTION: L'Impatto */}
+      <section className="relative h-[85vh] w-full overflow-hidden flex items-end">
+        <div className="absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
+          <Image
+            src="/images/brand/background.webp"
+            alt="LIAR SYSTEM Background"
+            fill
+            className="object-contain opacity-20 scale-150"
+            priority
+          />
+          <div className="absolute inset-0 bg-linear-to-t from-zinc-950 via-zinc-950/50 to-transparent" />
+          <div className="absolute inset-0 bg-[url('/noise.webp')] opacity-20 mix-blend-overlay pointer-events-none" />
+        </div>
+
+        <div className="absolute top-24 left-6 z-30">
+            <Link
+                href="/format"
+                suppressHydrationWarning
+                className="flex items-center gap-2 text-white/70 hover:text-red-600 transition-colors uppercase text-xs font-bold tracking-widest backdrop-blur-sm bg-black/30 px-4 py-2 rounded-full border border-white/10"
+            >
+                <ArrowLeft size={14} /> Tutti i format
+            </Link>
+        </div>
+
+        <div className="relative z-20 w-full max-w-7xl mx-auto p-6 md:p-12 mb-12">
+            <div id="liar-hero" className="flex flex-col space-y-8">
+                <div className="liar-tag flex flex-wrap items-center gap-3 text-red-600 text-sm font-bold uppercase tracking-[0.2em]">
+                    <span className="flex items-center gap-2 bg-red-600/10 backdrop-blur-sm px-3 py-1 rounded-full border border-red-600/20">
+                        <Zap size={14} /> Social Game Experience
+                    </span>
+                    <span className="flex items-center gap-2 bg-zinc-800/80 text-white backdrop-blur-sm px-3 py-1 rounded-full border border-white/10">
+                        Protocol: Social Deception
+                    </span>
                 </div>
 
-                <div className="absolute top-20 sm:top-24 left-4 sm:left-6 z-30">
-                    <Link
-                        href="/format"
-                        className="flex items-center gap-2 text-rama-text/70 hover:text-rama-accent transition-colors uppercase text-xs font-bold tracking-widest backdrop-blur-sm bg-black/30 px-3 py-2 sm:px-4 rounded-full border border-white/10"
-                    >
-                        <ArrowLeft size={14} /> Tutti i format
-                    </Link>
+                <h1 className="font-anton text-4xl sm:text-5xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tighter uppercase text-white">
+                    <span>IL TUO TAVOLO È</span><br />
+                    <span className="text-zinc-500">PIENO DI BUGIARDI.</span><br />
+                    <span className="text-red-600">DIMOSTRALO.</span>
+                </h1>
+
+                <p className="liar-desc text-base sm:text-xl md:text-2xl text-gray-300 font-light max-w-3xl border-l-4 border-red-600 pl-6 italic">
+                    Entra in LIAR SYSTEM. La prima Social Game Experience in cui la fiducia è un difetto, lo smartphone è un'arma e lo spettacolo... siete voi.
+                </p>
+            </div>
+        </div>
+      </section>
+
+      {/* QUICK INFO BAR */}
+      <FormatQuickInfo 
+        duration="3 ore circa"
+        capacity="20 - 100+ persone"
+        price="Da 50€ / pers"
+        highlight="Proprietary Web App"
+        highlightLabel="Tecnologia"
+      />
+
+      {/* 2. IL FILTRO: Fuori i nostalgici */}
+      <section id="disclaimer" className="py-24 px-6 max-w-6xl mx-auto">
+        <div className="reveal-liar border border-red-600/30 bg-red-600/5 p-8 md:p-16 rounded-3xl relative overflow-hidden group hover:bg-red-600/10 transition-colors duration-500">
+          <div className="absolute -top-10 -right-10 text-red-600/10 group-hover:scale-110 transition-transform duration-1000">
+            <AlertTriangle size={200} />
+          </div>
+          
+          <div className="relative z-10 space-y-8">
+            <div className="flex items-center gap-4">
+               <span className="h-px w-12 bg-red-600" />
+               <span className="text-red-600 font-bold uppercase tracking-widest text-[10px]">Il Futuro dell&apos;Intrattenimento</span>
+            </div>
+            
+            <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tighter leading-tight text-white">
+              Se amate il fascino del teatro classico e delle indagini guidate da attori professionisti, la nostra Cena con Delitto tradizionale è ciò che fa per voi.
+            </h2>
+            
+            <p className="text-gray-400 text-lg md:text-xl font-light">
+              (La trovate <Link href="/format/cena-con-delitto" suppressHydrationWarning className="text-white underline decoration-red-600/50 hover:text-red-600 transition-colors">cliccando qui</Link>).
+            </p>
+            
+            <div className="text-xl md:text-3xl font-bold uppercase tracking-tighter leading-tight text-white border-l-4 border-red-600 pl-8 py-2">
+              Se invece cercate un&apos;esperienza dove i protagonisti siete voi, pronti a sfidare colleghi e amici in un gioco di strategia supportato da una tecnologia all&apos;avanguardia, allora siete nel posto giusto. <span className="text-red-600">Benvenuti nel futuro dell&apos;intrattenimento.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. COME FUNZIONA: Regole spietate */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="font-anton text-5xl md:text-7xl uppercase tracking-tighter text-white">
+              TRE REGOLE. <span className="text-red-600">NESSUNA PIETÀ.</span>
+            </h2>
+            <div className="w-24 h-1 bg-red-600 mx-auto" />
+            <p className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto font-light pt-4">
+              Nessun copione da imparare. Tutto è gestito dalla nostra Web App proprietaria e dal nostro Game Master in sala. Voi dovete solo mangiare, bere e guardarvi le spalle.
+            </p>
+          </div>
+
+          <div id="rules-grid" className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            {[
+              {
+                icon: <Smartphone className="text-red-600" size={32} />,
+                title: "1. Esegui l'Accesso (E taci)",
+                desc: "Niente app pesanti da scaricare. Inquadri il QR code sul tavolo, entri nel network e il Sistema ti assegna segretamente un ruolo. Potresti essere un onesto Investigatore o un pessimo individuo."
+              },
+              {
+                icon: <Search className="text-red-600" size={32} />,
+                title: "2. Baratta e Menti",
+                desc: "Durante la cena, il tuo terminale riceverà indizi frammentati e 'missioni sociali' da completare al tavolo per creare caos. Alzati, negozia informazioni con gli altri, diffondi false piste. Nessuno ha la verità in tasca."
+              },
+              {
+                icon: <CheckCircle2 className="text-red-600" size={32} />,
+                title: "3. Emetti la Sentenza",
+                desc: "Al momento del dolce, il tavolo deve inserire il nome del colpevole nel Sistema. Sbagliate l'accusa? Il Bugiardo vince, e voi pagate il conto morale della sconfitta."
+              }
+            ].map((step, i) => (
+              <div
+                key={i}
+                className="reveal-liar bg-white/5 border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition duration-500 group flex flex-col items-center text-center gap-6"
+              >
+                <div className="w-16 h-16 bg-red-600/10 rounded-full flex items-center justify-center text-red-600 shrink-0 group-hover:scale-110 transition-transform duration-500 border border-red-600/20 shadow-[0_0_20px_rgba(220,38,38,0.1)]">
+                    {step.icon}
                 </div>
-
-                <div className="relative z-20 w-full max-w-7xl mx-auto p-6 md:p-12 mb-12">
-                    <div id="bugiardo-hero" className="flex flex-col space-y-6">
-                        <div className="bugiardo-tag flex flex-wrap items-center gap-3 text-rama-accent text-sm font-bold uppercase tracking-[0.2em]">
-                            <span className="flex items-center gap-2 bg-rama-accent/10 backdrop-blur-sm px-3 py-1 rounded-full border border-rama-accent/20">
-                                <Smile size={14} /> Dinner Show & Social Deception
-                            </span>
-                            <span className="flex items-center gap-2 bg-white/10 text-white backdrop-blur-sm px-3 py-1 rounded-full border border-white/20">
-                                Posti limitati — Max 30 persone
-                            </span>
-                        </div>
-                        <h1 className="sr-only">A Cena con il Bugiardo | Dinner Show a Torino</h1>
-                        <div aria-hidden="true" className="line text-4xl sm:text-5xl md:text-8xl font-bold text-rama-text tracking-tighter leading-[0.9] drop-shadow-2xl">
-                            <span>A CENA CON</span><br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-rama-accent via-white to-rama-accent">
-                                <span>IL BUGIARDO</span>
-                            </span>
-                        </div>
-
-                        <p className="bugiardo-desc text-base sm:text-xl md:text-3xl text-gray-300 font-light max-w-2xl border-l-4 border-rama-accent pl-4 sm:pl-6">
-                            Dimentica le cene spettacolo passive. L&apos;inganno ora è a portata di smartphone.
-                        </p>
-                    </div>
+                <div>
+                    <h3 className="text-2xl font-bold text-white mb-4 uppercase tracking-tight">{step.title}</h3>
+                    <p className="text-gray-400 text-base leading-relaxed font-sans">
+                        {step.desc}
+                    </p>
                 </div>
-            </section>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <FormatQuickInfo
-                duration="3 ore circa"
-                capacity="10 - 100+ persone"
-                price="da 50€ / pers"
-                highlight="Web App Integrata"
-                highlightLabel="Tecnologia"
+      {/* 4. I TARGET: Chi ha il coraggio di giocare? */}
+      <section id="targets-section" className="py-24 px-6 bg-zinc-900/20">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32">
+          
+          <div className="reveal-liar space-y-8">
+            <div className="inline-flex items-center gap-3 text-red-600 font-bold uppercase tracking-widest text-[10px]">
+                <Building2 size={16} /> Team Building Aziendale (B2B)
+            </div>
+            <h3 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter leading-none text-white">
+              Il vero problem solving <br /> si vede sotto pressione.
+            </h3>
+            <p className="text-gray-400 text-xl font-light leading-relaxed">
+              Le solite attività di team building vi fanno sbadigliare? Mettete alla prova le vere soft skills del vostro ufficio: negoziazione spietata, deduzione logica e pensiero laterale. Ideale per gruppi da 20 a 100+ persone.
+            </p>
+          </div>
+
+          <div className="reveal-liar space-y-8">
+            <div className="inline-flex items-center gap-3 text-red-600 font-bold uppercase tracking-widest text-[10px]">
+                <PartyPopper size={16} /> Private Party (B2C)
+            </div>
+            <h3 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter leading-none text-white">
+              Pensate di <br /> conoscervi bene?
+            </h3>
+            <p className="text-gray-400 text-xl font-light leading-relaxed">
+              Compleanni, feste di laurea, o semplicemente una cena che non sia la solita pizza. Mettete in gioco anni di amicizia. Ridi, bluffa, tradisci la fiducia del tuo migliore amico per un indizio extra e scopri chi è il vero manipolatore del gruppo.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 5. IL GAME MASTER: Il burattinaio */}
+      <section id="gamemaster" className="py-32 px-6 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-20">
+          <div className="reveal-liar lg:w-1/2 space-y-8">
+            <div className="flex items-center gap-2 text-red-600 font-bold text-xs uppercase tracking-widest">
+              <Zap size={16} className="animate-pulse" /> Protocollo Live
+            </div>
+            <h2 className="font-anton text-6xl md:text-8xl uppercase tracking-tighter leading-[0.85] text-white">
+              IL SISTEMA È <br /> <span className="text-red-600">MONITORATO.</span>
+            </h2>
+            <p className="text-gray-300 text-xl font-light leading-relaxed border-l-4 border-red-600 pl-8">
+              Non vi lasciamo soli in balia del caos. Ogni evento LIAR SYSTEM è guidato in presenza da un nostro Game Master. È lui che attiva le missioni, gestisce i colpi di scena dalla console di regia e si assicura che il ritmo della serata non cali mai.
+            </p>
+          </div>
+          
+          <div className="reveal-liar lg:w-1/2 relative aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
+            <Image
+              src="/images/brand/bg-venue-crowd.webp"
+              alt="Game Master"
+              fill
+              className="object-cover opacity-60 grayscale group-hover:grayscale-0 transition duration-1000"
             />
+            <div className="absolute inset-0 bg-linear-to-t from-zinc-950 via-transparent to-transparent" />
+            <div className="absolute top-8 left-8 border-l border-red-600 pl-4 py-2 bg-black/40 backdrop-blur-md">
+                <div className="text-[10px] text-red-600 font-bold tracking-widest uppercase">System Control</div>
+                <div className="text-xl font-black text-white">MASTER_ON_SITE</div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <EventConcept
-                description={`Dimentica le classiche cene spettacolo passive: in "A Cena con il Bugiardo" i veri protagonisti sono i commensali e l'intera regia del gioco è gestita da una Web App interattiva. Un format moderno e immersivo dove tutti hanno un ruolo, ma solo una persona nasconde il grande segreto.\n\nUn evento dal ritmo incalzante e altamente scalabile, dove la tecnologia fa da filo conduttore senza mai sovrastare il piacere della cena e della conversazione. Ideale per gruppi e aziende che cercano una serata ad alto tasso di coinvolgimento, dove tutti giocano e nessuno resta a guardare.`}
-            />
+      {/* 6. FOOTER: La Chiusura - Solid Red as requested */}
+      <section className="py-32 px-6 bg-red-600 text-black text-center relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 bg-[url('/noise.webp')] mix-blend-overlay" />
+        </div>
+        
+        <div className="relative z-10 max-w-5xl mx-auto space-y-12">
+          <h2 className="font-anton text-6xl md:text-[8vw] uppercase tracking-tighter leading-[0.85]">
+            IL SISTEMA È PRONTO <br className="hidden md:block" /> PER IL TUO GRUPPO. <br />
+            <span className="bg-black text-red-600 px-6 inline-block">VOI LO SIETE?</span>
+          </h2>
+          
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+            <Link 
+              href="/calendario" 
+              suppressHydrationWarning
+              className="group relative inline-flex items-center gap-4 px-12 py-6 bg-rama-accent text-black text-xl font-black uppercase tracking-widest hover:bg-white transition duration-500 shadow-[0_20px_50px_rgba(234,179,8,0.3)] rounded-full border border-black/10 hover:scale-105 active:scale-95"
+            >
+              INIZIALIZZA IL TUO EVENTO
+              <Zap size={24} className="text-black group-hover:animate-pulse" />
+            </Link>
+          </div>
+        </div>
+      </section>
 
-            <section className="py-24 bg-transparent/40 relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-rama-accent/5 rounded-full blur-[100px] -translate-y-1/2 -translate-x-1/2 pointer-events-none" />
-                <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-bordeaux/10 rounded-full blur-[100px] translate-y-1/2 translate-x-1/2 pointer-events-none" />
-
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="text-center mb-16">
-                        <h2 id="how-it-works-title" className="gsap-fade text-4xl md:text-5xl font-bold text-rama-text mb-4">
-                            COME <span className="text-rama-accent italic">FUNZIONA IL GIOCO</span>
-                        </h2>
-                        <div className="w-24 h-1 bg-rama-accent mx-auto" />
-                    </div>
-
-                    <div id="how-it-works-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                        {[
-                            {
-                                icon: <div className="font-heading text-2xl font-bold">01</div>,
-                                title: "Il Login",
-                                desc: "Appena seduto al tavolo, inquadra il QR code per accedere alla Web App della serata. Da questo momento, lo smartphone diventa la tua vera plancia di gioco."
-                            },
-                            {
-                                icon: <div className="font-heading text-2xl font-bold">02</div>,
-                                title: "La Scelta Segreta",
-                                desc: "Uno alla volta, in totale privacy, verrai guidato dal sistema per decidere il tuo ruolo: avrai il coraggio di proporti come Bugiardo? Attenzione, il sistema accetterà un solo Bugiardo. L'app distribuirà poi identità e obiettivi a tutti."
-                            },
-                            {
-                                icon: <div className="font-heading text-2xl font-bold">03</div>,
-                                title: "Indagini e Missioni",
-                                desc: "Durante la cena, il gioco non si ferma mai. La Web App invierà notifiche personali, indizi preziosi e missioni segrete da portare a termine direttamente al tavolo, mettendo alla prova la furbizia e l'intuito di ognuno."
-                            },
-                            {
-                                icon: <div className="font-heading text-2xl font-bold">04</div>,
-                                title: "Il Verdetto",
-                                desc: "Arrivati al dessert, le indagini si chiudono. Mettendo insieme i pezzi del puzzle forniti dall'app e analizzando i sospetti, dovrai votare per smascherare l'unico, vero Bugiardo della serata."
-                            }
-                        ].map((step, i) => (
-                            <div
-                                key={i}
-                                className="gsap-card bg-white/5 border border-white/10 p-6 md:p-8 rounded-2xl hover:bg-white/10 transition-colors group flex flex-col items-center text-center gap-6"
-                            >
-                                <div className="w-12 h-12 md:w-16 md:h-16 bg-rama-accent/10 rounded-full flex items-center justify-center text-rama-accent shrink-0 group-hover:scale-110 transition-transform duration-300 border border-rama-accent/20">
-                                    {step.icon}
-                                </div>
-                                <div className="flex flex-col items-center">
-                                    <h3 className="text-xl md:text-2xl font-bold text-rama-text mb-2 md:mb-4">{step.title}</h3>
-                                    <p className="text-gray-400 text-sm md:text-base leading-relaxed">
-                                        {step.desc}
-                                    </p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div id="bugiardo-cta" className="gsap-fade mt-16 md:mt-20 flex flex-col md:flex-row gap-4 md:gap-6 justify-center items-center">
-                        <Link
-                            href="/format"
-                            className="w-full md:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent border border-rama-accent text-rama-accent font-bold uppercase tracking-widest hover:bg-rama-accent hover:text-black transition-all duration-300"
-                        >
-                            Voglio esserci quella sera <ArrowLeft className="rotate-180" size={18} />
-                        </Link>
-                        <a
-                            href={buildWAUrl(WA_MESSAGES.bugiardo)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-full md:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-rama-accent text-black font-extrabold uppercase tracking-widest hover:bg-white transition-all duration-300 shadow-[0_0_30px_rgba(200,164,78,0.3)] rounded-sm"
-                        >
-                            Dimmi quando è la prossima data
-                        </a>
-                    </div>
-                </div>
-            </section>
-        </main>
-    );
+    </main>
+  );
 }

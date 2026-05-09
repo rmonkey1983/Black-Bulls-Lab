@@ -2,19 +2,16 @@ import type { Metadata } from "next";
 import { ACenaConIlBugiardoClient } from "./ACenaConIlBugiardoClient";
 import { EventSchema } from "@/components/seo/JsonLd";
 import { SITE_URL } from "@/lib/constants";
-import { BookingForm } from "@/components/ui/BookingForm";
-import { FormatFAQ } from "@/components/sections/FormatFAQ";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export const metadata: Metadata = {
-    title: "A Cena Con Il Bugiardo | Dinner Show e Social Deception Torino",
-    description: "Scopri la prima cena spettacolo di social deception a Torino guidata da Web App. 30 posti segreti: indaga, vota dal telefono e smaschera il colpevole.",
+    title: "LIAR SYSTEM | Social Game Experience & Dinner Show Torino",
+    description: "La fiducia è un difetto. Entra nel LIAR SYSTEM: il primo dinner show di social deception a Torino dove lo smartphone è la tua arma e ogni ospite è un sospettato.",
     alternates: { canonical: `${SITE_URL}/format/a-cena-con-il-bugiardo` },
     openGraph: {
-        title: "A Cena Con Il Bugiardo | Dinner Show e Social Deception Torino",
-        description: "Scopri la prima cena spettacolo di social deception a Torino guidata da Web App. 30 posti segreti: indaga, vota dal telefono e smaschera il colpevole.",
+        title: "LIAR SYSTEM | Social Game Experience & Dinner Show Torino",
+        description: "La fiducia è un difetto. Entra nel LIAR SYSTEM: il primo dinner show di social deception a Torino dove lo smartphone è la tua arma e ogni ospite è un sospettato.",
         url: `${SITE_URL}/format/a-cena-con-il-bugiardo`,
-        images: [{ url: "/images/brand/vibe-cocktail-art.webp", width: 1200, height: 630, alt: "A Cena Con Il Bugiardo | Black Bulls Lab" }],
+        images: [{ url: "/images/brand/liar-system-logo.webp", width: 1200, height: 630, alt: "LIAR SYSTEM | Black Bulls Lab" }],
     },
 };
 
@@ -31,22 +28,6 @@ export default function ACenaConIlBugiardoPage() {
                 image={`${SITE_URL}/images/brand/bg-hero-wide.webp`}
             />
             <ACenaConIlBugiardoClient />
-            
-            <FormatFAQ />
-
-            <section className="py-24 px-6 bg-zinc-950/50">
-                <div className="max-w-7xl mx-auto">
-                    <div className="mb-16">
-                        <SectionHeading
-                            title="SCOPRI IL"
-                            highlight="BUGIARDO"
-                            subtitle="Prenota il tuo tavolo per la sfida dell'inganno"
-                            align="center"
-                        />
-                    </div>
-                    <BookingForm />
-                </div>
-            </section>
         </>
     );
 }

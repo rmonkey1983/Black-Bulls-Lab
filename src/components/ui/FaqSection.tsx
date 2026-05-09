@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { ChevronDown, Sparkles, Plus, Minus } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { ChevronDown, Sparkles } from "lucide-react";
 import { useGSAP } from "@/hooks/useGSAP";
 import { animateFade } from "@/lib/gsapAnimations";
 import { gsap } from "gsap";
@@ -25,7 +25,7 @@ export default function FaqSection() {
         <section 
             id="faq-section-container"
             ref={containerRef} 
-            className="py-32 bg-zinc-950 border-t border-white/5 overflow-hidden"
+            className="py-16 md:py-32 bg-zinc-950 border-t border-white/5 overflow-hidden"
         >
             <div className="max-w-7xl mx-auto px-6">
                 <div className="flex flex-col md:flex-row items-end justify-between mb-20 gap-8">
@@ -49,17 +49,17 @@ export default function FaqSection() {
                         return (
                             <div 
                                 key={index}
-                                className="faq-item-animate group border border-white/5 rounded-2xl bg-zinc-900/30 backdrop-blur-sm hover:border-yellow-500/20 transition-all duration-500"
+                                className="faq-item-animate group border border-white/5 rounded-2xl bg-zinc-900/30 backdrop-blur-sm hover:border-yellow-500/20 transition duration-500"
                             >
                                 <button
                                     onClick={() => toggleFaq(index)}
-                                    className="w-full flex items-center justify-between p-6 md:p-8 text-left focus:outline-none"
+                                    className="w-full flex items-center justify-between p-6 md:p-8 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50"
                                     aria-label={isActive ? "Chiudi risposta" : "Apri risposta"}
                                 >
                                     <h3 className={`font-heading text-lg md:text-2xl font-bold uppercase tracking-widest transition-colors duration-300 ${isActive ? 'text-yellow-500' : 'text-zinc-300 group-hover:text-white'}`}>
                                         {faq.question}
                                     </h3>
-                                    <div className={`p-2 rounded-full border transition-all duration-500 ${isActive ? 'bg-yellow-500 border-yellow-500 text-black rotate-180' : 'bg-transparent border-white/10 text-zinc-500 group-hover:border-yellow-500/50 group-hover:text-yellow-500'}`}>
+                                    <div className={`p-2 rounded-full border transition duration-500 ${isActive ? 'bg-yellow-500 border-yellow-500 text-black rotate-180' : 'bg-transparent border-white/10 text-zinc-500 group-hover:border-yellow-500/50 group-hover:text-yellow-500'}`}>
                                         <ChevronDown size={20} />
                                     </div>
                                 </button>
@@ -84,21 +84,28 @@ export default function FaqSection() {
 
 function FaqWrapper({ isOpen, children }: { isOpen: boolean; children: React.ReactNode }) {
     const contentRef = useRef<HTMLDivElement>(null);
+    const initialized = useRef(false);
 
-    useGSAP(() => {
+    useEffect(() => {
         if (!contentRef.current) return;
         
+        // Skip the initial render animation (starts collapsed)
+        if (!initialized.current) {
+            initialized.current = true;
+            gsap.set(contentRef.current, { height: 0, opacity: 0 });
+            return;
+        }
+
         if (isOpen) {
-            gsap.fromTo(contentRef.current, 
-                { height: 0, opacity: 0 },
-                { height: "auto", opacity: 1, duration: 0.5, ease: "power3.inOut" }
-            );
+            gsap.to(contentRef.current, { 
+                height: "auto", opacity: 1, duration: 0.5, ease: "power3.inOut" 
+            });
         } else {
             gsap.to(contentRef.current, { 
                 height: 0, opacity: 0, duration: 0.4, ease: "power3.inOut" 
             });
         }
-    }, { dependencies: [isOpen] });
+    }, [isOpen]);
 
     return (
         <div ref={contentRef} className="overflow-hidden h-0 opacity-0">

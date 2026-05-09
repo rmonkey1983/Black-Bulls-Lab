@@ -30,9 +30,10 @@ import { BlogPost } from "@/lib/blog";
 
 interface HomeClientProps {
   latestPosts: BlogPost[];
+  nextEvents: any[];
 }
 
-export function HomeClient({ latestPosts }: HomeClientProps) {
+export function HomeClient({ latestPosts, nextEvents }: HomeClientProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
@@ -89,17 +90,17 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
         {/* Background Layer */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/brand/bg-hero-wide.webp"
+            src="/images/brand/bull-hero.jpg"
             alt="Black Bulls Lab"
             fill
-            className="object-cover opacity-40 grayscale"
+            className="object-cover opacity-50"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-zinc-950/60 to-zinc-950" />
+          <div className="absolute inset-0 bg-linear-to-b from-transparent via-zinc-950/60 to-zinc-950" />
         </div>
 
         {/* Content */}
-        <div className="hero-content relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center space-y-10">
+        <div className="hero-content relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center space-y-6 md:space-y-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-yellow-500/20 bg-yellow-500/5 backdrop-blur-sm">
             <Sparkles size={14} className="text-yellow-500" />
             <span className="font-heading text-[10px] tracking-[0.2em] text-yellow-500 uppercase font-bold">
@@ -108,41 +109,42 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
           </div>
           
           <h1 className="sr-only">Dinner Show Torino e Eventi Immersivi | Black Bulls Lab</h1>
-          <div aria-hidden="true" className="font-heading font-black text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl leading-[0.85] tracking-tighter uppercase max-w-5xl mx-auto italic transform -skew-x-2">
+          <div aria-hidden="true" className="font-heading font-black text-[clamp(2.5rem,10vw,8rem)] leading-[0.85] tracking-tighter uppercase max-w-5xl mx-auto wrap-break-word">
             <span className="text-white">DINNER SHOW </span>
+            <br className="block md:hidden" />
             <span className="text-yellow-500">A</span>
             <span className="inline md:hidden">&nbsp;</span>
             <br className="hidden md:block" />
             <span className="text-yellow-500">TORINO.</span>
           </div>
           
-          <div className="space-y-4 max-w-3xl mx-auto">
-             <h2 className="font-heading text-lg md:text-2xl text-zinc-400 uppercase tracking-widest font-light">
+          <div className="space-y-4 max-w-3xl mx-auto px-2">
+             <h2 className="font-heading text-base md:text-2xl text-zinc-400 uppercase tracking-[0.15em] md:tracking-widest font-light">
                 L&apos;INTRATTENIMENTO DIVENTA <span className="text-white font-bold">SCIENZA.</span>
              </h2>
-             <p className="font-sans text-zinc-400 text-sm md:text-base leading-relaxed font-light">
+             <p className="font-sans text-zinc-400 text-xs md:text-base leading-relaxed font-light">
                 Benvenuto nel Laboratorio delle Emozioni. Creiamo esperienze originali, scalabili e indimenticabili per chi non si accontenta dell&apos;ordinario.
              </p>
           </div>
 
-          <div className="pt-8 flex flex-col items-center gap-8">
-            <PrimaryButton href="/format" size="lg" className="px-12 py-5 text-sm font-bold tracking-widest bg-yellow-500 text-black hover:bg-white hover:text-black border-yellow-500">
+          <div className="pt-4 md:pt-8 flex flex-col items-center gap-6 md:gap-8">
+            <PrimaryButton href="/format" size="lg" className="w-full sm:w-auto">
                 SCOPRI I FORMAT
             </PrimaryButton>
             
-            <button onClick={scrollToNext} className="mt-8 w-12 h-12 flex items-center justify-center rounded-full border border-white/10 bg-white/5 hover:border-white/30 hover:bg-white/10 transition-all text-zinc-500 hover:text-white backdrop-blur-sm shadow-xl" aria-label="Vai alla prossima sezione">
-                <ChevronDown size={20} className="animate-bounce" />
+            <button onClick={scrollToNext} className="mt-4 md:mt-8 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full border border-white/10 bg-white/5 hover:border-white/30 hover:bg-white/10 transition text-zinc-500 hover:text-white backdrop-blur-sm shadow-xl" aria-label="Vai alla prossima sezione">
+                <ChevronDown size={18} className="animate-bounce" />
             </button>
           </div>
         </div>
 
         {/* Technical Deco Elements */}
-        <div className="absolute top-1/2 left-0 -translate-y-1/2 w-px h-1/2 bg-gradient-to-b from-transparent via-yellow-500/20 to-transparent" />
-        <div className="absolute top-1/2 right-0 -translate-y-1/2 w-px h-1/2 bg-gradient-to-b from-transparent via-yellow-500/20 to-transparent" />
+        <div className="absolute top-1/2 left-0 -translate-y-1/2 w-px h-1/2 bg-linear-to-b from-transparent via-yellow-500/20 to-transparent" />
+        <div className="absolute top-1/2 right-0 -translate-y-1/2 w-px h-1/2 bg-linear-to-b from-transparent via-yellow-500/20 to-transparent" />
       </section>
 
       {/* 1B. PROSSIME DATE */}
-      <ProssimeDate />
+      <ProssimeDate events={nextEvents} />
 
       {/* 2. SEZIONE 'IL METODO' (La Visione) */}
       <section id="metodo" className="metodo-section py-16 md:py-32 lg:py-48 px-4 sm:px-6 bg-transparent">
@@ -165,18 +167,18 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
                         Dimentica le cene silenziose e gli show distaccati: ogni nostro esperimento è testato per massimizzare il coinvolgimento, trasformando gli ospiti da semplici spettatori in protagonisti attivi della narrazione.
                     </p>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 md:gap-8 pt-6">
                     <div className="space-y-2">
-                        <span className="text-yellow-500 font-heading text-2xl font-bold">100%</span>
-                        <p className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold">Engagement</p>
+                        <span className="text-yellow-500 font-heading text-xl md:text-2xl font-bold">100%</span>
+                        <p className="text-[9px] md:text-[10px] text-zinc-400 uppercase tracking-widest font-bold">Engagement</p>
                     </div>
                     <div className="space-y-2">
-                        <span className="text-yellow-500 font-heading text-2xl font-bold">FORMAT</span>
-                        <p className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold">Testati</p>
+                        <span className="text-yellow-500 font-heading text-xl md:text-2xl font-bold">FORMAT</span>
+                        <p className="text-[9px] md:text-[10px] text-zinc-400 uppercase tracking-widest font-bold">Testati</p>
                     </div>
-                    <div className="space-y-2">
-                        <span className="text-yellow-500 font-heading text-2xl font-bold">80+</span>
-                        <p className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold">Recensioni</p>
+                    <div className="space-y-2 col-span-2 sm:col-span-1">
+                        <span className="text-yellow-500 font-heading text-xl md:text-2xl font-bold">80+</span>
+                        <p className="text-[9px] md:text-[10px] text-zinc-400 uppercase tracking-widest font-bold">Recensioni</p>
                     </div>
                 </div>
                 <div className="pt-6">
@@ -184,7 +186,7 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
                         href="/format"
                         className="group inline-flex items-center gap-2 font-heading text-xs uppercase tracking-[0.2em] text-white hover:text-yellow-500 transition-colors"
                     >
-                        Trova l'esperimento perfetto per il tuo prossimo evento
+                        Trova l&apos;esperimento perfetto per il tuo prossimo evento
                         <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>
@@ -220,22 +222,22 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
 
             <div className="format-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {EXPERIMENTS.map((exp) => (
-                    <PremiumCard key={exp.id} href={exp.href} className="group rounded-[24px]">
-                        <div className="relative aspect-[4/5] overflow-hidden bg-zinc-950 rounded-2xl">
+                    <PremiumCard key={exp.id} href={exp.href} className="format-card group rounded-[24px]">
+                        <div className="relative aspect-4/5 overflow-hidden bg-zinc-950 rounded-2xl">
                             {/* Immagine di sfondo */}
                             <Image 
                                 src={exp.image}
                                 alt={exp.name}
                                 fill
-                                className="object-cover transition-all duration-1000 group-hover:scale-110 group-hover:opacity-75 opacity-90 grayscale group-hover:grayscale-0"
+                                className="object-cover motion-safe:transition motion-safe:duration-1000 motion-safe:group-hover:scale-110 group-hover:opacity-75 opacity-90 grayscale group-hover:grayscale-0"
                             />
                             
                             {/* Overlay Sfumato Assoluto */}
-                            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-zinc-950/40 to-zinc-950 hover:via-zinc-950/60 transition-colors duration-700 pointer-events-none" />
+                            <div className="absolute inset-0 bg-linear-to-b from-transparent via-zinc-950/40 to-zinc-950 hover:via-zinc-950/60 transition-colors duration-700 pointer-events-none" />
                             
                             {/* Badge in alto (fluttuante) */}
                             <div className="absolute top-6 right-6">
-                                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/10 font-heading text-[10px] text-yellow-500 tracking-[0.2em] font-bold uppercase transition-all duration-300 group-hover:border-yellow-500/50">
+                                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/10 font-heading text-[10px] text-yellow-500 tracking-[0.2em] font-bold uppercase transition duration-300 group-hover:border-yellow-500/50">
                                     <Star size={12} className="fill-yellow-500/20 text-yellow-500" />
                                     {exp.badge}
                                 </span>
@@ -301,14 +303,14 @@ export function HomeClient({ latestPosts }: HomeClientProps) {
                     {teamMembers.filter(m => ['manuel', 'maurizio'].includes(m.id)).map((member) => (
                         <PremiumCard key={member.id} href={`/team/${member.id}`} className="group p-6">
                             <div className="space-y-6">
-                                <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-white/5 bg-zinc-900 shadow-2xl transition-all duration-500">
+                                <div className="relative aspect-4/5 rounded-xl overflow-hidden border border-white/5 bg-zinc-900 shadow-2xl transition duration-500">
                                     <Image
                                         src={member.imageUrl}
                                         alt={member.name}
                                         fill
-                                        className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                                        className="object-cover grayscale group-hover:grayscale-0 transition duration-700"
                                     />
-                                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
+                                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black via-transparent to-transparent opacity-80" />
                                 </div>
                                 <div className="space-y-1">
                                     <h3 className="font-heading text-2xl font-bold uppercase text-white group-hover:text-yellow-500 transition-colors">

@@ -60,7 +60,7 @@ export function FormatFAQ() {
                         return (
                             <div 
                                 key={index} 
-                                className="faq-item-gsap gsap-fade border border-white/10 bg-white/5 rounded-2xl overflow-hidden transition-all duration-300 hover:border-rama-accent/30"
+                                className="faq-item-gsap gsap-fade border border-white/10 bg-white/5 rounded-2xl overflow-hidden transition duration-300 hover:border-rama-accent/30"
                             >
                                 <button
                                     onClick={() => toggleFaq(index)}

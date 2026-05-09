@@ -22,47 +22,50 @@ export function SecondaryButton({
   type = "button",
 }: SecondaryButtonProps) {
   const sizeClasses = {
-    sm: "px-5 py-2 text-[10px]",
-    md: "px-8 py-3.5 text-xs",
-    lg: "px-10 py-4.5 text-sm",
+    sm: "px-6 py-2.5 text-[10px]",
+    md: "px-10 py-4 text-xs",
+    lg: "px-12 py-5 text-sm",
   };
 
   const classes = cn(
-    "inline-flex items-center justify-center gap-2.5 font-heading font-bold uppercase tracking-[0.2em] transition-all duration-500 ease-out relative overflow-hidden group/btn",
-    "bg-transparent text-white border border-yellow-500/50",
-    "hover:bg-yellow-500 hover:text-black hover:border-yellow-500 hover:shadow-[0_0_30px_rgba(234,179,8,0.15)]",
-    "active:scale-95",
+    "inline-flex items-center justify-center gap-3 font-heading font-black uppercase tracking-[0.3em] transition duration-500 relative group/btn",
+    "bg-transparent text-white border-2 border-[#FFD700]/30 rounded-full",
+    "hover:border-[#FFD700] hover:text-[#FFD700] hover:shadow-[0_0_30px_rgba(255,215,0,0.2)] hover:-translate-y-1",
+    "active:scale-95 active:translate-y-0",
+    "overflow-hidden",
     sizeClasses[size],
     className
-  );
-
-  const shine = (
-    <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-[150%] skew-x-[-20deg] group-hover/btn:animate-[premium-shine_0.75s_ease-in-out_forwards] pointer-events-none" />
   );
 
   const content = (
     <>
       <style>{`
-        @keyframes premium-shine {
-          0% { transform: translateX(-150%) skewX(-20deg); }
-          100% { transform: translateX(150%) skewX(-20deg); }
+        @keyframes pulse-glow {
+          0% { opacity: 0.3; transform: scale(1); }
+          50% { opacity: 0.5; transform: scale(1.05); }
+          100% { opacity: 0.3; transform: scale(1); }
         }
       `}</style>
-      {shine}
-      <span className="relative z-10">{children}</span>
+      
+      {/* Subtle internal glow on hover */}
+      <span className="absolute inset-0 w-full h-full bg-[#FFD700]/5 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500 rounded-full" />
+      
+      <span className="relative z-10 flex items-center gap-2">
+        {children}
+      </span>
     </>
   );
 
   if (href) {
     return (
-      <Link href={href} className={classes} onClick={onClick as any} suppressHydrationWarning>
+      <Link href={href} className={classes} onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>} suppressHydrationWarning>
         {content}
       </Link>
     );
   }
 
   return (
-    <button type={type} onClick={onClick as any} className={classes}>
+    <button type={type} onClick={onClick as React.MouseEventHandler<HTMLButtonElement>} className={classes}>
       {content}
     </button>
   );

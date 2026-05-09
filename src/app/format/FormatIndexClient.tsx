@@ -20,7 +20,7 @@ export function FormatIndexClient() {
             {/* Background Effects */}
             <div className="absolute inset-0 pointer-events-none z-0">
                 <div className="absolute inset-0 bg-[url('/noise.webp')] opacity-10 mix-blend-overlay" />
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.15)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[length:100%_2px,3px_100%] opacity-20" />
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.15)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-size-[100%_2px,3px_100%] opacity-20" />
             </div>
 
             <div className="max-w-7xl mx-auto relative z-10">
@@ -33,8 +33,8 @@ export function FormatIndexClient() {
                     </Link>
 
                     <div id="format-hero" className="flex flex-col">
-                        <h1 className="line font-bold text-rama-text font-heading uppercase tracking-tighter text-4xl sm:text-6xl md:text-8xl leading-[0.85]">
-                            <span>SCEGLI LA TUA <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-rama-accent via-white to-rama-accent">SERATA.</span></span>
+                        <h1 className="line font-bold text-rama-text font-heading uppercase tracking-tighter text-[clamp(2.5rem,8vw,6rem)] leading-[0.85] break-words">
+                            <span>SCEGLI LA TUA <br/> <span className="text-transparent bg-clip-text bg-linear-to-r from-rama-accent via-white to-rama-accent">SERATA.</span></span>
                         </h1>
                     </div>
                     <p
@@ -49,7 +49,7 @@ export function FormatIndexClient() {
                     {EXPERIMENTS.map((format, index) => (
                         <div key={format.id} className="gsap-card flex flex-col group relative">
                             {/* Tech index */}
-                            <div className="absolute -top-6 -left-4 text-white/5 font-heading text-[8rem] leading-none font-black select-none pointer-events-none z-0">
+                            <div className="absolute -top-4 -left-2 text-white/5 font-heading text-[5rem] md:text-[8rem] leading-none font-black select-none pointer-events-none z-0">
                                 {String(index + 1).padStart(2, '0')}
                             </div>
 
@@ -62,7 +62,7 @@ export function FormatIndexClient() {
                                     className="object-cover transition-transform duration-1000 group-hover:scale-105 opacity-60 grayscale group-hover:grayscale-[0.2] group-hover:opacity-100"
                                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                                <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent opacity-60" />
                                 
                                 {format.badge && (
                                     <div className="absolute top-4 right-4 bg-rama-accent text-black text-[9px] font-bold uppercase tracking-[0.2em] px-4 py-2 rounded-sm shadow-xl z-20">
@@ -91,7 +91,7 @@ export function FormatIndexClient() {
 
                                 <div className="flex flex-wrap gap-2 mb-10">
                                     {format.details?.split(' · ').map((detail, idx) => (
-                                        <span key={idx} className="text-[9px] uppercase font-heading tracking-widest bg-white/[0.03] border border-white/10 px-3 py-1.5 rounded-sm text-zinc-300">
+                                        <span key={idx} className="text-[9px] uppercase font-heading tracking-widest bg-white/3 border border-white/10 px-3 py-1.5 rounded-sm text-zinc-300">
                                             {detail}
                                         </span>
                                     ))}
@@ -113,7 +113,7 @@ export function FormatIndexClient() {
                                     
                                     <Link
                                         href={format.href}
-                                        className="w-full bg-white text-black text-center text-[10px] font-bold uppercase tracking-[0.2em] px-8 py-5 rounded-sm hover:bg-rama-accent transition-all transform active:scale-95 flex items-center justify-center gap-2"
+                                        className="w-full bg-white text-black text-center text-[10px] font-bold uppercase tracking-[0.2em] px-8 py-5 rounded-sm hover:bg-rama-accent transition transform active:scale-95 flex items-center justify-center gap-2"
                                         aria-label={`Accedi al programma ${format.name}`}
                                     >
                                         ACCEDI AL PROGRAMMA <ArrowUpRight size={14} />

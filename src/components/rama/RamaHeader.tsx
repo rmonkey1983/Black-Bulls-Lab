@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import { RamaMenuOverlay } from "./RamaMenuOverlay";
@@ -12,7 +12,7 @@ import { LOGO_PATH } from "@/lib/constants";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
 
 const experiments = [
-    { name: "A Cena Con Il Bugiardo", href: "/format/a-cena-con-il-bugiardo" },
+    { name: "Liar System", href: "/format/a-cena-con-il-bugiardo" },
     { name: "Il PalQo", href: "/format/il-palqo" },
     { name: "Cena Con Delitto", href: "/format/cena-con-delitto" },
     { name: "THE GOLDEN VOICE", href: "/format/the-golden-voice" },
@@ -21,24 +21,21 @@ const experiments = [
 export function RamaHeader() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [experimentsOpen, setExperimentsOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
     const pathname = usePathname();
     const dropdownRef = useRef<HTMLDivElement>(null);
     const logoRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 50);
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+
 
     useGSAP(() => {
         if (experimentsOpen) {
+            if (!dropdownRef.current) return;
             gsap.fromTo(dropdownRef.current,
                 { opacity: 0, y: 10, display: "none" },
                 { opacity: 1, y: 0, display: "flex", duration: 0.2, ease: "power2.out" }
             );
         } else {
+            if (!dropdownRef.current) return;
             gsap.to(dropdownRef.current, {
                 opacity: 0,
                 y: 10,
@@ -53,6 +50,7 @@ export function RamaHeader() {
     
     // GSAP: Logo Entrance Animation
     useGSAP(() => {
+        if (!logoRef.current) return;
         gsap.fromTo(logoRef.current,
             { opacity: 0, scale: 0.95, filter: "brightness(0)" },
             { 
@@ -64,20 +62,20 @@ export function RamaHeader() {
                 delay: 0.3
             }
         );
-    }, { scope: logoRef });
+    }, { dependencies: [], scope: logoRef });
 
     if (pathname.startsWith("/admin")) return null;
 
     return (
         <>
-            <header suppressHydrationWarning className="fixed top-0 left-0 right-0 z-50 px-6 py-2 md:px-12 transition-all duration-300 h-20 bg-black/80 backdrop-blur-md border-b border-white/5 flex items-center">
+            <header suppressHydrationWarning className="fixed top-0 left-0 right-0 z-50 px-6 py-2 md:px-12 transition duration-300 h-20 bg-black/80 backdrop-blur-md border-b border-white/5 flex items-center">
                 <div className="max-w-7xl mx-auto w-full flex justify-between items-center">
                     {/* 1. LOGO (Left) */}
                     <div className="flex-1 flex justify-start">
                         <Link href="/" suppressHydrationWarning className="relative z-50 flex items-center shrink-0 group/logo" aria-label="Black Bulls Lab — Home">
                             <div 
                                 ref={logoRef}
-                                className="h-8 md:h-10 w-[90px] md:w-[110px] relative transition-all duration-300 group-hover/logo:brightness-125 group-hover/logo:drop-shadow-[0_0_8px_rgba(234,179,8,0.4)]"
+                                className="h-8 md:h-10 w-[90px] md:w-[110px] relative transition duration-300 group-hover/logo:brightness-125 group-hover/logo:drop-shadow-[0_0_8px_rgba(234,179,8,0.4)]"
                             >
                                     <Image
                                         src={LOGO_PATH}
@@ -93,7 +91,7 @@ export function RamaHeader() {
                     </div>
 
                     {/* 2. NAVIGATION (Center) */}
-                    <nav className="hidden xl:flex items-center gap-6 relative z-50">
+                    <nav className="hidden lg:flex items-center gap-4 relative z-50">
                         <Link href="/" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname === "/" ? "text-rama-accent" : "text-zinc-300 hover:text-rama-accent"}`}>
                             Home
                         </Link>
@@ -116,7 +114,7 @@ export function RamaHeader() {
                                         key={exp.name} 
                                         href={exp.href}
                                         suppressHydrationWarning
-                                        className="px-6 py-4 font-heading text-[10px] uppercase tracking-[0.2em] text-zinc-300 hover:text-rama-accent hover:bg-white/5 transition-all border-b border-white/5 last:border-0 font-bold"
+                                        className="px-6 py-4 font-heading text-[10px] uppercase tracking-[0.2em] text-zinc-300 hover:text-rama-accent hover:bg-white/5 transition border-b border-white/5 last:border-0 font-bold"
                                     >
                                         {exp.name}
                                     </Link>
@@ -139,15 +137,15 @@ export function RamaHeader() {
                         <Link href="/blog" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname.startsWith("/blog") ? "text-rama-accent" : "text-zinc-300 hover:text-rama-accent"}`}>
                             Blog
                         </Link>
-                        <Link href="/contact" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname === "/contact" ? "text-rama-accent" : "text-zinc-300 hover:text-rama-accent"}`}>
-                            Contatti
+                        <Link href="/calendario" suppressHydrationWarning className={`font-heading text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${pathname === "/calendario" ? "text-rama-accent" : "text-zinc-300 hover:text-rama-accent"}`}>
+                            Calendario
                         </Link>
                     </nav>
 
                     {/* 3. CTA (Right) */}
                     <div className="flex-1 flex justify-end items-center gap-6">
                         <div className="hidden lg:block">
-                            <PrimaryButton href="/contact" size="sm">
+                            <PrimaryButton href="/calendario" size="sm">
                                 PRENOTA ORA
                             </PrimaryButton>
                         </div>
@@ -155,7 +153,7 @@ export function RamaHeader() {
                         {/* Hamburger Icon (Visible on lg and below) */}
                         <button
                             onClick={() => setIsMenuOpen(true)}
-                            className="flex xl:hidden flex-col gap-1.5 p-2 group"
+                            className="flex lg:hidden flex-col gap-1.5 p-2 group"
                             aria-label="Apri menu di navigazione"
                         >
                             <div className="w-8 h-[2px] bg-rama-accent group-hover:scale-x-110 transition-transform origin-right" />

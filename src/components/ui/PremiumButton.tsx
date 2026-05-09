@@ -52,7 +52,7 @@ export function PremiumButton({
         "text-[10px] md:text-xs",
         "font-heading",
         "uppercase",
-        "transition-all",
+        "transition",
         "duration-500",
         "ease-out",
         "relative",
@@ -62,7 +62,7 @@ export function PremiumButton({
     ].filter(Boolean).join(" ");
 
     const shineEffect = (
-        <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] skew-x-[-20deg] group-hover/btn:animate-[premium-shine_0.7s_ease-in-out_forwards] pointer-events-none" />
+        <span className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
     );
 
     if (href) {
@@ -116,7 +116,7 @@ export function GlowButton({
 }: PremiumButtonProps) {
     // Map legacy variants
     const mappedVariant: "primary" | "secondary" | "outline" =
-        variant === ("gold" as any) ? "primary" : variant === ("outline" as any) ? "secondary" : "primary";
+        (variant as string) === "gold" ? "primary" : (variant as string) === "outline" ? "secondary" : "primary";
 
     return (
         <PremiumButton href={href} variant={mappedVariant} size={size} {...rest}>

@@ -1,14 +1,12 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { checkCapacity } from '@/lib/dataStore';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
   try {
-    // Initialize Stripe inside the handler to prevent build-time crashes due to missing env vars
     if (!process.env.STRIPE_SECRET_KEY) {
-        return NextResponse.json({ error: 'Stripe API key is not configured.' }, { status: 500 });
+      return NextResponse.json({ error: 'Stripe API key non configurata.' }, { status: 500 });
     }
 
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
@@ -17,73 +15,75 @@ export async function POST(req: Request) {
     });
 
     const body = await req.json();
-    const { eventId, eventTitle, eventDateId, quantity, selectedDate, guest, premium, unitAmount } = body;
+    const {
+      eventId,
+      title,
+      price,
+      quantity = 1,
+      customerName = '',
+      customerEmail = '',
+      customerPhone = '',
+      guestNames = [],
+      allergies = '',
+    } = body;
 
-    if (!quantity || !guest.email || !guest.name || !eventDateId) {
-      return NextResponse.json({ error: 'Dati incompleti' }, { status: 400 });
+    if (!eventId) {
+      return NextResponse.json({ error: 'Manca ID evento' }, { status: 400 });
+    }
+
+    if (!customerEmail || !customerName) {
+      return NextResponse.json({ error: 'Nome e Email sono obbligatori' }, { status: 400 });
     }
 
     if (quantity < 1 || quantity > 10) {
       return NextResponse.json({ error: 'Quantità non valida (1-10)' }, { status: 400 });
     }
 
-    const bookingDate = new Date(selectedDate);
-    if (bookingDate < new Date()) {
-      return NextResponse.json({ error: 'Data non valida' }, { status: 400 });
-    }
+    const safeTitle = title || 'Ingresso Evento Black Bulls';
+    const safePrice = price || 50;
 
-    // Capacity Check
-    const hasCapacity = await checkCapacity(eventDateId, quantity);
-    if (!hasCapacity) {
-      return NextResponse.json({ error: 'Posti esauriti o non sufficienti per questa data.' }, { status: 400 });
-    }
-
-    // Determine the base URL for redirects
     const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
     const host = req.headers.get('host') || 'localhost:3000';
-    const baseUrl = `${protocol}://${host}`;
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || `${protocol}://${host}`;
 
-    // Create Checkout Session
+    // Stripe metadata values must be strings, max 500 chars each
+    const guestNamesStr = JSON.stringify(guestNames).slice(0, 490);
+
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      customer_email: guest.email,
+      payment_method_types: ['card', 'link'],
+      customer_email: customerEmail,
       line_items: [
         {
           price_data: {
             currency: 'eur',
             product_data: {
-              name: `Prenotazione: ${eventTitle || 'Evento Black Bulls Lab'}`,
-              description: `Prenotazione per ${quantity} ospiti il ${new Date(selectedDate).toLocaleDateString('it-IT')}`,
+              name: safeTitle,
+              description: `Prenotazione per ${quantity} ${quantity === 1 ? 'persona' : 'persone'}`,
             },
-            unit_amount: unitAmount || 2000, // Defalut to €20.00 deposit if not provided
+            unit_amount: Math.round(safePrice * 100),
           },
           quantity: quantity,
         },
       ],
       mode: 'payment',
-      success_url: `${baseUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${baseUrl}/checkout/cancel?eventId=${eventId}`,
+      success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}/calendario/${eventId}`,
       metadata: {
         eventId: eventId,
-        eventTitle: eventTitle,
-        eventDateId: eventDateId,
+        eventTitle: safeTitle,
         quantity: quantity.toString(),
-        selectedDate: selectedDate,
-        guestName: guest.name,
-        guestSurname: guest.surname,
-        guestEmail: guest.email,
-        guestPhone: guest.phone,
-        allergies: premium?.allergies || 'Nessuna',
-        occasion: premium?.occasion || 'Nessuna',
+        customerName: customerName.slice(0, 100),
+        customerEmail: customerEmail.slice(0, 200),
+        customerPhone: customerPhone.slice(0, 50),
+        guestNames: guestNamesStr,
+        allergies: (allergies || 'Nessuna').slice(0, 490),
       },
     });
 
     return NextResponse.json({ url: session.url });
-  } catch (error) {
-    console.error('Stripe Checkout Error:', error);
-    return NextResponse.json(
-      { error: 'Impossibile creare la sessione di pagamento.' },
-      { status: 500 }
-    );
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'Errore sconosciuto';
+    console.error('Errore Checkout:', error);
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

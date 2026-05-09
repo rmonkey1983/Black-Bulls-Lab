@@ -37,12 +37,12 @@ export function ParallaxImage({
         // Register ScrollTrigger if not already
         gsap.registerPlugin(ScrollTrigger);
 
-        // Calculate the shift based on speed - simplified for GSAP
-        // We move the image from -10% to 10% relative to its container
+        // Calculate the shift based on speed
+        const movement = 20 * speed;
         gsap.fromTo(imageRef.current, 
-            { y: "-10%" },
+            { y: `-${movement}%` },
             {
-                y: "10%",
+                y: `${movement}%`,
                 ease: "none",
                 scrollTrigger: {
                     trigger: containerRef.current,

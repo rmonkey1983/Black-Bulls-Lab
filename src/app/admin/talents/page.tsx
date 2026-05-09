@@ -86,7 +86,7 @@ function TalentForm({ talent, onSave, onCancel }: { talent?: Talent; onSave: () 
         }
     };
 
-    const inputClass = "w-full bg-lab-dark/80 border border-green/15 px-4 py-2.5 text-rama-text text-sm data-readout placeholder:text-gray-600 focus:outline-none focus:border-green/40 transition-all duration-300";
+    const inputClass = "w-full bg-lab-dark/80 border border-green/15 px-4 py-2.5 text-rama-text text-sm data-readout placeholder:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 focus:border-green/40 transition duration-300";
     const labelClass = "data-readout text-[10px] text-amber/40 tracking-[0.2em] uppercase block mb-1.5";
 
     return (
@@ -123,7 +123,7 @@ function TalentForm({ talent, onSave, onCancel }: { talent?: Talent; onSave: () 
                         <button
                             type="button"
                             onClick={() => setImageMode("upload")}
-                            className={`flex items-center gap-1 px-2.5 py-1 text-[10px] data-readout tracking-wider uppercase border transition-all cursor-pointer ${imageMode === "upload"
+                            className={`flex items-center gap-1 px-2.5 py-1 text-[10px] data-readout tracking-wider uppercase border transition cursor-pointer ${imageMode === "upload"
                                     ? "border-cyan/40 bg-cyan/10 text-cyan"
                                     : "border-green/10 text-gray-500 hover:text-gray-300"
                                 }`}
@@ -133,7 +133,7 @@ function TalentForm({ talent, onSave, onCancel }: { talent?: Talent; onSave: () 
                         <button
                             type="button"
                             onClick={() => setImageMode("url")}
-                            className={`flex items-center gap-1 px-2.5 py-1 text-[10px] data-readout tracking-wider uppercase border transition-all cursor-pointer ${imageMode === "url"
+                            className={`flex items-center gap-1 px-2.5 py-1 text-[10px] data-readout tracking-wider uppercase border transition cursor-pointer ${imageMode === "url"
                                     ? "border-cyan/40 bg-cyan/10 text-cyan"
                                     : "border-green/10 text-gray-500 hover:text-gray-300"
                                 }`}
@@ -149,7 +149,7 @@ function TalentForm({ talent, onSave, onCancel }: { talent?: Talent; onSave: () 
                         onDragOver={handleDragOver}
                         onDragLeave={handleDragLeave}
                         onClick={() => !uploading && fileInputRef.current?.click()}
-                        className={`relative border-2 border-dashed p-6 text-center transition-all duration-300 cursor-pointer ${dragOver
+                        className={`relative border-2 border-dashed p-6 text-center transition duration-300 cursor-pointer ${dragOver
                                 ? "border-cyan/60 bg-cyan/10"
                                 : uploading
                                     ? "border-amber/30 bg-amber/5"
@@ -172,7 +172,7 @@ function TalentForm({ talent, onSave, onCancel }: { talent?: Talent; onSave: () 
                             <div className="space-y-3">
                                 <div className="w-full h-1.5 bg-lab-dark/80 overflow-hidden">
                                     <div
-                                        className="h-full bg-gradient-to-r from-cyan to-green transition-all duration-300"
+                                        className="h-full bg-linear-to-r from-cyan to-green transition duration-300"
                                         style={{ width: `${uploadProgress}%` }}
                                     />
                                 </div>
@@ -187,7 +187,7 @@ function TalentForm({ talent, onSave, onCancel }: { talent?: Talent; onSave: () 
                                     Trascina una foto qui o <span className="text-cyan underline">sfoglia</span>
                                 </p>
                                 <p className="data-readout text-[9px] text-gray-600 tracking-wider">
-                                    JPG, PNG, WEBP
+                                    JPG, PNG, WEBP (Max 10MB)
                                 </p>
                             </div>
                         )}
@@ -232,7 +232,7 @@ function TalentForm({ talent, onSave, onCancel }: { talent?: Talent; onSave: () 
             )}
 
             <div className="flex gap-3 pt-2">
-                <button type="submit" disabled={uploading} className="flex-1 py-3 border border-amber/40 bg-amber/10 text-amber text-sm font-bold uppercase tracking-wider data-readout hover:bg-amber/20 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
+                <button type="submit" disabled={uploading} className="flex-1 py-3 border border-amber/40 bg-amber/10 text-amber text-sm font-bold uppercase tracking-wider data-readout hover:bg-amber/20 transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
                     <Save size={14} /> Salva Artista
                 </button>
                 <button type="button" onClick={onCancel} className="px-6 py-3 border border-gray-700 text-gray-400 text-sm data-readout uppercase tracking-wider hover:text-rama-text transition-colors cursor-pointer">
@@ -252,8 +252,10 @@ export default function AdminTalentsPage() {
     const load = () => { getTalents().then(setTalents); };
 
     useEffect(() => {
-        load();
-        if (searchParams.get("action") === "new") setCreating(true);
+        requestAnimationFrame(() => load());
+        if (searchParams.get("action") === "new") {
+            requestAnimationFrame(() => setCreating(true));
+        }
     }, [searchParams]);
 
     const handleDelete = async (id: string) => {
@@ -280,17 +282,17 @@ export default function AdminTalentsPage() {
                     <span className="data-readout text-[10px] text-green/40 tracking-[0.3em] uppercase">TAL // Team Artisti</span>
                     <h1 className="text-3xl font-bold text-rama-text mt-1">Artisti</h1>
                 </div>
-                <button onClick={() => setCreating(true)} className="flex items-center gap-2 px-5 py-2.5 border border-amber/40 bg-amber/10 text-amber text-xs font-bold uppercase tracking-wider data-readout hover:bg-amber/20 transition-all cursor-pointer">
+                <button onClick={() => setCreating(true)} className="flex items-center gap-2 px-5 py-2.5 border border-amber/40 bg-amber/10 text-amber text-xs font-bold uppercase tracking-wider data-readout hover:bg-amber/20 transition cursor-pointer">
                     <Plus size={14} /> Nuovo Artista
                 </button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {talents.map((talent) => (
-                    <div key={talent.id} className="border border-green/10 bg-lab-card/30 overflow-hidden group hover:border-amber/20 transition-all duration-300">
+                    <div key={talent.id} className="border border-green/10 bg-lab-card/30 overflow-hidden group hover:border-amber/20 transition duration-300">
                         <div className="h-48 overflow-hidden relative">
                             <img src={talent.image} alt={talent.name} className="w-full h-full object-cover" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-lab-dark to-transparent opacity-60" />
+                            <div className="absolute inset-0 bg-linear-to-t from-lab-dark to-transparent opacity-60" />
                             <div className="absolute top-2 right-2">
                                 <span className="data-readout text-[9px] text-green/40 tracking-wider flex items-center gap-1 bg-lab-dark/80 px-2 py-0.5">
                                     <Microscope size={8} /> {talent.code}

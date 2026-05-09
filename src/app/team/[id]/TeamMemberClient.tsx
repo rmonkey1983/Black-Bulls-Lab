@@ -58,7 +58,7 @@ export function TeamMemberClient({ member }: TeamMemberClientProps) {
                   fill
                   priority
                   onError={() => setImageError(true)}
-                  className={`object-cover transition-all duration-1000 
+                  className={`object-cover transition duration-1000 
                     ${member.id === 'manuel' ? 'grayscale contrast-125' : 'md:grayscale'} 
                     hover:grayscale-0 hover:scale-105 hover:contrast-100`}
                   sizes="(max-width: 1024px) 100vw, 40vw"
@@ -116,7 +116,7 @@ export function TeamMemberClient({ member }: TeamMemberClientProps) {
                 <div className="profile-content grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
                   {/* Qualifiche */}
                   {member.qualifiche && member.qualifiche.length > 0 && (
-                    <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-yellow-500/20 transition-all duration-500">
+                    <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-yellow-500/20 transition duration-500">
                       <div className="flex items-center gap-2 text-yellow-500 uppercase tracking-widest text-xs font-bold mb-6">
                         <Award size={16} />
                         <span>Skill & Qualifiche</span>
@@ -134,7 +134,7 @@ export function TeamMemberClient({ member }: TeamMemberClientProps) {
 
                   {/* Formazione */}
                   {member.formazione && member.formazione.length > 0 && (
-                    <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-yellow-500/20 transition-all duration-500">
+                    <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-yellow-500/20 transition duration-500">
                       <div className="flex items-center gap-2 text-yellow-500 uppercase tracking-widest text-xs font-bold mb-6">
                         <Star size={16} />
                         <span>Formazione</span>

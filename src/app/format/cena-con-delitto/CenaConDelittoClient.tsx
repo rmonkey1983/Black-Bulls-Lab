@@ -35,8 +35,8 @@ export function CenaConDelittoClient() {
                         className="opacity-40 contrast-125 grayscale"
                         priority
                     />
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-black/60 mix-blend-multiply" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/50 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-br from-blue-900/20 via-transparent to-black/60 mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-linear-to-t from-bg-dark via-bg-dark/50 to-transparent" />
                     <div className="absolute inset-0 bg-[url('/noise.webp')] opacity-20 mix-blend-overlay pointer-events-none" />
                 </div>
 
@@ -63,7 +63,7 @@ export function CenaConDelittoClient() {
                         <h1 className="sr-only">Cena Con Delitto Torino: Noir Experience interattiva</h1>
                         <div aria-hidden="true" className="line text-4xl sm:text-5xl md:text-8xl font-bold text-rama-text tracking-tighter leading-[0.9] drop-shadow-2xl">
                             <span>CENA CON</span><br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-rama-accent via-white to-rama-accent">
+                            <span className="text-transparent bg-clip-text bg-linear-to-r from-rama-accent via-white to-rama-accent">
                                 <span>DELITTO</span>
                             </span>
                         </div>
@@ -132,13 +132,13 @@ export function CenaConDelittoClient() {
                             href={buildWAUrl(WA_MESSAGES.cenaConDelitto)}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-full md:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-rama-accent text-black font-extrabold uppercase tracking-widest hover:bg-white transition-all duration-300 shadow-[0_0_30px_rgba(200,164,78,0.3)] rounded-sm"
+                            className="w-full md:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-rama-accent text-black font-extrabold uppercase tracking-widest hover:bg-white transition duration-300 shadow-[0_0_30px_rgba(200,164,78,0.3)] rounded-sm"
                         >
                             Dimmi quando è la prossima data
                         </a>
                         <Link
                             href="/format"
-                            className="w-full md:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent border border-white/20 text-white font-bold uppercase tracking-widest hover:border-rama-accent hover:text-rama-accent transition-all duration-300 rounded-sm"
+                            className="w-full md:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent border border-white/20 text-white font-bold uppercase tracking-widest hover:border-rama-accent hover:text-rama-accent transition duration-300 rounded-sm"
                         >
                             Dal Vivo a Torino
                         </Link>

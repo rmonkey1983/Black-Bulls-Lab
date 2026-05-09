@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { TheGoldenVoiceClient } from "./TheGoldenVoiceClient";
 import { EventSchema } from "@/components/seo/JsonLd";
 import { SITE_URL } from "@/lib/constants";
-import { BookingForm } from "@/components/ui/BookingForm";
+import { FormatBookingCTA } from "@/components/events/FormatBookingCTA";
 import { FormatFAQ } from "@/components/sections/FormatFAQ";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export const metadata: Metadata = {
     title: "The Golden Voice | Concorso Canoro Torino",
@@ -34,19 +33,7 @@ export default function TheGoldenVoicePage() {
 
             <FormatFAQ />
 
-            <section className="py-24 px-6 bg-zinc-950/50">
-                <div className="max-w-7xl mx-auto">
-                    <div className="mb-16">
-                        <SectionHeading
-                            title="AVVISAMI O"
-                            highlight="PRENOTA"
-                            subtitle="Sali sul palco o goditi lo spettacolo dal tuo tavolo"
-                            align="center"
-                        />
-                    </div>
-                    <BookingForm />
-                </div>
-            </section>
+            <FormatBookingCTA formatName="The Golden Voice" />
         </>
     );
 }

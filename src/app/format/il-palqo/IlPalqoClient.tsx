@@ -34,7 +34,7 @@ export function IlPalqoClient() {
                         className="opacity-50"
                         priority
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-bg-dark via-bg-dark/40 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-bg-dark via-bg-dark/40 to-transparent" />
                     <div className="absolute inset-0 bg-[url('/noise.webp')] opacity-20 mix-blend-overlay pointer-events-none" />
                 </div>
 
@@ -119,7 +119,7 @@ export function IlPalqoClient() {
                                 className="object-cover opacity-20 group-hover:scale-110 transition-transform duration-1000" 
                                 sizes="(max-width: 1024px) 100vw, 50vw"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-br from-gold/20 to-bordeaux/20 opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
+                            <div className="absolute inset-0 bg-linear-to-br from-gold/20 to-bordeaux/20 opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
                             <div className="absolute inset-0 flex items-center justify-center text-center p-6 md:p-8">
                                 <div>
                                     <Mic2 size={48} className="mx-auto text-rama-text/20 mb-4 md:mb-6" />
@@ -127,7 +127,7 @@ export function IlPalqoClient() {
                                     <p className="text-gray-300 text-sm md:text-base mb-6 md:mb-8 max-w-xs mx-auto">La selezione è sempre aperta per nuovi talenti.</p>
                                     <div className="flex flex-col gap-4 justify-center">
                                         <Link
-                                            href="/contact"
+                                            href="/calendario"
                                             className="w-full px-8 py-4 bg-rama-accent text-black font-bold uppercase tracking-widest hover:bg-white transition-colors rounded-sm text-sm"
                                         >
                                             Voglio esibirmi con te

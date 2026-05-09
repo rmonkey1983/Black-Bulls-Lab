@@ -74,7 +74,7 @@ export function EventHero({ title, subtitle, image, date, location }: EventHeroP
                                 alert("Link copiato negli appunti!");
                             }
                         }}
-                        className="flex items-center gap-3 px-6 py-3 bg-white/5 hover:bg-white/10 backdrop-blur-md rounded-full text-white border border-white/20 transition-all hover:scale-105 group"
+                        className="flex items-center gap-3 px-6 py-3 bg-white/5 hover:bg-white/10 backdrop-blur-md rounded-full text-white border border-white/20 transition hover:scale-105 group"
                     >
                         <Share2 size={20} className="group-hover:text-gold transition-colors" />
                         <span className="text-xs font-bold uppercase tracking-widest">Condividi</span>

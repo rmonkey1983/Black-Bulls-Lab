@@ -58,7 +58,7 @@ export function BackToTop() {
             <span className="font-sans text-[11px] uppercase tracking-widest text-rama-accent/70 group-hover:text-rama-accent transition-colors">
                 Torna in cima
             </span>
-            <div className="p-[14px] bg-rama-bg text-rama-accent rounded-sm border border-rama-accent/20 group-hover:border-rama-accent group-hover:bg-rama-accent/10 transition-all duration-300 shadow-[0_0_15px_rgba(200,164,78,0.1)] group-hover:shadow-[0_0_20px_rgba(200,164,78,0.3)]">
+            <div className="p-[14px] bg-rama-bg text-rama-accent rounded-sm border border-rama-accent/20 group-hover:border-rama-accent group-hover:bg-rama-accent/10 transition duration-300 shadow-[0_0_15px_rgba(200,164,78,0.1)] group-hover:shadow-[0_0_20px_rgba(200,164,78,0.3)]">
                 <ArrowUp size={22} strokeWidth={2.5} className="group-hover:animate-bounce" />
             </div>
         </button>

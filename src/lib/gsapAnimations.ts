@@ -60,7 +60,7 @@ export function animateCounters(containerSelector: string) {
           ease: 'power2.out',
           onUpdate: function () {
             counter.textContent = Math.round(
-              (this.targets()[0] as any).val
+              (this.targets()[0] as { val: number }).val
             ).toLocaleString('it-IT');
           },
         });

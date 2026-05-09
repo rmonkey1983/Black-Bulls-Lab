@@ -77,7 +77,7 @@ export function NoEventsNewsletter() {
             {/* Background glow layers */}
             <div className="absolute inset-0 bg-[#0b0b0b]" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(229,182,12,0.08)_0%,transparent_70%)] pointer-events-none" />
-            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-rama-accent/50 to-transparent" />
+            <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-rama-accent/50 to-transparent" />
 
             <div className="relative z-10 px-6 py-14 md:py-20 flex flex-col items-center text-center gap-8 max-w-3xl mx-auto">
 
@@ -112,7 +112,7 @@ export function NoEventsNewsletter() {
                     ].map(({ icon: Icon, text }) => (
                         <div
                             key={text}
-                            className="newsletter-feature flex items-center gap-2 bg-white/[0.04] border border-white/10 rounded-full px-4 py-2 text-sm text-white/70 font-sans"
+                            className="newsletter-feature flex items-center gap-2 bg-white/4 border border-white/10 rounded-full px-4 py-2 text-sm text-white/70 font-sans"
                         >
                             <Icon size={13} className="text-rama-accent" />
                             {text}
@@ -150,7 +150,7 @@ export function NoEventsNewsletter() {
                                         if (status === "error") setStatus("idle");
                                     }}
                                     placeholder="La tua email..."
-                                    className={`flex-1 bg-white/[0.05] border rounded-xl px-5 py-4 text-white font-sans text-sm placeholder:text-white/30 focus:outline-none transition-colors ${
+                                    className={`flex-1 bg-white/5 border rounded-xl px-5 py-4 text-white font-sans text-sm placeholder:text-white/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 transition-colors ${
                                         status === "error"
                                             ? "border-red-500/50 focus:border-red-500/70"
                                             : "border-white/15 focus:border-rama-accent/50"

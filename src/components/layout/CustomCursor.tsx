@@ -2,13 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { usePathname } from "next/navigation";
 
 export function CustomCursor() {
     const cursorRef = useRef<HTMLDivElement>(null);
     const followerRef = useRef<HTMLDivElement>(null);
     const [isVisible, setIsVisible] = useState(false);
-    const pathname = usePathname();
 
     useEffect(() => {
         // Disable on touch devices
@@ -16,7 +14,9 @@ export function CustomCursor() {
             return;
         }
 
-        setIsVisible(true);
+        if (!isVisible) {
+            requestAnimationFrame(() => setIsVisible(true));
+        }
 
         const cursor = cursorRef.current;
         const follower = followerRef.current;
@@ -78,7 +78,7 @@ export function CustomCursor() {
                 target.removeEventListener("mouseleave", handleMouseLeave);
             });
         };
-    }, []);
+    }, [isVisible]);
 
     // Hide if not on desktop/pointer device
     if (!isVisible) return null;
@@ -87,11 +87,11 @@ export function CustomCursor() {
         <>
             <div 
                 ref={cursorRef}
-                className="fixed top-0 left-0 w-2 h-2 bg-rama-accent rounded-full pointer-events-none z-[9999] opacity-50 mix-blend-difference hidden lg:block"
+                className="fixed top-0 left-0 w-2 h-2 bg-rama-accent rounded-full pointer-events-none z-9999 opacity-50 mix-blend-difference hidden lg:block"
             />
             <div 
                 ref={followerRef}
-                className="fixed top-0 left-0 w-8 h-8 border border-rama-accent/30 rounded-full pointer-events-none z-[9998] opacity-50 hidden lg:block"
+                className="fixed top-0 left-0 w-8 h-8 border border-rama-accent/30 rounded-full pointer-events-none z-9998 opacity-50 hidden lg:block"
             />
         </>
     );

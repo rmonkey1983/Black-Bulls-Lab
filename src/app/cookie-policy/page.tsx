@@ -13,7 +13,7 @@ export default function CookiePolicyPage() {
                 id="cookie-hero"
                 title="COOKIE"
                 highlight="Policy"
-                subtitle="Dettagli tecnici per un'esperienza fluida."
+                subtitle="Dettagli tecnici per un&apos;esperienza fluida."
                 mediaUrl="/images/brand/bg-stage-lights.webp"
             />
 
@@ -22,7 +22,7 @@ export default function CookiePolicyPage() {
                     <section className="space-y-6">
                         <h2 className="font-heading text-2xl font-bold uppercase tracking-wider text-white">Cosa sono i Cookie</h2>
                         <p className="leading-relaxed">
-                            I cookie sono piccoli file di testo che i siti visitati dall'utente inviano al suo terminale, dove vengono memorizzati per essere poi ritrasmessi agli stessi siti alla successiva visita del medesimo utente.
+                            I cookie sono piccoli file di testo che i siti visitati dall&apos;utente inviano al suo terminale, dove vengono memorizzati per essere poi ritrasmessi agli stessi siti alla successiva visita del medesimo utente.
                         </p>
                     </section>
 

@@ -11,34 +11,15 @@ const ICONS = [FlaskConical, Dna, Atom, Microscope, TestTube];
 export function Preloader() {
     const isMobile = useMediaQuery("(max-width: 768px)");
     const [count, setCount] = useState(0);
-    const [isLoading, setIsLoading] = useState(true);
-    const [iconIndex, setIconIndex] = useState(0);
-    const containerRef = useRef<HTMLDivElement>(null);
-    const particlesRef = useRef<HTMLDivElement>(null);
-    const scannerRef = useRef<HTMLDivElement>(null);
-    const iconRef = useRef<HTMLDivElement>(null);
-    const [particles, setParticles] = useState<Array<{id: number, left: number, size: number, delay: number, dur: number, x1: number, x2: number}>>([]);
-
-    // Optimized Loading Logic
-    useEffect(() => {
-        if (typeof window === "undefined") return;
-
+    const [isLoading, setIsLoading] = useState(() => {
+        if (typeof window === "undefined") return true;
+        const mobile = window.matchMedia("(max-width: 768px)").matches;
         const hasSeenSplash = sessionStorage.getItem("splash-seen");
-        
-        // 1. MOBILE SKIP: Render content immediately to avoid CLS and lag
-        if (isMobile || hasSeenSplash) {
-            setIsLoading(false);
-            return;
-        }
-
-        let mounted = true;
-
-        // 2. ICON & PARTICLE SETUP
-        const iconInterval = setInterval(() => {
-            setIconIndex((prev) => (prev + 1) % ICONS.length);
-        }, 200);
-
-        setParticles(Array.from({ length: 12 }).map((_, i) => ({
+        return !(mobile || hasSeenSplash);
+    });
+    const [iconIndex, setIconIndex] = useState(0);
+    const [particles] = useState<Array<{id: number, left: number, size: number, delay: number, dur: number, x1: number, x2: number}>>(() => 
+        Array.from({ length: 12 }).map((_, i) => ({
             id: i,
             left: Math.random() * 100,
             size: Math.random() * 4 + 2,
@@ -46,7 +27,23 @@ export function Preloader() {
             dur: Math.random() * 3 + 2,
             x1: Math.random() * 60 - 30,
             x2: Math.random() * 60 - 30,
-        })));
+        }))
+    );
+    const containerRef = useRef<HTMLDivElement>(null);
+    const particlesRef = useRef<HTMLDivElement>(null);
+    const scannerRef = useRef<HTMLDivElement>(null);
+    const iconRef = useRef<HTMLDivElement>(null);
+
+    // Optimized Loading Logic
+    useEffect(() => {
+        if (typeof window === "undefined" || !isLoading) return;
+
+        let mounted = true;
+
+        // 2. ICON INTERVAL
+        const iconInterval = setInterval(() => {
+            setIconIndex((prev) => (prev + 1) % ICONS.length);
+        }, 200);
 
         // 3. DESKTOP CAP (1500ms max)
         const startLoading = async () => {
@@ -101,7 +98,7 @@ export function Preloader() {
             mounted = false;
             clearInterval(iconInterval);
         };
-    }, [isMobile]);
+    }, [isMobile, isLoading]);
 
     useGSAP(() => {
         if (!isLoading) return;
@@ -150,7 +147,7 @@ export function Preloader() {
     return (
         <div
             ref={containerRef}
-            className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-bg-dark text-white cursor-wait py-12 px-6 overflow-hidden"
+            className="fixed inset-0 z-100 flex flex-col items-center justify-center bg-bg-dark text-white cursor-wait py-12 px-6 overflow-hidden"
         >
             {/* Background Grid Pattern */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
@@ -163,7 +160,7 @@ export function Preloader() {
             {/* Lab Scanner Line effect */}
             <div
                 ref={scannerRef}
-                className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold/40 to-transparent shadow-[0_0_15px_rgba(255,215,0,0.5)] z-0 top-0"
+                className="absolute left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-gold/40 to-transparent shadow-[0_0_15px_rgba(255,215,0,0.5)] z-0 top-0"
             />
 
             {/* Floating Lab Bubbles/Particles */}
@@ -201,10 +198,10 @@ export function Preloader() {
             {/* Progress Bar Container */}
             <div className="w-64 md:w-80 border border-white/20 p-1 rounded-full relative overflow-hidden backdrop-blur-sm z-10">
                 <div
-                    className="h-1.5 bg-gold rounded-full relative transition-all duration-100 ease-out"
+                    className="h-1.5 bg-gold rounded-full relative transition duration-100 ease-out"
                     style={{ width: `${count}%` }}
                 >
-                    <div className="absolute top-0 right-0 bottom-0 w-10 bg-gradient-to-r from-transparent to-white/50 blur-[2px]" />
+                    <div className="absolute top-0 right-0 bottom-0 w-10 bg-linear-to-r from-transparent to-white/50 blur-[2px]" />
                 </div>
             </div>
 

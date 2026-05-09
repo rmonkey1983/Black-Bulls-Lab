@@ -35,25 +35,36 @@ export function SectionHeading({
       className
     )}>
       {/* Optional Badge */}
-      {/* ... (rest of the component remains same until the Tag) ... */}
+      {badge && (
+        <span className="inline-block px-3 py-1 bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-[10px] font-bold uppercase tracking-widest rounded-full">
+          {badge}
+        </span>
+      )}
       
       {/* Main Title */}
       <Tag className={cn(
         "font-heading font-bold leading-[0.9] tracking-tighter uppercase text-white",
-        level === "h1" ? "text-5xl md:text-8xl lg:text-9xl italic -skew-x-2" : "text-4xl md:text-6xl lg:text-7xl",
+        level === "h1" ? "text-5xl md:text-8xl lg:text-9xl" : "text-4xl md:text-6xl lg:text-7xl",
         titleClassName
       )}>
         {title}{" "}
         {highlight && (
-          <span className="text-yellow-500 italic transform skew-x-12 inline-block ml-1">
+          <span className="text-yellow-500 inline-block ml-1">
             {highlight}
           </span>
         )}
       </Tag>
 
+      {/* Optional Subtitle */}
+      {subtitle && (
+        <p className="font-sans text-lg md:text-xl text-zinc-400 font-light leading-relaxed max-w-2xl">
+          {subtitle}
+        </p>
+      )}
+
       {/* Optional Bottom Accent */}
       {accentPos === "bottom" && (
-        <div className={cn("h-[1px] w-24 bg-yellow-500/60 mt-4", align === "center" ? "mx-auto" : "")} />
+        <div className={cn("h-px w-24 bg-yellow-500/60 mt-4", align === "center" ? "mx-auto" : "")} />
       )}
     </div>
   );

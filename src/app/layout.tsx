@@ -4,16 +4,14 @@ import { RamaHeader } from "@/components/rama/RamaHeader";
 import { RamaFooter } from "@/components/rama/RamaFooter";
 import { EntertainmentBusinessSchema, WebSiteSchema, FAQPageSchema } from "@/components/seo/JsonLd";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
-import { Preloader } from "@/components/layout/Preloader";
+// Preloader rimosso per evitare blocchi post-pagamento
 import { MobileStickyBookButton } from "@/components/layout/MobileStickyBookButton";
 import { WhatsAppWidget } from "@/components/layout/WhatsAppWidget";
 import { BackToTop } from "@/components/layout/BackToTop";
 import { GSAPInitializer } from "@/components/layout/GSAPInitializer";
 import { PageTransition } from "@/components/layout/PageTransition";
-import { CONTACT_EMAIL, SITE_URL, SITE_NAME } from "@/lib/constants";
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, SITE_KEYWORDS } from "@/lib/constants";
 import "./globals.css";
-
-// Force rebuild: ESE Redesign active
 
 const mohave = Mohave({
   variable: "--font-mohave",
@@ -36,8 +34,7 @@ const rockSalt = Rock_Salt({
   subsets: ["latin"],
 });
 
-const DEFAULT_DESCRIPTION =
-  "Siamo l'agenzia Black Bulls Lab: format immersivi, cena spettacolo e team building aziendale. Eventi indimenticabili dove il vero protagonista sei tu.";
+const DEFAULT_DESCRIPTION = SITE_DESCRIPTION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -46,15 +43,7 @@ export const metadata: Metadata = {
     template: "%s | Black Bulls Lab",
   },
   description: DEFAULT_DESCRIPTION,
-  keywords: [
-    "agenzia eventi", "creazione dinner show", "format immersivi",
-    "eventi aziendali creativi", "organizzazione spettacoli", "intrattenimento su misura",
-    "agenzia spettacolo", "dinner show aziendale", "team building esperienziale",
-    // Keyword geo-locali Torino
-    "dinner show Torino", "eventi aziendali Torino", "cena con delitto Torino",
-    "organizzazione eventi Torino", "team building Torino", "cena spettacolo Torino",
-    "a cena con il bugiardo Torino", "il palqo Torino", "the golden voice Torino", "format cena teatro Torino", "esperienze interattive"
-  ],
+  keywords: SITE_KEYWORDS,
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
@@ -108,7 +97,6 @@ export function generateViewport(): Viewport {
 }
 
 import { BackgroundWrapper } from "@/components/layout/BackgroundWrapper";
-
 import { CustomCursor } from "@/components/layout/CustomCursor";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
 
@@ -133,14 +121,14 @@ export default function RootLayout({
         <a
           href="#main-content"
           suppressHydrationWarning
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-6 focus:py-3 focus:bg-rama-accent focus:text-black focus:font-heading focus:font-bold focus:uppercase focus:tracking-widest focus:rounded-sm focus:shadow-lg"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-200 focus:px-6 focus:py-3 focus:bg-rama-accent focus:text-black focus:font-heading focus:font-bold focus:uppercase focus:tracking-widest focus:rounded-sm focus:shadow-lg"
         >
           Salta al contenuto principale
         </a>
         
-        <Preloader />
+        {/* Preloader rimosso per garantire fluidità post-pagamento */}
         
-        <main id="main-content" className="flex-grow relative z-10 w-full">
+        <main id="main-content" className="grow relative z-10 w-full">
           <PageTransition>
             {children}
           </PageTransition>
@@ -159,9 +147,9 @@ export default function RootLayout({
           { question: "Come funziona una serata Black Bulls Lab?", answer: "Arrivi, ti siedi, e diventi parte dello show. I nostri format immersivi coinvolgono ogni ospite direttamente — non sei spettatore, sei protagonista. Ogni serata dura circa 3 ore tra cena e spettacolo." },
           { question: "Quante persone partecipano a ogni serata?", answer: "Max 20-30 persone per serata. La dimensione ridotta è parte del format: garantisce coinvolgimento totale e un'atmosfera unica che i grandi eventi non possono replicare." },
           { question: "Dove si svolgono le serate?", answer: "A Torino, in location selezionate in base al format. La sede viene comunicata al momento della prenotazione." },
-          { question: "Come prenoto una serata?", answer: "Compila il form su /contact oppure scrivici su WhatsApp. Risposta garantita entro 24h. I posti sono limitati: prima prenoti, meglio è." },
+          { question: "Come prenoto una serata?", answer: "Scegli una data dal calendario e paga l'acconto tramite Stripe. Riceverai i QR code d'ingresso all'istante." },
           { question: "Organizzate eventi aziendali o privati?", answer: "Sì. Tutti i format sono replicabili per eventi corporate, team building, feste private. Contattaci per un preventivo personalizzato." },
-          { question: "Qual è il prezzo a persona?", answer: "Dipende dal format e dalla location. Contattaci per il dettaglio — lavoriamo sempre su preventivo trasparente senza sorprese." },
+          { question: "Qual è il prezzo a persona?", answer: "Dipende dal format e dalla location. Il prezzo è indicato chiaramente in fase di prenotazione." },
           { question: "Devo avere esperienze teatrali o particolari abilità?", answer: "Zero. I nostri format sono progettati per funzionare con chiunque — timidi inclusi. Ci pensiamo noi a tirarti in ballo." },
         ]} />
       </body>

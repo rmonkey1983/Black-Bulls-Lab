@@ -56,12 +56,12 @@ export function RamaBlogPreview({ posts }: RamaBlogPreviewProps) {
                     {posts.map((post) => (
                         <PremiumCard key={post.slug} href={`/blog/${post.slug}`} className="group p-5">
                             <div className="space-y-6">
-                                <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-white/5 bg-zinc-900 shadow-2xl transition-all duration-500">
+                                <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-white/5 bg-zinc-900 shadow-2xl transition duration-500">
                                     <Image
                                         src={post.coverImage}
                                         alt={post.title}
                                         fill
-                                        className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                                        className="object-cover grayscale group-hover:grayscale-0 transition duration-700 group-hover:scale-105"
                                     />
                                     {/* Overlay Gradient */}
                                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
@@ -86,7 +86,7 @@ export function RamaBlogPreview({ posts }: RamaBlogPreviewProps) {
                 <div className="mt-20 text-center">
                     <Link
                         href="/blog"
-                        className="inline-flex items-center gap-3 bg-white/5 border border-white/10 text-white font-heading font-bold uppercase tracking-widest text-sm px-10 py-5 rounded-full hover:bg-yellow-500 hover:text-black hover:border-yellow-500 transition-all duration-300"
+                        className="inline-flex items-center gap-3 bg-white/5 border border-white/10 text-white font-heading font-bold uppercase tracking-widest text-sm px-10 py-5 rounded-full hover:bg-yellow-500 hover:text-black hover:border-yellow-500 transition duration-300"
                     >
                         Vai al Blog
                         <ArrowRight size={18} />

@@ -2,7 +2,21 @@
  * BRAND & SITE METADATA
  */
 export const SITE_NAME = "Black Bulls Lab";
-export const SITE_DESCRIPTION = "Il laboratorio underground dove l'intrattenimento diventa scienza.";
+export const SITE_DESCRIPTION = "Agenzia creativa a Torino specializzata in dinner show, format immersivi e team building aziendali. Trasformiamo l'intrattenimento in scienza attraverso esperienze digitali e interattive uniche.";
+export const SITE_KEYWORDS = [
+    "dinner show Torino",
+    "eventi immersivi Torino",
+    "cena spettacolo Torino",
+    "team building creativo Torino",
+    "esperienze interattive",
+    "format eventi originali",
+    "A Cena Con Il Bugiardo",
+    "Il PalQo",
+    "Cena Con Delitto Torino",
+    "intrattenimento aziendale",
+    "cosa fare a Torino",
+    "esperienze digitali dal vivo"
+];
 export const SITE_URL = "https://blackbullslab.com";
 
 /**
@@ -32,7 +46,7 @@ export const NAV_LINKS = [
     { name: "Chi Siamo", href: "/chi-siamo" },
     { name: "Blog", href: "/blog" },
     { name: "Corporate", href: "/eventi-aziendali" },
-    { name: "Contact", href: "/contact" },
+    { name: "Calendario", href: "/calendario" },
 ];
 
 /**
@@ -41,20 +55,20 @@ export const NAV_LINKS = [
 export const EXPERIMENTS = [
     { 
         id: "a-cena-con-il-bugiardo",
-        name: "A Cena Con Il Bugiardo", 
+        name: "LIAR SYSTEM", 
         slug: "a-cena-con-il-bugiardo",
         href: "/format/a-cena-con-il-bugiardo", 
-        subtitle: "L'inganno è a portata di smartphone.",
-        desc: "Web App Interactive Game",
-        longDesc: "Il primo dinner show dove la regia del gioco è nel tuo smartphone. Smaschererai l'unico vero bugiardo?",
-        image: "/images/brand/service-plating.webp",
-        badge: "Digital Experience",
-        details: "3 ore · 10-100+ persone · Da 50€/persona",
-        quickInfo: "da 50€ · Max 30 pers.",
+        subtitle: "La fiducia è un difetto. Lo smartphone è la tua arma.",
+        desc: "Social Game Experience",
+        longDesc: "Il primo dinner show dove il sospetto è l'unica moneta di scambio. Smaschererai il bugiardo o cadrai nel Sistema?",
+        image: "/images/brand/liar-system-logo.webp",
+        badge: "Social Deception",
+        details: "3 ore · 20-100+ persone · Da 50€/persona",
+        quickInfo: "da 50€ · 20-100+ pers.",
         price: 50,
-        ctaText: "Accedi alla prova",
-        actionLabel: "Voglio smascherarlo →",
-        ctaHref: `https://wa.me/39${CONTACT_WHATSAPP}?text=Ciao!%20Sono%20interessato%2Fa%20a%20%22A%20Cena%20Con%20Il%20Bugiardo%22.%20Voglio%20saperne%20di%20pi%C3%B9%20sull%27App%21`
+        ctaText: "Accedi al Sistema",
+        actionLabel: "Voglio sfidare il sistema →",
+        ctaHref: `https://wa.me/39${CONTACT_WHATSAPP}?text=Ciao!%20Voglio%20info%20su%20LIAR%20SYSTEM.%20Potete%20dirmi%20di%20pi%C3%B9%20sull%27App%3F`
     },
     { 
         id: "il-palqo",
@@ -83,8 +97,8 @@ export const EXPERIMENTS = [
         longDesc: "Risolvi il mistero analizzando indizi e testimonianze digitali inviate direttamente al tuo smartphone.",
         image: "/images/brand/bg-stage-lights.webp",
         badge: "Su prenotazione",
-        details: "3 ore · Indagine Digitale · Da 50€/persona",
-        quickInfo: "da 50€ · 15-40 pers.",
+        details: "3 ore · 20-100+ persone · Da 50€/persona",
+        quickInfo: "da 50€ · 20-100+ pers.",
         price: 50,
         ctaText: "Inizia l'indagine",
         actionLabel: "Voglio risolvere il caso →",
@@ -105,7 +119,7 @@ export const EXPERIMENTS = [
         price: 0,
         ctaText: "Candidati ora",
         actionLabel: "Voglio esibirmi →",
-        ctaHref: "/contact"
+        ctaHref: "/calendario"
     }
 ];
 
