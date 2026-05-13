@@ -20,7 +20,9 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: '/esperimenti', destination: '/format', permanent: true },
-      { source: '/esperimenti/:slug*', destination: '/format/:slug*', permanent: true },
+      { source: '/esperimenti/:path*', destination: '/format/:path*', permanent: true },
+      { source: '/events', destination: '/calendario', permanent: true },
+      { source: '/events/:path*', destination: '/calendario/:path*', permanent: true },
     ];
   },
   async headers() {
