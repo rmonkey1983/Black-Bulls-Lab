@@ -23,6 +23,8 @@ const nextConfig: NextConfig = {
       { source: '/esperimenti/:path*', destination: '/format/:path*', permanent: true },
       { source: '/events', destination: '/calendario', permanent: true },
       { source: '/events/:path*', destination: '/calendario/:path*', permanent: true },
+      { source: '/artisti', destination: '/talents', permanent: true },
+      { source: '/artisti/:path*', destination: '/talents/:path*', permanent: true },
     ];
   },
   async headers() {

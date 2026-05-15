@@ -4,7 +4,7 @@ module.exports = {
   generateRobotsTxt: true,
   sitemapSize: 99999,
   generateIndexSitemap: false,
-  exclude: ['/admin', '/admin/*', '/api/*', '/checkout', '/checkout/*'],
+  exclude: ['/admin', '/admin/*', '/api/*', '/checkout', '/checkout/*', '/robots.txt'],
   priority: 0.7,
   changefreq: 'weekly',
   robotsTxtOptions: {
