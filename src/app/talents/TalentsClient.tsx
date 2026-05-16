@@ -163,7 +163,7 @@ export function TalentsClient() {
                             { role: "Bartender", icon: GlassWater, desc: "Mixology, Alchimia & Servizio Premium." },
                             { role: "Technician", icon: Zap, desc: "Regia Luci, Audio & Show Control." },
                         ].map((item) => (
-                            <PremiumCard key={item.role} className="p-12 border border-white/5 bg-white/[0.01] hover:border-accent-gold/20 transition-all duration-700 text-center flex flex-col items-center gap-8">
+                            <PremiumCard key={item.role} className="p-12 border border-white/5 bg-white/1 hover:border-accent-gold/20 transition-all duration-700 text-center flex flex-col items-center gap-8">
                                 <div className="w-16 h-16 rounded-full border border-accent-gold/10 flex items-center justify-center text-accent-gold group-hover:scale-110 transition-transform duration-700">
                                     <item.icon size={32} />
                                 </div>

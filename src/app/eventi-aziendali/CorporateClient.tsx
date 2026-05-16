@@ -242,8 +242,8 @@ export function CorporateClient() {
                             <div
                                 key={tier.name}
                                 className={`group relative flex flex-col p-12 border transition-all duration-700 ${ tier.highlighted
-                                        ? "border-accent-gold bg-accent-gold/[0.03] shadow-[0_40px_100px_rgba(200,164,78,0.05)]"
-                                        : "border-white/5 bg-white/[0.01]"
+                                        ? "border-accent-gold bg-accent-gold/3 shadow-[0_40px_100px_rgba(200,164,78,0.05)]"
+                                        : "border-white/5 bg-white/1"
                                 }`}
                             >
                                 {tier.highlighted && (
@@ -366,7 +366,7 @@ export function CorporateClient() {
                             </div>
                         </div>
 
-                        <div className="bg-white/[0.02] p-12 lg:p-16 border border-white/5 backdrop-blur-3xl shadow-2xl">
+                        <div className="reveal-corp bg-white/2 p-12 lg:p-16 border border-white/5 backdrop-blur-3xl shadow-2xl">
                             <CorporateForm />
                         </div>
                     </div>

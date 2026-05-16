@@ -192,7 +192,7 @@ export function CenaConDelittoClient() {
                     { title: "Crime Scene", desc: "Durante la cena raccogli indizi e ascolta le testimonianze. Ogni portata svela un nuovo segreto.", icon: <Search size={32} /> },
                     { title: "Final Verdict", desc: "Formula l&apos;accusa. Invia movente e arma del delitto tramite l&apos;App. Vinci la sfida.", icon: <Zap size={32} /> }
                 ].map((act, i) => (
-                    <div key={i} className="group space-y-8 p-12 border border-white/5 bg-white/[0.02] hover:border-accent-gold/20 transition-all duration-700">
+                    <div key={i} className="group space-y-8 p-12 border border-white/5 bg-white/2 hover:border-accent-gold/20 transition-all duration-700">
                         <div className="text-accent-gold opacity-30 group-hover:opacity-100 transition-opacity duration-700">
                             {act.icon}
                         </div>

@@ -188,7 +188,7 @@ export function ACenaConIlBugiardoClient() {
                 icon: <CheckCircle2 size={32} />
               }
             ].map((item) => (
-              <div key={item.id} className="reveal-liar group p-12 border border-white/5 bg-white/[0.02] hover:bg-red-600/[0.02] hover:border-red-600/20 transition-all duration-1000">
+              <div key={item.id} className="reveal-liar group p-12 border border-white/5 bg-white/2 hover:bg-red-600/2 hover:border-red-600/20 transition-all duration-1000">
                 <div className="text-red-600 font-anton text-6xl opacity-20 group-hover:opacity-100 transition-opacity duration-1000 mb-8">
                   {item.id}
                 </div>
@@ -217,14 +217,14 @@ export function ACenaConIlBugiardoClient() {
       {/* 5. THE TARGETS: Darker Tone */}
       <section className="py-48 px-6 bg-black-pure">
         <div className="container-max grid grid-cols-1 lg:grid-cols-2 gap-24">
-          <div className="reveal-liar p-16 border border-white/5 bg-white/[0.01] space-y-8">
+          <div className="reveal-liar p-16 border border-white/5 bg-white/1 space-y-8">
             <span className="text-red-600 font-bold text-[10px] uppercase tracking-[0.5em]">Corporate Warfare</span>
             <h3 className="font-anton text-5xl uppercase tracking-tighter text-white">Soft skills <br /> sotto pressione.</h3>
             <p className="font-inter text-white/40 text-lg leading-relaxed">
               Negoziazione spietata e deduzione logica. Metti alla prova la vera gerarchia del tuo ufficio.
             </p>
           </div>
-          <div className="reveal-liar p-16 border border-white/5 bg-white/[0.01] space-y-8">
+          <div className="reveal-liar p-16 border border-white/5 bg-white/1 space-y-8">
             <span className="text-red-600 font-bold text-[10px] uppercase tracking-[0.5em]">Private Social Game</span>
             <h3 className="font-anton text-5xl uppercase tracking-tighter text-white">Niente sarà <br /> come prima.</h3>
             <p className="font-inter text-white/40 text-lg leading-relaxed">

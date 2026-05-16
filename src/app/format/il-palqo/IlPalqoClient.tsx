@@ -189,7 +189,7 @@ export function IlPalqoClient() {
                     { title: "Live Battle", desc: "Performance esplosive. Vota dal tuo tavolo tramite l&apos;App proprietaria.", icon: <Mic2 size={32} /> },
                     { title: "The Verdict", desc: "I risultati appaiono a schermo. Premiazione e Aftershow immersivo.", icon: <Users size={32} /> }
                 ].map((act, i) => (
-                    <div key={i} className="group space-y-8 p-12 border border-white/5 bg-white/[0.02] hover:border-accent-gold/20 transition-all duration-700">
+                    <div key={i} className="group space-y-8 p-12 border border-white/5 bg-white/2 hover:border-accent-gold/20 transition-all duration-700">
                         <div className="text-accent-gold opacity-30 group-hover:opacity-100 transition-opacity duration-700">
                             {act.icon}
                         </div>

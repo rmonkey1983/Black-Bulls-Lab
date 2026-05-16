@@ -135,7 +135,7 @@ export function FormatIndexClient() {
                                 <div className={`lg:col-span-7 relative group ${
                                     index % 2 !== 0 ? 'lg:order-2' : ''
                                 }`}>
-                                    <PremiumCard href={format.href} className="aspect-16/9 md:aspect-21/9 lg:aspect-16/10">
+                                    <PremiumCard href={format.href} className="aspect-video md:aspect-21/9 lg:aspect-16/10">
                                         <Image
                                             src={format.image}
                                             alt={format.name}
