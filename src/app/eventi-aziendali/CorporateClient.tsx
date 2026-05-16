@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Building2, Users, Sparkles, CheckCircle2, Loader2, PartyPopper } from "lucide-react";
+import { Building2, Users, Sparkles, CheckCircle2, Loader2 } from "lucide-react";
 import { ParallaxImage, StickyTextSection } from "@/components/ui/ParallaxScroll";
 import { ImmersiveHeader } from "@/components/layout/ImmersiveHeader";
 import { useGSAP } from "@/hooks/useGSAP";
@@ -87,7 +87,7 @@ export function CorporateClient() {
 
     return (
         <div className="min-h-screen pb-24 relative">
-            <h1 className="sr-only">Eventi Aziendali e Team Building Esperienziale a Torino</h1>
+            <h1 className="sr-only">Team Building e Eventi Aziendali a Torino</h1>
             
             <div className="relative">
                 <ImmersiveHeader

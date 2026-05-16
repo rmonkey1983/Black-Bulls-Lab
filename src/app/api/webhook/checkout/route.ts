@@ -41,6 +41,8 @@ export async function POST(req: Request) {
       const customerEmail = session.customer_details?.email;
       let customerName = session.customer_details?.name || 'Cliente';
 
+      console.log("Processing payment for:", { customerEmail, customerName });
+
       if (isCorporate) {
         console.log('🏢 Elaborazione ordine CORPORATE...');
         const tierName = session.metadata?.tierName || 'Pacchetto Corporate';

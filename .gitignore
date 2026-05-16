@@ -29,6 +29,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+*.log
 
 # env files (can opt-in for committing if needed)
 .env*
@@ -36,12 +37,19 @@ yarn-error.log*
 # vercel
 .vercel
 
+# netlify
+.netlify
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
 
 # junk files
 *.txt
+!public/llms.txt
 audit.json
 eslint_report*.json
 convert_to_webp.js
+.agents/
+scratch/
+next-dev-error.log

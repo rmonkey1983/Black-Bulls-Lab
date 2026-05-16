@@ -27,7 +27,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${member.name} | Black Bulls Lab`,
       description: member.bio.substring(0, 155),
-      images: [{ url: member.imageUrl || "/og-image.jpg" }],
+      images: [{ url: member.imageUrl || "/images/brand/bg-hero-wide.webp" }],
     },
   };
 }

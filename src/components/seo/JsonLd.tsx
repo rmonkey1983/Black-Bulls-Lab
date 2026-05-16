@@ -124,7 +124,7 @@ export function EventSchema({
                 addressCountry: "IT",
             },
         },
-        image: image || `${SITE_URL}/og-image.jpg`,
+        image: image || `${SITE_URL}/images/brand/bg-hero-wide.webp`,
         url,
         organizer: {
             "@type": "Organization",
@@ -160,13 +160,20 @@ export function WebSiteSchema() {
     const schema = {
         "@context": "https://schema.org",
         "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
         name: SITE_NAME,
         url: SITE_URL,
         description: "Dinner show e format eventi immersivi a Torino. A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e THE GOLDEN VOICE.",
         inLanguage: "it-IT",
         publisher: {
             "@type": "Organization",
+            "@id": `${SITE_URL}/#business`,
             name: SITE_NAME,
+        },
+        potentialAction: {
+            "@type": "SearchAction",
+            target: `${SITE_URL}/blog?search={search_term_string}`,
+            "query-input": "required name=search_term_string",
         },
     };
 
@@ -255,7 +262,7 @@ export function LocalBusinessSchema() {
         url: SITE_URL,
         telephone: CONTACT_PHONE,
         email: CONTACT_EMAIL,
-        image: `${SITE_URL}/og-image.jpg`,
+        image: `${SITE_URL}/images/brand/bg-hero-wide.webp`,
         logo: `${SITE_URL}/brand/logo-white.svg`,
         address: {
             "@type": "PostalAddress",
@@ -343,38 +350,65 @@ export function EntertainmentBusinessSchema() {
     "@graph": [
       {
         "@type": "EntertainmentBusiness",
-        "@id": `${SITE_URL}/#organization`,
+        "@id": `${SITE_URL}/#business`,
         name: SITE_NAME,
         url: SITE_URL,
         telephone: CONTACT_PHONE,
         email: CONTACT_EMAIL,
+        image: `${SITE_URL}/images/brand/bg-hero-wide.webp`,
+        logo: `${SITE_URL}/brand/logo-white.svg`,
+        description: "Black Bulls Lab crea dinner show interattivi, cena con delitto, format immersivi e team building aziendali a Torino.",
         address: {
           "@type": "PostalAddress",
           addressLocality: "Torino",
+          addressRegion: "Piemonte",
           addressCountry: "IT"
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: "45.0703",
+          longitude: "7.6869"
+        },
+        areaServed: {
+          "@type": "AdministrativeArea",
+          name: "Torino e Piemonte"
+        },
+        priceRange: "€€",
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Format Black Bulls Lab",
+          itemListElement: [
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "A Cena Con Il Bugiardo",
+                description: "Dinner show di social deception con web app interattiva."
+              }
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Cena Con Delitto",
+                description: "Cena spettacolo investigativa con indizi e attori dal vivo."
+              }
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Team building aziendale",
+                description: "Eventi corporate immersivi per aziende e gruppi."
+              }
+            }
+          ]
         },
         sameAs: [
           SOCIAL_LINKS.instagram,
           SOCIAL_LINKS.facebook,
           SOCIAL_LINKS.tiktok
         ]
-      },
-      {
-        "@type": "Event",
-        "name": `${SITE_NAME} - Dinner Show Immersivo`,
-        "location": {
-          "@type": "Place",
-          "name": `${SITE_NAME} Torino`,
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Torino",
-            "addressCountry": "IT"
-          }
-        },
-        "organizer": {
-          "@id": `${SITE_URL}/#organization`
-        },
-        "description": "Il laboratorio underground dove l'intrattenimento diventa scienza. Dinner show e format originali a Torino."
       }
     ]
   };

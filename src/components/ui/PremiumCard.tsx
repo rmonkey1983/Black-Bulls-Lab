@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
@@ -19,30 +18,34 @@ export function PremiumCard({
   className,
   href,
   hoverGlow = true,
-  grayscaleHover = false,
   onClick,
   style,
 }: PremiumCardProps) {
   const baseClasses = cn(
-    "relative overflow-hidden rounded-xl border border-white/5 bg-zinc-900/40 backdrop-blur-md motion-safe:transition motion-safe:duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]",
-    hoverGlow && "hover:border-yellow-500/40 hover:shadow-[0_0_50px_rgba(234,179,8,0.1)] hover:-translate-y-1",
-    grayscaleHover && "group",
+    "relative block overflow-hidden rounded-none border border-white/5 bg-black-elevated/10 backdrop-blur-3xl transition-all duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)] stagger-item",
+    hoverGlow && "hover:border-accent-gold/20 hover:shadow-[0_40px_100px_rgba(0,0,0,0.6)]",
+    "group",
     className
   );
 
   const content = (
     <>
-      {children}
-      {/* Subtle inner overlay for depth */}
-      <div className="absolute inset-0 pointer-events-none bg-linear-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-      {/* Scanner-like line effect on hover */}
-      <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-yellow-500/50 to-transparent -translate-y-full group-hover:translate-y-[400%] transition-transform duration-1500 ease-in-out opacity-0 group-hover:opacity-100" />
+      {/* Background Cinematic Details */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div className="absolute inset-0 opacity-[0.02] bg-[url('/noise.webp')] mix-blend-overlay" />
+        <div className="absolute inset-0 bg-linear-to-br from-white/3 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+      </div>
+      
+      {/* Card Content */}
+      <div className="relative z-10 h-full w-full">
+        {children}
+      </div>
     </>
   );
 
   if (href) {
     return (
-      <Link href={href} className={cn("block group cursor-pointer", baseClasses)} onClick={onClick} style={style} suppressHydrationWarning>
+      <Link href={href} className={baseClasses} onClick={onClick} style={style} suppressHydrationWarning>
         {content}
       </Link>
     );

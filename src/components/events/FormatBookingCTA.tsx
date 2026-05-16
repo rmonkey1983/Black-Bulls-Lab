@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { Calendar, ArrowRight } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
 

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
         title: "I Nostri Format | Le Serate Immersive | Black Bulls Lab",
         description: "Dalla Cena con Delitto al social game interattivo. Esplora i format di intrattenimento a Torino che mettono il tuo gruppo al centro della narrazione",
         url: `${SITE_URL}/format`,
-        images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Format | Black Bulls Lab" }],
+        images: [{ url: "/images/brand/bg-hero-wide.webp", width: 1200, height: 630, alt: "Format | Black Bulls Lab" }],
     },
 };
 

@@ -2,13 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { SiteSettings, getSettings, saveSettings } from "@/lib/dataStore";
-import { Save, Settings, Eye, EyeOff } from "lucide-react";
+import { Save, Settings } from "lucide-react";
 
 export default function AdminSettingsPage() {
     const [form, setForm] = useState<SiteSettings | null>(null);
     const [saved, setSaved] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
-    const [showPassword, setShowPassword] = useState(false);
 
     useEffect(() => {
         getSettings().then(setForm);
@@ -84,26 +83,12 @@ export default function AdminSettingsPage() {
                     <div className="flex items-center gap-2 border-b border-amber/10 pb-2">
                         <span className="data-readout text-[10px] text-amber/40 tracking-[0.2em] uppercase">⚠ Sicurezza</span>
                     </div>
-                    <div>
-                        <label className={labelClass}>Password Admin</label>
-                        <div className="relative">
-                            <input
-                                value={form.adminPassword}
-                                onChange={(e) => setForm({ ...form, adminPassword: e.target.value })}
-                                type={showPassword ? "text" : "password"}
-                                className={inputClass}
-                            />
-                            <button
-                                type="button"
-                                onClick={() => setShowPassword(!showPassword)}
-                                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-rama-text cursor-pointer"
-                            >
-                                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                            </button>
-                        </div>
-                        <span className="data-readout text-[9px] text-amber/30 mt-1 block tracking-wider">
-                            Modifica la password di accesso al pannello admin
-                        </span>
+                    <div className="p-4 bg-amber/5 border border-amber/20 rounded">
+                        <p className="text-xs text-amber/60 font-sans leading-relaxed">
+                            L&apos;autenticazione è ora gestita tramite <strong>Supabase Auth</strong>. 
+                            Le password non sono più salvate in chiaro nel database. 
+                            Per cambiare le credenziali di accesso, utilizza la dashboard di Supabase.
+                        </p>
                     </div>
                 </div>
 

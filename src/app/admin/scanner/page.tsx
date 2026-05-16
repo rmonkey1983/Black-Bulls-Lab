@@ -33,7 +33,10 @@ export default function AdminScanner() {
     try {
       const res = await fetch('/api/admin/scan', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer bbl_admin_2026'
+        },
         body: JSON.stringify({ ticketId: ticketId }),
       });
 
@@ -143,7 +146,7 @@ export default function AdminScanner() {
 
         <div className="mt-12 text-center">
             <p className="data-readout text-[8px] text-zinc-700 uppercase tracking-[0.4em]">
-                System Status: <span className="text-green animate-pulse">Online</span> // Scanner Ready
+                System Status: <span className="text-green animate-pulse">Online</span> {"//"} Scanner Ready
             </p>
         </div>
 

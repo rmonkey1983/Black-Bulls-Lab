@@ -138,7 +138,7 @@ export function TheGoldenVoiceClient() {
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-3 px-8 py-4 border border-rama-accent text-rama-accent font-bold uppercase tracking-widest hover:bg-rama-accent hover:text-black transition duration-300 rounded-sm"
                             >
-                                <Mic size={18} /> Dimmi quando è la prossima data
+                                <Mic size={18} /> Chiedi info date
                             </a>
                         </div>
                     </div>

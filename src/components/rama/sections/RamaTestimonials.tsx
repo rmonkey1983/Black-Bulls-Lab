@@ -2,7 +2,6 @@
 
 import React, { useState, useRef } from "react";
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
-import { RamaAnimatedText } from "../RamaAnimatedText";
 import { useGSAP } from "@/hooks/useGSAP";
 import { gsap } from "gsap";
 
@@ -71,13 +70,12 @@ export function RamaTestimonials() {
             <div className="relative z-10 w-full max-w-5xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-12 sm:mb-16">
-                    <RamaAnimatedText
-                        text="COSA DICONO DI NOI"
-                        className="font-rock-salt text-rama-accent text-base sm:text-xl md:text-2xl mb-6 transform -rotate-1"
-                    />
+                    <span className="block font-rock-salt text-rama-accent text-base sm:text-xl md:text-2xl mb-6 transform -rotate-1">
+                        COSA DICONO DI NOI
+                    </span>
                     <div className="font-heading font-bold uppercase tracking-tighter text-white text-[12vw] sm:text-[9vw] md:text-[6vw] leading-[0.88] overflow-hidden">
-                        <RamaAnimatedText text="ESPERIENZE" delay={0.1} />
-                        <RamaAnimatedText text="REALI" delay={0.2} className="text-rama-accent" />
+                        <span>ESPERIENZE</span>
+                        <span className="text-rama-accent ml-4">REALI</span>
                     </div>
                 </div>
 

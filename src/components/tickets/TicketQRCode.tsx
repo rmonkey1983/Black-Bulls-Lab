@@ -1,7 +1,6 @@
 'use client';
 
 import { QRCodeSVG } from 'qrcode.react';
-import { useEffect, useState } from 'react';
 
 interface TicketQRCodeProps {
   ticketId: string;
@@ -10,16 +9,6 @@ interface TicketQRCodeProps {
 }
 
 export default function TicketQRCode({ ticketId, guestName }: TicketQRCodeProps) {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return <div className="w-[108px] h-[108px] bg-zinc-900 animate-pulse rounded-sm" />;
-  }
-
   // Encode both the unique ticket UUID and the holder name so the scanner
   // can identify the guest without any extra lookup.
   // Format: "TICKET:<uuid>|<GuestName>"

@@ -34,22 +34,27 @@ export function SectionHeading({
       align === "center" ? "text-center mx-auto" : "text-left",
       className
     )}>
+      {/* Optional Top Accent */}
+      {accentPos === "top" && (
+        <div className={cn("h-px w-12 bg-accent-gold/60 mb-8 stagger-item", align === "center" ? "mx-auto" : "")} />
+      )}
+
       {/* Optional Badge */}
       {badge && (
-        <span className="inline-block px-3 py-1 bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-[10px] font-bold uppercase tracking-widest rounded-full">
+        <span className="inline-block px-4 py-1.5 border border-accent-gold/20 text-accent-gold text-[10px] font-syne font-bold uppercase tracking-[0.4em] stagger-item">
           {badge}
         </span>
       )}
       
       {/* Main Title */}
       <Tag className={cn(
-        "font-heading font-bold leading-[0.9] tracking-tighter uppercase text-white",
-        level === "h1" ? "text-5xl md:text-8xl lg:text-9xl" : "text-4xl md:text-6xl lg:text-7xl",
+        "font-syne font-bold leading-[0.85] tracking-tighter uppercase text-text-primary stagger-item",
+        level === "h1" ? "text-5xl md:text-8xl lg:text-[10rem]" : "text-4xl md:text-6xl lg:text-8xl",
         titleClassName
       )}>
-        {title}{" "}
+        {title && <span>{title} </span>}
         {highlight && (
-          <span className="text-yellow-500 inline-block ml-1">
+          <span className="text-accent-gold block md:inline">
             {highlight}
           </span>
         )}
@@ -57,14 +62,14 @@ export function SectionHeading({
 
       {/* Optional Subtitle */}
       {subtitle && (
-        <p className="font-sans text-lg md:text-xl text-zinc-400 font-light leading-relaxed max-w-2xl">
+        <p className="font-inter text-xs md:text-sm text-text-secondary font-medium uppercase tracking-[0.3em] opacity-60 stagger-item">
           {subtitle}
         </p>
       )}
 
       {/* Optional Bottom Accent */}
       {accentPos === "bottom" && (
-        <div className={cn("h-px w-24 bg-yellow-500/60 mt-4", align === "center" ? "mx-auto" : "")} />
+        <div className={cn("h-px w-12 bg-accent-gold/60 mt-8 stagger-item", align === "center" ? "mx-auto" : "")} />
       )}
     </div>
   );

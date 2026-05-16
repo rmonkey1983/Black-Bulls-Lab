@@ -1,28 +1,8 @@
-import type { Metadata } from "next";
-import React from "react";
+import { homepageMetadata } from "@/lib/metadata";
+import { getHomepageJsonLd, getFaqJsonLd } from "@/lib/jsonld";
+import Script from "next/script";
 
-export const metadata: Metadata = {
-    title: {
-        absolute: "Dinner Show Torino e Eventi Immersivi | Black Bulls Lab",
-    },
-    description:
-        "Scopri l'universo Black Bulls Lab a Torino: Dinner Show interattivi, Cena con Delitto digitale e format immersivi unici. Prenota ora la tua serata tra divertimento e tecnologia.",
-    alternates: { canonical: "/" },
-    openGraph: {
-        title: "Dinner Show Torino e Eventi Immersivi | Black Bulls Lab",
-        description:
-            "Vivi esperienze interattive uniche a Torino. Scopri i mockumentary, i nostri dinner show e lasciati stupire da una cena spettacolo curata nei minimi dettagli.",
-        url: "https://blackbullslab.com",
-        images: [{ url: "/images/brand/bg-hero-wide.webp", width: 1200, height: 630, alt: "Black Bulls Lab | Dinner Show Torino" }],
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "Dinner Show Torino e Eventi Immersivi | Black Bulls Lab",
-        description:
-            "Vivi esperienze interattive uniche a Torino. Scopri i mockumentary, i nostri dinner show e lasciati stupire da una cena spettacolo curata nei minimi dettagli.",
-        images: ["/og-image.jpg"],
-    },
-};
+export const metadata = homepageMetadata;
 
 import dynamic from "next/dynamic";
 import { getAllPosts } from "@/lib/blog";
@@ -49,6 +29,18 @@ export default async function HomePage() {
 
     return (
         <main className="w-full bg-zinc-950 min-h-screen">
+            <Script
+                id="jsonld-homepage"
+                type="application/ld+json"
+                strategy="beforeInteractive"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(getHomepageJsonLd()) }}
+            />
+            <Script
+                id="jsonld-faq"
+                type="application/ld+json"
+                strategy="beforeInteractive"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(getFaqJsonLd()) }}
+            />
             <HomeClient latestPosts={latestPosts} nextEvents={nextEvents || []} />
         </main>
     );

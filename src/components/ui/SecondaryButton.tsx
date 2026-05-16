@@ -11,6 +11,7 @@ interface SecondaryButtonProps {
   className?: string;
   size?: "sm" | "md" | "lg";
   type?: "button" | "submit";
+  suppressHydrationWarning?: boolean;
 }
 
 export function SecondaryButton({
@@ -20,6 +21,7 @@ export function SecondaryButton({
   className,
   size = "md",
   type = "button",
+  suppressHydrationWarning = true,
 }: SecondaryButtonProps) {
   const sizeClasses = {
     sm: "px-6 py-2.5 text-[10px]",
@@ -28,10 +30,10 @@ export function SecondaryButton({
   };
 
   const classes = cn(
-    "inline-flex items-center justify-center gap-3 font-heading font-black uppercase tracking-[0.3em] transition duration-500 relative group/btn",
-    "bg-transparent text-white border-2 border-[#FFD700]/30 rounded-full",
-    "hover:border-[#FFD700] hover:text-[#FFD700] hover:shadow-[0_0_30px_rgba(255,215,0,0.2)] hover:-translate-y-1",
-    "active:scale-95 active:translate-y-0",
+    "inline-flex items-center justify-center gap-3 font-syne font-bold uppercase tracking-[0.3em] transition-all duration-700 relative group/btn",
+    "bg-transparent text-text-primary border border-white/10",
+    "hover:border-accent-gold hover:text-accent-gold",
+    "active:scale-95",
     "overflow-hidden",
     sizeClasses[size],
     className
@@ -39,18 +41,8 @@ export function SecondaryButton({
 
   const content = (
     <>
-      <style>{`
-        @keyframes pulse-glow {
-          0% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 0.5; transform: scale(1.05); }
-          100% { opacity: 0.3; transform: scale(1); }
-        }
-      `}</style>
-      
-      {/* Subtle internal glow on hover */}
-      <span className="absolute inset-0 w-full h-full bg-[#FFD700]/5 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500 rounded-full" />
-      
-      <span className="relative z-10 flex items-center gap-2">
+      <span className="absolute inset-0 bg-accent-gold opacity-0 group-hover/btn:opacity-[0.03] transition-opacity duration-700" />
+      <span className="relative z-10">
         {children}
       </span>
     </>
@@ -58,14 +50,24 @@ export function SecondaryButton({
 
   if (href) {
     return (
-      <Link href={href} className={classes} onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>} suppressHydrationWarning>
+      <Link 
+        href={href} 
+        className={classes} 
+        onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>} 
+        suppressHydrationWarning={suppressHydrationWarning}
+      >
         {content}
       </Link>
     );
   }
 
   return (
-    <button type={type} onClick={onClick as React.MouseEventHandler<HTMLButtonElement>} className={classes}>
+    <button 
+        type={type} 
+        onClick={onClick as React.MouseEventHandler<HTMLButtonElement>} 
+        className={classes}
+        suppressHydrationWarning={suppressHydrationWarning}
+    >
       {content}
     </button>
   );

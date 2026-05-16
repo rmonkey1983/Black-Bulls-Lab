@@ -47,7 +47,10 @@ export default function StaffCheckin() {
     try {
       const res = await fetch('/api/admin/scan', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer bbl_admin_2026'
+        },
         body: JSON.stringify({ ticketId: ticketId }),
       });
       const data = await res.json();
@@ -64,7 +67,8 @@ export default function StaffCheckin() {
       } else {
         setMessage({ text: 'CHECK-IN VALIDO', type: 'success' });
       }
-    } catch (error) {
+    } catch (err) {
+      console.error("Connection error:", err);
       setMessage({ text: 'Errore di connessione', type: 'error' });
     } finally {
       setLoading(false);

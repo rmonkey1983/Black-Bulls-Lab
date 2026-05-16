@@ -10,7 +10,7 @@ export const metadata: Metadata = {
         description:
             "Singing Contest immersivo a Torino. Hai la voce per vincere? Candidati o vieni a scoprire i talenti.",
         url: "/format/the-golden-voice",
-        images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "THE GOLDEN VOICE — Black Bulls Lab" }],
+        images: [{ url: "/images/brand/bg-hero-wide.webp", width: 1200, height: 630, alt: "THE GOLDEN VOICE — Black Bulls Lab" }],
     },
 };
 

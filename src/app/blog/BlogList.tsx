@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import Image from "next/image";
 import { BlogPost } from "@/lib/blog";
 import { PremiumCard } from "@/components/ui/PremiumCard";
-import { Calendar, Clock, User, ArrowRight } from "lucide-react";
+import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface BlogListProps {
@@ -66,7 +66,7 @@ export function BlogList({ posts }: BlogListProps) {
               className="flex flex-col h-full group"
             >
               {/* Image Container */}
-              <div className="relative aspect-[16/10] overflow-hidden grayscale group-hover:grayscale-0 transition duration-700">
+              <div className="relative aspect-16/10 overflow-hidden grayscale group-hover:grayscale-0 transition duration-700">
                 <Image
                   src={post.coverImage}
                   alt={post.title}
@@ -81,7 +81,7 @@ export function BlogList({ posts }: BlogListProps) {
               </div>
 
               {/* Content */}
-              <div className="p-6 flex flex-col flex-grow space-y-4">
+              <div className="p-6 flex flex-col grow space-y-4">
                 <div className="flex items-center gap-4 text-[10px] text-zinc-500 uppercase tracking-widest font-medium">
                   <div className="flex items-center gap-1">
                     <Calendar size={12} className="text-yellow-500/50" />

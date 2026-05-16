@@ -1,33 +1,34 @@
-import type { Metadata } from "next";
+import { buildFormatMetadata } from "@/lib/metadata";
+import { getFormatServiceJsonLd } from "@/lib/jsonld";
+import Script from "next/script";
 import { IlPalqoClient } from "./IlPalqoClient";
-import { EventSchema } from "@/components/seo/JsonLd";
 import { SITE_URL } from "@/lib/constants";
 import { FormatBookingCTA } from "@/components/events/FormatBookingCTA";
 import { FormatFAQ } from "@/components/sections/FormatFAQ";
 
-export const metadata: Metadata = {
-    title: "Il PalQo | Serate Live e Talenti a Torino",
-    description: "Vivi Il PalQo: tre atti di musica e stand-up. Le migliori serate live Torino con artisti emergenti tra i più originali eventi culturali Torino del momento",
-    alternates: { canonical: `${SITE_URL}/format/il-palqo` },
-    openGraph: {
-        title: "Il Palqo | Dinner Show & Performance | Black Bulls Lab",
-        description: "Un'esperienza gastronomica che incontra la performance dal vivo. Scopri Il Palqo, il format dove il cibo e l'arte si fondono in un dinner show unico a Torino",
-        url: `${SITE_URL}/format/il-palqo`,
-        images: [{ url: "/images/brand/vibe-live-jazz.webp", width: 1200, height: 630, alt: "Il Palqo | Black Bulls Lab" }],
-    },
-};
+export const metadata = buildFormatMetadata({
+    title: "Il PalQo",
+    description: "Vivi Il PalQo: tre atti di musica e stand-up. Le migliori serate live Torino con artisti emergenti.",
+    slug: "il-palqo",
+    image: "https://blackbullslab.com/images/brand/vibe-live-jazz.webp",
+    keywords: ["serate live Torino", "musica dal vivo Torino", "stand-up comedy Torino"],
+});
 
 export default function IlPalqoPage() {
+    const serviceLd = getFormatServiceJsonLd({
+        name: "Il PalQo",
+        description: "Un palcoscenico interattivo dove il pubblico vota le performance live tramite Web App. Musica, teatro e arti performative a Torino.",
+        image: `${SITE_URL}/images/brand/bg-stage-lights.webp`,
+        url: `${SITE_URL}/format/il-palqo`,
+        price: 0,
+    });
     return (
         <>
-            <EventSchema 
-                name="Il PalQo — Hybrid Showcase"
-                description="Un palcoscenico interattivo dove il pubblico vota le performance live tramite Web App. Musica, teatro e arti performative a Torino."
-                date="2026-12-31T21:00:00Z"
-                location="Black Bulls Lab, Torino"
-                url={`${SITE_URL}/format/il-palqo`}
-                price={0}
-                image={`${SITE_URL}/images/brand/bg-stage-lights.webp`}
+            <Script
+                id="jsonld-event"
+                type="application/ld+json"
+                strategy="beforeInteractive"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }}
             />
             <IlPalqoClient />
             

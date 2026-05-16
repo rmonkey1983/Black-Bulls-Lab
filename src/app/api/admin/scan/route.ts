@@ -3,6 +3,11 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   try {
+    const authHeader = req.headers.get('Authorization');
+    if (authHeader !== `Bearer ${process.env.ADMIN_SECRET || 'bbl_admin_2026'}`) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { ticketId } = await req.json();
 
     if (!ticketId) {

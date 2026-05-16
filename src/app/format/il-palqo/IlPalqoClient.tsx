@@ -130,7 +130,7 @@ export function IlPalqoClient() {
                                             href="/calendario"
                                             className="w-full px-8 py-4 bg-rama-accent text-black font-bold uppercase tracking-widest hover:bg-white transition-colors rounded-sm text-sm"
                                         >
-                                            Voglio esibirmi con te
+                                            Vedi date show
                                         </Link>
                                         <a
                                             href={buildWAUrl(WA_MESSAGES.ilPalqo)}
@@ -138,7 +138,7 @@ export function IlPalqoClient() {
                                             rel="noopener noreferrer"
                                             className="w-full px-8 py-4 border border-rama-accent text-rama-accent font-bold uppercase tracking-widest hover:bg-rama-accent hover:text-black transition-colors rounded-sm flex items-center justify-center gap-2 text-sm"
                                         >
-                                            Dimmi quando è la prossima data
+                                            Voglio esibirmi sul palco
                                         </a>
                                     </div>
                                 </div>

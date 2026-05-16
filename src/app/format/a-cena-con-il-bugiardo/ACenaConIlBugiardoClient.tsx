@@ -47,7 +47,7 @@ export function ACenaConIlBugiardoClient() {
         <div className="absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
           <Image
             src="/images/brand/background.webp"
-            alt="LIAR SYSTEM Background"
+            alt="A Cena Con Il Bugiardo Background"
             fill
             className="object-contain opacity-20 scale-150"
             priority
@@ -84,7 +84,7 @@ export function ACenaConIlBugiardoClient() {
                 </h1>
 
                 <p className="liar-desc text-base sm:text-xl md:text-2xl text-gray-300 font-light max-w-3xl border-l-4 border-red-600 pl-6 italic">
-                    Entra in LIAR SYSTEM. La prima Social Game Experience in cui la fiducia è un difetto, lo smartphone è un'arma e lo spettacolo... siete voi.
+                    Entra in A Cena Con Il Bugiardo. La prima Social Game Experience in cui la fiducia è un difetto, lo smartphone è un'arma e lo spettacolo... siete voi.
                 </p>
             </div>
         </div>
@@ -219,7 +219,7 @@ export function ACenaConIlBugiardoClient() {
               IL SISTEMA È <br /> <span className="text-red-600">MONITORATO.</span>
             </h2>
             <p className="text-gray-300 text-xl font-light leading-relaxed border-l-4 border-red-600 pl-8">
-              Non vi lasciamo soli in balia del caos. Ogni evento LIAR SYSTEM è guidato in presenza da un nostro Game Master. È lui che attiva le missioni, gestisce i colpi di scena dalla console di regia e si assicura che il ritmo della serata non cali mai.
+              Non vi lasciamo soli in balia del caos. Ogni serata è guidata in presenza da un nostro Game Master. È lui che attiva le missioni, gestisce i colpi di scena dalla console di regia e si assicura che il ritmo della serata non cali mai.
             </p>
           </div>
           

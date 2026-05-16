@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getPostBySlug, getAllPosts } from "@/lib/blog";
-import { Calendar, Clock, User, ArrowLeft, ArrowRight } from "lucide-react";
+import { Calendar, Clock, User, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { PreFooterCTA } from "@/components/layout/PreFooterCTA";
 import { SITE_URL } from "@/lib/constants";
@@ -211,7 +211,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           className="object-cover grayscale hover:grayscale-0 transition duration-1000"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-60" />
+        <div className="absolute inset-0 bg-linear-to-t from-zinc-950 via-transparent to-transparent opacity-60" />
       </div>
 
       {/* Content Body */}
@@ -246,7 +246,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   href={`/blog/${rp.slug}`}
                   className="group block space-y-6"
                 >
-                  <div className="relative aspect-[16/9] overflow-hidden rounded-xl border border-white/5 transition duration-500 group-hover:border-rama-accent/30">
+                  <div className="relative aspect-video overflow-hidden rounded-xl border border-white/5 transition duration-500 group-hover:border-rama-accent/30">
                     <Image
                       src={rp.coverImage}
                       alt={rp.title}

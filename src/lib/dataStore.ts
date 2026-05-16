@@ -50,7 +50,6 @@ export interface SiteSettings {
     heroSubtitle: string;
     contactEmail: string;
     instagram: string;
-    adminPassword: string;
 }
 
 export interface EventDate {
@@ -290,7 +289,6 @@ export async function getSettings(): Promise<SiteSettings> {
         heroSubtitle: "Il laboratorio underground dove l'intrattenimento diventa scienza.",
         contactEmail: "info@blackbullslab.com",
         instagram: "@blackbullslab",
-        adminPassword: "admin123",
     };
 
     const { data, error } = await supabase
@@ -307,7 +305,6 @@ export async function getSettings(): Promise<SiteSettings> {
         heroSubtitle: data.hero_subtitle || defaults.heroSubtitle,
         contactEmail: data.contact_email || defaults.contactEmail,
         instagram: data.instagram || defaults.instagram,
-        adminPassword: data.admin_password || defaults.adminPassword,
     };
 }
 
@@ -321,7 +318,6 @@ export async function saveSettings(settings: SiteSettings): Promise<void> {
             hero_subtitle: settings.heroSubtitle,
             contact_email: settings.contactEmail,
             instagram: settings.instagram,
-            admin_password: settings.adminPassword,
             updated_at: new Date().toISOString(),
         }, { onConflict: "id" });
 

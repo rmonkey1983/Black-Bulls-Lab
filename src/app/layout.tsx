@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Mohave, Outfit, Rock_Salt, Inter } from "next/font/google";
-import { RamaHeader } from "@/components/rama/RamaHeader";
-import { RamaFooter } from "@/components/rama/RamaFooter";
-import { EntertainmentBusinessSchema, WebSiteSchema, FAQPageSchema } from "@/components/seo/JsonLd";
+import { Mohave, Outfit, Rock_Salt, Inter, Syne } from "next/font/google";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import { EntertainmentBusinessSchema, WebSiteSchema } from "@/components/seo/JsonLd";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 // Preloader rimosso per evitare blocchi post-pagamento
 import { MobileStickyBookButton } from "@/components/layout/MobileStickyBookButton";
@@ -34,6 +34,11 @@ const rockSalt = Rock_Salt({
   subsets: ["latin"],
 });
 
+const syne = Syne({
+  variable: "--font-syne",
+  subsets: ["latin"],
+});
+
 const DEFAULT_DESCRIPTION = SITE_DESCRIPTION;
 
 export const metadata: Metadata = {
@@ -58,7 +63,7 @@ export const metadata: Metadata = {
     description: DEFAULT_DESCRIPTION,
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/images/brand/bg-hero-wide.webp",
         width: 1200,
         height: 630,
         alt: "Black Bulls Lab | Creatori di Emozioni",
@@ -69,7 +74,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Creatori di Emozioni e Dinner Show Esclusivi | Black Bulls",
     description: DEFAULT_DESCRIPTION,
-    images: ["/og-image.jpg"],
+    images: ["/images/brand/bg-hero-wide.webp"],
   },
   robots: {
     index: true,
@@ -109,13 +114,14 @@ export default function RootLayout({
     <html lang="it" suppressHydrationWarning>
       <head />
       <body
-        className={`${outfit.variable} ${inter.variable} ${mohave.variable} ${rockSalt.variable} font-sans antialiased text-white min-h-screen relative selection:bg-rama-accent selection:text-black flex flex-col bg-zinc-950`}
+        suppressHydrationWarning
+        className={`${outfit.variable} ${inter.variable} ${mohave.variable} ${rockSalt.variable} ${syne.variable} font-sans antialiased text-white min-h-screen relative selection:bg-accent-gold selection:text-black flex flex-col bg-black-pure`}
       >
         <CustomCursor />
         <ScrollProgress />
         <GSAPInitializer />
         <BackgroundWrapper />
-        <RamaHeader />
+        <Navbar />
         
         {/* Skip to main content */}
         <a
@@ -134,7 +140,7 @@ export default function RootLayout({
           </PageTransition>
         </main>
 
-        <RamaFooter />
+        <Footer />
         
         <MobileStickyBookButton />
         <WhatsAppWidget />
@@ -143,15 +149,6 @@ export default function RootLayout({
         
         <EntertainmentBusinessSchema />
         <WebSiteSchema />
-        <FAQPageSchema faqs={[
-          { question: "Come funziona una serata Black Bulls Lab?", answer: "Arrivi, ti siedi, e diventi parte dello show. I nostri format immersivi coinvolgono ogni ospite direttamente — non sei spettatore, sei protagonista. Ogni serata dura circa 3 ore tra cena e spettacolo." },
-          { question: "Quante persone partecipano a ogni serata?", answer: "Max 20-30 persone per serata. La dimensione ridotta è parte del format: garantisce coinvolgimento totale e un'atmosfera unica che i grandi eventi non possono replicare." },
-          { question: "Dove si svolgono le serate?", answer: "A Torino, in location selezionate in base al format. La sede viene comunicata al momento della prenotazione." },
-          { question: "Come prenoto una serata?", answer: "Scegli una data dal calendario e paga l'acconto tramite Stripe. Riceverai i QR code d'ingresso all'istante." },
-          { question: "Organizzate eventi aziendali o privati?", answer: "Sì. Tutti i format sono replicabili per eventi corporate, team building, feste private. Contattaci per un preventivo personalizzato." },
-          { question: "Qual è il prezzo a persona?", answer: "Dipende dal format e dalla location. Il prezzo è indicato chiaramente in fase di prenotazione." },
-          { question: "Devo avere esperienze teatrali o particolari abilità?", answer: "Zero. I nostri format sono progettati per funzionare con chiunque — timidi inclusi. Ci pensiamo noi a tirarti in ballo." },
-        ]} />
       </body>
     </html>
   );

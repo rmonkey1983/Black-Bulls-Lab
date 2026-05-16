@@ -9,7 +9,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useGSAP } from "@/hooks/useGSAP";
 import { animateQuote } from "@/lib/gsapAnimations";
-import { gsap } from "gsap";
 import { PreFooterCTA } from "@/components/layout/PreFooterCTA";
 
 
@@ -194,7 +193,7 @@ export function AboutClient() {
                             </p>
                             <div className="flex justify-center pt-4">
                                 <Link 
-                                    href="/calendario"
+                                    href="/eventi-aziendali"
                                     className="bg-rama-accent text-black font-heading font-bold uppercase tracking-[0.2em] text-xs px-12 py-5 rounded-full hover:bg-white transition transform hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(229,182,12,0.2)]"
                                 >
                                     Contattaci ora
