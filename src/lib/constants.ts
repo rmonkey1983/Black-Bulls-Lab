@@ -60,12 +60,12 @@ export const EXPERIMENTS = [
         desc: "Social Game Experience",
         longDesc: "Il primo dinner show dove il sospetto è l'unica moneta di scambio. Smaschererai il bugiardo o cadrai nel Sistema?",
         image: "/images/brand/background.webp",
-        badge: "Social Deception",
-        details: "3 ore · 20-100+ persone · Da 50€/persona",
-        quickInfo: "da 50€ · 20-100+ pers.",
+        badge: "Limited Access",
+        details: "3 ore · Sessione Esclusiva · Da 50€/persona",
+        quickInfo: "Posti limitati · Ogni serata è unica",
         price: 50,
-        ctaText: "Prenota Ora",
-        actionLabel: "Voglio sfidare il sistema →",
+        ctaText: "Accetta la Sfida",
+        actionLabel: "Scopri chi sta mentendo →",
         ctaHref: `https://wa.me/39${CONTACT_WHATSAPP}?text=Ciao!%20Voglio%20info%20su%20A%20Cena%20Con%20Il%20Bugiardo.%20Potete%20dirmi%20di%20pi%C3%B9%20sull%27App%3F`
     },
     { 
@@ -77,12 +77,12 @@ export const EXPERIMENTS = [
         desc: "Interactive Live Show",
         longDesc: "Il palco dove decidi tu chi merita il plauso, votando in tempo reale tramite la nostra web app.",
         image: "/images/brand/bg-venue-crowd.webp",
-        badge: "Social & Live",
-        details: "Showcase Aperto · Votazione Live · Ingresso Libero",
-        quickInfo: "Ogni mese · Ingresso libero",
+        badge: "Unique Event",
+        details: "Showcase Aperto · Votazione Live · Accesso Selezionato",
+        quickInfo: "Evento mensile · Disponibilità limitata",
         price: 0,
-        ctaText: "Voglio partecipare",
-        actionLabel: "Voglio salire sul palco →",
+        ctaText: "Prendi il Comando",
+        actionLabel: "Sali sul Palco →",
         ctaHref: "/calendario"
     },
     { 
@@ -94,12 +94,12 @@ export const EXPERIMENTS = [
         desc: "Dinner Show & Investigation",
         longDesc: "Risolvi il mistero analizzando indizi e testimonianze digitali inviate direttamente al tuo smartphone.",
         image: "/images/brand/bg-stage-lights.webp",
-        badge: "Su prenotazione",
-        details: "3 ore · 20-100+ persone · Da 50€/persona",
-        quickInfo: "da 50€ · 20-100+ pers.",
+        badge: "Sold Out Risk",
+        details: "3 ore · Indagine Live · Solo su Prenotazione",
+        quickInfo: "Posti limitati · Prenotazione obbligatoria",
         price: 50,
-        ctaText: "Inizia l'indagine",
-        actionLabel: "Voglio risolvere il caso →",
+        ctaText: "Risolvi il Caso",
+        actionLabel: "Entra nell'Indagine →",
         ctaHref: `https://wa.me/39${CONTACT_WHATSAPP}?text=Ciao!%20Vorrei%20organizzare%20una%20Cena%20con%20Delitto%20Digitale.%20Info%3F`
     },
     { 
@@ -115,8 +115,8 @@ export const EXPERIMENTS = [
         details: "Singing contest · Voto del Pubblico · Stay tuned",
         quickInfo: "In arrivo",
         price: 0,
-        ctaText: "Candidati ora",
-        actionLabel: "Voglio esibirmi →",
+        ctaText: "Diventa Giudice",
+        actionLabel: "Vivi il Talento →",
         ctaHref: "/calendario"
     }
 ];

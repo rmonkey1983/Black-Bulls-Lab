@@ -106,7 +106,7 @@ export function HomeClient({ latestPosts, nextEvents }: HomeClientProps) {
       
       {/* 1. HERO SECTION */}
       <section ref={heroRef} className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden bg-black-pure">
-        {/* Background Layer with Cinematic Video/Image */}
+        {/* ... (Hero content stays same) ... */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
             src="/images/brand/bull-hero.jpg"
@@ -117,7 +117,6 @@ export function HomeClient({ latestPosts, nextEvents }: HomeClientProps) {
             priority
           />
           
-          {/* Spotlight Effect */}
           <div 
             ref={spotlightRef}
             className="absolute top-0 left-0 w-[800px] h-[800px] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 hidden lg:block"
@@ -127,19 +126,13 @@ export function HomeClient({ latestPosts, nextEvents }: HomeClientProps) {
             }}
           />
 
-          {/* Cinematic Overlays */}
           <div className="absolute inset-0 bg-linear-to-b from-black-pure/80 via-transparent to-black-pure z-10" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(11,11,11,0.9)_100%)] z-10" />
-          
-          {/* Subtle Noise Texture */}
           <div className="absolute inset-0 opacity-[0.03] bg-[url('/noise.webp')] mix-blend-overlay z-20" />
         </div>
 
-        {/* Content */}
         <div className="hero-content relative z-30 container-max px-6 text-center">
           <div className="space-y-12 md:space-y-20">
-            
-            {/* Massive Cinematic Typography */}
             <h1 className="hero-headline flex flex-col items-center">
               <span className="block font-syne font-bold text-[clamp(2.5rem,8vw,6rem)] leading-none tracking-tighter uppercase text-text-primary">
                 Non organizziamo eventi.
@@ -152,27 +145,23 @@ export function HomeClient({ latestPosts, nextEvents }: HomeClientProps) {
               </span>
             </h1>
 
-            {/* Subheadline */}
             <div className="hero-subheadline max-w-3xl mx-auto">
                <p className="font-inter text-text-secondary text-sm md:text-xl leading-relaxed tracking-[0.2em] uppercase opacity-70">
-                  Dinner show, immersive games and cinematic live experiences <br className="hidden md:block" />
-                  designed to create emotional impact.
+                  Dinner show. Immersive games. Cinematic live experiences. <br className="hidden md:block" />
+                  Accesso limitato. Ogni sessione è irripetibile.
                </p>
             </div>
 
-            {/* CTA Buttons */}
             <div className="hero-ctas pt-8 flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-10">
               <PrimaryButton href="/format" size="lg" className="w-full sm:w-auto min-w-[240px]">
-                  SCOPRI I FORMAT
+                  ENTRA NELL&apos;ESPERIENZA
               </PrimaryButton>
               <SecondaryButton href="/calendario" size="lg" className="w-full sm:sm:w-auto min-w-[240px]">
-                  PRENOTA ESPERIENZA
+                  RISERVA IL TUO POSTO
               </SecondaryButton>
             </div>
-
           </div>
 
-          {/* Scroll Indicator */}
           <button 
             onClick={scrollToNext} 
             className="absolute bottom-10 left-1/2 -translate-x-1/2 group flex flex-col items-center gap-4 transition-all duration-500" 
@@ -183,52 +172,13 @@ export function HomeClient({ latestPosts, nextEvents }: HomeClientProps) {
           </button>
         </div>
 
-        {/* Framing Elements */}
         <div className="absolute top-12 left-12 w-12 h-px bg-white/10 hidden lg:block" />
         <div className="absolute top-12 left-12 w-px h-12 bg-white/10 hidden lg:block" />
         <div className="absolute top-12 right-12 w-12 h-px bg-white/10 hidden lg:block" />
         <div className="absolute top-12 right-12 w-px h-12 bg-white/10 hidden lg:block" />
       </section>
 
-      {/* 1B. PROSSIME DATE - Alternating Visual Rhythm */}
-      <div className="visual-rhythm-alt border-y border-white/5">
-        <div className="section-padding-large">
-          <ProssimeDate events={nextEvents} />
-        </div>
-      </div>
-
-      {/* 1C. ESPERIENZE IMMERSIVE (Services) */}
-      <section className="reveal-section section-padding-huge bg-black-pure">
-        <div className="container-editorial">
-          <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-40 lg:mb-72 gap-16">
-            <SectionHeading 
-              title="ESPERIENZE"
-              highlight="IMMERSIVE"
-              subtitle="Il nostro ecosistema"
-              align="left"
-            />
-            <p className="font-inter text-text-secondary max-w-sm text-left md:text-right font-medium uppercase text-[11px] tracking-[0.5em] leading-loose opacity-30">
-              Dall&apos;intrattenimento dal vivo alle sfide digitali. <br />
-              Progettiamo il coinvolgimento.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-24 lg:gap-32">
-            {SERVICE_EXPERIENCES.map((service) => (
-              <ExperienceCard 
-                key={service.id}
-                category={service.category}
-                title={service.title}
-                description={service.description}
-                image={service.image}
-                href={service.href}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 2. SEZIONE 'IL METODO' (La Visione) - Alternating Visual Rhythm */}
+      {/* 2. SEZIONE 'IL METODO' (Intrigue) */}
       <section id="metodo" className="reveal-section section-padding-huge visual-rhythm-alt relative overflow-hidden border-y border-white/5">
         <div className="container-max grid grid-cols-1 lg:grid-cols-2 gap-40 lg:gap-64 items-center">
             <div className="space-y-24 lg:space-y-40">
@@ -240,10 +190,10 @@ export function HomeClient({ latestPosts, nextEvents }: HomeClientProps) {
                 />
                 <div className="space-y-16 font-inter text-xl lg:text-3xl text-text-secondary font-light leading-relaxed max-w-2xl">
                     <p>
-                        L&apos;intrattenimento tradizionale è obsoleto. Noi non organizziamo eventi; progettiamo reazioni chimiche collettive. Ogni battito, ogni luce, ogni parola è calibrata per abbattere le barriere della realtà.
+                        L&apos;intrattenimento è obsoleto. Progettiamo reazioni chimiche collettive. Ogni battito, ogni luce, ogni parola abbatte le barriere della realtà.
                     </p>
                     <p>
-                        Dalla fusione tra neuroscienze e arte performativa nasce il Lab. Un ecosistema dove HR manager e brand visionari trovano la chiave per un engagement che non si dimentica.
+                        Neuroscienze e arte performativa. La chiave per un engagement che non si dimentica.
                     </p>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-20 pt-20 border-t border-white/5">
@@ -279,12 +229,43 @@ export function HomeClient({ latestPosts, nextEvents }: HomeClientProps) {
         </div>
       </section>
 
-      {/* 2B. CINEMATIC SHOWCASE: A CENA CON IL BUGIARDO */}
+      {/* 3. CINEMATIC SHOWCASE (Immersion) */}
       <div className="bg-black-pure">
         <CinematicShowcase />
       </div>
 
-      {/* 3. PREVIEW FORMAT (Dinner & Show) */}
+      {/* 4. ESPERIENZE IMMERSIVE (Scope) */}
+      <section className="reveal-section section-padding-huge bg-black-pure border-y border-white/5">
+        <div className="container-editorial">
+          <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-40 lg:mb-72 gap-16">
+            <SectionHeading 
+              title="ESPERIENZE"
+              highlight="IMMERSIVE"
+              subtitle="Il nostro ecosistema"
+              align="left"
+            />
+            <p className="font-inter text-text-secondary max-w-sm text-left md:text-right font-medium uppercase text-[11px] tracking-[0.5em] leading-loose opacity-30">
+              Dall&apos;intrattenimento dal vivo alle sfide digitali. <br />
+              Progettiamo il coinvolgimento.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-24 lg:gap-32">
+            {SERVICE_EXPERIENCES.map((service) => (
+              <ExperienceCard 
+                key={service.id}
+                category={service.category}
+                title={service.title}
+                description={service.description}
+                image={service.image}
+                href={service.href}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. PREVIEW FORMAT (Desire) */}
       <section id="format" className="reveal-section section-padding-huge bg-black-pure">
         <div className="container-max">
             <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-40 lg:mb-72 gap-16">
@@ -295,8 +276,8 @@ export function HomeClient({ latestPosts, nextEvents }: HomeClientProps) {
                   align="left"
                 />
                 <p className="font-inter text-text-secondary max-w-sm text-left md:text-right font-medium uppercase text-[11px] tracking-[0.5em] leading-loose opacity-30">
-                    Architetture narrative scalabili per locali, brand e privati. <br />
-                    Plug & Play Entertainment.
+                    Architetture narrative scalabili. <br />
+                    Solo su prenotazione. Posti limitati.
                 </p>
             </div>
 
@@ -341,8 +322,13 @@ export function HomeClient({ latestPosts, nextEvents }: HomeClientProps) {
         </div>
       </section>
 
-      {/* 4. SOCIAL PROOF / TEAM (Le Facce) - Alternating Visual Rhythm */}
-      <section className="reveal-section section-padding-huge visual-rhythm-alt border-y border-white/5">
+      {/* 6. SOCIAL PROOF (Validation) */}
+      <div className="reveal-section section-padding-huge visual-rhythm-alt border-y border-white/5">
+        <SocialProofSection />
+      </div>
+
+      {/* 7. TEAM (Trust) */}
+      <section className="reveal-section section-padding-huge bg-black-pure">
         <div className="container-editorial">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-40 lg:gap-64 items-center">
                 <div className="lg:col-span-4 space-y-24">
@@ -392,13 +378,15 @@ export function HomeClient({ latestPosts, nextEvents }: HomeClientProps) {
         </div>
       </section>
 
-      {/* 5. SOCIALLY PROVEN (Testimonials & Reactions) */}
-      <div className="reveal-section section-padding-huge bg-black-pure">
-        <SocialProofSection />
+      {/* 8. PROSSIME DATE (Urgency/Action Prep) */}
+      <div className="visual-rhythm-alt border-y border-white/5">
+        <div className="section-padding-large">
+          <ProssimeDate events={nextEvents} />
+        </div>
       </div>
 
-      {/* 6. FINAL EMOTIONAL CTA */}
-      <div className="reveal-section section-padding-huge bg-black-pure border-t border-white/5">
+      {/* 9. FINAL EMOTIONAL CTA (Action) */}
+      <div className="reveal-section section-padding-huge bg-black-pure">
         <FinalCTA />
       </div>
 

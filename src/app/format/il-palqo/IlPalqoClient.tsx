@@ -1,152 +1,273 @@
 "use client";
 
-import { useRef } from "react";
-import { EventConcept } from "@/components/events/EventConcept";
-import { Mic2, ArrowLeft, Users, Music } from "lucide-react";
-import Link from "next/link";
+import React, { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { Mic2, ArrowLeft, Users, Zap, Play, ArrowRight } from "lucide-react";
+import { gsap } from "gsap";
 import { useGSAP } from "@/hooks/useGSAP";
-import { animateHeroText, animateFade, animateCards } from "@/lib/gsapAnimations";
+import { useCinematic } from "@/hooks/useCinematic";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PrimaryButton } from "@/components/ui/PrimaryButton";
+import { PremiumCard } from "@/components/ui/PremiumCard";
 import { buildWAUrl, WA_MESSAGES } from "@/lib/whatsapp";
-import { FormatQuickInfo } from "@/components/events/FormatQuickInfo";
 
 export function IlPalqoClient() {
-    const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const spotlightRef = useRef<HTMLDivElement>(null);
+  const { revealOnScroll } = useCinematic();
 
-    useGSAP(() => {
-        animateHeroText("#palqo-hero", 0.1);
-        animateFade(".palqo-tag", "up", 0.3);
-        animateFade(".palqo-desc", "up", 0.4);
-        animateFade("#format-title", "left", 0.1);
-        animateFade("#format-desc", "up", 0.2);
-        animateCards("#format-steps");
-    }, { scope: containerRef });
+  useGSAP(() => {
+    // Spotlight movement
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!spotlightRef.current) return;
+      gsap.to(spotlightRef.current, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 1.5,
+        ease: "power2.out"
+      });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
 
-    return (
-        <main ref={containerRef} className=" min-h-screen">
-            <section className="relative min-h-[60vw] md:min-h-0 md:h-[85vh] w-full overflow-hidden flex items-end">
-                <div className="absolute inset-0 z-0">
+    // Cinematic Reveal
+    const tl = gsap.timeline();
+    tl.from(".palqo-title span", {
+      y: 100,
+      opacity: 0,
+      filter: "blur(20px)",
+      stagger: 0.2,
+      duration: 2,
+      ease: "expo.out"
+    })
+    .from(".palqo-sub", {
+      opacity: 0,
+      y: 20,
+      duration: 1.5,
+      ease: "power2.out"
+    }, "-=1");
+
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, { scope: containerRef });
+
+  revealOnScroll(".reveal-palqo");
+
+  return (
+    <main ref={containerRef} className="bg-black-pure text-text-primary min-h-screen selection:bg-accent-gold selection:text-black-pure overflow-x-hidden">
+      
+      {/* 1. CINEMATIC HERO */}
+      <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
+        {/* Background Layer */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/brand/bg-stage-lights.webp"
+            alt="Il PalQo Live Energy"
+            fill
+            className="object-cover opacity-30 scale-105"
+            priority
+          />
+          
+          {/* Spotlight Effect */}
+          <div 
+            ref={spotlightRef}
+            className="absolute top-0 left-0 w-[800px] h-[800px] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 opacity-30"
+            style={{
+              background: 'radial-gradient(circle, rgba(200, 169, 107, 0.1) 0%, transparent 70%)',
+              filter: 'blur(80px)'
+            }}
+          />
+
+          {/* Cinematic Overlays */}
+          <div className="absolute inset-0 bg-linear-to-b from-black-pure/90 via-transparent to-black-pure z-10" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)] z-10" />
+          <div className="absolute inset-0 opacity-[0.05] bg-[url('/noise.webp')] mix-blend-overlay z-20" />
+        </div>
+
+        {/* Navigation Link */}
+        <div className="absolute top-12 left-12 z-50">
+            <Link
+                href="/format"
+                className="group flex items-center gap-4 text-text-secondary/30 hover:text-accent-gold transition-all uppercase text-[10px] font-bold tracking-[0.5em]"
+            >
+                <ArrowLeft size={14} className="group-hover:-translate-x-2 transition-transform" /> 
+                Tutti i Format
+            </Link>
+        </div>
+
+        <div className="relative z-30 container-max px-6 text-center">
+            <div className="space-y-12">
+                <div className="flex flex-col items-center gap-6">
+                    <span className="reveal-palqo inline-block px-4 py-1 border border-accent-gold/20 text-accent-gold text-[10px] font-bold uppercase tracking-[0.6em] bg-accent-gold/5 backdrop-blur-md">
+                        Unique Live Event
+                    </span>
+                    <h1 className="palqo-title font-syne font-bold text-[clamp(3rem,10vw,10rem)] leading-[0.85] tracking-tighter uppercase text-text-primary flex flex-col">
+                        <span className="block">Accendi il</span>
+                        <span className="block text-accent-gold italic">Palco.</span>
+                    </h1>
+                </div>
+
+                <div className="palqo-sub max-w-2xl mx-auto">
+                    <p className="font-inter text-lg md:text-2xl text-text-secondary font-light leading-relaxed uppercase tracking-[0.2em] opacity-60">
+                        Il talento incontra la tecnologia. <br />
+                        Vota. Decidi. Vivi lo show.
+                    </p>
+                </div>
+
+                <div className="pt-12 flex flex-col sm:flex-row items-center justify-center gap-8">
+                    <PrimaryButton href="/calendario" size="lg" className="w-full sm:w-auto min-w-[280px]">
+                        VIVI LO SHOW
+                    </PrimaryButton>
+                </div>
+            </div>
+        </div>
+
+        {/* Tech Decor */}
+        <div className="absolute bottom-12 right-12 hidden lg:block">
+            <div className="flex items-center gap-4 text-white/10">
+                <div className="text-right">
+                    <div className="text-[10px] font-bold tracking-[0.4em] uppercase">Digital Voting</div>
+                    <div className="text-[9px] tracking-[0.2em] uppercase opacity-50">Active Protocol</div>
+                </div>
+                <Zap size={24} className="opacity-20" />
+            </div>
+        </div>
+      </section>
+
+      {/* 2. THE STORYTELLING: Backstage Tension */}
+      <section className="reveal-palqo section-padding-huge bg-black-pure border-y border-white/5">
+        <div className="container-max grid grid-cols-1 lg:grid-cols-2 gap-24 lg:gap-48 items-center">
+            <div className="space-y-16">
+                <SectionHeading 
+                  title="ADRENALINA"
+                  highlight="IN DIRETTA"
+                  subtitle="L'Essenza del PalQo"
+                />
+                <div className="space-y-12 font-inter text-xl md:text-2xl text-text-secondary font-light leading-relaxed opacity-70">
+                    <p>
+                        Una volta al mese, il sipario si alza su ciò che non hai mai visto. Non è un concerto, è una sfida. Non sei uno spettatore, sei il giudice.
+                    </p>
+                    <p>
+                        Tramite la nostra Web App, ogni tua emozione diventa un voto. Il destino degli artisti è nelle tue mani, in tempo reale.
+                    </p>
+                </div>
+            </div>
+
+            <div className="relative aspect-square">
+                <PremiumCard className="h-full">
                     <Image 
-                        src="/images/brand/bg-stage-lights.webp" 
-                        alt="Il PalQo" 
-                        fill 
-                        style={{ objectFit: 'cover' }}
-                        className="opacity-50"
-                        priority
+                        src="/images/brand/service-performance.webp"
+                        alt="Backstage Tension"
+                        fill
+                        className="object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-1000"
                     />
-                    <div className="absolute inset-0 bg-linear-to-t from-bg-dark via-bg-dark/40 to-transparent" />
-                    <div className="absolute inset-0 bg-[url('/noise.webp')] opacity-20 mix-blend-overlay pointer-events-none" />
-                </div>
-
-                <div className="absolute top-20 sm:top-24 left-4 sm:left-6 z-30">
-                    <Link
-                        href="/format"
-                        className="flex items-center gap-2 text-rama-text/70 hover:text-rama-accent transition-colors uppercase text-xs font-bold tracking-widest backdrop-blur-sm bg-black/30 px-3 py-2 sm:px-4 rounded-full border border-white/10"
-                    >
-                        <ArrowLeft size={14} /> Tutti i format
-                    </Link>
-                </div>
-
-                <div className="relative z-20 w-full max-w-7xl mx-auto p-6 md:p-12 mb-12">
-                    <div id="palqo-hero" className="flex flex-col space-y-6">
-                        <div className="palqo-tag flex items-center gap-3 text-rama-accent text-sm font-bold uppercase tracking-[0.2em]">
-                            <span className="flex items-center gap-2 bg-rama-accent/10 backdrop-blur-sm px-3 py-1 rounded-full border border-rama-accent/20">
-                                <Users size={14} /> Community & Show
-                            </span>
+                    <div className="absolute inset-0 bg-linear-to-t from-black-pure via-transparent to-transparent opacity-80" />
+                    <div className="absolute top-12 left-12">
+                        <div className="w-16 h-16 rounded-full border border-accent-gold/20 flex items-center justify-center animate-pulse">
+                            <Play size={24} className="text-accent-gold fill-accent-gold" />
                         </div>
+                    </div>
+                </PremiumCard>
+            </div>
+        </div>
+      </section>
 
-                        <h1 className="line text-4xl sm:text-6xl md:text-8xl font-bold text-rama-text tracking-tighter leading-[0.9] drop-shadow-2xl">
-                            <span>IL PALQO</span>
-                        </h1>
+      {/* 3. EXPERIENCE FLOW: The Three Acts */}
+      <section className="reveal-palqo section-padding-huge bg-black-pure">
+        <div className="container-max">
+            <div className="mb-32">
+                <SectionHeading 
+                  title="TRE ATTI."
+                  highlight="UN SOLO SHOW."
+                  subtitle="Il Percorso della Serata"
+                  align="center"
+                />
+            </div>
 
-                        <p className="palqo-desc text-base sm:text-xl md:text-3xl text-gray-300 font-light max-w-2xl border-l-4 border-rama-accent pl-4 sm:pl-6">
-                            Il palcoscenico dove il talento incontra la tecnologia. Vota le performance in tempo reale via Web App.
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24">
+                {[
+                    { title: "Digital Entry", desc: "Accedi al Sistema. Scopri i talenti della serata. Preparati a decidere.", icon: <Zap size={32} /> },
+                    { title: "Live Battle", desc: "Performance esplosive. Vota dal tuo tavolo tramite l&apos;App proprietaria.", icon: <Mic2 size={32} /> },
+                    { title: "The Verdict", desc: "I risultati appaiono a schermo. Premiazione e Aftershow immersivo.", icon: <Users size={32} /> }
+                ].map((act, i) => (
+                    <div key={i} className="group space-y-8 p-12 border border-white/5 bg-white/[0.02] hover:border-accent-gold/20 transition-all duration-700">
+                        <div className="text-accent-gold opacity-30 group-hover:opacity-100 transition-opacity duration-700">
+                            {act.icon}
+                        </div>
+                        <h3 className="font-syne text-3xl font-bold uppercase tracking-tighter text-text-primary">
+                            {act.title}
+                        </h3>
+                        <p className="font-inter text-text-secondary/60 leading-relaxed group-hover:text-text-secondary transition-colors">
+                            {act.desc}
                         </p>
                     </div>
+                ))}
+            </div>
+        </div>
+      </section>
+
+      {/* 4. CALL TO ACTION: The Stage is Yours */}
+      <section className="reveal-palqo section-padding-huge bg-black-pure border-t border-white/5 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent-gold/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4 pointer-events-none" />
+        
+        <div className="container-max grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+            <div className="space-y-12">
+                <h2 className="font-syne text-5xl md:text-8xl font-bold uppercase tracking-tighter leading-none text-text-primary">
+                    VUOI ESSERE <br />
+                    <span className="text-accent-gold italic">IL PROSSIMO?</span>
+                </h2>
+                <p className="font-inter text-xl text-text-secondary/60 leading-relaxed max-w-xl">
+                    La nostra selezione è sempre aperta. Se hai un talento che merita il grande palco, il Sistema ti sta aspettando.
+                </p>
+                <div className="pt-8">
+                    <a
+                        href={buildWAUrl(WA_MESSAGES.ilPalqo)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center gap-6 px-12 py-6 border border-accent-gold/40 text-accent-gold font-syne font-bold uppercase tracking-[0.4em] hover:bg-accent-gold hover:text-black-pure transition-all duration-500"
+                    >
+                        PORTA IL TUO TALENTO
+                        <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
+                    </a>
                 </div>
-            </section>
+            </div>
 
-            <FormatQuickInfo 
-                duration="3 ore"
-                capacity="Showcase Aperto"
-                price="Ingresso Libero / Offerta"
-                highlight="Digital Voting System"
-                highlightLabel="Tecnologia"
-            />
+            <div className="relative aspect-video lg:aspect-square">
+                <PremiumCard className="h-full">
+                    <Image 
+                        src="/images/brand/bg-venue-crowd.webp"
+                        alt="Live Crowd Energy"
+                        fill
+                        className="object-cover grayscale opacity-20 group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-1000"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-black-pure via-transparent to-transparent opacity-80" />
+                </PremiumCard>
+            </div>
+        </div>
+      </section>
 
-            <EventConcept
-                description={`Il PalQo è dove le serate live Torino tornano a essere scoperte reali. Una volta al mese, apriamo le porte ad artisti emergenti Torino che hanno scommesso tutto su un’unica esibizione.\n\nCosa succede? Arrivi, ti godi lo show e decidi chi merita di andare avanti votando in tempo reale. È il cuore pulsante dei nostri eventi culturali Torino: uno spazio senza filtri, dove il talento incontra finalmente il suo pubblico.`}
-            />
+      {/* 5. FINAL ACTION SECTION */}
+      <section className="reveal-palqo section-padding-huge bg-accent-gold text-black-pure text-center relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 bg-[url('/noise.webp')] mix-blend-overlay" />
+        </div>
+        <div className="container-narrow space-y-16 relative z-10">
+          <h2 className="font-syne text-6xl md:text-9xl font-bold uppercase tracking-tighter leading-[0.8]">
+            ENTRA <br /> NELLO <span className="bg-black-pure text-accent-gold px-4">SHOW.</span>
+          </h2>
+          <div className="pt-12">
+            <Link 
+              href="/calendario"
+              className="inline-flex items-center gap-8 px-16 py-8 bg-black-pure text-accent-gold text-xl font-black uppercase tracking-widest hover:bg-white hover:text-black-pure transition-all duration-500 rounded-full"
+            >
+              RISERVA IL TUO POSTO
+            </Link>
+          </div>
+          <p className="font-syne text-[10px] uppercase tracking-[0.6em] font-black opacity-40">
+            Disponibilità limitata // Evento mensile unico
+          </p>
+        </div>
+      </section>
 
-            <section className="py-24 bg-transparent/40 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rama-accent/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-                        <div className="order-2 md:order-1">
-                            <h2 id="format-title" className="text-3xl md:text-5xl font-bold text-rama-text mb-6 md:mb-8">
-                                IL <span className="text-rama-accent italic">FORMAT INTERATTIVO</span>
-                            </h2>
-
-                            <p id="format-desc" className="gsap-fade text-base md:text-lg text-gray-300 leading-relaxed mb-8">
-                                Ogni serata de &quot;Il PalQo&quot; è un viaggio in tre atti, dove lo smartphone diventa la connessione tra artista e platea.
-                            </p>
-
-                            <ul id="format-steps" className="space-y-6">
-                                {[
-                                    { icon: <Music size={20} />, title: "Digital Check-In", desc: "Arrivi nel club e accedi alla Web App del PalQo. Scopri chi sono gli artisti della serata e inizia a preparare i tuoi voti." },
-                                    { icon: <Mic2 size={20} />, title: "Live & Voto App", desc: "Il cuore della serata. Performance live alternate a momenti di votazione digitale per decretare l'artista più 'bull' della notte." },
-                                    { icon: <div className="text-xl font-rock-salt">!</div>, title: "Aftershow & Awards", desc: "I risultati appaiono a schermo. Jam session libera e premiazione dei talenti scelti direttamente da te." }
-                                ].map((item, i) => (
-                                    <li key={i} className="gsap-card flex gap-4 items-start">
-                                        <div className="w-10 h-10 md:w-12 md:h-12 bg-white/5 rounded-full flex items-center justify-center shrink-0 border border-white/10 text-rama-accent font-bold">
-                                            {item.icon}
-                                        </div>
-                                        <div>
-                                            <h4 className="text-lg md:text-xl font-bold text-rama-text">{item.title}</h4>
-                                            <p className="text-gray-400 text-sm">{item.desc}</p>
-                                        </div>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        <div className="order-1 md:order-2 gsap-fade relative h-[400px] md:h-[600px] border border-white/10 rounded-2xl overflow-hidden group">
-                            <Image 
-                                src="/images/brand/service-performance.webp" 
-                                alt="Candidati" 
-                                fill 
-                                className="object-cover opacity-20 group-hover:scale-110 transition-transform duration-1000" 
-                                sizes="(max-width: 1024px) 100vw, 50vw"
-                            />
-                            <div className="absolute inset-0 bg-linear-to-br from-gold/20 to-bordeaux/20 opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
-                            <div className="absolute inset-0 flex items-center justify-center text-center p-6 md:p-8">
-                                <div>
-                                    <Mic2 size={48} className="mx-auto text-rama-text/20 mb-4 md:mb-6" />
-                                    <h3 className="text-2xl md:text-3xl font-bold text-rama-text mb-2">Vuoi Esibirti?</h3>
-                                    <p className="text-gray-300 text-sm md:text-base mb-6 md:mb-8 max-w-xs mx-auto">La selezione è sempre aperta per nuovi talenti.</p>
-                                    <div className="flex flex-col gap-4 justify-center">
-                                        <Link
-                                            href="/calendario"
-                                            className="w-full px-8 py-4 bg-rama-accent text-black font-bold uppercase tracking-widest hover:bg-white transition-colors rounded-sm text-sm"
-                                        >
-                                            Vedi date show
-                                        </Link>
-                                        <a
-                                            href={buildWAUrl(WA_MESSAGES.ilPalqo)}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="w-full px-8 py-4 border border-rama-accent text-rama-accent font-bold uppercase tracking-widest hover:bg-rama-accent hover:text-black transition-colors rounded-sm flex items-center justify-center gap-2 text-sm"
-                                        >
-                                            Voglio esibirmi sul palco
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-    );
+    </main>
+  );
 }

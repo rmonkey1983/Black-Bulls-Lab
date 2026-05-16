@@ -1,55 +1,86 @@
 "use client";
 
-import { useState } from "react";
-import { Building2, Users, Sparkles, CheckCircle2, Loader2 } from "lucide-react";
+import { useState, useRef } from "react";
+import Image from "next/image";
+import { Building2, Users, Sparkles, CheckCircle2, Loader2, ArrowRight, Zap, Target, ShieldCheck, Heart, UserPlus } from "lucide-react";
 import { ParallaxImage, StickyTextSection } from "@/components/ui/ParallaxScroll";
-import { ImmersiveHeader } from "@/components/layout/ImmersiveHeader";
 import { useGSAP } from "@/hooks/useGSAP";
-import { animateCounters, animateCards, animateFade } from "@/lib/gsapAnimations";
+import { useCinematic } from "@/hooks/useCinematic";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PrimaryButton } from "@/components/ui/PrimaryButton";
+import { PremiumCard } from "@/components/ui/PremiumCard";
 import { buildWAUrl, WA_MESSAGES } from "@/lib/whatsapp";
 import { CorporateForm } from "@/components/rama/CorporateForm";
+import gsap from "gsap";
 
 const pricingTiers = [
     { 
-        name: "Starter",
-        size: "20–100+ persone",
+        name: "Essential",
+        size: "Social Core Experience",
         price: "€900",
         priceValue: 900,
         actionType: "checkout",
-        includes: ["Format a scelta", "1 Performer", "Coordinamento evento"],
-        ctaText: "Acquista Starter"
+        includes: ["Format immersivo a scelta", "Ingegneria sociale di base", "1 Lead Performer"],
+        ctaText: "INIZIA LA TRASFORMAZIONE"
     },
     { 
-        name: "Business",
-        size: "20–100+ persone",
+        name: "Advanced",
+        size: "Deep Connection Protocol",
         price: "€1500",
         priceValue: 1500,
         actionType: "checkout",
-        includes: ["Format premium", "Team di performer", "Welcome drink", "Supporto logistico"],
+        includes: ["Format premium adattivo", "Dinamiche sociali avanzate", "Team di performer dedicati", "Welcome Experience"],
         highlighted: true,
-        ctaText: "Scegli Business"
+        ctaText: "ELEVATE IL VOSTRO TEAM"
     },
     { 
-        name: "Enterprise",
-        size: "20–100+ persone",
+        name: "Tailored",
+        size: "Exclusive Brand Universe",
         price: "Su misura",
         actionType: "contact",
-        includes: ["Format esclusivo personalizzato", "Menu ad hoc con chef", "Regia e scenografia dedicata", "Account manager dedicato"],
-        ctaText: "Richiedi Preventivo"
+        includes: ["Architettura narrativa unica", "Personalizzazione totale brand", "Regia & Scenografia High-End", "Strategic Account Manager"],
+        ctaText: "PROGETTA L'IMPOSSIBILE"
     },
 ];
 
 export function CorporateClient() { 
     const [isProcessing, setIsProcessing] = useState<string | null>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const spotlightRef = useRef<HTMLDivElement>(null);
+    const { revealOnScroll } = useCinematic();
 
     useGSAP(() => { 
-        animateCards("#pricing-grid");
-        animateFade("#corporate-form-container", "up", 0.05);
-        animateFade("#services-intro", "up", 0.1);
-        animateFade("#value-cards", "up", 0.1);
-        animateCounters("#hero-stats");
-        animateCounters("#value-cards");
-    });
+        const handleMouseMove = (e: MouseEvent) => {
+            if (!spotlightRef.current) return;
+            gsap.to(spotlightRef.current, {
+                x: e.clientX,
+                y: e.clientY,
+                duration: 1.5,
+                ease: "power2.out"
+            });
+        };
+        window.addEventListener("mousemove", handleMouseMove);
+
+        const tl = gsap.timeline();
+        tl.from(".corp-title span", {
+            y: 100,
+            opacity: 0,
+            filter: "blur(20px)",
+            stagger: 0.2,
+            duration: 2,
+            ease: "expo.out"
+        })
+        .from(".corp-sub", {
+            opacity: 0,
+            y: 20,
+            duration: 1.5,
+            ease: "power2.out"
+        }, "-=1");
+
+        return () => window.removeEventListener("mousemove", handleMouseMove);
+    }, { scope: containerRef });
+
+    revealOnScroll(".reveal-corp");
 
     const handleAction = async (tier: any) => {
         if (tier.actionType === "contact") {
@@ -86,266 +117,262 @@ export function CorporateClient() {
     };
 
     return (
-        <div className="min-h-screen pb-24 relative">
-            <h1 className="sr-only">Team Building e Eventi Aziendali a Torino</h1>
+        <main ref={containerRef} className="bg-black-pure text-text-primary min-h-screen selection:bg-accent-gold selection:text-black-pure overflow-x-hidden">
             
-            <div className="relative">
-                <ImmersiveHeader
-                    id="corporate-hero"
-                    title="EVENTI"
-                    highlight="Aziendali"
-                    subtitle="Dimentica le solite cene. Progettiamo esperienze smart, digitali e altamente coinvolgenti per il tuo team."
-                    mediaUrl="/images/brand/bg-venue-crowd.webp"
-                />
+            {/* 1. CINEMATIC HERO: Emotional & Human Transformation */}
+            <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="/images/brand/bg-venue-crowd.webp"
+                        alt="Human Connection"
+                        fill
+                        className="object-cover opacity-20 scale-105 contrast-110"
+                        priority
+                    />
+                    
+                    <div 
+                        ref={spotlightRef}
+                        className="absolute top-0 left-0 w-[800px] h-[800px] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 opacity-30"
+                        style={{
+                            background: 'radial-gradient(circle, rgba(200, 169, 107, 0.08) 0%, transparent 70%)',
+                            filter: 'blur(80px)'
+                        }}
+                    />
 
-                <div id="hero-stats" className="relative z-20 max-w-6xl mx-auto px-6 -mt-16 md:-mt-20 mb-20">
-                    <div className="flex flex-wrap items-center gap-8 md:gap-16">
-                        <div className="flex flex-col">
-                            <span className="gsap-counter font-heading font-bold text-4xl md:text-6xl text-white" data-target="150">0</span>
-                            <span className="text-rama-accent font-sans text-xs md:text-sm uppercase tracking-widest font-bold">Eventi Realizzati</span>
+                    <div className="absolute inset-0 bg-linear-to-b from-black-pure/90 via-transparent to-black-pure z-10" />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.9)_100%)] z-10" />
+                    <div className="absolute inset-0 opacity-[0.05] bg-[url('/noise.webp')] mix-blend-overlay z-20" />
+                </div>
+
+                <div className="relative z-30 container-max px-6 text-center">
+                    <div className="space-y-12">
+                        <div className="flex flex-col items-center gap-6">
+                            <span className="reveal-corp inline-block px-4 py-1 border border-accent-gold/20 text-accent-gold text-[10px] font-bold uppercase tracking-[0.6em] bg-accent-gold/5 backdrop-blur-md">
+                                Ingegneria delle Connessioni Umane
+                            </span>
+                            <h1 className="corp-title font-syne font-bold text-[clamp(3rem,10vw,12rem)] leading-[0.8] tracking-tighter uppercase text-text-primary flex flex-col">
+                                <span className="block">Trasforma il tuo</span>
+                                <span className="block text-accent-gold italic">Capitale Umano.</span>
+                            </h1>
                         </div>
-                        <div className="flex flex-col">
-                            <span className="font-heading font-bold text-4xl md:text-6xl text-white"><span className="gsap-counter" data-target="100">0</span>%</span>
-                            <span className="text-rama-accent font-sans text-xs md:text-sm uppercase tracking-widest font-bold">Coinvolgimento</span>
+
+                        <div className="corp-sub max-w-2xl mx-auto">
+                            <p className="font-inter text-lg md:text-2xl text-text-secondary font-light leading-relaxed uppercase tracking-[0.2em] opacity-60">
+                                Oltre il team building. <br />
+                                Progettiamo esperienze sociali che lasciano un segno indelebile.
+                            </p>
                         </div>
-                        <div className="hidden md:flex flex-col border-l border-white/10 pl-16">
-                            <span className="gsap-counter font-heading font-bold text-4xl md:text-5xl text-white/40" data-target="24">0</span>
-                            <span className="text-white/20 font-sans text-xs uppercase tracking-widest font-bold">Ore per il Briefing</span>
+
+                        <div className="pt-12">
+                            <PrimaryButton href="#pricing-grid" size="lg" className="w-full sm:w-auto min-w-[320px]">
+                                ELEVA L&apos;ESPERIENZA
+                            </PrimaryButton>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div className="max-w-6xl mx-auto px-6 space-y-24 relative z-10">
-                <section id="team-merit" className="space-y-16">
-                    <div className="text-center">
-                        <h2 className="font-heading font-bold uppercase tracking-tighter text-white text-4xl md:text-7xl mb-4 leading-none">
-                            IL TUO TEAM MERITA <br className="md:hidden" />
-                            <span className="text-rama-accent">UN&apos;ESPERIENZA SMART</span>
-                        </h2>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="gsap-fade p-8 rounded-2xl border border-white/10 bg-white/3 flex flex-col gap-4 hover:border-rama-accent/30 transition">
-                            <div className="w-12 h-12 rounded-full bg-rama-accent/10 flex items-center justify-center text-rama-accent">
-                                <Users size={24} />
-                            </div>
-                            <h3 className="font-heading uppercase font-bold text-white text-xl leading-tight">
-                                Partecipazione 100% Digitale
-                            </h3>
-                            <p className="font-sans text-rama-muted text-sm leading-relaxed">
-                                Ogni dipendente interagisce con il proprio smartphone. Nessuno resta a guardare, tutti sono protagonisti del gioco.
-                            </p>
-                        </div>
-
-                        <div className="gsap-fade p-8 rounded-2xl border border-white/10 bg-white/3 flex flex-col gap-4 hover:border-rama-accent/30 transition">
-                            <div className="w-12 h-12 rounded-full bg-rama-accent/10 flex items-center justify-center text-rama-accent">
-                                <Users size={24} />
-                            </div>
-                            <h3 className="font-heading uppercase font-bold text-white text-xl leading-tight">
-                                Scalabilità Illimitata
-                            </h3>
-                            <p className="font-sans text-rama-muted text-sm leading-relaxed">
-                                Gestiamo piccoli gruppi o intere divisioni aziendali con la stessa qualità, grazie alla nostra regia Web App proprietaria.
-                            </p>
-                        </div>
-
-                        <div className="gsap-fade p-8 rounded-2xl border border-white/10 bg-white/3 flex flex-col gap-4 hover:border-rama-accent/30 transition">
-                            <div className="w-12 h-12 rounded-full bg-rama-accent/10 flex items-center justify-center text-rama-accent">
-                                <Sparkles size={24} />
-                            </div>
-                            <h3 className="font-heading uppercase font-bold text-white text-xl leading-tight">
-                                Dashboard & Feedback
-                            </h3>
-                            <p className="font-sans text-rama-muted text-sm leading-relaxed">
-                                Monitora il coinvolgimento e ricevi i feedback della serata. Unire il team non è mai stato così tecnologico e divertente.
-                            </p>
+                <div className="absolute bottom-12 left-12 hidden lg:block">
+                    <div className="flex items-center gap-4 text-white/10">
+                        <Heart size={20} className="opacity-20" />
+                        <div className="text-left">
+                            <div className="text-[10px] font-bold tracking-[0.4em] uppercase">Human-Centric Design</div>
+                            <div className="text-[9px] tracking-[0.2em] uppercase opacity-50">Emotional Impact: 100%</div>
                         </div>
                     </div>
-                </section>
-
-                <div id="services-intro" className="text-center">
-                    <h2 className="font-heading font-bold uppercase tracking-tighter text-white text-4xl md:text-7xl mb-4 leading-none">
-                        PROGETTIAMO <span className="text-rama-accent">IL VOSTRO SHOW</span>
-                    </h2>
                 </div>
+            </section>
 
-                <section id="pricing-grid" className="space-y-12">
-                    <div className="text-center">
-                        <span className="font-rock-salt text-rama-accent text-xl transform -rotate-1 inline-block mb-4">Soluzioni chiavi in mano</span>
-                        <h2 className="font-heading font-bold uppercase tracking-tighter text-white text-4xl md:text-[4vw] leading-[0.9]">
-                            FORMAT <span className="text-rama-accent">AZIENDALI</span>
-                        </h2>
-                        <p className="font-sans text-rama-muted mt-4 max-w-xl mx-auto">
-                            Scegliete il livello di interazione. Dalla web app standard alla personalizzazione totale del mistero aziendale.
-                        </p>
+            {/* 2. THE PHILOSOPHY: Social Dynamics */}
+            <section className="reveal-corp section-padding-huge bg-black-pure border-y border-white/5">
+                <div className="container-max grid grid-cols-1 lg:grid-cols-2 gap-24 lg:gap-48 items-center">
+                    <div className="space-y-16">
+                        <SectionHeading 
+                          title="DINAMICHE"
+                          highlight="SOCIALI"
+                          subtitle="L'Evoluzione del Gruppo"
+                        />
+                        <div className="space-y-12 font-inter text-xl md:text-2xl text-text-secondary font-light leading-relaxed opacity-70">
+                            <p>
+                                Rompiamo le barriere gerarchiche attraverso l&apos;immersione narrativa. In un mondo digitale, la connessione reale è il vero lusso aziendale.
+                            </p>
+                            <p>
+                                Non usiamo slide, usiamo emozioni. Non facciamo formazione, creiamo ricordi condivisi che alimentano la cultura del tuo brand.
+                            </p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-12 pt-12 border-t border-white/5">
+                            <div className="space-y-4">
+                                <span className="text-accent-gold font-syne text-4xl font-bold">DEEP</span>
+                                <p className="text-[9px] text-text-secondary uppercase tracking-[0.4em] font-bold opacity-30">Emotional Link</p>
+                            </div>
+                            <div className="space-y-4">
+                                <span className="text-accent-gold font-syne text-4xl font-bold">SHARED</span>
+                                <p className="text-[9px] text-text-secondary uppercase tracking-[0.4em] font-bold opacity-30">Universe</p>
+                            </div>
+                        </div>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {pricingTiers.map(tier => (
+
+                    <div className="relative aspect-square">
+                        <PremiumCard className="h-full">
+                            <Image 
+                                src="/images/brand/service-plating.webp"
+                                alt="Shared Moments"
+                                fill
+                                className="object-cover grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-1000"
+                            />
+                            <div className="absolute inset-0 bg-linear-to-t from-black-pure via-transparent to-transparent opacity-80" />
+                        </PremiumCard>
+                    </div>
+                </div>
+            </section>
+
+            {/* 3. PROTOCOLS: Pricing Tiers */}
+            <section id="pricing-grid" className="reveal-corp section-padding-huge bg-black-pure">
+                <div className="container-max">
+                    <div className="mb-32 text-center">
+                        <SectionHeading 
+                          title="PROTOCOLLI"
+                          highlight="DI TRASFORMAZIONE"
+                          subtitle="Seleziona l'Intensità"
+                          align="center"
+                        />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+                        {pricingTiers.map((tier) => (
                             <div
                                 key={tier.name}
-                                className={`gsap-card relative flex flex-col gap-5 p-7 md:p-8 rounded-2xl border transition duration-300 ${ tier.highlighted
-                                        ? "border-rama-accent bg-rama-accent/5 shadow-[0_0_40px_rgba(200,164,78,0.1)] ring-1 ring-rama-accent/20"
-                                        : "border-white/10 bg-white/3"
+                                className={`group relative flex flex-col p-12 border transition-all duration-700 ${ tier.highlighted
+                                        ? "border-accent-gold bg-accent-gold/[0.03] shadow-[0_40px_100px_rgba(200,164,78,0.05)]"
+                                        : "border-white/5 bg-white/[0.01]"
                                 }`}
                             >
                                 {tier.highlighted && (
-                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-rama-accent text-black font-heading font-bold uppercase text-xs tracking-widest px-4 py-1 rounded-full whitespace-nowrap z-10">
-                                        Più scelto
+                                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-accent-gold text-black-pure font-syne font-bold uppercase text-[9px] tracking-[0.4em] px-6 py-2 z-10">
+                                        Premium Protocol
                                     </div>
                                 )}
-                                <div>
-                                    <h3 className="font-heading font-bold uppercase tracking-wide text-white text-2xl">{tier.name}</h3>
-                                    <p className="font-sans text-rama-muted text-sm mt-1">{tier.size}</p>
+                                <div className="space-y-2 mb-12">
+                                    <h3 className="font-syne font-bold uppercase tracking-tighter text-text-primary text-3xl">{tier.name}</h3>
+                                    <p className="font-inter text-text-secondary/40 text-[10px] uppercase tracking-[0.3em]">{tier.size}</p>
                                 </div>
-                                <div className={`font-heading font-bold text-2xl ${tier.highlighted ? "text-rama-accent" : "text-white"}`}>
+                                <div className={`font-syne font-bold text-4xl mb-12 ${tier.highlighted ? "text-accent-gold" : "text-text-primary"}`}>
                                     {tier.price}
                                 </div>
-                                <ul className="flex flex-col gap-3 grow py-4">
+                                <ul className="flex flex-col gap-6 grow mb-12">
                                     {tier.includes.map(item => (
-                                        <li key={item} className="flex items-start gap-2 font-sans text-sm text-rama-muted">
-                                            <CheckCircle2 size={16} className="text-rama-accent shrink-0 mt-0.5" />
+                                        <li key={item} className="flex items-start gap-4 font-inter text-sm text-text-secondary/60">
+                                            <ShieldCheck size={16} className="text-accent-gold shrink-0 mt-0.5" />
                                             {item}
                                         </li>
                                     ))}
-                                    <li className="flex items-start gap-2 font-sans text-sm text-rama-accent font-bold">
-                                        <Sparkles size={16} className="shrink-0 mt-0.5" />
-                                        Web App Interattiva Inclusa
+                                    <li className="flex items-start gap-4 font-inter text-sm text-accent-gold font-bold">
+                                        <UserPlus size={16} className="shrink-0 mt-0.5" />
+                                        Social Interaction App
                                     </li>
                                 </ul>
-                                <div className="mt-auto flex flex-col gap-4">
-                                    <button
-                                        disabled={isProcessing === tier.name}
-                                        onClick={() => handleAction(tier)}
-                                        className={`w-full text-center font-heading font-bold uppercase tracking-widest text-sm px-6 py-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2 ${ tier.highlighted
-                                                ? "bg-rama-accent text-black hover:bg-white"
-                                                : "border border-white/20 text-white hover:border-rama-accent hover:text-rama-accent"
-                                        }`}
-                                    >
-                                        {isProcessing === tier.name ? (
-                                            <Loader2 size={18} className="animate-spin" />
-                                        ) : (
-                                            tier.ctaText
-                                        )}
-                                    </button>
-                                </div>
+                                <button
+                                    disabled={isProcessing === tier.name}
+                                    onClick={() => handleAction(tier)}
+                                    className={`w-full py-6 font-syne font-bold uppercase tracking-[0.3em] text-[10px] transition-all duration-500 ${ tier.highlighted
+                                            ? "bg-accent-gold text-black-pure hover:bg-white"
+                                            : "border border-white/10 text-text-primary hover:border-accent-gold hover:text-accent-gold"
+                                    }`}
+                                >
+                                    {isProcessing === tier.name ? (
+                                        <Loader2 size={18} className="animate-spin mx-auto" />
+                                    ) : (
+                                        tier.ctaText
+                                    )}
+                                </button>
                             </div>
                         ))}
                     </div>
-                </section>
+                </div>
+            </section>
 
-                <section className="space-y-32">
-                    <div className="flex items-center gap-3 mb-8">
-                        <div className="w-12 h-px bg-rama-accent/40" />
-                        <span className="font-rock-salt text-rama-accent transform -rotate-2 text-xl block">
-                            I Nostri Servizi Smart
-                        </span>
-                    </div>
-
+            {/* 4. IMMERSIVE SECTIONS: Human Connection Focus */}
+            <section className="reveal-corp section-padding-huge bg-black-pure border-y border-white/5">
+                <div className="container-max space-y-48 lg:space-y-64">
                     <StickyTextSection
-                        className="flex-col-reverse md:flex-row"
-                        content={ <div className="space-y-6 mt-8 md:mt-0">
-                                <Building2 size={42} className="text-rama-accent mb-4" />
-                                <h3 className="font-heading font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-5xl md:text-[6vw]">
-                                    <span className="text-white">Team Building</span>
-                                    <span className="text-rama-accent">Interattivo.</span>
+                        className="flex-col-reverse md:flex-row gap-24 items-center"
+                        content={ <div className="space-y-8">
+                                <span className="text-accent-gold font-bold text-[10px] uppercase tracking-[0.6em]">01 // Social Impact</span>
+                                <h3 className="font-syne font-bold leading-[0.85] tracking-tighter uppercase text-text-primary text-5xl md:text-[6vw]">
+                                    Connessione <br /> <span className="text-accent-gold italic">Umana.</span>
                                 </h3>
-                                <p className="text-rama-muted font-sans text-lg leading-relaxed mt-6">
-                                    Niente unisce un gruppo di lavoro più di una sfida digitale condivisa. I nostri format permettono di collaborare in tempo reale per risolvere misteri o vincere contest, alimentando lo spirito di squadra in modo moderno.
-                                </p>
-                            </div>
-                        }
-                    >
-                        <ParallaxImage
-                            src="/images/brand/service-plating.webp"
-                            alt="Team Building"
-                            aspectRatio="landscape"
-                            speed={0.2}
-                        />
-                    </StickyTextSection>
-
-                    <StickyTextSection
-                        className="flex-col-reverse md:flex-row-reverse"
-                        content={ <div className="space-y-6 mt-8 md:mt-0">
-                                <Users size={42} className="text-rama-accent mb-4" />
-                                <h3 className="font-heading font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-5xl md:text-[6vw]">
-                                    <span className="text-white">Networking</span>
-                                    <span className="text-rama-accent">Tecnologico.</span>
-                                </h3>
-                                <p className="text-rama-muted font-sans text-lg leading-relaxed mt-6">
-                                    Eliminiamo l&apos;imbarazzo dei classici eventi. La nostra Web App agisce come un facilitatore sociale, guidando gli ospiti in interazioni naturali attraverso missioni e mini-giochi digitali al tavolo.
-                                </p>
-                            </div>
-                        }
-                    >
-                        <ParallaxImage
-                            src="/images/brand/bg-venue-crowd.webp"
-                            alt="Networking"
-                            aspectRatio="landscape"
-                            speed={0.2}
-                        />
-                    </StickyTextSection>
-
-                    <StickyTextSection
-                        className="flex-col-reverse md:flex-row"
-                        content={ <div className="space-y-6 mt-8 md:mt-0">
-                                <Sparkles size={42} className="text-rama-accent mb-4" />
-                                <h3 className="font-heading font-bold leading-[0.8] tracking-tighter uppercase text-white flex flex-col text-5xl md:text-[6vw]">
-                                    <span className="text-white">Esperienza</span>
-                                    <span className="text-rama-accent">Chiavi in Mano.</span>
-                                </h3>
-                                <p className="text-rama-muted font-sans text-lg leading-relaxed mt-6">
-                                    Scegli tu il livello di personalizzazione. Dalla creazione di format ad alto impatto, al menu dedicato, fino alla meticolosa scelta dell&apos;artista o del performer perfetto per il tono e la visione della tua azienda.
+                                <p className="text-text-secondary/60 font-inter text-lg md:text-xl leading-relaxed mt-12 max-w-xl">
+                                    Abbattiamo i silos aziendali attraverso il gioco. Quando le persone ridono, competono e collaborano, il team smette di essere un organigramma e diventa una comunità.
                                 </p>
                             </div>
                         }
                     >
                         <ParallaxImage
                             src="/images/brand/bg-stage-lights.webp"
-                            alt="Esperienza Completa"
+                            alt="Human Connection"
                             aspectRatio="landscape"
-                            speed={0.2}
+                            speed={0.1}
                         />
                     </StickyTextSection>
-                </section>
 
-                <div
-                    id="corporate-form-container"
-                    className="border border-rama-accent/8 bg-zinc-900/30 p-8 md:p-16 relative rounded-2xl min-h-[500px] flex flex-col justify-center"
-                >
-                    <div className="absolute top-0 left-0 w-6 h-6 border-t border-l border-rama-accent/15" />
-                    <div className="absolute bottom-0 right-0 w-6 h-6 border-b border-r border-rama-accent/15" />
-
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                            <div className="space-y-8">
-                                <div className="space-y-4">
-                                    <h3 className="font-heading font-bold leading-[0.8] tracking-tighter uppercase text-white text-4xl md:text-[4vw]">
-                                        Progetta il tuo <br /><span className="text-rama-accent">Evento Unico.</span>
-                                    </h3>
-                                    <p className="text-rama-muted font-sans max-w-md text-base md:text-lg leading-relaxed">
-                                        Il pacchetto Enterprise è una tela bianca. Raccontaci la tua visione e noi la trasformeremo in un format immersivo su misura.
-                                    </p>
-                                </div>
-                                
-                                <div className="space-y-4 pt-8 border-t border-white/5">
-                                    <p className="font-heading text-[10px] uppercase tracking-[0.3em] text-zinc-500 font-bold">Oppure contattaci direttamente:</p>
-                                    <a 
-                                        href={buildWAUrl(WA_MESSAGES.corporate)}
-                                        target="_blank" 
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-3 text-rama-accent hover:text-white transition-colors font-heading text-xs font-bold uppercase tracking-widest"
-                                    >
-                                        WhatsApp Creativo &rarr;
-                                    </a>
-                                </div>
+                    <StickyTextSection
+                        className="flex-col-reverse md:flex-row-reverse gap-24 items-center"
+                        content={ <div className="space-y-8 md:text-right flex flex-col md:items-end">
+                                <span className="text-accent-gold font-bold text-[10px] uppercase tracking-[0.6em]">02 // Shared Legacy</span>
+                                <h3 className="font-syne font-bold leading-[0.85] tracking-tighter uppercase text-text-primary text-5xl md:text-[6vw]">
+                                    Ricordi <br /> <span className="text-accent-gold italic">Condivisi.</span>
+                                </h3>
+                                <p className="text-text-secondary/60 font-inter text-lg md:text-xl leading-relaxed mt-12 max-w-xl">
+                                    L&apos;impatto di un evento si misura in ciò che resta il giorno dopo in ufficio. Creiamo storie che verranno raccontate per anni, rafforzando l&apos;identità del tuo gruppo.
+                                </p>
                             </div>
+                        }
+                    >
+                        <ParallaxImage
+                            src="/images/brand/bg-venue-crowd.webp"
+                            alt="Shared Legacy"
+                            aspectRatio="landscape"
+                            speed={0.1}
+                        />
+                    </StickyTextSection>
+                </div>
+            </section>
 
-                            <div className="bg-black/40 p-8 rounded-2xl border border-white/5 shadow-2xl">
-                                <CorporateForm />
+            {/* 5. CONTACT FORM SECTION */}
+            <section id="corporate-form-container" className="reveal-corp section-padding-huge bg-black-pure relative">
+                <div className="container-max">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 lg:gap-48 items-center">
+                        <div className="space-y-16">
+                            <div className="space-y-8">
+                                <span className="text-accent-gold font-bold text-[10px] uppercase tracking-[0.8em]">Bespoke Experience</span>
+                                <h2 className="font-syne font-bold leading-[0.85] tracking-tighter uppercase text-text-primary text-5xl md:text-[5vw]">
+                                    Crea la tua <br /><span className="text-accent-gold italic">Trasformazione.</span>
+                                </h2>
+                                <p className="text-text-secondary/60 font-inter text-xl leading-relaxed max-w-lg">
+                                    Ogni team è unico. Raccontaci le vostre sfide sociali. Noi progettiamo l&apos;esperienza per superarle.
+                                </p>
+                            </div>
+                            
+                            <div className="pt-16 border-t border-white/5 space-y-6">
+                                <p className="font-syne text-[10px] uppercase tracking-[0.4em] text-text-secondary opacity-30">Contatto Strategico:</p>
+                                <a 
+                                    href={buildWAUrl(WA_MESSAGES.corporate)}
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="group flex items-center gap-6 text-accent-gold hover:text-text-primary transition-all font-syne text-xs font-bold uppercase tracking-[0.6em]"
+                                >
+                                    WHATSAPP CREATIVO
+                                    <ArrowRight size={18} className="group-hover:translate-x-3 transition-transform" />
+                                </a>
                             </div>
                         </div>
+
+                        <div className="bg-white/[0.02] p-12 lg:p-16 border border-white/5 backdrop-blur-3xl shadow-2xl">
+                            <CorporateForm />
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </section>
+
+        </main>
     );
 }

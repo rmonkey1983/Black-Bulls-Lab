@@ -1,149 +1,272 @@
 "use client";
 
-import { useRef } from "react";
-import { EventConcept } from "@/components/events/EventConcept";
-import { Mic, Trophy, Star, Music2, ArrowLeft } from "lucide-react";
-import Link from "next/link";
+import React, { useRef } from "react";
 import Image from "next/image";
-import { GoldenVoiceForm } from "@/components/forms/GoldenVoiceForm";
+import Link from "next/link";
+import { Mic, ArrowLeft, Zap, Play, ArrowRight, Star, Trophy, Music2 } from "lucide-react";
+import { gsap } from "gsap";
 import { useGSAP } from "@/hooks/useGSAP";
-import { animateHeroText, animateFade, animateCards } from "@/lib/gsapAnimations";
-import { FormatQuickInfo } from "@/components/events/FormatQuickInfo";
+import { useCinematic } from "@/hooks/useCinematic";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PrimaryButton } from "@/components/ui/PrimaryButton";
+import { PremiumCard } from "@/components/ui/PremiumCard";
+import { GoldenVoiceForm } from "@/components/forms/GoldenVoiceForm";
 import { buildWAUrl, WA_MESSAGES } from "@/lib/whatsapp";
 
 export function TheGoldenVoiceClient() {
-    const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const spotlightRef = useRef<HTMLDivElement>(null);
+  const { revealOnScroll } = useCinematic();
 
-    useGSAP(() => {
-        animateHeroText("#golden-hero", 0.1);
-        animateFade(".golden-tag", "up", 0.3);
-        animateFade(".golden-desc", "up", 0.4);
-        animateFade("#percorso-title", "up", 0.1);
-        animateCards("#percorso-grid");
-        animateFade("#casting-form-container", "up", 0.1);
-    }, { scope: containerRef });
+  useGSAP(() => {
+    // Spotlight movement - Warm luxury stage light
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!spotlightRef.current) return;
+      gsap.to(spotlightRef.current, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 1.5,
+        ease: "power2.out"
+      });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
 
-    return (
-        <main ref={containerRef} className=" min-h-screen">
-            <section className="relative min-h-[60vw] md:min-h-0 md:h-[85vh] w-full overflow-hidden flex items-end">
-                <div className="absolute inset-0 z-0">
+    // Cinematic Reveal
+    const tl = gsap.timeline();
+    tl.from(".golden-title span", {
+      y: 100,
+      opacity: 0,
+      filter: "blur(20px)",
+      stagger: 0.2,
+      duration: 2,
+      ease: "expo.out"
+    })
+    .from(".golden-sub", {
+      opacity: 0,
+      y: 20,
+      duration: 1.5,
+      ease: "power2.out"
+    }, "-=1");
+
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, { scope: containerRef });
+
+  revealOnScroll(".reveal-golden");
+
+  return (
+    <main ref={containerRef} className="bg-black-pure text-text-primary min-h-screen selection:bg-accent-gold selection:text-black-pure overflow-x-hidden">
+      
+      {/* 1. CINEMATIC HERO: The Stage Entry */}
+      <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
+        {/* Background Layer */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/brand/service-performance.webp"
+            alt="The Golden Voice Experience"
+            fill
+            className="object-cover opacity-20 contrast-125 grayscale scale-105"
+            priority
+          />
+          
+          {/* Warm Stage Spotlight Effect */}
+          <div 
+            ref={spotlightRef}
+            className="absolute top-0 left-0 w-[800px] h-[800px] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 opacity-30"
+            style={{
+              background: 'radial-gradient(circle, rgba(200, 169, 107, 0.12) 0%, transparent 70%)',
+              filter: 'blur(80px)'
+            }}
+          />
+
+          {/* Cinematic Overlays */}
+          <div className="absolute inset-0 bg-linear-to-b from-black-pure/90 via-transparent to-black-pure z-10" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.9)_100%)] z-10" />
+          <div className="absolute inset-0 opacity-[0.05] bg-[url('/noise.webp')] mix-blend-overlay z-20" />
+        </div>
+
+        {/* Navigation Link */}
+        <div className="absolute top-12 left-12 z-50">
+            <Link
+                href="/format"
+                className="group flex items-center gap-4 text-text-secondary/30 hover:text-accent-gold transition-all uppercase text-[10px] font-bold tracking-[0.5em]"
+            >
+                <ArrowLeft size={14} className="group-hover:-translate-x-2 transition-transform" /> 
+                Archivio Format
+            </Link>
+        </div>
+
+        <div className="relative z-30 container-max px-6 text-center">
+            <div className="space-y-12">
+                <div className="flex flex-col items-center gap-6">
+                    <span className="reveal-golden inline-block px-4 py-1 border border-accent-gold/20 text-accent-gold text-[10px] font-bold uppercase tracking-[0.6em] bg-accent-gold/5 backdrop-blur-md">
+                        Premium Stage Universe
+                    </span>
+                    <h1 className="golden-title font-syne font-bold text-[clamp(3rem,10vw,12rem)] leading-[0.8] tracking-tighter uppercase text-text-primary flex flex-col">
+                        <span className="block">Ogni voce</span>
+                        <span className="block text-accent-gold italic">lascia un segno.</span>
+                    </h1>
+                </div>
+
+                <div className="golden-sub max-w-2xl mx-auto">
+                    <p className="font-inter text-lg md:text-2xl text-text-secondary font-light leading-relaxed uppercase tracking-[0.2em] opacity-60">
+                        Più di una performance. Una presenza. <br />
+                        Il contest dove il pubblico decide il tuo destino.
+                    </p>
+                </div>
+
+                <div className="pt-12 flex flex-col sm:flex-row items-center justify-center gap-8">
+                    <PrimaryButton href="#casting-form" size="lg" className="w-full sm:w-auto min-w-[280px]">
+                        SALI SUL PALCO
+                    </PrimaryButton>
+                </div>
+            </div>
+        </div>
+
+        {/* Tech Decor */}
+        <div className="absolute bottom-12 right-12 hidden lg:block">
+            <div className="flex items-center gap-4 text-white/10">
+                <div className="text-right">
+                    <div className="text-[10px] font-bold tracking-[0.4em] uppercase">Live Audience Scoring</div>
+                    <div className="text-[9px] tracking-[0.2em] uppercase opacity-50">Protocol: GOLDEN_VOICE</div>
+                </div>
+                <Star size={20} className="opacity-20" />
+            </div>
+        </div>
+      </section>
+
+      {/* 2. THE STORYTELLING: The Spotlight Tension */}
+      <section className="reveal-golden section-padding-huge bg-black-pure border-y border-white/5">
+        <div className="container-max grid grid-cols-1 lg:grid-cols-2 gap-24 lg:gap-48 items-center">
+            <div className="space-y-16">
+                <SectionHeading 
+                  title="PRESENZA"
+                  highlight="ASSOLUTA"
+                  subtitle="L'Evoluzione dello Show"
+                />
+                <div className="space-y-12 font-inter text-xl md:text-2xl text-text-secondary font-light leading-relaxed opacity-70">
+                    <p>
+                        Quando il riflettore si accende, non puoi più nasconderti. The Golden Voice non è un concorso canoro, è un momento di verità.
+                    </p>
+                    <p>
+                        Cerchiamo chi vive per esibirsi e non teme il giudizio di un pubblico armato di smartphone e passione. La tua voce è lo strumento, il Lab è il tuo amplificatore.
+                    </p>
+                </div>
+            </div>
+
+            <div className="relative aspect-square">
+                <PremiumCard className="h-full">
                     <Image 
-                        src="/images/brand/service-performance.webp" 
-                        alt="THE GOLDEN VOICE" 
-                        width={1920}
-                        height={1080}
-                        className="w-full h-full object-cover opacity-50 grayscale contrast-125"
-                        style={{ aspectRatio: '16/9', objectFit: 'cover' }}
-                        priority
+                        src="/images/brand/service-performance.webp"
+                        alt="Stage Tension"
+                        fill
+                        className="object-cover grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-50 transition-all duration-1000"
                     />
-                    <div className="absolute inset-0 bg-rama-accent/10 mix-blend-overlay" />
-                    <div className="absolute inset-0 bg-linear-to-t from-bg-dark via-bg-dark/40 to-transparent" />
-                    <div className="absolute inset-0 bg-[url('/noise.webp')] opacity-20 mix-blend-overlay pointer-events-none" />
-                </div>
-
-                <div className="absolute top-20 sm:top-24 left-4 sm:left-6 z-30">
-                    <Link
-                        href="/format"
-                        className="flex items-center gap-2 text-rama-text/70 hover:text-rama-accent transition-colors uppercase text-xs font-bold tracking-widest backdrop-blur-sm bg-black/30 px-3 py-2 sm:px-4 rounded-full border border-white/10"
-                    >
-                        <ArrowLeft size={14} /> Tutti i format
-                    </Link>
-                </div>
-
-                <div className="relative z-20 w-full max-w-7xl mx-auto p-6 md:p-12 mb-12">
-                    <div id="golden-hero" className="flex flex-col space-y-6">
-                        <div className="golden-tag flex items-center gap-3 text-rama-accent text-sm font-bold uppercase tracking-[0.2em]">
-                            <span className="flex items-center gap-2 bg-rama-accent/20 backdrop-blur-sm px-3 py-1 rounded-full border border-rama-accent/30 text-rama-accent-light">
-                                <Mic size={14} /> Singing Contest
-                            </span>
+                    <div className="absolute inset-0 bg-linear-to-t from-black-pure via-transparent to-transparent opacity-90" />
+                    <div className="absolute top-12 left-12">
+                        <div className="w-16 h-16 rounded-full border border-accent-gold/20 flex items-center justify-center">
+                            <Mic size={24} className="text-accent-gold" />
                         </div>
+                    </div>
+                </PremiumCard>
+            </div>
+        </div>
+      </section>
 
-                        <h1 className="line text-4xl sm:text-6xl md:text-8xl font-bold text-rama-text tracking-tighter leading-[0.9] drop-shadow-2xl">
-                            <span>THE GOLDEN</span> <br />
-                            <span className="text-transparent bg-clip-text bg-linear-to-r from-gold via-white to-gold animate-gradient-x bg-size-[200%_auto]">
-                                <span>VOICE</span>
-                            </span>
-                        </h1>
+      {/* 3. EXPERIENCE FLOW: The Path to Glory */}
+      <section className="reveal-golden section-padding-huge bg-black-pure">
+        <div className="container-max">
+            <div className="mb-32">
+                <SectionHeading 
+                  title="TRE FASI."
+                  highlight="UNA VOCE."
+                  subtitle="Il Percorso dell'Artista"
+                  align="center"
+                />
+            </div>
 
-                        <p className="golden-desc text-base sm:text-xl md:text-3xl text-gray-300 font-light max-w-2xl border-l-4 border-rama-accent pl-4 sm:pl-6">
-                            La tua voce, la tua occasione. Il contest dove il pubblico è il quinto giudice via Web App.
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24">
+                {[
+                    { title: "Digital Casting", desc: "Il primo passo. Invia la tua candidatura e i tuoi link social. La selezione inizia dallo schermo.", icon: <Music2 size={32} /> },
+                    { title: "Live Presence", desc: "Performance esplosive davanti a giuria e pubblico. Ogni nota può ribaltare la classifica in app.", icon: <Zap size={32} /> },
+                    { title: "The Gala Final", desc: "La serata definitiva. Tensione tecnologica e voti in tempo reale per decretare il vincitore.", icon: <Trophy size={32} /> }
+                ].map((act, i) => (
+                    <div key={i} className="group space-y-8 p-12 border border-white/5 bg-white/[0.02] hover:border-accent-gold/20 transition-all duration-700">
+                        <div className="text-accent-gold opacity-30 group-hover:opacity-100 transition-opacity duration-700">
+                            {act.icon}
+                        </div>
+                        <h3 className="font-syne text-3xl font-bold uppercase tracking-tighter text-text-primary">
+                            {act.title}
+                        </h3>
+                        <p className="font-inter text-text-secondary/60 leading-relaxed group-hover:text-text-secondary transition-colors">
+                            {act.desc}
                         </p>
                     </div>
-                </div>
-            </section>
+                ))}
+            </div>
+        </div>
+      </section>
 
-            <FormatQuickInfo 
-                capacity="In definizione"
-                price="Stay Tuned"
-                highlight="Digital Voting System"
-                highlightLabel="Tecnologia"
-            />
-
-            <EventConcept
-                description={`Sei uno di quelli che sente la musica come una necessità e ne sprigiona tutta la potenza? The Golden Voice non è il solito talent show Torino, ma il concorso canoro dove conta solo la verità della tua voce.\n\nI posti sul palco sono pochissimi, la selezione è millimetrica e il tempo per candidarti sta per scadere. Cerchiamo chi vive per esibirsi e non teme il giudizio. Dimostra il tuo valore nel singing contest Torino più atteso dell’anno.`}
-            />
-
-            <section className="py-24 bg-linear-to-b from-black to-bg-dark relative overflow-hidden">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="text-center mb-16">
-                        <h2 id="percorso-title" className="gsap-fade text-4xl md:text-5xl font-bold text-rama-text mb-4">
-                            IL PERCORSO <span className="text-rama-accent italic">DIGITALE</span>
+      {/* 4. CASTING FORM: The Entry Protocol */}
+      <section id="casting-form" className="reveal-golden section-padding-huge bg-black-pure border-t border-white/5 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent-gold/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4 pointer-events-none" />
+        
+        <div className="container-max">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 lg:gap-48 items-center">
+                <div className="space-y-16">
+                    <div className="space-y-8">
+                        <span className="text-accent-gold font-bold text-[10px] uppercase tracking-[0.8em]">Apply to the Lab</span>
+                        <h2 className="font-syne font-bold leading-[0.85] tracking-tighter uppercase text-text-primary text-5xl md:text-[5vw]">
+                            Invia la tua <br /><span className="text-accent-gold italic">Candidatura.</span>
                         </h2>
-                        <div className="w-24 h-1 bg-rama-accent mx-auto" />
+                        <p className="text-text-secondary/60 font-inter text-xl leading-relaxed max-w-lg">
+                            Il palco è pronto. Il Sistema ti sta aspettando. Dimostra che la tua voce merita lo spotlight.
+                        </p>
                     </div>
-
-                    <div id="percorso-grid" className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                        {[
-                            {
-                                icon: <Music2 size={24} />,
-                                title: "Casting Online",
-                                desc: "Il primo passo avviene qui sul sito. Invia la tua candidatura e i tuoi link social tramite il form dedicato. La selezione inizia dallo schermo."
-                            },
-                            {
-                                icon: <Star size={24} />,
-                                title: "Live & Voto App",
-                                desc: "Esibisciti davanti a una giuria di esperti e a un pubblico armato di smartphone. Ogni nota conta, ogni voto in app può ribaltare la classifica."
-                            },
-                            {
-                                icon: <Trophy size={24} />,
-                                title: "La Finale",
-                                desc: "Una serata di gala ad altissima tensione tecnologica, dove il vincitore assoluto verrà decretato dall'incrocio tra voti tecnici e preferenze digitali."
-                            }
-                        ].map((step, i) => (
-                            <div
-                                key={i}
-                                className="gsap-card bg-white/5 border border-white/10 p-6 md:p-8 rounded-2xl hover:bg-white/10 transition-colors group flex md:flex-col items-center md:text-center gap-6"
-                            >
-                                <div className="w-12 h-12 md:w-16 md:h-16 bg-rama-accent/10 rounded-full flex items-center justify-center text-rama-accent shrink-0 group-hover:scale-110 transition-transform duration-300 border border-rama-accent/20">
-                                    {step.icon}
-                                </div>
-                                <div className="flex flex-col md:items-center">
-                                    <h3 className="text-xl md:text-2xl font-bold text-rama-text mb-2 md:mb-4">{step.title}</h3>
-                                    <p className="text-gray-400 text-sm md:text-base leading-relaxed">
-                                        {step.desc}
-                                    </p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div id="casting-form-container" className="gsap-fade mt-24 max-w-4xl mx-auto flex flex-col items-center gap-6">
-                        <GoldenVoiceForm />
-                        
-                        <div className="flex flex-col items-center gap-4 mt-8">
-                            <p className="text-gray-400 text-sm font-sans uppercase tracking-widest">Oppure chiedi info date</p>
-                            <a
-                                href={buildWAUrl(WA_MESSAGES.default)}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-3 px-8 py-4 border border-rama-accent text-rama-accent font-bold uppercase tracking-widest hover:bg-rama-accent hover:text-black transition duration-300 rounded-sm"
-                            >
-                                <Mic size={18} /> Chiedi info date
-                            </a>
-                        </div>
+                    
+                    <div className="pt-16 border-t border-white/5 space-y-6">
+                        <p className="font-syne text-[10px] uppercase tracking-[0.4em] text-text-secondary opacity-30">Contatto Casting:</p>
+                        <a 
+                            href={buildWAUrl(WA_MESSAGES.default)}
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="group flex items-center gap-6 text-accent-gold hover:text-text-primary transition-all font-syne text-xs font-bold uppercase tracking-[0.6em]"
+                        >
+                            WHATSAPP CASTING
+                            <ArrowRight size={18} className="group-hover:translate-x-3 transition-transform" />
+                        </a>
                     </div>
                 </div>
-            </section>
-        </main>
-    );
+
+                <div className="bg-white/[0.02] p-12 lg:p-16 border border-white/5 backdrop-blur-3xl shadow-2xl">
+                    <GoldenVoiceForm />
+                </div>
+            </div>
+        </div>
+      </section>
+
+      {/* 5. FINAL ACTION SECTION */}
+      <section className="reveal-golden section-padding-huge bg-accent-gold text-black-pure text-center relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 bg-[url('/noise.webp')] mix-blend-overlay" />
+        </div>
+        <div className="container-narrow space-y-16 relative z-10">
+          <h2 className="font-syne text-6xl md:text-9xl font-bold uppercase tracking-tighter leading-[0.8]">
+            ENTRA <br /> NELLO <span className="bg-black-pure text-accent-gold px-4">SPOTLIGHT.</span>
+          </h2>
+          <div className="pt-12">
+            <Link 
+              href="/calendario"
+              className="inline-flex items-center gap-8 px-16 py-8 bg-black-pure text-accent-gold text-xl font-black uppercase tracking-widest hover:bg-white hover:text-black-pure transition-all duration-500 rounded-full"
+            >
+              PRENDI IL TUO POSTO
+            </Link>
+          </div>
+          <p className="font-syne text-[10px] uppercase tracking-[0.6em] font-black opacity-40">
+            Selezioni limitate // Solo per talenti puri
+          </p>
+        </div>
+      </section>
+
+    </main>
+  );
 }
