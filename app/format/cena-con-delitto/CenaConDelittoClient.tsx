@@ -61,7 +61,7 @@ export function CenaConDelittoClient() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/brand/bg-venue-crowd.webp"
-            alt="Investigation Atmosphere"
+            alt="Atmosfera d'Indagine"
             fill
             sizes="100vw"
             className="object-cover opacity-20 contrast-125 grayscale scale-105"
@@ -99,18 +99,18 @@ export function CenaConDelittoClient() {
             <div className="space-y-12">
                 <div className="flex flex-col items-center gap-6">
                     <span className="reveal-mystery inline-block px-4 py-1 border border-accent-gold/20 text-accent-gold text-[10px] font-bold uppercase tracking-[0.6em] bg-accent-gold/5 backdrop-blur-md">
-                        Interactive Noir Experience
+                        Esperienza Noir Interattiva
                     </span>
                     <h1 className="mystery-title font-syne font-bold text-[clamp(3rem,10vw,12rem)] leading-[0.8] tracking-tighter uppercase text-text-primary flex flex-col">
-                        <span className="block">Truth is</span>
-                        <span className="block text-accent-gold italic">a Shadow.</span>
+                        <span className="block">La Verità è</span>
+                        <span className="block text-accent-gold italic">un'Ombra.</span>
                     </h1>
                 </div>
 
                 <div className="mystery-sub max-w-2xl mx-auto">
                     <p className="font-inter text-lg md:text-2xl text-text-secondary font-light leading-relaxed uppercase tracking-[0.2em] opacity-60">
-                        One murder. One cold case. Your team. <br />
-                        Noir investigation goes digital.
+                        Un omicidio. Un caso irrisolto. Il tuo team. <br />
+                        L'indagine noir diventa digitale.
                     </p>
                 </div>
 
@@ -127,8 +127,8 @@ export function CenaConDelittoClient() {
             <div className="flex items-center gap-4 text-white/10">
                 <Search size={20} className="opacity-20" />
                 <div className="text-left">
-                    <div className="text-[10px] font-bold tracking-[0.4em] uppercase">Status: Active Investigation</div>
-                    <div className="text-[9px] tracking-[0.2em] uppercase opacity-50">Protocol 002 // NOIR_SYSTEM</div>
+                    <div className="text-[10px] font-bold tracking-[0.4em] uppercase">Stato: Indagine Attiva</div>
+                    <div className="text-[9px] tracking-[0.2em] uppercase opacity-50">Protocollo 002 // SISTEMA_NOIR</div>
                 </div>
             </div>
         </div>
@@ -157,7 +157,7 @@ export function CenaConDelittoClient() {
                 <PremiumCard className="h-full">
                     <Image 
                         src="/images/brand/bg-stage-lights.webp"
-                        alt="Investigation Details"
+                        alt="Dettagli dell'Indagine"
                         fill
                         sizes="(max-width: 1024px) 100vw, 50vw"
                         className="object-cover grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-50 transition-[filter,opacity] duration-1000"
@@ -168,7 +168,7 @@ export function CenaConDelittoClient() {
                             <div className="w-12 h-12 rounded-full border border-accent-gold/20 flex items-center justify-center">
                                 <Target size={20} className="text-accent-gold" />
                             </div>
-                            <span className="font-syne text-xs uppercase tracking-[0.4em] text-accent-gold">Evidence Found</span>
+                            <span className="font-syne text-xs uppercase tracking-[0.4em] text-accent-gold">Prove Trovate</span>
                         </div>
                     </div>
                 </PremiumCard>
@@ -190,9 +190,9 @@ export function CenaConDelittoClient() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24">
                 {[
-                    { title: "Digital Briefing", desc: "Inquadra il QR code. Accedi al network. Ricevi la lista dei sospettati e il primo set di prove.", icon: <ShieldCheck size={32} /> },
-                    { title: "The Scene", desc: "Durante la cena raccogli indizi e ascolta le testimonianze. Ogni portata svela un nuovo segreto.", icon: <Search size={32} /> },
-                    { title: "The Accusation", desc: "Formula l&apos;accusa. Invia movente e arma del delitto tramite l&apos;App. Vinci la sfida.", icon: <Zap size={32} /> }
+                    { title: "Briefing Digitale", desc: "Inquadra il QR code. Accedi al network. Ricevi la lista dei sospettati e il primo set di prove.", icon: <ShieldCheck size={32} /> },
+                    { title: "La Scena del Crimine", desc: "Durante la cena raccogli indizi e ascolta le testimonianze. Ogni portata svela un nuovo segreto.", icon: <Search size={32} /> },
+                    { title: "L'Accusa", desc: "Formula l&apos;accusa. Invia movente e arma del delitto tramite l&apos;App. Vinci la sfida.", icon: <Zap size={32} /> }
                 ].map((act, i) => (
                     <div key={i} className="group space-y-8 p-12 border border-white/5 bg-white/2 hover:border-accent-gold/20 transition-[border-color,background-color] duration-700">
                         <div className="text-accent-gold opacity-30 group-hover:opacity-100 transition-opacity duration-700">
@@ -240,7 +240,7 @@ export function CenaConDelittoClient() {
                 <PremiumCard className="h-full">
                     <Image 
                         src="/images/brand/bg-hero-wide.webp"
-                        alt="Trust is the real risk."
+                        alt="La fiducia è il vero rischio."
                         fill
                         sizes="(max-width: 1024px) 100vw, 50vw"
                         className="object-cover grayscale opacity-20 group-hover:grayscale-0 group-hover:opacity-40 transition-[filter,opacity] duration-1000"

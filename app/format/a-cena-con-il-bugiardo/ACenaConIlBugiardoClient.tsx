@@ -1,263 +1,416 @@
 "use client";
 
-import React, { useRef } from "react";
-import Image from "next/image";
+import React, { useState } from "react";
 import Link from "next/link";
-import { Search, Smartphone, CheckCircle2, AlertTriangle, Building2, PartyPopper, Zap, ArrowLeft } from "lucide-react";
-import { gsap } from "gsap";
-import { useGSAP } from "@/hooks/useGSAP";
-import { animateHeroText, animateFade, animateCards } from "@/lib/gsapAnimations";
-import { FormatQuickInfo } from "@/components/events/FormatQuickInfo";
-import { Anton } from "next/font/google";
-
-const anton = Anton({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-anton",
-});
+import { Users, Smartphone, Search, ShieldAlert, ChevronDown, Loader2, CheckCircle2 } from "lucide-react";
 
 export function ACenaConIlBugiardoClient() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const spotlightRef = useRef<HTMLDivElement>(null);
+  const [formData, setFormData] = useState({
+    nome: "",
+    cognome: "",
+    data_nascita: "",
+    cap: "",
+    email: "",
+    cellulare: "",
+    consenso_privacy: false,
+    consenso_marketing: false
+  });
 
-  useGSAP(() => {
-    // Spotlight movement
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!spotlightRef.current) return;
-      gsap.to(spotlightRef.current, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 1.5,
-        ease: "power2.out"
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [generatedNumber, setGeneratedNumber] = useState<string>("");
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.nome || !formData.cognome || !formData.data_nascita || !formData.cap || !formData.email || !formData.consenso_privacy) {
+      setStatus("error");
+      setErrorMessage("Compila tutti i campi obbligatori ed accetta la privacy policy.");
+      return;
+    }
+
+    setStatus("submitting");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/whitelist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
       });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
 
-    // Cinematic Reveal
-    const tl = gsap.timeline();
-    tl.from(".liar-title span", {
-      y: 100,
-      opacity: 0,
-      filter: "blur(20px)",
-      stagger: 0.2,
-      duration: 2,
-      ease: "expo.out"
-    })
-    .from(".liar-quote", {
-      opacity: 0,
-      x: -30,
-      duration: 1.5,
-      ease: "power2.out"
-    }, "-=1");
+      const result = await response.json();
 
-    const revealItems = gsap.utils.toArray(".reveal-liar");
-    revealItems.forEach((item: any) => {
-      gsap.from(item, {
-        opacity: 0,
-        y: 50,
-        filter: "blur(10px)",
-        duration: 1.5,
-        scrollTrigger: {
-          trigger: item,
-          start: "top 85%",
-          toggleActions: "play none none reverse"
-        }
-      });
-    });
+      if (!response.ok) {
+        setStatus("error");
+        setErrorMessage(result.error || "Si è verificato un errore durante l'invio. Riprova più tardi.");
+        return;
+      }
 
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, { scope: containerRef });
+      setGeneratedNumber(result.ticketNumber || "");
+      setStatus("success");
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage("Si è verificato un errore di connessione. Riprova più tardi.");
+    }
+  };
+
+  const FAQS = [
+    {
+      q: "Ci sono attori professionisti?",
+      a: "No, i protagonisti e gli investigatori siete voi. Tutti i partecipanti al tavolo sono giocatori attivi del Dinner & Show."
+    },
+    {
+      q: "Devo saper recitare?",
+      a: "Assolutamente no. Non c'è alcuna pressione o palcoscenico: devi semplicemente mentire, fare domande o scoprire chi sta dicendo il falso direttamente dal tuo tavolo."
+    },
+    {
+      q: "Cosa mi serve per giocare?",
+      a: "Ti serve solo il tuo smartphone con una connessione internet attiva. Non devi scaricare alcuna applicazione: accederai al sistema inquadrando il QR code al tavolo."
+    },
+    {
+      q: "Come funziona l'estrazione della cena gratuita e il regolamento?",
+      a: "Per partecipare all'estrazione di una cena per 2 persone, devi iscriverti alla White List. L'iniziativa è valida solo per i nuovi utenti: il sistema verificherà che Nome, Cognome ed Email non siano già presenti nel database. L'estrazione avverrà esattamente 1 settimana prima della data dell'evento. Il vincitore sarà contattato tramite i recapiti lasciati nel modulo."
+    }
+  ];
 
   return (
-    <main ref={containerRef} className={`${anton.variable} min-h-screen bg-black-pure text-white font-sans selection:bg-red-600 selection:text-white overflow-x-hidden`}>
+    <div className="bg-black text-white min-h-screen font-sans selection:bg-red-600 selection:text-white flex flex-col items-center w-full relative overflow-x-hidden">
       
-      {/* 1. CINEMATIC HERO: The Thriller Entry */}
-      <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
-        {/* Background Layer */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/brand/background.webp"
-            alt="The Liar Universe"
-            fill
-            sizes="100vw"
-            className="object-cover opacity-20 scale-110"
-            priority
-          />
-          
-          {/* Red Spotlight Effect */}
-          <div 
-            ref={spotlightRef}
-            className="absolute top-0 left-0 w-[600px] h-[600px] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 opacity-40"
-            style={{
-              background: 'radial-gradient(circle, rgba(220, 38, 38, 0.15) 0%, transparent 70%)',
-              filter: 'blur(60px)'
-            }}
-          />
+      {/* CSS overrides to isolate the landing page, hiding site-wide components */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        nav, footer:not(.landing-footer), [class*="MobileStickyBookButton"], [class*="WhatsAppWidget"], [class*="BackToTop"], #back-to-top, .MobileStickyBookButton, .WhatsAppWidget, .BackToTop {
+          display: none !important;
+        }
+      `}} />
 
-          {/* Cinematic Overlays */}
-          <div className="absolute inset-0 bg-linear-to-b from-black-pure/90 via-transparent to-black-pure z-10" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)] z-10" />
-          <div className="absolute inset-0 opacity-[0.05] bg-[url('/noise.webp')] mix-blend-overlay z-20" />
-        </div>
+      {/* 1. HEADER */}
+      <header className="w-full py-8 text-center border-b border-white/[0.03] select-none">
+        <span className="font-syne text-[10px] tracking-[0.5em] text-gray-500 uppercase">
+          Black Bulls Lab Presenta
+        </span>
+      </header>
 
-        {/* Back Link */}
-        <div className="absolute top-28 left-6 lg:top-12 lg:left-12 z-50">
-            <Link
-                href="/format"
-                className="group flex items-center gap-4 text-white/30 hover:text-red-600 transition-colors uppercase text-[10px] font-bold tracking-[0.5em]"
-            >
-                <ArrowLeft size={14} className="group-hover:-translate-x-2 transition-transform" /> 
-                Esci dal Sistema
-            </Link>
-        </div>
+      {/* 2. HERO SECTION */}
+      <section className="min-h-[75vh] flex flex-col justify-center items-center px-6 py-20 text-center max-w-4xl mx-auto w-full select-none">
+        <span className="text-red-600 tracking-[0.3em] font-semibold text-xs mb-6 uppercase font-syne">
+          Dinner & Show Immersivo
+        </span>
+        <h1 className="font-syne text-5xl md:text-8xl font-black tracking-tighter uppercase leading-[0.95] text-white mb-8">
+          A Cena Con Il <br className="hidden md:inline" />
+          <span className="text-red-600">Bugiardo</span>
+        </h1>
+        <p className="font-sans text-lg md:text-2xl text-gray-400 font-light max-w-2xl mb-12 leading-relaxed">
+          Il nuovo Dinner & Show immersivo. <br />
+          Per due ore... nessuno dirà la verità.
+        </p>
+        <button
+          onClick={() => document.getElementById("whitelist-form")?.scrollIntoView({ behavior: "smooth" })}
+          className="inline-flex items-center justify-center px-10 py-5 bg-red-600 text-white text-xs font-bold tracking-[0.25em] uppercase hover:bg-white hover:text-red-600 transition-all duration-300 active:scale-95 cursor-pointer shadow-lg"
+        >
+          Entra Nella White List
+        </button>
+      </section>
 
-        <div className="relative z-30 container-max px-6 text-center">
-            <div className="space-y-12">
-                <div className="flex flex-col items-center gap-6">
-                    <span className="reveal-liar inline-block px-4 py-1 border border-red-600/30 text-red-600 text-[10px] font-bold uppercase tracking-[0.6em] bg-red-600/5 backdrop-blur-md">
-                        Protocollo: Inganno Umano
-                    </span>
-                    <h1 className="liar-title font-anton text-[clamp(2.5rem,8vw,8rem)] leading-[0.9] tracking-tighter uppercase text-white flex flex-col">
-                        <span className="block">A Cena Con Il</span>
-                        <span className="block text-red-600 italic">Bugiardo.</span>
-                    </h1>
-                </div>
-
-                <div className="liar-quote max-w-2xl mx-auto border-l border-red-600/30 pl-8 text-left">
-                    <p className="font-inter text-xl md:text-2xl text-white/60 font-light leading-relaxed italic">
-                        &quot;La verità non è ciò che accade, ma ciò che riesci a far credere agli altri.&quot;
-                    </p>
-                </div>
-
-                <div className="pt-12">
-                    <Link 
-                      href="/calendario"
-                      className="group relative inline-flex items-center gap-6 px-12 py-6 bg-red-600 text-white text-sm font-bold uppercase tracking-[0.4em] hover:bg-white hover:text-red-600 transition-[background-color,color] duration-700 overflow-hidden"
-                    >
-                      <span className="relative z-10">Inizia la Sfida</span>
-                      <Zap size={18} className="relative z-10 group-hover:animate-pulse" />
-                      <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-700" />
-                    </Link>
-                </div>
+      {/* 3. COME FUNZIONA SECTION */}
+      <section className="py-24 md:py-36 px-6 max-w-5xl mx-auto w-full border-t border-white/[0.03]">
+        <h2 className="font-syne text-3xl md:text-5xl font-bold tracking-tight uppercase text-center mb-20 text-white">
+          Nessun attore. <br className="md:hidden" />
+          I protagonisti siete voi.
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+          {[
+            {
+              num: "01",
+              title: "Siediti a tavola",
+              desc: "Un gruppo di 20-30 persone, tra amici e sconosciuti, pronti a sfidarsi.",
+              icon: <Users className="text-red-600 w-8 h-8 mb-4" />
+            },
+            {
+              num: "02",
+              title: "Ricevi indizi",
+              desc: "Usa il tuo smartphone per consultare prove segrete e dossier in tempo reale.",
+              icon: <Smartphone className="text-red-600 w-8 h-8 mb-4" />
+            },
+            {
+              num: "03",
+              title: "Indaga",
+              desc: "Fai domande mirate, analizza i comportamenti e scova l'inganno al tavolo.",
+              icon: <Search className="text-red-600 w-8 h-8 mb-4" />
+            },
+            {
+              num: "04",
+              title: "Vota e smaschera",
+              desc: "Esprimi il tuo verdetto prima del dolce. Chi mente meglio vince la serata.",
+              icon: <ShieldAlert className="text-red-600 w-8 h-8 mb-4" />
+            }
+          ].map((item, idx) => (
+            <div key={idx} className="flex flex-col items-start space-y-4 border border-white/[0.02] bg-white/[0.01] p-6 hover:bg-white/[0.02] transition-colors duration-300">
+              <div className="flex items-center justify-between w-full">
+                {item.icon}
+                <span className="font-syne text-sm font-semibold text-gray-700 tracking-wider">
+                  {item.num}
+                </span>
+              </div>
+              <h3 className="font-syne text-lg font-bold tracking-tight uppercase text-white">
+                {item.title}
+              </h3>
+              <p className="font-sans text-sm text-gray-400 leading-relaxed">
+                {item.desc}
+              </p>
             </div>
-        </div>
-
-        {/* Framing Decor */}
-        <div className="absolute bottom-12 left-12 w-32 h-px bg-white/5" />
-        <div className="absolute bottom-12 left-12 w-px h-32 bg-white/5" />
-        <div className="absolute top-12 right-12 text-[10px] text-white/10 tracking-[0.5em] uppercase vertical-text hidden lg:block">
-            Active Session: 004 // TRN_LAB
+          ))}
         </div>
       </section>
 
-      {/* 2. THE PSYCHOLOGICAL HOOK */}
-      <section className="py-48 px-6 bg-black-pure relative">
-        <div className="container-narrow text-center space-y-16">
-          <div className="reveal-liar space-y-8">
-            <h2 className="font-anton text-4xl md:text-7xl uppercase tracking-tighter leading-none">
-              Il tuo smartphone <br /> è <span className="text-red-600">la tua unica arma.</span>
+      {/* 4. FORM SECTION */}
+      <section id="whitelist-form" className="py-24 md:py-36 bg-[#050505] w-full border-y border-white/[0.03] flex flex-col items-center">
+        <div className="max-w-xl w-full px-6 space-y-12">
+          <div className="text-center space-y-4">
+            <h2 className="font-syne text-3xl md:text-5xl font-bold tracking-tight uppercase text-white">
+              Entra In Lista
             </h2>
-            <div className="w-20 h-px bg-red-600 mx-auto opacity-30" />
-            <p className="font-inter text-lg md:text-xl text-white/40 leading-relaxed max-w-2xl mx-auto">
-              Niente attori. Niente copioni. Solo tu, il tuo network e il Sistema che monitora ogni tua mossa. Chi sceglierai di tradire stasera?
+            <p className="font-sans text-sm md:text-base text-gray-400 leading-relaxed">
+              Registrati per accedere alle prossime date dell&apos;evento. L&apos;iscrizione assegna un numero univoco per l&apos;estrazione di una cena gratuita per 2 persone. L&apos;iniziativa è riservata esclusivamente ai <strong>NUOVI UTENTI</strong> (nuovo Nome, Cognome ed Email).
             </p>
           </div>
-        </div>
-      </section>
 
-      {/* 3. RULES OF THE GAME: Dramatic Grid */}
-      <section className="py-48 bg-black-pure border-y border-white/5">
-        <div className="container-max px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {[
-              {
-                id: "01",
-                title: "Accedi al Gioco",
-                desc: "Inquadra il codice QR al tavolo con lo smartphone. Nessuna applicazione da installare: giochi direttamente dal browser. Il Sistema ti assegna un ruolo segreto.",
-                icon: <Smartphone size={32} />
-              },
-              {
-                id: "02",
-                title: "Raccogli Indizi",
-                desc: "Tra una portata e l'altra ricevi sul telefono indizi, prove e segreti esclusivi. Puoi condividerli per collaborare, nasconderli o mentire per proteggerti.",
-                icon: <Zap size={32} />
-              },
-              {
-                id: "03",
-                title: "Smaschera il Bugiardo",
-                desc: "Prima del dolce si vota: ogni tavolo indica chi ritiene essere il bugiardo della serata. Vince chi scopre la verità o chi ha mentito meglio di tutti.",
-                icon: <CheckCircle2 size={32} />
-              }
-            ].map((item) => (
-              <div key={item.id} className="reveal-liar group p-12 border border-white/5 bg-white/2 hover:bg-red-600/2 hover:border-red-600/20 transition-[border-color,background-color] duration-1000">
-                <div className="text-red-600 font-anton text-6xl opacity-20 group-hover:opacity-100 transition-opacity duration-1000 mb-8">
-                  {item.id}
-                </div>
-                <h3 className="font-anton text-3xl uppercase tracking-tighter text-white mb-6">
-                  {item.title}
-                </h3>
-                <p className="font-inter text-white/40 leading-relaxed group-hover:text-white/70 transition-colors">
-                  {item.desc}
+          {status === "success" ? (
+            <div className="bg-white/[0.02] border border-red-600/30 p-8 text-center space-y-6">
+              <CheckCircle2 className="text-red-600 w-16 h-16 mx-auto animate-pulse" />
+              <div className="space-y-2">
+                <h3 className="font-syne text-2xl font-bold uppercase text-white">Iscrizione completata</h3>
+                <p className="font-sans text-gray-400 text-sm">
+                  Il tuo numero univoco per l&apos;estrazione è:
                 </p>
               </div>
-            ))}
-          </div>
+              <div className="inline-block bg-red-600/10 border border-red-600/40 text-red-600 font-mono text-3xl font-bold px-8 py-4 tracking-widest">
+                {generatedNumber.startsWith("BGL-") ? generatedNumber : `#${generatedNumber}`}
+              </div>
+              <p className="font-sans text-xs text-gray-500">
+                Conserva questo codice. Abbiamo inviato una copia e i dettagli dell&apos;evento alla tua email.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-1">
+                  <label htmlFor="nome" className="font-syne text-[10px] tracking-widest text-gray-500 uppercase">
+                    Nome *
+                  </label>
+                  <input
+                    id="nome"
+                    name="nome"
+                    type="text"
+                    required
+                    value={formData.nome}
+                    onChange={handleInputChange}
+                    placeholder="Emanuele"
+                    className="block w-full bg-transparent border-b border-gray-800 py-3 text-white focus:outline-none focus:border-red-600 transition-colors placeholder:text-gray-700 text-sm font-light"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label htmlFor="cognome" className="font-syne text-[10px] tracking-widest text-gray-500 uppercase">
+                    Cognome *
+                  </label>
+                  <input
+                    id="cognome"
+                    name="cognome"
+                    type="text"
+                    required
+                    value={formData.cognome}
+                    onChange={handleInputChange}
+                    placeholder="Rossi"
+                    className="block w-full bg-transparent border-b border-gray-800 py-3 text-white focus:outline-none focus:border-red-600 transition-colors placeholder:text-gray-700 text-sm font-light"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-1">
+                  <label htmlFor="data_nascita" className="font-syne text-[10px] tracking-widest text-gray-500 uppercase">
+                    Data di Nascita *
+                  </label>
+                  <input
+                    id="data_nascita"
+                    name="data_nascita"
+                    type="date"
+                    required
+                    value={formData.data_nascita}
+                    onChange={handleInputChange}
+                    className="block w-full bg-transparent border-b border-gray-800 py-3 text-white focus:outline-none focus:border-red-600 transition-colors text-sm font-light appearance-none"
+                    style={{ colorScheme: "dark" }}
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label htmlFor="cap" className="font-syne text-[10px] tracking-widest text-gray-500 uppercase">
+                    CAP *
+                  </label>
+                  <input
+                    id="cap"
+                    name="cap"
+                    type="text"
+                    required
+                    value={formData.cap}
+                    onChange={handleInputChange}
+                    placeholder="10100"
+                    className="block w-full bg-transparent border-b border-gray-800 py-3 text-white focus:outline-none focus:border-red-600 transition-colors placeholder:text-gray-700 text-sm font-light"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-1">
+                  <label htmlFor="email" className="font-syne text-[10px] tracking-widest text-gray-500 uppercase">
+                    Email *
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="nome@esempio.it"
+                    className="block w-full bg-transparent border-b border-gray-800 py-3 text-white focus:outline-none focus:border-red-600 transition-colors placeholder:text-gray-700 text-sm font-light"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label htmlFor="cellulare" className="font-syne text-[10px] tracking-widest text-gray-500 uppercase">
+                    Cellulare (Opzionale)
+                  </label>
+                  <input
+                    id="cellulare"
+                    name="cellulare"
+                    type="tel"
+                    value={formData.cellulare}
+                    onChange={handleInputChange}
+                    placeholder="+39 333 1234567"
+                    className="block w-full bg-transparent border-b border-gray-800 py-3 text-white focus:outline-none focus:border-red-600 transition-colors placeholder:text-gray-700 text-sm font-light"
+                  />
+                </div>
+              </div>
+
+              {/* GDPR Checks */}
+              <div className="space-y-4 pt-4 border-t border-white/[0.02]">
+                <div className="flex items-start gap-4">
+                  <input
+                    id="consenso_privacy"
+                    name="consenso_privacy"
+                    type="checkbox"
+                    required
+                    checked={formData.consenso_privacy}
+                    onChange={handleInputChange}
+                    className="mt-1 w-4 h-4 rounded-sm border-gray-800 bg-transparent text-red-600 focus:ring-red-600 focus:ring-offset-0 cursor-pointer accent-red-600"
+                  />
+                  <label htmlFor="consenso_privacy" className="font-sans text-xs text-gray-400 leading-relaxed cursor-pointer select-none">
+                    Ho letto l&apos;Informativa sulla Privacy e accetto il trattamento dei dati per l&apos;iscrizione alla White List. *
+                  </label>
+                </div>
+                <div className="flex items-start gap-4">
+                  <input
+                    id="consenso_marketing"
+                    name="consenso_marketing"
+                    type="checkbox"
+                    checked={formData.consenso_marketing}
+                    onChange={handleInputChange}
+                    className="mt-1 w-4 h-4 rounded-sm border-gray-800 bg-transparent text-red-600 focus:ring-red-600 focus:ring-offset-0 cursor-pointer accent-red-600"
+                  />
+                  <label htmlFor="consenso_marketing" className="font-sans text-xs text-gray-400 leading-relaxed cursor-pointer select-none">
+                    Voglio ricevere sconti e novità! Accetto di ricevere comunicazioni promozionali via Email o WhatsApp da Black Bulls Lab e partner per eventi e format.
+                  </label>
+                </div>
+              </div>
+
+              {status === "error" && (
+                <div className="text-red-500 font-sans text-xs text-center font-medium bg-red-950/20 border border-red-900/30 py-3 px-4">
+                  {errorMessage}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={status === "submitting"}
+                className="w-full py-5 bg-red-600 hover:bg-white hover:text-red-600 text-white font-bold tracking-[0.25em] uppercase text-xs transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50"
+              >
+                {status === "submitting" ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Elaborazione...
+                  </>
+                ) : (
+                  "Iscriviti E Ricevi Il Tuo Numero"
+                )}
+              </button>
+            </form>
+          )}
         </div>
       </section>
 
-      {/* 4. IMMERSIVE QUOTE INTERSTITIAL */}
-      <section className="h-[60vh] flex items-center justify-center bg-black-pure relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/brand/bg-venue-crowd.webp')] opacity-5 grayscale scale-125 rotate-3" />
-        <div className="container-narrow text-center relative z-10">
-          <p className="reveal-liar font-anton text-3xl md:text-6xl uppercase tracking-tighter leading-tight text-white/80 italic">
-            &quot;In questo gioco, l&apos;unico errore <br /> è credere di avere amici.&quot;
-          </p>
+      {/* 5. FAQ SECTION */}
+      <section className="py-24 md:py-36 px-6 max-w-3xl mx-auto w-full">
+        <h2 className="font-syne text-3xl md:text-5xl font-bold tracking-tight uppercase text-center mb-16 text-white">
+          Domande Frequenti
+        </h2>
+        <div className="space-y-4">
+          {FAQS.map((faq, idx) => {
+            const isOpen = openFaq === idx;
+            return (
+              <div key={idx} className="border-b border-white/[0.04] pb-4">
+                <button
+                  onClick={() => setOpenFaq(isOpen ? null : idx)}
+                  className="w-full flex items-center justify-between py-4 text-left group focus:outline-none"
+                >
+                  <span className="font-syne text-sm md:text-base font-semibold tracking-wider text-gray-300 group-hover:text-white transition-colors uppercase">
+                    {faq.q}
+                  </span>
+                  <ChevronDown
+                    className={`w-5 h-5 text-gray-500 group-hover:text-red-600 transition-transform duration-300 ${
+                      isOpen ? "transform rotate-180 text-red-600" : ""
+                    }`}
+                  />
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    isOpen ? "max-h-40 opacity-100 mt-2" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <p className="font-sans text-sm text-gray-400 leading-relaxed pb-4">
+                    {faq.a}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 
-      {/* 5. THE TARGETS: Darker Tone */}
-      <section className="py-48 px-6 bg-black-pure">
-        <div className="container-max grid grid-cols-1 lg:grid-cols-2 gap-24">
-          <div className="reveal-liar p-16 border border-white/5 bg-white/1 space-y-8">
-            <span className="text-red-600 font-bold text-[10px] uppercase tracking-[0.5em]">Team Building Aziendale</span>
-            <h3 className="font-anton text-5xl uppercase tracking-tighter text-white">Soft skills <br /> sotto pressione.</h3>
-            <p className="font-inter text-white/40 text-lg leading-relaxed">
-              Negoziazione spietata e deduzione logica. Metti alla prova la vera gerarchia del tuo ufficio.
-            </p>
-          </div>
-          <div className="reveal-liar p-16 border border-white/5 bg-white/1 space-y-8">
-            <span className="text-red-600 font-bold text-[10px] uppercase tracking-[0.5em]">Esperienza per Privati</span>
-            <h3 className="font-anton text-5xl uppercase tracking-tighter text-white">Niente sarà <br /> come prima.</h3>
-            <p className="font-inter text-white/40 text-lg leading-relaxed">
-              Scopri chi sono davvero i tuoi amici. Una serata che rimarrà impressa nella memoria collettiva.
-            </p>
-          </div>
+      {/* 6. FOOTER */}
+      <footer className="landing-footer w-full py-16 text-center border-t border-white/[0.03] mt-auto">
+        <p className="font-sans text-[10px] text-gray-500 uppercase tracking-widest mb-4">
+          © {new Date().getFullYear()} Black Bulls Lab. Tutti i diritti riservati.
+        </p>
+        <div className="flex justify-center gap-6">
+          <Link href="/privacy-policy" className="font-sans text-[9px] text-gray-600 hover:text-red-600 transition-colors uppercase tracking-wider">
+            Privacy Policy
+          </Link>
+          <span className="text-gray-800 text-[9px]">/</span>
+          <Link href="/cookie-policy" className="font-sans text-[9px] text-gray-600 hover:text-red-600 transition-colors uppercase tracking-wider">
+            Cookie Policy
+          </Link>
         </div>
-      </section>
+      </footer>
 
-      {/* 6. FINAL ACTION: Maximum Urgency */}
-      <section className="py-64 bg-red-600 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0 bg-[url('/noise.webp')] mix-blend-overlay" />
-        </div>
-        <div className="container-narrow text-center relative z-10 space-y-16">
-          <h2 className="font-anton text-6xl md:text-9xl uppercase tracking-tight leading-[1.15] text-black">
-            Accetta&nbsp;il <br /> <span className="bg-black text-red-600 px-4">Rischio.</span>
-          </h2>
-          <p className="font-syne text-[10px] text-black uppercase tracking-[0.8em] font-black opacity-60">
-            Posti limitati // Sessioni esclusive
-          </p>
-          <div className="pt-8">
-            <Link 
-              href="/calendario"
-              className="inline-flex items-center gap-6 px-16 py-8 bg-black text-red-600 text-xl font-black uppercase tracking-widest hover:bg-white hover:text-black transition-[background-color,color] duration-500 rounded-full shadow-2xl"
-            >
-              RISERVA IL TUO POSTO
-            </Link>
-          </div>
-        </div>
-      </section>
-
-    </main>
+    </div>
   );
 }

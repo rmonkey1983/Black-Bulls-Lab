@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Mohave, Outfit, Rock_Salt, Inter, Syne } from "next/font/google";
+import { Mohave, Rock_Salt, Inter, Syne } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { EntertainmentBusinessSchema, WebSiteSchema } from "@/components/seo/JsonLd";
-// Preloader rimosso per evitare blocchi post-pagamento
 import { MobileStickyBookButton } from "@/components/layout/MobileStickyBookButton";
+import { ClientOnlyWrappers } from "@/components/layout/ClientOnlyWrappers";
 import { WhatsAppWidget } from "@/components/layout/WhatsAppWidget";
 import { BackToTop } from "@/components/layout/BackToTop";
 import { PageTransition } from "@/components/layout/PageTransition";
@@ -17,10 +17,6 @@ const mohave = Mohave({
   subsets: ["latin"],
 });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-});
 
 const inter = Inter({
   variable: "--font-inter",
@@ -100,7 +96,6 @@ export function generateViewport(): Viewport {
   };
 }
 
-import { ClientOnlyWrappers } from "@/components/layout/ClientOnlyWrappers";
 
 export default function RootLayout({
   children,
@@ -125,12 +120,12 @@ export default function RootLayout({
       </head>
       <body
         suppressHydrationWarning
-        className={`${outfit.variable} ${inter.variable} ${mohave.variable} ${rockSalt.variable} ${syne.variable} font-sans antialiased text-white min-h-screen relative selection:bg-accent-gold selection:text-black flex flex-col bg-black-pure`}
+        className={`${inter.variable} ${mohave.variable} ${rockSalt.variable} ${syne.variable} font-sans antialiased text-white min-h-screen relative selection:bg-accent-gold selection:text-black flex flex-col bg-black-pure`}
       >
         <ClientOnlyWrappers />
         <Navbar />
         
-        {/* Skip to main content */}
+        {/* Skip to main content - Accessibilità */}
         <a
           href="#main-content"
           suppressHydrationWarning
@@ -138,9 +133,6 @@ export default function RootLayout({
         >
           Salta al contenuto principale
         </a>
-        
-        {/* Preloader rimosso per garantire fluidità post-pagamento */}
-        
         <main id="main-content" className="grow relative z-10 w-full">
           <PageTransition>
             {children}

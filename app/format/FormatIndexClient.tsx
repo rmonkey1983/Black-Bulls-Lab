@@ -221,7 +221,7 @@ export function FormatIndexClient() {
                     <SectionHeading 
                         title="PRONTO A"
                         highlight="SFIDARE IL SISTEMA?"
-                        subtitle="Your experience starts here"
+                        subtitle="La tua esperienza inizia qui"
                         align="center"
                     />
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
@@ -242,7 +242,7 @@ export function FormatIndexClient() {
             <div className="fixed bottom-12 left-12 z-50 opacity-10 hidden lg:block">
                 <div className="font-syne text-[10px] tracking-[0.4em] uppercase space-y-2">
                     <div>BLACK BULLS LAB / TRN / ITA</div>
-                    <div>ACTIVE PROTOCOLS: {EXPERIMENTS.length}</div>
+                    <div>PROTOCOLLI ATTIVI: {EXPERIMENTS.length}</div>
                 </div>
             </div>
         </main>

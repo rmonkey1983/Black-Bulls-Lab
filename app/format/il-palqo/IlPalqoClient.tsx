@@ -61,7 +61,7 @@ export function IlPalqoClient() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/brand/bg-stage-lights.webp"
-            alt="Il PalQo Live Energy"
+            alt="Energia Live de Il PalQo"
             fill
             sizes="100vw"
             className="object-cover opacity-30 scale-105"
@@ -99,18 +99,18 @@ export function IlPalqoClient() {
             <div className="space-y-12">
                 <div className="flex flex-col items-center gap-6">
                     <span className="reveal-palqo inline-block px-4 py-1 border border-accent-gold/20 text-accent-gold text-[10px] font-bold uppercase tracking-[0.6em] bg-accent-gold/5 backdrop-blur-md">
-                        The Spotlight Changes Everything
+                        I Riflettori Cambiano Tutto
                     </span>
                     <h1 className="palqo-title font-syne font-bold text-[clamp(3rem,10vw,10rem)] leading-[0.85] tracking-tighter uppercase text-text-primary flex flex-col">
-                        <span className="block">Ignite the</span>
-                        <span className="block text-accent-gold italic">Stage.</span>
+                        <span className="block">Accendi il</span>
+                        <span className="block text-accent-gold italic">Palco.</span>
                     </h1>
                 </div>
 
                 <div className="palqo-sub max-w-2xl mx-auto">
                     <p className="font-inter text-lg md:text-2xl text-text-secondary font-light leading-relaxed uppercase tracking-[0.2em] opacity-60">
-                        Talent meets technology. <br />
-                        Every performance leaves a mark. You are the judge.
+                        Il talento incontra la tecnologia. <br />
+                        Ogni performance lascia il segno. Tu sei il giudice.
                     </p>
                 </div>
 
@@ -126,8 +126,8 @@ export function IlPalqoClient() {
         <div className="absolute bottom-12 right-12 hidden lg:block">
             <div className="flex items-center gap-4 text-white/10">
                 <div className="text-right">
-                    <div className="text-[10px] font-bold tracking-[0.4em] uppercase">Digital Voting</div>
-                    <div className="text-[9px] tracking-[0.2em] uppercase opacity-50">Active Protocol</div>
+                    <div className="text-[10px] font-bold tracking-[0.4em] uppercase">Votazione Digitale</div>
+                    <div className="text-[9px] tracking-[0.2em] uppercase opacity-50">Protocollo Attivo</div>
                 </div>
                 <Zap size={24} className="opacity-20" />
             </div>
@@ -157,7 +157,7 @@ export function IlPalqoClient() {
                 <PremiumCard className="h-full">
                     <Image 
                         src="/images/brand/service-performance.webp"
-                        alt="Backstage Tension"
+                        alt="Tensione nel Backstage"
                         fill
                         sizes="(max-width: 1024px) 100vw, 50vw"
                         className="object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-60 transition-[filter,opacity] duration-1000"
@@ -187,9 +187,9 @@ export function IlPalqoClient() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24">
                 {[
-                    { title: "Digital Entry", desc: "Accedi al Sistema. Scopri i talenti della serata. Preparati a decidere.", icon: <Zap size={32} /> },
-                    { title: "The Confrontation", desc: "Performance esplosive. Vota dal tuo tavolo tramite l&apos;App proprietaria.", icon: <Mic2 size={32} /> },
-                    { title: "The Reckoning", desc: "I risultati appaiono a schermo. Premiazione e Aftershow immersivo.", icon: <Users size={32} /> }
+                    { title: "Ingresso Digitale", desc: "Accedi al Sistema. Scopri i talenti della serata. Preparati a decidere.", icon: <Zap size={32} /> },
+                    { title: "Il Confronto", desc: "Performance esplosive. Vota dal tuo tavolo tramite l&apos;App proprietaria.", icon: <Mic2 size={32} /> },
+                    { title: "Il Verdetto", desc: "I risultati appaiono a schermo. Premiazione e Aftershow immersivo.", icon: <Users size={32} /> }
                 ].map((act, i) => (
                     <div key={i} className="group space-y-8 p-12 border border-white/5 bg-white/2 hover:border-accent-gold/20 transition-[border-color,background-color] duration-700">
                         <div className="text-accent-gold opacity-30 group-hover:opacity-100 transition-opacity duration-700">
@@ -237,7 +237,7 @@ export function IlPalqoClient() {
                 <PremiumCard className="h-full">
                     <Image 
                         src="/images/brand/bg-venue-crowd.webp"
-                        alt="Live Crowd Energy"
+                        alt="Energia del Pubblico Live"
                         fill
                         sizes="(max-width: 1024px) 100vw, 50vw"
                         className="object-cover grayscale opacity-20 group-hover:grayscale-0 group-hover:opacity-40 transition-[filter,opacity] duration-1000"
