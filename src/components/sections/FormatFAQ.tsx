@@ -5,6 +5,7 @@ import { ChevronDown } from "lucide-react";
 import { useGSAP } from "@/hooks/useGSAP";
 import { animateFade } from "@/lib/gsapAnimations";
 import { gsap } from "gsap";
+import { buildFAQSchema } from "@/lib/schemas";
 
 const faqs = [
   {
@@ -29,9 +30,19 @@ const faqs = [
   }
 ];
 
-export function FormatFAQ() {
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface FormatFAQProps {
+  items?: FaqItem[];
+}
+
+export function FormatFAQ({ items }: FormatFAQProps) {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+    const displayFaqs = items || faqs;
 
     useGSAP(() => {
         // Anima il titolo
@@ -44,8 +55,14 @@ export function FormatFAQ() {
         setActiveIndex(activeIndex === index ? null : index);
     };
 
+    const faqSchema = buildFAQSchema(displayFaqs.map((faq) => ({ q: faq.question, a: faq.answer })));
+
     return (
         <section ref={containerRef} className="py-24 px-6 bg-transparent relative overflow-hidden">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: faqSchema }}
+            />
             <div className="max-w-4xl mx-auto">
                 <div id="faq-title-container" className="text-center mb-16 gsap-fade">
                     <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 uppercase tracking-tighter">
@@ -55,7 +72,7 @@ export function FormatFAQ() {
                 </div>
 
                 <div id="faq-list" className="space-y-4">
-                    {faqs.map((faq, index) => {
+                    {displayFaqs.map((faq, index) => {
                         const isActive = activeIndex === index;
                         return (
                             <div 
@@ -64,7 +81,7 @@ export function FormatFAQ() {
                             >
                                 <button
                                     onClick={() => toggleFaq(index)}
-                                    className="w-full py-6 px-8 flex items-center justify-between text-left group"
+                                    className="w-full py-4 px-4 md:py-6 md:px-8 flex items-center justify-between text-left group"
                                     aria-expanded={isActive}
                                 >
                                     <span className={`text-lg md:text-xl font-bold uppercase tracking-tight transition-colors duration-300 ${isActive ? 'text-rama-accent' : 'text-white'}`}>
@@ -76,7 +93,7 @@ export function FormatFAQ() {
                                 </button>
                                 
                                 <FaqContent isOpen={isActive}>
-                                    <div className="px-8 pb-8 text-gray-400 text-lg leading-relaxed border-t border-white/5 pt-4">
+                                    <div className="px-4 pb-6 pt-4 md:px-8 md:pb-8 md:pt-4 text-gray-400 text-base md:text-lg leading-relaxed border-t border-white/5">
                                         {faq.answer}
                                     </div>
                                 </FaqContent>
@@ -103,7 +120,7 @@ function FaqContent({ isOpen, children }: { isOpen: boolean; children: React.Rea
                     opacity: 1, 
                     duration: 0.5, 
                     ease: "power3.out",
-                    clearProps: "opacity" // Permette al contenuto di essere visibile se ridimensionato
+                    clearProps: "height,opacity" // Permette al contenuto di essere visibile se ridimensionato
                 }
             );
         } else {
@@ -117,7 +134,10 @@ function FaqContent({ isOpen, children }: { isOpen: boolean; children: React.Rea
     }, { dependencies: [isOpen] });
 
     return (
-        <div ref={contentRef} className="overflow-hidden h-0 opacity-0">
+        <div 
+            ref={contentRef} 
+            className={`overflow-hidden ${isOpen ? "h-auto opacity-100" : "h-0 opacity-0"}`}
+        >
             {children}
         </div>
     );

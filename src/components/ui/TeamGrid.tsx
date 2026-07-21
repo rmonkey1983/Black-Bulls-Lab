@@ -61,6 +61,7 @@ export function TeamGrid() {
                         src={member.imageUrl} 
                         alt={member.name} 
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="julian_silhouette julian-silhouette object-cover opacity-70 transition duration-500 group-hover:scale-105 group-hover:opacity-100" 
                     />
                     <div className="absolute inset-x-0 bottom-0 h-[30%] bg-linear-to-t from-black via-black/40 to-transparent" />

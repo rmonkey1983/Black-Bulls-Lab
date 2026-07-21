@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
+import Image from 'next/image';
 import { saveEventAction } from './actions';
 import { useRouter } from 'next/navigation';
 
@@ -107,84 +108,91 @@ export default function EventsFormClient({ eventToEdit }: { eventToEdit: any }) 
         
         <div className="space-y-4">
           <div>
-            <label className="data-readout text-[10px] text-green/40 uppercase tracking-[0.2em] block mb-2">Media Immersivo</label>
+          <label htmlFor="image_file" className="data-readout text-[10px] text-green/40 uppercase tracking-[0.2em] block mb-2">Media Immersivo</label>
             {eventToEdit?.image && (
-              <div className="mb-4 relative rounded-lg overflow-hidden border border-green/20">
-                <img 
+              <div className="mb-4 relative rounded-lg overflow-hidden border border-green/20 h-32">
+                <Image 
                   src={eventToEdit.image} 
-                  alt="Preview" 
-                  className="w-full h-32 object-cover grayscale opacity-60"
+                  alt="Preview evento" 
+                  fill
+                  className="object-cover grayscale opacity-60"
                 />
               </div>
             )}
             <input 
+              id="image_file"
               type="file" 
               name="image_file" 
               accept="image/*"
-              className="w-full bg-lab-dark/50 border border-green/10 rounded-lg px-4 py-3 text-[10px] text-zinc-500 file:mr-4 file:py-1.5 file:px-4 file:rounded-full file:border-0 file:text-[9px] file:font-black file:uppercase file:bg-green file:text-black hover:file:bg-white transition cursor-pointer"
+              className="w-full bg-lab-dark/50 border border-green/10 rounded-lg px-4 py-3 text-[10px] text-zinc-500 file:mr-4 file:py-1.5 file:px-4 file:rounded-full file:border-0 file:text-[9px] file:font-black file:uppercase file:bg-green file:text-black hover:file:bg-white transition-colors cursor-pointer"
             />
           </div>
 
           <div className="grid grid-cols-1 gap-6">
             <div>
-              <label className="data-readout text-[10px] text-green/40 uppercase tracking-[0.2em] block mb-2">Identificativo / Location</label>
+              <label htmlFor="location_name" className="data-readout text-[10px] text-green/40 uppercase tracking-[0.2em] block mb-2">Identificativo / Location</label>
               <input 
+                id="location_name"
                 type="text" 
                 name="location_name" 
                 required 
                 defaultValue={eventToEdit?.location_name || ''}
-                placeholder="Es. Lab #01 - Torino" 
-                className="w-full bg-lab-dark/50 border border-green/10 rounded-lg px-4 py-3 text-sm text-white focus:border-green focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 transition placeholder:text-zinc-700 font-sans"
+                placeholder="Es. Lab #01 - Torino…" 
+                className="w-full bg-lab-dark/50 border border-green/10 rounded-lg px-4 py-3 text-sm text-white focus:border-green focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 transition-colors placeholder:text-zinc-700 font-sans"
               />
             </div>
             
             <div>
-              <label className="data-readout text-[10px] text-green/40 uppercase tracking-[0.2em] block mb-2">Coordinate Geografiche</label>
+              <label htmlFor="location_address" className="data-readout text-[10px] text-green/40 uppercase tracking-[0.2em] block mb-2">Coordinate Geografiche</label>
               <input 
+                id="location_address"
                 type="text" 
                 name="location_address" 
                 required 
                 defaultValue={eventToEdit?.location_address || ''}
-                placeholder="Es. Corso Regina Margherita, 1" 
-                className="w-full bg-lab-dark/50 border border-green/10 rounded-lg px-4 py-3 text-sm text-white focus:border-green focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 transition placeholder:text-zinc-700 font-sans"
+                placeholder="Es. Corso Regina Margherita, 1…" 
+                className="w-full bg-lab-dark/50 border border-green/10 rounded-lg px-4 py-3 text-sm text-white focus:border-green focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 transition-colors placeholder:text-zinc-700 font-sans"
               />
             </div>
           </div>
 
           <div>
-            <label className="data-readout text-[10px] text-green/40 uppercase tracking-[0.2em] block mb-2">Dettagli Esperimento</label>
+            <label htmlFor="description" className="data-readout text-[10px] text-green/40 uppercase tracking-[0.2em] block mb-2">Dettagli Esperimento</label>
             <textarea 
+              id="description"
               name="description" 
               rows={3}
               defaultValue={eventToEdit?.description || ''}
-              placeholder="Briefing dell'evento..." 
-              className="w-full bg-lab-dark/50 border border-green/10 rounded-lg px-4 py-3 text-sm text-white focus:border-green focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 transition resize-none placeholder:text-zinc-700 font-sans"
+              placeholder="Briefing dell'evento…" 
+              className="w-full bg-lab-dark/50 border border-green/10 rounded-lg px-4 py-3 text-sm text-white focus:border-green focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 transition-colors resize-none placeholder:text-zinc-700 font-sans"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="data-readout text-[10px] text-green/40 uppercase tracking-[0.2em] block mb-2">Time Stamp</label>
+              <label htmlFor="event_date" className="data-readout text-[10px] text-green/40 uppercase tracking-[0.2em] block mb-2">Time Stamp</label>
               <input 
+                id="event_date"
                 type="datetime-local" 
                 name="event_date" 
                 required 
                 defaultValue={eventToEdit?.event_date || ''}
-                className="w-full bg-lab-dark/50 border border-green/10 rounded-lg px-4 py-3 text-xs focus:border-green focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 transition text-white"
+                className="w-full bg-lab-dark/50 border border-green/10 rounded-lg px-4 py-3 text-xs focus:border-green focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 transition-colors text-white"
                 style={{ colorScheme: 'dark' }}
               />
             </div>
 
             <div>
-              <label className="data-readout text-[10px] text-green/40 uppercase tracking-[0.2em] block mb-2">Unit Capacity</label>
+              <label htmlFor="slots" className="data-readout text-[10px] text-green/40 uppercase tracking-[0.2em] block mb-2">Unit Capacity</label>
               <input 
+                id="slots"
                 type="number" 
                 name="slots" 
                 required 
                 min="1"
                 defaultValue={eventToEdit?.total_slots || ''}
-                placeholder="30" 
-                className="w-full bg-lab-dark/50 border border-green/10 rounded-lg px-4 py-3 text-sm text-white focus:border-green focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 transition"
+                placeholder="30…" 
+                className="w-full bg-lab-dark/50 border border-green/10 rounded-lg px-4 py-3 text-sm text-white focus:border-green focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 transition-colors"
               />
             </div>
           </div>
@@ -193,7 +201,7 @@ export default function EventsFormClient({ eventToEdit }: { eventToEdit: any }) 
         <button 
           type="submit" 
           disabled={submitting}
-          className="w-full bg-green text-black text-xs font-black uppercase tracking-[0.3em] py-5 rounded-lg mt-8 hover:bg-white transition transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className="w-full bg-green text-black text-xs font-black uppercase tracking-[0.3em] py-5 rounded-lg mt-8 hover:bg-white transition-[background-color] transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {submitting ? (
             <>

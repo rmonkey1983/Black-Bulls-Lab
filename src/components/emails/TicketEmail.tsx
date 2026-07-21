@@ -21,7 +21,7 @@ export const TicketEmail: React.FC<Readonly<TicketEmailProps>> = ({
       <p>📅 <strong>Data:</strong> {eventDate}</p>
       <p>🎟️ <strong>Biglietti:</strong> {ticketCount}</p>
     </div>
-    <p>Puoi visualizzare i tuoi QR Code d'ingresso cliccando sul pulsante qui sotto:</p>
+    <p>Puoi visualizzare i tuoi QR Code d&apos;ingresso cliccando sul pulsante qui sotto:</p>
     <a href={successUrl} style={{ background: '#FFD700', color: '#000', padding: '12px 24px', textDecoration: 'none', fontWeight: 'bold', borderRadius: '5px' }}>
       VISUALIZZA BIGLIETTI
     </a>

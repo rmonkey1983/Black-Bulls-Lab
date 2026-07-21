@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { PreFooterCTA } from "@/components/layout/PreFooterCTA";
 import { SITE_URL } from "@/lib/constants";
 import { MDXComponentsProps } from "@/types/mdx";
+import { buildArticleSchema } from "@/lib/schemas";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -132,24 +133,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: post.title,
-            description: post.description,
-            image: `${SITE_URL}${post.coverImage}`,
-            author: {
-              "@type": "Person",
-              "name": post.author,
-            },
-            publisher: {
-              "@type": "Organization",
-              "name": "Black Bulls Lab",
-              "url": SITE_URL,
-            },
-            datePublished: post.date,
-            url: `${SITE_URL}/blog/${post.slug}`,
-          }),
+          __html: buildArticleSchema(post.title, post.author, post.date, post.content),
         }}
       />
       <div className="max-w-7xl mx-auto px-6">
@@ -200,6 +184,32 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
           </div>
         </header>
+
+        {/* Author Byline Section */}
+        {post.author.toLowerCase() === "julian halili" && (
+          <div className="max-w-2xl mx-auto mb-16 p-6 border border-white/5 bg-[#0A0A0A] rounded-xl flex flex-col sm:flex-row items-center gap-6 text-left">
+            <div className="w-16 h-16 rounded-full border border-accent-gold/20 flex items-center justify-center bg-accent-gold/5 shrink-0">
+              <span className="font-heading text-lg font-bold text-accent-gold">JH</span>
+            </div>
+            <div className="space-y-2">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                <span className="font-syne font-bold uppercase text-white tracking-wider text-sm">Julian Halili</span>
+                <span className="text-[9px] text-accent-gold uppercase font-bold tracking-widest bg-accent-gold/5 px-2 py-0.5 border border-accent-gold/20 self-start sm:self-auto">Founder, BBL</span>
+              </div>
+              <p className="font-inter text-xs text-zinc-400 leading-relaxed">
+                Julian Halili è il fondatore di Black Bulls Lab. Con la passione per l&apos;innovazione digitale e l&apos;intrattenimento interattivo, progetta dinner show e format immersivi unici a Torino, unendo tecnologia e game design per ridefinire lo spettacolo dal vivo.
+              </p>
+              <a 
+                href="https://instagram.com/blackbullslab" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-block font-syne text-[10px] text-accent-gold uppercase tracking-widest hover:text-white transition-colors mt-1"
+              >
+                Segui su Instagram →
+              </a>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Cover Image */}

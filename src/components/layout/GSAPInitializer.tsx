@@ -1,43 +1,16 @@
 "use client";
 
 import { useEffect } from "react";
-import { usePathname } from "next/navigation";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap";
 
+gsap.registerPlugin(ScrollTrigger);
+
 /**
  * GSAPInitializer — Handles ScrollTrigger lifecycle in the Next.js App Router.
- * This component ensures triggers are killed and refreshed correctly on navigation.
+ * This component ensures triggers are refreshed correctly on window events.
  */
 export function GSAPInitializer() {
-    const pathname = usePathname();
-
-    useEffect(() => {
-        // Find all sections marked for reveal
-        const sections = document.querySelectorAll('.reveal-section');
-        
-        sections.forEach(section => {
-          gsap.fromTo(section, 
-            { opacity: 0, y: 30 },
-            {
-              opacity: 1, 
-              y: 0, 
-              duration: 1.2, 
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: section,
-                start: "top 85%",
-                toggleActions: "play none none none"
-              }
-            }
-          );
-        });
-
-        return () => {
-          ScrollTrigger.getAll().forEach(st => st.kill());
-        };
-    }, [pathname]);
-
     useEffect(() => {
         const handleLoad = () => ScrollTrigger.refresh();
         window.addEventListener('load', handleLoad);
@@ -51,3 +24,4 @@ export function GSAPInitializer() {
 
     return null;
 }
+

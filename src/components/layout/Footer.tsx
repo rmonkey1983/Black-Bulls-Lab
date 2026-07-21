@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 const WA_NUMBER = "393342010067";
 const WA_MSG    = encodeURIComponent("Ciao! Vorrei informazioni su un evento con Black Bulls Lab");
 
 export default function Footer() {
-  const year = new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-black-pure border-t border-white/5 py-24">
@@ -30,7 +31,7 @@ export default function Footer() {
             <div className="space-y-2">
               <p className="font-syne text-[9px] uppercase tracking-[0.3em] text-text-secondary opacity-60">Sede Creativa: Torino, Italia</p>
               <p className="font-syne text-[9px] uppercase tracking-[0.3em] text-text-secondary/40" suppressHydrationWarning>
-                © {year} Black Bulls Lab. All Rights Reserved.
+                © {currentYear} Black Bulls Lab. Tutti i diritti riservati.
               </p>
             </div>
           </div>
@@ -101,10 +102,19 @@ export default function Footer() {
         </div>
 
         <div className="mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="font-syne text-[9px] uppercase tracking-[0.4em] text-text-secondary/40">System Status: Online // Entertainment Laboratory</p>
+          <p className="font-syne text-[9px] uppercase tracking-[0.4em] text-text-secondary/40">Stato del Sistema: Online // Laboratorio di Intrattenimento</p>
           <div className="flex gap-8">
             <Link href="/privacy-policy" className="font-syne text-[9px] uppercase tracking-[0.2em] text-text-secondary/40 hover:text-text-primary transition-colors">Privacy</Link>
             <Link href="/cookie-policy" className="font-syne text-[9px] uppercase tracking-[0.2em] text-text-secondary/40 hover:text-text-primary transition-colors">Cookies</Link>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                window.dispatchEvent(new Event("open-cookie-banner"));
+              }}
+              className="font-syne text-[9px] uppercase tracking-[0.2em] text-text-secondary/40 hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none p-0 focus:outline-none"
+            >
+              Preferenze Cookie
+            </button>
           </div>
         </div>
       </div>

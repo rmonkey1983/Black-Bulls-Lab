@@ -32,7 +32,7 @@ export function PrimaryButton({
   };
 
   const classes = cn(
-    "inline-flex items-center justify-center gap-3 font-syne font-bold uppercase tracking-[0.3em] transition-all duration-700 relative group/btn",
+    "inline-flex items-center justify-center gap-3 font-syne font-bold uppercase tracking-[0.3em] transition-[background-color,color,border-color,box-shadow] duration-700 relative group/btn",
     "bg-accent-gold text-black-pure border-none",
     "hover:bg-text-primary",
     "active:scale-95",

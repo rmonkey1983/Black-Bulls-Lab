@@ -61,13 +61,14 @@ export function FormatIndexClient() {
     return (
         <main ref={containerRef} className="bg-black-pure text-text-primary min-h-screen selection:bg-accent-gold selection:text-black-pure overflow-x-hidden">
             {/* 1. HERO SECTION */}
-            <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden border-b border-white/5">
+            <section className="relative h-[70vh] min-h-125 flex items-center justify-center overflow-hidden border-b border-white/5">
                 {/* Background Layer */}
                 <div className="absolute inset-0 z-0 overflow-hidden">
                     <Image
                         src="/images/brand/bg-hero-wide.webp"
                         alt="Formats Background"
                         fill
+                        sizes="100vw"
                         className="object-cover opacity-20 scale-105"
                         priority
                     />
@@ -75,7 +76,7 @@ export function FormatIndexClient() {
                     {/* Spotlight Effect */}
                     <div 
                         ref={spotlightRef}
-                        className="absolute top-0 left-0 w-[800px] h-[800px] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 hidden lg:block"
+                        className="absolute top-0 left-0 w-200 h-200 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 hidden lg:block"
                         style={{
                             background: 'radial-gradient(circle, rgba(200, 169, 107, 0.05) 0%, transparent 70%)',
                             filter: 'blur(80px)'
@@ -89,10 +90,10 @@ export function FormatIndexClient() {
                 </div>
 
                 <div className="relative z-30 container-max px-6">
-                    <div className="mb-12">
+                    <div className="mb-6 md:mb-12">
                         <Link
                             href="/"
-                            className="inline-flex items-center gap-3 text-text-secondary/40 hover:text-accent-gold transition-all group uppercase text-[10px] font-bold tracking-[0.4em] mb-12"
+                            className="inline-flex items-center gap-3 text-text-secondary/40 hover:text-accent-gold transition-colors group uppercase text-[10px] font-bold tracking-[0.4em] mb-12"
                         >
                             <ArrowLeft size={14} className="group-hover:-translate-x-2 transition-transform" /> 
                             TORNA ALLA HOME
@@ -109,8 +110,8 @@ export function FormatIndexClient() {
                             </span>
                         </h1>
                         <p className="format-hero-sub mt-8 font-inter text-text-secondary text-sm md:text-xl leading-relaxed tracking-[0.2em] uppercase opacity-70 max-w-2xl">
-                            Dall&apos;ingegneria emotiva alla tua serata. <br className="hidden md:block" />
-                            Quattro universi narrativi pronti per essere vissuti.
+                            Dall'ingegneria emotiva alla tua serata. <br className="hidden md:block" />
+                            Quattro universi narrativi interattivi pronti da vivere.
                         </p>
                     </div>
                 </div>
@@ -123,11 +124,11 @@ export function FormatIndexClient() {
             {/* 2. FORMATS LIST - Editorial Layout */}
             <section className="section-padding-huge bg-black-pure relative">
                 <div className="container-max">
-                    <div className="formats-list space-y-32 lg:space-y-64">
+                    <div className="formats-list space-y-16 md:space-y-24 lg:space-y-40">
                         {EXPERIMENTS.map((format, index) => (
                             <div 
                                 key={format.id} 
-                                className={`format-item reveal-section grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center ${
+                                className={`format-item reveal-section grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-24 items-center ${
                                     index % 2 !== 0 ? 'lg:flex-row-reverse' : ''
                                 }`}
                             >
@@ -140,16 +141,17 @@ export function FormatIndexClient() {
                                             src={format.image}
                                             alt={format.name}
                                             fill
-                                            className="object-cover grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-1000 group-hover:scale-105"
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw"
+                                            className="object-cover grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-60 transition-[filter,opacity,transform] duration-1000 group-hover:scale-105"
                                         />
                                         <div className="absolute inset-0 bg-linear-to-t from-black-pure via-transparent to-transparent opacity-80" />
                                         
                                         {/* Floating Tech Index */}
-                                        <div className="absolute -top-10 -left-10 text-white/5 font-syne text-[10rem] lg:text-[15rem] font-bold leading-none select-none pointer-events-none">
+                                        <div className="absolute -top-6 -left-4 md:-top-10 md:-left-10 text-white/5 font-syne text-[6rem] md:text-[10rem] lg:text-[15rem] font-bold leading-none select-none pointer-events-none">
                                             {String(index + 1).padStart(2, '0')}
                                         </div>
 
-                                        <div className="absolute bottom-12 left-12 right-12 flex justify-between items-end">
+                                        <div className="absolute bottom-6 left-6 right-6 md:bottom-12 md:left-12 md:right-12 flex justify-between items-end">
                                             <div className="space-y-4">
                                                 <span className="font-syne text-[10px] text-accent-gold tracking-[0.5em] uppercase border-b border-accent-gold/20 pb-2">
                                                     {format.badge}
@@ -160,7 +162,7 @@ export function FormatIndexClient() {
                                             </div>
                                             <div className="hidden md:block">
                                                 <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-accent-gold/40 transition-colors duration-500">
-                                                    <ArrowRight size={20} className="text-white/40 group-hover:text-accent-gold group-hover:translate-x-1 transition-all" />
+                                                    <ArrowRight size={20} className="text-white/40 group-hover:text-accent-gold group-hover:translate-x-1 transition-[color,transform]" />
                                                 </div>
                                             </div>
                                         </div>
@@ -196,7 +198,7 @@ export function FormatIndexClient() {
                                     </div>
 
                                     <div className={`pt-12 flex flex-col sm:flex-row items-center gap-6 ${index % 2 !== 0 ? 'lg:justify-end' : ''}`}>
-                                        <PrimaryButton href={format.href} className="w-full sm:w-auto min-w-[200px]">
+                                        <PrimaryButton href={format.href} className="w-full sm:w-auto min-w-50">
                                             VIVI IL FORMAT
                                         </PrimaryButton>
                                         <Link 
@@ -219,11 +221,11 @@ export function FormatIndexClient() {
                     <SectionHeading 
                         title="PRONTO A"
                         highlight="SFIDARE IL SISTEMA?"
-                        subtitle="Your experience starts here"
+                        subtitle="La tua esperienza inizia qui"
                         align="center"
                     />
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
-                        <PrimaryButton href="/calendario" size="lg" className="w-full sm:w-auto min-w-[280px]">
+                        <PrimaryButton href="/calendario" size="lg" className="w-full sm:w-auto min-w-70">
                             VEDI CALENDARIO
                         </PrimaryButton>
                         <Link 
@@ -240,7 +242,7 @@ export function FormatIndexClient() {
             <div className="fixed bottom-12 left-12 z-50 opacity-10 hidden lg:block">
                 <div className="font-syne text-[10px] tracking-[0.4em] uppercase space-y-2">
                     <div>BLACK BULLS LAB / TRN / ITA</div>
-                    <div>ACTIVE PROTOCOLS: {EXPERIMENTS.length}</div>
+                    <div>PROTOCOLLI ATTIVI: {EXPERIMENTS.length}</div>
                 </div>
             </div>
         </main>

@@ -234,6 +234,21 @@ export function getFormatServiceJsonLd({
   };
 }
 
+export function getCustomFaqJsonLd(items: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map(item => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+}
+
 // ─── 4. UTILIZZO in layout.tsx / page.tsx ─────────────────────────────────────
 /*
   // In app/page.tsx (homepage):

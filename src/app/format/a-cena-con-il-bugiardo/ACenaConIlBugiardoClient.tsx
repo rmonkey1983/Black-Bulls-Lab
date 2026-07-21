@@ -3,25 +3,22 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Search, Smartphone, CheckCircle2, AlertTriangle, Building2, PartyPopper, Zap, ArrowLeft } from "lucide-react";
+import { Users, Smartphone, Search, ShieldAlert, ArrowLeft, Zap, Play, ArrowRight } from "lucide-react";
 import { gsap } from "gsap";
 import { useGSAP } from "@/hooks/useGSAP";
-import { animateHeroText, animateFade, animateCards } from "@/lib/gsapAnimations";
-import { FormatQuickInfo } from "@/components/events/FormatQuickInfo";
-import { Anton } from "next/font/google";
-
-const anton = Anton({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-anton",
-});
+import { useCinematic } from "@/hooks/useCinematic";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PrimaryButton } from "@/components/ui/PrimaryButton";
+import { PremiumCard } from "@/components/ui/PremiumCard";
+import { buildWAUrl, WA_MESSAGES } from "@/lib/whatsapp";
 
 export function ACenaConIlBugiardoClient() {
   const containerRef = useRef<HTMLDivElement>(null);
   const spotlightRef = useRef<HTMLDivElement>(null);
+  const { revealOnScroll } = useCinematic();
 
   useGSAP(() => {
-    // Spotlight movement
+    // Spotlight movement - Intense crimson spotlight for tension
     const handleMouseMove = (e: MouseEvent) => {
       if (!spotlightRef.current) return;
       gsap.to(spotlightRef.current, {
@@ -35,7 +32,7 @@ export function ACenaConIlBugiardoClient() {
 
     // Cinematic Reveal
     const tl = gsap.timeline();
-    tl.from(".liar-title span", {
+    tl.from(".bugiardo-title span", {
       y: 100,
       opacity: 0,
       filter: "blur(20px)",
@@ -43,220 +40,233 @@ export function ACenaConIlBugiardoClient() {
       duration: 2,
       ease: "expo.out"
     })
-    .from(".liar-quote", {
+    .from(".bugiardo-sub", {
       opacity: 0,
-      x: -30,
+      y: 20,
       duration: 1.5,
       ease: "power2.out"
     }, "-=1");
 
-    const revealItems = gsap.utils.toArray(".reveal-liar");
-    revealItems.forEach((item: any) => {
-      gsap.from(item, {
-        opacity: 0,
-        y: 50,
-        filter: "blur(10px)",
-        duration: 1.5,
-        scrollTrigger: {
-          trigger: item,
-          start: "top 85%",
-          toggleActions: "play none none reverse"
-        }
-      });
-    });
-
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, { scope: containerRef });
 
+  revealOnScroll(".reveal-bugiardo");
+
   return (
-    <main ref={containerRef} className={`${anton.variable} min-h-screen bg-black-pure text-white font-sans selection:bg-red-600 selection:text-white overflow-x-hidden`}>
+    <main ref={containerRef} className="bg-black-pure text-text-primary min-h-screen selection:bg-accent-gold selection:text-black-pure overflow-x-hidden">
       
-      {/* 1. CINEMATIC HERO: The Thriller Entry */}
+      {/* 1. CINEMATIC HERO */}
       <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
         {/* Background Layer */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/brand/background.webp"
-            alt="The Liar Universe"
+            src="/images/brand/bg-hero-wide.webp"
+            alt="A Cena Con Il Bugiardo"
             fill
-            className="object-cover opacity-20 scale-110"
+            sizes="100vw"
+            className="object-cover opacity-25 contrast-125 scale-105"
             priority
           />
           
-          {/* Red Spotlight Effect */}
+          {/* Spotlight Effect */}
           <div 
             ref={spotlightRef}
-            className="absolute top-0 left-0 w-[600px] h-[600px] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 opacity-40"
+            className="absolute top-0 left-0 w-200 h-200 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 opacity-30"
             style={{
-              background: 'radial-gradient(circle, rgba(220, 38, 38, 0.15) 0%, transparent 70%)',
-              filter: 'blur(60px)'
+              background: 'radial-gradient(circle, rgba(200, 169, 107, 0.1) 0%, transparent 70%)',
+              filter: 'blur(80px)'
             }}
           />
 
           {/* Cinematic Overlays */}
           <div className="absolute inset-0 bg-linear-to-b from-black-pure/90 via-transparent to-black-pure z-10" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)] z-10" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.9)_100%)] z-10" />
           <div className="absolute inset-0 opacity-[0.05] bg-[url('/noise.webp')] mix-blend-overlay z-20" />
         </div>
 
-        {/* Back Link */}
-        <div className="absolute top-12 left-12 z-50">
-            <Link
-                href="/format"
-                className="group flex items-center gap-4 text-white/30 hover:text-red-600 transition-all uppercase text-[10px] font-bold tracking-[0.5em]"
-            >
-                <ArrowLeft size={14} className="group-hover:-translate-x-2 transition-transform" /> 
-                Esci dal Sistema
-            </Link>
+        {/* Navigation Link */}
+        <div className="absolute top-28 left-6 lg:top-12 lg:left-12 z-50">
+          <Link
+            href="/format"
+            className="group flex items-center gap-4 text-text-secondary/30 hover:text-accent-gold transition-colors uppercase text-[10px] font-bold tracking-[0.5em]"
+          >
+            <ArrowLeft size={14} className="group-hover:-translate-x-2 transition-transform" /> 
+            Archivio Format
+          </Link>
         </div>
 
         <div className="relative z-30 container-max px-6 text-center">
-            <div className="space-y-12">
-                <div className="flex flex-col items-center gap-6">
-                    <span className="reveal-liar inline-block px-4 py-1 border border-red-600/30 text-red-600 text-[10px] font-bold uppercase tracking-[0.6em] bg-red-600/5 backdrop-blur-md">
-                        Protocol: Social Deception
-                    </span>
-                    <h1 className="liar-title font-anton text-[clamp(3rem,12vw,12rem)] leading-[0.8] tracking-tighter uppercase text-white flex flex-col">
-                        <span className="block">Nessuno è</span>
-                        <span className="block text-red-600 italic">Innocente.</span>
-                    </h1>
-                </div>
-
-                <div className="liar-quote max-w-2xl mx-auto border-l border-red-600/30 pl-8 text-left">
-                    <p className="font-inter text-xl md:text-2xl text-white/60 font-light leading-relaxed italic">
-                        &quot;La verità non è ciò che accade, ma ciò che riesci a far credere agli altri.&quot;
-                    </p>
-                </div>
-
-                <div className="pt-12">
-                    <Link 
-                      href="/calendario"
-                      className="group relative inline-flex items-center gap-6 px-12 py-6 bg-red-600 text-white text-sm font-bold uppercase tracking-[0.4em] hover:bg-white hover:text-red-600 transition-all duration-700 overflow-hidden"
-                    >
-                      <span className="relative z-10">Inizia la Sfida</span>
-                      <Zap size={18} className="relative z-10 group-hover:animate-pulse" />
-                      <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-700" />
-                    </Link>
-                </div>
+          <div className="space-y-12">
+            <div className="flex flex-col items-center gap-6">
+              <span className="inline-block px-5 py-2 border border-accent-gold/20 text-accent-gold text-[10px] font-bold uppercase tracking-[0.6em] bg-accent-gold/5 backdrop-blur-md">
+                Dinner Show Immersivo // Social Deduction
+              </span>
             </div>
-        </div>
 
-        {/* Framing Decor */}
-        <div className="absolute bottom-12 left-12 w-32 h-px bg-white/5" />
-        <div className="absolute bottom-12 left-12 w-px h-32 bg-white/5" />
-        <div className="absolute top-12 right-12 text-[10px] text-white/10 tracking-[0.5em] uppercase vertical-text">
-            Active Session: 004 // TRN_LAB
-        </div>
-      </section>
+            <h1 className="bugiardo-title font-syne font-bold text-[clamp(2.8rem,7.5vw,7.5rem)] leading-[0.9] tracking-tighter uppercase text-text-primary flex flex-col items-center">
+              <span>A Cena Con Il</span>
+              <span className="text-accent-gold italic">Bugiardo.</span>
+            </h1>
 
-      {/* 2. THE PSYCHOLOGICAL HOOK */}
-      <section className="py-48 px-6 bg-black-pure relative">
-        <div className="container-narrow text-center space-y-16">
-          <div className="reveal-liar space-y-8">
-            <h2 className="font-anton text-4xl md:text-7xl uppercase tracking-tighter leading-none">
-              Il tuo smartphone <br /> è <span className="text-red-600">la tua unica arma.</span>
-            </h2>
-            <div className="w-20 h-px bg-red-600 mx-auto opacity-30" />
-            <p className="font-inter text-lg md:text-xl text-white/40 leading-relaxed max-w-2xl mx-auto">
-              Niente attori. Niente copioni. Solo tu, il tuo network e il Sistema che monitora ogni tua mossa. Chi sceglierai di tradire stasera?
+            <p className="bugiardo-sub font-inter text-text-secondary text-sm md:text-xl leading-relaxed tracking-[0.2em] uppercase opacity-75 max-w-3xl mx-auto">
+              Per due ore... nessuno dirà la verità. <br className="hidden md:block" />
+              Un esperimento di psicologia sociale, inganno e complicità al tavolo.
             </p>
+
+            <div className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-6">
+              <PrimaryButton href="/calendario" size="lg" className="w-full sm:w-auto min-w-70">
+                PRENOTA IL TUO TAVOLO
+              </PrimaryButton>
+              <a
+                href={buildWAUrl(WA_MESSAGES.bugiardo)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto py-5 px-10 border border-white/10 text-white font-syne text-[10px] font-bold tracking-[0.3em] uppercase hover:border-accent-gold hover:text-accent-gold transition-all duration-500 bg-white/2 backdrop-blur-md text-center cursor-pointer"
+              >
+                RICHIEDI INFO EVENTO
+              </a>
+            </div>
           </div>
         </div>
+
+        {/* Ambient Corner specs */}
+        <div className="absolute bottom-12 left-12 hidden lg:block">
+          <p className="font-syne text-[9px] text-text-secondary/20 uppercase tracking-[0.5em]">
+            Format Code // BBL-BUG-001
+          </p>
+        </div>
+        <div className="absolute bottom-12 right-12 hidden lg:block">
+          <p className="font-syne text-[9px] text-accent-gold/40 uppercase tracking-[0.5em]">
+            Status // Live Experience
+          </p>
+        </div>
       </section>
 
-      {/* 3. RULES OF THE GAME: Dramatic Grid */}
-      <section className="py-48 bg-black-pure border-y border-white/5">
-        <div className="container-max px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      {/* 2. THE MECHANICS */}
+      <section className="reveal-bugiardo section-padding-huge bg-black-pure relative border-t border-white/5">
+        <div className="container-max space-y-24">
+          <SectionHeading
+            title="NESSUN ATTORE."
+            highlight="PROTAGONISTI SIETE VOI."
+            subtitle="Le Regole del Gioco"
+            align="center"
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                id: "01",
-                title: "Infiltrati",
-                desc: "Accedi al Sistema. Ricevi il tuo ruolo segreto. Sei la preda o il predatore?",
-                icon: <Smartphone size={32} />
+                num: "01",
+                title: "Siediti a Tavola",
+                desc: "Gruppi da 20-30 persone, amici e sconosciuti, seduti insieme per un'esperienza gastronomica e sociale unica.",
+                icon: Users
               },
               {
-                id: "02",
-                title: "Manipola",
-                desc: "Usa gli indizi per seminare il dubbio. Baratta segreti per sopravvivere al tavolo.",
-                icon: <Zap size={32} />
+                num: "02",
+                title: "Ricevi Dossier",
+                desc: "Accedi alle tue istruzioni riservate dal tuo smartphone. Nessun download necessario, basta inquadrare il QR Code.",
+                icon: Smartphone
               },
               {
-                id: "03",
-                title: "Esegui",
-                desc: "Identifica il Bugiardo prima dell&apos;ultima portata. O guarda il Sistema vincere.",
-                icon: <CheckCircle2 size={32} />
+                num: "03",
+                title: "Indaga & Menti",
+                desc: "Poni domande mirate, interpreta le micro-espressioni dei tuoi vicini e difendi la tua vera identità.",
+                icon: Search
+              },
+              {
+                num: "04",
+                title: "Vota e Smaschera",
+                desc: "Esprimi il tuo verdetto finale prima del dolce. Chi sa mentire con la massima naturalezza vince la serata.",
+                icon: ShieldAlert
               }
-            ].map((item) => (
-              <div key={item.id} className="reveal-liar group p-12 border border-white/5 bg-white/2 hover:bg-red-600/2 hover:border-red-600/20 transition-all duration-1000">
-                <div className="text-red-600 font-anton text-6xl opacity-20 group-hover:opacity-100 transition-opacity duration-1000 mb-8">
-                  {item.id}
+            ].map((step, idx) => (
+              <PremiumCard key={idx} className="p-8 space-y-6 flex flex-col justify-between">
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                    <step.icon className="text-accent-gold w-8 h-8" />
+                    <span className="font-syne text-xs font-bold text-accent-gold/40 tracking-[0.3em]">
+                      {step.num}
+                    </span>
+                  </div>
+                  <h3 className="font-syne text-xl font-bold uppercase text-text-primary tracking-tight">
+                    {step.title}
+                  </h3>
+                  <p className="font-inter text-xs text-text-secondary leading-relaxed font-light">
+                    {step.desc}
+                  </p>
                 </div>
-                <h3 className="font-anton text-3xl uppercase tracking-tighter text-white mb-6">
-                  {item.title}
-                </h3>
-                <p className="font-inter text-white/40 leading-relaxed group-hover:text-white/70 transition-colors">
-                  {item.desc}
-                </p>
-              </div>
+              </PremiumCard>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 4. IMMERSIVE QUOTE INTERSTITIAL */}
-      <section className="h-[60vh] flex items-center justify-center bg-black-pure relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/brand/bg-venue-crowd.webp')] opacity-5 grayscale scale-125 rotate-3" />
-        <div className="container-narrow text-center relative z-10">
-          <p className="reveal-liar font-anton text-3xl md:text-6xl uppercase tracking-tighter leading-tight text-white/80 italic">
-            &quot;In questo gioco, l&apos;unico errore <br /> è credere di avere amici.&quot;
-          </p>
+      {/* 3. EXPERIENCE HIGHLIGHTS */}
+      <section className="reveal-bugiardo section-padding-huge bg-black-elevated/20 relative border-t border-white/5">
+        <div className="container-max grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          <div className="lg:col-span-6 space-y-10">
+            <SectionHeading
+              title="INGEGNERIA"
+              highlight="EMOTIVA LIVE."
+              subtitle="Perché A Cena Con Il Bugiardo funziona"
+              align="left"
+            />
+            
+            <p className="font-inter text-base lg:text-lg text-text-secondary leading-relaxed font-light">
+              Non si tratta di una classica cena con delitto dove si assiste a una recita. In <strong className="text-text-primary font-semibold">A Cena Con Il Bugiardo</strong>, l&apos;imprevisto nasce dalle interazioni reali tra le persone al tavolo.
+            </p>
+
+            <ul className="space-y-6 pt-4">
+              {[
+                { title: "Zero Palcoscenico", desc: "Nessuna pressione di dover recitare: il gioco scorre fluido durante la cena." },
+                { title: "Social Deduction Pura", desc: "Sviluppato secondo le dinamiche dei migliori giochi di bluff psicologico." },
+                { title: "Coinvolgimento Garantito", desc: "Perfetto sia per gruppi di amici che per chi vuole fare nuove conoscenze." }
+              ].map((item, i) => (
+                <li key={i} className="flex gap-4 items-start">
+                  <span className="w-2 h-2 rounded-full bg-accent-gold mt-2 shrink-0" />
+                  <div>
+                    <h4 className="font-syne text-sm font-bold uppercase text-text-primary tracking-wider">{item.title}</h4>
+                    <p className="font-inter text-xs text-text-secondary/70 mt-1">{item.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="lg:col-span-6 relative aspect-4/3 rounded-sm overflow-hidden border border-white/10">
+            <Image
+              src="/images/brand/bg-venue-crowd.webp"
+              alt="Atmosfera Cena con il Bugiardo"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover contrast-110 opacity-60"
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-black-pure via-transparent to-transparent opacity-80" />
+          </div>
         </div>
       </section>
 
-      {/* 5. THE TARGETS: Darker Tone */}
-      <section className="py-48 px-6 bg-black-pure">
-        <div className="container-max grid grid-cols-1 lg:grid-cols-2 gap-24">
-          <div className="reveal-liar p-16 border border-white/5 bg-white/1 space-y-8">
-            <span className="text-red-600 font-bold text-[10px] uppercase tracking-[0.5em]">Corporate Warfare</span>
-            <h3 className="font-anton text-5xl uppercase tracking-tighter text-white">Soft skills <br /> sotto pressione.</h3>
-            <p className="font-inter text-white/40 text-lg leading-relaxed">
-              Negoziazione spietata e deduzione logica. Metti alla prova la vera gerarchia del tuo ufficio.
-            </p>
-          </div>
-          <div className="reveal-liar p-16 border border-white/5 bg-white/1 space-y-8">
-            <span className="text-red-600 font-bold text-[10px] uppercase tracking-[0.5em]">Private Social Game</span>
-            <h3 className="font-anton text-5xl uppercase tracking-tighter text-white">Niente sarà <br /> come prima.</h3>
-            <p className="font-inter text-white/40 text-lg leading-relaxed">
-              Scopri chi sono davvero i tuoi amici. Una serata che rimarrà impressa nella memoria collettiva.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. FINAL ACTION: Maximum Urgency */}
-      <section className="py-64 bg-red-600 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0 bg-[url('/noise.webp')] mix-blend-overlay" />
-        </div>
-        <div className="container-narrow text-center relative z-10 space-y-16">
-          <h2 className="font-anton text-6xl md:text-9xl uppercase tracking-tighter leading-[0.8] text-black">
-            Accetta il <br /> <span className="bg-black text-red-600 px-4">Rischio.</span>
-          </h2>
-          <p className="font-syne text-[10px] text-black uppercase tracking-[0.8em] font-black opacity-60">
-            Posti limitati // Sessioni esclusive
-          </p>
-          <div className="pt-8">
-            <Link 
-              href="/calendario"
-              className="inline-flex items-center gap-6 px-16 py-8 bg-black text-red-600 text-xl font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-500 rounded-full shadow-2xl"
+      {/* 4. FINAL CTA */}
+      <section className="reveal-bugiardo section-padding-huge bg-black-pure text-center border-t border-white/5">
+        <div className="container-narrow space-y-12">
+          <SectionHeading
+            title="SEI PRONTO A"
+            highlight="SMASCHERARE IL BUGIARDO?"
+            subtitle="Partecipa al prossimo evento"
+            align="center"
+          />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <PrimaryButton href="/calendario" size="lg" className="w-full sm:w-auto min-w-70">
+              VEDI CALENDARIO DATE
+            </PrimaryButton>
+            <Link
+              href="/eventi-privati"
+              className="font-syne text-xs uppercase tracking-[0.5em] text-accent-gold hover:text-white transition-colors"
             >
-              RISERVA IL TUO POSTO
+              ORGANIZZA UN EVENTO PRIVATO →
             </Link>
           </div>
         </div>
       </section>
-
     </main>
   );
 }

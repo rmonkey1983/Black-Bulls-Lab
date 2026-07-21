@@ -1,16 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Mohave, Outfit, Rock_Salt, Inter, Syne } from "next/font/google";
+import { Mohave, Rock_Salt, Inter, Syne } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { EntertainmentBusinessSchema, WebSiteSchema } from "@/components/seo/JsonLd";
-import { SmoothScroll } from "@/components/layout/SmoothScroll";
-// Preloader rimosso per evitare blocchi post-pagamento
 import { MobileStickyBookButton } from "@/components/layout/MobileStickyBookButton";
+import { ClientOnlyWrappers } from "@/components/layout/ClientOnlyWrappers";
 import { WhatsAppWidget } from "@/components/layout/WhatsAppWidget";
 import { BackToTop } from "@/components/layout/BackToTop";
-import { GSAPInitializer } from "@/components/layout/GSAPInitializer";
 import { PageTransition } from "@/components/layout/PageTransition";
-import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, SITE_KEYWORDS } from "@/lib/constants";
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, SITE_KEYWORDS, CONTACT_PHONE, CONTACT_EMAIL } from "@/lib/constants";
+import { buildOrganizationSchema, buildLocalBusinessSchema } from "@/lib/schemas";
 import "./globals.css";
 
 const mohave = Mohave({
@@ -18,10 +17,6 @@ const mohave = Mohave({
   subsets: ["latin"],
 });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-});
 
 const inter = Inter({
   variable: "--font-inter",
@@ -101,29 +96,36 @@ export function generateViewport(): Viewport {
   };
 }
 
-import { BackgroundWrapper } from "@/components/layout/BackgroundWrapper";
-import { CustomCursor } from "@/components/layout/CustomCursor";
-import { ScrollProgress } from "@/components/layout/ScrollProgress";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const address = process.env.NEXT_PUBLIC_BUSINESS_ADDRESS || "Torino, Italia";
+  const phone = process.env.NEXT_PUBLIC_BUSINESS_PHONE || CONTACT_PHONE;
+  const email = process.env.NEXT_PUBLIC_BUSINESS_EMAIL || CONTACT_EMAIL;
+
   return (
     <html lang="it" suppressHydrationWarning>
-      <head />
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: buildOrganizationSchema() }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: buildLocalBusinessSchema(address, phone, email) }}
+        />
+      </head>
       <body
         suppressHydrationWarning
-        className={`${outfit.variable} ${inter.variable} ${mohave.variable} ${rockSalt.variable} ${syne.variable} font-sans antialiased text-white min-h-screen relative selection:bg-accent-gold selection:text-black flex flex-col bg-black-pure`}
+        className={`${inter.variable} ${mohave.variable} ${rockSalt.variable} ${syne.variable} font-sans antialiased text-white min-h-screen relative selection:bg-accent-gold selection:text-black flex flex-col bg-black-pure`}
       >
-        <CustomCursor />
-        <ScrollProgress />
-        <GSAPInitializer />
-        <BackgroundWrapper />
+        <ClientOnlyWrappers />
         <Navbar />
         
-        {/* Skip to main content */}
+        {/* Skip to main content - Accessibilità */}
         <a
           href="#main-content"
           suppressHydrationWarning
@@ -131,9 +133,6 @@ export default function RootLayout({
         >
           Salta al contenuto principale
         </a>
-        
-        {/* Preloader rimosso per garantire fluidità post-pagamento */}
-        
         <main id="main-content" className="grow relative z-10 w-full">
           <PageTransition>
             {children}
@@ -145,7 +144,6 @@ export default function RootLayout({
         <MobileStickyBookButton />
         <WhatsAppWidget />
         <BackToTop />
-        <SmoothScroll />
         
         <EntertainmentBusinessSchema />
         <WebSiteSchema />

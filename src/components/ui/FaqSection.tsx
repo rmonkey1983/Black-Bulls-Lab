@@ -53,8 +53,8 @@ export default function FaqSection() {
                             >
                                 <button
                                     onClick={() => toggleFaq(index)}
-                                    className="w-full flex items-center justify-between p-6 md:p-8 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50"
-                                    aria-label={isActive ? "Chiudi risposta" : "Apri risposta"}
+                                    className="w-full flex items-center justify-between py-4 px-4 md:py-6 md:px-8 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50"
+                                    aria-label={isActive ? `Chiudi risposta: ${faq.question}` : `Apri risposta: ${faq.question}`}
                                 >
                                     <h3 className={`font-heading text-lg md:text-2xl font-bold uppercase tracking-widest transition-colors duration-300 ${isActive ? 'text-yellow-500' : 'text-zinc-300 group-hover:text-white'}`}>
                                         {faq.question}
@@ -65,7 +65,7 @@ export default function FaqSection() {
                                 </button>
                                 
                                 <FaqWrapper isOpen={isActive}>
-                                    <div className="px-6 md:px-8 pb-8">
+                                    <div className="px-4 pb-6 md:px-8 md:pb-8">
                                         <div className="pt-2 border-t border-white/5 mt-2 opacity-80">
                                             <p className="font-sans text-zinc-300 text-base md:text-lg leading-relaxed font-light">
                                                 {faq.answer}
@@ -98,17 +98,27 @@ function FaqWrapper({ isOpen, children }: { isOpen: boolean; children: React.Rea
 
         if (isOpen) {
             gsap.to(contentRef.current, { 
-                height: "auto", opacity: 1, duration: 0.5, ease: "power3.inOut" 
+                height: "auto", 
+                opacity: 1, 
+                duration: 0.5, 
+                ease: "power3.inOut",
+                clearProps: "height,opacity"
             });
         } else {
             gsap.to(contentRef.current, { 
-                height: 0, opacity: 0, duration: 0.4, ease: "power3.inOut" 
+                height: 0, 
+                opacity: 0, 
+                duration: 0.4, 
+                ease: "power3.inOut" 
             });
         }
     }, [isOpen]);
 
     return (
-        <div ref={contentRef} className="overflow-hidden h-0 opacity-0">
+        <div 
+            ref={contentRef} 
+            className={`overflow-hidden ${isOpen ? "h-auto opacity-100" : "h-0 opacity-0"}`}
+        >
             {children}
         </div>
     );
