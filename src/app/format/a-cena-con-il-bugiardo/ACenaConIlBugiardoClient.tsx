@@ -661,8 +661,8 @@ export function ACenaConIlBugiardoClient() {
 
               </div>
 
-              {/* Cloudflare Turnstile integration */}
-              {turnstileSiteKey && (
+              {/* Cloudflare Turnstile integration (Attivabile via NEXT_PUBLIC_WAITLIST_TURNSTILE_ENABLED=true) */}
+              {process.env.NEXT_PUBLIC_WAITLIST_TURNSTILE_ENABLED === "true" && turnstileSiteKey && (
                 <div className="pt-2 flex justify-center">
                   <Turnstile
                     siteKey={turnstileSiteKey}

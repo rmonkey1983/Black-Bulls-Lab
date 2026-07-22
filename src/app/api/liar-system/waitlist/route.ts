@@ -50,13 +50,9 @@ function normalizeE164Phone(rawPhone: string): string | null {
   return cleaned;
 }
 
-// Verification Cloudflare Turnstile con approccio Fail-Closed
+// Verification Cloudflare Turnstile con approccio Fail-Closed (Nessun fallback fail-open!)
 async function verifyTurnstile(token: string, secretKey: string, remoteIp?: string): Promise<boolean> {
-  if (!secretKey) {
-    // In ambiente senza secret (es. local dev senza Turnstile)
-    return true;
-  }
-  if (!token) return false;
+  if (!secretKey || !token) return false;
 
   try {
     const formData = new URLSearchParams();
@@ -71,7 +67,7 @@ async function verifyTurnstile(token: string, secretKey: string, remoteIp?: stri
     const outcome = await res.json();
     return Boolean(outcome.success);
   } catch (err) {
-    console.error("[Turnstile Verification Fail-Closed Exception]:", err);
+    console.error("[Turnstile Verification Exception]:", err);
     return false; // Fail-closed in caso di errore di rete
   }
 }
@@ -83,7 +79,28 @@ export async function POST(req: Request) {
   };
 
   try {
-    // Controllo dimensione payload max 50KB
+    // 1. Controllo Origin Header per sicurezza
+    const origin = req.headers.get("origin");
+    if (origin) {
+      const allowedOrigins = [
+        "https://blackbullslab.com",
+        "https://www.blackbullslab.com",
+        "http://localhost:3000",
+        "http://localhost:3001",
+      ];
+      const isAllowedOrigin =
+        allowedOrigins.includes(origin) ||
+        (origin.endsWith(".netlify.app") && origin.includes("blackbullslab"));
+
+      if (!isAllowedOrigin) {
+        return NextResponse.json(
+          { success: false, error: "Origine della richiesta non autorizzata." },
+          { status: 403, headers }
+        );
+      }
+    }
+
+    // 2. Controllo dimensione payload max 50KB
     const contentLength = parseInt(req.headers.get("content-length") || "0", 10);
     if (contentLength > 50000) {
       return NextResponse.json({ success: false, error: "Payload troppo grande." }, { status: 413, headers });
@@ -94,7 +111,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: "Formato richiesta non valido." }, { status: 400, headers });
     }
 
-    // Honeypot check per bot
+    // 3. Honeypot check per bot
     if (rawBody.website && String(rawBody.website).trim().length > 0) {
       return NextResponse.json(
         { success: true, message: "Iscrizione alla lista d’attesa confermata." },
@@ -102,7 +119,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // Validazione Zod
+    // 4. Validazione Zod
     const parseResult = waitlistSchema.safeParse(rawBody);
     if (!parseResult.success) {
       const firstIssue = parseResult.error.issues[0]?.message || "Dati inviati non validi";
@@ -111,17 +128,37 @@ export async function POST(req: Request) {
 
     const data = parseResult.data;
 
-    // Cloudflare Turnstile Verification
-    const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
-    if (turnstileSecret) {
+    // 5. Cloudflare Turnstile Verification Esplicita (Opzionale tramite WAITLIST_TURNSTILE_ENABLED)
+    const turnstileEnabled = process.env.WAITLIST_TURNSTILE_ENABLED === "true";
+
+    if (turnstileEnabled) {
+      const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
+      if (!turnstileSecret) {
+        console.error("[Turnstile Config Error]: WAITLIST_TURNSTILE_ENABLED è true ma TURNSTILE_SECRET_KEY manca.");
+        return NextResponse.json(
+          { success: false, error: "Configurazione anti-bot non valida sul server." },
+          { status: 500, headers }
+        );
+      }
+
+      if (!data.turnstileToken) {
+        return NextResponse.json(
+          { success: false, error: "Verifica anti-bot obbligatoria mancante." },
+          { status: 400, headers }
+        );
+      }
+
       const clientIp = req.headers.get("x-forwarded-for")?.split(",")[0] || undefined;
       const isHuman = await verifyTurnstile(data.turnstileToken, turnstileSecret, clientIp);
       if (!isHuman) {
-        return NextResponse.json({ success: false, error: "Verifica anti-bot fallita. Riprova." }, { status: 400, headers });
+        return NextResponse.json(
+          { success: false, error: "Verifica anti-bot fallita. Riprova." },
+          { status: 400, headers }
+        );
       }
     }
 
-    // Normalizzazione dati
+    // 6. Normalizzazione dati
     const cleanEmail = data.email.trim().toLowerCase();
     const cleanName = data.name.trim();
     const phoneE164 = normalizeE164Phone(data.phone);
@@ -133,7 +170,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // Istanziazione Fail-Closed di Supabase Service Role Admin
+    // 7. Istanziazione Fail-Closed di Supabase Service Role Admin
     let dbClient;
     try {
       dbClient = getStrictSupabaseAdmin();
@@ -145,7 +182,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // Controllo esistenza contatto per preservazione consensi e prevenzione duplicati
+    // 8. Controllo esistenza contatto per preservazione consensi e prevenzione duplicati
     const { data: existingUser, error: findError } = await dbClient
       .from("liar_system_waitlist")
       .select("id, marketing_consent, marketing_channels, marketing_consent_at, status")
