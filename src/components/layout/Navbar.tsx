@@ -119,7 +119,7 @@ export default function Navbar() {
 
         {/* Mobile Toggle */}
         <button
-          className="lg:hidden relative z-[110] p-2 text-text-primary hover:text-accent-gold transition-colors duration-500"
+          className="lg:hidden relative z-110 p-2 text-text-primary hover:text-accent-gold transition-colors duration-500"
           aria-label={menuOpen ? "Chiudi menu" : "Apri menu"}
           onClick={() => setMenuOpen(!menuOpen)}
         >
@@ -134,16 +134,16 @@ export default function Navbar() {
       {/* ── MOBILE MENU ── */}
       <div
         className={cn(
-          "lg:hidden fixed inset-0 z-[100] bg-black-pure transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]",
+          "lg:hidden fixed inset-0 z-100 bg-black-pure transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]",
           menuOpen
             ? "opacity-100 pointer-events-auto translate-y-0"
             : "opacity-0 pointer-events-none -translate-y-full"
         )}
       >
-        <div className="fixed inset-0 bg-black-pure z-[100] flex flex-col justify-between p-8 md:p-16 pt-32 pb-12 overflow-y-auto">
+        <div className="fixed inset-0 bg-black-pure z-100 flex flex-col justify-between p-8 md:p-16 pt-32 pb-12 overflow-y-auto">
 
           {/* Background Ambient Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent-gold/5 rounded-full blur-[150px] pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 bg-accent-gold/5 rounded-full blur-[150px] pointer-events-none" />
 
           {/* Navigation Links */}
           <div className="relative z-10 flex flex-col space-y-6 md:space-y-8">
