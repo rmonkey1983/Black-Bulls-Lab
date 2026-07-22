@@ -1,7 +1,13 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    throw new Error('RESEND_API_KEY non configurata.');
+  }
+  return new Resend(apiKey);
+}
 
 export async function POST(req: Request) {
   try {
@@ -11,6 +17,8 @@ export async function POST(req: Request) {
     if (!company || !name || !email || !phone || !message) {
       return NextResponse.json({ error: 'Mancano campi obbligatori' }, { status: 400 });
     }
+
+    const resend = getResend();
 
     const { data, error } = await resend.emails.send({
       from: 'Black Bulls Lab <noreply@blackbullslab.com>',
