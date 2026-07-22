@@ -1,13 +1,10 @@
 'use server';
 
-import { createClient } from '@supabase/supabase-js';
+import { getSupabaseAdmin } from '@/lib/supabase';
 import { revalidatePath } from 'next/cache';
 
 export async function saveEventAction(formData: FormData) {
-  const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
+  const supabaseAdmin = getSupabaseAdmin();
 
   const id = formData.get('id') as string;
   const location_name = formData.get('location_name') as string;
@@ -56,10 +53,7 @@ export async function saveEventAction(formData: FormData) {
 
 export async function deleteEventAction(formData: FormData) {
   const id = formData.get('id') as string;
-  const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
+  const supabaseAdmin = getSupabaseAdmin();
   
   const { error } = await supabaseAdmin.from('events').delete().eq('id', id);
   if (error) {

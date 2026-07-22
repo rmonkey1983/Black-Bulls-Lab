@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { getStrictSupabaseAdmin, supabase } from '@/lib/supabase';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import TicketQRCode from '@/components/tickets/TicketQRCode';
@@ -48,10 +48,12 @@ export default async function SuccessPage(props: {
     );
   }
 
-  const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
+  let supabaseAdmin;
+  try {
+    supabaseAdmin = getStrictSupabaseAdmin();
+  } catch {
+    supabaseAdmin = supabase;
+  }
 
   let booking = null;
   let attempts = 0;

@@ -1,14 +1,16 @@
-import { createClient } from '@supabase/supabase-js';
+import { getStrictSupabaseAdmin, supabase } from '@/lib/supabase';
 import { Ticket } from 'lucide-react';
 
 export default async function AdminBookingsPage() {
-  const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
+  let dbClient;
+  try {
+    dbClient = getStrictSupabaseAdmin();
+  } catch {
+    dbClient = supabase;
+  }
 
   // Fetch bookings with event details and tickets
-  const { data: bookings } = await supabaseAdmin
+  const { data: bookings } = await dbClient
     .from('bookings')
     .select(`
       *,

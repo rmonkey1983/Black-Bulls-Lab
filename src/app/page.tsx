@@ -6,7 +6,7 @@ export const metadata = homepageMetadata;
 
 import dynamic from "next/dynamic";
 import { getAllPosts } from "@/lib/blog";
-import { createClient } from '@supabase/supabase-js';
+import { getStrictSupabaseAdmin, supabase as publicSupabase } from "@/lib/supabase";
 
 const HomeClient = dynamic(() => import("./HomeClient").then(mod => mod.HomeClient));
 
@@ -14,10 +14,12 @@ export default async function HomePage() {
     const latestPosts = getAllPosts().slice(0, 3);
 
     // Fetch next 3 events from Supabase
-    const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.SUPABASE_SERVICE_ROLE_KEY!
-    );
+    let supabase;
+    try {
+        supabase = getStrictSupabaseAdmin();
+    } catch {
+        supabase = publicSupabase;
+    }
 
     const now = new Date().toISOString();
     const { data: nextEvents } = await supabase

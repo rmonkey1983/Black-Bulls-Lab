@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { getSupabaseAdmin } from '@/lib/supabase';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
@@ -14,10 +14,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'ID Biglietto mancante' }, { status: 400 });
     }
 
-    const supabaseAdmin = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!
-    );
+    const supabaseAdmin = getSupabaseAdmin();
 
     // 1. Recuperiamo il biglietto e i dati della prenotazione associata
     // Usiamo guest_name dal ticket per il nome individuale dell'ospite

@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { getStrictSupabaseAdmin, supabase } from '@/lib/supabase';
 import { Pencil, FlaskConical } from 'lucide-react';
 import DeleteEventButton from '@/components/admin/DeleteEventButton';
 import Link from 'next/link';
@@ -11,13 +11,15 @@ export default async function AdminEventsPage(props: {
   const searchParams = await props.searchParams;
   const editId = searchParams.edit;
 
-  const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
+  let dbClient;
+  try {
+    dbClient = getStrictSupabaseAdmin();
+  } catch {
+    dbClient = supabase;
+  }
 
   // Peschiamo gli eventi esistenti dal server con permessi admin
-  const { data: events } = await supabaseAdmin
+  const { data: events } = await dbClient
     .from('events')
     .select('*')
     .order('created_at', { ascending: false });

@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+import { getStrictSupabaseAdmin, supabase as publicSupabase } from "@/lib/supabase";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -40,10 +40,12 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
+  let supabase;
+  try {
+    supabase = getStrictSupabaseAdmin();
+  } catch {
+    supabase = publicSupabase;
+  }
 
   const { data } = await supabase
     .from("events")
@@ -81,10 +83,12 @@ export default async function EventDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
+  let supabase;
+  try {
+    supabase = getStrictSupabaseAdmin();
+  } catch {
+    supabase = publicSupabase;
+  }
 
   const { data: event, error } = await supabase
     .from("events")

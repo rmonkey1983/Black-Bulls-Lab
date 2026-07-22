@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { getStrictSupabaseAdmin, supabase as publicSupabase } from '@/lib/supabase';
 import Link from 'next/link';
 import { Calendar, MapPin, Users, ArrowRight } from 'lucide-react';
 
@@ -7,10 +7,12 @@ import { Calendar, MapPin, Users, ArrowRight } from 'lucide-react';
 export const revalidate = 0; 
 
 export default async function CalendarioPage() {
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
+  let supabase;
+  try {
+    supabase = getStrictSupabaseAdmin();
+  } catch {
+    supabase = publicSupabase;
+  }
 
   // Preleviamo gli eventi da oggi in poi, ordinati per data
   const now = new Date().toISOString();

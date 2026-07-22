@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabase';
 import { AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import { saveEventAction } from './actions';
@@ -11,12 +11,6 @@ export default function EventsFormClient({ eventToEdit }: { eventToEdit: any }) 
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
   const router = useRouter();
-
-  // Client client for image upload (using anon key is fine for storage if policy allows)
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!, 
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

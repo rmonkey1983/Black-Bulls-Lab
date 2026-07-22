@@ -1,16 +1,28 @@
-import { supabaseAdmin } from '../../../../lib/supabase';
+import { getSupabaseAdmin } from '@/lib/supabase';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { Resend } from 'resend';
-import { TicketEmail } from '../../../../components/emails/TicketEmail';
+import { TicketEmail } from '@/components/emails/TicketEmail';
 import * as React from 'react';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  apiVersion: '2023-10-16' as any,
-});
+function getStripe() {
+  const secretKey = process.env.STRIPE_SECRET_KEY;
+  if (!secretKey) {
+    throw new Error('STRIPE_SECRET_KEY non configurata.');
+  }
+  return new Stripe(secretKey, {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    apiVersion: '2023-10-16' as any,
+  });
+}
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    throw new Error('RESEND_API_KEY non configurata.');
+  }
+  return new Resend(apiKey);
+}
 
 export async function POST(req: Request) {
   try {
@@ -21,13 +33,16 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Manca la firma Stripe' }, { status: 400 });
     }
 
+    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+    if (!webhookSecret) {
+      console.error('❌ STRIPE_WEBHOOK_SECRET mancante nelle variabili d\'ambiente.');
+      return NextResponse.json({ error: 'STRIPE_WEBHOOK_SECRET non configurato' }, { status: 500 });
+    }
+
+    const stripe = getStripe();
     let event: Stripe.Event;
     try {
-      event = stripe.webhooks.constructEvent(
-        body,
-        signature,
-        process.env.STRIPE_WEBHOOK_SECRET!
-      );
+      event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Firma non valida';
       console.error('❌ Webhook signature error:', msg);
@@ -36,6 +51,8 @@ export async function POST(req: Request) {
 
     // Processiamo solo i pagamenti completati
     if (event.type === 'checkout.session.completed') {
+      const supabaseAdmin = getSupabaseAdmin();
+      const resend = getResend();
       const session = event.data.object as Stripe.Checkout.Session;
       const isCorporate = session.metadata?.type === 'corporate';
       const customerEmail = session.customer_details?.email;
@@ -78,7 +95,6 @@ export async function POST(req: Request) {
       }
       // --- LOGICA B2C (Esistente) ---
       const eventId = session.metadata?.eventId;
-      const customerPhone = session.metadata?.customerPhone || '';
       customerName = session.metadata?.customerName || session.customer_details?.name || 'Ospite 1';
 
       // Nomi ospiti aggiuntivi (JSON array)
