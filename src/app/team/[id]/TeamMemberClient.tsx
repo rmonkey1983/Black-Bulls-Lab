@@ -170,7 +170,7 @@ export function TeamMemberClient({ member }: TeamMemberClientProps) {
         </div>
       </div>
       {/* Background Decorative Element */}
-      <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none -z-10" />
+      <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-150 h-150 bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none -z-10" />
     </div>
   );
 }

@@ -210,7 +210,7 @@ export function TheGoldenVoiceClient() {
 
       {/* 4. CASTING FORM: The Entry Protocol */}
       <section id="casting-form" className="reveal-golden section-padding-huge bg-black-pure border-t border-white/5 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent-gold/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-150 h-150 bg-accent-gold/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4 pointer-events-none" />
         
         <div className="container-max">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 lg:gap-48 items-center">

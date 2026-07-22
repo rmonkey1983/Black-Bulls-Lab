@@ -209,7 +209,7 @@ export function IlPalqoClient() {
 
       {/* 4. CALL TO ACTION: The Stage is Yours */}
       <section className="reveal-palqo section-padding-huge bg-black-pure border-t border-white/5 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent-gold/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-150 h-150 bg-accent-gold/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4 pointer-events-none" />
         
         <div className="container-max grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
             <div className="space-y-12">
