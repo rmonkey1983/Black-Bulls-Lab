@@ -92,36 +92,40 @@ export const homepageMetadata: Metadata = {
 
 export const corporateMetadata: Metadata = {
   ...baseMetadata,
-  // FIX: era "Area Corporate — Black Bulls Lab" nel <title> e diverso nell'H1
-  // Ora title, og:title e H1 sono allineati sulla keyword "team building Torino"
-  title: "Team Building e Eventi Aziendali a Torino | Black Bulls Lab",
+  title: "Team Building Immersivo e Eventi Aziendali Torino | Black Bulls Lab",
   description:
-    "Organizza il tuo evento aziendale a Torino con Black Bulls Lab. Dinner show, team building esperienziale e serate corporate su misura. Preventivo gratuito.",
+    "Trasforma il tuo evento corporate con Black Bulls Lab. Dinner show aziendali, team building immersivi ed eventi aziendali interattivi a Torino, Milano e in tutta Italia.",
   keywords: [
-    "team building Torino",
+    "team building immersivo",
+    "eventi aziendali interattivi",
+    "dinner show aziendale",
+    "eventi corporate",
+    "esperienze immersive per aziende",
     "eventi aziendali Torino",
+    "team building Milano",
+    "eventi esperienziali",
+    "team building Torino",
     "cena aziendale Torino",
-    "dinner show corporate",
     "intrattenimento aziendale Torino",
   ],
   openGraph: {
     ...baseMetadata.openGraph,
-    title: "Team Building e Eventi Aziendali a Torino | Black Bulls Lab",
+    title: "Team Building Immersivo e Eventi Aziendali Torino | Black Bulls Lab",
     description:
-      "Dinner show e format immersivi per eventi aziendali a Torino. Esperienza chiavi in mano da 45€/persona.",
+      "Dinner show aziendali e team building immersivi per eventi aziendali interattivi e unici. Esperienze esperienziali a Torino e Milano.",
     url: `${BASE_URL}/eventi-aziendali`,
     images: [
       {
         url: `${BASE_URL}/images/brand/bg-stage-lights.webp`,
         width: 1200,
         height: 630,
-        alt: "Black Bulls Lab — Team Building Torino",
+        alt: "Black Bulls Lab — Team Building Immersivo e Eventi Aziendali",
       },
     ],
   },
   twitter: {
     ...baseMetadata.twitter,
-    title: "Team Building e Eventi Aziendali a Torino | Black Bulls Lab",
+    title: "Team Building Immersivo e Eventi Aziendali Torino | Black Bulls Lab",
     images: [`${BASE_URL}/images/brand/bg-stage-lights.webp`],
   },
   alternates: {

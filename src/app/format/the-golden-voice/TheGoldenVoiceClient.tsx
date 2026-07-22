@@ -62,8 +62,9 @@ export function TheGoldenVoiceClient() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/brand/service-performance.webp"
-            alt="The Golden Voice Experience"
+            alt="L'Esperienza The Golden Voice"
             fill
+            sizes="100vw"
             className="object-cover opacity-20 contrast-125 grayscale scale-105"
             priority
           />
@@ -85,10 +86,10 @@ export function TheGoldenVoiceClient() {
         </div>
 
         {/* Navigation Link */}
-        <div className="absolute top-12 left-12 z-50">
+        <div className="absolute top-28 left-6 lg:top-12 lg:left-12 z-50">
             <Link
                 href="/format"
-                className="group flex items-center gap-4 text-text-secondary/30 hover:text-accent-gold transition-all uppercase text-[10px] font-bold tracking-[0.5em]"
+                className="group flex items-center gap-4 text-text-secondary/30 hover:text-accent-gold transition-colors uppercase text-[10px] font-bold tracking-[0.5em]"
             >
                 <ArrowLeft size={14} className="group-hover:-translate-x-2 transition-transform" /> 
                 Archivio Format
@@ -99,18 +100,18 @@ export function TheGoldenVoiceClient() {
             <div className="space-y-12">
                 <div className="flex flex-col items-center gap-6">
                     <span className="reveal-golden inline-block px-4 py-1 border border-accent-gold/20 text-accent-gold text-[10px] font-bold uppercase tracking-[0.6em] bg-accent-gold/5 backdrop-blur-md">
-                        Premium Stage Universe
+                        Universo del Palco Premium
                     </span>
                     <h1 className="golden-title font-syne font-bold text-[clamp(3rem,10vw,12rem)] leading-[0.8] tracking-tighter uppercase text-text-primary flex flex-col">
                         <span className="block">Ogni voce</span>
-                        <span className="block text-accent-gold italic">lascia un segno.</span>
+                        <span className="block text-accent-gold italic">lascia il segno.</span>
                     </h1>
                 </div>
 
                 <div className="golden-sub max-w-2xl mx-auto">
                     <p className="font-inter text-lg md:text-2xl text-text-secondary font-light leading-relaxed uppercase tracking-[0.2em] opacity-60">
                         Più di una performance. Una presenza. <br />
-                        Il contest dove il pubblico decide il tuo destino.
+                        Il contest in cui il pubblico decide il tuo destino.
                     </p>
                 </div>
 
@@ -126,8 +127,8 @@ export function TheGoldenVoiceClient() {
         <div className="absolute bottom-12 right-12 hidden lg:block">
             <div className="flex items-center gap-4 text-white/10">
                 <div className="text-right">
-                    <div className="text-[10px] font-bold tracking-[0.4em] uppercase">Live Audience Scoring</div>
-                    <div className="text-[9px] tracking-[0.2em] uppercase opacity-50">Protocol: GOLDEN_VOICE</div>
+                    <div className="text-[10px] font-bold tracking-[0.4em] uppercase">Votazione del Pubblico dal Vivo</div>
+                    <div className="text-[9px] tracking-[0.2em] uppercase opacity-50">Protocollo: VOCE_D_ORO</div>
                 </div>
                 <Star size={20} className="opacity-20" />
             </div>
@@ -159,7 +160,8 @@ export function TheGoldenVoiceClient() {
                         src="/images/brand/service-performance.webp"
                         alt="Stage Tension"
                         fill
-                        className="object-cover grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-50 transition-all duration-1000"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        className="object-cover grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-50 transition-[filter,opacity] duration-1000"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-black-pure via-transparent to-transparent opacity-90" />
                     <div className="absolute top-12 left-12">
@@ -186,11 +188,11 @@ export function TheGoldenVoiceClient() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24">
                 {[
-                    { title: "Digital Casting", desc: "Il primo passo. Invia la tua candidatura e i tuoi link social. La selezione inizia dallo schermo.", icon: <Music2 size={32} /> },
-                    { title: "Live Presence", desc: "Performance esplosive davanti a giuria e pubblico. Ogni nota può ribaltare la classifica in app.", icon: <Zap size={32} /> },
-                    { title: "The Gala Final", desc: "La serata definitiva. Tensione tecnologica e voti in tempo reale per decretare il vincitore.", icon: <Trophy size={32} /> }
+                    { title: "Casting Digitale", desc: "Il primo passo. Invia la tua candidatura e i tuoi link social. La selezione inizia dallo schermo.", icon: <Music2 size={32} /> },
+                    { title: "La Performance", desc: "Performance esplosive davanti a giuria e pubblico. Ogni nota può ribaltare la classifica in app.", icon: <Zap size={32} /> },
+                    { title: "Il Crescendo Finale", desc: "La serata definitiva. Tensione tecnologica e voti in tempo reale per decretare il vincitore.", icon: <Trophy size={32} /> }
                 ].map((act, i) => (
-                    <div key={i} className="group space-y-8 p-12 border border-white/5 bg-white/2 hover:border-accent-gold/20 transition-all duration-700">
+                    <div key={i} className="group space-y-8 p-12 border border-white/5 bg-white/2 hover:border-accent-gold/20 transition-[border-color,background-color] duration-700">
                         <div className="text-accent-gold opacity-30 group-hover:opacity-100 transition-opacity duration-700">
                             {act.icon}
                         </div>
@@ -214,12 +216,12 @@ export function TheGoldenVoiceClient() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 lg:gap-48 items-center">
                 <div className="space-y-16">
                     <div className="space-y-8">
-                        <span className="text-accent-gold font-bold text-[10px] uppercase tracking-[0.8em]">Apply to the Lab</span>
+                        <span className="text-accent-gold font-bold text-[10px] uppercase tracking-[0.8em]">Candidati al Laboratorio</span>
                         <h2 className="font-syne font-bold leading-[0.85] tracking-tighter uppercase text-text-primary text-5xl md:text-[5vw]">
                             Invia la tua <br /><span className="text-accent-gold italic">Candidatura.</span>
                         </h2>
                         <p className="text-text-secondary/60 font-inter text-xl leading-relaxed max-w-lg">
-                            Il palco è pronto. Il Sistema ti sta aspettando. Dimostra che la tua voce merita lo spotlight.
+                            Il palco è pronto. Il Sistema ti sta aspettando. Dimostra che la tua voce merita i riflettori.
                         </p>
                     </div>
                     
@@ -229,7 +231,7 @@ export function TheGoldenVoiceClient() {
                             href={buildWAUrl(WA_MESSAGES.default)}
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="group flex items-center gap-6 text-accent-gold hover:text-text-primary transition-all font-syne text-xs font-bold uppercase tracking-[0.6em]"
+                            className="group flex items-center gap-6 text-accent-gold hover:text-text-primary transition-colors font-syne text-xs font-bold uppercase tracking-[0.6em]"
                         >
                             WHATSAPP CASTING
                             <ArrowRight size={18} className="group-hover:translate-x-3 transition-transform" />
@@ -251,12 +253,12 @@ export function TheGoldenVoiceClient() {
         </div>
         <div className="container-narrow space-y-16 relative z-10">
           <h2 className="font-syne text-6xl md:text-9xl font-bold uppercase tracking-tighter leading-[0.8]">
-            ENTRA <br /> NELLO <span className="bg-black-pure text-accent-gold px-4">SPOTLIGHT.</span>
+            ENTRA <br /> SOTTO I <span className="bg-black-pure text-accent-gold px-4">RIFLETTORI.</span>
           </h2>
           <div className="pt-12">
             <Link 
               href="/calendario"
-              className="inline-flex items-center gap-8 px-16 py-8 bg-black-pure text-accent-gold text-xl font-black uppercase tracking-widest hover:bg-white hover:text-black-pure transition-all duration-500 rounded-full"
+              className="inline-flex items-center gap-8 px-16 py-8 bg-black-pure text-accent-gold text-xl font-black uppercase tracking-widest hover:bg-white hover:text-black-pure transition-[background-color,color] duration-500 rounded-full"
             >
               PRENDI IL TUO POSTO
             </Link>

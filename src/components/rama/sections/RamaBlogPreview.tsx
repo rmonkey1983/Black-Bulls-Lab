@@ -33,7 +33,7 @@ export function RamaBlogPreview({ posts }: RamaBlogPreviewProps) {
     };
 
     return (
-        <section id="blog-preview" className="reveal-section section-padding bg-black-pure border-t border-white/5">
+        <section id="blog-preview" className="reveal-section section-padding bg-black-pure border-t border-white/5" suppressHydrationWarning>
             <div className="container-max">
                 {/* Header */}
                 <div id="blog-preview-header" className="flex flex-col md:flex-row items-start md:items-end justify-between mb-24 lg:mb-40 gap-12">
@@ -63,7 +63,7 @@ export function RamaBlogPreview({ posts }: RamaBlogPreviewProps) {
                                         alt={post.title}
                                         fill
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                        className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105 opacity-40 group-hover:opacity-100"
+                                        className="object-cover grayscale group-hover:grayscale-0 transition-[filter,opacity,transform] duration-1000 group-hover:scale-105 opacity-40 group-hover:opacity-100"
                                     />
                                     {/* Overlay Gradient */}
                                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black-pure via-transparent to-transparent" />
@@ -75,7 +75,7 @@ export function RamaBlogPreview({ posts }: RamaBlogPreviewProps) {
                                     <h3 className="font-syne text-2xl lg:text-3xl font-bold uppercase text-text-primary group-hover:text-accent-gold transition-colors duration-700 line-clamp-2 leading-tight tracking-tighter">
                                         {post.title}
                                     </h3>
-                                    <div className="pt-4 flex items-center justify-between border-t border-white/5 opacity-0 group-hover:opacity-100 transition-all duration-1000 delay-200">
+                                    <div className="pt-4 flex items-center justify-between border-t border-white/5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-1000 delay-200">
                                         <span className="font-syne text-[9px] uppercase tracking-[0.4em] text-accent-gold">Read Article</span>
                                         <ArrowRight size={16} className="text-accent-gold group-hover:translate-x-1 transition-transform" />
                                     </div>
@@ -89,11 +89,11 @@ export function RamaBlogPreview({ posts }: RamaBlogPreviewProps) {
                 <div className="mt-24 lg:mt-40 text-center">
                     <Link
                         href="/blog"
-                        className="group inline-flex items-center gap-4 px-10 py-5 border border-white/5 bg-black-elevated/20 hover:border-accent-gold/30 transition-all duration-700"
+                        className="group inline-flex items-center gap-4 px-10 py-5 border border-white/5 bg-black-elevated/20 hover:border-accent-gold/30 transition-[border-color,background-color] duration-700"
                         suppressHydrationWarning
                     >
                         <span className="font-syne text-[10px] uppercase tracking-[0.4em] font-bold text-text-secondary group-hover:text-text-primary transition-colors">Esplora il Blog</span>
-                        <ArrowRight size={18} className="text-text-secondary group-hover:text-accent-gold group-hover:translate-x-2 transition-all duration-700" />
+                        <ArrowRight size={18} className="text-text-secondary group-hover:text-accent-gold group-hover:translate-x-2 transition-[color,transform] duration-700" />
                     </Link>
                 </div>
             </div>

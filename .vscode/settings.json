@@ -2,6 +2,9 @@
   "[typescript]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
   "css.customData": [],
   "css.lint.unknownAtRules": "ignore",
   "deno.enablePaths": [

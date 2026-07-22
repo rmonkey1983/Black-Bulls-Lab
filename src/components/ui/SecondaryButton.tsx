@@ -30,7 +30,7 @@ export function SecondaryButton({
   };
 
   const classes = cn(
-    "inline-flex items-center justify-center gap-3 font-syne font-bold uppercase tracking-[0.3em] transition-all duration-700 relative group/btn",
+    "inline-flex items-center justify-center gap-3 font-syne font-bold uppercase tracking-[0.3em] transition-[background-color,color,border-color,box-shadow] duration-700 relative group/btn",
     "bg-transparent text-text-primary border border-white/10",
     "hover:border-accent-gold hover:text-accent-gold",
     "active:scale-95",

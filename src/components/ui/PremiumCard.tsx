@@ -22,7 +22,7 @@ export function PremiumCard({
   style,
 }: PremiumCardProps) {
   const baseClasses = cn(
-    "relative block overflow-hidden rounded-none border border-white/5 bg-black-elevated/10 backdrop-blur-3xl transition-all duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)] stagger-item",
+    "relative block overflow-hidden rounded-none border border-white/5 bg-black-elevated/10 backdrop-blur-3xl transition-[border-color,box-shadow] duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)] stagger-item",
     hoverGlow && "hover:border-accent-gold/20 hover:shadow-[0_40px_100px_rgba(0,0,0,0.6)]",
     "group",
     className
@@ -30,7 +30,7 @@ export function PremiumCard({
 
   const content = (
     <>
-      {/* Background Cinematic Details */}
+      {/* Background Cinematic Atmosphere */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute inset-0 opacity-[0.02] bg-[url('/noise.webp')] mix-blend-overlay" />
         <div className="absolute inset-0 bg-linear-to-br from-white/3 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />

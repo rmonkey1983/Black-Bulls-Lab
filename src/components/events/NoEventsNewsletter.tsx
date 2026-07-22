@@ -142,14 +142,18 @@ export function NoEventsNewsletter() {
                                     <input type="text" name="b_contact_name" tabIndex={-1} autoComplete="off" />
                                 </div>
                                 <input
+                                    id="newsletter-email"
                                     type="email"
+                                    name="email"
                                     required
+                                    autoComplete="email"
+                                    spellCheck={false}
                                     value={email}
                                     onChange={(e) => {
                                         setEmail(e.target.value);
                                         if (status === "error") setStatus("idle");
                                     }}
-                                    placeholder="La tua email..."
+                                    placeholder="La tua email…"
                                     className={`flex-1 bg-white/5 border rounded-xl px-5 py-4 text-white font-sans text-sm placeholder:text-white/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500/50 transition-colors ${
                                         status === "error"
                                             ? "border-red-500/50 focus:border-red-500/70"
@@ -169,7 +173,7 @@ export function NoEventsNewsletter() {
                                 </button>
                             </form>
                             {status === "error" && errorMsg && (
-                                <p className="font-sans text-red-400 text-xs mt-2 text-left">
+                                <p role="alert" aria-live="polite" className="font-sans text-red-400 text-xs mt-2 text-left">
                                     ⚠ {errorMsg}
                                 </p>
                             )}

@@ -38,7 +38,7 @@ export default async function CalendarioPage() {
           </p>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {events?.map((event) => {
             const isSoldOut = event.available_slots === 0;
             const eventDate = new Date(event.event_date);
@@ -51,7 +51,7 @@ export default async function CalendarioPage() {
 
                 <div className="p-8 flex flex-col grow">
                   {/* Intestazione Card: Calendario e Badge Posti */}
-                  <div className="flex justify-between items-start mb-8">
+                  <div className="flex justify-between items-start mb-8 gap-3">
                     <div className="bg-zinc-900 border border-zinc-800 text-zinc-300 px-4 py-2 rounded-xl text-center min-w-[70px] shadow-inner">
                       <div className="text-[10px] uppercase text-[#FFD700] font-bold tracking-widest">{eventDate.toLocaleString('it-IT', { month: 'short' })}</div>
                       <div className="text-3xl font-bold text-white mt-1">{eventDate.getDate()}</div>

@@ -2,10 +2,9 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { Play, Quote } from "lucide-react";
+import { Quote, Star } from "lucide-react";
 import { SOCIAL_PROOF } from "@/lib/constants";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-
 import { useCinematic } from "@/hooks/useCinematic";
 
 export function SocialProofSection() {
@@ -15,86 +14,111 @@ export function SocialProofSection() {
   staggerReveal(".container-max", ".proof-card");
 
   return (
-    <section 
-      ref={containerRef} 
-      className="section-padding-huge bg-black-pure relative overflow-hidden"
+    <section
+      ref={containerRef}
+      className="relative overflow-hidden"
     >
-      <div className="container-max">
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-24 lg:mb-40 gap-12">
-          <SectionHeading 
+      {/* Subtle background grid */}
+      <div className="absolute inset-0 cinematic-grid opacity-50 pointer-events-none" />
+
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-32 md:py-48 lg:py-64 relative z-10">
+
+        {/* Header */}
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-20 md:mb-32 gap-10">
+          <SectionHeading
             title="SOCIALLY"
             highlight="PROVEN"
             subtitle="The Evidence"
             align="left"
+            sectionNumber="05"
           />
-          <p className="font-syne text-[10px] uppercase tracking-[0.5em] text-accent-gold italic font-bold opacity-40 group-hover:opacity-100 transition-opacity duration-700">
-            This is not a normal event.
-          </p>
+          <div className="flex flex-col items-start md:items-end gap-3 md:mb-4">
+            <p className="font-syne text-[9px] uppercase tracking-[0.5em] text-accent-gold/50 italic font-bold">
+              This is not a normal event.
+            </p>
+            <div className="flex gap-1">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={10} className="fill-accent-gold text-accent-gold opacity-70" />
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        {/* Cards — taller, more visible images */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
           {SOCIAL_PROOF.map((item) => (
-            <div 
-              key={item.id} 
-              className="proof-card group relative aspect-9/16 overflow-hidden rounded-none bg-black-elevated/10 border border-white/5 cursor-pointer backdrop-blur-3xl transition-all duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)] hover:border-accent-gold/20 hover:shadow-[0_40px_100px_rgba(0,0,0,0.6)]"
+            <div
+              key={item.id}
+              className="proof-card group relative overflow-hidden cursor-pointer border border-white/[0.06] transition-all duration-700 ease-out hover:border-accent-gold/25 hover:shadow-[0_40px_100px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(200,169,107,0.05)] aspect-[4/5] sm:aspect-[9/14]"
             >
-              {/* Image Layer with Blur-to-Focus Effect */}
-              <div className="absolute inset-0 z-0 transition-all duration-1000 group-hover:scale-105">
-                <Image 
-                  src={item.image} 
+              {/* Image — 50% visible by default */}
+              <div className="absolute inset-0 transition-transform duration-1000 group-hover:scale-105">
+                <Image
+                  src={item.image}
                   alt={item.title}
                   fill
-                  className="object-cover opacity-20 blur-sm group-hover:blur-0 transition-all duration-1000 grayscale group-hover:grayscale-0 group-hover:opacity-40"
+                  className="object-cover opacity-45 grayscale-[20%] transition-all duration-1000 group-hover:opacity-65 group-hover:grayscale-0"
                 />
-                <div className="absolute inset-0 bg-linear-to-b from-black-pure/10 via-transparent to-black-pure/90" />
+                {/* Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black-pure via-black-pure/50 to-black-pure/10" />
               </div>
 
-              {/* Content Overlay */}
-              <div className="relative z-10 h-full flex flex-col justify-between p-10 lg:p-12">
-                <div className="flex justify-between items-start">
-                  <div className="p-3 bg-accent-gold/5 border border-accent-gold/10 backdrop-blur-xl transition-all duration-700 group-hover:bg-accent-gold/10">
-                    <Quote size={16} strokeWidth={1.2} className="text-accent-gold" />
+              {/* Content */}
+              <div className="relative z-10 h-full flex flex-col justify-between p-8">
+
+                {/* Top — quote icon + type */}
+                <div className="flex items-start justify-between">
+                  <div className="p-2.5 bg-accent-gold/[0.06] border border-accent-gold/15 backdrop-blur-sm group-hover:bg-accent-gold/10 transition-colors duration-500">
+                    <Quote size={14} strokeWidth={1.5} className="text-accent-gold" />
                   </div>
-                  <span className="font-syne text-[9px] uppercase tracking-[0.4em] text-text-secondary opacity-40">
+                  <span className="font-syne text-[8px] uppercase tracking-[0.4em] text-text-secondary/35 mt-1">
                     {item.type}
                   </span>
                 </div>
 
-                <div className="space-y-8">
-                  <h4 className="font-syne text-[10px] uppercase tracking-[0.4em] text-accent-gold/60 group-hover:text-accent-gold font-bold transition-colors duration-700">
+                {/* Bottom — quote + author */}
+                <div className="space-y-5">
+                  {/* Title */}
+                  <h4 className="font-syne text-[9px] uppercase tracking-[0.4em] text-accent-gold/50 group-hover:text-accent-gold font-bold transition-colors duration-500">
                     {item.title}
                   </h4>
-                  <p className="font-inter text-sm lg:text-base text-text-primary leading-relaxed italic opacity-80 group-hover:opacity-100 transition-opacity duration-700">
+
+                  {/* Quote */}
+                  <p className="font-inter text-sm lg:text-base text-text-primary leading-relaxed italic opacity-75 group-hover:opacity-95 transition-opacity duration-500">
                     &ldquo;{item.content}&rdquo;
                   </p>
-                  <p className="font-syne text-[9px] uppercase tracking-[0.4em] text-text-secondary pt-8 border-t border-white/5 opacity-40">
-                    — {item.author}
-                  </p>
+
+                  {/* Author */}
+                  <div className="pt-4 border-t border-white/[0.07]">
+                    <p className="font-syne text-[8px] uppercase tracking-[0.4em] text-text-secondary/40">
+                      — {item.author}
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              {/* Play Interaction Reveal */}
-              <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-700 bg-black-pure/40 backdrop-blur-xs">
-                <div className="w-20 h-20 rounded-none border border-accent-gold/20 flex items-center justify-center bg-black-pure/40 backdrop-blur-3xl scale-90 group-hover:scale-100 transition-all duration-700">
-                  <Play size={24} strokeWidth={1.2} className="text-accent-gold fill-accent-gold/20" />
-                </div>
-              </div>
+              {/* Film grain */}
+              <div className="absolute inset-0 z-20 pointer-events-none opacity-[0.025] bg-[url('/noise.webp')] mix-blend-overlay" />
 
-              {/* Cinematic Details */}
-              <div className="absolute inset-0 z-30 pointer-events-none">
-                <div className="absolute inset-0 opacity-[0.02] bg-[url('/noise.webp')] mix-blend-overlay" />
-                <div className="absolute inset-0 bg-linear-to-br from-white/3 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-              </div>
+              {/* Hover gold sheen */}
+              <div className="absolute inset-0 z-20 pointer-events-none bg-gradient-to-br from-accent-gold/[0.04] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             </div>
           ))}
         </div>
 
-        {/* Corporate Proof Deco */}
-        <div className="mt-40 pt-20 border-t border-white/5 flex flex-wrap justify-center items-center gap-16 md:gap-32 opacity-20 hover:opacity-60 transition-all duration-1000 grayscale hover:grayscale-0">
-           <span className="font-syne text-[10px] uppercase tracking-[0.8em] text-text-secondary">Corporate Partners</span>
-           <span className="font-syne text-xs uppercase tracking-[0.6em] text-text-primary hover:text-accent-gold transition-colors cursor-default">TechCo</span>
-           <span className="font-syne text-xs uppercase tracking-[0.6em] text-text-primary hover:text-accent-gold transition-colors cursor-default">GlobalBank</span>
-           <span className="font-syne text-xs uppercase tracking-[0.6em] text-text-primary hover:text-accent-gold transition-colors cursor-default">LuxuryGroup</span>
+        {/* Corporate logos bar */}
+        <div className="mt-24 pt-16 border-t border-white/[0.05] flex flex-wrap justify-center items-center gap-10 md:gap-20">
+          <span className="font-syne text-[9px] uppercase tracking-[0.7em] text-text-secondary/30">
+            Corporate Partners
+          </span>
+          {["TechCo", "GlobalBank", "LuxuryGroup"].map((name) => (
+            <span
+              key={name}
+              className="font-syne text-[10px] uppercase tracking-[0.5em] text-text-primary/20 hover:text-accent-gold/60 transition-colors duration-500 cursor-default"
+            >
+              {name}
+            </span>
+          ))}
         </div>
       </div>
     </section>

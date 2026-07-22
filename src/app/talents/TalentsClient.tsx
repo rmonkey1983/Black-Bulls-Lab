@@ -61,6 +61,7 @@ export function TalentsClient() {
                         src="/images/brand/service-performance.webp"
                         alt="Join the Lab Cast"
                         fill
+                        sizes="100vw"
                         className="object-cover opacity-20 scale-105"
                         priority
                     />
@@ -83,7 +84,7 @@ export function TalentsClient() {
                 <div className="absolute top-12 left-12 z-50">
                     <Link
                         href="/"
-                        className="group flex items-center gap-4 text-text-secondary/30 hover:text-accent-gold transition-all uppercase text-[10px] font-bold tracking-[0.5em]"
+                        className="group flex items-center gap-4 text-text-secondary/30 hover:text-accent-gold transition-colors uppercase text-[10px] font-bold tracking-[0.5em]"
                     >
                         <ArrowLeft size={14} className="group-hover:-translate-x-2 transition-transform" /> 
                         Torna alla Home
@@ -163,7 +164,7 @@ export function TalentsClient() {
                             { role: "Bartender", icon: GlassWater, desc: "Mixology, Alchimia & Servizio Premium." },
                             { role: "Technician", icon: Zap, desc: "Regia Luci, Audio & Show Control." },
                         ].map((item) => (
-                            <PremiumCard key={item.role} className="p-12 border border-white/5 bg-white/1 hover:border-accent-gold/20 transition-all duration-700 text-center flex flex-col items-center gap-8">
+                            <PremiumCard key={item.role} className="p-12 border border-white/5 bg-white/1 hover:border-accent-gold/20 transition-[border-color,box-shadow] duration-700 text-center flex flex-col items-center gap-8">
                                 <div className="w-16 h-16 rounded-full border border-accent-gold/10 flex items-center justify-center text-accent-gold group-hover:scale-110 transition-transform duration-700">
                                     <item.icon size={32} />
                                 </div>
@@ -189,7 +190,7 @@ export function TalentsClient() {
                     <div className="pt-12">
                         <Link 
                             href="/calendario"
-                            className="inline-flex items-center gap-8 px-16 py-8 bg-black-pure text-accent-gold text-xl font-black uppercase tracking-widest hover:bg-white hover:text-black-pure transition-all duration-500 rounded-full"
+                            className="inline-flex items-center gap-8 px-16 py-8 bg-black-pure text-accent-gold text-xl font-black uppercase tracking-widest hover:bg-white hover:text-black-pure transition-[background-color,color] duration-500 rounded-full"
                         >
                             PRENDI IL TUO POSTO
                         </Link>

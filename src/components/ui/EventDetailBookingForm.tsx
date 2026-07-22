@@ -28,6 +28,8 @@ export function EventDetailBookingForm({
   const [dataConsent, setDataConsent] = useState(false);
 
   const maxSlots = Math.min(availableSlots, 10);
+  const formatPrice = (amount: number) =>
+    new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR", minimumFractionDigits: 0 }).format(amount);
   const totalPrice = quantity * eventPrice;
   const isSoldOut = availableSlots === 0;
 
@@ -71,8 +73,6 @@ export function EventDetailBookingForm({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           eventId,
-          title: eventTitle,
-          price: eventPrice,
           quantity,
           customerName,
           customerEmail,
@@ -130,6 +130,7 @@ export function EventDetailBookingForm({
             type="button"
             onClick={() => handleQuantityChange(-1)}
             disabled={quantity <= 1}
+            aria-label="Riduci quantità"
             className="w-11 h-11 rounded-full border border-zinc-700 flex items-center justify-center text-zinc-300 hover:border-[#FFD700] hover:text-[#FFD700] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
           >
             <Minus size={16} />
@@ -141,6 +142,7 @@ export function EventDetailBookingForm({
             type="button"
             onClick={() => handleQuantityChange(1)}
             disabled={quantity >= maxSlots}
+            aria-label="Aumenta quantità"
             className="w-11 h-11 rounded-full border border-zinc-700 flex items-center justify-center text-zinc-300 hover:border-[#FFD700] hover:text-[#FFD700] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
           >
             <Plus size={16} />
@@ -157,11 +159,11 @@ export function EventDetailBookingForm({
           </span>
           <div className="text-right">
             <span className="text-3xl font-bold text-[#FFD700]">
-              €{totalPrice}
+              {formatPrice(totalPrice)}
             </span>
             {quantity > 1 && (
               <span className="block text-[10px] text-zinc-600 mt-0.5">
-                €{eventPrice} × {quantity} persone
+                {formatPrice(eventPrice)} × {quantity} persone
               </span>
             )}
           </div>
@@ -181,10 +183,12 @@ export function EventDetailBookingForm({
           <input
             id="customerName"
             type="text"
+            name="customerName"
             required
+            autoComplete="name"
             value={customerName}
             onChange={(e) => setCustomerName(e.target.value)}
-            placeholder="Mario Rossi"
+            placeholder="Mario Rossi…"
             className={inputClass}
           />
         </div>
@@ -201,10 +205,13 @@ export function EventDetailBookingForm({
             <input
               id="customerEmail"
               type="email"
+              name="email"
               required
+              autoComplete="email"
+              spellCheck={false}
               value={customerEmail}
               onChange={(e) => setCustomerEmail(e.target.value)}
-              placeholder="mario@example.com"
+              placeholder="mario@example.com…"
               className={`${inputClass} pl-10`}
             />
           </div>
@@ -222,10 +229,12 @@ export function EventDetailBookingForm({
             <input
               id="customerPhone"
               type="tel"
+              name="phone"
               required
+              autoComplete="tel"
               value={customerPhone}
               onChange={(e) => setCustomerPhone(e.target.value)}
-              placeholder="+39 333 000 0000"
+              placeholder="+39 333 000 0000…"
               className={`${inputClass} pl-10`}
             />
           </div>
@@ -287,13 +296,17 @@ export function EventDetailBookingForm({
           className="mt-1 w-4 h-4 rounded border-zinc-700 bg-zinc-900 text-[#FFD700] focus:ring-[#FFD700] focus:ring-offset-black cursor-pointer"
         />
         <label htmlFor="dataConsent" className="text-xs text-zinc-400 leading-relaxed cursor-pointer select-none">
-          Acconsento al trattamento dei miei dati personali per la gestione della prenotazione e per ricevere comunicazioni relative all'evento, nel rispetto della <a href="/privacy" target="_blank" className="text-[#FFD700] hover:underline">Privacy Policy</a>. *
+          Acconsento al trattamento dei miei dati personali per la gestione della prenotazione e per ricevere comunicazioni relative all&apos;evento, nel rispetto della <a href="/privacy" target="_blank" className="text-[#FFD700] hover:underline">Privacy Policy</a>. *
         </label>
       </div>
 
       {/* Error Message */}
       {error && (
-        <div className="bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3 text-red-400 text-sm font-medium">
+        <div
+          role="alert"
+          aria-live="polite"
+          className="bg-red-500/10 border border-red-500/30 rounded-xl px-4 py-3 text-red-400 text-sm font-medium"
+        >
           {error}
         </div>
       )}
@@ -308,12 +321,12 @@ export function EventDetailBookingForm({
         {isLoading ? (
           <>
             <Loader2 size={18} className="animate-spin" />
-            Reindirizzamento...
+            Reindirizzamento…
           </>
         ) : (
           <>
-            <ShieldCheck size={18} />
-            Procedi al Pagamento — €{totalPrice}
+            <ShieldCheck size={18} aria-hidden="true" />
+            Procedi al Pagamento — {formatPrice(totalPrice)}
           </>
         )}
       </button>

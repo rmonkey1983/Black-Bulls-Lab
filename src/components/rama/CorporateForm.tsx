@@ -50,7 +50,7 @@ export function CorporateForm() {
           onClick={() => setStatus("idle")}
           className="text-rama-accent hover:text-white transition-colors text-sm font-bold uppercase tracking-widest"
         >
-          Invia un'altra richiesta
+          Invia un&apos;altra richiesta
         </button>
       </div>
     );
