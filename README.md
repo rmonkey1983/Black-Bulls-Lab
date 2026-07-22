@@ -35,3 +35,32 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 # bbl
+
+## Liar System Waitlist API
+
+Endpoint per la registrazione degli utenti alla lista d'attesa del sistema Liar System.
+
+### Endpoint: `POST /api/liar-system/waitlist`
+
+#### Payload Request (JSON)
+```json
+{
+  "email": "utente@example.com",
+  "name": "Mario Rossi",
+  "phone": "+393331234567",
+  "city": "Milano",
+  "instagram": "@mariorossi",
+  "source": "landing_page",
+  "metadata": {}
+}
+```
+
+#### Risposte HTTP
+- `201 Created`: Registrazione completata.
+- `400 Bad Request`: Email mancante o formato non valido.
+- `409 Conflict`: Email già presente nella lista d'attesa.
+- `500 Internal Server Error`: Errore del server o connessione Supabase.
+
+### Schema Supabase (`liar_system_waitlist`)
+Eseguire lo script SQL in `database/liar_system_waitlist.sql` su Supabase SQL Editor per istanziare la tabella e le policy RLS.
+
