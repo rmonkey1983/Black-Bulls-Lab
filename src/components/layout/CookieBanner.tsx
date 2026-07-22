@@ -78,7 +78,7 @@ export function CookieBanner() {
 
   return (
     <div 
-      className="fixed bottom-20 left-4 right-4 md:bottom-6 md:left-6 md:right-auto md:max-w-md z-9999 bg-[#0B0B0B]/95 border border-white/8 backdrop-blur-md p-5 md:p-6 rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col gap-4 text-left transition-all duration-700 ease-out animate-in fade-in slide-in-from-bottom-8"
+      className="fixed bottom-20 left-4 right-4 md:bottom-6 md:left-6 md:right-auto md:max-w-md z-9999 bg-black-pure/95 border border-white/8 backdrop-blur-md p-5 md:p-6 rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col gap-4 text-left transition-all duration-700 ease-out animate-in fade-in slide-in-from-bottom-8"
       role="dialog"
       aria-labelledby="cookie-title"
       aria-describedby="cookie-desc"

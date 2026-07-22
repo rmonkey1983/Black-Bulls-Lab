@@ -184,7 +184,7 @@ export default async function SuccessPage(props: {
                       <TicketQRCode ticketId={ticket.id} guestName={ticket.guest_name} />
                     </div>
                     {ticket.guest_name && (
-                      <span className="text-[10px] text-[#FFD700] font-bold uppercase tracking-widest text-center max-w-[128px] truncate">
+                      <span className="text-[10px] text-[#FFD700] font-bold uppercase tracking-widest text-center max-w-32 truncate">
                         {ticket.guest_name}
                       </span>
                     )}

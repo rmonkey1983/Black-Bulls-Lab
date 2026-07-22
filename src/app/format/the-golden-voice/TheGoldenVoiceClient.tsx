@@ -72,7 +72,7 @@ export function TheGoldenVoiceClient() {
           {/* Warm Stage Spotlight Effect */}
           <div 
             ref={spotlightRef}
-            className="absolute top-0 left-0 w-[800px] h-[800px] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 opacity-30"
+            className="absolute top-0 left-0 w-200 h-200 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 opacity-30"
             style={{
               background: 'radial-gradient(circle, rgba(200, 169, 107, 0.12) 0%, transparent 70%)',
               filter: 'blur(80px)'
@@ -116,7 +116,7 @@ export function TheGoldenVoiceClient() {
                 </div>
 
                 <div className="pt-12 flex flex-col sm:flex-row items-center justify-center gap-8">
-                    <PrimaryButton href="#casting-form" size="lg" className="w-full sm:w-auto min-w-[280px]">
+                    <PrimaryButton href="#casting-form" size="lg" className="w-full sm:w-auto min-w-70">
                         SALI SUL PALCO
                     </PrimaryButton>
                 </div>

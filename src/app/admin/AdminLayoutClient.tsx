@@ -17,6 +17,7 @@ import {
     EyeOff,
     Ticket,
     QrCode,
+    TrendingUp,
 } from "lucide-react";
 
 const navItems = [
@@ -24,6 +25,7 @@ const navItems = [
     { name: "Scanner", href: "/admin/scanner", icon: QrCode, code: "SCN" },
     { name: "Eventi", href: "/admin/events", icon: FlaskConical, code: "EVT" },
     { name: "Prenotazioni", href: "/admin/bookings", icon: Ticket, code: "BKG" },
+    { name: "Crescita Community", href: "/admin/community", icon: TrendingUp, code: "COMM" },
     { name: "Gallery", href: "/admin/gallery", icon: ImageIcon, code: "GAL" },
     { name: "Artisti", href: "/admin/talents", icon: Users, code: "TAL" },
     { name: "Impostazioni", href: "/admin/settings", icon: Settings, code: "SET" },

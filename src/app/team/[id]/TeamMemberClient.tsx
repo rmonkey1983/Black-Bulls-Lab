@@ -50,7 +50,7 @@ export function TeamMemberClient({ member }: TeamMemberClientProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           {/* Left Column: Image Centerpiece */}
           <div className="lg:col-span-5 profile-content">
-            <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-white/5 shadow-2xl group bg-zinc-900 flex items-center justify-center">
+            <div className="relative aspect-4/5 rounded-xl overflow-hidden border border-white/5 shadow-2xl group bg-zinc-900 flex items-center justify-center">
               {!imageError ? (
                 <Image
                   src={member.imageUrl}
@@ -71,7 +71,7 @@ export function TeamMemberClient({ member }: TeamMemberClientProps) {
                   <span className="font-heading text-xl text-white/50 uppercase tracking-widest">{member.name}</span>
                 </div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 pointer-events-none" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-60 pointer-events-none" />
             </div>
           </div>
 
@@ -81,7 +81,7 @@ export function TeamMemberClient({ member }: TeamMemberClientProps) {
               {/* Header */}
               <div className="profile-content">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="h-[1px] w-8 bg-yellow-500/40" />
+                  <div className="h-px w-8 bg-yellow-500/40" />
                   <span className="font-rock-salt text-yellow-500 transform -rotate-2 text-lg">
                     Artist Profile
                   </span>

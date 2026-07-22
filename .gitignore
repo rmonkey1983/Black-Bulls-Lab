@@ -54,3 +54,4 @@ convert_to_webp.js
 .agents/
 scratch/
 next-dev-error.log
+*.csv
