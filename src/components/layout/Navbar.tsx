@@ -34,7 +34,7 @@ export default function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-in-out",
         scrolled
-          ? "h-16 lg:h-20 bg-black-pure/85 backdrop-blur-xl border-b border-white/[0.06]"
+          ? "h-16 lg:h-20 bg-black-pure/85 backdrop-blur-xl border-b border-white/6"
           : "h-20 lg:h-24 bg-transparent border-b border-transparent"
       )}
     >
@@ -50,14 +50,14 @@ export default function Navbar() {
         }}
       />
 
-      <div className="max-w-[1440px] mx-auto h-full flex items-center justify-between px-6 md:px-10 relative">
+      <div className="max-w-360 mx-auto h-full flex items-center justify-between px-6 md:px-10 relative">
 
         {/* LOGO */}
         <div className="flex-none">
           <Link
             href="/"
             aria-label="Black Bulls Lab — Home"
-            className="relative z-[110]"
+            className="relative z-110"
             onClick={() => setMenuOpen(false)}
             suppressHydrationWarning
           >
@@ -70,7 +70,7 @@ export default function Navbar() {
               style={{ width: "auto", height: "auto" }}
               className={cn(
                 "transition-all duration-700 h-auto",
-                scrolled ? "w-[100px] lg:w-[120px]" : "w-[120px] lg:w-[145px]"
+                scrolled ? "w-25 lg:w-30" : "w-30 lg:w-36.25"
               )}
             />
           </Link>
@@ -108,13 +108,12 @@ export default function Navbar() {
           <Link
             href="/calendario"
             suppressHydrationWarning
-            className="relative overflow-hidden group font-syne text-[9px] font-bold uppercase tracking-[0.45em] px-7 py-3.5 bg-accent-gold text-black-pure transition-all duration-500 hover:bg-accent-gold-light"
+            className="relative px-8 py-3.5 bg-accent-gold text-black-pure font-syne text-[11px] font-extrabold uppercase tracking-[0.25em] overflow-hidden transition-all duration-500 group hover:shadow-[0_0_35px_rgba(200,169,107,0.4)]"
           >
-            <span className="relative z-10" suppressHydrationWarning>
-              Calendario Date
+            <span className="relative z-10 flex items-center gap-2">
+              Prenota Ora <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </span>
-            {/* Sheen on hover */}
-            <span className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-[-20deg]" />
+            <div className="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
           </Link>
         </div>
 
@@ -135,91 +134,57 @@ export default function Navbar() {
       {/* ── MOBILE MENU ── */}
       <div
         className={cn(
-          "lg:hidden fixed inset-0 z-[100] bg-black-pure transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] overscroll-contain overflow-y-auto no-scrollbar",
+          "lg:hidden fixed inset-0 z-[100] bg-black-pure transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]",
           menuOpen
             ? "opacity-100 pointer-events-auto translate-y-0"
             : "opacity-0 pointer-events-none -translate-y-full"
         )}
       >
-        {/* Ambient glow */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(200,169,107,0.04) 0%, transparent 70%)",
-            filter: "blur(80px)",
-          }}
-        />
+        <div className="fixed inset-0 bg-black-pure z-[100] flex flex-col justify-between p-8 md:p-16 pt-32 pb-12 overflow-y-auto">
 
-        <div className="flex flex-col min-h-full container-max px-8 pt-28 pb-12 relative z-10">
+          {/* Background Ambient Glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent-gold/5 rounded-full blur-[150px] pointer-events-none" />
 
-          {/* Nav links */}
-          <ul className="space-y-1 mb-auto">
-            {NAV_LINKS.map((link, i) => (
-              <li
-                key={link.href}
-                className={cn(
-                  "border-b border-white/[0.05] transition-all duration-700",
-                  menuOpen
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-0 -translate-x-8"
-                )}
-                style={{ transitionDelay: `${i * 70}ms` }}
-              >
+          {/* Navigation Links */}
+          <div className="relative z-10 flex flex-col space-y-6 md:space-y-8">
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href;
+              return (
                 <Link
+                  key={link.href}
                   href={link.href}
-                  className={cn(
-                    "block font-syne text-3xl font-bold uppercase tracking-tighter py-5 transition-colors duration-500",
-                    pathname === link.href
-                      ? "text-accent-gold"
-                      : "text-text-primary hover:text-accent-gold"
-                  )}
                   onClick={() => setMenuOpen(false)}
-                  suppressHydrationWarning
+                  className="group flex items-baseline justify-between border-b border-white/5 pb-4"
                 >
-                  {link.label}
+                  <span className={cn(
+                    "font-syne text-3xl font-bold uppercase tracking-tighter transition-colors duration-500",
+                    isActive ? "text-accent-gold" : "text-text-primary group-hover:text-accent-gold"
+                  )}>
+                    {link.label}
+                  </span>
                 </Link>
-              </li>
-            ))}
-          </ul>
+              );
+            })}
+          </div>
 
-          {/* Bottom actions */}
-          <div
-            className={cn(
-              "mt-10 space-y-4 transition-all duration-700 delay-500",
-              menuOpen
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-8"
-            )}
-          >
-            <Link
-              href="/calendario"
-              onClick={() => setMenuOpen(false)}
-              className="flex items-center justify-between w-full py-5 px-6 bg-accent-gold text-black-pure group"
-              suppressHydrationWarning
-            >
-              <span className="font-syne text-[10px] uppercase tracking-[0.5em] font-bold">
-                Vedi Calendario Date
-              </span>
-              <ArrowRight
-                size={18}
-                className="group-hover:translate-x-1 transition-transform duration-500"
-              />
-            </Link>
+          {/* Socials & WhatsApp Footer */}
+          <div className="relative z-10 space-y-8 pt-8 border-t border-white/6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+              <div>
+                <p className="font-syne text-[9px] uppercase tracking-[0.4em] text-text-secondary/40 mb-2">
+                  Diretto / WhatsApp
+                </p>
+                <a
+                  href={`https://wa.me/${CONTACT_WHATSAPP}?text=${WA_MSG}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-syne text-lg md:text-xl font-bold text-accent-gold hover:underline"
+                >
+                  +{CONTACT_WHATSAPP.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})$/, "$1 $2 $3 $4")}
+                </a>
+              </div>
 
-            <a
-              href={`https://wa.me/${CONTACT_WHATSAPP}?text=${WA_MSG}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block text-center font-syne text-[9px] uppercase tracking-[0.4em] text-text-secondary/50 hover:text-accent-gold transition-colors duration-500 py-3 border border-white/[0.06]"
-              suppressHydrationWarning
-            >
-              Richiedi Info su WhatsApp
-            </a>
-
-            {/* Socials */}
-            <div className="flex items-center justify-between pt-6 border-t border-white/[0.06]">
-              <div className="flex gap-6">
+              <div className="flex items-center gap-6 border-t md:border-t-0 pt-6 md:pt-0 border-white/6">
                 <a
                   href={SOCIAL_LINKS.instagram}
                   target="_blank"
