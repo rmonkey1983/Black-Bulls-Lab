@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { getStrictSupabaseAdmin, supabase } from "@/lib/supabase";
-import crypto from "crypto";
 
 export const dynamic = "force-dynamic";
 
@@ -37,7 +36,7 @@ export async function GET(req: Request) {
     const unmaskReason = searchParams.get("reason") || "Nessuna motivazione fornita";
     const actor = searchParams.get("actor") || "admin@blackbullslab.com";
 
-    // 1. Peschiamo la waitlist e i dati collegati
+    // 1. Peschiamo la waitlist e i dati collegati dalla tabella reale
     const { data: waitlistEntries } = await dbClient
       .from("liar_system_waitlist")
       .select("*")
@@ -83,12 +82,12 @@ export async function GET(req: Request) {
     const totalRegistrations = waitlist.length;
     const marketingConsentsCount = waitlist.filter((w) => w.marketing_consent).length;
     const eligibleList = waitlist.filter(
-      (w) => w.event_consent && w.status !== "withdrawn" && w.status !== "excluded"
+      (w) => w.event_updates_consent && w.status !== "withdrawn" && w.status !== "invalid"
     );
     const eligibleCount = eligibleList.length;
     const currentThreshold = 30;
     const missingToThreshold = Math.max(0, currentThreshold - eligibleCount);
-    const excludedCount = waitlist.filter((w) => w.status === "excluded" || w.status === "withdrawn").length;
+    const excludedCount = waitlist.filter((w) => w.status === "invalid" || w.status === "withdrawn").length;
     const qualifiedCyclesCount = cycles.filter((c) => c.status === "qualified" || c.status === "drawn" || c.status === "locked").length;
     const deliveredPrizesCount = resultsData?.filter((r) => r.claimed_status === "accepted").length || 0;
 
@@ -99,20 +98,26 @@ export async function GET(req: Request) {
       sourcesMap[src] = (sourcesMap[src] || 0) + 1;
     });
 
-    const maskedParticipants = waitlist.map((w) => ({
-      id: w.id,
-      name: unmask ? w.name : w.name.split(" ")[0] + " " + (w.name.split(" ")[1]?.[0] || "") + ".",
-      email: unmask ? w.email : maskEmail(w.email),
-      phone: unmask ? w.phone : maskPhone(w.phone || ""),
-      city: w.city || "Torino",
-      guests_count: w.guests_count || 1,
-      event_consent: w.event_consent,
-      marketing_consent: w.marketing_consent,
-      status: w.status === "withdrawn" ? "withdrawn" : w.status === "excluded" ? "excluded" : "eligible",
-      source: w.utm_source || w.source || "Diretto",
-      utm_campaign: w.utm_campaign || "-",
-      created_at: w.created_at,
-    }));
+    const maskedParticipants = waitlist.map((w) => {
+      const rawName = w.full_name || "Utente Anonimo";
+      const nameParts = rawName.split(" ");
+      const maskedName = nameParts[0] + " " + (nameParts[1]?.[0] || "") + ".";
+
+      return {
+        id: w.id,
+        name: unmask ? rawName : maskedName,
+        email: unmask ? w.email : maskEmail(w.email),
+        phone: unmask ? (w.phone_e164 || "") : maskPhone(w.phone_e164 || ""),
+        city: w.city || "Torino",
+        guests_count: w.party_size || 1,
+        event_consent: w.event_updates_consent,
+        marketing_consent: w.marketing_consent,
+        status: w.status === "withdrawn" ? "withdrawn" : w.status === "invalid" ? "invalid" : "eligible",
+        source: w.utm_source || w.source || "Diretto",
+        utm_campaign: w.utm_campaign || "-",
+        created_at: w.created_at,
+      };
+    });
 
     return NextResponse.json({
       kpi: {

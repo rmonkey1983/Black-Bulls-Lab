@@ -130,7 +130,7 @@ export function ACenaConIlBugiardoClient() {
 
       const data = await res.json();
 
-      if (!res.ok) {
+      if (!res.ok || data.success === false) {
         setErrorMsg(data.error || "Errore durante l'invio. Riprova tra poco.");
       } else {
         setSuccessMsg(data.message || "Iscrizione completata con successo! Ti ricontatteremo in anteprima.");

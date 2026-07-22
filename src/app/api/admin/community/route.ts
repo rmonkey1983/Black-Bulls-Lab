@@ -84,7 +84,7 @@ export async function GET(req: Request) {
     // KPI Base
     const monthlyTarget = parseInt(process.env.COMMUNITY_MONTHLY_TARGET || "30", 10);
     const totalRegistrations = waitlist.length;
-    const activeContacts = waitlist.filter((w) => w.status !== "withdrawn" && w.status !== "excluded").length;
+    const activeContacts = waitlist.filter((w) => w.status !== "withdrawn" && w.status !== "invalid").length;
     const withdrawnContacts = waitlist.filter((w) => w.status === "withdrawn").length;
 
     const newThisMonth = waitlist.filter((w) => new Date(w.created_at) >= currentMonthStart && w.status !== "withdrawn").length;
@@ -99,24 +99,24 @@ export async function GET(req: Request) {
     const missingToMonthlyTarget = Math.max(0, monthlyTarget - newThisMonth);
 
     const marketingConsents = waitlist.filter((w) => w.marketing_consent).length;
-    const potentialParticipantsTotal = waitlist.reduce((acc, w) => acc + (w.guests_count || 1), 0);
+    const potentialParticipantsTotal = waitlist.reduce((acc, w) => acc + (w.party_size || 1), 0);
 
     // Analisi Gruppi
     const partyDistribution = {
-      individual: waitlist.filter((w) => (w.guests_count || 1) === 1).length,
-      couples: waitlist.filter((w) => (w.guests_count || 1) === 2).length,
-      groups3to4: waitlist.filter((w) => (w.guests_count || 1) >= 3 && (w.guests_count || 1) <= 4).length,
-      groups5to6: waitlist.filter((w) => (w.guests_count || 1) >= 5 && (w.guests_count || 1) <= 6).length,
-      groupsOver6: waitlist.filter((w) => (w.guests_count || 1) > 6).length,
+      individual: waitlist.filter((w) => (w.party_size || 1) === 1).length,
+      couples: waitlist.filter((w) => (w.party_size || 1) === 2).length,
+      groups3to4: waitlist.filter((w) => (w.party_size || 1) >= 3 && (w.party_size || 1) <= 4).length,
+      groups5to6: waitlist.filter((w) => (w.party_size || 1) >= 5 && (w.party_size || 1) <= 6).length,
+      groupsOver6: waitlist.filter((w) => (w.party_size || 1) > 6).length,
       averagePartySize: totalRegistrations ? (potentialParticipantsTotal / totalRegistrations).toFixed(1) : "1.0",
     };
 
     // Analisi Qualità
     const qualityMetrics = {
       emailCompletePct: totalRegistrations ? 100 : 0,
-      phonePresentPct: totalRegistrations ? Math.round((waitlist.filter((w) => w.phone && w.phone.trim().length >= 6).length / totalRegistrations) * 100) : 0,
+      phonePresentPct: totalRegistrations ? Math.round((waitlist.filter((w) => w.phone_e164 && w.phone_e164.trim().length >= 6).length / totalRegistrations) * 100) : 0,
       cityPresentPct: totalRegistrations ? Math.round((waitlist.filter((w) => w.city && w.city.trim().length > 0).length / totalRegistrations) * 100) : 0,
-      eventConsentPct: totalRegistrations ? Math.round((waitlist.filter((w) => w.event_consent).length / totalRegistrations) * 100) : 0,
+      eventConsentPct: totalRegistrations ? Math.round((waitlist.filter((w) => w.event_updates_consent).length / totalRegistrations) * 100) : 0,
       marketingConsentPct: totalRegistrations ? Math.round((marketingConsents / totalRegistrations) * 100) : 0,
       withdrawnPct: totalRegistrations ? Math.round((withdrawnContacts / totalRegistrations) * 100) : 0,
     };
@@ -131,7 +131,7 @@ export async function GET(req: Request) {
         sourcesMap[src] = { count: 0, potential: 0, marketing: 0 };
       }
       sourcesMap[src].count++;
-      sourcesMap[src].potential += w.guests_count || 1;
+      sourcesMap[src].potential += w.party_size || 1;
       if (w.marketing_consent) sourcesMap[src].marketing++;
 
       if (w.utm_campaign) {
@@ -147,7 +147,7 @@ export async function GET(req: Request) {
           };
         }
         campaignMap[key].count++;
-        campaignMap[key].potential += w.guests_count || 1;
+        campaignMap[key].potential += w.party_size || 1;
         if (w.marketing_consent) campaignMap[key].marketing++;
       }
     });
@@ -178,21 +178,27 @@ export async function GET(req: Request) {
     }
 
     // Elenco partecipanti formattato con Privacy by Design
-    const formattedParticipants = filteredList.map((w) => ({
-      id: w.id,
-      name: unmask ? w.name : w.name.split(" ")[0] + " " + (w.name.split(" ")[1]?.[0] || "") + ".",
-      email: unmask ? w.email : maskEmail(w.email),
-      phone: unmask ? w.phone : maskPhone(w.phone || ""),
-      city: w.city || "Torino",
-      guests_count: w.guests_count || 1,
-      event_consent: w.event_consent,
-      marketing_consent: w.marketing_consent,
-      source: w.utm_source || w.source || "Diretto",
-      utm_medium: w.utm_medium || "-",
-      utm_campaign: w.utm_campaign || "-",
-      status: w.status,
-      created_at: w.created_at,
-    }));
+    const formattedParticipants = filteredList.map((w) => {
+      const rawName = w.full_name || "Utente Anonimo";
+      const nameParts = rawName.split(" ");
+      const maskedName = nameParts[0] + " " + (nameParts[1]?.[0] || "") + ".";
+
+      return {
+        id: w.id,
+        name: unmask ? rawName : maskedName,
+        email: unmask ? w.email : maskEmail(w.email),
+        phone: unmask ? (w.phone_e164 || "") : maskPhone(w.phone_e164 || ""),
+        city: w.city || "Torino",
+        guests_count: w.party_size || 1,
+        event_consent: w.event_updates_consent,
+        marketing_consent: w.marketing_consent,
+        source: w.utm_source || w.source || "Diretto",
+        utm_medium: w.utm_medium || "-",
+        utm_campaign: w.utm_campaign || "-",
+        status: w.status,
+        created_at: w.created_at,
+      };
+    });
 
     return NextResponse.json(
       {
@@ -267,10 +273,10 @@ export async function POST(req: Request) {
       ]);
 
       const headers = [
-        "Nome",
+        "Full_Name",
         "Email",
-        "Telefono",
-        "Citta",
+        "Phone_E164",
+        "City",
         "Party_Size",
         "Source",
         "UTM_Source",
@@ -283,17 +289,17 @@ export async function POST(req: Request) {
       ];
 
       const csvRows = records.map((r) => [
-        `"${sanitizeCSVCell(r.name)}"`,
-        `"${sanitizeCSVCell(r.email)}"`,
-        `"${sanitizeCSVCell(r.phone || "")}"`,
+        `"${sanitizeCSVCell(r.full_name || "")}"`,
+        `"${sanitizeCSVCell(r.email || "")}"`,
+        `"${sanitizeCSVCell(r.phone_e164 || "")}"`,
         `"${sanitizeCSVCell(r.city || "Torino")}"`,
-        r.guests_count || 1,
+        r.party_size || 1,
         `"${sanitizeCSVCell(r.source || "landing_page")}"`,
         `"${sanitizeCSVCell(r.utm_source || "")}"`,
         `"${sanitizeCSVCell(r.utm_medium || "")}"`,
         `"${sanitizeCSVCell(r.utm_campaign || "")}"`,
         `"${sanitizeCSVCell(r.status)}"`,
-        r.event_consent ? "TRUE" : "FALSE",
+        r.event_updates_consent ? "TRUE" : "FALSE",
         r.marketing_consent ? "TRUE" : "FALSE",
         r.created_at,
       ]);

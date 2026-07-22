@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { getStrictSupabaseAdmin, supabase } from "@/lib/supabase";
+import { getStrictSupabaseAdmin } from "@/lib/supabase";
 
 export const dynamic = "force-dynamic";
 
-// Zod Schema per la validazione della request
+// Zod Schema per la validazione del payload di richiesta
 const waitlistSchema = z.object({
   name: z.string().min(2, "Il nome deve contenere almeno 2 caratteri").max(100, "Nome troppo lungo"),
   email: z.string().email("Indirizzo email non valido").max(200, "Email troppo lunga"),
@@ -28,8 +28,34 @@ const waitlistSchema = z.object({
   website: z.string().optional().default(""), // Honeypot field
 });
 
+// Normalizzazione numero di telefono in formato E.164 (^\+[1-9][0-9]{7,14}$)
+function normalizeE164Phone(rawPhone: string): string | null {
+  if (!rawPhone) return null;
+  let cleaned = rawPhone.trim().replace(/[\s\-\(\)]/g, "");
+
+  if (cleaned.startsWith("00")) {
+    cleaned = "+" + cleaned.slice(2);
+  } else if (!cleaned.startsWith("+")) {
+    if (cleaned.startsWith("39") && cleaned.length >= 10) {
+      cleaned = "+" + cleaned;
+    } else {
+      cleaned = "+39" + cleaned;
+    }
+  }
+
+  const e164Regex = /^\+[1-9][0-9]{7,14}$/;
+  if (!e164Regex.test(cleaned)) {
+    return null;
+  }
+  return cleaned;
+}
+
+// Verification Cloudflare Turnstile con approccio Fail-Closed
 async function verifyTurnstile(token: string, secretKey: string, remoteIp?: string): Promise<boolean> {
-  if (!secretKey) return true; // Se la chiave non è configurata in locale/ambiente, non bloccare
+  if (!secretKey) {
+    // In ambiente senza secret (es. local dev senza Turnstile)
+    return true;
+  }
   if (!token) return false;
 
   try {
@@ -45,8 +71,8 @@ async function verifyTurnstile(token: string, secretKey: string, remoteIp?: stri
     const outcome = await res.json();
     return Boolean(outcome.success);
   } catch (err) {
-    console.error("[Turnstile Verification Exception]:", err);
-    return true; // Fallback difensivo in caso di downtime del servizio di verifica
+    console.error("[Turnstile Verification Fail-Closed Exception]:", err);
+    return false; // Fail-closed in caso di errore di rete
   }
 }
 
@@ -57,22 +83,21 @@ export async function POST(req: Request) {
   };
 
   try {
-    // Controllo dimensione approssimativa body (max 50KB)
+    // Controllo dimensione payload max 50KB
     const contentLength = parseInt(req.headers.get("content-length") || "0", 10);
     if (contentLength > 50000) {
-      return NextResponse.json({ error: "Payload troppo grande" }, { status: 413, headers });
+      return NextResponse.json({ success: false, error: "Payload troppo grande." }, { status: 413, headers });
     }
 
     const rawBody = await req.json().catch(() => null);
     if (!rawBody || typeof rawBody !== "object") {
-      return NextResponse.json({ error: "Formato richiesta non valido" }, { status: 400, headers });
+      return NextResponse.json({ success: false, error: "Formato richiesta non valido." }, { status: 400, headers });
     }
 
-    // Honeypot check
+    // Honeypot check per bot
     if (rawBody.website && String(rawBody.website).trim().length > 0) {
-      // Simula successo per i bot
       return NextResponse.json(
-        { success: true, message: "Iscrizione completata con successo." },
+        { success: true, message: "Iscrizione alla lista d’attesa confermata." },
         { status: 200, headers }
       );
     }
@@ -81,78 +106,125 @@ export async function POST(req: Request) {
     const parseResult = waitlistSchema.safeParse(rawBody);
     if (!parseResult.success) {
       const firstIssue = parseResult.error.issues[0]?.message || "Dati inviati non validi";
-      return NextResponse.json({ error: firstIssue }, { status: 400, headers });
+      return NextResponse.json({ success: false, error: firstIssue }, { status: 400, headers });
     }
 
     const data = parseResult.data;
 
-    // Cloudflare Turnstile verification
+    // Cloudflare Turnstile Verification
     const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
-    if (turnstileSecret && data.turnstileToken) {
+    if (turnstileSecret) {
       const clientIp = req.headers.get("x-forwarded-for")?.split(",")[0] || undefined;
       const isHuman = await verifyTurnstile(data.turnstileToken, turnstileSecret, clientIp);
       if (!isHuman) {
-        return NextResponse.json({ error: "Verifica anti-bot fallita. Riprova." }, { status: 400, headers });
+        return NextResponse.json({ success: false, error: "Verifica anti-bot fallita. Riprova." }, { status: 400, headers });
       }
     }
 
     // Normalizzazione dati
     const cleanEmail = data.email.trim().toLowerCase();
-    const cleanPhone = data.phone.trim().replace(/\s+/g, " ");
     const cleanName = data.name.trim();
+    const phoneE164 = normalizeE164Phone(data.phone);
 
-    // Selezione Supabase client sicuro
+    if (!phoneE164) {
+      return NextResponse.json(
+        { success: false, error: "Numero di telefono non valido. Inserire un numero di telefono corretto." },
+        { status: 400, headers }
+      );
+    }
+
+    // Istanziazione Fail-Closed di Supabase Service Role Admin
     let dbClient;
     try {
       dbClient = getStrictSupabaseAdmin();
-    } catch {
-      dbClient = supabase;
+    } catch (err) {
+      console.error("[Supabase Admin Service Role Missing]:", err);
+      return NextResponse.json(
+        { success: false, error: "Servizio temporaneamente non disponibile. Riprova più tardi." },
+        { status: 503, headers }
+      );
     }
 
-    // Controllo se l'utente esiste già per preservare consensi precedenti (es. marketing_consent già true)
-    const { data: existingUser } = await dbClient
+    // Controllo esistenza contatto per preservazione consensi e prevenzione duplicati
+    const { data: existingUser, error: findError } = await dbClient
       .from("liar_system_waitlist")
-      .select("id, marketing_consent")
+      .select("id, marketing_consent, marketing_channels, marketing_consent_at, status")
       .eq("email", cleanEmail)
       .maybeSingle();
 
-    const finalMarketingConsent = existingUser
-      ? existingUser.marketing_consent || data.marketing_consent
-      : data.marketing_consent;
+    if (findError) {
+      console.error("[Waitlist Query Error]:", findError.message);
+      return NextResponse.json(
+        { success: false, error: "Impossibile completare la registrazione. Riprova a breve." },
+        { status: 500, headers }
+      );
+    }
 
-    const payloadToSave = {
+    const nowIso = new Date().toISOString();
+    let finalMarketingConsent = false;
+    let finalMarketingChannels: string[] = [];
+    let finalMarketingConsentAt: string | null = null;
+
+    if (existingUser) {
+      if (existingUser.marketing_consent) {
+        finalMarketingConsent = true;
+        finalMarketingChannels = existingUser.marketing_channels || ["email", "whatsapp"];
+        finalMarketingConsentAt = existingUser.marketing_consent_at || nowIso;
+      } else if (data.marketing_consent) {
+        finalMarketingConsent = true;
+        finalMarketingChannels = ["email", "whatsapp"];
+        finalMarketingConsentAt = nowIso;
+      } else {
+        finalMarketingConsent = false;
+        finalMarketingChannels = [];
+        finalMarketingConsentAt = null;
+      }
+    } else {
+      if (data.marketing_consent) {
+        finalMarketingConsent = true;
+        finalMarketingChannels = ["email", "whatsapp"];
+        finalMarketingConsentAt = nowIso;
+      }
+    }
+
+    // Mappatura esatta sulle colonne reali della tabella public.liar_system_waitlist
+    const recordPayload = {
+      full_name: cleanName,
       email: cleanEmail,
-      name: cleanName,
-      phone: cleanPhone,
-      city: data.city,
-      guests_count: data.guests_count,
-      event_consent: true,
+      phone_e164: phoneE164,
+      city: data.city || "Torino",
+      party_size: data.guests_count || 1,
+      event_updates_consent: true,
+      event_updates_channels: ["email", "whatsapp"],
+      event_updates_consent_at: nowIso,
       marketing_consent: finalMarketingConsent,
-      source: data.source,
-      landing_page: data.landing_page,
-      referrer: data.referrer,
-      utm_source: data.utm_source,
-      utm_medium: data.utm_medium,
-      utm_campaign: data.utm_campaign,
-      utm_term: data.utm_term,
-      utm_content: data.utm_content,
-      privacy_version: data.privacy_version,
-      consent_timestamp: new Date().toISOString(),
-      status: "pending",
-      updated_at: new Date().toISOString(),
+      marketing_channels: finalMarketingChannels,
+      marketing_consent_at: finalMarketingConsentAt,
+      privacy_notice_version: data.privacy_version || "v1.0",
+      privacy_acknowledged_at: nowIso,
+      source: data.source || "landing_page",
+      referrer_url: data.referrer || "",
+      landing_path: data.landing_page || "/format/a-cena-con-il-bugiardo",
+      utm_source: data.utm_source || "",
+      utm_medium: data.utm_medium || "",
+      utm_campaign: data.utm_campaign || "",
+      utm_content: data.utm_content || "",
+      utm_term: data.utm_term || "",
+      status: "active",
+      updated_at: nowIso,
     };
 
     if (existingUser) {
-      // Aggiornamento contatto esistente
+      // Aggiornamento del contatto esistente senza duplicazione
       const { error: updateError } = await dbClient
         .from("liar_system_waitlist")
-        .update(payloadToSave)
+        .update(recordPayload)
         .eq("id", existingUser.id);
 
       if (updateError) {
         console.error("[Waitlist Update Error]:", updateError.message);
         return NextResponse.json(
-          { error: "Impossibile aggiornare la registrazione. Riprova." },
+          { success: false, error: "Impossibile aggiornare la registrazione. Riprova." },
           { status: 500, headers }
         );
       }
@@ -160,7 +232,7 @@ export async function POST(req: Request) {
       return NextResponse.json(
         {
           success: true,
-          message: "I tuoi dati e la tua presenza in lista d'attesa sono stati aggiornati!",
+          message: "I tuoi dati e la tua presenza in lista d’attesa sono stati aggiornati!",
         },
         { status: 200, headers }
       );
@@ -169,18 +241,18 @@ export async function POST(req: Request) {
     // Inserimento nuovo contatto
     const { error: insertError } = await dbClient
       .from("liar_system_waitlist")
-      .insert([{ ...payloadToSave, created_at: new Date().toISOString() }]);
+      .insert([{ ...recordPayload, created_at: nowIso }]);
 
     if (insertError) {
       if (insertError.code === "23505") {
         return NextResponse.json(
-          { success: true, message: "Sei già iscritto alla lista d'attesa di Torino!" },
+          { success: true, message: "Sei già iscritto alla lista d’attesa di Torino!" },
           { status: 200, headers }
         );
       }
       console.error("[Waitlist Insert Error]:", insertError.message);
       return NextResponse.json(
-        { error: "Si è verificato un errore durante il salvataggio. Riprova a breve." },
+        { success: false, error: "Si è verificato un errore durante il salvataggio. Riprova a breve." },
         { status: 500, headers }
       );
     }
@@ -188,12 +260,15 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         success: true,
-        message: "Iscrizione alla lista d'attesa confermata! Ti ricontatteremo per l'apertura posti.",
+        message: "Iscrizione alla lista d’attesa confermata! Ti ricontatteremo per l'apertura posti.",
       },
       { status: 201, headers }
     );
   } catch (err) {
     console.error("[Waitlist API Exception]:", err);
-    return NextResponse.json({ error: "Errore interno del server." }, { status: 500, headers });
+    return NextResponse.json(
+      { success: false, error: "Errore interno durante l'elaborazione della richiesta." },
+      { status: 500, headers }
+    );
   }
 }
