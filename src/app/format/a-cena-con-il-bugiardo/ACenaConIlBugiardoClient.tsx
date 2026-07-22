@@ -159,7 +159,7 @@ export function ACenaConIlBugiardoClient() {
     <main className="bg-[#050505] text-[#E5E5E5] min-h-screen font-sans selection:bg-[#990000] selection:text-white overflow-x-hidden">
       
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[92vh] w-full flex items-center justify-center pt-24 pb-16 px-4 md:px-8 border-b border-white/5 overflow-hidden">
+      <section className="relative min-h-svh w-full flex items-center justify-center pt-28 sm:pt-32 pb-16 px-4 md:px-8 border-b border-white/5 overflow-hidden">
         {/* Background Layer */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -198,8 +198,8 @@ export function ACenaConIlBugiardoClient() {
           </div>
 
           {/* Main Title */}
-          <h1 className="font-heading font-extrabold text-4xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tight text-white leading-[0.95]">
-            A CENA CON IL <br />
+          <h1 className="font-heading font-extrabold text-3xl sm:text-6xl md:text-7xl lg:text-8xl uppercase tracking-tight text-white leading-[0.95] wrap-break-word">
+            A CENA CON IL <br className="hidden sm:block" />{" "}
             <span className="text-[#990000] italic drop-shadow-[0_0_25px_rgba(153,0,0,0.5)]">
               BUGIARDO
             </span>
@@ -216,7 +216,7 @@ export function ACenaConIlBugiardoClient() {
           </div>
 
           {/* Confirmed Pilot Information Badges */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto pt-4 text-left">
+          <div className="grid grid-cols-1 min-[360px]:grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl mx-auto pt-4 text-left">
             <div className="p-3 bg-zinc-900/60 border border-white/10 rounded-xl backdrop-blur-md">
               <div className="flex items-center gap-2 text-zinc-400 text-xs mb-1">
                 <MapPin size={14} className="text-[#990000]" /> Città
@@ -546,7 +546,7 @@ export function ACenaConIlBugiardoClient() {
                     onChange={handleChange}
                     placeholder="Mario Rossi"
                     autoComplete="name"
-                    className="w-full px-4 py-3.5 bg-zinc-900/90 border border-white/15 rounded-xl text-white text-sm focus:outline-hidden focus:border-[#990000] focus:ring-1 focus:ring-[#990000] transition-colors"
+                    className="w-full px-4 py-3.5 bg-zinc-900/90 border border-white/15 rounded-xl text-white text-base focus:outline-hidden focus:border-[#990000] focus:ring-1 focus:ring-[#990000] transition-colors"
                   />
                 </div>
 
@@ -564,7 +564,7 @@ export function ACenaConIlBugiardoClient() {
                     onChange={handleChange}
                     placeholder="mario.rossi@example.com"
                     autoComplete="email"
-                    className="w-full px-4 py-3.5 bg-zinc-900/90 border border-white/15 rounded-xl text-white text-sm focus:outline-hidden focus:border-[#990000] focus:ring-1 focus:ring-[#990000] transition-colors"
+                    className="w-full px-4 py-3.5 bg-zinc-900/90 border border-white/15 rounded-xl text-white text-base focus:outline-hidden focus:border-[#990000] focus:ring-1 focus:ring-[#990000] transition-colors"
                   />
                 </div>
 
@@ -586,7 +586,7 @@ export function ACenaConIlBugiardoClient() {
                     onChange={handleChange}
                     placeholder="+39 333 1234567"
                     autoComplete="tel"
-                    className="w-full px-4 py-3.5 bg-zinc-900/90 border border-white/15 rounded-xl text-white text-sm focus:outline-hidden focus:border-[#990000] focus:ring-1 focus:ring-[#990000] transition-colors"
+                    className="w-full px-4 py-3.5 bg-zinc-900/90 border border-white/15 rounded-xl text-white text-base focus:outline-hidden focus:border-[#990000] focus:ring-1 focus:ring-[#990000] transition-colors"
                   />
                 </div>
 

@@ -187,7 +187,7 @@ export default function CommunityDashboardClient() {
           </span>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 min-[360px]:grid-cols-2 lg:grid-cols-5 gap-4">
           <div className="bg-zinc-950 border border-white/5 p-5 rounded-xl space-y-1">
             <div className="flex justify-between items-center text-zinc-500 text-[10px] font-mono uppercase">
               <span>Iscritti Totali</span>
@@ -417,7 +417,7 @@ export default function CommunityDashboardClient() {
         </div>
 
         {/* Filtri */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 font-mono text-xs pb-2">
+        <div className="grid grid-cols-1 min-[360px]:grid-cols-2 md:grid-cols-4 gap-3 font-mono text-xs pb-2">
           <div>
             <label className="block text-[10px] text-zinc-500 uppercase mb-1">Periodo</label>
             <select

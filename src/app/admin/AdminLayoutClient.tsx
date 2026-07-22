@@ -255,12 +255,14 @@ export default function AdminLayoutClient({ children }: { children: ReactNode })
                                 key={item.href}
                                 href={item.href}
                                 onClick={() => setIsSidebarOpen(false)}
-                                className={`flex items-center gap-3 px-3 py-2.5 text-xs font-semibold uppercase tracking-wider
-                                    transition duration-200 group
-                                    ${isActive
-                                        ? "text-green bg-green/10 border-l-2 border-green"
-                                        : "text-gray-400 hover:text-green hover:bg-green/5 border-l-2 border-transparent"
-                                    }`}
+                                className={`
+                                    flex items-center justify-between px-3 py-2.5 rounded text-[11px] uppercase tracking-wider
+                                    font-mono transition-all duration-300
+                                    ${isActive 
+                                        ? "bg-green/10 text-green border border-green/30" 
+                                        : "text-gray-400 hover:text-white hover:bg-white/5"
+                                    }
+                                `}
                             >
                                 <Icon size={16} />
                                 <span>{item.name}</span>

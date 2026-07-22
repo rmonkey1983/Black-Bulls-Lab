@@ -122,9 +122,9 @@ export function FormatIndexClient() {
             </section>
 
             {/* 2. FORMATS LIST - Editorial Layout */}
-            <section className="section-padding-huge bg-black-pure relative">
+            <section className="py-16 md:py-24 lg:py-32 bg-black-pure relative">
                 <div className="container-max">
-                    <div className="formats-list space-y-16 md:space-y-24 lg:space-y-40">
+                    <div className="formats-list space-y-12 md:space-y-20 lg:space-y-32">
                         {EXPERIMENTS.map((format, index) => (
                             <div 
                                 key={format.id} 

@@ -133,7 +133,7 @@ export default function RootLayout({
         >
           Salta al contenuto principale
         </a>
-        <main id="main-content" className="grow relative z-10 w-full">
+        <main id="main-content" className="grow relative z-10 w-full pb-[calc(4.5rem+env(safe-area-inset-bottom))] md:pb-0">
           <PageTransition>
             {children}
           </PageTransition>
