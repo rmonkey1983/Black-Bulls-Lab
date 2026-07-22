@@ -66,7 +66,6 @@ export function HomeClient({ latestPosts, nextEvents }: HomeClientProps) {
   }, { scope: containerRef });
 
   revealOnScroll(".reveal-section");
-  softParallax(".hero-bg-image", 0.2);
   staggerReveal(".format-grid", ".format-card");
   staggerReveal(".reveal-section", ".stagger-item");
 

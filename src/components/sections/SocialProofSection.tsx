@@ -11,7 +11,7 @@ export function SocialProofSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { staggerReveal } = useCinematic();
 
-  staggerReveal(".container-max", ".proof-card");
+  staggerReveal(".social-proof-grid", ".proof-card");
 
   return (
     <section
@@ -45,7 +45,7 @@ export function SocialProofSection() {
         </div>
 
         {/* Cards — taller, more visible images */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+        <div className="social-proof-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
           {SOCIAL_PROOF.map((item) => (
             <div
               key={item.id}

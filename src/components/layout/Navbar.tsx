@@ -67,6 +67,7 @@ export default function Navbar() {
               width={160}
               height={36}
               priority
+              style={{ width: "auto", height: "auto" }}
               className={cn(
                 "transition-all duration-700 h-auto",
                 scrolled ? "w-[100px] lg:w-[120px]" : "w-[120px] lg:w-[145px]"
