@@ -75,7 +75,7 @@ export default async function AdminBookingsPage() {
                   <td className="px-6 py-5">
                     <div className="flex flex-wrap gap-2">
                       {booking.tickets?.map((ticket: any) => (
-                        <div key={ticket.id} className="bg-green/5 border border-green/10 rounded-lg px-3 py-1.5 flex flex-col min-w-[120px]">
+                        <div key={ticket.id} className="bg-green/5 border border-green/10 rounded-lg px-3 py-1.5 flex flex-col min-w-30">
                           <span className="text-[10px] font-black uppercase tracking-wider text-zinc-300">{ticket.guest_name}</span>
                           {ticket.allergies && (
                             <span className="data-readout text-[8px] text-red uppercase tracking-widest mt-1 animate-pulse">
