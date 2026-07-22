@@ -21,7 +21,7 @@ export function SocialProofSection() {
       {/* Subtle background grid */}
       <div className="absolute inset-0 cinematic-grid opacity-50 pointer-events-none" />
 
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-32 md:py-48 lg:py-64 relative z-10">
+      <div className="max-w-360 mx-auto px-6 md:px-12 py-32 md:py-48 lg:py-64 relative z-10">
 
         {/* Header */}
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-20 md:mb-32 gap-10">
@@ -49,7 +49,7 @@ export function SocialProofSection() {
           {SOCIAL_PROOF.map((item) => (
             <div
               key={item.id}
-              className="proof-card group relative overflow-hidden cursor-pointer border border-white/[0.06] transition-all duration-700 ease-out hover:border-accent-gold/25 hover:shadow-[0_40px_100px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(200,169,107,0.05)] aspect-[4/5] sm:aspect-[9/14]"
+              className="proof-card group relative overflow-hidden cursor-pointer border border-white/6 transition-all duration-700 ease-out hover:border-accent-gold/25 hover:shadow-[0_40px_100px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(200,169,107,0.05)] aspect-4/5 sm:aspect-9/14"
             >
               {/* Image — 50% visible by default */}
               <div className="absolute inset-0 transition-transform duration-1000 group-hover:scale-105">
@@ -57,10 +57,10 @@ export function SocialProofSection() {
                   src={item.image}
                   alt={item.title}
                   fill
-                  className="object-cover opacity-45 grayscale-[20%] transition-all duration-1000 group-hover:opacity-65 group-hover:grayscale-0"
+                  className="object-cover opacity-45 grayscale-20 transition-all duration-1000 group-hover:opacity-65 group-hover:grayscale-0"
                 />
                 {/* Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black-pure via-black-pure/50 to-black-pure/10" />
+                <div className="absolute inset-0 bg-linear-to-t from-black-pure via-black-pure/50 to-black-pure/10" />
               </div>
 
               {/* Content */}
@@ -68,7 +68,7 @@ export function SocialProofSection() {
 
                 {/* Top — quote icon + type */}
                 <div className="flex items-start justify-between">
-                  <div className="p-2.5 bg-accent-gold/[0.06] border border-accent-gold/15 backdrop-blur-sm group-hover:bg-accent-gold/10 transition-colors duration-500">
+                  <div className="p-2.5 bg-accent-gold/6 border border-accent-gold/15 backdrop-blur-sm group-hover:bg-accent-gold/10 transition-colors duration-500">
                     <Quote size={14} strokeWidth={1.5} className="text-accent-gold" />
                   </div>
                   <span className="font-syne text-[8px] uppercase tracking-[0.4em] text-text-secondary/35 mt-1">
@@ -101,13 +101,13 @@ export function SocialProofSection() {
               <div className="absolute inset-0 z-20 pointer-events-none opacity-[0.025] bg-[url('/noise.webp')] mix-blend-overlay" />
 
               {/* Hover gold sheen */}
-              <div className="absolute inset-0 z-20 pointer-events-none bg-gradient-to-br from-accent-gold/[0.04] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <div className="absolute inset-0 z-20 pointer-events-none bg-linear-to-br from-accent-gold/4 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             </div>
           ))}
         </div>
 
         {/* Corporate logos bar */}
-        <div className="mt-24 pt-16 border-t border-white/[0.05] flex flex-wrap justify-center items-center gap-10 md:gap-20">
+        <div className="mt-24 pt-16 border-t border-white/5 flex flex-wrap justify-center items-center gap-10 md:gap-20">
           <span className="font-syne text-[9px] uppercase tracking-[0.7em] text-text-secondary/30">
             Corporate Partners
           </span>
