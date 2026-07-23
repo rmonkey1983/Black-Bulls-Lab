@@ -107,7 +107,7 @@ export default function AdminLayoutClient({
           {adminEmail && (
             <div className="mt-3 pt-2.5 border-t border-white/5 flex items-center gap-1.5">
               <UserCheck size={12} className="text-green/60 flex-none" />
-              <span className="data-readout text-[9px] text-gray-400 truncate max-w-[170px]" title={adminEmail}>
+              <span className="data-readout text-[9px] text-gray-400 truncate max-w-42.5" title={adminEmail}>
                 {adminEmail}
               </span>
             </div>
