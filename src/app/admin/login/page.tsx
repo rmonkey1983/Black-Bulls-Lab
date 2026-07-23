@@ -31,6 +31,20 @@ function LoginForm() {
         return;
       }
 
+      // Verify server-side authorization and allowlist
+      const sessionRes = await fetch("/api/admin/auth/session", {
+        method: "GET",
+        cache: "no-store",
+      });
+
+      if (!sessionRes.ok) {
+        // Immediately sign out if user is not in ADMIN_ALLOWED_EMAILS
+        await supabase.auth.signOut();
+        setErrorMsg("Credenziali non valide o accesso non autorizzato.");
+        setLoading(false);
+        return;
+      }
+
       // Safe redirect check to prevent open redirects
       const nextParam = searchParams.get("next");
       let targetUrl = "/admin";
@@ -43,7 +57,7 @@ function LoginForm() {
         targetUrl = nextParam;
       }
 
-      // Force full navigation to refresh server-side cookies
+      // Force full navigation to re-evaluate server layout & session cookies
       window.location.href = targetUrl;
     } catch {
       setErrorMsg("Errore di connessione durante la verifica delle credenziali.");

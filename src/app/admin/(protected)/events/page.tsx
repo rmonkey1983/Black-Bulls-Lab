@@ -1,4 +1,4 @@
-import { getStrictSupabaseAdmin, supabase } from '@/lib/supabase';
+import { getStrictSupabaseAdmin } from '@/lib/supabase';
 import { Pencil, FlaskConical } from 'lucide-react';
 import DeleteEventButton from '@/components/admin/DeleteEventButton';
 import Link from 'next/link';
@@ -15,7 +15,11 @@ export default async function AdminEventsPage(props: {
   try {
     dbClient = getStrictSupabaseAdmin();
   } catch {
-    dbClient = supabase;
+    return (
+      <div className="p-8 text-red font-mono text-sm">
+        Servizio di amministrazione non disponibile. Service role key non configurata.
+      </div>
+    );
   }
 
   // Peschiamo gli eventi esistenti dal server con permessi admin
@@ -35,7 +39,7 @@ export default async function AdminEventsPage(props: {
                 <div className="w-2 h-2 rounded-full bg-green animate-pulse" />
                 <span className="data-readout text-[10px] text-green/60 tracking-[0.3em] uppercase">EVT // Gestore Esperimenti</span>
             </div>
-            <h1 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter">
+            <h1 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter font-syne">
               Gestione <span className="text-green text-glow-green">Eventi</span>
             </h1>
           </div>

@@ -9,11 +9,12 @@ export async function requireAdmin(): Promise<AuthResult> {
   let supabase;
   try {
     supabase = await createClient();
-  } catch {
+  } catch (err) {
+    console.error("[RequireAdmin Client Error]:", err);
     return {
       authorized: false,
       status: 401,
-      error: "Impossibile verificare la sessione amministrativa.",
+      error: "Non autenticato. Sessione amministrativa non valida o scaduta.",
     };
   }
 
@@ -23,6 +24,7 @@ export async function requireAdmin(): Promise<AuthResult> {
   } = await supabase.auth.getUser();
 
   if (error || !user || !user.email) {
+    if (error) console.error("[RequireAdmin Auth Error]:", error.message);
     return {
       authorized: false,
       status: 401,
@@ -61,17 +63,21 @@ export function isValidOrigin(req: Request): boolean {
 
   try {
     const originUrl = new URL(origin);
-    const originHost = originUrl.host;
+    const originNormalized = originUrl.origin.toLowerCase().trim();
 
     if (
-      originHost === "blackbullslab.com" ||
-      originHost === "www.blackbullslab.com"
+      originNormalized === "https://blackbullslab.com" ||
+      originNormalized === "https://www.blackbullslab.com"
     ) {
       return true;
     }
 
-    if (host && originHost === host) {
-      return true;
+    if (host) {
+      const expectedProtocol = req.headers.get("x-forwarded-proto") || "https";
+      const sameHostOrigin = `${expectedProtocol}://${host}`.toLowerCase().trim();
+      if (originNormalized === sameHostOrigin || originUrl.host === host) {
+        return true;
+      }
     }
 
     if (
@@ -81,7 +87,19 @@ export function isValidOrigin(req: Request): boolean {
       return true;
     }
 
-    if (originUrl.hostname.endsWith(".netlify.app")) {
+    const allowedCustomOriginsRaw = process.env.ADMIN_ALLOWED_ORIGINS || "";
+    const allowedCustomOrigins = allowedCustomOriginsRaw
+      .split(",")
+      .map((o) => {
+        try {
+          return new URL(o.trim()).origin.toLowerCase();
+        } catch {
+          return "";
+        }
+      })
+      .filter(Boolean);
+
+    if (allowedCustomOrigins.includes(originNormalized)) {
       return true;
     }
 

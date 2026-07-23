@@ -1,4 +1,4 @@
-import CommunityDashboardClient from "@/app/admin/community/CommunityDashboardClient";
+import CommunityDashboardClient from "./CommunityDashboardClient";
 
 export const metadata = {
   title: "Crescita Community | Black Bulls Lab",
