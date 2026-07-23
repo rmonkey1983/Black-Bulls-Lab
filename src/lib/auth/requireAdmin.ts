@@ -9,8 +9,12 @@ export async function requireAdmin(): Promise<AuthResult> {
   let supabase;
   try {
     supabase = await createClient();
-  } catch (err) {
-    console.error("[RequireAdmin Client Error]:", err);
+  } catch (err: unknown) {
+    if (typeof err === "object" && err !== null && "digest" in err && (err as { digest: string }).digest === "DYNAMIC_SERVER_USAGE") {
+      throw err;
+    }
+    const message = err instanceof Error ? err.message : String(err);
+    console.error("[RequireAdmin Client Error]:", message);
     return {
       authorized: false,
       status: 401,
