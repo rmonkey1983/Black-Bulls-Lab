@@ -1,28 +1,34 @@
 'use server';
 
-import { getSupabaseAdmin } from '@/lib/supabase';
+import { getStrictSupabaseAdmin } from '@/lib/supabase';
+import { requireAdmin } from '@/lib/auth/requireAdmin';
 import { revalidatePath } from 'next/cache';
 
 export async function saveEventAction(formData: FormData) {
-  const supabaseAdmin = getSupabaseAdmin();
+  const auth = await requireAdmin();
+  if (!auth.authorized) {
+    throw new Error(auth.error);
+  }
+
+  const supabaseAdmin = getStrictSupabaseAdmin();
 
   const id = formData.get('id') as string;
   const location_name = formData.get('location_name') as string;
   const location_address = formData.get('location_address') as string;
   const event_date = formData.get('event_date') as string;
   const description = formData.get('description') as string;
-  const slots = parseInt(formData.get('slots') as string);
+  const slots = parseInt(formData.get('slots') as string, 10);
   const imageUrl = formData.get('imageUrl') as string;
 
   const slug = location_name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') + '-' + Math.random().toString(36).slice(2, 5);
 
-  const eventData: any = {
+  const eventData: Record<string, unknown> = {
     title: location_name,
     slug: slug,
     date: event_date,
     category: 'Dinner Show',
-    status: 'active',   // Added to fix NOT NULL constraint
-    active: true,       // Added for compatibility
+    status: 'active',
+    active: true,
     location: location_name,
     location_name,
     location_address,
@@ -52,8 +58,13 @@ export async function saveEventAction(formData: FormData) {
 }
 
 export async function deleteEventAction(formData: FormData) {
+  const auth = await requireAdmin();
+  if (!auth.authorized) {
+    throw new Error(auth.error);
+  }
+
   const id = formData.get('id') as string;
-  const supabaseAdmin = getSupabaseAdmin();
+  const supabaseAdmin = getStrictSupabaseAdmin();
   
   const { error } = await supabaseAdmin.from('events').delete().eq('id', id);
   if (error) {

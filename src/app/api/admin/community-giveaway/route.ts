@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { getStrictSupabaseAdmin, supabase } from "@/lib/supabase";
+import { getStrictSupabaseAdmin } from "@/lib/supabase";
+import { requireAdmin, isValidOrigin } from "@/lib/auth/requireAdmin";
 
 export const dynamic = "force-dynamic";
 
@@ -23,18 +24,40 @@ function maskPhone(phone: string): string {
 }
 
 export async function GET(req: Request) {
-  try {
-    let dbClient;
-    try {
-      dbClient = getStrictSupabaseAdmin();
-    } catch {
-      dbClient = supabase;
-    }
+  const headers = {
+    "Cache-Control": "private, no-store, max-age=0, must-revalidate",
+    "Content-Type": "application/json",
+  };
 
+  // 1. Strict Server Authentication & Authorization
+  const auth = await requireAdmin();
+  if (!auth.authorized) {
+    return NextResponse.json({ error: auth.error }, { status: auth.status, headers });
+  }
+
+  // 2. Strict Service Role Client Initialization
+  let dbClient;
+  try {
+    dbClient = getStrictSupabaseAdmin();
+  } catch {
+    return NextResponse.json(
+      { error: "Servizio di amministrazione non disponibile. Service role key non configurata." },
+      { status: 503, headers }
+    );
+  }
+
+  try {
     const { searchParams } = new URL(req.url);
     const unmask = searchParams.get("unmask") === "true";
-    const unmaskReason = searchParams.get("reason") || "Nessuna motivazione fornita";
-    const actor = searchParams.get("actor") || "admin@blackbullslab.com";
+    const unmaskReason = searchParams.get("reason")?.trim() || "";
+    const actorEmail = auth.email;
+
+    if (unmask && !unmaskReason) {
+      return NextResponse.json(
+        { error: "È richiesta una motivazione valida per lo sblocco dei dati personali." },
+        { status: 400, headers }
+      );
+    }
 
     // 1. Peschiamo la waitlist e i dati collegati dalla tabella reale
     const { data: waitlistEntries } = await dbClient
@@ -67,7 +90,7 @@ export async function GET(req: Request) {
     if (unmask) {
       await dbClient.from("prize_audit_log").insert([
         {
-          actor_id: actor,
+          actor_id: actorEmail,
           action: "UNMASK_PII_REQUESTED",
           details: {
             reason: unmaskReason,
@@ -119,32 +142,44 @@ export async function GET(req: Request) {
       };
     });
 
-    return NextResponse.json({
-      kpi: {
-        totalRegistrations,
-        eligibleCount,
-        missingToThreshold,
-        excludedCount,
-        marketingConsentsCount,
-        marketingConsentPercentage: totalRegistrations ? Math.round((marketingConsentsCount / totalRegistrations) * 100) : 0,
-        qualifiedCyclesCount,
-        deliveredPrizesCount,
-        currentThreshold,
+    return NextResponse.json(
+      {
+        kpi: {
+          totalRegistrations,
+          eligibleCount,
+          missingToThreshold,
+          excludedCount,
+          marketingConsentsCount,
+          marketingConsentPercentage: totalRegistrations ? Math.round((marketingConsentsCount / totalRegistrations) * 100) : 0,
+          qualifiedCyclesCount,
+          deliveredPrizesCount,
+          currentThreshold,
+        },
+        sources: Object.entries(sourcesMap).map(([name, count]) => ({ name, count })),
+        participants: maskedParticipants,
+        isUnmasked: unmask,
+        cycles,
+        results: resultsData || [],
+        auditLog: auditLog || [],
       },
-      sources: Object.entries(sourcesMap).map(([name, count]) => ({ name, count })),
-      participants: maskedParticipants,
-      isUnmasked: unmask,
-      cycles,
-      results: resultsData || [],
-      auditLog: auditLog || [],
-    });
-  } catch (err: any) {
-    console.error("[Admin Giveaway GET Exception]:", err);
-    return NextResponse.json({ error: err.message || "Errore interno server" }, { status: 500 });
+      { status: 200, headers }
+    );
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Errore interno server";
+    return NextResponse.json({ error: message }, { status: 500, headers });
   }
 }
 
-export async function POST() {
+export async function POST(req: Request) {
+  const auth = await requireAdmin();
+  if (!auth.authorized) {
+    return NextResponse.json({ error: auth.error }, { status: auth.status });
+  }
+
+  if (!isValidOrigin(req)) {
+    return NextResponse.json({ error: "Origine richiesta non consentita." }, { status: 403 });
+  }
+
   return NextResponse.json(
     {
       error: "La campagna è archiviata e non dispone di un soggetto promotore.",
@@ -152,4 +187,16 @@ export async function POST() {
     },
     { status: 403 }
   );
+}
+
+export async function PUT() {
+  return new Response(null, { status: 405, headers: { Allow: "GET, POST" } });
+}
+
+export async function PATCH() {
+  return new Response(null, { status: 405, headers: { Allow: "GET, POST" } });
+}
+
+export async function DELETE() {
+  return new Response(null, { status: 405, headers: { Allow: "GET, POST" } });
 }

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { getStrictSupabaseAdmin, supabase } from "@/lib/supabase";
+import { getStrictSupabaseAdmin } from "@/lib/supabase";
+import { requireAdmin, isValidOrigin } from "@/lib/auth/requireAdmin";
 
 export const dynamic = "force-dynamic";
 
@@ -23,7 +24,7 @@ function maskPhone(phone: string): string {
 }
 
 // Neutralizzazione per CSV Injection
-function sanitizeCSVCell(val: any): string {
+function sanitizeCSVCell(val: unknown): string {
   if (val === null || val === undefined) return "";
   const str = String(val);
   if (/^[=+\-@\t\r]/.test(str)) {
@@ -34,26 +35,43 @@ function sanitizeCSVCell(val: any): string {
 
 export async function GET(req: Request) {
   const headers = {
-    "Cache-Control": "no-store, no-cache, must-revalidate",
+    "Cache-Control": "private, no-store, max-age=0, must-revalidate",
     "Content-Type": "application/json",
   };
 
-  try {
-    let dbClient;
-    try {
-      dbClient = getStrictSupabaseAdmin();
-    } catch {
-      dbClient = supabase;
-    }
+  // 1. Strict Server Authentication & Authorization
+  const auth = await requireAdmin();
+  if (!auth.authorized) {
+    return NextResponse.json({ error: auth.error }, { status: auth.status, headers });
+  }
 
+  // 2. Strict Service Role Client Initialization (No public client fallback)
+  let dbClient;
+  try {
+    dbClient = getStrictSupabaseAdmin();
+  } catch {
+    return NextResponse.json(
+      { error: "Servizio di amministrazione non disponibile. Service role key non configurata." },
+      { status: 503, headers }
+    );
+  }
+
+  try {
     const { searchParams } = new URL(req.url);
     const period = searchParams.get("period") || "all";
     const statusFilter = searchParams.get("status") || "all";
     const sourceFilter = searchParams.get("source") || "all";
     const marketingConsentFilter = searchParams.get("marketing") || "all";
     const unmask = searchParams.get("unmask") === "true";
-    const unmaskReason = searchParams.get("reason") || "Consultazione autorizzata";
-    const actor = searchParams.get("actor") || "admin@blackbullslab.com";
+    const unmaskReason = searchParams.get("reason")?.trim() || "";
+    const actorEmail = auth.email;
+
+    if (unmask && !unmaskReason) {
+      return NextResponse.json(
+        { error: "È richiesta una motivazione valida e non vuota per lo sblocco dei dati personali." },
+        { status: 400, headers }
+      );
+    }
 
     // Peschiamo tutti gli iscritti dalla tabella reale
     const { data: rawWaitlist, error } = await dbClient
@@ -68,7 +86,7 @@ export async function GET(req: Request) {
     if (unmask) {
       await dbClient.from("prize_audit_log").insert([
         {
-          actor_id: actor,
+          actor_id: actorEmail,
           action: "COMMUNITY_UNMASK_PII_VIEW",
           details: { reason: unmaskReason, timestamp: new Date().toISOString(), total_records: waitlist.length },
         },
@@ -236,24 +254,39 @@ export async function GET(req: Request) {
       },
       { status: 200, headers }
     );
-  } catch (err: any) {
-    console.error("[Community API Exception]:", err);
-    return NextResponse.json({ error: err.message || "Errore interno server" }, { status: 500, headers });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Errore interno server";
+    return NextResponse.json({ error: message }, { status: 500, headers });
   }
 }
 
 // Endpoint POST per export CSV sicuro con neutralizzazione CSV Injection
 export async function POST(req: Request) {
-  try {
-    let dbClient;
-    try {
-      dbClient = getStrictSupabaseAdmin();
-    } catch {
-      dbClient = supabase;
-    }
+  // 1. Strict Server Authentication & Authorization
+  const auth = await requireAdmin();
+  if (!auth.authorized) {
+    return NextResponse.json({ error: auth.error }, { status: auth.status });
+  }
 
+  // 2. Origin Verification for write/export operations
+  if (!isValidOrigin(req)) {
+    return NextResponse.json({ error: "Origine richiesta non consentita." }, { status: 403 });
+  }
+
+  // 3. Strict Service Role Client Initialization
+  let dbClient;
+  try {
+    dbClient = getStrictSupabaseAdmin();
+  } catch {
+    return NextResponse.json(
+      { error: "Servizio di amministrazione non disponibile. Service role key non configurata." },
+      { status: 503 }
+    );
+  }
+
+  try {
     const body = await req.json();
-    const { action, actor = "admin@blackbullslab.com", reason = "Esportazione report community" } = body;
+    const { action, reason = "Esportazione report community" } = body;
 
     if (action === "EXPORT_CSV") {
       const { data: waitlist } = await dbClient
@@ -263,10 +296,10 @@ export async function POST(req: Request) {
 
       const records = waitlist || [];
 
-      // Log dell'azione nell'audit log
+      // Log dell'azione nell'audit log con email verificata dal server
       await dbClient.from("prize_audit_log").insert([
         {
-          actor_id: actor,
+          actor_id: auth.email,
           action: "COMMUNITY_CSV_EXPORT",
           details: { reason, record_count: records.length, timestamp: new Date().toISOString() },
         },
@@ -311,14 +344,26 @@ export async function POST(req: Request) {
         headers: {
           "Content-Type": "text/csv; charset=utf-8",
           "Content-Disposition": `attachment; filename="community_export_${new Date().toISOString().slice(0, 10)}.csv"`,
-          "Cache-Control": "no-store",
+          "Cache-Control": "private, no-store, max-age=0, must-revalidate",
         },
       });
     }
 
     return NextResponse.json({ error: "Azione non consentita" }, { status: 400 });
-  } catch (err: any) {
-    console.error("[Community Export Exception]:", err);
-    return NextResponse.json({ error: err.message || "Errore export" }, { status: 500 });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Errore export";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
+}
+
+export async function PUT() {
+  return new Response(null, { status: 405, headers: { Allow: "GET, POST" } });
+}
+
+export async function PATCH() {
+  return new Response(null, { status: 405, headers: { Allow: "GET, POST" } });
+}
+
+export async function DELETE() {
+  return new Response(null, { status: 405, headers: { Allow: "GET, POST" } });
 }
