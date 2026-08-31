@@ -296,7 +296,7 @@ export function EventDetailBookingForm({
           className="mt-1 w-4 h-4 rounded border-zinc-700 bg-zinc-900 text-[#FFD700] focus:ring-[#FFD700] focus:ring-offset-black cursor-pointer"
         />
         <label htmlFor="dataConsent" className="text-xs text-zinc-400 leading-relaxed cursor-pointer select-none">
-          Acconsento al trattamento dei miei dati personali per la gestione della prenotazione e per ricevere comunicazioni relative all&apos;evento, nel rispetto della <a href="/privacy" target="_blank" className="text-[#FFD700] hover:underline">Privacy Policy</a>. *
+          Acconsento al trattamento dei miei dati personali per la gestione della prenotazione, nel rispetto della <a href="/privacy-policy" target="_blank" rel="noreferrer" className="text-[#FFD700] hover:underline">Privacy Policy</a>. *
         </label>
       </div>
 

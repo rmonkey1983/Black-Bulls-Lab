@@ -2,7 +2,8 @@
  * BRAND & SITE METADATA
  */
 export const SITE_NAME = "Black Bulls Lab";
-export const SITE_DESCRIPTION = "Agenzia creativa a Torino specializzata in dinner show, format immersivi e team building aziendali. Trasformiamo l'intrattenimento in scienza attraverso esperienze digitali e interattive uniche.";
+export const FORMAT_ACCENT_OXBLOOD = "#641F2E";
+export const SITE_DESCRIPTION = "Format ed esperienze dal vivo a Torino in cui il pubblico è parte attiva: serate pubbliche, eventi privati, aziende e location.";
 export const SITE_KEYWORDS = [
     "dinner show Torino",
     "eventi immersivi Torino",
@@ -39,13 +40,12 @@ export const SOCIAL_LINKS = {
  * MAIN NAVIGATION
  */
 export const NAV_LINKS = [
-    { label: "Home", href: "/" },
-    { label: "Format", href: "/format" },
+    { label: "Esperienze", href: "/format" },
     { label: "A cena con il bugiardo", href: "/format/a-cena-con-il-bugiardo" },
-    { label: "Feste Private", href: "/eventi-privati" },
     { label: "Aziende", href: "/eventi-aziendali" },
+    { label: "Locali & Partner", href: "/locali-partner" },
+    { label: "Eventi Privati", href: "/eventi-privati" },
     { label: "Chi siamo", href: "/chi-siamo" },
-    { label: "Contatti", href: "/contatti" },
 ];
 
 /**
@@ -55,70 +55,38 @@ export const EXPERIMENTS = [
     { 
         id: "a-cena-con-il-bugiardo",
         name: "A Cena Con Il Bugiardo", 
-        slug: "a-cena-con-il-bugiardo",
         href: "/format/a-cena-con-il-bugiardo", 
         subtitle: "Una cena. Un bugiardo. Nessun attore.",
-        desc: "Social Deduction Dinner Experience",
-        longDesc: "Durante la cena ricevi un ruolo, informazioni e missioni. Parla, osserva e decidi di chi fidarti prima del reveal finale.",
+        desc: "Cena interattiva BBL",
         image: "/images/brand/background.webp",
-        badge: "Prima sessione · Torino",
-        details: "Fine settembre 2026 · 30–40 partecipanti · Sessione pilota",
-        quickInfo: "Lista d'attesa aperta",
-        price: 0,
-        ctaText: "Entra nella lista",
-        actionLabel: "Di chi ti fidi? →",
-        ctaHref: "/format/a-cena-con-il-bugiardo#lista-attesa"
+        badge: "Format flagship"
     },
     { 
         id: "il-palqo",
         name: "Il PalQo", 
-        slug: "il-palqo",
         href: "/format/il-palqo", 
-        subtitle: "Spettacolo live interattivo. Vota i talenti dal tavolo.",
-        desc: "Showcase con Votazione Live",
-        longDesc: "Assisti alle esibizioni degli artisti sul palco e decidi chi merita di vincere, votando in tempo reale tramite la nostra web app.",
+        subtitle: "Dinner & show live con stand-up e improvvisazione.",
+        desc: "Format live con conduzione e interazione del pubblico",
         image: "/images/brand/bg-venue-crowd.webp",
-        badge: "Evento Unico",
-        details: "Showcase Aperto · Votazione Live · Accesso Selezionato",
-        quickInfo: "Evento mensile · Disponibilità limitata",
-        price: 0,
-        ctaText: "Vedi il Calendario",
-        actionLabel: "Scopri le date dell'evento →",
-        ctaHref: "/calendario"
+        badge: "Format BBL"
     },
     { 
         id: "cena-con-delitto",
         name: "Cena Con Delitto", 
-        slug: "cena-con-delitto",
         href: "/format/cena-con-delitto", 
-        subtitle: "Cena con delitto a Torino. Un giallo classico in chiave moderna.",
-        desc: "Cena Spettacolo Investigativa",
-        longDesc: "Diventa un detective per una sera. Analizza le prove inviate direttamente al tuo smartphone e interroga gli attori tra una portata e l'altra.",
+        subtitle: "Esperienza investigativa classica a Torino.",
+        desc: "Cena e indagine dal vivo",
         image: "/images/brand/bg-stage-lights.webp",
-        badge: "Rischio Sold Out",
-        details: "3 ore · Indagine Live · Solo su Prenotazione",
-        quickInfo: "Posti limitati · Prenotazione obbligatoria",
-        price: 50,
-        ctaText: "Info su WhatsApp",
-        actionLabel: "Contattaci per dettagli →",
-        ctaHref: `https://wa.me/39${CONTACT_WHATSAPP}?text=Ciao!%20Vorrei%20organizzare%20una%20Cena%20con%20Delitto%20Digitale.%20Info%3F`
+        badge: "Esperienza investigativa"
     },
     { 
         id: "the-golden-voice",
         name: "THE GOLDEN VOICE", 
-        slug: "the-golden-voice",
         href: "/format/the-golden-voice", 
-        subtitle: "Show musicale dal vivo. Tu sei il giudice.",
-        desc: "Contest Canoro Interattivo",
-        longDesc: "Ascolta i cantanti esibirsi live e usa la nostra web app per votare la voce migliore direttamente dal tuo tavolo.",
-        image: "/images/brand/service-performance.webp",
-        badge: "In Arrivo",
-        details: "Contest canoro · Voto del Pubblico · In arrivo",
-        quickInfo: "In arrivo",
-        price: 0,
-        ctaText: "Vedi le Date",
-        actionLabel: "Controlla il calendario →",
-        ctaHref: "/calendario"
+        subtitle: "Format musicale live con partecipazione del pubblico.",
+        desc: "Format musicale con cantanti e pubblico",
+        image: "/images/brand/vibe-live-jazz.webp",
+        badge: "Format BBL"
     }
 ];
 
@@ -153,53 +121,11 @@ export const SERVICE_EXPERIENCES = [
 ];
 
 /**
- * SOCIAL PROOF & TESTIMONIALS
- */
-export const SOCIAL_PROOF = [
-    {
-        id: "rev-1",
-        type: "reaction",
-        title: "Real-time Impact",
-        author: "Marco R.",
-        content: "Non è una cena. È un glitch nella realtà. Incredibile.",
-        image: "/images/brand/bg-venue-crowd.webp",
-        videoUrl: "#", // Placeholder for tiktok-style
-    },
-    {
-        id: "rev-2",
-        type: "atmosphere",
-        title: "The Vibe",
-        author: "Sarah L.",
-        content: "Atmosfera pazzesca. Ogni dettaglio è curato maniacalmente.",
-        image: "/images/brand/bg-stage-lights.webp",
-        videoUrl: "#",
-    },
-    {
-        id: "rev-3",
-        type: "corporate",
-        title: "HR Director @ TechCo",
-        author: "Alessandro G.",
-        content: "Il miglior team building di sempre. Engagement al 100%.",
-        image: "/images/brand/service-performance.webp",
-        videoUrl: "#",
-    },
-    {
-        id: "rev-4",
-        type: "moment",
-        title: "Magic Moment",
-        author: "Elena V.",
-        content: "Ancora cerco di capire come abbiano fatto a sapere il mio segreto.",
-        image: "/images/brand/bull-hero.jpg",
-        videoUrl: "#",
-    }
-];
-
-/**
  * TECHNICAL CONFIG
  */
 
 /**
  * ASSETS
  */
-export const LOGO_PATH = "/brand/logo-full.jpg";
+export const LOGO_PATH = "/brand/bbl-logo-horizontal.webp";
 export const FALLBACK_IMAGE = "/lab_menu.webp";

@@ -54,7 +54,7 @@ export function TheGoldenVoiceClient() {
   revealOnScroll(".reveal-golden");
 
   return (
-    <main ref={containerRef} className="bg-black-pure text-text-primary min-h-screen selection:bg-accent-gold selection:text-black-pure overflow-x-hidden">
+    <div ref={containerRef} className="bg-black-pure text-text-primary min-h-screen selection:bg-accent-gold selection:text-black-pure overflow-x-hidden">
       
       {/* 1. CINEMATIC HERO: The Stage Entry */}
       <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
@@ -100,7 +100,7 @@ export function TheGoldenVoiceClient() {
             <div className="space-y-12">
                 <div className="flex flex-col items-center gap-6">
                     <span className="reveal-golden inline-block px-4 py-1 border border-accent-gold/20 text-accent-gold text-[10px] font-bold uppercase tracking-[0.6em] bg-accent-gold/5 backdrop-blur-md">
-                        Universo del Palco Premium
+                        Format musicale live
                     </span>
                     <h1 className="golden-title font-syne font-bold text-[clamp(3rem,10vw,12rem)] leading-[0.8] tracking-tighter uppercase text-text-primary flex flex-col">
                         <span className="block">Ogni voce</span>
@@ -110,8 +110,8 @@ export function TheGoldenVoiceClient() {
 
                 <div className="golden-sub max-w-2xl mx-auto">
                     <p className="font-inter text-lg md:text-2xl text-text-secondary font-light leading-relaxed uppercase tracking-[0.2em] opacity-60">
-                        Più di una performance. Una presenza. <br />
-                        Il contest in cui il pubblico decide il tuo destino.
+                        Cantanti dal vivo. <br />
+                        Il pubblico partecipa alla valutazione.
                     </p>
                 </div>
 
@@ -128,7 +128,7 @@ export function TheGoldenVoiceClient() {
             <div className="flex items-center gap-4 text-white/10">
                 <div className="text-right">
                     <div className="text-[10px] font-bold tracking-[0.4em] uppercase">Votazione del Pubblico dal Vivo</div>
-                    <div className="text-[9px] tracking-[0.2em] uppercase opacity-50">Protocollo: VOCE_D_ORO</div>
+                    <div className="text-[9px] tracking-[0.2em] uppercase opacity-50">Partecipazione del pubblico</div>
                 </div>
                 <Star size={20} className="opacity-20" />
             </div>
@@ -146,10 +146,10 @@ export function TheGoldenVoiceClient() {
                 />
                 <div className="space-y-12 font-inter text-xl md:text-2xl text-text-secondary font-light leading-relaxed opacity-70">
                     <p>
-                        Quando il riflettore si accende, non puoi più nasconderti. The Golden Voice non è un concorso canoro, è un momento di verità.
+                        The Golden Voice è un format musicale live con cantanti e partecipazione del pubblico alla valutazione.
                     </p>
                     <p>
-                        Cerchiamo chi vive per esibirsi e non teme il giudizio di un pubblico armato di smartphone e passione. La tua voce è lo strumento, il Lab è il tuo amplificatore.
+                        La voce e la presenza sul palco incontrano una sala coinvolta nell’esperienza.
                     </p>
                 </div>
             </div>
@@ -179,18 +179,18 @@ export function TheGoldenVoiceClient() {
         <div className="container-max">
             <div className="mb-32">
                 <SectionHeading 
-                  title="TRE FASI."
+                  title="LIVE."
                   highlight="UNA VOCE."
-                  subtitle="Il Percorso dell'Artista"
+                  subtitle="Il cuore del format"
                   align="center"
                 />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24">
                 {[
-                    { title: "Casting Digitale", desc: "Il primo passo. Invia la tua candidatura e i tuoi link social. La selezione inizia dallo schermo.", icon: <Music2 size={32} /> },
-                    { title: "La Performance", desc: "Performance esplosive davanti a giuria e pubblico. Ogni nota può ribaltare la classifica in app.", icon: <Zap size={32} /> },
-                    { title: "Il Crescendo Finale", desc: "La serata definitiva. Tensione tecnologica e voti in tempo reale per decretare il vincitore.", icon: <Trophy size={32} /> }
+                    { title: "La voce", desc: "I cantanti portano la propria presenza sul palco.", icon: <Music2 size={32} /> },
+                    { title: "La serata", desc: "La musica live incontra la conduzione e l’energia della sala.", icon: <Zap size={32} /> },
+                    { title: "La valutazione", desc: "Il pubblico partecipa alla valutazione delle performance.", icon: <Trophy size={32} /> }
                 ].map((act, i) => (
                     <div key={i} className="group space-y-8 p-12 border border-white/5 bg-white/2 hover:border-accent-gold/20 transition-[border-color,background-color] duration-700">
                         <div className="text-accent-gold opacity-30 group-hover:opacity-100 transition-opacity duration-700">
@@ -221,7 +221,7 @@ export function TheGoldenVoiceClient() {
                             Invia la tua <br /><span className="text-accent-gold italic">Candidatura.</span>
                         </h2>
                         <p className="text-text-secondary/60 font-inter text-xl leading-relaxed max-w-lg">
-                            Il palco è pronto. Il Sistema ti sta aspettando. Dimostra che la tua voce merita i riflettori.
+                            Scopri il format musicale live e raccontaci il tuo interesse a partecipare.
                         </p>
                     </div>
                     
@@ -264,11 +264,11 @@ export function TheGoldenVoiceClient() {
             </Link>
           </div>
           <p className="font-syne text-[10px] uppercase tracking-[0.6em] font-black opacity-40">
-            Selezioni limitate // Solo per talenti puri
+            Musica live // Partecipazione del pubblico
           </p>
         </div>
       </section>
 
-    </main>
+    </div>
   );
 }

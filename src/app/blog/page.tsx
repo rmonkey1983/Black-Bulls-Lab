@@ -13,7 +13,15 @@ export const metadata: Metadata = {
     title: "Blog | Idee e Storie dal Laboratorio | Black Bulls Lab",
     description: "Idee, storie e ispirazione dal laboratorio delle emozioni di Black Bulls Lab a Torino",
     url: "https://blackbullslab.com/blog",
+    images: [{ url: "/images/brand/bg-hero-wide.webp", width: 1200, height: 630, alt: "Blog | Black Bulls Lab" }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog | Idee e Storie dal Laboratorio | Black Bulls Lab",
+    description: "Idee, storie e appunti dal laboratorio di Black Bulls Lab a Torino.",
+    images: ["/images/brand/bg-hero-wide.webp"],
+  },
+  alternates: { canonical: "https://blackbullslab.com/blog" },
 };
 
 export default async function BlogPage() {
@@ -30,6 +38,7 @@ export default async function BlogPage() {
             highlight="LABORATORIO."
             subtitle="I Nostri Appunti"
             align="center"
+            titleClassName="[overflow-wrap:anywhere]"
           />
           <p className="max-w-2xl mx-auto font-sans text-zinc-400 text-lg md:text-xl font-light leading-relaxed">
             Idee, storie e ispirazione per chi vuole vivere qualcosa di vero.

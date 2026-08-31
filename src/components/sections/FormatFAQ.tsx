@@ -7,7 +7,7 @@ import { animateFade } from "@/lib/gsapAnimations";
 import { gsap } from "gsap";
 import { buildFAQSchema } from "@/lib/schemas";
 
-const faqs = [
+const defaultFaqs = [
   {
     question: "Serve una location enorme per i vostri format?",
     answer: "Assolutamente no. Il nostro punto di forza sono gli eventi per gruppi di 20-30 persone. Abbiamo ingegnerizzato i nostri format per essere scalabili e adattabili a spazi intimi: ristoranti partner a Torino, loft privati o persino le sale meeting della tua azienda. Se non hai uno spazio, te ne proponiamo uno noi."
@@ -42,7 +42,7 @@ interface FormatFAQProps {
 export function FormatFAQ({ items }: FormatFAQProps) {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-    const displayFaqs = items || faqs;
+    const displayFaqs = items || defaultFaqs;
 
     useGSAP(() => {
         // Anima il titolo

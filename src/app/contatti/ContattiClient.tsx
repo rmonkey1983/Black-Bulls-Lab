@@ -7,11 +7,11 @@ import { ArrowLeft, ArrowRight, Mail, Instagram, MessageSquare, Loader2, ShieldC
 import { gsap } from "gsap";
 import { useGSAP } from "@/hooks/useGSAP";
 import { useCinematic } from "@/hooks/useCinematic";
-import { useMounted } from "@/hooks/useMounted";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PremiumCard } from "@/components/ui/PremiumCard";
 import { buildWAUrl, WA_MESSAGES } from "@/lib/whatsapp";
 import { submitContactForm } from "@/app/actions/contact";
+import { trackLead } from "@/lib/analytics";
 
 const EXPERIENCE_OPTIONS = [
   "A Cena Con Il Bugiardo",
@@ -22,7 +22,6 @@ const EXPERIENCE_OPTIONS = [
 ];
 
 export function ContattiClient() {
-  const mounted = useMounted();
   const containerRef = useRef<HTMLDivElement>(null);
   const spotlightRef = useRef<HTMLDivElement>(null);
   const { revealOnScroll } = useCinematic();
@@ -38,8 +37,6 @@ export function ContattiClient() {
   });
 
   useGSAP(() => {
-    if (!mounted) return;
-
     // Smooth whole-page spotlight mouse tracking
     const handleMouseMove = (e: MouseEvent) => {
       if (!spotlightRef.current) return;
@@ -77,7 +74,7 @@ export function ContattiClient() {
     }, "-=0.8");
 
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, { scope: containerRef, dependencies: [mounted] });
+  }, { scope: containerRef, dependencies: [] });
 
   revealOnScroll(".reveal-scroll");
 
@@ -87,9 +84,10 @@ export function ContattiClient() {
     setErrorMessage("");
 
     try {
-      const res = await submitContactForm(formData);
+      const res = await submitContactForm({ ...formData, leadType: "contact" });
       if (res.success) {
         setStatus("success");
+        trackLead("contact");
       } else {
         setStatus("error");
         setErrorMessage(res.error || "Errore sconosciuto.");
@@ -101,16 +99,8 @@ export function ContattiClient() {
     }
   };
 
-  if (!mounted) {
-    return (
-      <div className="bg-black-pure min-h-screen flex items-center justify-center">
-        <Loader2 size={32} className="text-accent-gold animate-spin" />
-      </div>
-    );
-  }
-
   return (
-    <main ref={containerRef} className="bg-black-pure text-text-primary min-h-screen selection:bg-accent-gold selection:text-black-pure overflow-x-hidden relative">
+    <div ref={containerRef} className="bg-black-pure text-text-primary min-h-screen selection:bg-accent-gold selection:text-black-pure overflow-x-hidden relative">
       
       {/* Immersive Whole-Page Spotlight (Floating gold light tracking mouse) */}
       <div 
@@ -154,7 +144,7 @@ export function ContattiClient() {
         <div className="relative z-30 container-max px-6 text-center space-y-14">
           <div className="space-y-6 max-w-4xl mx-auto">
             <span className="inline-block px-4 py-1 border border-accent-gold/20 text-accent-gold text-[10px] font-bold uppercase tracking-[0.6em] bg-accent-gold/5 backdrop-blur-md">
-              Lab Connection Hub
+              Black Bulls Lab · Torino
             </span>
             <h1 className="reveal-title font-syne font-bold text-[clamp(2.5rem,7vw,8rem)] leading-[0.9] tracking-tighter uppercase text-text-primary flex flex-col items-center">
               <span>La prossima</span>
@@ -162,7 +152,7 @@ export function ContattiClient() {
               <span>inizia da qui.</span>
             </h1>
             <p className="reveal-sub font-inter text-text-secondary text-xs md:text-lg leading-relaxed tracking-[0.2em] uppercase opacity-75 max-w-3xl mx-auto">
-              Dinner show immersivi, eventi interattivi e format live progettati per lasciare il segno.
+              Format ed esperienze dal vivo per pubblico, aziende, privati e location. Scrivici per capire quale percorso è adatto al tuo progetto.
             </p>
           </div>
 
@@ -171,8 +161,8 @@ export function ContattiClient() {
             {[
               {
                 title: "WhatsApp",
-                desc: "Messaggistica cifrata diretta",
-                actionText: "INIZIA L'ESPERIENZA",
+                desc: "Scrivici direttamente",
+                actionText: "SCRIVICI SU WHATSAPP",
                 href: buildWAUrl(WA_MESSAGES.default),
                 icon: <MessageSquare size={24} />,
                 external: true
@@ -188,7 +178,7 @@ export function ContattiClient() {
               {
                 title: "Instagram",
                 desc: "@blackbullslab",
-                actionText: "PRENOTA VIA DM",
+                actionText: "SCRIVICI SU INSTAGRAM",
                 href: "https://instagram.com/blackbullslab",
                 icon: <Instagram size={24} />,
                 external: true
@@ -221,6 +211,15 @@ export function ContattiClient() {
         </div>
       </section>
 
+      <nav aria-label="Percorsi Black Bulls Lab" className="px-6 py-10 md:px-12">
+        <div className="container-max mx-auto flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs uppercase tracking-[0.12em] text-text-secondary">
+          <Link className="hover:text-accent-gold" href="/format">Esperienze</Link>
+          <Link className="hover:text-accent-gold" href="/eventi-aziendali">Eventi aziendali</Link>
+          <Link className="hover:text-accent-gold" href="/eventi-privati">Eventi privati</Link>
+          <Link className="hover:text-accent-gold" href="/locali-partner">Locali &amp; Partner</Link>
+        </div>
+      </nav>
+
       {/* 3. IMMERSIVE MINIMALIST FORM */}
       <section className="reveal-scroll py-16 md:py-24 px-6 md:px-12 bg-black-pure relative z-30">
         <div className="container-max max-w-4xl px-6">
@@ -247,7 +246,7 @@ export function ContattiClient() {
                     CONNESSI CON IL LAB
                   </h3>
                   <p className="font-inter text-text-secondary text-xs md:text-sm max-w-md mx-auto leading-relaxed opacity-60">
-                    I nostri ingegneri dell&apos;intrattenimento hanno registrato la tua visione. Riceverai un contatto cifrato entro le prossime 24 ore.
+                    Abbiamo ricevuto la tua richiesta. Ti ricontatteremo usando i recapiti indicati.
                   </p>
                 </div>
                 <button 
@@ -400,6 +399,6 @@ export function ContattiClient() {
         </div>
       </section>
 
-    </main>
+    </div>
   );
 }

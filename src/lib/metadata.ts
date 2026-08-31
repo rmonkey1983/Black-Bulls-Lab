@@ -29,7 +29,7 @@ export const baseMetadata: Metadata = {
   },
   icons: {
     icon: "/favicon.ico",
-    apple: "/brand/logo-full.jpg",
+    apple: "/brand/bbl-monogram.webp",
   },
   openGraph: {
     siteName: SITE_NAME,
@@ -47,9 +47,9 @@ export const baseMetadata: Metadata = {
 
 export const homepageMetadata: Metadata = {
   ...baseMetadata,
-  title: "Dinner Show Torino e Eventi Immersivi | Black Bulls Lab",
+  title: "Esperienze dal vivo a Torino | Black Bulls Lab",
   description:
-    "Scopri Black Bulls Lab a Torino: Dinner Show interattivi, Cena con Delitto e format immersivi unici. Prenota ora la tua serata.",
+    "Format ed esperienze dal vivo a Torino in cui il pubblico è parte attiva: A Cena con il Bugiardo, eventi privati, aziende e location.",
   keywords: [
     "dinner show Torino",
     "eventi immersivi Torino",
@@ -63,9 +63,9 @@ export const homepageMetadata: Metadata = {
   ],
   openGraph: {
     ...baseMetadata.openGraph,
-    title: "Dinner Show Torino e Eventi Immersivi | Black Bulls Lab",
+    title: "Esperienze dal vivo a Torino | Black Bulls Lab",
     description:
-      "Esperienze interattive uniche a Torino. Dinner show immersivi, Cena con Delitto e serate che trasformano gli ospiti in protagonisti.",
+      "Esperienze dal vivo e format proprietari a Torino per pubblico, aziende, eventi privati e location.",
     url: BASE_URL,
     images: [
       {
@@ -92,9 +92,9 @@ export const homepageMetadata: Metadata = {
 
 export const corporateMetadata: Metadata = {
   ...baseMetadata,
-  title: "Team Building Immersivo e Eventi Aziendali Torino | Black Bulls Lab",
+  title: "Team building ed eventi aziendali a Torino",
   description:
-    "Trasforma il tuo evento corporate con Black Bulls Lab. Dinner show aziendali, team building immersivi ed eventi aziendali interattivi a Torino, Milano e in tutta Italia.",
+    "Black Bulls Lab progetta team building ed eventi aziendali a Torino basati su format dal vivo, interazione tra partecipanti, regia e dinamiche sociali.",
   keywords: [
     "team building immersivo",
     "eventi aziendali interattivi",
@@ -102,7 +102,6 @@ export const corporateMetadata: Metadata = {
     "eventi corporate",
     "esperienze immersive per aziende",
     "eventi aziendali Torino",
-    "team building Milano",
     "eventi esperienziali",
     "team building Torino",
     "cena aziendale Torino",
@@ -110,9 +109,9 @@ export const corporateMetadata: Metadata = {
   ],
   openGraph: {
     ...baseMetadata.openGraph,
-    title: "Team Building Immersivo e Eventi Aziendali Torino | Black Bulls Lab",
+    title: "Team building ed eventi aziendali a Torino | Black Bulls Lab",
     description:
-      "Dinner show aziendali e team building immersivi per eventi aziendali interattivi e unici. Esperienze esperienziali a Torino e Milano.",
+      "Format dal vivo per team building, cene aziendali ed eventi interni a Torino.",
     url: `${BASE_URL}/eventi-aziendali`,
     images: [
       {
@@ -125,7 +124,7 @@ export const corporateMetadata: Metadata = {
   },
   twitter: {
     ...baseMetadata.twitter,
-    title: "Team Building Immersivo e Eventi Aziendali Torino | Black Bulls Lab",
+    title: "Team building ed eventi aziendali a Torino | Black Bulls Lab",
     images: [`${BASE_URL}/images/brand/bg-stage-lights.webp`],
   },
   alternates: {
@@ -154,7 +153,8 @@ export function buildFormatMetadata({
   const url       = `${BASE_URL}/format/${slug}`;
   return {
     ...baseMetadata,
-    title: fullTitle,
+    // Root layout appends the canonical brand template.
+    title,
     description,
     keywords: ["dinner show Torino", "eventi immersivi Torino", ...keywords],
     openGraph: {

@@ -10,71 +10,7 @@ import { SITE_URL, SITE_NAME, CONTACT_PHONE, CONTACT_EMAIL, SOCIAL_LINKS } from 
  */
 
 /**
- * 1. buildLocalBusinessSchema
- * Creates an EntertainmentBusiness schema (sub-type of LocalBusiness).
- * Impact: Local SEO, Knowledge Graph panel.
- * 
- * @param address - Business street address
- * @param phone - Business telephone number
- * @param email - Business contact email
- * @returns Valid JSON-LD string
- */
-export function buildLocalBusinessSchema(
-    address: string,
-    phone: string,
-    email: string
-): string {
-    // Validation constraint: EntertainmentBusiness / LocalBusiness must include name, image, address, etc.
-    const schema = {
-        "@context": "https://schema.org",
-        "@type": "EntertainmentBusiness",
-        "@id": `${SITE_URL}/#business`,
-        "name": SITE_NAME,
-        "url": SITE_URL,
-        "logo": `${SITE_URL}/brand/logo-white.svg`,
-        "image": `${SITE_URL}/images/brand/bg-hero-wide.webp`,
-        "description": "Black Bulls Lab crea dinner show interattivi, cena con delitto, format immersivi e team building aziendali a Torino.",
-        "telephone": phone || CONTACT_PHONE,
-        "email": email || CONTACT_EMAIL,
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": address || "Sede Creativa",
-            "addressLocality": "Torino",
-            "addressRegion": "TO",
-            "postalCode": "10100",
-            "addressCountry": "IT"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 45.0703,
-            "longitude": 7.6869
-        },
-        "areaServed": {
-            "@type": "AdministrativeArea",
-            "name": "Torino e Piemonte"
-        },
-        "priceRange": "€€",
-        "currenciesAccepted": "EUR",
-        "paymentAccepted": "Cash, Credit Card",
-        "openingHoursSpecification": [
-            {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": ["Friday", "Saturday"],
-                "opens": "19:30",
-                "closes": "00:00"
-            }
-        ],
-        "sameAs": [
-            SOCIAL_LINKS.instagram,
-            SOCIAL_LINKS.facebook,
-            SOCIAL_LINKS.tiktok
-        ]
-    };
-    return JSON.stringify(schema, null, 2);
-}
-
-/**
- * 2. buildOrganizationSchema
+ * Canonical organization schema.
  * Creates an Organization schema.
  * Impact: General brand identification.
  * 
@@ -89,8 +25,8 @@ export function buildOrganizationSchema(): string {
         "name": SITE_NAME,
         "alternateName": "BBL",
         "url": SITE_URL,
-        "logo": `${SITE_URL}/brand/logo-white.svg`,
-        "description": "Leader a Torino nella creazione di Dinner Show interattivi e format eventi immersivi.",
+        "logo": `${SITE_URL}/brand/bbl-logo-horizontal.webp`,
+        "description": "Black Bulls Lab è un laboratorio di Torino che progetta format ed esperienze dal vivo per pubblico, aziende, privati e location.",
         "contactPoint": {
             "@type": "ContactPoint",
             "telephone": CONTACT_PHONE,
@@ -232,7 +168,7 @@ export function buildArticleSchema(
             "url": SITE_URL,
             "logo": {
                 "@type": "ImageObject",
-                "url": `${SITE_URL}/brand/logo-white.svg`
+                "url": `${SITE_URL}/brand/bbl-logo-horizontal.webp`
             }
         },
         "image": `${SITE_URL}/images/brand/bg-hero-wide.webp`,

@@ -1,49 +1,4 @@
-import { SITE_URL, CONTACT_EMAIL, SITE_NAME, CONTACT_PHONE, SOCIAL_LINKS, SITE_KEYWORDS } from "@/lib/constants";
-
-// ─── Organization Schema ──────────────────────────────────────────────────────
-
-interface OrganizationSchemaProps {
-    url?: string;
-}
-
-export function OrganizationSchema({ url = SITE_URL }: OrganizationSchemaProps) {
-    const schema = {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        name: SITE_NAME,
-        alternateName: "BBL",
-        url,
-        logo: `${url}/brand/logo-white.svg`,
-        description:
-            "Leader a Torino nella creazione di Dinner Show interattivi e format eventi immersivi. Black Bulls Lab fonde tecnologia e intrattenimento per team building aziendali e serate private uniche.",
-        address: {
-            "@type": "PostalAddress",
-            addressLocality: "Torino",
-            addressCountry: "IT",
-        },
-        contactPoint: {
-            "@type": "ContactPoint",
-            telephone: CONTACT_PHONE,
-            email: CONTACT_EMAIL,
-            contactType: "customer service",
-            availableLanguage: "Italian",
-        },
-        sameAs: [
-            SOCIAL_LINKS.instagram,
-            SOCIAL_LINKS.facebook,
-            SOCIAL_LINKS.tiktok
-        ],
-        foundingDate: "2026",
-        keywords: SITE_KEYWORDS.join(", "),
-    };
-
-    return (
-        <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-    );
-}
+import { SITE_URL, SITE_NAME, CONTACT_EMAIL, CONTACT_PHONE, SOCIAL_LINKS } from "@/lib/constants";
 
 // ─── FAQPage Schema ────────────────────────────────────────────────────────────
 
@@ -74,86 +29,6 @@ export function FAQPageSchema({ faqs }: { faqs: FAQItem[] }) {
     );
 }
 
-// ─── Event Schema ────────────────────────────────────────────────────────────
-
-interface EventSchemaProps {
-    name: string;
-    description: string;
-    date: string;
-    location: string;
-    image?: string;
-    url: string;
-    price?: number;
-    maximumAttendeeCapacity?: number;
-    performers?: string[];
-    typicalAgeRange?: string;
-}
-
-export function EventSchema({
-    name,
-    description,
-    date,
-    location,
-    image,
-    url,
-    price,
-    maximumAttendeeCapacity,
-    performers = [],
-    typicalAgeRange = "18+",
-}: EventSchemaProps) {
-    const schema: Record<string, unknown> = {
-        "@context": "https://schema.org",
-        "@type": "Event",
-        name,
-        description: description || `${name} — Un'esperienza immersiva del Black Bulls Lab a Torino.`,
-        startDate: date,
-        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-        eventStatus: "https://schema.org/EventScheduled",
-        typicalAgeRange,
-        ...(maximumAttendeeCapacity ? { maximumAttendeeCapacity } : {}),
-        audience: {
-            "@type": "Audience",
-            audienceType: "Adulti, Team Aziendale, Gruppi Privati",
-        },
-        location: {
-            "@type": "Place",
-            name: location,
-            address: {
-                "@type": "PostalAddress",
-                addressLocality: "Torino",
-                addressCountry: "IT",
-            },
-        },
-        image: image || `${SITE_URL}/images/brand/bg-hero-wide.webp`,
-        url,
-        organizer: {
-            "@type": "Organization",
-            name: SITE_NAME,
-            url: SITE_URL,
-        },
-        ...(performers.length > 0 && {
-            performer: performers.map((p) => ({
-                "@type": "PerformingGroup",
-                name: p,
-            })),
-        }),
-        offers: {
-            "@type": "Offer",
-            price: price ? price.toString() : "50.00",
-            priceCurrency: "EUR",
-            availability: "https://schema.org/InStock",
-            url,
-        },
-    };
-
-    return (
-        <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-    );
-}
-
 // ─── WebSite Schema ───────────────────────────────────────────────────────────
 
 export function WebSiteSchema() {
@@ -167,7 +42,7 @@ export function WebSiteSchema() {
         inLanguage: "it-IT",
         publisher: {
             "@type": "Organization",
-            "@id": `${SITE_URL}/#business`,
+            "@id": `${SITE_URL}/#organization`,
             name: SITE_NAME,
         },
         potentialAction: {
@@ -263,7 +138,7 @@ export function LocalBusinessSchema() {
         telephone: CONTACT_PHONE,
         email: CONTACT_EMAIL,
         image: `${SITE_URL}/images/brand/bg-hero-wide.webp`,
-        logo: `${SITE_URL}/brand/logo-white.svg`,
+        logo: `${SITE_URL}/brand/bbl-logo-horizontal.webp`,
         address: {
             "@type": "PostalAddress",
             addressLocality: "Torino",
@@ -286,13 +161,6 @@ export function LocalBusinessSchema() {
                 closes: "00:00",
             },
         ],
-        aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: "5.0",
-            bestRating: "5",
-            worstRating: "1",
-            reviewCount: "82",
-        },
         hasOfferCatalog: {
             "@type": "OfferCatalog",
             name: "Format Dinner Show",
@@ -356,7 +224,7 @@ export function EntertainmentBusinessSchema() {
         telephone: CONTACT_PHONE,
         email: CONTACT_EMAIL,
         image: `${SITE_URL}/images/brand/bg-hero-wide.webp`,
-        logo: `${SITE_URL}/brand/logo-white.svg`,
+        logo: `${SITE_URL}/brand/bbl-logo-horizontal.webp`,
         description: "Black Bulls Lab crea dinner show interattivi, cena con delitto, format immersivi e team building aziendali a Torino.",
         address: {
           "@type": "PostalAddress",

@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Eventi Aziendali e Team Building a Torino | Black Bulls Lab",
+    title: "Team building ed eventi aziendali a Torino",
     description:
-        "Organizza il tuo evento aziendale a Torino con Black Bulls Lab. Dinner show immersivi, team building originali e gala dinner personalizzati. Soluzioni da 50€/persona.",
+        "Black Bulls Lab progetta team building ed eventi aziendali a Torino basati su format dal vivo, interazione tra partecipanti, regia e dinamiche sociali.",
     keywords: ["team building Torino", "cena aziendale Torino", "dinner show aziendale", "eventi corporate Torino", "gala dinner Torino"],
     alternates: { canonical: "/eventi-aziendali" },
     openGraph: {
-        title: "Eventi Aziendali e Team Building a Torino | Black Bulls Lab",
+        title: "Team building ed eventi aziendali a Torino | Black Bulls Lab",
         description:
-            "Format immersivi per cene aziendali, team building e gala a Torino. Trasforma il tuo evento in un'esperienza indimenticabile.",
+            "Format dal vivo per team building, cene aziendali ed eventi interni a Torino.",
         url: "https://blackbullslab.com/eventi-aziendali",
         images: [{ url: "/images/brand/bg-hero-wide.webp", width: 1200, height: 630, alt: "Team Building e Cene Aziendali — Black Bulls Lab" }],
     },
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Eventi Aziendali e Team Building a Torino | Black Bulls Lab",
         description:
-            "Format immersivi per cene aziendali, team building e gala a Torino. Soluzioni personalizzate da 50€/persona.",
+            "Format live per cene aziendali, team building e eventi corporate a Torino.",
         images: ["/images/brand/bg-hero-wide.webp"],
     },
 };

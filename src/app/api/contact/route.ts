@@ -4,7 +4,9 @@ import { submitContactForm } from "@/app/actions/contact";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, message } = body;
+    const name = typeof body.name === "string" ? body.name.trim() : "";
+    const email = typeof body.email === "string" ? body.email.trim() : "";
+    const message = typeof body.message === "string" ? body.message.trim() : "";
 
     // Validate inputs
     if (!name || !email || !message) {
@@ -18,7 +20,8 @@ export async function POST(request: Request) {
     const result = await submitContactForm({
       name,
       email,
-      experience: "Contatto Generale",
+      leadType: "contact",
+      experience: "Contatto generale",
       message,
     });
 

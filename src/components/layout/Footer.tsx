@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
 
 const WA_NUMBER = "393342010067";
 const WA_MSG    = encodeURIComponent("Ciao! Vorrei informazioni su un evento con Black Bulls Lab");
@@ -18,50 +17,47 @@ export default function Footer() {
           <div className="lg:col-span-4 space-y-8">
             <Link href="/" aria-label="Black Bulls Lab — Home" suppressHydrationWarning className="block">
               <Image
-                src="/brand/logo-white.svg"
+                src="/brand/bbl-logo-horizontal.webp"
                 alt="Black Bulls Lab"
-                width={160}
-                height={36}
-                className="w-[140px] md:w-[160px] h-auto"
+                width={2149}
+                height={731}
+                className="w-[140px] md:w-[160px] h-auto object-contain"
               />
             </Link>
-            <p className="font-syne text-[10px] uppercase tracking-[0.4em] text-text-secondary leading-relaxed max-w-sm">
-              Il Laboratorio delle Emozioni. Esperienze immersive, dinner show esclusivi e performance d&apos;avanguardia.
+            <p className="font-syne text-sm font-medium uppercase tracking-[0.06em] text-text-secondary leading-relaxed max-w-sm">
+              Esperienze dal vivo a Torino per pubblico, aziende, feste private e location.
             </p>
             <div className="space-y-2">
-              <p className="font-syne text-[9px] uppercase tracking-[0.3em] text-text-secondary opacity-60">Sede Creativa: Torino, Italia</p>
-              <p className="font-syne text-[9px] uppercase tracking-[0.3em] text-text-secondary/40" suppressHydrationWarning>
+              <p className="font-syne text-xs font-medium uppercase tracking-[0.06em] text-text-secondary">Sede creativa: Torino, Italia</p>
+              <p className="font-syne text-xs font-medium uppercase tracking-[0.06em] text-text-secondary/80" suppressHydrationWarning>
                 © {currentYear} Black Bulls Lab. Tutti i diritti riservati.
               </p>
             </div>
           </div>
 
           {/* Nav */}
-          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-12">
+          <div className="lg:col-span-8 grid grid-cols-2 lg:grid-cols-4 gap-12">
             <div className="space-y-8">
-              <p className="font-syne text-[10px] font-bold uppercase tracking-[0.4em] text-accent-gold">Serate</p>
+              <p className="font-syne text-sm font-bold uppercase tracking-[0.1em] text-accent-gold">Esperienze</p>
               <ul className="space-y-4">
-                <li><Link href="/format/a-cena-con-il-bugiardo" className="font-syne text-[9px] uppercase tracking-[0.3em] text-text-secondary hover:text-accent-gold transition-colors duration-500">A Cena Con Il Bugiardo</Link></li>
-                <li><Link href="/format/il-palqo" className="font-syne text-[9px] uppercase tracking-[0.3em] text-text-secondary hover:text-accent-gold transition-colors duration-500">Il PalQo</Link></li>
-                <li><Link href="/format/cena-con-delitto" className="font-syne text-[9px] uppercase tracking-[0.3em] text-text-secondary hover:text-accent-gold transition-colors duration-500">Cena Con Delitto</Link></li>
-                <li><Link href="/format/the-golden-voice" className="font-syne text-[9px] uppercase tracking-[0.3em] text-text-secondary hover:text-accent-gold transition-colors duration-500">The Golden Voice</Link></li>
+                <li><Link href="/format/a-cena-con-il-bugiardo" className="font-syne text-sm font-medium uppercase tracking-[0.04em] text-text-secondary hover:text-accent-gold transition-colors duration-300">A Cena con il Bugiardo</Link></li>
+                <li><Link href="/eventi-aziendali" className="font-syne text-sm font-medium uppercase tracking-[0.04em] text-text-secondary hover:text-accent-gold transition-colors duration-300">Aziende</Link></li>
+                <li><Link href="/locali-partner" className="font-syne text-sm font-medium uppercase tracking-[0.04em] text-text-secondary hover:text-accent-gold transition-colors duration-300">Locali &amp; Partner</Link></li>
+                <li><Link href="/eventi-privati" className="font-syne text-sm font-medium uppercase tracking-[0.04em] text-text-secondary hover:text-accent-gold transition-colors duration-300">Eventi Privati</Link></li>
               </ul>
             </div>
             <div className="space-y-8">
-              <p className="font-syne text-[10px] font-bold uppercase tracking-[0.4em] text-accent-gold">Lab</p>
+              <p className="font-syne text-sm font-bold uppercase tracking-[0.1em] text-accent-gold">Lab</p>
               <ul className="space-y-4">
-                <li><Link href="/chi-siamo" className="font-syne text-[9px] uppercase tracking-[0.3em] text-text-secondary hover:text-accent-gold transition-colors duration-500">Chi Siamo</Link></li>
-                <li><Link href="/talents" className="font-syne text-[9px] uppercase tracking-[0.3em] text-text-secondary hover:text-accent-gold transition-colors duration-500">Artisti</Link></li>
-                <li><Link href="/eventi-aziendali" className="font-syne text-[9px] uppercase tracking-[0.3em] text-text-secondary hover:text-accent-gold transition-colors duration-500">Corporate</Link></li>
-                <li><Link href="/gallery" className="font-syne text-[9px] uppercase tracking-[0.3em] text-text-secondary hover:text-accent-gold transition-colors duration-500">Galleria</Link></li>
-                <li><Link href="/blog" className="font-syne text-[9px] uppercase tracking-[0.3em] text-text-secondary hover:text-accent-gold transition-colors duration-500">Blog</Link></li>
+                <li><Link href="/chi-siamo" className="font-syne text-sm font-medium uppercase tracking-[0.04em] text-text-secondary hover:text-accent-gold transition-colors duration-300">Chi Siamo</Link></li>
+                <li><Link href="/blog" className="font-syne text-sm font-medium uppercase tracking-[0.04em] text-text-secondary hover:text-accent-gold transition-colors duration-300">Blog</Link></li>
               </ul>
             </div>
             <div className="space-y-8">
-              <p className="font-syne text-[10px] font-bold uppercase tracking-[0.4em] text-accent-gold">Contatti</p>
+              <p className="font-syne text-sm font-bold uppercase tracking-[0.1em] text-accent-gold">Contatti</p>
               <ul className="space-y-4">
                 <li>
-                  <a href={`mailto:info@blackbullslab.com`} className="font-syne text-[9px] uppercase tracking-[0.3em] text-text-secondary hover:text-accent-gold transition-colors duration-500">
+                  <a href={`mailto:info@blackbullslab.com`} className="font-syne text-xs font-medium uppercase tracking-[0.04em] text-text-secondary hover:text-accent-gold transition-colors duration-500">
                     info@blackbullslab.com
                   </a>
                 </li>
@@ -70,29 +66,29 @@ export default function Footer() {
                     href={`https://wa.me/${WA_NUMBER}?text=${WA_MSG}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-syne text-[9px] uppercase tracking-[0.3em] text-text-secondary hover:text-accent-gold transition-colors duration-500"
+                    className="font-syne text-xs font-medium uppercase tracking-[0.04em] text-text-secondary hover:text-accent-gold transition-colors duration-500"
                   >
                     WhatsApp
                   </a>
                 </li>
-                <li><Link href="/calendario" className="font-syne text-[9px] uppercase tracking-[0.3em] text-text-secondary hover:text-accent-gold transition-colors duration-500">Prenota una serata</Link></li>
+                <li><Link href="/calendario" className="font-syne text-xs font-medium uppercase tracking-[0.04em] text-text-secondary hover:text-accent-gold transition-colors duration-500">Prenota una serata</Link></li>
               </ul>
             </div>
             <div className="space-y-8">
-              <p className="font-syne text-[10px] font-bold uppercase tracking-[0.4em] text-accent-gold">Social</p>
+              <p className="font-syne text-sm font-bold uppercase tracking-[0.1em] text-accent-gold">Social</p>
               <ul className="space-y-4">
                 <li>
-                  <a href="https://instagram.com/blackbullslab" target="_blank" rel="noopener noreferrer" className="font-syne text-[9px] uppercase tracking-[0.3em] text-text-secondary hover:text-accent-gold transition-colors duration-500">
+                  <a href="https://instagram.com/blackbullslab" target="_blank" rel="noopener noreferrer" className="font-syne text-xs font-medium uppercase tracking-[0.04em] text-text-secondary hover:text-accent-gold transition-colors duration-500">
                     Instagram
                   </a>
                 </li>
                 <li>
-                  <a href="https://facebook.com/blackbullslab" target="_blank" rel="noopener noreferrer" className="font-syne text-[9px] uppercase tracking-[0.3em] text-text-secondary hover:text-accent-gold transition-colors duration-500">
+                  <a href="https://facebook.com/blackbullslab" target="_blank" rel="noopener noreferrer" className="font-syne text-xs font-medium uppercase tracking-[0.04em] text-text-secondary hover:text-accent-gold transition-colors duration-500">
                     Facebook
                   </a>
                 </li>
                 <li>
-                  <a href="https://tiktok.com/@blackbullslab" target="_blank" rel="noopener noreferrer" className="font-syne text-[9px] uppercase tracking-[0.3em] text-text-secondary hover:text-accent-gold transition-colors duration-500">
+                  <a href="https://tiktok.com/@blackbullslab" target="_blank" rel="noopener noreferrer" className="font-syne text-xs font-medium uppercase tracking-[0.04em] text-text-secondary hover:text-accent-gold transition-colors duration-500">
                     TikTok
                   </a>
                 </li>
@@ -102,16 +98,16 @@ export default function Footer() {
         </div>
 
         <div className="mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="font-syne text-[9px] uppercase tracking-[0.4em] text-text-secondary/40">Stato del Sistema: Online // Laboratorio di Intrattenimento</p>
+          <p className="font-syne text-xs font-medium uppercase tracking-[0.08em] text-text-secondary/80">Black Bulls Lab · Torino</p>
           <div className="flex gap-8">
-            <Link href="/privacy-policy" className="font-syne text-[9px] uppercase tracking-[0.2em] text-text-secondary/40 hover:text-text-primary transition-colors">Privacy</Link>
-            <Link href="/cookie-policy" className="font-syne text-[9px] uppercase tracking-[0.2em] text-text-secondary/40 hover:text-text-primary transition-colors">Cookies</Link>
-            <button
+            <Link href="/privacy-policy" className="font-syne text-xs font-medium uppercase tracking-[0.06em] text-text-secondary/80 hover:text-text-primary transition-colors">Privacy</Link>
+            <Link href="/cookie-policy" className="font-syne text-xs font-medium uppercase tracking-[0.06em] text-text-secondary/80 hover:text-text-primary transition-colors">Cookies</Link>
+              <button
               onClick={(e) => {
                 e.preventDefault();
                 window.dispatchEvent(new Event("open-cookie-banner"));
               }}
-              className="font-syne text-[9px] uppercase tracking-[0.2em] text-text-secondary/40 hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none p-0 focus:outline-none"
+              className="font-syne text-xs font-medium uppercase tracking-[0.06em] text-text-secondary/90 hover:text-text-primary transition-colors cursor-pointer bg-transparent border-none p-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold"
             >
               Preferenze Cookie
             </button>

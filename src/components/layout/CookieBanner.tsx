@@ -19,6 +19,10 @@ function setCookie(name: string, value: string, days = 365) {
   document.cookie = `${name}=${encodeURIComponent(value)}${expires}; path=/; SameSite=Lax`;
 }
 
+function notifyConsentChange() {
+  window.dispatchEvent(new Event("bbl-consent-updated"));
+}
+
 export function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
   const [showCustomize, setShowCustomize] = useState(false);
@@ -53,17 +57,20 @@ export function CookieBanner() {
   const handleAcceptAll = () => {
     const consentValue = { necessary: true, analytics: true, marketing: true };
     setCookie("bbl_cookie_consent", JSON.stringify(consentValue), 365);
+    notifyConsentChange();
     setIsVisible(false);
   };
 
   const handleDeclineAll = () => {
     const consentValue = { necessary: true, analytics: false, marketing: false };
     setCookie("bbl_cookie_consent", JSON.stringify(consentValue), 365);
+    notifyConsentChange();
     setIsVisible(false);
   };
 
   const handleSavePreferences = () => {
     setCookie("bbl_cookie_consent", JSON.stringify(preferences), 365);
+    notifyConsentChange();
     setIsVisible(false);
   };
 
@@ -108,7 +115,7 @@ export function CookieBanner() {
           <div className="flex items-center justify-between">
             <div className="flex flex-col">
               <span className="font-sans text-xs font-semibold text-white">Cookie Necessari</span>
-              <span className="font-sans text-[10px] text-gray-500">Essenziali per la Web App.</span>
+              <span className="font-sans text-[10px] text-gray-500">Essenziali per il funzionamento del sito.</span>
             </div>
             <input
               type="checkbox"

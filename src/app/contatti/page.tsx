@@ -3,14 +3,20 @@ import { ContattiClient } from "./ContattiClient";
 import { SITE_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-    title: "Contatti | La Tua Prossima Esperienza Inizia Qui",
-    description: "Entra nel Sistema. Dinner show immersivi, giochi interattivi e format live progettati per lasciare il segno. Parla con il team di Black Bulls Lab Torino.",
+    title: "Contatti a Torino",
+    description: "Contatta Black Bulls Lab a Torino per informazioni su format ed esperienze dal vivo, eventi aziendali, feste private e collaborazioni con location.",
     alternates: { canonical: `${SITE_URL}/contatti` },
     openGraph: {
-        title: "Contatti | Black Bulls Lab",
-        description: "Entra nel Sistema. Dinner show immersivi, giochi interattivi e format live progettati per lasciare il segno. Parla con il team di Black Bulls Lab Torino.",
+        title: "Contatti | Black Bulls Lab a Torino",
+        description: "Contatta Black Bulls Lab a Torino per informazioni su format ed esperienze dal vivo, eventi aziendali, feste private e collaborazioni con location.",
         url: `${SITE_URL}/contatti`,
         images: [{ url: "/images/brand/bg-hero-wide.webp", width: 1200, height: 630, alt: "Contatti | Black Bulls Lab" }],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Contatti | Black Bulls Lab a Torino",
+        description: "Contatta Black Bulls Lab a Torino per format ed esperienze dal vivo.",
+        images: ["/images/brand/bg-hero-wide.webp"],
     },
 };
 

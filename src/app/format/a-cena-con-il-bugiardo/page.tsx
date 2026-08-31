@@ -1,45 +1,13 @@
-import { Metadata } from "next";
 import { ACenaConIlBugiardoClient } from "./ACenaConIlBugiardoClient";
+import { buildFormatMetadata } from "@/lib/metadata";
 import { SITE_URL } from "@/lib/constants";
 
-export const metadata: Metadata = {
-  title: "A Cena con il Bugiardo | Esperienza sociale a Torino",
-  description: "Una cena, un bugiardo e nessun attore. Entra nella lista d'attesa per la prima sessione pilota di A Cena con il Bugiardo a Torino.",
-  keywords: [
-    "A Cena con il Bugiardo",
-    "Liar System",
-    "Torino",
-    "esperienza sociale Torino",
-    "bluff psicologico",
-    "Black Bulls Lab",
-    "cena interattiva"
-  ],
-  alternates: {
-    canonical: `${SITE_URL}/format/a-cena-con-il-bugiardo`,
-  },
-  openGraph: {
-    title: "A Cena con il Bugiardo | Esperienza sociale a Torino",
-    description: "Una cena. Un bugiardo. Nessun attore. Di chi ti fidi? Entra in lista d'attesa per la prima sessione pilota di Torino.",
-    url: `${SITE_URL}/format/a-cena-con-il-bugiardo`,
-    siteName: "Black Bulls Lab",
-    locale: "it_IT",
-    type: "website",
-    images: [
-      {
-        url: `${SITE_URL}/images/brand/bg-hero-wide.webp`,
-        width: 1200,
-        height: 630,
-        alt: "A Cena con il Bugiardo - Un'esperienza Liar System by Black Bulls Lab",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "A Cena con il Bugiardo | Esperienza sociale a Torino",
-    description: "Una cena. Un bugiardo. Nessun attore. Entra in lista d'attesa per la sessione pilota di Torino.",
-    images: [`${SITE_URL}/images/brand/bg-hero-wide.webp`],
-  },
-};
+export const metadata = buildFormatMetadata({
+  title: "A Cena con il Bugiardo",
+  description: "Una cena. Un bugiardo. Nessun attore. Entra nella lista d’attesa per la sessione pilota a Torino.",
+  slug: "a-cena-con-il-bugiardo",
+  keywords: ["A Cena con il Bugiardo", "esperienza sociale Torino", "cena interattiva"],
+});
 
 const serviceJsonLd = {
   "@context": "https://schema.org",
@@ -50,7 +18,7 @@ const serviceJsonLd = {
     "name": "Black Bulls Lab",
     "url": SITE_URL
   },
-  "serviceType": "Social Deduction & Immersive Dining Experience",
+  "serviceType": "Cena interattiva",
   "areaServed": {
     "@type": "City",
     "name": "Torino"
@@ -60,6 +28,26 @@ const serviceJsonLd = {
   "image": `${SITE_URL}/images/brand/bg-hero-wide.webp`
 };
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    ["Cos’è A Cena con il Bugiardo?", "È una cena interattiva creata da Black Bulls Lab a Torino. Ricevi informazioni riservate, interagisci al tavolo e provi a capire chi sta mentendo."],
+    ["È una cena con delitto?", "No. Non devi risolvere un omicidio: devi capire chi sta mentendo."],
+    ["Ci sono attori?", "No. Il format non usa attori."],
+    ["Devo recitare?", "No. Non servono esperienza, costumi o battute: devi parlare, ascoltare e decidere."],
+    ["Posso venire da solo?", "Sì. Puoi partecipare da solo, in coppia o con un gruppo."],
+    ["Quanto dura?", "La durata non è ancora confermata per la sessione pilota. Sarà comunicata insieme a data e location."],
+    ["Quante persone partecipano?", "La sessione pilota è prevista per 30–40 partecipanti."],
+    ["Posso usare lo smartphone?", "Non sono state ancora comunicate regole definitive sull’uso dello smartphone."],
+    ["Come funziona la lista d’attesa?", "Non paghi ora. Ti comunicheremo successivamente data, location e apertura delle prenotazioni."],
+  ].map(([question, answer]) => ({
+    "@type": "Question",
+    name: question,
+    acceptedAnswer: { "@type": "Answer", text: answer },
+  })),
+};
+
 export default function ACenaConIlBugiardoPage() {
   return (
     <>
@@ -67,6 +55,11 @@ export default function ACenaConIlBugiardoPage() {
         id="jsonld-service"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
+      <script
+        id="jsonld-faq"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <ACenaConIlBugiardoClient />
     </>

@@ -22,6 +22,8 @@
 
 # misc
 .DS_Store
+__pycache__/
+*.pyc
 *.pem
 
 # debug
@@ -52,6 +54,20 @@ audit.json
 eslint_report*.json
 convert_to_webp.js
 .agents/
+.agent/
+.claude/
+.codebuddy/
+.codex/
+.continue/
+.cursor/
+.gemini/
+.kiro/
+.opencode/
+.qoder/
+.roo/
+.trae/
+.windsurf/
 scratch/
+.playwright-cli/
 next-dev-error.log
 *.csv

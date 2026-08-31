@@ -53,7 +53,7 @@ export function CenaConDelittoClient() {
   revealOnScroll(".reveal-mystery");
 
   return (
-    <main ref={containerRef} className="bg-black-pure text-text-primary min-h-screen selection:bg-accent-gold selection:text-black-pure overflow-x-hidden">
+    <div ref={containerRef} className="bg-black-pure text-text-primary min-h-screen selection:bg-accent-gold selection:text-black-pure overflow-x-hidden">
       
       {/* 1. CINEMATIC HERO: The Investigation Entry */}
       <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
@@ -99,7 +99,7 @@ export function CenaConDelittoClient() {
             <div className="space-y-12">
                 <div className="flex flex-col items-center gap-6">
                     <span className="reveal-mystery inline-block px-4 py-1 border border-accent-gold/20 text-accent-gold text-[10px] font-bold uppercase tracking-[0.6em] bg-accent-gold/5 backdrop-blur-md">
-                        Esperienza Noir Interattiva
+                        Esperienza investigativa classica
                     </span>
                     <h1 className="mystery-title font-syne font-bold text-[clamp(3rem,10vw,12rem)] leading-[0.8] tracking-tighter uppercase text-text-primary flex flex-col">
                         <span className="block">La Verità è</span>
@@ -109,8 +109,8 @@ export function CenaConDelittoClient() {
 
                 <div className="mystery-sub max-w-2xl mx-auto">
                     <p className="font-inter text-lg md:text-2xl text-text-secondary font-light leading-relaxed uppercase tracking-[0.2em] opacity-60">
-                        Un omicidio. Un caso irrisolto. Il tuo team. <br />
-                        L'indagine noir diventa digitale.
+                        Un caso da seguire. Una cena. <br />
+                        Un’esperienza investigativa da vivere insieme.
                     </p>
                 </div>
 
@@ -127,8 +127,8 @@ export function CenaConDelittoClient() {
             <div className="flex items-center gap-4 text-white/10">
                 <Search size={20} className="opacity-20" />
                 <div className="text-left">
-                    <div className="text-[10px] font-bold tracking-[0.4em] uppercase">Stato: Indagine Attiva</div>
-                    <div className="text-[9px] tracking-[0.2em] uppercase opacity-50">Protocollo 002 // SISTEMA_NOIR</div>
+                    <div className="text-[10px] font-bold tracking-[0.4em] uppercase">Esperienza investigativa</div>
+                    <div className="text-[9px] tracking-[0.2em] uppercase opacity-50">Cena con Delitto</div>
                 </div>
             </div>
         </div>
@@ -145,10 +145,10 @@ export function CenaConDelittoClient() {
                 />
                 <div className="space-y-12 font-inter text-xl md:text-2xl text-text-secondary font-light leading-relaxed opacity-70">
                     <p>
-                        Dimentica le vecchie cene con delitto. Qui non ci sono attori che urlano, ma prove che vibrano nel tuo smartphone.
+                        Cena con Delitto è un’esperienza investigativa classica, distinta dai format identitari di Black Bulls Lab.
                     </p>
                     <p>
-                        Ricevi il fascicolo, analizza gli indizi digitali e interroga i sospettati. La tecnologia è la tua lente d&apos;ingrandimento.
+                        Segui il caso, osserva gli indizi e prova a ricostruire ciò che è accaduto durante la cena.
                     </p>
                 </div>
             </div>
@@ -181,18 +181,18 @@ export function CenaConDelittoClient() {
         <div className="container-max">
             <div className="mb-32">
                 <SectionHeading 
-                  title="TRE FASI."
-                  highlight="UN COLPEVOLE."
-                  subtitle="Il Protocollo Investigativo"
+                  title="TRE MOMENTI."
+                  highlight="UN CASO."
+                  subtitle="Come si vive l’esperienza"
                   align="center"
                 />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24">
                 {[
-                    { title: "Briefing Digitale", desc: "Inquadra il QR code. Accedi al network. Ricevi la lista dei sospettati e il primo set di prove.", icon: <ShieldCheck size={32} /> },
-                    { title: "La Scena del Crimine", desc: "Durante la cena raccogli indizi e ascolta le testimonianze. Ogni portata svela un nuovo segreto.", icon: <Search size={32} /> },
-                    { title: "L'Accusa", desc: "Formula l&apos;accusa. Invia movente e arma del delitto tramite l&apos;App. Vinci la sfida.", icon: <Zap size={32} /> }
+                    { title: "Conosci il caso", desc: "Entra nella storia e segui gli elementi che la compongono.", icon: <ShieldCheck size={32} /> },
+                    { title: "Segui gli indizi", desc: "Durante la cena osserva, ascolta e collega le informazioni.", icon: <Search size={32} /> },
+                    { title: "Ricostruisci", desc: "Metti insieme ciò che hai scoperto e prova a capire l’accaduto.", icon: <Zap size={32} /> }
                 ].map((act, i) => (
                     <div key={i} className="group space-y-8 p-12 border border-white/5 bg-white/2 hover:border-accent-gold/20 transition-[border-color,background-color] duration-700">
                         <div className="text-accent-gold opacity-30 group-hover:opacity-100 transition-opacity duration-700">
@@ -217,11 +217,11 @@ export function CenaConDelittoClient() {
         <div className="container-max grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
             <div className="space-y-12">
                 <h2 className="font-syne text-5xl md:text-8xl font-bold uppercase tracking-tighter leading-none text-text-primary">
-                    RISOLVI <br />
+                    VIVI <br />
                     <span className="text-accent-gold italic">IL CASO.</span>
                 </h2>
                 <p className="font-inter text-xl text-text-secondary/60 leading-relaxed max-w-xl">
-                    Sei pronto a mettere alla prova il tuo intuito? Il Sistema è pronto. La tua squadra ti aspetta.
+                    Scopri l’esperienza investigativa classica e contattaci per informazioni.
                 </p>
                 <div className="pt-8">
                     <a
@@ -230,7 +230,7 @@ export function CenaConDelittoClient() {
                         rel="noopener noreferrer"
                         className="group inline-flex items-center gap-6 px-12 py-6 border border-accent-gold/40 text-accent-gold font-syne font-bold uppercase tracking-[0.4em] hover:bg-accent-gold hover:text-black-pure transition-[background-color,color,border-color] duration-500"
                     >
-                        PRENOTA L&apos;INDAGINE
+                        SCOPRI L&apos;ESPERIENZA
                         <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
                     </a>
                 </div>
@@ -265,15 +265,15 @@ export function CenaConDelittoClient() {
               href="/calendario"
               className="inline-flex items-center gap-8 px-16 py-8 bg-black-pure text-accent-gold text-xl font-black uppercase tracking-widest hover:bg-white hover:text-black-pure transition-[background-color,color] duration-500 rounded-full"
             >
-              RISERVA IL TUO POSTO
+              SCOPRI L&apos;ESPERIENZA
             </Link>
           </div>
           <p className="font-syne text-[10px] uppercase tracking-[0.6em] font-black opacity-40">
-            Posti limitati // Prenotazione obbligatoria
+            Cena // Indagine // Interazione
           </p>
         </div>
       </section>
 
-    </main>
+    </div>
   );
 }

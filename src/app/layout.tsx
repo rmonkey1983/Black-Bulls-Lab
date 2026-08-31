@@ -2,14 +2,14 @@ import type { Metadata, Viewport } from "next";
 import { Mohave, Rock_Salt, Inter, Syne } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { EntertainmentBusinessSchema, WebSiteSchema } from "@/components/seo/JsonLd";
+import { WebSiteSchema } from "@/components/seo/JsonLd";
 import { MobileStickyBookButton } from "@/components/layout/MobileStickyBookButton";
 import { ClientOnlyWrappers } from "@/components/layout/ClientOnlyWrappers";
 import { WhatsAppWidget } from "@/components/layout/WhatsAppWidget";
 import { BackToTop } from "@/components/layout/BackToTop";
 import { PageTransition } from "@/components/layout/PageTransition";
-import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, SITE_KEYWORDS, CONTACT_PHONE, CONTACT_EMAIL } from "@/lib/constants";
-import { buildOrganizationSchema, buildLocalBusinessSchema } from "@/lib/schemas";
+import { SITE_URL, SITE_NAME, SITE_KEYWORDS } from "@/lib/constants";
+import { buildOrganizationSchema } from "@/lib/schemas";
 import "./globals.css";
 
 const mohave = Mohave({
@@ -34,15 +34,13 @@ const syne = Syne({
   subsets: ["latin"],
 });
 
-const DEFAULT_DESCRIPTION = SITE_DESCRIPTION;
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Creatori di Emozioni e Dinner Show Esclusivi | Black Bulls",
+    default: "Esperienze dal vivo a Torino | Black Bulls Lab",
     template: "%s | Black Bulls Lab",
   },
-  description: DEFAULT_DESCRIPTION,
+  description: "Format ed esperienze dal vivo in cui il pubblico cambia ciò che succede: serate pubbliche, eventi privati, aziende e location.",
   keywords: SITE_KEYWORDS,
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
@@ -54,8 +52,8 @@ export const metadata: Metadata = {
     locale: "it_IT",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: "Creatori di Emozioni e Dinner Show Esclusivi | Black Bulls",
-    description: DEFAULT_DESCRIPTION,
+    title: "Esperienze dal vivo a Torino | Black Bulls Lab",
+    description: "Format ed esperienze dal vivo in cui il pubblico è parte attiva.",
     images: [
       {
         url: "/images/brand/bg-hero-wide.webp",
@@ -67,8 +65,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Creatori di Emozioni e Dinner Show Esclusivi | Black Bulls",
-    description: DEFAULT_DESCRIPTION,
+    title: "Esperienze dal vivo a Torino | Black Bulls Lab",
+    description: "Format ed esperienze dal vivo a Torino per pubblico, aziende, feste private e location.",
     images: ["/images/brand/bg-hero-wide.webp"],
   },
   robots: {
@@ -83,8 +81,8 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/brand/logo-white.svg",
-    apple: "/brand/logo-full.jpg",
+    icon: "/brand/bbl-monogram.webp",
+    apple: "/brand/bbl-monogram.webp",
   },
   category: "entertainment",
 };
@@ -102,20 +100,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const address = process.env.NEXT_PUBLIC_BUSINESS_ADDRESS || "Torino, Italia";
-  const phone = process.env.NEXT_PUBLIC_BUSINESS_PHONE || CONTACT_PHONE;
-  const email = process.env.NEXT_PUBLIC_BUSINESS_EMAIL || CONTACT_EMAIL;
-
   return (
     <html lang="it" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: buildOrganizationSchema() }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: buildLocalBusinessSchema(address, phone, email) }}
         />
       </head>
       <body
@@ -145,7 +135,6 @@ export default function RootLayout({
         <WhatsAppWidget />
         <BackToTop />
         
-        <EntertainmentBusinessSchema />
         <WebSiteSchema />
       </body>
     </html>

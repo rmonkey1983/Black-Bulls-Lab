@@ -53,7 +53,7 @@ export function IlPalqoClient() {
   revealOnScroll(".reveal-palqo");
 
   return (
-    <main ref={containerRef} className="bg-black-pure text-text-primary min-h-screen selection:bg-accent-gold selection:text-black-pure overflow-x-hidden">
+    <div ref={containerRef} className="bg-black-pure text-text-primary min-h-screen selection:bg-accent-gold selection:text-black-pure overflow-x-hidden">
       
       {/* 1. CINEMATIC HERO */}
       <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
@@ -99,7 +99,7 @@ export function IlPalqoClient() {
             <div className="space-y-12">
                 <div className="flex flex-col items-center gap-6">
                     <span className="reveal-palqo inline-block px-4 py-1 border border-accent-gold/20 text-accent-gold text-[10px] font-bold uppercase tracking-[0.6em] bg-accent-gold/5 backdrop-blur-md">
-                        I Riflettori Cambiano Tutto
+                        Dinner &amp; show live
                     </span>
                     <h1 className="palqo-title font-syne font-bold text-[clamp(3rem,10vw,10rem)] leading-[0.85] tracking-tighter uppercase text-text-primary flex flex-col">
                         <span className="block">Accendi il</span>
@@ -109,8 +109,8 @@ export function IlPalqoClient() {
 
                 <div className="palqo-sub max-w-2xl mx-auto">
                     <p className="font-inter text-lg md:text-2xl text-text-secondary font-light leading-relaxed uppercase tracking-[0.2em] opacity-60">
-                        Il talento incontra la tecnologia. <br />
-                        Ogni performance lascia il segno. Tu sei il giudice.
+                        Stand-up, improvvisazione e conduzione. <br />
+                        Il pubblico partecipa a ciò che accade sul palco.
                     </p>
                 </div>
 
@@ -126,8 +126,8 @@ export function IlPalqoClient() {
         <div className="absolute bottom-12 right-12 hidden lg:block">
             <div className="flex items-center gap-4 text-white/10">
                 <div className="text-right">
-                    <div className="text-[10px] font-bold tracking-[0.4em] uppercase">Votazione Digitale</div>
-                    <div className="text-[9px] tracking-[0.2em] uppercase opacity-50">Protocollo Attivo</div>
+                    <div className="text-[10px] font-bold tracking-[0.4em] uppercase">Interazione live</div>
+                    <div className="text-[9px] tracking-[0.2em] uppercase opacity-50">Pubblico protagonista</div>
                 </div>
                 <Zap size={24} className="opacity-20" />
             </div>
@@ -145,10 +145,10 @@ export function IlPalqoClient() {
                 />
                 <div className="space-y-12 font-inter text-xl md:text-2xl text-text-secondary font-light leading-relaxed opacity-70">
                     <p>
-                        Una volta al mese, il sipario si alza su ciò che non hai mai visto. Non è un concerto, è una sfida. Non sei uno spettatore, sei il giudice.
+                        Il PalQo è un dinner &amp; show live con stand-up, improvvisazione, conduzione e interazione con il pubblico.
                     </p>
                     <p>
-                        Tramite la nostra Web App, ogni tua emozione diventa un voto. Il destino degli artisti è nelle tue mani, in tempo reale.
+                        La serata alterna momenti sul palco e coinvolgimento della sala: il pubblico non resta ai margini dello spettacolo.
                     </p>
                 </div>
             </div>
@@ -178,18 +178,18 @@ export function IlPalqoClient() {
         <div className="container-max">
             <div className="mb-32">
                 <SectionHeading 
-                  title="TRE ATTI."
-                  highlight="UN SOLO SHOW."
-                  subtitle="Il Percorso della Serata"
+                  title="LIVE."
+                  highlight="INSIEME."
+                  subtitle="Come si vive il format"
                   align="center"
                 />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24">
                 {[
-                    { title: "Ingresso Digitale", desc: "Accedi al Sistema. Scopri i talenti della serata. Preparati a decidere.", icon: <Zap size={32} /> },
-                    { title: "Il Confronto", desc: "Performance esplosive. Vota dal tuo tavolo tramite l&apos;App proprietaria.", icon: <Mic2 size={32} /> },
-                    { title: "Il Verdetto", desc: "I risultati appaiono a schermo. Premiazione e Aftershow immersivo.", icon: <Users size={32} /> }
+                    { title: "Stand-up", desc: "La conduzione apre la serata e porta il pubblico dentro il ritmo dello show.", icon: <Mic2 size={32} /> },
+                    { title: "Improvvisazione", desc: "Il palco cambia direzione seguendo ciò che succede in sala.", icon: <Zap size={32} /> },
+                    { title: "Interazione", desc: "Il pubblico partecipa e contribuisce all’energia della serata.", icon: <Users size={32} /> }
                 ].map((act, i) => (
                     <div key={i} className="group space-y-8 p-12 border border-white/5 bg-white/2 hover:border-accent-gold/20 transition-[border-color,background-color] duration-700">
                         <div className="text-accent-gold opacity-30 group-hover:opacity-100 transition-opacity duration-700">
@@ -214,11 +214,11 @@ export function IlPalqoClient() {
         <div className="container-max grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
             <div className="space-y-12">
                 <h2 className="font-syne text-5xl md:text-8xl font-bold uppercase tracking-tighter leading-none text-text-primary">
-                    VUOI ESSERE <br />
-                    <span className="text-accent-gold italic">IL PROSSIMO?</span>
+                    VUOI VIVERE <br />
+                    <span className="text-accent-gold italic">IL PALQO?</span>
                 </h2>
                 <p className="font-inter text-xl text-text-secondary/60 leading-relaxed max-w-xl">
-                    La nostra selezione è sempre aperta. Se hai un talento che merita il grande palco, il Sistema ti sta aspettando.
+                    Scopri il format e contattaci per ricevere informazioni sulle prossime occasioni di partecipazione.
                 </p>
                 <div className="pt-8">
                     <a
@@ -227,7 +227,7 @@ export function IlPalqoClient() {
                         rel="noopener noreferrer"
                         className="group inline-flex items-center gap-6 px-12 py-6 border border-accent-gold/40 text-accent-gold font-syne font-bold uppercase tracking-[0.4em] hover:bg-accent-gold hover:text-black-pure transition-[background-color,color,border-color] duration-500"
                     >
-                        PORTA IL TUO TALENTO
+                        SCOPRI IL FORMAT
                         <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
                     </a>
                 </div>
@@ -255,22 +255,22 @@ export function IlPalqoClient() {
         </div>
         <div className="container-narrow space-y-16 relative z-10">
           <h2 className="font-syne text-6xl md:text-9xl font-bold uppercase tracking-tighter leading-[0.8]">
-            ENTRA <br /> NELLO <span className="bg-black-pure text-accent-gold px-4">SHOW.</span>
+            SCOPRI <br /> IL <span className="bg-black-pure text-accent-gold px-4">PALQO.</span>
           </h2>
           <div className="pt-12">
             <Link 
               href="/calendario"
               className="inline-flex items-center gap-8 px-16 py-8 bg-black-pure text-accent-gold text-xl font-black uppercase tracking-widest hover:bg-white hover:text-black-pure transition-[background-color,color] duration-500 rounded-full"
             >
-              RISERVA IL TUO POSTO
+              SCOPRI IL FORMAT
             </Link>
           </div>
           <p className="font-syne text-[10px] uppercase tracking-[0.6em] font-black opacity-40">
-            Disponibilità limitata // Evento mensile unico
+            Stand-up // Improvvisazione // Interazione
           </p>
         </div>
       </section>
 
-    </main>
+    </div>
   );
 }

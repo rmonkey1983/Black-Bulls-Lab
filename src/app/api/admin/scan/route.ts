@@ -31,7 +31,7 @@ export async function POST(req: Request) {
       supabaseAdmin = getStrictSupabaseAdmin();
     } catch {
       return NextResponse.json(
-        { error: "Servizio di amministrazione non disponibile. Service role key non configurata." },
+        { error: "Servizio di amministrazione non disponibile." },
         { status: 503, headers }
       );
     }

@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { X, Menu, ArrowRight } from "lucide-react";
+import { X, Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NAV_LINKS, CONTACT_WHATSAPP, SOCIAL_LINKS } from "@/lib/constants";
 
@@ -52,42 +52,43 @@ export default function Navbar() {
 
       <div className="max-w-360 mx-auto h-full flex items-center justify-between px-6 md:px-10 relative">
 
-        {/* LOGO */}
-        <div className="flex-none">
-          <Link
-            href="/"
-            aria-label="Black Bulls Lab — Home"
-            className="relative z-110"
-            onClick={() => setMenuOpen(false)}
-            suppressHydrationWarning
-          >
-            <Image
-              src="/brand/logo-white.svg"
-              alt="Black Bulls Lab"
-              width={160}
-              height={36}
-              priority
-              style={{ width: "auto", height: "auto" }}
-              className={cn(
-                "transition-all duration-700 h-auto",
-                scrolled ? "w-25 lg:w-30" : "w-30 lg:w-36.25"
-              )}
-            />
-          </Link>
-        </div>
+        {/* Official BBL logo */}
+        <Link
+          href="/"
+          aria-label="Black Bulls Lab — Home"
+          className="relative z-[110] flex-none"
+          onClick={() => setMenuOpen(false)}
+        >
+          <Image
+            src="/brand/bbl-logo-horizontal.webp"
+            alt="Black Bulls Lab"
+            width={2149}
+            height={731}
+            className="hidden lg:block w-[145px] h-auto object-contain"
+            priority
+          />
+          <Image
+            src="/brand/bbl-monogram.webp"
+            alt="Black Bulls Lab"
+            width={1254}
+            height={1254}
+            className="block lg:hidden w-10 h-10 object-contain"
+            priority
+          />
+        </Link>
 
         {/* Desktop Links */}
-        <ul className="hidden lg:flex items-center gap-10 ml-auto mr-10">
+        <ul className="hidden lg:flex items-center gap-6 absolute left-1/2 -translate-x-1/2 min-w-0">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
                 suppressHydrationWarning
                 className={cn(
-                  "font-syne text-[9px] uppercase tracking-[0.45em] transition-colors duration-500 hover:text-accent-gold relative group",
+                  "font-syne text-xs font-semibold uppercase tracking-[0.08em] transition-colors duration-300 hover:text-accent-gold relative group whitespace-nowrap",
                   pathname === link.href
                     ? "text-accent-gold"
-                    : "text-text-primary/50"
+                    : "text-text-primary/85"
                 )}
               >
                 {link.label}
@@ -103,23 +104,9 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Desktop CTA */}
-        <div className="hidden lg:block flex-none">
-          <Link
-            href="/calendario"
-            suppressHydrationWarning
-            className="relative px-8 py-3.5 bg-accent-gold text-black-pure font-syne text-[11px] font-extrabold uppercase tracking-[0.25em] overflow-hidden transition-all duration-500 group hover:shadow-[0_0_35px_rgba(200,169,107,0.4)]"
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              Prenota Ora <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-            </span>
-            <div className="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
-          </Link>
-        </div>
-
         {/* Mobile Toggle */}
         <button
-          className="lg:hidden relative z-110 p-2 text-text-primary hover:text-accent-gold transition-colors duration-500"
+          className="lg:hidden relative z-110 p-2 ml-auto text-text-primary hover:text-accent-gold transition-colors duration-500"
           aria-label={menuOpen ? "Chiudi menu" : "Apri menu"}
           onClick={() => setMenuOpen(!menuOpen)}
         >
@@ -140,10 +127,10 @@ export default function Navbar() {
             : "opacity-0 pointer-events-none -translate-y-full"
         )}
       >
-        <div className="fixed inset-0 bg-black-pure z-100 flex flex-col justify-between p-8 md:p-16 pt-32 pb-12 overflow-y-auto">
+        <div className="fixed inset-0 bg-black-pure z-100 flex flex-col justify-between p-8 md:p-16 pt-32 pb-12 overflow-x-hidden overflow-y-auto">
 
           {/* Background Ambient Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 bg-accent-gold/5 rounded-full blur-[150px] pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(500px,100vw)] h-[min(500px,100vw)] bg-accent-gold/5 rounded-full blur-[150px] pointer-events-none" />
 
           {/* Navigation Links */}
           <div className="relative z-10 flex flex-col space-y-6 md:space-y-8">
@@ -171,7 +158,7 @@ export default function Navbar() {
           <div className="relative z-10 space-y-8 pt-8 border-t border-white/6">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
               <div>
-                <p className="font-syne text-[9px] uppercase tracking-[0.4em] text-text-secondary/40 mb-2">
+                <p className="font-syne text-xs font-semibold uppercase tracking-[0.12em] text-text-secondary mb-2">
                   Diretto / WhatsApp
                 </p>
                 <a
@@ -189,7 +176,7 @@ export default function Navbar() {
                   href={SOCIAL_LINKS.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-syne text-[9px] uppercase tracking-widest text-text-secondary/40 hover:text-accent-gold transition-colors duration-500"
+                  className="font-syne text-xs font-semibold uppercase tracking-[0.1em] text-text-secondary hover:text-accent-gold transition-colors duration-500"
                   suppressHydrationWarning
                 >
                   Instagram
@@ -198,7 +185,7 @@ export default function Navbar() {
                   href={SOCIAL_LINKS.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-syne text-[9px] uppercase tracking-widest text-text-secondary/40 hover:text-accent-gold transition-colors duration-500"
+                  className="font-syne text-xs font-semibold uppercase tracking-[0.1em] text-text-secondary hover:text-accent-gold transition-colors duration-500"
                   suppressHydrationWarning
                 >
                   Facebook
@@ -207,13 +194,13 @@ export default function Navbar() {
                   href={SOCIAL_LINKS.tiktok}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-syne text-[9px] uppercase tracking-widest text-text-secondary/40 hover:text-accent-gold transition-colors duration-500"
+                  className="font-syne text-xs font-semibold uppercase tracking-[0.1em] text-text-secondary hover:text-accent-gold transition-colors duration-500"
                   suppressHydrationWarning
                 >
                   TikTok
                 </a>
               </div>
-              <span className="font-syne text-[8px] uppercase tracking-[0.3em] text-text-secondary/25 italic">
+              <span className="font-syne text-xs uppercase tracking-[0.1em] text-text-secondary/75 italic">
                 Cinematic Universe
               </span>
             </div>

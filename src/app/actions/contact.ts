@@ -1,99 +1,122 @@
 "use server";
 
-import { supabase } from "@/lib/supabase";
+export type LeadType = "corporate" | "private" | "partner" | "contact";
 
 export interface ContactSubmissionData {
     name: string;
     email: string;
-    experience: string;
-    message: string;
-    b_contact_name?: string; // honeypot
+    leadType: LeadType;
+    message?: string;
+    phone?: string;
+    company?: string;
+    eventType?: string;
+    experience?: string;
+    guests?: string;
+    location?: string;
+    period?: string;
+    objective?: string;
+    format?: string;
+    venue?: string;
+    venueType?: string;
+    capacity?: string;
+    city?: string;
+    b_contact_name?: string;
+}
+
+function escapeHtml(value: string): string {
+    return value.replace(/[&<>"']/g, (character) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+    })[character] ?? character);
+}
+
+function formatField(label: string, value?: string): string {
+    const trimmed = typeof value === "string" ? value.trim() : "";
+    return trimmed ? `<p><strong>${escapeHtml(label)}:</strong> ${escapeHtml(trimmed)}</p>` : "";
 }
 
 export async function submitContactForm(data: ContactSubmissionData) {
-    const { name, email, experience, message, b_contact_name } = data;
-
-    // 1. Honeypot check (Spam prevention)
-    if (b_contact_name) {
+    if (data.b_contact_name) {
         return { success: false, error: "Spam detected." };
     }
 
-    // 2. Validation
-    if (!name || !email || !experience || !message) {
-        return { success: false, error: "Tutti i campi sono obbligatori per procedere." };
+    const name = typeof data.name === "string" ? data.name.trim() : "";
+    const email = typeof data.email === "string" ? data.email.trim() : "";
+
+    const leadLabels: Record<LeadType, string> = {
+        corporate: "Evento aziendale",
+        private: "Evento privato",
+        partner: "Proposta location partner",
+        contact: "Contatto generale",
+    };
+
+    if (!name || !email || !leadLabels[data.leadType]) {
+        return { success: false, error: "Nome, email e tipo di richiesta sono obbligatori." };
     }
 
     if (!email.includes("@")) {
         return { success: false, error: "Inserisci un indirizzo email valido." };
     }
 
+    const message = typeof data.message === "string" ? data.message.trim() : "";
+    const objective = typeof data.objective === "string" ? data.objective.trim() : "";
+    if (!message && !objective) {
+        return { success: false, error: "Aggiungi un messaggio o un obiettivo alla richiesta." };
+    }
+
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+        console.error("Contact submission unavailable: RESEND_API_KEY is not configured.");
+        return { success: false, error: "Servizio temporaneamente non disponibile. Riprova più tardi." };
+    }
+
+    const details = [
+        formatField("Nome", name),
+        formatField("Email", email),
+        formatField("Telefono", data.phone),
+        formatField("Azienda", data.company),
+        formatField("Tipo evento", data.eventType),
+        formatField("Esperienza", data.experience),
+        formatField("Partecipanti", data.guests),
+        formatField("Città/location", data.location),
+        formatField("Periodo", data.period),
+        formatField("Format", data.format),
+        formatField("Locale", data.venue),
+        formatField("Tipologia location", data.venueType),
+        formatField("Capienza indicativa", data.capacity),
+        formatField("Città", data.city),
+        formatField("Obiettivo", objective),
+        formatField("Messaggio", message),
+    ].filter(Boolean).join("");
+
     try {
-        // 3. Database Insertion (Graceful fallback if contact_submissions table doesn't exist)
-        try {
-            const { error: dbError } = await supabase
-                .from("contact_submissions")
-                .insert([
-                    {
-                        name,
-                        email,
-                        experience,
-                        message,
-                        created_at: new Date().toISOString(),
-                    }
-                ]);
+        const { Resend } = await import("resend");
+        const resend = new Resend(apiKey);
+        const { error } = await resend.emails.send({
+            from: "Black Bulls Lab <info@blackbullslab.com>",
+            to: ["info@blackbullslab.com"],
+            reply_to: email,
+            subject: `[Contatti Lab] ${leadLabels[data.leadType]}`,
+            html: `
+                <div style="font-family: Arial, sans-serif; background-color: #060606; color: #ffffff; padding: 32px; border-radius: 12px; max-width: 600px; margin: 0 auto; border: 1px solid #c8a96b;">
+                    <h1 style="color: #c8a96b; font-size: 22px;">NUOVA RICHIESTA</h1>
+                    <p>${escapeHtml(leadLabels[data.leadType])}</p>
+                    <div style="line-height: 1.6;">${details}</div>
+                </div>
+            `,
+        });
 
-            if (dbError) {
-                console.warn("Non-critical: Supabase insert failed. Falling back to email dispatch only.", dbError.message);
-            }
-        } catch (dbErr) {
-            console.warn("Non-critical: Database connection or table absent. Falling back to email.", dbErr);
-        }
-
-        // 4. Send Premium Email Notification using Resend
-        try {
-            const { Resend } = await import("resend");
-            
-            if (process.env.RESEND_API_KEY) {
-                const resend = new Resend(process.env.RESEND_API_KEY);
-                await resend.emails.send({
-                    from: "Black Bulls Lab <info@blackbullslab.com>",
-                    to: ["info@blackbullslab.com"],
-                    subject: `[Contatti Lab] Nuova Richiesta Esperienza: ${name}`,
-                    html: `
-                        <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #060606; color: #ffffff; padding: 40px; border-radius: 12px; max-width: 600px; margin: 0 auto; border: 1px solid #c8a96b;">
-                            <h2 style="color: #c8a96b; font-size: 24px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; border-bottom: 1px solid rgba(200, 169, 107, 0.2); padding-bottom: 10px;">
-                                NUOVA RICHIESTA CONTATTO
-                            </h2>
-                            <p style="font-size: 16px; margin: 10px 0;"><strong style="color: #c8a96b;">Nome:</strong> ${name}</p>
-                            <p style="font-size: 16px; margin: 10px 0;"><strong style="color: #c8a96b;">Email:</strong> <a href="mailto:${email}" style="color: #ffffff; text-decoration: underline;">${email}</a></p>
-                            <p style="font-size: 16px; margin: 10px 0;"><strong style="color: #c8a96b;">Esperienza Selezionata:</strong> <span style="background-color: rgba(200, 169, 107, 0.1); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(200, 169, 107, 0.3); font-weight: bold;">${experience}</span></p>
-                            
-                            <div style="margin-top: 30px; background-color: rgba(255, 255, 255, 0.03); border-left: 3px solid #c8a96b; padding: 20px; border-radius: 4px;">
-                                <p style="margin: 0; font-size: 15px; font-style: italic; line-height: 1.6; color: #dcdcdc;">
-                                    "${message}"
-                                </p>
-                            </div>
-                            
-                            <hr style="border: 0; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 30px 0;" />
-                            <p style="font-size: 11px; color: rgba(255, 255, 255, 0.4); text-transform: uppercase; letter-spacing: 1px; text-align: center;">
-                                BLACK BULLS LAB // IMMERSIVE EXPERIENCES PROTOCOL
-                            </p>
-                        </div>
-                    `,
-                });
-            } else {
-                console.warn("RESEND_API_KEY is not defined in environment variables. Email notification skipped.");
-            }
-        } catch (emailErr) {
-            console.error("Non-critical error: failed to send contact notification email", emailErr);
+        if (error) {
+            console.error("Contact notification failed:", error.message);
+            return { success: false, error: "Non è stato possibile inviare la richiesta. Riprova più tardi." };
         }
 
         return { success: true };
-    } catch (err) {
-        console.error("Unexpected error in contact submission:", err);
-        return {
-            success: false,
-            error: "Si è verificato un errore imprevisto. Riprova più tardi."
-        };
+    } catch (error) {
+        console.error("Contact notification failed:", error instanceof Error ? error.message : "unknown error");
+        return { success: false, error: "Non è stato possibile inviare la richiesta. Riprova più tardi." };
     }
 }

@@ -1,214 +1,56 @@
-"use client";
-
-import { ImmersiveHeader } from "@/components/layout/ImmersiveHeader";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { PremiumCard } from "@/components/ui/PremiumCard";
-import { Sparkles, Target, Heart, ArrowRight, Zap, Cpu } from "lucide-react";
-import FaqSection from "@/components/ui/FaqSection";
+import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useGSAP } from "@/hooks/useGSAP";
-import { animateQuote } from "@/lib/gsapAnimations";
-import { PreFooterCTA } from "@/components/layout/PreFooterCTA";
+import { ArrowRight, CircleDot, Compass, Lightbulb, Users } from "lucide-react";
 
+export const ABOUT_FAQS = [
+  { question: "Cos'è Black Bulls Lab?", answer: "Black Bulls Lab è un laboratorio creativo di Torino che progetta format ed esperienze dal vivo per pubblico, aziende, privati e location." },
+  { question: "Cosa significa il nome?", answer: "Black richiama un'identità netta e riconoscibile. Bulls collega il nome al toro del marchio e alla città di Torino. Lab indica sperimentazione e progettazione di format." },
+  { question: "Cosa create?", answer: "Creiamo format proprietari ed esperienze dal vivo in cui partecipazione, regia e interazione fanno parte dell'esperienza." },
+  { question: "In cosa vi differenziate da un'agenzia eventi?", answer: "Partiamo dal format e dalla dinamica di partecipazione, poi costruiamo regia e personalizzazione adatte al contesto dell'evento." },
+  { question: "Il pubblico è protagonista?", answer: "Sì. Le persone non sono solo spettatrici: partecipano alle fasi e alle interazioni previste dal format." },
+  { question: "Lavorate con attori?", answer: "Dipende dal format. A Cena con il Bugiardo, per esempio, è definito proprio dall'assenza di attori e dalla partecipazione degli invitati." },
+  { question: "Come usate la tecnologia?", answer: "Quando serve, sostiene informazioni, fasi e interazioni. Resta un supporto discreto al vivo, non il prodotto principale." },
+  { question: "Per chi lavorate?", answer: "Per pubblico, aziende, privati e location che vogliono ospitare o vivere un format dal vivo." },
+  { question: "Dove operate?", answer: "Il nostro punto di riferimento è Torino, con collaborazioni nell'area del Piemonte in base a format e location." },
+  { question: "È possibile personalizzare un'esperienza?", answer: "Sì, la personalizzazione viene definita nel brief in base a obiettivi, pubblico, format e contesto." },
+  { question: "Come possiamo collaborare?", answer: "Puoi contattarci per un evento aziendale, proporre una location o parlare di una collaborazione." },
+];
 
+const pillars = [
+  { icon: Compass, title: "Format proprietari", text: "Ideiamo strutture riconoscibili, progettate per essere vissute dal pubblico." },
+  { icon: Users, title: "Pubblico protagonista", text: "La partecipazione cambia il ritmo dell'esperienza e la relazione tra le persone." },
+  { icon: Lightbulb, title: "Regia e metodo", text: "Brief, preparazione e conduzione tengono insieme creatività e operatività." },
+];
 
 export function AboutClient() {
-    const pathname = usePathname();
-    useGSAP(() => {
-        // Hero title reveal
-        animateQuote("#hero-title-reveal");
-    }, { dependencies: [pathname] });
+  return (
+    <div className="relative overflow-hidden bg-black-pure text-white">
+      <section className="relative isolate flex min-h-[560px] items-end overflow-hidden px-6 pb-20 pt-36 md:min-h-[680px] md:px-12 md:pb-28 lg:px-20">
+        <Image src="/images/brand/bg-venue-crowd.webp" alt="Pubblico durante un'esperienza dal vivo Black Bulls Lab" fill priority sizes="100vw" className="-z-20 object-cover object-center opacity-30" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black-pure via-black-pure/70 to-black-pure/30" />
+        <div className="absolute inset-0 -z-10 bg-black/25" />
+        <div className="relative z-10 mx-auto w-full max-w-7xl">
+          <p className="mb-5 font-syne text-xs uppercase tracking-[0.28em] text-accent-gold">Chi siamo · Torino</p>
+          <h1 className="max-w-5xl font-heading text-[clamp(3.2rem,10vw,9.5rem)] font-bold uppercase leading-[0.82] tracking-[-0.06em]">Black Bulls Lab</h1>
+          <p className="mt-8 max-w-2xl font-heading text-xl uppercase leading-tight text-accent-gold md:text-3xl">Laboratorio di format ed esperienze dal vivo</p>
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-white/75 md:text-lg">Progettiamo situazioni in cui il pubblico non assiste soltanto: entra nella dinamica, interagisce e contribuisce a ciò che accade.</p>
+        </div>
+      </section>
 
-    const scrollToVision = (e: React.MouseEvent) => {
-        e.preventDefault();
-        const visionSection = document.getElementById('vision-section');
-        if (visionSection) {
-            visionSection.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
+      <section className="mx-auto grid max-w-7xl gap-10 px-6 py-20 md:grid-cols-[0.8fr_1.2fr] md:px-12 md:py-28 lg:px-20">
+        <div><p className="font-syne text-xs uppercase tracking-[0.28em] text-accent-gold">Il laboratorio</p><h2 className="mt-4 max-w-md font-heading text-4xl uppercase leading-[0.95] tracking-tight md:text-6xl">Perché Black Bulls Lab</h2></div>
+        <div className="space-y-6 text-lg leading-relaxed text-white/75 md:text-xl"><p>Black Bulls Lab è un laboratorio creativo di Torino che progetta format ed esperienze dal vivo per pubblico, aziende, privati e location.</p><p>Ogni progetto parte dalla partecipazione: costruiamo una regia chiara, prepariamo le interazioni e usiamo la tecnologia solo quando aiuta a sostenere informazioni o fasi dell&apos;esperienza.</p></div>
+      </section>
 
-    return (
-        <div className="min-h-screen relative bg-transparent overflow-hidden">
-            {/* 1. HERO SECTION */}
-            <ImmersiveHeader
-                id="about-hero"
-                title="OLTRE L'EVENTO."
-                highlight="OLTRE L'IMMAGINAZIONE."
-                subtitle="LA VISIONE. Benvenuto nel laboratorio dove la precisione incontra la magia."
-                mediaUrl="/images/brand/bg-venue-crowd.webp"
-            />
-            
-            <div className="flex justify-center mt-[-10vh] mb-20 relative z-20">
-                <button 
-                    onClick={scrollToVision}
-                    className="group flex flex-col items-center gap-4 transition-transform duration-500 hover:scale-105"
-                >
-                    <span className="font-heading tracking-[0.3em] uppercase text-xs text-rama-muted group-hover:text-yellow-500 transition-colors">
-                        Vedi cosa abbiamo creato
-                    </span>
-                    <div className="w-12 h-12 rounded-full border border-yellow-500/20 flex items-center justify-center bg-black/40 backdrop-blur-sm group-hover:border-yellow-500 transition duration-300">
-                        <ArrowRight size={20} className="text-yellow-500 rotate-90" />
-                    </div>
-                </button>
-            </div>
+      <section className="border-y border-white/10 bg-white/[0.02] px-6 py-20 md:px-12 md:py-24 lg:px-20"><div className="mx-auto max-w-7xl"><div className="mb-12 max-w-2xl"><p className="font-syne text-xs uppercase tracking-[0.28em] text-accent-gold">Un nome, tre direzioni</p><h2 className="mt-4 font-heading text-4xl uppercase leading-none md:text-6xl">Black · Bulls · Lab</h2></div><div className="grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-3">{[["BLACK", "Un'identità netta, essenziale e riconoscibile."], ["BULLS", "Il toro del marchio richiama Torino e il carattere con cui affrontiamo ogni progetto."], ["LAB", "Uno spazio di sperimentazione: osserviamo, progettiamo e portiamo i format dal vivo."]].map(([title, text]) => <div key={title} className="bg-black-pure p-8 md:min-h-52 md:p-10"><h3 className="font-heading text-3xl font-bold text-accent-gold">{title}</h3><p className="mt-5 text-base leading-relaxed text-white/70">{text}</p></div>)}</div></div></section>
 
-            {/* 2. SEZIONE VISIONE (Il Laboratorio) */}
-            <section id="vision-section" className="reveal-section py-24 px-6 max-w-7xl mx-auto border-t border-white/5">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    <div className="space-y-8">
-                        <SectionHeading 
-                            title="IL LABORATORIO DI"
-                            highlight="EMOZIONI"
-                            subtitle="Il Laboratorio"
-                            align="left"
-                        />
-                        <p className="font-sans text-lg md:text-xl text-zinc-300 font-light leading-relaxed max-w-xl">
-                            In Black Bulls Lab, ogni evento è un esperimento di precisione. Julian Halili ha fondato questo progetto con una visione chiara: unire l&apos;organizzazione millimetrica di un laboratorio tecnico alla scintilla creativa dell&apos;intrattenimento dal vivo. Non siamo solo organizzatori, siamo architetti di esperienze che sfidano l&apos;ordinario.
-                        </p>
-                    </div>
-                    <div className="flex justify-center lg:justify-end">
-                        <div className="relative w-64 h-64 md:w-96 md:h-96">
-                            <div className="absolute inset-0 border border-yellow-500/20 rounded-full animate-[spin_20s_linear_infinite]" />
-                            <div className="absolute inset-4 border border-white/5 rounded-full" />
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <Sparkles size={80} className="text-yellow-500 opacity-40" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+      <section className="mx-auto max-w-7xl px-6 py-20 md:px-12 md:py-28 lg:px-20"><div className="mb-12 max-w-2xl"><p className="font-syne text-xs uppercase tracking-[0.28em] text-accent-gold">Come lavoriamo</p><h2 className="mt-4 font-heading text-4xl uppercase leading-none md:text-6xl">Tre pilastri</h2></div><div className="grid gap-5 md:grid-cols-3">{pillars.map(({ icon: Icon, title, text }) => <article key={title} className="border border-white/10 bg-white/[0.02] p-7 md:p-9"><Icon aria-hidden="true" className="mb-8 text-accent-gold" size={28} strokeWidth={1.5} /><h3 className="font-heading text-2xl uppercase">{title}</h3><p className="mt-4 leading-relaxed text-white/70">{text}</p></article>)}</div></section>
 
-            {/* 3. SEZIONE VALORI (Perché noi) */}
-            <section id="values-grid" className="bg-zinc-950/50 py-32 border-y border-white/5">
-                <div className="max-w-7xl mx-auto px-6">
-                    <SectionHeading 
-                        title="PERCHÉ SCEGLIERE"
-                        highlight="IL LAB"
-                        align="center"
-                        accentPos="bottom"
-                        className="mb-20"
-                    />
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {/* Valore 1 */}
-                        <PremiumCard className="p-10 group animate-fade-in-up" style={{ animationDelay: '0s' }}>
-                            <div className="w-16 h-16 rounded-xl border border-yellow-500/20 flex items-center justify-center text-yellow-500 mb-8 group-hover:border-yellow-500 transition-colors">
-                                <Target size={32} />
-                            </div>
-                            <h3 className="font-heading text-2xl font-bold text-white uppercase mb-4 tracking-wide group-hover:text-yellow-500 transition-colors">
-                                FORMAT REPLICABILI
-                            </h3>
-                            <p className="font-sans text-zinc-300 font-light leading-relaxed">
-                                Soluzioni concrete e scalabili per ogni tipologia di spazio, garantendo sempre la massima qualità esecutiva.
-                            </p>
-                        </PremiumCard>
+      <section className="border-y border-white/10 bg-white/[0.02] px-6 py-20 md:px-12 md:py-24 lg:px-20"><div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-3"><div><p className="font-syne text-xs uppercase tracking-[0.28em] text-accent-gold">Collaboriamo con</p><h2 className="mt-4 font-heading text-4xl uppercase leading-none md:text-5xl">Il prossimo percorso</h2></div><div className="grid gap-3 md:col-span-2 md:grid-cols-3">{[["Esperienze", "/format"], ["Aziende", "/eventi-aziendali"], ["Eventi Privati", "/eventi-privati"], ["Locali & Partner", "/locali-partner"], ["Contatti e collaborazioni", "/contatti"]].map(([label, href]) => <Link key={href} href={href} className="group flex items-center justify-between border border-white/10 p-5 text-sm uppercase tracking-[0.12em] text-white/80 transition hover:border-accent-gold hover:text-accent-gold"><span>{label}</span><ArrowRight aria-hidden="true" size={17} className="transition-transform group-hover:translate-x-1" /></Link>)}</div></div></section>
 
-                        {/* Valore 2 */}
-                        <PremiumCard className="p-10 group animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
-                            <div className="w-16 h-16 rounded-xl border border-yellow-500/20 flex items-center justify-center text-yellow-500 mb-8 group-hover:border-yellow-500 transition-colors">
-                                <Heart size={32} />
-                            </div>
-                            <h3 className="font-heading text-2xl font-bold text-white uppercase mb-4 tracking-wide group-hover:text-yellow-500 transition-colors">
-                                COINVOLGIMENTO
-                            </h3>
-                            <p className="font-sans text-zinc-300 font-light leading-relaxed">
-                                L&apos;ospite non è un semplice spettatore, ma il vero protagonista al centro di una narrazione immersiva.
-                            </p>
-                        </PremiumCard>
+      <section className="mx-auto max-w-5xl px-6 py-20 md:px-12 md:py-28 lg:px-20"><div className="mb-10 flex items-center gap-3"><CircleDot aria-hidden="true" className="text-accent-gold" size={18} /><h2 className="font-heading text-3xl uppercase md:text-5xl">Domande frequenti</h2></div><div className="divide-y divide-white/10 border-y border-white/10">{ABOUT_FAQS.map((faq) => <details key={faq.question} className="group py-5"><summary className="cursor-pointer list-none pr-8 font-heading text-lg uppercase leading-tight text-white marker:hidden md:text-xl">{faq.question}</summary><p className="max-w-3xl pt-4 leading-relaxed text-white/70">{faq.answer}</p></details>)}</div></section>
 
-                        {/* Valore 3 */}
-                        <PremiumCard className="p-10 group animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-                            <div className="w-16 h-16 rounded-xl border border-yellow-500/20 flex items-center justify-center text-yellow-500 mb-8 group-hover:border-yellow-500 transition-colors">
-                                <Sparkles size={32} />
-                            </div>
-                            <h3 className="font-heading text-2xl font-bold text-white uppercase mb-4 tracking-wide group-hover:text-yellow-500 transition-colors">
-                                ECCELLENZA TECNICA
-                            </h3>
-                            <p className="font-sans text-zinc-300 font-light leading-relaxed">
-                                Nulla è lasciato al caso. Ogni dettaglio audio, video e logistico è orchestrato con perfezione millimetrica.
-                            </p>
-                        </PremiumCard>
-                    </div>
-                </div>
-            </section>
-
-            {/* 4. SEZIONE TEAM (L'anima del progetto) */}
-            <section className="py-32 mt-24 bg-transparent">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16 px-6">
-                        <SectionHeading 
-                            title="LE MENTI"
-                            highlight="DIETRO AL LAB"
-                            subtitle="Creators"
-                            align="center"
-                        />
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
-                        {[
-                            { 
-                                title: "DESIGN", 
-                                desc: "Progettiamo ogni interazione per essere unica e irripetibile.",
-                                icon: <Zap size={32} />
-                            },
-                            { 
-                                title: "TECHNOLOGY", 
-                                desc: "Utilizziamo web app proprietarie per guidare lo show senza intoppi.",
-                                icon: <Cpu size={32} />
-                            },
-                            { 
-                                title: "EMOTION", 
-                                desc: "Mettiamo l'uomo al centro, creando legami reali in un mondo digitale.",
-                                icon: <Heart size={32} />
-                            }
-                        ].map((item, idx) => (
-                            <div key={idx} className="group p-10 rounded-3xl border border-white/5 bg-white/2 hover:bg-rama-accent/3 hover:border-rama-accent/30 transition duration-500">
-                                <div className="w-16 h-16 rounded-xl border border-rama-accent/20 flex items-center justify-center text-rama-accent mb-8 group-hover:border-rama-accent transition-colors">
-                                    {item.icon}
-                                </div>
-                                <h3 className="font-heading text-2xl font-bold text-white uppercase mb-4 tracking-wide group-hover:text-rama-accent transition-colors">
-                                    {item.title}
-                                </h3>
-                                <p className="font-sans text-rama-muted leading-relaxed">
-                                    {item.desc}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                    </div>
-                </section>
-
-                {/* 3. Call to Action */}
-                <section className="py-24">
-                    <div className="relative bg-zinc-950 border-t-2 border-rama-accent rounded-3xl overflow-hidden p-12 md:p-20 text-center shadow-[0_-20px_50px_rgba(229,182,12,0.05)]">
-                        <div className="absolute top-0 left-0 w-full h-full bg-linear-to-b from-rama-accent/3 to-transparent pointer-events-none" />
-                        
-                        <div className="relative z-10 space-y-8">
-                            <h2 className="font-heading font-bold text-4xl md:text-7xl uppercase tracking-tighter text-white">
-                                VUOI COLLABORARE <br />
-                                <span className="text-rama-accent">AL PROSSIMO ESPERIMENTO?</span>
-                            </h2>
-                            <p className="font-sans text-rama-muted text-lg md:text-xl max-w-2xl mx-auto">
-                                Siamo sempre alla ricerca di nuovi talenti, partner e location per elevare il livello dei nostri format.
-                            </p>
-                            <div className="flex justify-center pt-4">
-                                <Link 
-                                    href="/eventi-aziendali"
-                                    className="bg-rama-accent text-black font-heading font-bold uppercase tracking-[0.2em] text-xs px-12 py-5 rounded-full hover:bg-white transition transform hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(229,182,12,0.2)]"
-                                >
-                                    Contattaci ora
-                                </Link>
-                            </div>
-                        </div>
-
-                        {/* Decorazioni */}
-                        <div className="absolute -bottom-1/2 -right-1/4 w-[500px] h-[500px] bg-rama-accent/5 rounded-full blur-[100px] pointer-events-none" />
-                        <div className="absolute -top-1/2 -left-1/4 w-[500px] h-[500px] bg-rama-accent/5 rounded-full blur-[100px] pointer-events-none" />
-                    </div>
-                </section>
-
-                <FaqSection />
-                <PreFooterCTA />
-            </div>
-        );
-    }
+      <section className="mx-6 mb-20 border border-accent-gold/30 bg-accent-gold/[0.06] px-6 py-14 text-center md:mx-12 md:px-12 md:py-20 lg:mx-auto lg:max-w-7xl"><h2 className="font-heading text-4xl uppercase leading-none md:text-6xl">Scopri le esperienze</h2><p className="mx-auto mt-5 max-w-xl text-white/70">Conosci i format Black Bulls Lab e trova il percorso adatto al tuo pubblico.</p><Link href="/format" className="mt-8 inline-flex items-center gap-3 bg-accent-gold px-7 py-4 font-syne text-xs font-bold uppercase tracking-[0.16em] text-black transition hover:bg-white">Vai alle esperienze <ArrowRight aria-hidden="true" size={16} /></Link></section>
+    </div>
+  );
+}

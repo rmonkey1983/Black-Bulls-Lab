@@ -34,8 +34,7 @@ export default function AdminScanner() {
       const res = await fetch('/api/admin/scan', {
         method: 'POST',
         headers: { 
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer bbl_admin_2026'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({ ticketId: ticketId }),
       });

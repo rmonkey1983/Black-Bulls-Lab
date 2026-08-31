@@ -14,15 +14,14 @@ export function FormatBookingCTA({ formatName }: FormatBookingCTAProps) {
                     <SectionHeading
                         title="PRENOTA IL TUO"
                         highlight={formatName.toUpperCase()}
-                        subtitle="Scegli una data dal calendario e assicurati un posto in prima fila"
+                        subtitle="Scopri le prossime informazioni sul format"
                         align="center"
                     />
                 </div>
                 
                 <div className="flex flex-col items-center gap-8">
                     <p className="text-zinc-400 text-lg max-w-2xl">
-                        Le nostre serate sono a numero chiuso per garantire un&apos;esperienza immersiva e di alta qualità. 
-                        Consulta le prossime date disponibili nel nostro calendario ufficiale.
+                        Consulta il calendario per verificare eventuali date pubbliche e modalità di partecipazione.
                     </p>
                     
                     <PrimaryButton href="/calendario" size="lg">

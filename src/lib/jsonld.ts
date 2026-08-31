@@ -12,11 +12,11 @@ export function getHomepageJsonLd() {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "EntertainmentBusiness",
-        "@id": "https://blackbullslab.com/#business",
+        "@type": "Organization",
+        "@id": "https://blackbullslab.com/#organization",
         name: "Black Bulls Lab",
         url: "https://blackbullslab.com",
-        logo: "https://blackbullslab.com/brand/logo-white.svg",
+        logo: "https://blackbullslab.com/brand/bbl-logo-horizontal.webp",
         image: "https://blackbullslab.com/images/brand/bg-hero-wide.webp",
         description:
           "Dinner Show interattivi, Cena con Delitto e format immersivi unici a Torino.",
@@ -33,13 +33,6 @@ export function getHomepageJsonLd() {
           "https://facebook.com/blackbullslab",
           "https://tiktok.com/@blackbullslab",
         ],
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: "4.9",
-          reviewCount: "80",
-          bestRating: "5",
-          worstRating: "1",
-        },
       },
     ],
   };
@@ -65,7 +58,7 @@ export function getFaqJsonLd() {
         name: "Quante persone partecipano a ogni serata?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Max 20-30 persone per serata. La dimensione ridotta è parte del format: garantisce coinvolgimento totale e un'atmosfera unica che i grandi eventi non possono replicare.",
+          text: "La capienza varia in base al format e alla location. Per A Cena con il Bugiardo la configurazione di riferimento è di 30–40 partecipanti.",
         },
       },
       {
@@ -81,7 +74,7 @@ export function getFaqJsonLd() {
         name: "Come prenoto una serata?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Controlla le prossime date nel calendario su blackbullslab.com/calendario e prenota direttamente online. I posti sono limitati a 20-30 persone.",
+          text: "Controlla le prossime date nel calendario su blackbullslab.com/calendario e prenota direttamente online. La capienza viene indicata per ogni esperienza.",
         },
       },
       {
@@ -171,12 +164,6 @@ export function getEventJsonLd({
       validFrom: new Date().toISOString(),
     },
     maximumAttendeeCapacity: totalSeats,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "80",
-      bestRating: "5",
-    },
   };
 }
 
@@ -187,6 +174,7 @@ interface FormatServiceJsonLdProps {
   url: string;
   price?: number;
   audience?: string;
+  serviceType?: string;
 }
 
 export function getFormatServiceJsonLd({
@@ -196,6 +184,7 @@ export function getFormatServiceJsonLd({
   url,
   price,
   audience = "Adulti, gruppi privati e team aziendali",
+  serviceType = "Dinner show immersivo",
 }: FormatServiceJsonLdProps) {
   return {
     "@context": "https://schema.org",
@@ -204,7 +193,7 @@ export function getFormatServiceJsonLd({
     description,
     image,
     url,
-    serviceType: "Dinner show immersivo",
+    serviceType,
     areaServed: {
       "@type": "City",
       name: "Torino",
@@ -215,8 +204,8 @@ export function getFormatServiceJsonLd({
       audienceType: audience,
     },
     provider: {
-      "@type": "EntertainmentBusiness",
-      "@id": "https://blackbullslab.com/#business",
+      "@type": "Organization",
+      "@id": "https://blackbullslab.com/#organization",
       name: "Black Bulls Lab",
       url: "https://blackbullslab.com",
     },

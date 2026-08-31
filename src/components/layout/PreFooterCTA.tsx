@@ -16,18 +16,18 @@ export function PreFooterCTA() {
 
     // Default: Homepage e pagine format
     let title = "Il tuo tavolo ti sta aspettando.";
-    let subtitle = "Ogni serata ha un numero limitato di posti. Non aspettare.";
+    let subtitle = "Scopri le esperienze Black Bulls Lab e scegli il percorso adatto a te.";
     let ctaText = "Vedi il Calendario";
     let ctaHref = "/calendario";
 
     if (pathname === "/eventi-aziendali") {
         title = "Il tuo team merita una serata indimenticabile.";
-        subtitle = "Parliamo del tuo evento. Preventivo gratuito in 24 ore.";
+        subtitle = "Raccontaci il tuo evento: definiremo insieme il percorso più adatto.";
         ctaText = "Costruiamo insieme la serata";
         ctaHref = `https://wa.me/${CONTACT_WHATSAPP}?text=Ciao!%20Voglio%20organizzare%20un%20evento%20aziendale`;
     } else if (pathname === "/format/a-cena-con-il-bugiardo") {
         title = "Smaschera il Bugiardo.";
-        subtitle = "Solo 30 posti segreti disponibili per ogni esperimento.";
+        subtitle = "Ricevi informazioni su data, location e apertura delle prenotazioni.";
         ctaText = "Prenota ora";
         ctaHref = "/calendario";
     } else if (pathname === "/format/il-palqo") {

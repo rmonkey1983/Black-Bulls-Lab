@@ -1,10 +1,11 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: 'https://blackbullslab.com',
-  generateRobotsTxt: true,
+  // robots.txt is served by the native Next.js metadata route at /app/robots.ts.
+  generateRobotsTxt: false,
   sitemapSize: 99999,
   generateIndexSitemap: false,
-  exclude: ['/admin', '/admin/*', '/api/*', '/checkout', '/checkout/*', '/robots.txt'],
+  exclude: ['/admin', '/admin/*', '/api/*', '/checkout', '/checkout/*', '/robots.txt', '/case-study', '/gallery', '/checkin', '/profile'],
   priority: 0.7,
   changefreq: 'weekly',
   robotsTxtOptions: {
