@@ -1,10 +1,28 @@
+import type { Metadata } from 'next';
 import { getStrictSupabaseAdmin, supabase as publicSupabase } from '@/lib/supabase';
+import { SITE_URL } from '@/lib/constants';
 import Link from 'next/link';
 import { Calendar, MapPin, Users, ArrowRight } from 'lucide-react';
 
 // Questa riga dice a Next.js di non salvare la pagina in cache,
 // garantendo che i posti disponibili siano sempre aggiornati al secondo.
 export const revalidate = 0; 
+
+export const metadata: Metadata = {
+  title: 'Prossime date ed eventi a Torino',
+  description: 'Consulta le prossime esperienze ed eventi Black Bulls Lab a Torino e in Piemonte.',
+  alternates: { canonical: `${SITE_URL}/calendario` },
+  openGraph: {
+    title: 'Prossime date ed eventi a Torino | Black Bulls Lab',
+    description: 'Consulta le prossime esperienze ed eventi Black Bulls Lab a Torino e in Piemonte.',
+    url: `${SITE_URL}/calendario`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Prossime date ed eventi a Torino | Black Bulls Lab',
+    description: 'Consulta le prossime esperienze ed eventi Black Bulls Lab a Torino e in Piemonte.',
+  },
+};
 
 export default async function CalendarioPage() {
   let supabase;
@@ -36,7 +54,7 @@ export default async function CalendarioPage() {
             Prossime <span className="text-[#FFD700]">Date</span>
           </h1>
           <p className="text-zinc-400 text-lg md:text-xl max-w-2xl">
-            Scopri il calendario dei nostri format immersivi. I posti sono rigorosamente limitati per garantire l&apos;esclusività dell&apos;esperienza.
+            Consulta le prossime esperienze ed eventi Black Bulls Lab a Torino e in Piemonte.
           </p>
         </header>
 
@@ -114,7 +132,7 @@ export default async function CalendarioPage() {
         {(!events || events.length === 0) && (
           <div className="text-center py-32 border border-dashed border-zinc-800 rounded-2xl bg-zinc-950/50">
             <p className="text-zinc-500 text-lg uppercase tracking-widest font-bold">Il calendario è in aggiornamento.</p>
-            <p className="text-zinc-600 mt-4">Iscriviti alla newsletter per avere la priorità sulle prossime date segrete.</p>
+            <p className="text-zinc-600 mt-4">Le prossime date verranno pubblicate qui.</p>
           </div>
         )}
         

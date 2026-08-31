@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { getTalents } from "@/lib/dataStore";
+import { SITE_URL } from "@/lib/constants";
 
 type Props = {
     params: Promise<{ slug: string }>;
@@ -22,6 +23,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
         title: `${talent.name} (${talent.role}) — Black Bulls Lab`,
         description: shortBio || `Scopri ${talent.name}, ${talent.role} al Black Bulls Lab di Torino.`,
+        robots: { index: false, follow: true },
+        alternates: { canonical: `${SITE_URL}/talents/${talent.id}` },
         openGraph: {
             title: `${talent.name} — Black Bulls Lab`,
             description: shortBio || `Scopri ${talent.name}, ${talent.role} al Black Bulls Lab di Torino.`,

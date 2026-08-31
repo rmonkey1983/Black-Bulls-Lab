@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
-    title: "Galleria Foto | Black Bulls Lab — Rivivi le Nostre Esperienze a Torino",
+    title: "Gallery",
     description:
         "Esplora la galleria fotografica di Black Bulls Lab. Guarda i momenti più iconici dei nostri dinner show, performance e serate esclusive a Torino.",
-    alternates: { canonical: "/gallery" },
+    alternates: { canonical: `${SITE_URL}/gallery` },
     robots: { index: false, follow: true },
     openGraph: {
         title: "Galleria Foto | Black Bulls Lab — Momenti d'Atmosfera",
         description: "Rivivi le emozioni delle serate Black Bulls Lab attraverso i nostri scatti più belli.",
-        url: "/gallery",
+        url: `${SITE_URL}/gallery`,
     },
 };
 

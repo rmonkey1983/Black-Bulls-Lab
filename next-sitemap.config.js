@@ -5,7 +5,15 @@ module.exports = {
   generateRobotsTxt: false,
   sitemapSize: 99999,
   generateIndexSitemap: false,
-  exclude: ['/admin', '/admin/*', '/api/*', '/checkout', '/checkout/*', '/robots.txt', '/case-study', '/gallery', '/checkin', '/profile'],
+  exclude: ['/admin', '/admin/*', '/api/*', '/checkout', '/checkout/*', '/robots.txt', '/case-study', '/gallery', '/checkin', '/profile', '/talents', '/talents/*'],
+  additionalPaths: async () => [
+    {
+      loc: '/calendario',
+      changefreq: 'weekly',
+      priority: 0.8,
+      lastmod: new Date().toISOString(),
+    },
+  ],
   priority: 0.7,
   changefreq: 'weekly',
   robotsTxtOptions: {

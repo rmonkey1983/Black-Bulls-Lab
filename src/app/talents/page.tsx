@@ -6,6 +6,7 @@ export const metadata: Metadata = {
     title: "Artisti e Performer | Unisciti al Lab",
     description: "Incontra i talenti di Black Bulls Lab a Torino. Sei un artista o un performer? Unisciti al nostro laboratorio e crea con noi eventi indimenticabili",
     alternates: { canonical: `${SITE_URL}/talents` },
+    robots: { index: false, follow: true },
     openGraph: {
         title: "Artisti e Performer | Unisciti al Lab | Black Bulls Lab",
         description: "Incontra i talenti di Black Bulls Lab a Torino. Sei un artista o un performer? Unisciti al nostro laboratorio e crea con noi eventi indimenticabili",
