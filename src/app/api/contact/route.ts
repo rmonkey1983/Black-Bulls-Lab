@@ -3,7 +3,10 @@ import { submitContactForm } from "@/app/actions/contact";
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    const body = await request.json().catch(() => null);
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return NextResponse.json({ success: false, error: "Formato richiesta non valido." }, { status: 400 });
+    }
     const name = typeof body.name === "string" ? body.name.trim() : "";
     const email = typeof body.email === "string" ? body.email.trim() : "";
     const message = typeof body.message === "string" ? body.message.trim() : "";
@@ -20,6 +23,8 @@ export async function POST(request: Request) {
     const result = await submitContactForm({
       name,
       email,
+      b_contact_name: typeof body.b_contact_name === "string" ? body.b_contact_name : "",
+      guests: typeof body.guests === "string" ? body.guests : "",
       leadType: "contact",
       experience: "Contatto generale",
       message,

@@ -91,7 +91,7 @@ export function ScrollScrubHero({ videoSrc = DEFAULT_VIDEO, poster = "/images/br
         <div ref={titleRef} className="absolute inset-0 z-10 flex items-center px-6 text-center transition-[opacity,filter,transform] duration-150 will-change-[opacity,filter,transform] motion-reduce:!transform-none motion-reduce:!filter-none motion-reduce:!opacity-100">
           <div className="mx-auto w-full max-w-6xl">
             <p className="mb-6 font-syne text-xs font-bold uppercase tracking-[0.35em] text-accent-gold">Black Bulls Lab · Torino</p>
-            <h1 className="w-full max-w-full break-words font-heading text-[clamp(3rem,8vw,8.5rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.06em] text-white">Il pubblico<br /><span className="text-accent-gold italic">cambia tutto.</span></h1>
+            <h1 className="w-full max-w-full break-words font-heading text-[clamp(min(3rem,10vw),8vw,8.5rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.06em] text-white">Il pubblico<br /><span className="text-accent-gold italic">cambia tutto.</span></h1>
             <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-zinc-200 md:text-xl">Format dal vivo in cui non resti a guardare: partecipi, scegli e fai parte di ciò che succede.</p>
             <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
               <Link href="#esperienze" style={ctaStyle} className="inline-flex items-center justify-center gap-3 rounded-lg bg-accent-gold px-7 py-4 font-syne text-xs font-bold uppercase tracking-[0.22em] text-black-pure transition-colors duration-200 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">Scopri le esperienze <ArrowRight size={16} /></Link>

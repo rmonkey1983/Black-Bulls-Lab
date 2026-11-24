@@ -65,12 +65,13 @@ export function ContattiClient() {
       duration: 1.2,
       ease: "power2.out"
     }, "-=1.2")
-    .from(".reveal-cards", {
-      opacity: 0,
-      y: 30,
+    .fromTo(".reveal-cards", { opacity: 0, y: 30 }, {
+      opacity: 1,
+      y: 0,
       stagger: 0.15,
       duration: 1.2,
-      ease: "power2.out"
+      ease: "power2.out",
+      clearProps: "opacity,transform"
     }, "-=0.8");
 
     return () => window.removeEventListener("mousemove", handleMouseMove);
@@ -80,6 +81,7 @@ export function ContattiClient() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (status === "loading") return;
     setStatus("loading");
     setErrorMessage("");
 
@@ -113,7 +115,7 @@ export function ContattiClient() {
       />
 
       {/* 1. CINEMATIC HERO */}
-      <section className="relative min-h-[90vh] flex items-center justify-center pt-32 pb-20 overflow-hidden border-b border-white/5">
+      <section className="relative min-h-[90vh] flex items-center justify-center pt-40 lg:pt-32 pb-20 overflow-hidden border-b border-white/5">
         {/* Background Layer */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
@@ -131,10 +133,10 @@ export function ContattiClient() {
         </div>
 
         {/* Back Link */}
-        <div className="absolute top-12 left-12 z-50">
+        <div className="absolute top-28 left-6 lg:left-12 z-50">
           <Link
             href="/"
-            className="group flex items-center gap-4 text-text-secondary/30 hover:text-accent-gold transition-colors uppercase text-[10px] font-bold tracking-[0.5em]"
+            className="group flex items-center gap-4 text-text-secondary/80 hover:text-accent-gold transition-colors uppercase text-[10px] font-bold tracking-[0.5em]"
           >
             <ArrowLeft size={14} className="group-hover:-translate-x-2 transition-transform" /> 
             Torna alla Home
@@ -187,7 +189,7 @@ export function ContattiClient() {
               <PremiumCard 
                 key={method.title} 
                 href={method.href}
-                className="reveal-cards p-8 bg-white/2 border border-white/5 hover:border-accent-gold/20 hover:shadow-[0_0_50px_rgba(200,169,107,0.04)] transition-all duration-700 text-center flex flex-col justify-between items-center h-full group"
+                className="reveal-cards p-8 bg-white/2 border border-white/5 hover:border-accent-gold/20 hover:shadow-[0_0_50px_rgba(200,169,107,0.04)] transition-[border-color,box-shadow] duration-700 text-center flex flex-col justify-between items-center h-full group"
               >
                 <div className="space-y-4 flex flex-col items-center">
                   <div className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center text-text-secondary group-hover:text-accent-gold group-hover:border-accent-gold/20 transition-all duration-500">
@@ -221,7 +223,7 @@ export function ContattiClient() {
       </nav>
 
       {/* 3. IMMERSIVE MINIMALIST FORM */}
-      <section className="reveal-scroll py-16 md:py-24 px-6 md:px-12 bg-black-pure relative z-30">
+      <section id="modulo" className="reveal-scroll scroll-mt-24 py-16 md:py-24 px-6 md:px-12 bg-black-pure relative z-30">
         <div className="container-max max-w-4xl px-6">
           <div className="space-y-12">
             <div className="text-center space-y-4">
@@ -277,11 +279,12 @@ export function ContattiClient() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                   {/* Name Input */}
                   <div className="relative z-10 space-y-2 group">
-                    <label className="font-syne text-[10px] uppercase tracking-[0.3em] text-accent-gold/40 group-focus-within:text-accent-gold transition-colors duration-500 font-bold">
+                    <label htmlFor="contact-name" className="font-syne text-[10px] uppercase tracking-[0.3em] text-accent-gold/40 group-focus-within:text-accent-gold transition-colors duration-500 font-bold">
                       Il Tuo Nome
                     </label>
                     <input
                       type="text"
+                      id="contact-name"
                       name="name"
                       autoComplete="name"
                       required
@@ -294,11 +297,12 @@ export function ContattiClient() {
 
                   {/* Email Input */}
                   <div className="relative z-10 space-y-2 group">
-                    <label className="font-syne text-[10px] uppercase tracking-[0.3em] text-accent-gold/40 group-focus-within:text-accent-gold transition-colors duration-500 font-bold">
+                    <label htmlFor="contact-email" className="font-syne text-[10px] uppercase tracking-[0.3em] text-accent-gold/40 group-focus-within:text-accent-gold transition-colors duration-500 font-bold">
                       Indirizzo Email
                     </label>
                     <input
                       type="email"
+                      id="contact-email"
                       name="email"
                       autoComplete="email"
                       spellCheck={false}
@@ -322,6 +326,7 @@ export function ContattiClient() {
                       return (
                         <button
                           key={exp}
+                          aria-pressed={isSelected}
                           type="button"
                           onClick={() => setFormData({ ...formData, experience: exp })}
                           className={`px-4 py-2.5 border font-syne text-[9px] uppercase tracking-[0.2em] transition-all duration-500 cursor-pointer ${
@@ -339,13 +344,14 @@ export function ContattiClient() {
 
                 {/* Message Input */}
                 <div className="relative z-10 space-y-2 group">
-                  <label className="font-syne text-[10px] uppercase tracking-[0.3em] text-accent-gold/40 group-focus-within:text-accent-gold transition-colors duration-500 font-bold">
+                  <label htmlFor="contact-message" className="font-syne text-[10px] uppercase tracking-[0.3em] text-accent-gold/40 group-focus-within:text-accent-gold transition-colors duration-500 font-bold">
                     La Tua Visione / Messaggio
                   </label>
                   <textarea
                     required
                     rows={4}
-                    name="message"
+                    id="contact-message"
+                      name="message"
                     autoComplete="off"
                     placeholder="RACCONTACI COSA VUOI PROGETTARE…"
                     className="w-full bg-transparent border-b border-white/10 group-focus-within:border-accent-gold/50 px-0 py-3 font-inter text-xs md:text-sm text-text-primary placeholder:text-white/10 focus:outline-none transition-colors duration-500 resize-none uppercase tracking-wider leading-relaxed"
@@ -356,7 +362,7 @@ export function ContattiClient() {
 
                 {/* Error Banner */}
                 {status === "error" && (
-                  <div className="flex items-center gap-3 text-red-400 text-xs p-4 bg-red-400/5 border border-red-400/20 rounded-xl relative z-10 animate-in slide-in-from-top-4 duration-500">
+                  <div role="alert" className="flex items-center gap-3 text-red-400 text-xs p-4 bg-red-400/5 border border-red-400/20 rounded-xl relative z-10 animate-in slide-in-from-top-4 duration-500">
                     <AlertCircle size={16} />
                     <span>{errorMessage || "Si è verificato un errore nell'invio della richiesta. Riprova."}</span>
                   </div>

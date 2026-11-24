@@ -46,7 +46,7 @@ export default async function CalendarioPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white p-6 md:p-12 font-sans pt-32 relative z-10">
+    <div className="min-h-screen bg-black text-white p-6 md:p-12 font-sans pt-32 md:pt-36 relative z-10">
       <div className="max-w-6xl mx-auto">
         
         <header className="mb-16 text-center md:text-left border-b border-zinc-900 pb-8">
@@ -73,8 +73,8 @@ export default async function CalendarioPage() {
                   {/* Intestazione Card: Calendario e Badge Posti */}
                   <div className="flex justify-between items-start mb-8 gap-3">
                     <div className="bg-zinc-900 border border-zinc-800 text-zinc-300 px-4 py-2 rounded-xl text-center min-w-17.5 shadow-inner">
-                      <div className="text-[10px] uppercase text-[#FFD700] font-bold tracking-widest">{eventDate.toLocaleString('it-IT', { month: 'short' })}</div>
-                      <div className="text-3xl font-bold text-white mt-1">{eventDate.getDate()}</div>
+                      <div className="text-[10px] uppercase text-[#FFD700] font-bold tracking-widest">{eventDate.toLocaleString('it-IT', { month: 'short', timeZone: 'Europe/Rome' })}</div>
+                      <div className="text-3xl font-bold text-white mt-1">{eventDate.toLocaleString('it-IT', { day: 'numeric', timeZone: 'Europe/Rome' })}</div>
                     </div>
                     
                     <div className={`text-[10px] uppercase tracking-widest font-bold px-3 py-1.5 rounded-full border ${
@@ -87,9 +87,9 @@ export default async function CalendarioPage() {
                   </div>
 
                   {/* Info Evento */}
-                  <h3 className="text-2xl font-bold text-white mb-6 group-hover:text-[#FFD700] transition-colors uppercase tracking-wide">
+                  <h2 className="text-2xl font-bold text-white mb-6 group-hover:text-[#FFD700] transition-colors uppercase tracking-wide">
                     {event.location_name}
-                  </h3>
+                  </h2>
                   
                   <div className="space-y-4 text-sm text-zinc-400 mb-10 grow">
                     <div className="flex items-start gap-3">
@@ -98,7 +98,7 @@ export default async function CalendarioPage() {
                     </div>
                     <div className="flex items-start gap-3">
                       <Calendar size={18} className="text-[#FFD700]/50 shrink-0 mt-0.5" />
-                      <span className="capitalize">{eventDate.toLocaleString('it-IT', { weekday: 'long', hour: '2-digit', minute:'2-digit' })}</span>
+                      <span className="capitalize">{eventDate.toLocaleString('it-IT', { weekday: 'long', hour: '2-digit', minute:'2-digit', timeZone: 'Europe/Rome' })}</span>
                     </div>
                     <div className="flex items-start gap-3">
                       <Users size={18} className="text-[#FFD700]/50 shrink-0 mt-0.5" />
@@ -131,8 +131,12 @@ export default async function CalendarioPage() {
         {/* Messaggio se non ci sono date in programma */}
         {(!events || events.length === 0) && (
           <div className="text-center py-32 border border-dashed border-zinc-800 rounded-2xl bg-zinc-950/50">
-            <p className="text-zinc-500 text-lg uppercase tracking-widest font-bold">Il calendario è in aggiornamento.</p>
-            <p className="text-zinc-600 mt-4">Le prossime date verranno pubblicate qui.</p>
+            <p className="text-zinc-200 text-lg uppercase tracking-widest font-bold">Al momento non ci sono date pubbliche.</p>
+            <p className="text-zinc-400 mt-4 max-w-xl mx-auto px-6">Puoi entrare nella lista d&apos;attesa di A Cena con il Bugiardo o chiederci un evento privato o aziendale.</p>
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 px-6">
+              <Link href="/format/a-cena-con-il-bugiardo" className="inline-flex items-center justify-center min-h-12 w-full sm:w-auto px-7 bg-accent-gold text-black-pure font-syne text-xs font-bold uppercase tracking-[0.12em] hover:bg-white transition-colors">Entra nella lista d&apos;attesa</Link>
+              <Link href="/contatti" className="inline-flex items-center justify-center min-h-12 w-full sm:w-auto px-7 border border-white/30 text-white font-syne text-xs font-bold uppercase tracking-[0.12em] hover:border-accent-gold hover:text-accent-gold transition-colors">Richiedi un preventivo</Link>
+            </div>
           </div>
         )}
         

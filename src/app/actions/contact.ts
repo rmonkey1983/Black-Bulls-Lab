@@ -1,5 +1,8 @@
 "use server";
 
+import { z } from "zod";
+import { saveContactRequest, setContactEmailStatus } from "@/lib/contactRequests";
+
 export type LeadType = "corporate" | "private" | "partner" | "contact";
 
 export interface ContactSubmissionData {
@@ -39,6 +42,12 @@ function formatField(label: string, value?: string): string {
 }
 
 export async function submitContactForm(data: ContactSubmissionData) {
+    if (!data || typeof data !== "object") {
+        return { success: false, error: "Dati della richiesta non validi." };
+    }
+    if (Object.values(data).some(value => typeof value !== "undefined" && (typeof value !== "string" || value.length > 10000))) {
+        return { success: false, error: "Dati della richiesta non validi o troppo lunghi." };
+    }
     if (data.b_contact_name) {
         return { success: false, error: "Spam detected." };
     }
@@ -53,11 +62,11 @@ export async function submitContactForm(data: ContactSubmissionData) {
         contact: "Contatto generale",
     };
 
-    if (!name || !email || !leadLabels[data.leadType]) {
+    if (!name || !email || !Object.hasOwn(leadLabels, data.leadType)) {
         return { success: false, error: "Nome, email e tipo di richiesta sono obbligatori." };
     }
 
-    if (!email.includes("@")) {
+    if (!z.string().email().max(254).safeParse(email).success) {
         return { success: false, error: "Inserisci un indirizzo email valido." };
     }
 
@@ -65,12 +74,6 @@ export async function submitContactForm(data: ContactSubmissionData) {
     const objective = typeof data.objective === "string" ? data.objective.trim() : "";
     if (!message && !objective) {
         return { success: false, error: "Aggiungi un messaggio o un obiettivo alla richiesta." };
-    }
-
-    const apiKey = process.env.RESEND_API_KEY;
-    if (!apiKey) {
-        console.error("Contact submission unavailable: RESEND_API_KEY is not configured.");
-        return { success: false, error: "Servizio temporaneamente non disponibile. Riprova più tardi." };
     }
 
     const details = [
@@ -92,18 +95,57 @@ export async function submitContactForm(data: ContactSubmissionData) {
         formatField("Messaggio", message),
     ].filter(Boolean).join("");
 
+    const optional = (value?: string) => (typeof value === "string" && value.trim()) || null;
+    const extra = {
+        eventType: data.eventType, experience: data.experience, guests: data.guests, location: data.location,
+        period: data.period, format: data.format, venue: data.venue, venueType: data.venueType,
+        capacity: data.capacity, city: data.city, objective: message ? objective : undefined,
+    };
+
+    // Stored first, so an email failure cannot lose the request.
+    const requestId = await saveContactRequest({
+        lead_type: data.leadType,
+        name,
+        email,
+        phone: optional(data.phone),
+        company: optional(data.company),
+        message: message || objective,
+        details: Object.fromEntries(
+            Object.entries(extra).flatMap(([key, value]) => {
+                const text = optional(value);
+                return text ? [[key, text]] : [];
+            })
+        ),
+    });
+
+    const emailSent = await sendNotification(leadLabels[data.leadType], email, details);
+    if (requestId) await setContactEmailStatus(requestId, emailSent ? "accepted" : "failed");
+
+    if (!requestId && !emailSent) {
+        return { success: false, error: "Non è stato possibile inviare la richiesta. Riprova più tardi o scrivici su WhatsApp." };
+    }
+    return { success: true };
+}
+
+async function sendNotification(leadLabel: string, replyTo: string, details: string): Promise<boolean> {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+        console.error("Contact notification unavailable: RESEND_API_KEY is not configured.");
+        return false;
+    }
+
     try {
         const { Resend } = await import("resend");
         const resend = new Resend(apiKey);
         const { error } = await resend.emails.send({
             from: "Black Bulls Lab <info@blackbullslab.com>",
             to: ["info@blackbullslab.com"],
-            reply_to: email,
-            subject: `[Contatti Lab] ${leadLabels[data.leadType]}`,
+            reply_to: replyTo,
+            subject: `[Contatti Lab] ${leadLabel}`,
             html: `
                 <div style="font-family: Arial, sans-serif; background-color: #060606; color: #ffffff; padding: 32px; border-radius: 12px; max-width: 600px; margin: 0 auto; border: 1px solid #c8a96b;">
                     <h1 style="color: #c8a96b; font-size: 22px;">NUOVA RICHIESTA</h1>
-                    <p>${escapeHtml(leadLabels[data.leadType])}</p>
+                    <p>${escapeHtml(leadLabel)}</p>
                     <div style="line-height: 1.6;">${details}</div>
                 </div>
             `,
@@ -111,12 +153,12 @@ export async function submitContactForm(data: ContactSubmissionData) {
 
         if (error) {
             console.error("Contact notification failed:", error.message);
-            return { success: false, error: "Non è stato possibile inviare la richiesta. Riprova più tardi." };
+            return false;
         }
 
-        return { success: true };
+        return true;
     } catch (error) {
         console.error("Contact notification failed:", error instanceof Error ? error.message : "unknown error");
-        return { success: false, error: "Non è stato possibile inviare la richiesta. Riprova più tardi." };
+        return false;
     }
 }

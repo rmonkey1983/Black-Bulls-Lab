@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MessageSquare } from "lucide-react";
@@ -12,25 +12,40 @@ const inputClass = "w-full rounded-sm border border-white/15 bg-black-pure px-4 
 
 export function PrivateEventsClient() {
   const [status, setStatus] = useState("");
+  const [pending, setPending] = useState(false);
+  const submitting = useRef(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const result = await submitContactForm({
-      name: String(form.get("name") || "").trim(), email: String(form.get("email") || "").trim(),
-      leadType: "private",
-      phone: String(form.get("phone") || "").trim(),
-      eventType: String(form.get("partyType") || "").trim(),
-      guests: String(form.get("guests") || "").trim(),
-      location: String(form.get("location") || "").trim(),
-      format: String(form.get("format") || "").trim(),
-      period: String(form.get("period") || "").trim(),
-      message: String(form.get("details") || "").trim(),
-      b_contact_name: String(form.get("b_contact_name") || ""),
-    });
-    setStatus(result.success ? "Richiesta inviata. Ti ricontatteremo presto." : result.error || "Controlla i dati inseriti.");
-    if (result.success) trackLead("private");
-    if (result.success) event.currentTarget.reset();
+    if (submitting.current) return;
+    const formElement = event.currentTarget;
+    submitting.current = true;
+    setPending(true);
+    setStatus("Invio in corso…");
+    try {
+      const form = new FormData(formElement);
+      const result = await submitContactForm({
+        name: String(form.get("name") || "").trim(), email: String(form.get("email") || "").trim(),
+        leadType: "private",
+        phone: String(form.get("phone") || "").trim(),
+        eventType: String(form.get("partyType") || "").trim(),
+        guests: String(form.get("guests") || "").trim(),
+        location: String(form.get("location") || "").trim(),
+        format: String(form.get("format") || "").trim(),
+        period: String(form.get("period") || "").trim(),
+        message: String(form.get("details") || "").trim(),
+        b_contact_name: String(form.get("b_contact_name") || ""),
+      });
+      setStatus(result.success ? "Richiesta inviata. Ti ricontatteremo presto." : result.error || "Controlla i dati inseriti.");
+      if (result.success) trackLead("private");
+      if (result.success) formElement.reset();
+    } catch {
+      setStatus("Errore di connessione. I dati sono conservati: riprova.");
+    } finally {
+      submitting.current = false;
+      setPending(false);
+    }
+
   }
 
   return (
@@ -58,7 +73,7 @@ export function PrivateEventsClient() {
 
       <section className="max-w-[1000px] mx-auto px-6 md:px-12 pb-16 md:pb-24"><p className="text-accent-gold text-xs uppercase tracking-[.2em] mb-4">Domande frequenti</p><h2 className="text-4xl md:text-6xl mb-10">Prima di organizzare.</h2><div className="divide-y divide-white/10 border-y border-white/10">{PRIVATE_PARTY_FAQS.map((faq) => <details key={faq.question} className="py-5 group"><summary className="cursor-pointer list-none pr-8 text-lg font-medium group-open:text-accent-gold">{faq.question}</summary><p className="text-text-secondary leading-relaxed mt-3 max-w-3xl">{faq.answer}</p></details>)}</div></section>
 
-      <section id="proposta" className="border-y border-white/10 bg-black-elevated/25"><div className="max-w-[1100px] mx-auto px-6 md:px-12 py-16 md:py-24 grid lg:grid-cols-2 gap-10"><div><p className="text-accent-gold text-xs uppercase tracking-[.2em] mb-4">Proposta privata</p><h2 className="text-4xl md:text-6xl">Raccontaci la tua festa.</h2><p className="text-text-secondary leading-relaxed mt-6">Nessun pagamento ora: raccogliamo le informazioni e definiamo con te format, data e location.</p></div><form onSubmit={handleSubmit} className="space-y-4" aria-label="Richiesta festa privata"><input type="text" name="b_contact_name" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" /><label className="sr-only" htmlFor="private-name">Nome e cognome</label><input id="private-name" name="name" required placeholder="Nome e cognome" autoComplete="name" className={inputClass} /><label className="sr-only" htmlFor="private-email">Email</label><input id="private-email" name="email" type="email" required placeholder="Email" autoComplete="email" className={inputClass} /><label className="sr-only" htmlFor="private-phone">Telefono</label><input id="private-phone" name="phone" type="tel" placeholder="Telefono" autoComplete="tel" className={inputClass} /><label className="sr-only" htmlFor="private-party-type">Tipo evento</label><select id="private-party-type" name="partyType" required className={inputClass} defaultValue=""><option value="" disabled>Tipo evento</option>{PRIVATE_OCCASIONS.map((item) => <option key={item}>{item}</option>)}</select><label className="sr-only" htmlFor="private-guests">Numero indicativo invitati</label><input id="private-guests" name="guests" required placeholder="Numero indicativo invitati" inputMode="numeric" className={inputClass} /><label className="sr-only" htmlFor="private-location">Città o location</label><input id="private-location" name="location" required placeholder="Città o location" className={inputClass} /><label className="sr-only" htmlFor="private-format">Format preferito</label><select id="private-format" name="format" required className={inputClass} defaultValue=""><option value="" disabled>Format preferito</option>{PRIVATE_FORMATS.map((item) => <option key={item.name}>{item.name}</option>)}</select><label className="sr-only" htmlFor="private-period">Data o periodo</label><input id="private-period" name="period" required placeholder="Data o periodo indicativo" className={inputClass} /><label className="sr-only" htmlFor="private-details">Dettagli</label><textarea id="private-details" name="details" required rows={5} placeholder="Raccontaci i dettagli della festa" className={inputClass} /><button type="submit" className="inline-flex items-center gap-3 bg-accent-gold text-black-pure px-7 py-4 font-syne text-xs font-bold uppercase tracking-[.16em] hover:bg-white focus-visible:ring-2 focus-visible:ring-white">Raccontaci la tua festa <ArrowRight size={16} /></button><p role="status" aria-live="polite" className="min-h-6 text-sm text-accent-gold">{status}</p></form></div></section>
+      <section id="proposta" className="border-y border-white/10 bg-black-elevated/25"><div className="max-w-[1100px] mx-auto px-6 md:px-12 py-16 md:py-24 grid lg:grid-cols-2 gap-10"><div><p className="text-accent-gold text-xs uppercase tracking-[.2em] mb-4">Proposta privata</p><h2 className="text-4xl md:text-6xl">Raccontaci la tua festa.</h2><p className="text-text-secondary leading-relaxed mt-6">Nessun pagamento ora: raccogliamo le informazioni e definiamo con te format, data e location.</p></div><form aria-busy={pending} onSubmit={handleSubmit} className="space-y-4" aria-label="Richiesta festa privata"><input type="text" name="b_contact_name" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" /><label className="sr-only" htmlFor="private-name">Nome e cognome</label><input id="private-name" name="name" required placeholder="Nome e cognome" autoComplete="name" className={inputClass} /><label className="sr-only" htmlFor="private-email">Email</label><input id="private-email" name="email" type="email" required placeholder="Email" autoComplete="email" className={inputClass} /><label className="sr-only" htmlFor="private-phone">Telefono</label><input id="private-phone" name="phone" type="tel" placeholder="Telefono" autoComplete="tel" className={inputClass} /><label className="sr-only" htmlFor="private-party-type">Tipo evento</label><select id="private-party-type" name="partyType" required className={inputClass} defaultValue=""><option value="" disabled>Tipo evento</option>{PRIVATE_OCCASIONS.map((item) => <option key={item}>{item}</option>)}</select><label className="sr-only" htmlFor="private-guests">Numero indicativo invitati</label><input id="private-guests" name="guests" required placeholder="Numero indicativo invitati" inputMode="numeric" className={inputClass} /><label className="sr-only" htmlFor="private-location">Città o location</label><input id="private-location" name="location" required placeholder="Città o location" className={inputClass} /><label className="sr-only" htmlFor="private-format">Format preferito</label><select id="private-format" name="format" required className={inputClass} defaultValue=""><option value="" disabled>Format preferito</option>{PRIVATE_FORMATS.map((item) => <option key={item.name}>{item.name}</option>)}</select><label className="sr-only" htmlFor="private-period">Data o periodo</label><input id="private-period" name="period" required placeholder="Data o periodo indicativo" className={inputClass} /><label className="sr-only" htmlFor="private-details">Dettagli</label><textarea id="private-details" name="details" required rows={5} placeholder="Raccontaci i dettagli della festa" className={inputClass} /><button disabled={pending} type="submit" className="inline-flex items-center gap-3 bg-accent-gold text-black-pure px-7 py-4 font-syne text-xs font-bold uppercase tracking-[.16em] hover:bg-white focus-visible:ring-2 focus-visible:ring-white">Raccontaci la tua festa <ArrowRight size={16} /></button><p className="text-xs text-text-secondary">Inviando la richiesta, dichiari di aver letto la <Link href="/privacy-policy" className="underline">Privacy Policy</Link>.</p><p role="status" aria-live="polite" className="min-h-6 text-sm text-accent-gold">{status}</p></form></div></section>
     </div>
   );
 }

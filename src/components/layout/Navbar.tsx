@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { X, Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { QUOTE_LABEL, getQuoteHref } from "@/lib/quote";
 import { NAV_LINKS, CONTACT_WHATSAPP, SOCIAL_LINKS } from "@/lib/constants";
 
 const WA_MSG = encodeURIComponent(
@@ -16,6 +17,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const quoteHref = getQuoteHref(pathname);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
@@ -78,7 +80,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Links */}
-        <ul className="hidden lg:flex items-center gap-6 absolute left-1/2 -translate-x-1/2 min-w-0">
+        <ul className="hidden xl:flex items-center gap-4 2xl:gap-6 mx-auto min-w-0">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <Link
@@ -104,9 +106,18 @@ export default function Navbar() {
           ))}
         </ul>
 
+        <Link
+          href={quoteHref}
+          suppressHydrationWarning
+          onClick={() => setMenuOpen(false)}
+          className="hidden sm:inline-flex relative z-110 ml-auto xl:ml-0 items-center justify-center min-h-11 px-5 bg-accent-gold text-black-pure font-syne text-xs font-bold uppercase tracking-[0.08em] whitespace-nowrap transition-colors duration-300 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+        >
+          {QUOTE_LABEL}
+        </Link>
+
         {/* Mobile Toggle */}
         <button
-          className="lg:hidden relative z-110 p-2 ml-auto text-text-primary hover:text-accent-gold transition-colors duration-500"
+          className="xl:hidden relative z-110 p-2 ml-auto sm:ml-4 text-text-primary hover:text-accent-gold transition-colors duration-500"
           aria-label={menuOpen ? "Chiudi menu" : "Apri menu"}
           onClick={() => setMenuOpen(!menuOpen)}
         >
@@ -121,7 +132,7 @@ export default function Navbar() {
       {/* ── MOBILE MENU ── */}
       <div
         className={cn(
-          "lg:hidden fixed inset-0 z-100 bg-black-pure transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]",
+          "xl:hidden fixed inset-0 z-100 bg-black-pure transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]",
           menuOpen
             ? "opacity-100 pointer-events-auto translate-y-0"
             : "opacity-0 pointer-events-none -translate-y-full"

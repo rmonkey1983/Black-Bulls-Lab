@@ -64,7 +64,7 @@ export function FormatFAQ({ items }: FormatFAQProps) {
                 dangerouslySetInnerHTML={{ __html: faqSchema }}
             />
             <div className="max-w-4xl mx-auto">
-                <div id="faq-title-container" className="text-center mb-16 gsap-fade">
+                <div id="faq-title-container" className="text-center mb-16">
                     <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 uppercase tracking-tighter">
                         Domande <span className="text-rama-accent italic">Frequenti</span>
                     </h2>

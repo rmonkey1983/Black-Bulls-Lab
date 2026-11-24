@@ -7,7 +7,7 @@ import { EXPERIMENTS } from "@/lib/constants";
 import { ScrollScrubHero } from "@/components/ui/scroll-scrub-hero";
 
 const audiences = [
-  ["Partecipa a un'esperienza", "Serate pubbliche a Torino per incontrare persone, giocare e decidere insieme.", "/calendario"],
+  ["Partecipa a un'esperienza", "Serate pubbliche a Torino per incontrare persone, giocare e decidere insieme.", "/format/a-cena-con-il-bugiardo"],
   ["Aziende", "Eventi aziendali che fanno interagire davvero le persone.", "/eventi-aziendali"],
   ["Eventi Privati", "Un format originale per compleanni, lauree e occasioni da vivere insieme.", "/eventi-privati"],
   ["Locali & Partner", "Ospita un format proprietario e porta nuove persone nel tuo spazio.", "/locali-partner"],

@@ -168,8 +168,8 @@
   }
 
   /* === STAGGER ITEMS === */
+  /* Visible by default: GSAP sets the hidden start state where it animates them. */
   .stagger-item {
-    opacity: 0;
     will-change: transform, opacity, filter;
   }
 

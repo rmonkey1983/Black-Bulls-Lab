@@ -12,7 +12,7 @@ export default function Footer() {
   return (
     <footer className="bg-black-pure border-t border-white/5 py-24">
       <div className="max-w-[1400px] mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 lg:gap-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 lg:gap-12 xl:gap-24">
           {/* Brand */}
           <div className="lg:col-span-4 space-y-8">
             <Link href="/" aria-label="Black Bulls Lab — Home" suppressHydrationWarning className="block">
@@ -36,7 +36,7 @@ export default function Footer() {
           </div>
 
           {/* Nav */}
-          <div className="lg:col-span-8 grid grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="lg:col-span-8 grid grid-cols-2 xl:grid-cols-4 gap-x-6 gap-y-12 lg:gap-x-12">
             <div className="space-y-8">
               <p className="font-syne text-sm font-bold uppercase tracking-[0.1em] text-accent-gold">Esperienze</p>
               <ul className="space-y-4">
@@ -58,7 +58,7 @@ export default function Footer() {
               <ul className="space-y-4">
                 <li>
                   <a href={`mailto:info@blackbullslab.com`} className="font-syne text-xs font-medium uppercase tracking-[0.04em] text-text-secondary hover:text-accent-gold transition-colors duration-500">
-                    info@blackbullslab.com
+                    info@<wbr className="lg:hidden" />blackbullslab.com
                   </a>
                 </li>
                 <li>
@@ -71,7 +71,7 @@ export default function Footer() {
                     WhatsApp
                   </a>
                 </li>
-                <li><Link href="/calendario" className="font-syne text-xs font-medium uppercase tracking-[0.04em] text-text-secondary hover:text-accent-gold transition-colors duration-500">Prenota una serata</Link></li>
+                <li><Link href="/calendario" className="font-syne text-xs font-medium uppercase tracking-[0.04em] text-text-secondary hover:text-accent-gold transition-colors duration-500">Calendario</Link></li>
               </ul>
             </div>
             <div className="space-y-8">

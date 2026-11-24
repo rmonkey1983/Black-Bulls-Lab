@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -10,23 +10,39 @@ import { PARTNER_FAQS, PARTNER_PROCESS } from "./partnerContent";
 
 export function LocaliPartnerClient() {
   const [status, setStatus] = useState("");
+  const [pending, setPending] = useState(false);
+  const submitting = useRef(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const result = await submitContactForm({
-      name: String(data.get("name") || "").trim(),
-      email: String(data.get("email") || "").trim(),
-      leadType: "partner",
-      venue: String(data.get("venue") || "").trim(),
-      phone: String(data.get("phone") || "").trim(),
-      city: String(data.get("city") || "").trim(),
-      venueType: String(data.get("venueType") || "").trim(),
-      capacity: String(data.get("capacity") || "").trim(),
-      message: String(data.get("message") || "").trim(),
-    });
-    setStatus(result.success ? "Richiesta inviata. Ti ricontatteremo presto." : result.error || "Controlla i dati inseriti.");
-    if (result.success) trackLead("partner");
+    if (submitting.current) return;
+    const formElement = event.currentTarget;
+    submitting.current = true;
+    setPending(true);
+    setStatus("Invio in corso…");
+    try {
+      const data = new FormData(formElement);
+      const result = await submitContactForm({
+        name: String(data.get("name") || "").trim(),
+        email: String(data.get("email") || "").trim(),
+        leadType: "partner",
+        b_contact_name: String(data.get("b_contact_name") || ""),
+        venue: String(data.get("venue") || "").trim(),
+        phone: String(data.get("phone") || "").trim(),
+        city: String(data.get("city") || "").trim(),
+        venueType: String(data.get("venueType") || "").trim(),
+        capacity: String(data.get("capacity") || "").trim(),
+        message: String(data.get("message") || "").trim(),
+      });
+      setStatus(result.success ? "Richiesta inviata. Ti ricontatteremo presto." : result.error || "Controlla i dati inseriti.");
+      if (result.success) trackLead("partner");
+      if (result.success) formElement.reset();
+    } catch {
+      setStatus("Errore di connessione. I dati sono conservati: riprova.");
+    } finally {
+      submitting.current = false;
+      setPending(false);
+    }
   }
 
   return (
@@ -45,7 +61,7 @@ export function LocaliPartnerClient() {
 
       <section className="max-w-[1100px] mx-auto px-6 md:px-12 pb-16 md:pb-24"><p className="text-accent-gold text-xs uppercase tracking-[.28em] mb-4">Domande frequenti</p><h2 className="text-4xl md:text-6xl mb-10">Prima di proporre lo spazio.</h2><div className="divide-y divide-white/10 border-y border-white/10">{PARTNER_FAQS.map((faq) => <details key={faq.question} className="py-5 group"><summary className="cursor-pointer list-none pr-8 text-lg font-medium group-open:text-accent-gold">{faq.question}</summary><p className="text-text-secondary leading-relaxed mt-3 max-w-3xl">{faq.answer}</p></details>)}</div></section>
 
-      <section id="proposta" className="border-y border-white/10 bg-black-elevated/25"><div className="max-w-[1100px] mx-auto px-6 md:px-12 py-16 md:py-24 grid lg:grid-cols-2 gap-10"><div><p className="text-accent-gold text-xs uppercase tracking-[.28em] mb-4">Collaborazione</p><h2 className="text-4xl md:text-6xl">Proponi la tua location.</h2><p className="text-text-secondary leading-relaxed mt-6">Raccontaci spazio, città e pubblico. Definiremo insieme se e come ospitare un format BBL.</p></div><form onSubmit={handleSubmit} className="space-y-4" aria-label="Proposta location partner"><input id="partner-name" name="name" required placeholder="Nome e cognome" aria-label="Nome e cognome" className="w-full bg-black-pure border border-white/15 px-4 py-4 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold" /><input id="partner-venue" name="venue" required placeholder="Nome del locale" aria-label="Nome del locale" className="w-full bg-black-pure border border-white/15 px-4 py-4 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold" /><input id="partner-email" name="email" type="email" required placeholder="Email" aria-label="Email" className="w-full bg-black-pure border border-white/15 px-4 py-4 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold" /><input id="partner-phone" name="phone" type="tel" placeholder="Telefono" aria-label="Telefono" className="w-full bg-black-pure border border-white/15 px-4 py-4 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold" /><div className="grid sm:grid-cols-2 gap-4"><input id="partner-city" name="city" required placeholder="Città" aria-label="Città" className="w-full bg-black-pure border border-white/15 px-4 py-4 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold" /><input id="partner-type" name="venueType" required placeholder="Tipologia location" aria-label="Tipologia location" className="w-full bg-black-pure border border-white/15 px-4 py-4 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold" /></div><input id="partner-capacity" name="capacity" placeholder="Capienza indicativa" aria-label="Capienza indicativa" className="w-full bg-black-pure border border-white/15 px-4 py-4 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold" /><textarea id="partner-message" name="message" required placeholder="Messaggio" aria-label="Messaggio" rows={5} className="w-full bg-black-pure border border-white/15 px-4 py-4 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold" /><button type="submit" className="inline-flex items-center gap-3 bg-accent-gold text-black-pure px-7 py-4 font-syne text-xs font-bold uppercase tracking-[.2em] hover:bg-white focus-visible:ring-2 focus-visible:ring-white">Proponi la tua location <ArrowRight size={16} /></button><p role="status" aria-live="polite" className="text-sm text-accent-gold min-h-5">{status}</p></form></div></section>
+      <section id="proposta" className="border-y border-white/10 bg-black-elevated/25"><div className="max-w-[1100px] mx-auto px-6 md:px-12 py-16 md:py-24 grid lg:grid-cols-2 gap-10"><div><p className="text-accent-gold text-xs uppercase tracking-[.28em] mb-4">Collaborazione</p><h2 className="text-4xl md:text-6xl">Proponi la tua location.</h2><p className="text-text-secondary leading-relaxed mt-6">Raccontaci spazio, città e pubblico. Definiremo insieme se e come ospitare un format BBL.</p></div><form aria-busy={pending} onSubmit={handleSubmit} className="space-y-4" aria-label="Proposta location partner"><input type="text" name="b_contact_name" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" /><input id="partner-name" name="name" required placeholder="Nome e cognome" aria-label="Nome e cognome" className="w-full bg-black-pure border border-white/15 px-4 py-4 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold" /><input id="partner-venue" name="venue" required placeholder="Nome del locale" aria-label="Nome del locale" className="w-full bg-black-pure border border-white/15 px-4 py-4 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold" /><input id="partner-email" name="email" type="email" required placeholder="Email" aria-label="Email" className="w-full bg-black-pure border border-white/15 px-4 py-4 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold" /><input id="partner-phone" name="phone" type="tel" placeholder="Telefono" aria-label="Telefono" className="w-full bg-black-pure border border-white/15 px-4 py-4 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold" /><div className="grid sm:grid-cols-2 gap-4"><input id="partner-city" name="city" required placeholder="Città" aria-label="Città" className="w-full bg-black-pure border border-white/15 px-4 py-4 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold" /><input id="partner-type" name="venueType" required placeholder="Tipologia location" aria-label="Tipologia location" className="w-full bg-black-pure border border-white/15 px-4 py-4 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold" /></div><input id="partner-capacity" name="capacity" placeholder="Capienza indicativa" aria-label="Capienza indicativa" className="w-full bg-black-pure border border-white/15 px-4 py-4 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold" /><textarea id="partner-message" name="message" required placeholder="Messaggio" aria-label="Messaggio" rows={5} className="w-full bg-black-pure border border-white/15 px-4 py-4 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold" /><button disabled={pending} type="submit" className="inline-flex items-center gap-3 bg-accent-gold text-black-pure px-7 py-4 font-syne text-xs font-bold uppercase tracking-[.2em] hover:bg-white focus-visible:ring-2 focus-visible:ring-white">Proponi la tua location <ArrowRight size={16} /></button><p className="text-xs text-text-secondary">Inviando la richiesta, dichiari di aver letto la <Link href="/privacy-policy" className="underline">Privacy Policy</Link>.</p><p role="status" aria-live="polite" className="text-sm text-accent-gold min-h-5">{status}</p></form></div></section>
     </div>
   );
 }

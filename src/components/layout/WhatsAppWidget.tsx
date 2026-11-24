@@ -13,7 +13,7 @@ export function WhatsAppWidget() {
             rel="noopener noreferrer"
             suppressHydrationWarning
             aria-label="Scrivici su WhatsApp"
-            className="fixed bottom-24 left-5 md:bottom-10 md:left-10 z-110 group flex items-center gap-3"
+            className="fixed bottom-24 left-5 md:bottom-10 md:left-10 z-40 group flex items-center gap-3"
         >
             {/* Button */}
             <div className="relative w-14 h-14 overflow-hidden rounded-full bg-[#25D366] flex items-center justify-center shadow-[0_4px_20px_rgba(37,211,102,0.4)] group-hover:shadow-[0_4px_30px_rgba(37,211,102,0.6)] transition duration-300 group-hover:scale-110">
