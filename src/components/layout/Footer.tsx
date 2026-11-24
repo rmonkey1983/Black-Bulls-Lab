@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { CONTACT_EMAIL } from "@/lib/constants";
 
 const WA_NUMBER = "393342010067";
 const WA_MSG    = encodeURIComponent("Ciao! Vorrei informazioni su un evento con Black Bulls Lab");
@@ -57,8 +58,8 @@ export default function Footer() {
               <p className="font-syne text-sm font-bold uppercase tracking-[0.1em] text-accent-gold">Contatti</p>
               <ul className="space-y-4">
                 <li>
-                  <a href={`mailto:info@blackbullslab.com`} className="font-syne text-xs font-medium uppercase tracking-[0.04em] text-text-secondary hover:text-accent-gold transition-colors duration-500">
-                    info@<wbr className="lg:hidden" />blackbullslab.com
+                  <a href={`mailto:${CONTACT_EMAIL}`} className="font-syne text-xs font-medium uppercase tracking-[0.04em] text-text-secondary hover:text-accent-gold transition-colors duration-500">
+                    {CONTACT_EMAIL.split("@")[0]}@<wbr className="lg:hidden" />{CONTACT_EMAIL.split("@")[1]}
                   </a>
                 </li>
                 <li>

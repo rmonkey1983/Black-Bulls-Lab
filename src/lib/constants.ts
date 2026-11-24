@@ -23,7 +23,7 @@ export const SITE_URL = "https://blackbullslab.com";
 /**
  * CONTACT INFORMATION
  */
-export const CONTACT_EMAIL = "info@blackbullslab.com";
+export const CONTACT_EMAIL = "eventi@blackbullslab.it";
 export const CONTACT_PHONE = "+39 334 2010067";
 export const CONTACT_WHATSAPP = "393342010067"; // No spaces or symbols for deep links
 

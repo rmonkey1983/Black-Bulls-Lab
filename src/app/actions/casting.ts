@@ -1,5 +1,6 @@
 "use server";
 
+import { CONTACT_EMAIL } from "@/lib/constants";
 import { supabase } from "@/lib/supabase";
 
 export async function submitCasting(formData: FormData) {
@@ -53,7 +54,7 @@ export async function submitCasting(formData: FormData) {
             const resend = new Resend(process.env.RESEND_API_KEY);
             await resend.emails.send({
                 from: "Black Bulls Lab <info@blackbullslab.com>",
-                to: ["info@blackbullslab.com"],
+                to: [CONTACT_EMAIL],
                 subject: `Nuova Candidatura Casting: ${name}`,
                 html: `
                     <h2>Nuova candidatura per The Golden Voice</h2>

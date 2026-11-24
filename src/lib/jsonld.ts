@@ -21,7 +21,7 @@ export function getHomepageJsonLd() {
         description:
           "Dinner Show interattivi, Cena con Delitto e format immersivi unici a Torino.",
         telephone: "+393342010067",
-        email: "info@blackbullslab.com",
+        email: "eventi@blackbullslab.it",
         address: {
           "@type": "PostalAddress",
           addressLocality: "Torino",

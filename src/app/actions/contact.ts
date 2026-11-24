@@ -1,6 +1,7 @@
 "use server";
 
 import { z } from "zod";
+import { CONTACT_EMAIL } from "@/lib/constants";
 import { saveContactRequest, setContactEmailStatus } from "@/lib/contactRequests";
 
 export type LeadType = "corporate" | "private" | "partner" | "contact";
@@ -139,7 +140,7 @@ async function sendNotification(leadLabel: string, replyTo: string, details: str
         const resend = new Resend(apiKey);
         const { error } = await resend.emails.send({
             from: "Black Bulls Lab <info@blackbullslab.com>",
-            to: ["info@blackbullslab.com"],
+            to: [CONTACT_EMAIL],
             reply_to: replyTo,
             subject: `[Contatti Lab] ${leadLabel}`,
             html: `

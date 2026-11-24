@@ -12,6 +12,7 @@ import { PremiumCard } from "@/components/ui/PremiumCard";
 import { buildWAUrl, WA_MESSAGES } from "@/lib/whatsapp";
 import { submitContactForm, type LeadType } from "@/app/actions/contact";
 import { trackLead } from "@/lib/analytics";
+import { CONTACT_EMAIL } from "@/lib/constants";
 
 const EXPERIENCE_OPTIONS: { label: string; leadType: LeadType }[] = [
   { label: "Evento aziendale", leadType: "corporate" },
@@ -183,9 +184,9 @@ export function ContattiClient() {
               },
               {
                 title: "Email",
-                desc: "info@blackbullslab.com",
+                desc: CONTACT_EMAIL,
                 actionText: "SCRIVICI UN'EMAIL",
-                href: "mailto:info@blackbullslab.com",
+                href: `mailto:${CONTACT_EMAIL}`,
                 icon: <Mail size={24} />,
                 external: false
               },

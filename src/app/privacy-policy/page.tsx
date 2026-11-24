@@ -34,7 +34,7 @@ export default function PrivacyPolicyPage() {
           <section className="space-y-4">
             <h2 className="font-heading text-2xl font-bold uppercase tracking-wider text-white">1. Titolare del Trattamento</h2>
             <p className="leading-relaxed">
-              Il Titolare del Trattamento è <strong>Black Bulls Lab</strong>, con sede a Torino (TO). Per qualsiasi richiesta relativa alla protezione dei dati personali o per l&apos;esercizio dei diritti previsti dal GDPR, puoi contattarci all&apos;indirizzo email: <a href="mailto:info@blackbullslab.com" className="text-accent-gold underline">info@blackbullslab.com</a>.
+              Il Titolare del Trattamento è <strong>Black Bulls Lab</strong>, con sede a Torino (TO). Per qualsiasi richiesta relativa alla protezione dei dati personali o per l&apos;esercizio dei diritti previsti dal GDPR, puoi contattarci all&apos;indirizzo email: <a href="mailto:eventi@blackbullslab.it" className="text-accent-gold underline">eventi@blackbullslab.it</a>.
             </p>
           </section>
 
@@ -108,7 +108,7 @@ export default function PrivacyPolicyPage() {
               Le richieste di preventivo e contatto saranno conservate per non oltre 12 mesi dalla raccolta, salvo richiesta di cancellazione anticipata o l&apos;avvio di un rapporto contrattuale, nel qual caso si applicano i termini previsti dalla legge.
             </p>
             <p className="leading-relaxed text-sm">
-              In qualsiasi momento puoi richiedere l&apos;accesso, la rettifica, la cancellazione o la limitazione del trattamento scrivendo a <a href="mailto:info@blackbullslab.com" className="text-accent-gold underline">info@blackbullslab.com</a>.
+              In qualsiasi momento puoi richiedere l&apos;accesso, la rettifica, la cancellazione o la limitazione del trattamento scrivendo a <a href="mailto:eventi@blackbullslab.it" className="text-accent-gold underline">eventi@blackbullslab.it</a>.
             </p>
           </section>
 
