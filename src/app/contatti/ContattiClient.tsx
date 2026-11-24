@@ -10,16 +10,33 @@ import { useCinematic } from "@/hooks/useCinematic";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PremiumCard } from "@/components/ui/PremiumCard";
 import { buildWAUrl, WA_MESSAGES } from "@/lib/whatsapp";
-import { submitContactForm } from "@/app/actions/contact";
+import { submitContactForm, type LeadType } from "@/app/actions/contact";
 import { trackLead } from "@/lib/analytics";
 
-const EXPERIENCE_OPTIONS = [
-  "A Cena Con Il Bugiardo",
-  "Cena Con Delitto",
-  "Il PalQo",
-  "The Golden Voice",
-  "Evento Aziendale / Privato"
+const EXPERIENCE_OPTIONS: { label: string; leadType: LeadType }[] = [
+  { label: "Evento aziendale", leadType: "corporate" },
+  { label: "Festa privata", leadType: "private" },
+  { label: "A Cena con il Bugiardo", leadType: "contact" },
+  { label: "Cena con Delitto", leadType: "contact" },
+  { label: "Il PalQo", leadType: "contact" },
+  { label: "The Golden Voice", leadType: "contact" },
+  { label: "Proporre un locale", leadType: "partner" },
+  { label: "Altro", leadType: "contact" },
 ];
+
+const EMPTY_FORM = {
+  name: "",
+  email: "",
+  phone: "",
+  experience: "",
+  guests: "",
+  period: "",
+  message: "",
+  b_contact_name: "", // honeypot
+};
+
+const LABEL_CLASS = "block font-inter text-sm text-text-secondary group-focus-within:text-accent-gold transition-colors duration-300";
+const FIELD_CLASS = "w-full bg-transparent border-b border-white/30 focus:border-accent-gold px-0 py-3 font-inter text-base text-text-primary placeholder:text-white/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold/60 transition-colors duration-300";
 
 export function ContattiClient() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -28,13 +45,7 @@ export function ContattiClient() {
 
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    experience: "A Cena Con Il Bugiardo",
-    message: "",
-    b_contact_name: "", // honeypot
-  });
+  const [formData, setFormData] = useState(EMPTY_FORM);
 
   useGSAP(() => {
     // Smooth whole-page spotlight mouse tracking
@@ -86,10 +97,11 @@ export function ContattiClient() {
     setErrorMessage("");
 
     try {
-      const res = await submitContactForm({ ...formData, leadType: "contact" });
+      const leadType = EXPERIENCE_OPTIONS.find(({ label }) => label === formData.experience)?.leadType ?? "contact";
+      const res = await submitContactForm({ ...formData, leadType });
       if (res.success) {
         setStatus("success");
-        trackLead("contact");
+        trackLead(leadType);
       } else {
         setStatus("error");
         setErrorMessage(res.error || "Errore sconosciuto.");
@@ -120,7 +132,7 @@ export function ContattiClient() {
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
             src="/images/brand/bg-hero-wide.webp"
-            alt="Cinematic Experience Space"
+            alt=""
             fill
             sizes="100vw"
             className="object-cover opacity-20 contrast-125 scale-102"
@@ -153,7 +165,7 @@ export function ContattiClient() {
               <span className="text-accent-gold italic">esperienza</span>
               <span>inizia da qui.</span>
             </h1>
-            <p className="reveal-sub font-inter text-text-secondary text-xs md:text-lg leading-relaxed tracking-[0.2em] uppercase opacity-75 max-w-3xl mx-auto">
+            <p className="reveal-sub font-inter text-zinc-200 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
               Format ed esperienze dal vivo per pubblico, aziende, privati e location. Scrivici per capire quale percorso è adatto al tuo progetto.
             </p>
           </div>
@@ -172,7 +184,7 @@ export function ContattiClient() {
               {
                 title: "Email",
                 desc: "info@blackbullslab.com",
-                actionText: "PARLA CON IL TEAM",
+                actionText: "SCRIVICI UN'EMAIL",
                 href: "mailto:info@blackbullslab.com",
                 icon: <Mail size={24} />,
                 external: false
@@ -199,12 +211,12 @@ export function ContattiClient() {
                     <h3 className="font-syne font-bold uppercase text-xl tracking-tight text-text-primary">
                       {method.title}
                     </h3>
-                    <p className="font-inter text-[11px] text-text-secondary/50 tracking-wider">
+                    <p className="font-inter text-sm text-text-secondary">
                       {method.desc}
                     </p>
                   </div>
                 </div>
-                <div className="pt-8 flex items-center gap-3 font-syne text-[10px] font-bold text-accent-gold tracking-[0.3em] uppercase group-hover:text-white transition-colors duration-500">
+                <div className="pt-8 flex items-center gap-3 font-syne text-xs font-bold text-accent-gold tracking-[0.12em] uppercase group-hover:text-white transition-colors duration-500">
                   {method.actionText} <ArrowRight size={12} className="group-hover:translate-x-2 transition-transform duration-500" />
                 </div>
               </PremiumCard>
@@ -224,45 +236,43 @@ export function ContattiClient() {
 
       {/* 3. IMMERSIVE MINIMALIST FORM */}
       <section id="modulo" className="reveal-scroll scroll-mt-24 py-16 md:py-24 px-6 md:px-12 bg-black-pure relative z-30">
-        <div className="container-max max-w-4xl px-6">
+        <div className="container-max max-w-4xl md:px-6">
           <div className="space-y-12">
             <div className="text-center space-y-4">
               <SectionHeading 
-                title="SCRIVI IL"
-                highlight="PROTOCOLLO"
-                subtitle="Nessun modulo standard, solo la tua visione"
+                title="RICHIEDI UN"
+                highlight="PREVENTIVO"
+                subtitle="Raccontaci cosa vuoi organizzare"
                 align="center"
               />
             </div>
 
             {status === "success" ? (
-              <div className="text-center py-16 space-y-8 animate-in fade-in duration-1000">
-                <div className="w-20 h-20 rounded-full border border-accent-gold/20 bg-accent-gold/5 flex items-center justify-center mx-auto animate-pulse">
-                  <ShieldCheck size={36} className="text-accent-gold" />
+              <div role="status" className="text-center py-16 space-y-8 animate-in fade-in duration-1000">
+                <div className="w-20 h-20 rounded-full border border-accent-gold/40 bg-accent-gold/5 flex items-center justify-center mx-auto">
+                  <ShieldCheck size={36} className="text-accent-gold" aria-hidden="true" />
                 </div>
                 <div className="space-y-3">
-                  <span className="font-syne text-[10px] text-accent-gold tracking-[0.5em] uppercase font-bold">
-                    Protocollo Iniziato
-                  </span>
                   <h3 className="font-syne text-3xl md:text-5xl font-bold text-text-primary uppercase tracking-tighter">
-                    CONNESSI CON IL LAB
+                    Richiesta inviata
                   </h3>
-                  <p className="font-inter text-text-secondary text-xs md:text-sm max-w-md mx-auto leading-relaxed opacity-60">
-                    Abbiamo ricevuto la tua richiesta. Ti ricontatteremo usando i recapiti indicati.
+                  <p className="font-inter text-text-secondary text-base max-w-md mx-auto leading-relaxed">
+                    Grazie. Ti ricontatteremo usando i recapiti indicati. Se preferisci, puoi scriverci anche su WhatsApp.
                   </p>
                 </div>
-                <button 
+                <button
+                  type="button"
                   onClick={() => {
                     setStatus("idle");
-                    setFormData({ name: "", email: "", experience: "A Cena Con Il Bugiardo", message: "", b_contact_name: "" });
+                    setFormData(EMPTY_FORM);
                   }}
-                  className="font-syne text-[10px] uppercase tracking-[0.4em] text-accent-gold hover:text-white transition-colors duration-500 py-3 px-8 border border-accent-gold/20 hover:border-white/25 bg-white/2"
+                  className="font-syne text-xs font-bold uppercase tracking-[0.12em] text-accent-gold hover:text-white transition-colors duration-300 min-h-12 px-8 border border-accent-gold/40 hover:border-white/40"
                 >
-                  INVIA NUOVO PROTOCOLLO
+                  Invia un&apos;altra richiesta
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-12 p-8 md:p-12 border border-white/5 bg-white/1 backdrop-blur-md rounded-2xl relative overflow-hidden group">
+              <form onSubmit={handleSubmit} className="space-y-12 p-5 md:p-12 border border-white/10 bg-white/1 backdrop-blur-md rounded-2xl relative overflow-hidden group">
                 
                 {/* Honeypot field */}
                 <div className="hidden">
@@ -276,30 +286,47 @@ export function ContattiClient() {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                  {/* Name Input */}
-                  <div className="relative z-10 space-y-2 group">
-                    <label htmlFor="contact-name" className="font-syne text-[10px] uppercase tracking-[0.3em] text-accent-gold/40 group-focus-within:text-accent-gold transition-colors duration-500 font-bold">
-                      Il Tuo Nome
-                    </label>
+                {/* Request type */}
+                <fieldset className="relative z-10">
+                  <legend className="font-inter text-sm text-text-secondary mb-4">Cosa ti interessa? (facoltativo)</legend>
+                  <div className="flex flex-wrap gap-3">
+                    {EXPERIENCE_OPTIONS.map(({ label }) => {
+                      const isSelected = formData.experience === label;
+                      return (
+                        <button
+                          key={label}
+                          aria-pressed={isSelected}
+                          type="button"
+                          onClick={() => setFormData({ ...formData, experience: isSelected ? "" : label })}
+                          className={`px-4 min-h-11 border font-inter text-sm transition-colors duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold ${
+                            isSelected
+                              ? "bg-accent-gold text-black-pure border-accent-gold font-semibold"
+                              : "bg-white/2 border-white/25 text-zinc-200 hover:border-accent-gold hover:text-white"
+                          }`}
+                        >
+                          {label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </fieldset>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="relative z-10 space-y-1 group">
+                    <label htmlFor="contact-name" className={LABEL_CLASS}>Nome e cognome *</label>
                     <input
                       type="text"
                       id="contact-name"
                       name="name"
                       autoComplete="name"
                       required
-                      placeholder="NOME COMPLETO"
-                      className="w-full bg-transparent border-b border-white/10 group-focus-within:border-accent-gold/50 px-0 py-3 font-inter text-xs md:text-sm text-text-primary placeholder:text-white/10 focus:outline-none transition-colors duration-500 uppercase tracking-wider"
+                      className={FIELD_CLASS}
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     />
                   </div>
-
-                  {/* Email Input */}
-                  <div className="relative z-10 space-y-2 group">
-                    <label htmlFor="contact-email" className="font-syne text-[10px] uppercase tracking-[0.3em] text-accent-gold/40 group-focus-within:text-accent-gold transition-colors duration-500 font-bold">
-                      Indirizzo Email
-                    </label>
+                  <div className="relative z-10 space-y-1 group">
+                    <label htmlFor="contact-email" className={LABEL_CLASS}>Email *</label>
                     <input
                       type="email"
                       id="contact-email"
@@ -307,54 +334,59 @@ export function ContattiClient() {
                       autoComplete="email"
                       spellCheck={false}
                       required
-                      placeholder="EMAIL@DOMINIO.COM"
-                      className="w-full bg-transparent border-b border-white/10 group-focus-within:border-accent-gold/50 px-0 py-3 font-inter text-xs md:text-sm text-text-primary placeholder:text-white/10 focus:outline-none transition-colors duration-500 uppercase tracking-wider"
+                      className={FIELD_CLASS}
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     />
                   </div>
-                </div>
-
-                {/* Experience Selection Badges */}
-                <div className="relative z-10 space-y-4">
-                  <label className="font-syne text-[10px] uppercase tracking-[0.3em] text-accent-gold/40 font-bold block">
-                    Tipo di Esperienza
-                  </label>
-                  <div className="flex flex-wrap gap-3">
-                    {EXPERIENCE_OPTIONS.map((exp) => {
-                      const isSelected = formData.experience === exp;
-                      return (
-                        <button
-                          key={exp}
-                          aria-pressed={isSelected}
-                          type="button"
-                          onClick={() => setFormData({ ...formData, experience: exp })}
-                          className={`px-4 py-2.5 border font-syne text-[9px] uppercase tracking-[0.2em] transition-all duration-500 cursor-pointer ${
-                            isSelected
-                              ? "bg-accent-gold text-black-pure border-accent-gold font-bold"
-                              : "bg-white/2 border-white/5 text-text-secondary hover:border-accent-gold/30 hover:text-text-primary"
-                          }`}
-                        >
-                          {exp}
-                        </button>
-                      );
-                    })}
+                  <div className="relative z-10 space-y-1 group">
+                    <label htmlFor="contact-phone" className={LABEL_CLASS}>Telefono (facoltativo)</label>
+                    <input
+                      type="tel"
+                      id="contact-phone"
+                      name="phone"
+                      autoComplete="tel"
+                      className={FIELD_CLASS}
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    />
+                  </div>
+                  <div className="relative z-10 space-y-1 group">
+                    <label htmlFor="contact-guests" className={LABEL_CLASS}>Numero indicativo di persone (facoltativo)</label>
+                    <input
+                      type="text"
+                      id="contact-guests"
+                      name="guests"
+                      autoComplete="off"
+                      className={FIELD_CLASS}
+                      value={formData.guests}
+                      onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
+                    />
+                  </div>
+                  <div className="relative z-10 space-y-1 group">
+                    <label htmlFor="contact-period" className={LABEL_CLASS}>Data o periodo (facoltativo)</label>
+                    <input
+                      type="text"
+                      id="contact-period"
+                      name="period"
+                      autoComplete="off"
+                      className={FIELD_CLASS}
+                      value={formData.period}
+                      onChange={(e) => setFormData({ ...formData, period: e.target.value })}
+                    />
                   </div>
                 </div>
 
-                {/* Message Input */}
-                <div className="relative z-10 space-y-2 group">
-                  <label htmlFor="contact-message" className="font-syne text-[10px] uppercase tracking-[0.3em] text-accent-gold/40 group-focus-within:text-accent-gold transition-colors duration-500 font-bold">
-                    La Tua Visione / Messaggio
-                  </label>
+                <div className="relative z-10 space-y-1 group">
+                  <label htmlFor="contact-message" className={LABEL_CLASS}>Messaggio *</label>
                   <textarea
                     required
                     rows={4}
                     id="contact-message"
-                      name="message"
+                    name="message"
                     autoComplete="off"
-                    placeholder="RACCONTACI COSA VUOI PROGETTARE…"
-                    className="w-full bg-transparent border-b border-white/10 group-focus-within:border-accent-gold/50 px-0 py-3 font-inter text-xs md:text-sm text-text-primary placeholder:text-white/10 focus:outline-none transition-colors duration-500 resize-none uppercase tracking-wider leading-relaxed"
+                    placeholder="Raccontaci cosa vuoi organizzare"
+                    className={`${FIELD_CLASS} resize-y leading-relaxed`}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   />
@@ -362,7 +394,7 @@ export function ContattiClient() {
 
                 {/* Error Banner */}
                 {status === "error" && (
-                  <div role="alert" className="flex items-center gap-3 text-red-400 text-xs p-4 bg-red-400/5 border border-red-400/20 rounded-xl relative z-10 animate-in slide-in-from-top-4 duration-500">
+                  <div role="alert" className="flex items-center gap-3 text-red-300 text-sm p-4 bg-red-400/5 border border-red-400/20 rounded-xl relative z-10 animate-in slide-in-from-top-4 duration-500">
                     <AlertCircle size={16} />
                     <span>{errorMessage || "Si è verificato un errore nell'invio della richiesta. Riprova."}</span>
                   </div>
@@ -373,17 +405,24 @@ export function ContattiClient() {
                   <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="w-full bg-accent-gold text-black-pure font-syne font-bold uppercase tracking-[0.5em] px-6 py-4.5 hover:bg-white hover:text-black-pure transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-4 cursor-pointer text-xs"
+                    className="w-full bg-accent-gold text-black-pure font-syne font-bold uppercase tracking-[0.12em] px-6 min-h-14 hover:bg-white hover:text-black-pure transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-4 cursor-pointer text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                   >
                     {status === "loading" ? (
-                      <Loader2 size={16} className="animate-spin" />
+                      <>
+                        <Loader2 size={16} className="animate-spin" aria-hidden="true" />
+                        Invio in corso…
+                      </>
                     ) : (
                       <>
-                        INVIA L&apos;ESPERIENZA
+                        Richiedi un preventivo
                         <ArrowRight size={14} />
                       </>
                     )}
                   </button>
+                  <p className="mt-4 font-inter text-sm text-text-secondary">
+                    Inviando la richiesta, dichiari di aver letto la{" "}
+                    <Link href="/privacy-policy" className="underline hover:text-accent-gold">Privacy Policy</Link>.
+                  </p>
                 </div>
               </form>
             )}
@@ -399,7 +438,7 @@ export function ContattiClient() {
             OGNI ESPERIENZA <br />
             <span className="text-accent-gold italic drop-shadow-[0_0_30px_rgba(200,169,107,0.15)]">INIZIA CON UNA SCELTA.</span>
           </h2>
-          <p className="font-inter text-text-secondary/50 text-[10px] md:text-xs uppercase tracking-[0.4em] max-w-xl mx-auto leading-relaxed">
+          <p className="font-inter text-text-secondary text-base max-w-xl mx-auto leading-relaxed">
             Alcune serate non si dimenticano. <br /> Il Lab è pronto. La scelta è tua.
           </p>
         </div>

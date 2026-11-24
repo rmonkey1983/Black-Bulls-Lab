@@ -64,7 +64,7 @@ export function SectionHeading({
 
       {/* Optional Subtitle — shown ABOVE the title for visual rhythm */}
       {subtitle && (
-        <p className="font-inter text-[10px] md:text-xs text-text-secondary font-medium uppercase tracking-[0.4em] opacity-40 mb-5 stagger-item">
+        <p className="font-inter text-xs text-text-secondary font-medium uppercase tracking-[0.2em] mb-5 stagger-item">
           {subtitle}
         </p>
       )}
