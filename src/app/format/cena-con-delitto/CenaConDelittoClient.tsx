@@ -3,12 +3,13 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Search, ArrowLeft, Zap, Play, ArrowRight, ShieldCheck, Target } from "lucide-react";
+import { Search, ArrowLeft, Zap, ShieldCheck, Target } from "lucide-react";
 import { gsap } from "gsap";
 import { useGSAP } from "@/hooks/useGSAP";
 import { useCinematic } from "@/hooks/useCinematic";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
+import { FormatPaths } from "@/components/events/FormatPaths";
 import { PremiumCard } from "@/components/ui/PremiumCard";
 import { buildWAUrl, WA_MESSAGES } from "@/lib/whatsapp";
 
@@ -61,7 +62,7 @@ export function CenaConDelittoClient() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/brand/bg-venue-crowd.webp"
-            alt="Atmosfera d'Indagine"
+            alt=""
             fill
             sizes="100vw"
             className="object-cover opacity-20 contrast-125 grayscale scale-105"
@@ -99,25 +100,28 @@ export function CenaConDelittoClient() {
             <div className="space-y-12">
                 <div className="flex flex-col items-center gap-6">
                     <span className="reveal-mystery inline-block px-4 py-1 border border-accent-gold/20 text-accent-gold text-[10px] font-bold uppercase tracking-[0.6em] bg-accent-gold/5 backdrop-blur-md">
-                        Esperienza investigativa classica
+                        Cena investigativa
                     </span>
-                    <h1 className="mystery-title font-syne font-bold text-[clamp(3rem,10vw,12rem)] leading-[0.8] tracking-tighter uppercase text-text-primary flex flex-col">
-                        <span className="block">La Verità è</span>
-                        <span className="block text-accent-gold italic">un'Ombra.</span>
+                    <h1 className="mystery-title font-syne font-bold text-[clamp(2.5rem,7vw,7rem)] leading-[0.9] tracking-tighter uppercase text-text-primary flex flex-col">
+                        <span className="block">Cena con Delitto</span>
+                        <span className="block text-accent-gold italic">a Torino.</span>
                     </h1>
                 </div>
 
                 <div className="mystery-sub max-w-2xl mx-auto">
-                    <p className="font-inter text-lg md:text-2xl text-text-secondary font-light leading-relaxed uppercase tracking-[0.2em] opacity-60">
-                        Un caso da seguire. Una cena. <br />
-                        Un’esperienza investigativa da vivere insieme.
+                    <p className="font-inter text-lg md:text-xl text-zinc-200 leading-relaxed">
+                        La verità è un’ombra: segui gli indizi tra una portata e l’altra <br className="hidden md:block" />
+                        e ricostruisci il caso insieme al tuo tavolo.
                     </p>
                 </div>
 
-                <div className="pt-12 flex flex-col sm:flex-row items-center justify-center gap-8">
-                    <PrimaryButton href="/contatti" size="lg" className="w-full sm:w-auto min-w-[280px]">
-                        CHIEDI INFORMAZIONI
+                <div className="pt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <PrimaryButton href="/contatti" size="lg" className="w-full sm:w-auto">
+                        Richiedi un preventivo
                     </PrimaryButton>
+                    <a href={buildWAUrl(WA_MESSAGES.cenaConDelitto)} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 w-full sm:w-auto items-center justify-center border border-white/40 px-8 py-4 font-syne text-xs font-bold uppercase tracking-[.12em] text-white hover:border-accent-gold hover:text-accent-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold">
+                        Chiedi le prossime date
+                    </a>
                 </div>
             </div>
         </div>
@@ -139,16 +143,16 @@ export function CenaConDelittoClient() {
         <div className="container-max grid grid-cols-1 lg:grid-cols-2 gap-24 lg:gap-48 items-center">
             <div className="space-y-16">
                 <SectionHeading 
-                  title="OGNI TAVOLO"
-                  highlight="UN SOSPETTO"
-                  subtitle="Il Delitto è Smart"
+                  title="UN CASO"
+                  highlight="A TAVOLA"
+                  subtitle="Che cos’è"
                 />
-                <div className="space-y-12 font-inter text-xl md:text-2xl text-text-secondary font-light leading-relaxed opacity-70">
+                <div className="space-y-12 font-inter text-lg md:text-xl text-zinc-300 leading-relaxed">
                     <p>
-                        Cena con Delitto è un’esperienza investigativa classica, distinta dai format identitari di Black Bulls Lab.
+                        Cena con Delitto è una cena con un’indagine: durante la serata la storia va avanti e il caso si costruisce un indizio alla volta.
                     </p>
                     <p>
-                        Segui il caso, osserva gli indizi e prova a ricostruire ciò che è accaduto durante la cena.
+                        Osservi, ascolti, confronti le tue idee con gli altri e provi a ricostruire ciò che è accaduto.
                     </p>
                 </div>
             </div>
@@ -157,7 +161,7 @@ export function CenaConDelittoClient() {
                 <PremiumCard className="h-full">
                     <Image 
                         src="/images/brand/bg-stage-lights.webp"
-                        alt="Dettagli dell'Indagine"
+                        alt=""
                         fill
                         sizes="(max-width: 1024px) 100vw, 50vw"
                         className="object-cover grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-50 transition-[filter,opacity] duration-1000"
@@ -168,7 +172,7 @@ export function CenaConDelittoClient() {
                             <div className="w-12 h-12 rounded-full border border-accent-gold/20 flex items-center justify-center">
                                 <Target size={20} className="text-accent-gold" />
                             </div>
-                            <span className="font-syne text-xs uppercase tracking-[0.4em] text-accent-gold">Prove Trovate</span>
+                            <span className="font-syne text-xs uppercase tracking-[0.4em] text-accent-gold">Indizi da seguire</span>
                         </div>
                     </div>
                 </PremiumCard>
@@ -201,7 +205,7 @@ export function CenaConDelittoClient() {
                         <h3 className="font-syne text-3xl font-bold uppercase tracking-tighter text-text-primary">
                             {act.title}
                         </h3>
-                        <p className="font-inter text-text-secondary/60 leading-relaxed group-hover:text-text-secondary transition-colors">
+                        <p className="font-inter text-text-secondary text-base leading-relaxed">
                             {act.desc}
                         </p>
                     </div>
@@ -210,69 +214,11 @@ export function CenaConDelittoClient() {
         </div>
       </section>
 
-      {/* 4. CALL TO ACTION: Open the Case */}
-      <section className="reveal-mystery section-padding-huge bg-black-pure border-t border-white/5 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/noise.webp')] opacity-[0.02] mix-blend-overlay" />
-        
-        <div className="container-max grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-            <div className="space-y-12">
-                <h2 className="font-syne text-5xl md:text-8xl font-bold uppercase tracking-tighter leading-none text-text-primary">
-                    VIVI <br />
-                    <span className="text-accent-gold italic">IL CASO.</span>
-                </h2>
-                <p className="font-inter text-xl text-text-secondary/60 leading-relaxed max-w-xl">
-                    Scopri l’esperienza investigativa classica e contattaci per informazioni.
-                </p>
-                <div className="pt-8">
-                    <a
-                        href={buildWAUrl(WA_MESSAGES.cenaConDelitto)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group inline-flex items-center gap-6 px-12 py-6 border border-accent-gold/40 text-accent-gold font-syne font-bold uppercase tracking-[0.4em] hover:bg-accent-gold hover:text-black-pure transition-[background-color,color,border-color] duration-500"
-                    >
-                        SCOPRI L&apos;ESPERIENZA
-                        <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
-                    </a>
-                </div>
-            </div>
-
-            <div className="relative aspect-video lg:aspect-square">
-                <PremiumCard className="h-full">
-                    <Image 
-                        src="/images/brand/bg-hero-wide.webp"
-                        alt="La fiducia è il vero rischio."
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                        className="object-cover grayscale opacity-20 group-hover:grayscale-0 group-hover:opacity-40 transition-[filter,opacity] duration-1000"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-black-pure via-transparent to-transparent opacity-80" />
-                </PremiumCard>
-            </div>
-        </div>
-      </section>
-
-      {/* 5. FINAL ACTION SECTION */}
-      <section className="reveal-mystery section-padding-huge bg-accent-gold text-black-pure text-center relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[url('/noise.webp')] mix-blend-overlay" />
-        </div>
-        <div className="container-narrow space-y-16 relative z-10">
-          <h2 className="font-syne text-6xl md:text-9xl font-bold uppercase tracking-tighter leading-[0.8]">
-            ENTRA <br /> NEL <span className="bg-black-pure text-accent-gold px-4">MISTERO.</span>
-          </h2>
-          <div className="pt-12">
-            <Link 
-              href="/contatti"
-              className="inline-flex items-center gap-8 px-16 py-8 bg-black-pure text-accent-gold text-xl font-black uppercase tracking-widest hover:bg-white hover:text-black-pure transition-[background-color,color] duration-500 rounded-full"
-            >
-              CHIEDI INFORMAZIONI
-            </Link>
-          </div>
-          <p className="font-syne text-[10px] uppercase tracking-[0.6em] font-black opacity-40">
-            Cena // Indagine // Interazione
-          </p>
-        </div>
-      </section>
+      <FormatPaths
+        whatsappHref={buildWAUrl(WA_MESSAGES.cenaConDelitto)}
+        joinText="Le date pubbliche vengono pubblicate nel calendario. Scrivici su WhatsApp e ti diciamo quali sono le prossime."
+        organizeText="Raccontaci gruppo, occasione e location: valutiamo insieme come portare la Cena con Delitto al tuo evento, a Torino e in Piemonte."
+      />
 
     </div>
   );

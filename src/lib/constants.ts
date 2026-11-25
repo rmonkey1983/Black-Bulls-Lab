@@ -72,12 +72,12 @@ export const EXPERIMENTS = [
     },
     { 
         id: "cena-con-delitto",
-        name: "Cena Con Delitto", 
+        name: "Cena con Delitto",
         href: "/format/cena-con-delitto", 
-        subtitle: "Esperienza investigativa classica a Torino.",
+        subtitle: "Un caso da ricostruire durante la cena.",
         desc: "Cena e indagine dal vivo",
         image: "/images/brand/bg-stage-lights.webp",
-        badge: "Esperienza investigativa"
+        badge: "Cena investigativa"
     },
     { 
         id: "the-golden-voice",

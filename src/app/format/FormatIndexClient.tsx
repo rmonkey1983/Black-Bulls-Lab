@@ -29,7 +29,7 @@ const OTHER_FORMAT: FormatCard = {
   name: "Cena con Delitto",
   href: "/format/cena-con-delitto",
   image: "/images/brand/bg-stage-lights.webp",
-  eyebrow: "Altra esperienza disponibile",
+  eyebrow: "Cena investigativa",
   description: "Una cena investigativa con un caso da ricostruire e indizi da seguire durante la serata.",
   detail: "Cena · indagine · Torino",
 };
@@ -85,7 +85,7 @@ export function FormatIndexClient() {
 
       <section className="border-y border-white/10 bg-white/[0.02] px-6 py-16 md:px-12 md:py-24"><div className="mx-auto max-w-7xl"><p className="font-syne text-xs uppercase tracking-[0.24em] text-accent-gold">Format proprietari BBL</p><h2 className="mt-3 max-w-3xl font-heading text-4xl uppercase leading-none md:text-6xl">Esperienze costruite per far partecipare il pubblico.</h2><div className="mt-10 grid gap-5 md:grid-cols-2">{PROPRIETARY_FORMATS.map((format) => <FormatCardView key={format.href} format={format} />)}</div></div></section>
 
-      <section className="px-6 py-16 md:px-12 md:py-24"><div className="mx-auto max-w-7xl"><p className="font-syne text-xs uppercase tracking-[0.24em] text-accent-gold">Altre esperienze</p><h2 className="mt-3 font-heading text-4xl uppercase leading-none md:text-6xl">Cena con Delitto</h2><p className="mt-5 max-w-2xl leading-relaxed text-text-secondary">Un’esperienza investigativa distinta dai format proprietari BBL, con una pagina dedicata per informazioni e modalità.</p><div className="mt-8 max-w-xl"><FormatCardView format={OTHER_FORMAT} /></div></div></section>
+      <section className="px-6 py-16 md:px-12 md:py-24"><div className="mx-auto max-w-7xl"><p className="font-syne text-xs uppercase tracking-[0.24em] text-accent-gold">Altre esperienze</p><h2 className="mt-3 font-heading text-4xl uppercase leading-none md:text-6xl">Cena con Delitto</h2><p className="mt-5 max-w-2xl leading-relaxed text-text-secondary">Un caso da ricostruire e indizi da seguire durante la cena.</p><div className="mt-8 max-w-xl"><FormatCardView format={OTHER_FORMAT} /></div></div></section>
 
       <section className="border-y border-white/10 bg-black-elevated/20 px-6 py-16 md:px-12 md:py-20"><div className="mx-auto max-w-7xl"><p className="font-syne text-xs uppercase tracking-[0.24em] text-accent-gold">Scegli il percorso</p><h2 className="mt-3 font-heading text-4xl uppercase leading-none md:text-6xl">Dove vuoi portare l’esperienza?</h2><div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{[["Aziende", "/eventi-aziendali"], ["Eventi Privati", "/eventi-privati"], ["Locali & Partner", "/locali-partner"], ["Date pubbliche", "/calendario"]].map(([label, href]) => <Link key={href} href={href} className="flex items-center justify-between border border-white/10 p-5 text-sm uppercase tracking-[0.1em] text-white/80 hover:border-accent-gold hover:text-accent-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold"><span>{label}</span><ArrowRight aria-hidden="true" size={16} /></Link>)}</div></div></section>
 
