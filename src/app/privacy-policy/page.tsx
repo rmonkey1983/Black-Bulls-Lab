@@ -55,7 +55,7 @@ export default function PrivacyPolicyPage() {
               Tramite i moduli delle pagine Contatti, Eventi aziendali, Eventi privati e Locali &amp; Partner raccogliamo i dati che scegli di inviarci:
             </p>
             <ul className="list-disc pl-6 space-y-2 text-zinc-400 text-sm">
-              <li><strong>Dati necessari per rispondere:</strong> Nome, Indirizzo Email e contenuto del messaggio. In base al modulo, sono necessari anche azienda, dati sull&apos;evento o dati sul locale.</li>
+              <li><strong>Dati necessari per rispondere:</strong> Nome, Indirizzo Email e contenuto del messaggio. In base al modulo, sono necessari anche il nome dell&apos;azienda o i dati sul locale.</li>
               <li><strong>Dati sull&apos;evento o sulla collaborazione:</strong> Telefono, azienda o locale, tipo di evento, format di interesse, numero di partecipanti, città o location, periodo, tipologia e capienza dello spazio.</li>
               <li><strong>Dati di gestione:</strong> Data e tipo della richiesta ed esito dell&apos;invio della notifica email.</li>
             </ul>

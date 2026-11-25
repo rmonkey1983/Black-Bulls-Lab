@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, InputHTMLAttributes, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, MessageSquare } from "lucide-react";
@@ -9,9 +9,7 @@ import { CORPORATE_APPLICATIONS, CORPORATE_BENEFITS, CORPORATE_FAQS, CORPORATE_M
 import { trackLead } from "@/lib/analytics";
 import { QUOTE_LABEL } from "@/lib/quote";
 import { buildWAUrl, WA_MESSAGES } from "@/lib/whatsapp";
-
-const LABEL_CLASS = "block mb-2 text-sm text-zinc-300";
-const INPUT_CLASS = "w-full bg-black-pure border border-white/30 px-4 py-3 text-base text-white placeholder:text-white/50 focus:outline-none focus:border-accent-gold focus-visible:ring-2 focus-visible:ring-accent-gold";
+import { Field, INPUT_CLASS, LABEL_CLASS } from "@/components/forms/Field";
 
 export function CorporateClient() {
   const [status, setStatus] = useState("");
@@ -133,14 +131,5 @@ export function CorporateClient() {
 
       <section className="border-t border-white/10 bg-black-elevated/25"><div className="max-w-[1100px] mx-auto px-6 md:px-12 py-16 md:py-24"><h2 className="text-3xl md:text-5xl mb-9">Domande frequenti</h2><div className="divide-y divide-white/10 border-y border-white/10">{CORPORATE_FAQS.map((faq) => <details key={faq.question} className="py-5 group"><summary className="cursor-pointer pr-2 text-lg font-medium group-open:text-accent-gold">{faq.question}</summary><p className="text-text-secondary leading-relaxed mt-3 max-w-3xl">{faq.answer}</p></details>)}</div><Link href="#richiesta" className="inline-flex min-h-12 items-center gap-3 mt-10 bg-accent-gold text-black-pure px-7 py-4 font-syne text-xs font-bold uppercase tracking-[.12em] hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">{QUOTE_LABEL} <ArrowRight size={16} aria-hidden="true" /></Link></div></section>
     </div>
-  );
-}
-
-function Field({ label, ...props }: { label: string } & InputHTMLAttributes<HTMLInputElement>) {
-  return (
-    <label className="block">
-      <span className={LABEL_CLASS}>{label}</span>
-      <input autoComplete="off" {...props} className={INPUT_CLASS} />
-    </label>
   );
 }
