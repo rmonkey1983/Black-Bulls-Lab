@@ -20,7 +20,6 @@ const EXPERIENCE_OPTIONS: { label: string; leadType: LeadType }[] = [
   { label: "A Cena con il Bugiardo", leadType: "contact" },
   { label: "Cena con Delitto", leadType: "contact" },
   { label: "Il PalQo", leadType: "contact" },
-  { label: "The Golden Voice", leadType: "contact" },
   { label: "Proporre un locale", leadType: "partner" },
   { label: "Altro", leadType: "contact" },
 ];

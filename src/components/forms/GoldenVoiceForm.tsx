@@ -145,7 +145,7 @@ export function GoldenVoiceForm() {
                         disabled={loading}
                         className="flex items-center gap-3 px-12 py-4 bg-gold text-black font-bold uppercase tracking-widest hover:bg-white transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        {loading ? "IN INVIO..." : "INVIA CANDIDATURA"} <ArrowLeft className="rotate-180" size={18} />
+                        {loading ? "IN INVIO..." : "INVIA"} <ArrowLeft className="rotate-180" size={18} />
                     </button>
                 </div>
             </form>

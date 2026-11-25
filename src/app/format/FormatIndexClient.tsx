@@ -22,7 +22,7 @@ const FLAGSHIP: FormatCard = {
 
 const PROPRIETARY_FORMATS: FormatCard[] = [
   { name: "Il PalQo", href: "/format/il-palqo", image: "/images/brand/bg-venue-crowd.webp", eyebrow: "Format proprietario", description: "Dinner & show live con stand-up, improvvisazione, conduzione e interazione con il pubblico.", detail: "Stand-up · improvvisazione · pubblico" },
-  { name: "The Golden Voice", href: "/format/the-golden-voice", image: "/images/brand/vibe-live-jazz.webp", eyebrow: "Format proprietario", description: "Format musicale live con cantanti e partecipazione del pubblico alla valutazione.", detail: "Canto · live · partecipazione" },
+  { name: "The Golden Voice", href: "/format/the-golden-voice", image: "/images/brand/vibe-live-jazz.webp", eyebrow: "In preparazione", description: "Concorso canoro in fase di creazione. Date, sede e regolamento saranno comunicati quando saranno definiti.", detail: "Concorso canoro · non ancora disponibile" },
 ];
 
 const OTHER_FORMAT: FormatCard = {
@@ -36,7 +36,7 @@ const OTHER_FORMAT: FormatCard = {
 
 export const FORMAT_FAQS = [
   ["Che cosa sono le esperienze Black Bulls Lab?", "Sono format ed esperienze dal vivo progettati per coinvolgere il pubblico, le aziende, i privati e le location."],
-  ["Quali format sono disponibili?", "In questa pagina trovi A Cena con il Bugiardo, Il PalQo, The Golden Voice e Cena con Delitto. Ogni scheda rimanda alla pagina dedicata."],
+  ["Quali format sono disponibili?", "In questa pagina trovi A Cena con il Bugiardo, Il PalQo e Cena con Delitto. The Golden Voice è un concorso canoro ancora in preparazione. Ogni scheda rimanda alla pagina dedicata."],
   ["Dove si svolgono?", "Black Bulls Lab ha focus su Torino e Piemonte. Data, location e disponibilità dipendono dal format e dalla sessione."],
   ["Posso partecipare a un format come pubblico?", "Sì, quando sono disponibili date pubbliche. Le date e le modalità vengono comunicate nella pagina del format o nel calendario."],
   ["È possibile organizzare un format per un’azienda o una festa privata?", "Sì. Puoi partire dai percorsi Aziende o Eventi Privati per raccontare il tuo progetto e definire la proposta."],

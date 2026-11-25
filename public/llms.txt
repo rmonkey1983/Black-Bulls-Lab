@@ -16,7 +16,7 @@ Black Bulls Lab crea dinner show interattivi, cena con delitto, format immersivi
 - A Cena Con Il Bugiardo: dinner show di social deception con web app interattiva.
 - Cena Con Delitto: cena spettacolo investigativa con indizi, attori dal vivo e gioco di deduzione.
 - Il PalQo: palco live con voto del pubblico e community experience.
-- The Golden Voice: singing contest e cena spettacolo con votazione dal vivo.
+- The Golden Voice: concorso canoro in preparazione, non ancora disponibile.
 
 ## Contesto locale
 

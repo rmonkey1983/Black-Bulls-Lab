@@ -81,12 +81,12 @@ export const EXPERIMENTS = [
     },
     { 
         id: "the-golden-voice",
-        name: "THE GOLDEN VOICE", 
+        name: "The Golden Voice",
         href: "/format/the-golden-voice", 
-        subtitle: "Format musicale live con partecipazione del pubblico.",
-        desc: "Format musicale con cantanti e pubblico",
+        subtitle: "Concorso canoro in fase di creazione.",
+        desc: "Concorso canoro in preparazione",
         image: "/images/brand/vibe-live-jazz.webp",
-        badge: "Format BBL"
+        badge: "In preparazione"
     }
 ];
 

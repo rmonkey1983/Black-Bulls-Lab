@@ -62,7 +62,7 @@ export function TheGoldenVoiceClient() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/brand/service-performance.webp"
-            alt="L'Esperienza The Golden Voice"
+            alt=""
             fill
             sizes="100vw"
             className="object-cover opacity-20 contrast-125 grayscale scale-105"
@@ -100,7 +100,7 @@ export function TheGoldenVoiceClient() {
             <div className="space-y-12">
                 <div className="flex flex-col items-center gap-6">
                     <span className="reveal-golden inline-block px-4 py-1 border border-accent-gold/20 text-accent-gold text-[10px] font-bold uppercase tracking-[0.6em] bg-accent-gold/5 backdrop-blur-md">
-                        Format musicale live
+                        Concorso canoro · In preparazione
                     </span>
                     <h1 className="golden-title font-syne font-bold text-[clamp(3rem,10vw,12rem)] leading-[0.8] tracking-tighter uppercase text-text-primary flex flex-col">
                         <span className="block">Ogni voce</span>
@@ -110,14 +110,14 @@ export function TheGoldenVoiceClient() {
 
                 <div className="golden-sub max-w-2xl mx-auto">
                     <p className="font-inter text-lg md:text-2xl text-text-secondary font-light leading-relaxed uppercase tracking-[0.2em] opacity-60">
-                        Cantanti dal vivo. <br />
-                        Il pubblico partecipa alla valutazione.
+                        Il concorso canoro di Black Bulls Lab, a Torino. <br />
+                        Date e regolamento sono in definizione.
                     </p>
                 </div>
 
                 <div className="pt-12 flex flex-col sm:flex-row items-center justify-center gap-8">
                     <PrimaryButton href="#casting-form" size="lg" className="w-full sm:w-auto min-w-70">
-                        SALI SUL PALCO
+                        LASCIA IL TUO INTERESSE
                     </PrimaryButton>
                 </div>
             </div>
@@ -140,16 +140,16 @@ export function TheGoldenVoiceClient() {
         <div className="container-max grid grid-cols-1 lg:grid-cols-2 gap-24 lg:gap-48 items-center">
             <div className="space-y-16">
                 <SectionHeading 
-                  title="PRESENZA"
-                  highlight="ASSOLUTA"
-                  subtitle="L'Evoluzione dello Show"
+                  title="CONCORSO"
+                  highlight="CANORO"
+                  subtitle="In preparazione"
                 />
                 <div className="space-y-12 font-inter text-xl md:text-2xl text-text-secondary font-light leading-relaxed opacity-70">
                     <p>
-                        The Golden Voice è un format musicale live con cantanti e partecipazione del pubblico alla valutazione.
+                        The Golden Voice è un concorso canoro che stiamo creando. È dedicato a chi canta e vuole esibirsi dal vivo.
                     </p>
                     <p>
-                        La voce e la presenza sul palco incontrano una sala coinvolta nell’esperienza.
+                        Date, sede, requisiti e modalità non sono ancora definiti: li pubblicheremo qui.
                     </p>
                 </div>
             </div>
@@ -158,7 +158,7 @@ export function TheGoldenVoiceClient() {
                 <PremiumCard className="h-full">
                     <Image 
                         src="/images/brand/service-performance.webp"
-                        alt="Stage Tension"
+                        alt=""
                         fill
                         sizes="(max-width: 1024px) 100vw, 50vw"
                         className="object-cover grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-50 transition-[filter,opacity] duration-1000"
@@ -179,18 +179,18 @@ export function TheGoldenVoiceClient() {
         <div className="container-max">
             <div className="mb-32">
                 <SectionHeading 
-                  title="LIVE."
-                  highlight="UNA VOCE."
-                  subtitle="Il cuore del format"
+                  title="A CHE PUNTO"
+                  highlight="SIAMO."
+                  subtitle="Il progetto"
                   align="center"
                 />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24">
                 {[
-                    { title: "La voce", desc: "I cantanti portano la propria presenza sul palco.", icon: <Music2 size={32} /> },
-                    { title: "La serata", desc: "La musica live incontra la conduzione e l’energia della sala.", icon: <Zap size={32} /> },
-                    { title: "La valutazione", desc: "Il pubblico partecipa alla valutazione delle performance.", icon: <Trophy size={32} /> }
+                    { title: "Il concorso", desc: "Un progetto dedicato a chi canta e vuole esibirsi dal vivo.", icon: <Music2 size={32} /> },
+                    { title: "In preparazione", desc: "Date, sede, requisiti e regolamento sono in definizione.", icon: <Zap size={32} /> },
+                    { title: "Il tuo interesse", desc: "Puoi già lasciarci i tuoi dati e un brano con il modulo qui sotto.", icon: <Trophy size={32} /> }
                 ].map((act, i) => (
                     <div key={i} className="group space-y-8 p-12 border border-white/5 bg-white/2 hover:border-accent-gold/20 transition-[border-color,background-color] duration-700">
                         <div className="text-accent-gold opacity-30 group-hover:opacity-100 transition-opacity duration-700">
@@ -216,24 +216,24 @@ export function TheGoldenVoiceClient() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 lg:gap-48 items-center">
                 <div className="space-y-16">
                     <div className="space-y-8">
-                        <span className="text-accent-gold font-bold text-[10px] uppercase tracking-[0.8em]">Candidati al Laboratorio</span>
+                        <span className="text-accent-gold font-bold text-[10px] uppercase tracking-[0.8em]">Per chi canta</span>
                         <h2 className="font-syne font-bold leading-[0.85] tracking-tighter uppercase text-text-primary text-5xl md:text-[5vw]">
-                            Invia la tua <br /><span className="text-accent-gold italic">Candidatura.</span>
+                            Lascia il tuo <br /><span className="text-accent-gold italic">interesse.</span>
                         </h2>
                         <p className="text-text-secondary/60 font-inter text-xl leading-relaxed max-w-lg">
-                            Scopri il format musicale live e raccontaci il tuo interesse a partecipare.
+                            Il concorso non è ancora aperto. Lasciaci i tuoi dati: ti ricontatteremo quando ci saranno novità.
                         </p>
                     </div>
                     
                     <div className="pt-16 border-t border-white/5 space-y-6">
-                        <p className="font-syne text-[10px] uppercase tracking-[0.4em] text-text-secondary opacity-30">Contatto Casting:</p>
+                        <p className="font-syne text-[10px] uppercase tracking-[0.4em] text-text-secondary opacity-30">Per informazioni:</p>
                         <a 
-                            href={buildWAUrl(WA_MESSAGES.default)}
+                            href={buildWAUrl(WA_MESSAGES.goldenVoice)}
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="group flex items-center gap-6 text-accent-gold hover:text-text-primary transition-colors font-syne text-xs font-bold uppercase tracking-[0.6em]"
                         >
-                            WHATSAPP CASTING
+                            SCRIVICI SU WHATSAPP
                             <ArrowRight size={18} className="group-hover:translate-x-3 transition-transform" />
                         </a>
                     </div>
@@ -257,14 +257,14 @@ export function TheGoldenVoiceClient() {
           </h2>
           <div className="pt-12">
             <Link 
-              href="/contatti"
+              href="#casting-form"
               className="inline-flex items-center gap-8 px-16 py-8 bg-black-pure text-accent-gold text-xl font-black uppercase tracking-widest hover:bg-white hover:text-black-pure transition-[background-color,color] duration-500 rounded-full"
             >
-              CHIEDI INFORMAZIONI
+              LASCIA IL TUO INTERESSE
             </Link>
           </div>
           <p className="font-syne text-[10px] uppercase tracking-[0.6em] font-black opacity-40">
-            Musica live // Partecipazione del pubblico
+            Concorso canoro in preparazione
           </p>
         </div>
       </section>

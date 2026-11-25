@@ -15,8 +15,9 @@ export function MobileStickyBookButton() {
   if (isHiddenRoute) return null;
 
   const isPartnerPage = pathname === "/locali-partner";
-  const href = isPartnerPage ? "#proposta" : getQuoteHref(pathname);
-  const label = isPartnerPage ? "Proponi la tua location" : QUOTE_LABEL;
+  const isGoldenVoicePage = pathname === "/format/the-golden-voice";
+  const href = isPartnerPage ? "#proposta" : isGoldenVoicePage ? "#casting-form" : getQuoteHref(pathname);
+  const label = isPartnerPage ? "Proponi la tua location" : isGoldenVoicePage ? "Lascia il tuo interesse" : QUOTE_LABEL;
 
   if (isBugiardoPage) {
     return (
