@@ -6,6 +6,8 @@ export const WA_MESSAGES = {
     bugiardo: 'Ciao! Sono interessato/a a "A Cena Con Il Bugiardo". Potete darmi info su date e prezzi?',
     ilPalqo: "Ciao! Vorrei sapere di più su Il PalQo. Quando è la prossima data?",
     corporate: "Ciao! Sto organizzando un evento aziendale per la mia azienda. Posso avere un preventivo?",
+    goldenVoice: "Ciao! Vorrei informazioni su The Golden Voice, il concorso canoro in preparazione.",
+    privati: "Ciao! Vorrei organizzare una festa privata. Posso avere un preventivo?",
     compleanno: "Ciao! Vorrei organizzare una festa di compleanno con voi. Quante persone accettate?",
 };
 

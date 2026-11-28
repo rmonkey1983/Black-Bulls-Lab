@@ -16,13 +16,13 @@ Black Bulls Lab crea dinner show interattivi, cena con delitto, format immersivi
 - A Cena Con Il Bugiardo: dinner show di social deception con web app interattiva.
 - Cena Con Delitto: cena spettacolo investigativa con indizi, attori dal vivo e gioco di deduzione.
 - Il PalQo: palco live con voto del pubblico e community experience.
-- The Golden Voice: singing contest e cena spettacolo con votazione dal vivo.
+- The Golden Voice: concorso canoro in preparazione, non ancora disponibile.
 
 ## Contesto locale
 
 - Citta principale: Torino, Piemonte, Italia.
 - Pubblico: gruppi privati, aziende, team HR, eventi corporate, persone che cercano una serata originale a Torino.
-- Contatti: info@blackbullslab.com, WhatsApp +39 334 2010067.
+- Contatti: eventi@blackbullslab.it, WhatsApp +39 334 2010067.
 
 ## Query utili
 

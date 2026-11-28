@@ -83,6 +83,8 @@ export async function POST(req: Request) {
     const origin = req.headers.get("origin");
     if (origin) {
       const allowedOrigins = [
+        "https://blackbullslab.it",
+        "https://www.blackbullslab.it",
         "https://blackbullslab.com",
         "https://www.blackbullslab.com",
         "http://localhost:3000",

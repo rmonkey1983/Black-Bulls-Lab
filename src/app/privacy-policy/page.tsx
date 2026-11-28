@@ -34,12 +34,13 @@ export default function PrivacyPolicyPage() {
           <section className="space-y-4">
             <h2 className="font-heading text-2xl font-bold uppercase tracking-wider text-white">1. Titolare del Trattamento</h2>
             <p className="leading-relaxed">
-              Il Titolare del Trattamento è <strong>Black Bulls Lab</strong>, con sede a Torino (TO). Per qualsiasi richiesta relativa alla protezione dei dati personali o per l&apos;esercizio dei diritti previsti dal GDPR, puoi contattarci all&apos;indirizzo email: <a href="mailto:info@blackbullslab.com" className="text-accent-gold underline">info@blackbullslab.com</a>.
+              Il Titolare del Trattamento è <strong>Black Bulls Lab</strong>, con sede a Torino (TO). Per qualsiasi richiesta relativa alla protezione dei dati personali o per l&apos;esercizio dei diritti previsti dal GDPR, puoi contattarci all&apos;indirizzo email: <a href="mailto:eventi@blackbullslab.it" className="text-accent-gold underline">eventi@blackbullslab.it</a>.
             </p>
           </section>
 
           <section className="space-y-4">
-            <h2 className="font-heading text-2xl font-bold uppercase tracking-wider text-white">2. Dati Raccolti e Liste d&apos;Attesa</h2>
+            <h2 className="font-heading text-2xl font-bold uppercase tracking-wider text-white">2. Dati Raccolti</h2>
+            <h3 className="text-lg font-bold text-white">Liste d&apos;attesa</h3>
             <p className="leading-relaxed">
               Tramite la landing page ed i moduli di iscrizione alle liste d&apos;attesa (in particolare per il format <em>&quot;A Cena con il Bugiardo&quot;</em>), raccogliamo i seguenti dati:
             </p>
@@ -49,6 +50,18 @@ export default function PrivacyPolicyPage() {
               <li><strong>Dati di Navigazione e Provenienza:</strong> Pagina di atterraggio, URL referrer, parametri di campagna promozionale (UTM) ed eventuale identificatore di origine.</li>
               <li><strong>Dati Tecnici di Sicurezza:</strong> Token di verifica Cloudflare Turnstile per la protezione anti-spam e il timestamp di rilascio del consenso.</li>
             </ul>
+            <h3 className="text-lg font-bold text-white pt-4">Richieste di preventivo e contatto</h3>
+            <p className="leading-relaxed">
+              Tramite i moduli delle pagine Contatti, Eventi aziendali, Eventi privati e Locali &amp; Partner raccogliamo i dati che scegli di inviarci:
+            </p>
+            <ul className="list-disc pl-6 space-y-2 text-zinc-400 text-sm">
+              <li><strong>Dati necessari per rispondere:</strong> Nome, Indirizzo Email e contenuto del messaggio. In base al modulo, sono necessari anche il nome dell&apos;azienda o i dati sul locale.</li>
+              <li><strong>Dati sull&apos;evento o sulla collaborazione:</strong> Telefono, azienda o locale, tipo di evento, format di interesse, numero di partecipanti, città o location, periodo, tipologia e capienza dello spazio.</li>
+              <li><strong>Dati di gestione:</strong> Data e tipo della richiesta ed esito dell&apos;invio della notifica email.</li>
+            </ul>
+            <p className="leading-relaxed text-sm">
+              Ti invitiamo a non inserire nel messaggio dati particolari, come quelli sulla salute, se non sono necessari.
+            </p>
           </section>
 
           <section className="space-y-4">
@@ -58,7 +71,10 @@ export default function PrivacyPolicyPage() {
                 <strong>Gestione Lista d&apos;Attesa ed Evento:</strong> I dati di contatto vengono utilizzati per gestire la pre-iscrizione alle sessioni pilota, inviare aggiornamenti sull&apos;apertura delle prenotazioni e comunicare data e location dell&apos;evento. <em>Base giuridica: Esecuzione di misure precontrattuali su richiesta dell&apos;interessato.</em>
               </li>
               <li>
-                <strong>Comunicazioni di Marketing (Facoltativo):</strong> Previor esplicito e separato consenso, possiamo inviare aggiornamenti su futuri eventi, nuovi format e iniziative speciali di Black Bulls Lab via Email o WhatsApp. <em>Base giuridica: Consenso dell&apos;interessato (revocabile in qualsiasi momento).</em>
+                <strong>Richieste di Preventivo e Contatto:</strong> Utilizziamo i dati inviati per rispondere, preparare una proposta e conservare traccia della richiesta. Non li usiamo per comunicazioni di marketing senza un consenso separato. <em>Base giuridica: Esecuzione di misure precontrattuali su richiesta dell&apos;interessato.</em>
+              </li>
+              <li>
+                <strong>Comunicazioni di Marketing (Facoltativo):</strong> Previo esplicito e separato consenso, possiamo inviare aggiornamenti su futuri eventi, nuovi format e iniziative speciali di Black Bulls Lab via Email o WhatsApp. <em>Base giuridica: Consenso dell&apos;interessato (revocabile in qualsiasi momento).</em>
               </li>
               <li>
                 <strong>Sicurezza e Prevenzione Abusi:</strong> Utilizziamo Cloudflare Turnstile per prevenire invii automatizzati o fraudolenti. <em>Base giuridica: Legittimo interesse del Titolare a garantire la sicurezza della piattaforma.</em>
@@ -69,7 +85,7 @@ export default function PrivacyPolicyPage() {
           <section className="space-y-4">
             <h2 className="font-heading text-2xl font-bold uppercase tracking-wider text-white">4. Piattaforme e Servizi Terzi</h2>
             <p className="leading-relaxed text-sm">
-              I dati vengono memorizzati in modo sicuro attraverso infrastrutture database gestite tramite <strong>Supabase Inc.</strong>, nel rispetto delle normative europee di protezione dati. La protezione dei form è affidata a <strong>Cloudflare Inc.</strong> (Turnstile). Per gli analytics del sito, Google Analytics 4 di <strong>Google LLC</strong> viene caricato solo dopo il consenso alla categoria analytics. Il rifiuto mantiene Google Analytics disabilitato.
+              I dati vengono memorizzati in modo sicuro attraverso infrastrutture database gestite tramite <strong>Supabase Inc.</strong>, nel rispetto delle normative europee di protezione dati. Le notifiche email delle richieste inviate dai moduli sono gestite tramite <strong>Resend</strong>. La protezione anti-spam del modulo di lista d&apos;attesa è affidata a <strong>Cloudflare Inc.</strong> (Turnstile). Per gli analytics del sito, Google Analytics 4 di <strong>Google LLC</strong> viene caricato solo dopo il consenso alla categoria analytics. Il rifiuto mantiene Google Analytics disabilitato.
             </p>
           </section>
 
@@ -86,12 +102,18 @@ export default function PrivacyPolicyPage() {
           <section className="space-y-4">
             <h2 className="font-heading text-2xl font-bold uppercase tracking-wider text-white">6. Conservazione e Diritti dell&apos;Interessato</h2>
             <p className="leading-relaxed text-sm">
-              I dati della lista d&apos;attesa saranno conservati per il tempo strettamente necessario all&apos;organizzazione della sessione e comunque non oltre 12 mesi dalla raccolta, salvo revoca o richiesta di cancellazione. In qualsiasi momento puoi richiedere l&apos;accesso, la rettifica, la cancellazione o la limitazione del trattamento scrivendo a <a href="mailto:info@blackbullslab.com" className="text-accent-gold underline">info@blackbullslab.com</a>.
+              I dati della lista d&apos;attesa saranno conservati per il tempo strettamente necessario all&apos;organizzazione della sessione e comunque non oltre 12 mesi dalla raccolta, salvo revoca o richiesta di cancellazione.
+            </p>
+            <p className="leading-relaxed text-sm">
+              Le richieste di preventivo e contatto saranno conservate per non oltre 12 mesi dalla raccolta, salvo richiesta di cancellazione anticipata o l&apos;avvio di un rapporto contrattuale, nel qual caso si applicano i termini previsti dalla legge.
+            </p>
+            <p className="leading-relaxed text-sm">
+              In qualsiasi momento puoi richiedere l&apos;accesso, la rettifica, la cancellazione o la limitazione del trattamento scrivendo a <a href="mailto:eventi@blackbullslab.it" className="text-accent-gold underline">eventi@blackbullslab.it</a>.
             </p>
           </section>
 
           <footer className="pt-8 border-t border-white/5 text-xs text-zinc-500 italic">
-            Ultimo aggiornamento: 30 agosto 2026. Versione informativa 1.1.
+            Ultimo aggiornamento: 24 novembre 2026. Versione informativa 1.2.
           </footer>
         </div>
       </div>

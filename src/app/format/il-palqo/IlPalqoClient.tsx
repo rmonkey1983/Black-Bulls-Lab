@@ -3,12 +3,13 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Mic2, ArrowLeft, Users, Zap, Play, ArrowRight } from "lucide-react";
+import { Play, Mic2, ArrowLeft, Users, Zap } from "lucide-react";
 import { gsap } from "gsap";
 import { useGSAP } from "@/hooks/useGSAP";
 import { useCinematic } from "@/hooks/useCinematic";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PrimaryButton } from "@/components/ui/PrimaryButton";
+import { FormatPaths } from "@/components/events/FormatPaths";
 import { PremiumCard } from "@/components/ui/PremiumCard";
 import { buildWAUrl, WA_MESSAGES } from "@/lib/whatsapp";
 
@@ -56,12 +57,12 @@ export function IlPalqoClient() {
     <div ref={containerRef} className="bg-black-pure text-text-primary min-h-screen selection:bg-accent-gold selection:text-black-pure overflow-x-hidden">
       
       {/* 1. CINEMATIC HERO */}
-      <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
+      <section className="relative min-h-screen pt-40 pb-20 lg:py-32 w-full overflow-hidden flex items-center justify-center">
         {/* Background Layer */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/brand/bg-stage-lights.webp"
-            alt="Energia Live de Il PalQo"
+            alt=""
             fill
             sizes="100vw"
             className="object-cover opacity-30 scale-105"
@@ -85,10 +86,10 @@ export function IlPalqoClient() {
         </div>
 
         {/* Navigation Link */}
-        <div className="absolute top-28 left-6 lg:top-12 lg:left-12 z-50">
+        <div className="absolute top-28 left-6 lg:left-12 z-50">
             <Link
                 href="/format"
-                className="group flex items-center gap-4 text-text-secondary/30 hover:text-accent-gold transition-colors uppercase text-[10px] font-bold tracking-[0.5em]"
+                className="group flex items-center gap-4 text-text-secondary/80 hover:text-accent-gold transition-colors uppercase text-[10px] font-bold tracking-[0.5em]"
             >
                 <ArrowLeft size={14} className="group-hover:-translate-x-2 transition-transform" /> 
                 Tutti i Format
@@ -101,23 +102,26 @@ export function IlPalqoClient() {
                     <span className="reveal-palqo inline-block px-4 py-1 border border-accent-gold/20 text-accent-gold text-[10px] font-bold uppercase tracking-[0.6em] bg-accent-gold/5 backdrop-blur-md">
                         Dinner &amp; show live
                     </span>
-                    <h1 className="palqo-title font-syne font-bold text-[clamp(3rem,10vw,10rem)] leading-[0.85] tracking-tighter uppercase text-text-primary flex flex-col">
-                        <span className="block">Accendi il</span>
-                        <span className="block text-accent-gold italic">Palco.</span>
+                    <h1 className="palqo-title font-serif text-[clamp(2.5rem,6vw,6rem)] leading-[0.95] tracking-[-0.02em] text-text-primary flex flex-col">
+                        <span className="block">Il PalQo</span>
+                        <span className="block text-accent-gold italic">Dinner &amp; show a Torino.</span>
                     </h1>
                 </div>
 
                 <div className="palqo-sub max-w-2xl mx-auto">
-                    <p className="font-inter text-lg md:text-2xl text-text-secondary font-light leading-relaxed uppercase tracking-[0.2em] opacity-60">
+                    <p className="font-inter text-lg md:text-xl text-zinc-200 leading-relaxed">
                         Stand-up, improvvisazione e conduzione. <br />
                         Il pubblico partecipa a ciò che accade sul palco.
                     </p>
                 </div>
 
-                <div className="pt-12 flex flex-col sm:flex-row items-center justify-center gap-8">
-                    <PrimaryButton href="/calendario" size="lg" className="w-full sm:w-auto min-w-70">
-                        VIVI LO SHOW
+                <div className="pt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <PrimaryButton href="/contatti" size="lg" className="w-full sm:w-auto">
+                        Richiedi un preventivo
                     </PrimaryButton>
+                    <a href={buildWAUrl(WA_MESSAGES.ilPalqo)} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 w-full sm:w-auto items-center justify-center border border-white/40 px-8 py-4 font-syne text-xs font-bold uppercase tracking-[.12em] text-white hover:border-accent-gold hover:text-accent-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold">
+                        Chiedi le prossime date
+                    </a>
                 </div>
             </div>
         </div>
@@ -139,11 +143,12 @@ export function IlPalqoClient() {
         <div className="container-max grid grid-cols-1 lg:grid-cols-2 gap-24 lg:gap-48 items-center">
             <div className="space-y-16">
                 <SectionHeading 
-                  title="ADRENALINA"
-                  highlight="IN DIRETTA"
-                  subtitle="L'Essenza del PalQo"
+                  titleClassName="font-serif normal-case tracking-[-0.02em] leading-[1.02]"
+title="UNO SHOW"
+                  highlight="A CENA"
+                  subtitle="Che cos’è"
                 />
-                <div className="space-y-12 font-inter text-xl md:text-2xl text-text-secondary font-light leading-relaxed opacity-70">
+                <div className="space-y-12 font-inter text-lg md:text-xl text-zinc-300 leading-relaxed">
                     <p>
                         Il PalQo è un dinner &amp; show live con stand-up, improvvisazione, conduzione e interazione con il pubblico.
                     </p>
@@ -156,11 +161,11 @@ export function IlPalqoClient() {
             <div className="relative aspect-square">
                 <PremiumCard className="h-full">
                     <Image 
-                        src="/images/brand/service-performance.webp"
-                        alt="Tensione nel Backstage"
+                        src="/images/format/il-palqo/serata-envy-torino.webp"
+                        alt="Il PalQo in una serata da Envy a Torino: il pubblico applaude mentre un conduttore parla al microfono"
                         fill
                         sizes="(max-width: 1024px) 100vw, 50vw"
-                        className="object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-60 transition-[filter,opacity] duration-1000"
+                        className="object-cover object-[78%_30%] transition-[filter,opacity] duration-1000"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-black-pure via-transparent to-transparent opacity-80" />
                     <div className="absolute top-12 left-12">
@@ -178,7 +183,8 @@ export function IlPalqoClient() {
         <div className="container-max">
             <div className="mb-32">
                 <SectionHeading 
-                  title="LIVE."
+                  titleClassName="font-serif normal-case tracking-[-0.02em] leading-[1.02]"
+title="LIVE."
                   highlight="INSIEME."
                   subtitle="Come si vive il format"
                   align="center"
@@ -195,10 +201,10 @@ export function IlPalqoClient() {
                         <div className="text-accent-gold opacity-30 group-hover:opacity-100 transition-opacity duration-700">
                             {act.icon}
                         </div>
-                        <h3 className="font-syne text-3xl font-bold uppercase tracking-tighter text-text-primary">
+                        <h3 className="font-serif text-3xl normal-case tracking-[-0.02em] text-text-primary">
                             {act.title}
                         </h3>
-                        <p className="font-inter text-text-secondary/60 leading-relaxed group-hover:text-text-secondary transition-colors">
+                        <p className="font-inter text-text-secondary text-base leading-relaxed">
                             {act.desc}
                         </p>
                     </div>
@@ -207,69 +213,11 @@ export function IlPalqoClient() {
         </div>
       </section>
 
-      {/* 4. CALL TO ACTION: The Stage is Yours */}
-      <section className="reveal-palqo section-padding-huge bg-black-pure border-t border-white/5 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-150 h-150 bg-accent-gold/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4 pointer-events-none" />
-        
-        <div className="container-max grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-            <div className="space-y-12">
-                <h2 className="font-syne text-5xl md:text-8xl font-bold uppercase tracking-tighter leading-none text-text-primary">
-                    VUOI VIVERE <br />
-                    <span className="text-accent-gold italic">IL PALQO?</span>
-                </h2>
-                <p className="font-inter text-xl text-text-secondary/60 leading-relaxed max-w-xl">
-                    Scopri il format e contattaci per ricevere informazioni sulle prossime occasioni di partecipazione.
-                </p>
-                <div className="pt-8">
-                    <a
-                        href={buildWAUrl(WA_MESSAGES.ilPalqo)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group inline-flex items-center gap-6 px-12 py-6 border border-accent-gold/40 text-accent-gold font-syne font-bold uppercase tracking-[0.4em] hover:bg-accent-gold hover:text-black-pure transition-[background-color,color,border-color] duration-500"
-                    >
-                        SCOPRI IL FORMAT
-                        <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
-                    </a>
-                </div>
-            </div>
-
-            <div className="relative aspect-video lg:aspect-square">
-                <PremiumCard className="h-full">
-                    <Image 
-                        src="/images/brand/bg-venue-crowd.webp"
-                        alt="Energia del Pubblico Live"
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                        className="object-cover grayscale opacity-20 group-hover:grayscale-0 group-hover:opacity-40 transition-[filter,opacity] duration-1000"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-black-pure via-transparent to-transparent opacity-80" />
-                </PremiumCard>
-            </div>
-        </div>
-      </section>
-
-      {/* 5. FINAL ACTION SECTION */}
-      <section className="reveal-palqo section-padding-huge bg-accent-gold text-black-pure text-center relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[url('/noise.webp')] mix-blend-overlay" />
-        </div>
-        <div className="container-narrow space-y-16 relative z-10">
-          <h2 className="font-syne text-6xl md:text-9xl font-bold uppercase tracking-tighter leading-[0.8]">
-            SCOPRI <br /> IL <span className="bg-black-pure text-accent-gold px-4">PALQO.</span>
-          </h2>
-          <div className="pt-12">
-            <Link 
-              href="/calendario"
-              className="inline-flex items-center gap-8 px-16 py-8 bg-black-pure text-accent-gold text-xl font-black uppercase tracking-widest hover:bg-white hover:text-black-pure transition-[background-color,color] duration-500 rounded-full"
-            >
-              SCOPRI IL FORMAT
-            </Link>
-          </div>
-          <p className="font-syne text-[10px] uppercase tracking-[0.6em] font-black opacity-40">
-            Stand-up // Improvvisazione // Interazione
-          </p>
-        </div>
-      </section>
+      <FormatPaths
+        whatsappHref={buildWAUrl(WA_MESSAGES.ilPalqo)}
+        joinText="Le date pubbliche vengono pubblicate nel calendario. Scrivici su WhatsApp e ti diciamo quali sono le prossime."
+        organizeText="Raccontaci gruppo, occasione e location: valutiamo insieme come portare Il PalQo al tuo evento o nel tuo locale, a Torino e in Piemonte."
+      />
 
     </div>
   );

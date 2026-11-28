@@ -13,10 +13,10 @@ export function WhatsAppWidget() {
             rel="noopener noreferrer"
             suppressHydrationWarning
             aria-label="Scrivici su WhatsApp"
-            className="fixed bottom-24 left-5 md:bottom-10 md:left-10 z-110 group flex items-center gap-3"
+            className="fixed bottom-24 right-4 md:bottom-10 md:left-10 md:right-auto z-40 group flex items-center gap-3"
         >
             {/* Button */}
-            <div className="relative w-14 h-14 overflow-hidden rounded-full bg-[#25D366] flex items-center justify-center shadow-[0_4px_20px_rgba(37,211,102,0.4)] group-hover:shadow-[0_4px_30px_rgba(37,211,102,0.6)] transition duration-300 group-hover:scale-110">
+            <div className="relative w-12 h-12 md:w-14 md:h-14 overflow-hidden rounded-full bg-[#25D366] flex items-center justify-center shadow-[0_4px_20px_rgba(37,211,102,0.4)] group-hover:shadow-[0_4px_30px_rgba(37,211,102,0.6)] transition duration-300 group-hover:scale-110">
                 {/* Pulse ring */}
                 <span className="absolute inset-0 rounded-full bg-[#25D366] animate-pulse opacity-20" />
                 <MessageCircle size={26} className="text-white relative z-10" fill="white" />

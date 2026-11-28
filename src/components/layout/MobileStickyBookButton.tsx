@@ -2,15 +2,22 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Calendar, UserPlus } from "lucide-react";
+import { FileText, UserPlus } from "lucide-react";
+import { QUOTE_LABEL, getQuoteHref } from "@/lib/quote";
 import { FORMAT_ACCENT_OXBLOOD } from "@/lib/constants";
 
 export function MobileStickyBookButton() {
   const pathname = usePathname();
   const isBugiardoPage = pathname === "/format/a-cena-con-il-bugiardo";
-  const isInquiryRoute = ["/eventi-aziendali", "/eventi-privati", "/locali-partner", "/chi-siamo"].includes(pathname);
+  const isHiddenRoute =
+    ["/contatti", "/success", "/checkin", "/profile"].includes(pathname) || pathname.startsWith("/admin");
 
-  if (isInquiryRoute) return null;
+  if (isHiddenRoute) return null;
+
+  const isPartnerPage = pathname === "/locali-partner";
+  const isGoldenVoicePage = pathname === "/format/the-golden-voice";
+  const href = isPartnerPage ? "#proposta" : isGoldenVoicePage ? "#casting-form" : getQuoteHref(pathname);
+  const label = isPartnerPage ? "Proponi la tua location" : isGoldenVoicePage ? "Lascia il tuo interesse" : QUOTE_LABEL;
 
   if (isBugiardoPage) {
     return (
@@ -35,13 +42,13 @@ export function MobileStickyBookButton() {
       {/* Pulse glow on top border for visibility on dark bg */}
       <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-accent-gold to-transparent animate-pulse" />
       <Link
-        href="/calendario"
+        href={href}
         suppressHydrationWarning
         className="flex items-center justify-center gap-3 p-2.5 bg-accent-gold text-black-pure font-heading uppercase font-bold text-base tracking-widest shadow-[0_-5px_20px_rgba(200,169,107,0.15)] transition-[transform] active:scale-95"
         style={{ paddingBottom: 'calc(0.5rem + env(safe-area-inset-bottom))' }}
       >
-        <Calendar size={18} strokeWidth={2.5} />
-        Prenota una serata
+        <FileText size={18} strokeWidth={2.5} />
+        {label}
       </Link>
     </div>
   );

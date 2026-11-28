@@ -66,15 +66,16 @@ export function BlogList({ posts }: BlogListProps) {
               className="flex flex-col h-full group"
             >
               {/* Image Container */}
-              <div className="relative aspect-16/10 overflow-hidden grayscale group-hover:grayscale-0 transition duration-700">
+              <div className="relative aspect-16/10 overflow-hidden grayscale transition-[filter] duration-700 group-hover:grayscale-0">
                 <Image
                   src={post.coverImage}
-                  alt={post.title}
+                  alt=""
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-yellow-500 text-black text-[10px] uppercase font-bold tracking-widest rounded-sm">
+                  <span className="px-3 py-1 bg-accent-gold text-black-pure text-[10px] uppercase font-bold tracking-widest">
                     {CATEGORIES.find((c) => c.id === post.category)?.label || post.category}
                   </span>
                 </div>
@@ -82,29 +83,29 @@ export function BlogList({ posts }: BlogListProps) {
 
               {/* Content */}
               <div className="p-6 flex flex-col grow space-y-4">
-                <div className="flex items-center gap-4 text-[10px] text-zinc-500 uppercase tracking-widest font-medium">
+                <div className="flex items-center gap-4 text-[10px] text-zinc-400 uppercase tracking-widest font-medium tabular-nums">
                   <div className="flex items-center gap-1">
-                    <Calendar size={12} className="text-yellow-500/50" />
+                    <Calendar size={12} aria-hidden="true" className="text-accent-gold/70" />
                     {formatDate(post.date)}
                   </div>
                   <div className="flex items-center gap-1">
-                    <Clock size={12} className="text-yellow-500/50" />
+                    <Clock size={12} aria-hidden="true" className="text-accent-gold/70" />
                     {post.readingTime}
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="font-heading text-xl font-bold uppercase text-white group-hover:text-yellow-500 transition-colors leading-tight line-clamp-2">
+                  <h3 className="font-heading text-xl font-bold uppercase text-white group-hover:text-accent-gold transition-colors leading-tight line-clamp-2">
                     {post.title}
                   </h3>
-                  <p className="font-sans text-zinc-400 text-sm font-light leading-relaxed line-clamp-2">
+                  <p className="font-sans text-zinc-400 text-sm font-light leading-relaxed text-pretty line-clamp-2">
                     {post.description}
                   </p>
                 </div>
 
                 <div className="pt-4 mt-auto flex items-center justify-between border-t border-white/5">
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-yellow-500 border border-white/5">
+                    <div className="w-6 h-6 rounded-full bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-accent-gold border border-white/5">
                       {post.author.charAt(0)}
                     </div>
                     <span className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold">
@@ -113,7 +114,8 @@ export function BlogList({ posts }: BlogListProps) {
                   </div>
                   <ArrowRight
                     size={16}
-                    className="text-yellow-500 transform translate-x-0 group-hover:translate-x-2 transition-transform duration-300"
+                    aria-hidden="true"
+                    className="text-accent-gold transition-transform duration-300 group-hover:translate-x-2"
                   />
                 </div>
               </div>

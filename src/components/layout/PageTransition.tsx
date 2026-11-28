@@ -11,15 +11,13 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const containerRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
-  const [displayChildren, setDisplayChildren] = useState(children);
+  const [displayed, setDisplayed] = useState({ pathname, children });
+  const isCurrent = displayed.pathname === pathname;
 
   // Initialize .reveal-section scroll triggers as soon as the new page is in the DOM
   useEffect(() => {
     const sections = document.querySelectorAll('.reveal-section');
-    sections.forEach(section => {
-      if (section.getAttribute('data-scroll-init') === 'true') return;
-      section.setAttribute('data-scroll-init', 'true');
-      
+    const ctx = gsap.context(() => sections.forEach(section => {
       gsap.fromTo(section, 
         { opacity: 0, y: 30 },
         {
@@ -34,17 +32,19 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
           }
         }
       );
-    });
-  }, [displayChildren]);
+    }));
+
+    return () => ctx.revert();
+  }, [displayed.pathname]);
 
   useEffect(() => {
-    if (pathname !== undefined) {
-      // Kill existing ScrollTriggers on pathname change to prevent memory leaks and duplicate triggers
-      ScrollTrigger.getAll().forEach(st => st.kill());
-
+    // First load and same-page updates render directly: only real navigations animate.
+    if (!isCurrent) {
+      const overlay = overlayRef.current;
+      const container = containerRef.current;
       const tl = gsap.timeline({
         onComplete: () => {
-          setDisplayChildren(children);
+          setDisplayed({ pathname, children });
           window.scrollTo(0, 0);
           
           // Exit overlay - snappier animation
@@ -94,8 +94,17 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
         duration: 0.5,
         ease: "expo.in"
       }, "-=0.5");
+
+      return () => {
+        // Interrupted navigation: never leave the page covered or hidden.
+        if (tl.progress() < 1) {
+          tl.kill();
+          gsap.set(overlay, { scaleY: 0 });
+          gsap.set(container, { clearProps: "opacity,transform,filter" });
+        }
+      };
     }
-  }, [pathname, children]);
+  }, [pathname, children, isCurrent]);
 
   return (
     <>
@@ -104,7 +113,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
         className="fixed inset-0 z-9999 bg-accent-gold scale-y-0 will-change-transform"
       />
       <div ref={containerRef} className="will-change-transform">
-        {displayChildren}
+        {isCurrent ? children : displayed.children}
       </div>
     </>
   );

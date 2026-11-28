@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Shield, ChevronDown, ChevronUp } from "lucide-react";
 function getCookie(name: string): string | undefined {
   if (typeof document === "undefined") return undefined;
   const value = `; ${document.cookie}`;
@@ -34,6 +33,12 @@ export function CookieBanner() {
 
   useEffect(() => {
     const handleOpen = () => {
+      try {
+        const saved = JSON.parse(decodeURIComponent(getCookie("bbl_cookie_consent") || "{}"));
+        setPreferences({ necessary: true, analytics: saved.analytics === true, marketing: saved.marketing === true });
+      } catch {
+        setPreferences({ necessary: true, analytics: false, marketing: false });
+      }
       setIsVisible(true);
       setShowCustomize(true); // Apre direttamente le preferenze per comodità
     };
@@ -85,40 +90,34 @@ export function CookieBanner() {
 
   return (
     <div 
-      className="fixed bottom-20 left-4 right-4 md:bottom-6 md:left-6 md:right-auto md:max-w-md z-45 bg-black-pure/95 border border-white/8 backdrop-blur-md p-5 md:p-6 rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col gap-4 text-left transition-all duration-700 ease-out animate-in fade-in slide-in-from-bottom-8"
+      className="fixed bottom-[4.25rem] left-3 right-3 md:bottom-6 md:left-6 md:right-auto md:max-w-sm z-45 bg-black-pure border border-white/20 p-4 md:p-5 shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col gap-3 text-left max-h-[calc(100dvh-7rem)] overflow-y-auto animate-in fade-in slide-in-from-bottom-4 duration-300"
       role="dialog"
       aria-labelledby="cookie-title"
       aria-describedby="cookie-desc"
     >
-      {/* Intestazione */}
-      <div className="flex items-center gap-3">
-        <div className="p-2 bg-accent-gold/10 rounded-md border border-accent-gold/20">
-          <Shield className="text-accent-gold w-5 h-5" />
-        </div>
-        <h3 id="cookie-title" className="font-syne text-sm font-bold uppercase tracking-widest text-white">
-          Controllo Privacy
-        </h3>
+      <div>
+        <p id="cookie-title" className="font-inter text-sm font-semibold text-white">Cookie e privacy</p>
+        <p id="cookie-desc" className="mt-1 font-inter text-sm text-zinc-300 leading-snug">
+          Usiamo cookie necessari e, con il tuo consenso, statistiche di visita.{" "}
+          <Link href="/cookie-policy" className="text-accent-gold underline">Cookie Policy</Link>
+          {" · "}
+          <button type="button" aria-expanded={showCustomize} onClick={() => setShowCustomize(!showCustomize)} className="text-accent-gold underline hover:text-white">
+            {showCustomize ? "Riduci opzioni" : "Personalizza"}
+          </button>
+        </p>
       </div>
-
-      {/* Descrizione */}
-      <p id="cookie-desc" className="font-sans text-xs text-gray-400 leading-relaxed">
-        Utilizziamo cookie per migliorare la tua esperienza con il nostro Dinner & Show e analizzare il traffico del sito. Cliccando su &quot;Accetta Tutti&quot; acconsenti al loro utilizzo. Leggi la nostra{" "}
-        <Link href="/cookie-policy" className="text-accent-gold hover:underline">
-          Cookie Policy
-        </Link>
-        .
-      </p>
 
       {/* Personalizzazione Preferenze */}
       {showCustomize && (
         <div className="space-y-3 pt-3 border-t border-white/5 animate-in fade-in duration-300">
           <div className="flex items-center justify-between">
             <div className="flex flex-col">
-              <span className="font-sans text-xs font-semibold text-white">Cookie Necessari</span>
-              <span className="font-sans text-[10px] text-gray-500">Essenziali per il funzionamento del sito.</span>
+              <span className="font-inter text-sm font-semibold text-white">Cookie Necessari</span>
+              <span className="font-inter text-xs text-zinc-400">Essenziali per il funzionamento del sito.</span>
             </div>
             <input
               type="checkbox"
+              aria-label="Cookie Necessari"
               checked
               disabled
               className="w-4 h-4 rounded-sm border-gray-800 bg-transparent text-accent-gold focus:ring-accent-gold focus:ring-offset-0 opacity-50 cursor-not-allowed"
@@ -127,11 +126,12 @@ export function CookieBanner() {
 
           <div className="flex items-center justify-between">
             <div className="flex flex-col">
-              <span className="font-sans text-xs font-semibold text-white">Cookie Analitici</span>
-              <span className="font-sans text-[10px] text-gray-500">Statistiche d&apos;uso anonime.</span>
+              <span className="font-inter text-sm font-semibold text-white">Cookie Analitici</span>
+              <span className="font-inter text-xs text-zinc-400">Statistiche d&apos;uso anonime.</span>
             </div>
             <input
               type="checkbox"
+              aria-label="Cookie Analitici"
               checked={preferences.analytics}
               onChange={() => togglePreference("analytics")}
               className="w-4 h-4 rounded-sm border-gray-800 bg-transparent text-accent-gold focus:ring-accent-gold focus:ring-offset-0 cursor-pointer accent-accent-gold"
@@ -140,11 +140,12 @@ export function CookieBanner() {
 
           <div className="flex items-center justify-between">
             <div className="flex flex-col">
-              <span className="font-sans text-xs font-semibold text-white">Cookie di Marketing</span>
-              <span className="font-sans text-[10px] text-gray-500">Pixel pubblicitari e retargeting.</span>
+              <span className="font-inter text-sm font-semibold text-white">Cookie di Marketing</span>
+              <span className="font-inter text-xs text-zinc-400">Pixel pubblicitari e retargeting.</span>
             </div>
             <input
               type="checkbox"
+              aria-label="Cookie di Marketing"
               checked={preferences.marketing}
               onChange={() => togglePreference("marketing")}
               className="w-4 h-4 rounded-sm border-gray-800 bg-transparent text-accent-gold focus:ring-accent-gold focus:ring-offset-0 cursor-pointer accent-accent-gold"
@@ -153,47 +154,21 @@ export function CookieBanner() {
         </div>
       )}
 
-      {/* Pulsanti Azione */}
-      <div className="flex flex-col gap-2 pt-2">
-        {showCustomize ? (
-          <button
-            onClick={handleSavePreferences}
-            className="w-full bg-white hover:bg-gray-200 text-black font-syne text-[10px] font-bold uppercase tracking-wider py-3 transition-colors duration-300 rounded-sm"
-          >
-            Salva Preferenze
-          </button>
-        ) : (
-          <>
-            <button
-              onClick={handleAcceptAll}
-              className="w-full bg-accent-gold hover:bg-accent-gold-light text-black font-syne text-[10px] font-bold uppercase tracking-wider py-3 transition-colors duration-300 rounded-sm"
-            >
-              Accetta Tutti
-            </button>
-            <button
-              onClick={handleDeclineAll}
-              className="w-full border border-white/10 hover:border-white/20 text-white font-syne text-[10px] font-bold uppercase tracking-wider py-3 transition-colors duration-300 rounded-sm"
-            >
-              Solo Necessari
-            </button>
-          </>
-        )}
-
-        <button
-          onClick={() => setShowCustomize(!showCustomize)}
-          className="flex items-center justify-center gap-1 font-sans text-[10px] text-gray-500 hover:text-white mt-1 transition-colors py-1 cursor-pointer"
-        >
-          {showCustomize ? (
-            <>
-              Riduci Opzioni <ChevronUp className="w-3.5 h-3.5" />
-            </>
-          ) : (
-            <>
-              Personalizza Cookie <ChevronDown className="w-3.5 h-3.5" />
-            </>
-          )}
+      {showCustomize ? (
+        <button type="button" onClick={handleSavePreferences} className="w-full bg-white text-black hover:bg-zinc-200 min-h-11 px-3 font-inter text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold">
+          Salva preferenze
         </button>
-      </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-2">
+          <button type="button" onClick={handleDeclineAll} className="bg-white text-black hover:bg-zinc-200 min-h-11 px-3 font-inter text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold">
+            Solo necessari
+          </button>
+          <button type="button" onClick={handleAcceptAll} className="bg-white text-black hover:bg-zinc-200 min-h-11 px-3 font-inter text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold">
+            Accetta tutti
+          </button>
+        </div>
+      )}
+
 
     </div>
   );

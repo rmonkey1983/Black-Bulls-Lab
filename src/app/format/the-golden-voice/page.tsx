@@ -1,41 +1,28 @@
 import { buildFormatMetadata } from "@/lib/metadata";
-import { getFormatServiceJsonLd } from "@/lib/jsonld";
 import { TheGoldenVoiceClient } from "./TheGoldenVoiceClient";
-import { SITE_URL } from "@/lib/constants";
-import { FormatBookingCTA } from "@/components/events/FormatBookingCTA";
 import { FormatFAQ } from "@/components/sections/FormatFAQ";
 
 const GOLDEN_VOICE_FAQS = [
-    { question: "Che cos’è The Golden Voice?", answer: "È un format musicale live con cantanti e partecipazione del pubblico alla valutazione." },
-    { question: "Il pubblico partecipa?", answer: "Sì. Il pubblico partecipa alla valutazione delle performance durante l’esperienza." },
-    { question: "Chi può partecipare?", answer: "Il format coinvolge cantanti e pubblico; modalità e requisiti vengono comunicati per ogni esperienza." },
-    { question: "Dove si svolge?", answer: "The Golden Voice è un format di Black Bulls Lab con focus su Torino e Piemonte." },
+    { question: "Che cos’è The Golden Voice?", answer: "È un concorso canoro di Black Bulls Lab, ancora in fase di creazione." },
+    { question: "Quando si svolge?", answer: "Le date non sono ancora definite. Saranno comunicate insieme a sede e regolamento." },
+    { question: "Come posso partecipare?", answer: "Se canti, puoi lasciare i tuoi dati e un brano con il modulo in questa pagina. Requisiti e modalità di selezione saranno comunicati quando saranno definiti." },
+    { question: "Dove si svolgerà?", answer: "Il focus di Black Bulls Lab è Torino e Piemonte. La sede non è ancora definita." },
 ];
 
 export const metadata = buildFormatMetadata({
-    title: "The Golden Voice",
-    description: "The Golden Voice è un format musicale live con cantanti e partecipazione del pubblico alla valutazione a Torino.",
+    title: "The Golden Voice: concorso canoro a Torino",
+    description: "The Golden Voice è il concorso canoro di Black Bulls Lab, in preparazione a Torino. Se canti, lascia il tuo interesse: date e regolamento sono in definizione.",
     slug: "the-golden-voice",
-    image: "https://blackbullslab.com/images/brand/service-performance.webp",
-    keywords: ["concorso canoro Torino", "talent show Torino", "singing contest Torino"],
+    image: "https://blackbullslab.it/images/brand/service-performance.webp",
+    keywords: ["concorso canoro Torino"],
 });
 
 export default function TheGoldenVoicePage() {
-    const serviceLd = getFormatServiceJsonLd({
-        name: "The Golden Voice",
-        description: "Un format musicale live con cantanti e partecipazione del pubblico alla valutazione a Torino.",
-        image: `${SITE_URL}/images/brand/service-performance.webp`,
-        url: `${SITE_URL}/format/the-golden-voice`,
-        serviceType: "Format musicale live",
-    });
     return (
         <>
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }} />
             <TheGoldenVoiceClient />
 
             <FormatFAQ items={GOLDEN_VOICE_FAQS} />
-
-            <FormatBookingCTA formatName="The Golden Voice" />
         </>
     );
 }

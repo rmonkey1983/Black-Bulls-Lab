@@ -1,4 +1,5 @@
 import { supabase } from "./supabase";
+import { CONTACT_EMAIL } from "./constants";
 
 // ===== TYPE DEFINITIONS =====
 
@@ -287,7 +288,7 @@ export async function getSettings(): Promise<SiteSettings> {
         siteTitle: "Black Bulls Lab",
         siteDescription: "Il laboratorio underground dove l'intrattenimento diventa scienza",
         heroSubtitle: "Il laboratorio underground dove l'intrattenimento diventa scienza.",
-        contactEmail: "info@blackbullslab.com",
+        contactEmail: CONTACT_EMAIL,
         instagram: "@blackbullslab",
     };
 

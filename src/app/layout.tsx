@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Mohave, Rock_Salt, Inter, Syne } from "next/font/google";
+import { Mohave, Rock_Salt, Inter, Syne, Fraunces } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { WebSiteSchema } from "@/components/seo/JsonLd";
@@ -32,6 +32,12 @@ const rockSalt = Rock_Salt({
 const syne = Syne({
   variable: "--font-syne",
   subsets: ["latin"],
+});
+
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -110,7 +116,7 @@ export default function RootLayout({
       </head>
       <body
         suppressHydrationWarning
-        className={`${inter.variable} ${mohave.variable} ${rockSalt.variable} ${syne.variable} font-sans antialiased text-white min-h-screen relative selection:bg-accent-gold selection:text-black flex flex-col bg-black-pure`}
+        className={`${inter.variable} ${mohave.variable} ${rockSalt.variable} ${syne.variable} ${fraunces.variable} font-sans antialiased text-white min-h-screen relative selection:bg-accent-gold selection:text-black flex flex-col bg-black-pure`}
       >
         <ClientOnlyWrappers />
         <Navbar />

@@ -24,7 +24,7 @@ function getBaseUrl(): string {
     return process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
   }
   return process.env.NODE_ENV === "production"
-    ? "https://blackbullslab.com"
+    ? "https://blackbullslab.it"
     : "http://localhost:3000";
 }
 

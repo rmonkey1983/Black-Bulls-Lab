@@ -18,12 +18,12 @@ export const SITE_KEYWORDS = [
     "cosa fare a Torino",
     "esperienze digitali dal vivo"
 ];
-export const SITE_URL = "https://blackbullslab.com";
+export const SITE_URL = "https://blackbullslab.it";
 
 /**
  * CONTACT INFORMATION
  */
-export const CONTACT_EMAIL = "info@blackbullslab.com";
+export const CONTACT_EMAIL = "eventi@blackbullslab.it";
 export const CONTACT_PHONE = "+39 334 2010067";
 export const CONTACT_WHATSAPP = "393342010067"; // No spaces or symbols for deep links
 
@@ -58,7 +58,7 @@ export const EXPERIMENTS = [
         href: "/format/a-cena-con-il-bugiardo", 
         subtitle: "Una cena. Un bugiardo. Nessun attore.",
         desc: "Cena interattiva BBL",
-        image: "/images/brand/background.webp",
+        image: "/images/format/a-cena-con-il-bugiardo/card.webp",
         badge: "Format flagship"
     },
     { 
@@ -72,21 +72,22 @@ export const EXPERIMENTS = [
     },
     { 
         id: "cena-con-delitto",
-        name: "Cena Con Delitto", 
+        name: "Cena con Delitto",
         href: "/format/cena-con-delitto", 
-        subtitle: "Esperienza investigativa classica a Torino.",
+        subtitle: "Un caso da ricostruire durante la cena.",
         desc: "Cena e indagine dal vivo",
         image: "/images/brand/bg-stage-lights.webp",
-        badge: "Esperienza investigativa"
+        badge: "Cena investigativa"
     },
     { 
         id: "the-golden-voice",
-        name: "THE GOLDEN VOICE", 
+        name: "The Golden Voice",
         href: "/format/the-golden-voice", 
-        subtitle: "Format musicale live con partecipazione del pubblico.",
-        desc: "Format musicale con cantanti e pubblico",
+        subtitle: "Concorso canoro in fase di creazione.",
+        desc: "Concorso canoro in preparazione",
         image: "/images/brand/vibe-live-jazz.webp",
-        badge: "Format BBL"
+        badge: "In preparazione",
+        upcoming: true
     }
 ];
 

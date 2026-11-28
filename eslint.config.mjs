@@ -15,6 +15,7 @@ const eslintConfig = defineConfig([
     "scratch/**",
     ".agents/**",
     "supabase/functions/**",
+    "_archivio/**",
   ]),
   {
     rules: {

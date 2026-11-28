@@ -192,7 +192,7 @@ export function buildFormatMetadata({
     title: "Cena Con Delitto",
     description: "Un omicidio. Una cena. Un solo colpevole — se riesci a trovarlo. Dinner show investigativo a Torino.",
     slug: "cena-con-delitto",
-    image: "https://blackbullslab.com/images/brand/bg-stage-lights.webp",
+    image: "https://blackbullslab.it/images/brand/bg-stage-lights.webp",
     keywords: ["cena con delitto Torino", "dinner show investigativo"],
   });
 

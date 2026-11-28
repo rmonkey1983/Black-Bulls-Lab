@@ -55,7 +55,7 @@ export function TalentsClient() {
         <main ref={containerRef} className="bg-black-pure text-text-primary min-h-screen selection:bg-accent-gold selection:text-black-pure overflow-x-hidden">
             
             {/* 1. CINEMATIC HERO */}
-            <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
+            <section className="relative min-h-screen pt-40 pb-20 lg:py-32 w-full overflow-hidden flex items-center justify-center">
                 <div className="absolute inset-0 z-0">
                     <Image
                         src="/images/brand/service-performance.webp"
@@ -81,10 +81,10 @@ export function TalentsClient() {
                 </div>
 
                 {/* Navigation Link */}
-                <div className="absolute top-12 left-12 z-50">
+                <div className="absolute top-28 left-6 lg:left-12 z-50">
                     <Link
                         href="/"
-                        className="group flex items-center gap-4 text-text-secondary/30 hover:text-accent-gold transition-colors uppercase text-[10px] font-bold tracking-[0.5em]"
+                        className="group flex items-center gap-4 text-text-secondary/80 hover:text-accent-gold transition-colors uppercase text-[10px] font-bold tracking-[0.5em]"
                     >
                         <ArrowLeft size={14} className="group-hover:-translate-x-2 transition-transform" /> 
                         Torna alla Home
@@ -189,10 +189,10 @@ export function TalentsClient() {
                     </h2>
                     <div className="pt-12">
                         <Link 
-                            href="/calendario"
+                            href="/contatti"
                             className="inline-flex items-center gap-8 px-16 py-8 bg-black-pure text-accent-gold text-xl font-black uppercase tracking-widest hover:bg-white hover:text-black-pure transition-[background-color,color] duration-500 rounded-full"
                         >
-                            PRENDI IL TUO POSTO
+                            SCRIVICI
                         </Link>
                     </div>
                     <p className="font-syne text-[10px] uppercase tracking-[0.6em] font-black opacity-40">

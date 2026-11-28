@@ -33,11 +33,12 @@ export async function generateMetadata({
 
   return {
     title: post.title,
+    alternates: { canonical: `${SITE_URL}/blog/${slug}` },
     description: post.description,
     openGraph: {
       title: `${post.title} | Black Bulls Lab`,
       description: post.description,
-      url: `https://blackbullslab.com/blog/${slug}`,
+      url: `https://blackbullslab.it/blog/${slug}`,
       images: [{ url: post.coverImage }],
     },
   };
@@ -46,7 +47,7 @@ export async function generateMetadata({
 const components = {
   h2: (props: MDXComponentsProps['heading']) => (
     <h2
-      className="font-heading text-3xl md:text-4xl font-bold uppercase text-white mt-16 mb-8 border-b border-white/5 pb-4"
+      className="font-heading break-words text-3xl md:text-4xl font-bold uppercase text-white mt-16 mb-8 border-b border-white/5 pb-4"
       {...props}
     />
   ),
@@ -165,7 +166,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               post.category}
           </div>
 
-          <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold uppercase text-white leading-tight tracking-tighter">
+          <h1 className="font-heading break-words text-4xl md:text-6xl lg:text-7xl font-bold uppercase text-white leading-tight tracking-tighter">
             {post.title}
           </h1>
 

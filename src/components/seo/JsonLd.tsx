@@ -38,7 +38,7 @@ export function WebSiteSchema() {
         "@id": `${SITE_URL}/#website`,
         name: SITE_NAME,
         url: SITE_URL,
-        description: "Dinner show e format eventi immersivi a Torino. A Cena Con Il Bugiardo, Il PalQo, Cena Con Delitto e THE GOLDEN VOICE.",
+        description: "Format ed esperienze dal vivo a Torino e in Piemonte per pubblico, aziende, feste private e location.",
         inLanguage: "it-IT",
         publisher: {
             "@type": "Organization",
