@@ -54,6 +54,10 @@ export async function POST(req: Request) {
       const supabaseAdmin = getSupabaseAdmin();
       const resend = getResend();
       const session = event.data.object as Stripe.Checkout.Session;
+      // Un pagamento non ancora incassato (es. bonifico in attesa) non genera ordini né biglietti.
+      if (session.payment_status !== 'paid') {
+        return NextResponse.json({ received: true, skipped: 'not_paid' });
+      }
       const isCorporate = session.metadata?.type === 'corporate';
       const customerEmail = session.customer_details?.email;
       let customerName = session.customer_details?.name || 'Cliente';
@@ -113,6 +117,18 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: 'Metadata incompleti' }, { status: 400 });
       }
 
+      // Stripe può reinviare lo stesso evento: una sessione già elaborata non crea un secondo booking.
+      const { data: existingBooking } = await supabaseAdmin
+        .from('bookings')
+        .select('id')
+        .eq('stripe_session_id', session.id)
+        .maybeSingle();
+
+      if (existingBooking) {
+        console.log('↩️ Sessione già elaborata, nessuna azione:', session.id);
+        return NextResponse.json({ received: true, duplicate: true });
+      }
+
       // 1 — Salva la prenotazione (Nota: customer_name/phone rimossi perché colonne mancanti in DB)
       const { data: booking, error: bookingError } = await supabaseAdmin
         .from('bookings')
@@ -126,6 +142,11 @@ export async function POST(req: Request) {
         .single();
 
       if (bookingError) {
+        // Due consegne simultanee della stessa sessione: il vincolo UNIQUE su stripe_session_id ferma la seconda.
+        if (bookingError.code === '23505') {
+          console.log('↩️ Sessione già elaborata (consegna simultanea):', session.id);
+          return NextResponse.json({ received: true, duplicate: true });
+        }
         console.error('❌ ERRORE SALVATAGGIO BOOKING:', bookingError.message);
         return NextResponse.json(
           { error: 'Booking Error', details: bookingError.message },
