@@ -6,6 +6,7 @@ export const metadata = buildFormatMetadata({
   title: "A Cena con il Bugiardo",
   description: "Una cena. Un bugiardo. Nessun attore. Entra nella lista d’attesa per la sessione pilota a Torino.",
   slug: "a-cena-con-il-bugiardo",
+  image: `${SITE_URL}/images/format/a-cena-con-il-bugiardo/og.webp`,
   keywords: ["A Cena con il Bugiardo", "esperienza sociale Torino", "cena interattiva"],
 });
 
@@ -25,7 +26,7 @@ const serviceJsonLd = {
   },
   "description": "Esperienza sociale e cena interattiva senza attori basata sulla fiducia, sulla deduzione sociale e sul gioco dal tavolo.",
   "url": `${SITE_URL}/format/a-cena-con-il-bugiardo`,
-  "image": `${SITE_URL}/images/brand/bg-hero-wide.webp`
+  "image": `${SITE_URL}/images/format/a-cena-con-il-bugiardo/card.webp`
 };
 
 const faqJsonLd = {

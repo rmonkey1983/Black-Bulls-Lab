@@ -160,7 +160,7 @@ export function ContattiClient() {
             <span className="inline-block px-4 py-1 border border-accent-gold/20 text-accent-gold text-[10px] font-bold uppercase tracking-[0.6em] bg-accent-gold/5 backdrop-blur-md">
               Black Bulls Lab · Torino
             </span>
-            <h1 className="reveal-title font-syne font-bold text-[clamp(2.5rem,7vw,8rem)] leading-[0.9] tracking-tighter uppercase text-text-primary flex flex-col items-center">
+            <h1 className="font-serif reveal-title text-[clamp(2.5rem,7vw,8rem)] leading-[0.9] text-text-primary flex flex-col items-center">
               <span>La prossima</span>
               <span className="text-accent-gold italic">esperienza</span>
               <span>inizia da qui.</span>
@@ -434,7 +434,7 @@ export function ContattiClient() {
       <section className="reveal-scroll py-20 md:py-32 px-6 md:px-12 bg-black-pure border-t border-white/5 text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(200,169,107,0.02)_0%,transparent_80%)] pointer-events-none" />
         <div className="container-narrow space-y-10 relative z-10">
-          <h2 className="font-syne text-4xl md:text-7xl font-bold uppercase tracking-tighter leading-none text-text-primary">
+          <h2 className="font-serif text-4xl md:text-7xl leading-none text-text-primary">
             OGNI ESPERIENZA <br />
             <span className="text-accent-gold italic drop-shadow-[0_0_30px_rgba(200,169,107,0.15)]">INIZIA CON UNA SCELTA.</span>
           </h2>

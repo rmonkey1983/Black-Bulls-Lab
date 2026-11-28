@@ -58,7 +58,7 @@ export const EXPERIMENTS = [
         href: "/format/a-cena-con-il-bugiardo", 
         subtitle: "Una cena. Un bugiardo. Nessun attore.",
         desc: "Cena interattiva BBL",
-        image: "/images/brand/background.webp",
+        image: "/images/format/a-cena-con-il-bugiardo/card.webp",
         badge: "Format flagship"
     },
     { 
@@ -86,7 +86,8 @@ export const EXPERIMENTS = [
         subtitle: "Concorso canoro in fase di creazione.",
         desc: "Concorso canoro in preparazione",
         image: "/images/brand/vibe-live-jazz.webp",
-        badge: "In preparazione"
+        badge: "In preparazione",
+        upcoming: true
     }
 ];
 

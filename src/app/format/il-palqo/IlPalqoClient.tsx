@@ -102,7 +102,7 @@ export function IlPalqoClient() {
                     <span className="reveal-palqo inline-block px-4 py-1 border border-accent-gold/20 text-accent-gold text-[10px] font-bold uppercase tracking-[0.6em] bg-accent-gold/5 backdrop-blur-md">
                         Dinner &amp; show live
                     </span>
-                    <h1 className="palqo-title font-syne font-bold text-[clamp(2.5rem,6vw,6rem)] leading-[0.9] tracking-tighter uppercase text-text-primary flex flex-col">
+                    <h1 className="palqo-title font-serif text-[clamp(2.5rem,6vw,6rem)] leading-[0.95] tracking-[-0.02em] text-text-primary flex flex-col">
                         <span className="block">Il PalQo</span>
                         <span className="block text-accent-gold italic">Dinner &amp; show a Torino.</span>
                     </h1>
@@ -143,7 +143,8 @@ export function IlPalqoClient() {
         <div className="container-max grid grid-cols-1 lg:grid-cols-2 gap-24 lg:gap-48 items-center">
             <div className="space-y-16">
                 <SectionHeading 
-                  title="UNO SHOW"
+                  titleClassName="font-serif normal-case tracking-[-0.02em] leading-[1.02]"
+title="UNO SHOW"
                   highlight="A CENA"
                   subtitle="Che cos’è"
                 />
@@ -160,11 +161,11 @@ export function IlPalqoClient() {
             <div className="relative aspect-square">
                 <PremiumCard className="h-full">
                     <Image 
-                        src="/images/brand/service-performance.webp"
-                        alt=""
+                        src="/images/format/il-palqo/serata-envy-torino.webp"
+                        alt="Il PalQo in una serata da Envy a Torino: il pubblico applaude mentre un conduttore parla al microfono"
                         fill
                         sizes="(max-width: 1024px) 100vw, 50vw"
-                        className="object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-60 transition-[filter,opacity] duration-1000"
+                        className="object-cover object-[78%_30%] transition-[filter,opacity] duration-1000"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-black-pure via-transparent to-transparent opacity-80" />
                     <div className="absolute top-12 left-12">
@@ -182,7 +183,8 @@ export function IlPalqoClient() {
         <div className="container-max">
             <div className="mb-32">
                 <SectionHeading 
-                  title="LIVE."
+                  titleClassName="font-serif normal-case tracking-[-0.02em] leading-[1.02]"
+title="LIVE."
                   highlight="INSIEME."
                   subtitle="Come si vive il format"
                   align="center"
@@ -199,7 +201,7 @@ export function IlPalqoClient() {
                         <div className="text-accent-gold opacity-30 group-hover:opacity-100 transition-opacity duration-700">
                             {act.icon}
                         </div>
-                        <h3 className="font-syne text-3xl font-bold uppercase tracking-tighter text-text-primary">
+                        <h3 className="font-serif text-3xl normal-case tracking-[-0.02em] text-text-primary">
                             {act.title}
                         </h3>
                         <p className="font-inter text-text-secondary text-base leading-relaxed">

@@ -15,6 +15,7 @@
   --color-accent-gold: #C8A96B;
   --color-accent-gold-light: #DFC08A;
   --color-accent-gold-dim: #8A7246;
+  --color-ivory: #F3EDE2;
 
   /* Rama Sub-Theme Colors */
   --color-rama-accent: #E5B60C;
@@ -546,6 +547,7 @@
 
 @theme inline {
   --font-heading: var(--font-syne);
+  --font-serif: var(--font-fraunces);
   --font-sans: var(--font-inter);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);

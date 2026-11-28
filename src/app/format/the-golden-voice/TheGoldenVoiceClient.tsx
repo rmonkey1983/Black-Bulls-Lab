@@ -102,14 +102,14 @@ export function TheGoldenVoiceClient() {
                     <span className="reveal-golden inline-block px-4 py-1 border border-accent-gold/20 text-accent-gold text-[10px] font-bold uppercase tracking-[0.6em] bg-accent-gold/5 backdrop-blur-md">
                         Concorso canoro · In preparazione
                     </span>
-                    <h1 className="golden-title font-syne font-bold text-[clamp(3rem,10vw,12rem)] leading-[0.8] tracking-tighter uppercase text-text-primary flex flex-col">
+                    <h1 className="golden-title font-serif text-[clamp(3rem,10vw,12rem)] leading-[0.95] tracking-[-0.02em] text-text-primary flex flex-col">
                         <span className="block">Ogni voce</span>
                         <span className="block text-accent-gold italic">lascia il segno.</span>
                     </h1>
                 </div>
 
                 <div className="golden-sub max-w-2xl mx-auto">
-                    <p className="font-inter text-lg md:text-2xl text-text-secondary font-light leading-relaxed uppercase tracking-[0.2em] opacity-60">
+                    <p className="font-inter text-lg md:text-2xl text-zinc-200 font-light leading-relaxed uppercase tracking-[0.2em] opacity-90">
                         Il concorso canoro di Black Bulls Lab, a Torino. <br />
                         Date e regolamento sono in definizione.
                     </p>
@@ -140,7 +140,8 @@ export function TheGoldenVoiceClient() {
         <div className="container-max grid grid-cols-1 lg:grid-cols-2 gap-24 lg:gap-48 items-center">
             <div className="space-y-16">
                 <SectionHeading 
-                  title="CONCORSO"
+                  titleClassName="font-serif normal-case tracking-[-0.02em] leading-[1.02]"
+title="CONCORSO"
                   highlight="CANORO"
                   subtitle="In preparazione"
                 />
@@ -179,7 +180,8 @@ export function TheGoldenVoiceClient() {
         <div className="container-max">
             <div className="mb-32">
                 <SectionHeading 
-                  title="A CHE PUNTO"
+                  titleClassName="font-serif normal-case tracking-[-0.02em] leading-[1.02]"
+title="A CHE PUNTO"
                   highlight="SIAMO."
                   subtitle="Il progetto"
                   align="center"
@@ -196,7 +198,7 @@ export function TheGoldenVoiceClient() {
                         <div className="text-accent-gold opacity-30 group-hover:opacity-100 transition-opacity duration-700">
                             {act.icon}
                         </div>
-                        <h3 className="font-syne text-3xl font-bold uppercase tracking-tighter text-text-primary">
+                        <h3 className="font-serif text-3xl normal-case tracking-[-0.02em] text-text-primary">
                             {act.title}
                         </h3>
                         <p className="font-inter text-text-secondary/60 leading-relaxed group-hover:text-text-secondary transition-colors">

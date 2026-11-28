@@ -7,42 +7,19 @@ import { animateFade } from "@/lib/gsapAnimations";
 import { gsap } from "gsap";
 import { buildFAQSchema } from "@/lib/schemas";
 
-const defaultFaqs = [
-  {
-    question: "Serve una location enorme per i vostri format?",
-    answer: "Assolutamente no. Il nostro punto di forza sono gli eventi per gruppi di 20-30 persone. Abbiamo ingegnerizzato i nostri format per essere scalabili e adattabili a spazi intimi: ristoranti partner a Torino, loft privati o persino le sale meeting della tua azienda. Se non hai uno spazio, te ne proponiamo uno noi."
-  },
-  {
-    question: "Chi si occupa dell'allestimento tecnico (audio, luci, palco)?",
-    answer: "Facciamo tutto noi. Il Black Bulls Lab fornisce soluzioni 'chiavi in mano'. Portiamo la strumentazione necessaria per trasformare la location senza creare cantieri infiniti. Tu devi solo goderti la serata, l'organizzazione logistica è il nostro lavoro."
-  },
-  {
-    question: "Il pubblico è obbligato a partecipare o viene messo in imbarazzo?",
-    answer: "Mai. L'interazione è il cuore dei nostri spettacoli, ma i nostri artisti (come Manuel e Maurizio) sanno leggere la sala. Coinvolgiamo il pubblico in modo intelligente e naturale, creando un'atmosfera di complicità, mai di disagio. Chi vuole solo guardare e ridere, può farlo tranquillamente."
-  },
-  {
-    question: "I costi sono proibitivi per una piccola azienda o un gruppo di amici?",
-    answer: "No, perché puntiamo sull'ottimizzazione, non sul lusso inutile. Essendo format replicabili e ben collaudati, abbattiamo i costi di progettazione mantenendo un'esperienza premium. Offriamo un prezzo medio accessibile che garantisce la massima qualità artistica senza brutte sorprese sul preventivo finale."
-  },
-  {
-    question: "I format sono personalizzabili per cene aziendali o team building?",
-    answer: "Sì. La struttura (il 'Laboratorio') è solida, ma il contenuto viene cucito su misura. Possiamo inserire riferimenti alla tua azienda nello spettacolo di stand-up o adattare i tempi dello show alle esigenze del catering. È la soluzione ideale per team building originali e coinvolgenti."
-  }
-];
-
 interface FaqItem {
   question: string;
   answer: string;
 }
 
 interface FormatFAQProps {
-  items?: FaqItem[];
+  items: FaqItem[];
 }
 
 export function FormatFAQ({ items }: FormatFAQProps) {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-    const displayFaqs = items || defaultFaqs;
+    const displayFaqs = items;
 
     useGSAP(() => {
         // Anima il titolo
@@ -65,10 +42,10 @@ export function FormatFAQ({ items }: FormatFAQProps) {
             />
             <div className="max-w-4xl mx-auto">
                 <div id="faq-title-container" className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 uppercase tracking-tighter">
-                        Domande <span className="text-rama-accent italic">Frequenti</span>
+                    <h2 className="font-serif normal-case tracking-[-0.02em] text-4xl md:text-5xl leading-[1.05] text-text-primary mb-4">
+                        Domande <span className="text-accent-gold italic">frequenti</span>
                     </h2>
-                    <div className="w-24 h-1 bg-rama-accent mx-auto" />
+                    <div className="w-24 h-px bg-accent-gold mx-auto" />
                 </div>
 
                 <div id="faq-list" className="space-y-4">
@@ -77,23 +54,23 @@ export function FormatFAQ({ items }: FormatFAQProps) {
                         return (
                             <div 
                                 key={index} 
-                                className="faq-item-gsap gsap-fade border border-white/10 bg-white/5 rounded-2xl overflow-hidden transition duration-300 hover:border-rama-accent/30"
+                                className="faq-item-gsap gsap-fade border-b border-white/10 overflow-hidden transition duration-300"
                             >
                                 <button
                                     onClick={() => toggleFaq(index)}
-                                    className="w-full py-4 px-4 md:py-6 md:px-8 flex items-center justify-between text-left group"
+                                    className="w-full py-5 md:py-6 flex items-center justify-between gap-6 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold"
                                     aria-expanded={isActive}
                                 >
-                                    <span className={`text-lg md:text-xl font-bold uppercase tracking-tight transition-colors duration-300 ${isActive ? 'text-rama-accent' : 'text-white'}`}>
+                                    <span className={`font-serif text-xl md:text-2xl leading-snug transition-colors duration-300 ${isActive ? 'text-accent-gold' : 'text-text-primary'}`}>
                                         {faq.question}
                                     </span>
-                                    <div className={`transition-transform duration-500 ${isActive ? 'rotate-180 text-rama-accent' : 'text-white/40 group-hover:text-white'}`}>
+                                    <div className={`transition-transform duration-500 ${isActive ? 'rotate-180 text-accent-gold' : 'text-text-secondary group-hover:text-text-primary'}`}>
                                         <ChevronDown size={24} />
                                     </div>
                                 </button>
                                 
                                 <FaqContent isOpen={isActive}>
-                                    <div className="px-4 pb-6 pt-4 md:px-8 md:pb-8 md:pt-4 text-gray-400 text-base md:text-lg leading-relaxed border-t border-white/5">
+                                    <div className="pb-6 pt-1 md:pb-8 text-text-secondary text-base md:text-lg leading-relaxed max-w-3xl">
                                         {faq.answer}
                                     </div>
                                 </FaqContent>

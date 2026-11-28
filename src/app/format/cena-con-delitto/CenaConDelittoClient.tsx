@@ -102,7 +102,7 @@ export function CenaConDelittoClient() {
                     <span className="reveal-mystery inline-block px-4 py-1 border border-accent-gold/20 text-accent-gold text-[10px] font-bold uppercase tracking-[0.6em] bg-accent-gold/5 backdrop-blur-md">
                         Cena investigativa
                     </span>
-                    <h1 className="mystery-title font-syne font-bold text-[clamp(2.5rem,7vw,7rem)] leading-[0.9] tracking-tighter uppercase text-text-primary flex flex-col">
+                    <h1 className="mystery-title font-serif text-[clamp(2.5rem,7vw,7rem)] leading-[0.95] tracking-[-0.02em] text-text-primary flex flex-col">
                         <span className="block">Cena con Delitto</span>
                         <span className="block text-accent-gold italic">a Torino.</span>
                     </h1>
@@ -143,7 +143,8 @@ export function CenaConDelittoClient() {
         <div className="container-max grid grid-cols-1 lg:grid-cols-2 gap-24 lg:gap-48 items-center">
             <div className="space-y-16">
                 <SectionHeading 
-                  title="UN CASO"
+                  titleClassName="font-serif normal-case tracking-[-0.02em] leading-[1.02]"
+title="UN CASO"
                   highlight="A TAVOLA"
                   subtitle="Che cos’è"
                 />
@@ -185,7 +186,8 @@ export function CenaConDelittoClient() {
         <div className="container-max">
             <div className="mb-32">
                 <SectionHeading 
-                  title="TRE MOMENTI."
+                  titleClassName="font-serif normal-case tracking-[-0.02em] leading-[1.02]"
+title="TRE MOMENTI."
                   highlight="UN CASO."
                   subtitle="Come si vive l’esperienza"
                   align="center"
@@ -202,7 +204,7 @@ export function CenaConDelittoClient() {
                         <div className="text-accent-gold opacity-30 group-hover:opacity-100 transition-opacity duration-700">
                             {act.icon}
                         </div>
-                        <h3 className="font-syne text-3xl font-bold uppercase tracking-tighter text-text-primary">
+                        <h3 className="font-serif text-3xl normal-case tracking-[-0.02em] text-text-primary">
                             {act.title}
                         </h3>
                         <p className="font-inter text-text-secondary text-base leading-relaxed">
