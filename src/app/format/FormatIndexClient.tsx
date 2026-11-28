@@ -48,7 +48,7 @@ export const FORMAT_FAQS = [
 function FormatCardView({ format }: { format: FormatCard }) {
   // Un solo link per card: il CTA si estende su tutta la card (una sola tappa da tastiera).
   return (
-    <article className={`group relative overflow-hidden border bg-black-elevated/20 focus-within:ring-2 focus-within:ring-accent-gold ${format.upcoming ? "border-dashed border-white/25" : "border-white/10"}`}>
+    <article className={`group relative overflow-hidden border bg-black-elevated/20 transition-colors duration-500 hover:border-accent-gold/40 focus-within:ring-2 focus-within:ring-accent-gold ${format.upcoming ? "border-dashed border-white/25" : "border-white/10"}`}>
       <div className="relative aspect-[16/9] overflow-hidden">
         <Image src={format.image} alt="" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover opacity-55 grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-75" />
         <div className="absolute inset-0 bg-gradient-to-t from-black-pure via-black-pure/20 to-transparent" />
@@ -56,9 +56,9 @@ function FormatCardView({ format }: { format: FormatCard }) {
       </div>
       <div className="p-6 md:p-7">
         <p className={`font-syne text-[10px] uppercase tracking-[0.2em] ${format.upcoming ? "text-white/70" : "text-accent-gold"}`}>{format.eyebrow}</p>
-        <p className="mt-4 text-base leading-relaxed text-text-secondary">{format.description}</p>
+        <p className="mt-4 text-base leading-relaxed text-pretty text-text-secondary">{format.description}</p>
         <p className="mt-5 text-xs uppercase tracking-[0.12em] text-white/55">{format.detail}</p>
-        <Link href={format.href} aria-label={`Scopri il format ${format.name}`} className="mt-6 inline-flex items-center gap-2 font-syne text-xs font-bold uppercase tracking-[0.14em] text-accent-gold transition hover:text-white focus-visible:outline-none after:absolute after:inset-0 after:content-['']">Scopri il format <ArrowRight aria-hidden="true" size={15} /></Link>
+        <Link href={format.href} aria-label={`Scopri il format ${format.name}`} className="mt-6 inline-flex items-center gap-2 font-syne text-xs font-bold uppercase tracking-[0.14em] text-accent-gold transition-colors hover:text-white focus-visible:outline-none after:absolute after:inset-0 after:content-['']">Scopri il format <ArrowRight aria-hidden="true" size={15} /></Link>
       </div>
     </article>
   );
@@ -77,10 +77,10 @@ export function FormatIndexClient() {
 
       <section className="px-6 py-16 md:px-12 md:py-24">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-8 flex flex-wrap items-end justify-between gap-5"><div><p className="font-syne text-xs uppercase tracking-[0.24em] text-accent-gold">Il flagship</p><h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">L’esperienza principale</h2></div><Link href={FLAGSHIP.href} className="inline-flex items-center gap-2 font-syne text-xs font-bold uppercase tracking-[0.14em] text-accent-gold hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold">Scopri il format <ArrowRight aria-hidden="true" size={15} /></Link></div>
-          <article className="group relative grid overflow-hidden border border-white/10 bg-black-elevated/20 md:grid-cols-2">
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-5"><div><p className="font-syne text-xs uppercase tracking-[0.24em] text-accent-gold">Il flagship</p><h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">L’esperienza principale</h2></div><Link href={FLAGSHIP.href} className="inline-flex min-h-11 items-center gap-2 font-syne text-xs font-bold uppercase tracking-[0.14em] text-accent-gold hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold">Scopri il format <ArrowRight aria-hidden="true" size={15} /></Link></div>
+          <article className="group relative grid overflow-hidden border border-white/10 bg-black-elevated/20 transition-colors duration-500 hover:border-accent-gold/40 md:grid-cols-2">
             <div className="relative block min-h-64 overflow-hidden md:min-h-96"><Image src={FLAGSHIP.image} alt="" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover opacity-55 transition duration-700 group-hover:scale-105 group-hover:opacity-75" /><div className="absolute inset-0 bg-gradient-to-t from-black-pure via-transparent to-transparent" /></div>
-            <div className="flex flex-col justify-center p-7 md:p-12"><p className="font-syne text-xs uppercase tracking-[0.2em] text-accent-gold">{FLAGSHIP.eyebrow}</p><h3 className="mt-4 font-serif text-4xl leading-none md:text-6xl">{FLAGSHIP.name}</h3><p className="mt-6 text-lg font-medium leading-relaxed text-white">{FLAGSHIP.detail}</p><p className="mt-4 max-w-xl leading-relaxed text-text-secondary">{FLAGSHIP.description}</p><Link href={FLAGSHIP.href} aria-label="Scopri il format A Cena con il Bugiardo" className="mt-7 inline-flex w-fit items-center gap-2 bg-accent-gold px-6 py-4 font-syne text-xs font-bold uppercase tracking-[0.14em] text-black-pure hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white after:absolute after:inset-0 after:content-['']">Scopri il format <ArrowRight aria-hidden="true" size={16} /></Link></div>
+            <div className="flex flex-col justify-center p-7 md:p-12"><p className="font-syne text-xs uppercase tracking-[0.2em] text-accent-gold">{FLAGSHIP.eyebrow}</p><h3 className="mt-4 font-serif text-4xl leading-none md:text-6xl">{FLAGSHIP.name}</h3><p className="mt-6 text-lg font-medium leading-relaxed text-white">{FLAGSHIP.detail}</p><p className="mt-4 max-w-xl leading-relaxed text-pretty text-text-secondary">{FLAGSHIP.description}</p><Link href={FLAGSHIP.href} aria-label="Scopri il format A Cena con il Bugiardo" className="mt-7 inline-flex w-fit items-center gap-2 bg-accent-gold px-6 py-4 font-syne text-xs font-bold uppercase tracking-[0.14em] text-black-pure transition-colors hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white after:absolute after:inset-0 after:content-['']">Scopri il format <ArrowRight aria-hidden="true" size={16} /></Link></div>
           </article>
         </div>
       </section>
