@@ -17,7 +17,7 @@ export const metadata = buildFormatMetadata({
     title: "Cena con Delitto a Torino",
     description: "Cena con Delitto a Torino con Black Bulls Lab: segui il caso, raccogli gli indizi e ricostruisci l’accaduto durante la cena. Date pubbliche e preventivi.",
     slug: "cena-con-delitto",
-    image: "https://blackbullslab.com/images/brand/bg-stage-lights.webp",
+    image: "https://blackbullslab.it/images/brand/bg-stage-lights.webp",
     keywords: ["cena con delitto Torino"],
 });
 

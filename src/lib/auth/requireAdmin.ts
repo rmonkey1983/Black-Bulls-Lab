@@ -70,6 +70,8 @@ export function isValidOrigin(req: Request): boolean {
     const originNormalized = originUrl.origin.toLowerCase().trim();
 
     if (
+      originNormalized === "https://blackbullslab.it" ||
+      originNormalized === "https://www.blackbullslab.it" ||
       originNormalized === "https://blackbullslab.com" ||
       originNormalized === "https://www.blackbullslab.com"
     ) {

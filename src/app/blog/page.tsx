@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Blog | Idee e Storie dal Laboratorio | Black Bulls Lab",
     description: "Idee, storie e ispirazione dal laboratorio delle emozioni di Black Bulls Lab a Torino",
-    url: "https://blackbullslab.com/blog",
+    url: "https://blackbullslab.it/blog",
     images: [{ url: "/images/brand/bg-hero-wide.webp", width: 1200, height: 630, alt: "Blog | Black Bulls Lab" }],
   },
   twitter: {
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     description: "Idee, storie e appunti dal laboratorio di Black Bulls Lab a Torino.",
     images: ["/images/brand/bg-hero-wide.webp"],
   },
-  alternates: { canonical: "https://blackbullslab.com/blog" },
+  alternates: { canonical: "https://blackbullslab.it/blog" },
 };
 
 export default async function BlogPage() {

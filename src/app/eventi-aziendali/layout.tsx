@@ -10,7 +10,7 @@ export const metadata: Metadata = {
         title: "Team building ed eventi aziendali a Torino | Black Bulls Lab",
         description:
             "Format dal vivo per team building, cene aziendali ed eventi interni a Torino.",
-        url: "https://blackbullslab.com/eventi-aziendali",
+        url: "https://blackbullslab.it/eventi-aziendali",
         images: [{ url: "/images/brand/bg-hero-wide.webp", width: 1200, height: 630, alt: "Team Building e Cene Aziendali — Black Bulls Lab" }],
     },
     twitter: {

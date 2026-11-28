@@ -2,7 +2,7 @@ import { SITE_URL, SITE_NAME, CONTACT_PHONE, CONTACT_EMAIL, SOCIAL_LINKS } from 
 
 /**
  * ============================================================================
- * JSON-LD SCHEMA BUILDERS FOR BLACK BULLS LAB (blackbullslab.com)
+ * JSON-LD SCHEMA BUILDERS FOR BLACK BULLS LAB (blackbullslab.it)
  * ============================================================================
  * 
  * These helper functions build compliant, valid JSON-LD schemas.

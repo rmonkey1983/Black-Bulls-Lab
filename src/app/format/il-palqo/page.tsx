@@ -16,7 +16,7 @@ export const metadata = buildFormatMetadata({
     title: "Il PalQo: dinner & show a Torino",
     description: "Il PalQo è un dinner & show live con stand-up, improvvisazione, conduzione e interazione con il pubblico a Torino.",
     slug: "il-palqo",
-    image: "https://blackbullslab.com/images/brand/vibe-live-jazz.webp",
+    image: "https://blackbullslab.it/images/brand/vibe-live-jazz.webp",
     keywords: ["stand-up comedy Torino", "dinner show Torino"],
 });
 

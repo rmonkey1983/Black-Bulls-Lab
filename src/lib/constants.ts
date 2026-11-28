@@ -18,7 +18,7 @@ export const SITE_KEYWORDS = [
     "cosa fare a Torino",
     "esperienze digitali dal vivo"
 ];
-export const SITE_URL = "https://blackbullslab.com";
+export const SITE_URL = "https://blackbullslab.it";
 
 /**
  * CONTACT INFORMATION

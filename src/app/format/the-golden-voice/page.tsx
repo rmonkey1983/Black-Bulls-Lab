@@ -13,7 +13,7 @@ export const metadata = buildFormatMetadata({
     title: "The Golden Voice: concorso canoro a Torino",
     description: "The Golden Voice è il concorso canoro di Black Bulls Lab, in preparazione a Torino. Se canti, lascia il tuo interesse: date e regolamento sono in definizione.",
     slug: "the-golden-voice",
-    image: "https://blackbullslab.com/images/brand/service-performance.webp",
+    image: "https://blackbullslab.it/images/brand/service-performance.webp",
     keywords: ["concorso canoro Torino"],
 });
 

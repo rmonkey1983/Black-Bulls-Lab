@@ -13,11 +13,11 @@ export function getHomepageJsonLd() {
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://blackbullslab.com/#organization",
+        "@id": "https://blackbullslab.it/#organization",
         name: "Black Bulls Lab",
-        url: "https://blackbullslab.com",
-        logo: "https://blackbullslab.com/brand/bbl-logo-horizontal.webp",
-        image: "https://blackbullslab.com/images/brand/bg-hero-wide.webp",
+        url: "https://blackbullslab.it",
+        logo: "https://blackbullslab.it/brand/bbl-logo-horizontal.webp",
+        image: "https://blackbullslab.it/images/brand/bg-hero-wide.webp",
         description:
           "Dinner Show interattivi, Cena con Delitto e format immersivi unici a Torino.",
         telephone: "+393342010067",
@@ -74,7 +74,7 @@ export function getFaqJsonLd() {
         name: "Come prenoto una serata?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Controlla le prossime date nel calendario su blackbullslab.com/calendario e prenota direttamente online. La capienza viene indicata per ogni esperienza.",
+          text: "Controlla le prossime date nel calendario su blackbullslab.it/calendario e prenota direttamente online. La capienza viene indicata per ogni esperienza.",
         },
       },
       {
@@ -151,9 +151,9 @@ export function getEventJsonLd({
     },
     organizer: {
       "@type": "Organization",
-      "@id": "https://blackbullslab.com/#business",
+      "@id": "https://blackbullslab.it/#business",
       name: "Black Bulls Lab",
-      url: "https://blackbullslab.com",
+      url: "https://blackbullslab.it",
     },
     offers: {
       "@type": "Offer",
@@ -205,9 +205,9 @@ export function getFormatServiceJsonLd({
     },
     provider: {
       "@type": "Organization",
-      "@id": "https://blackbullslab.com/#organization",
+      "@id": "https://blackbullslab.it/#organization",
       name: "Black Bulls Lab",
-      url: "https://blackbullslab.com",
+      url: "https://blackbullslab.it",
     },
     ...(typeof price === "number"
       ? {
@@ -266,8 +266,8 @@ export function getCustomFaqJsonLd(items: { question: string; answer: string }[]
     const eventLd = getEventJsonLd({
       name: "Cena Con Delitto — Black Bulls Lab",
       description: "Un omicidio. Una cena. Un solo colpevole — se riesci a trovarlo. Format investigativo immersivo a Torino.",
-      image: "https://blackbullslab.com/images/brand/bg-stage-lights.webp",
-      url: "https://blackbullslab.com/format/cena-con-delitto",
+      image: "https://blackbullslab.it/images/brand/bg-stage-lights.webp",
+      url: "https://blackbullslab.it/format/cena-con-delitto",
       startDate: "2025-07-20T20:00:00+02:00",
       price: 50,
       totalSeats: 25,

@@ -122,7 +122,7 @@ export const BookingConfirmationEmail: React.FC<Readonly<BookingEmailProps>> = (
 
         {/* CTA */}
         <div style={{ textAlign: "center" }}>
-          <a href="https://blackbullslab.com/format" style={{
+          <a href="https://blackbullslab.it/format" style={{
             display: "inline-block",
             backgroundColor: "#ffffff",
             color: "#000000",
